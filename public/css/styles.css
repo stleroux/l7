@@ -1,0 +1,33 @@
+/* dropdown menu for showing icons in table (edit / delete) */
+.dataTables_scrollBody, .dataTables_wrapper {
+   position: static !important;
+}
+.dropdown-button {
+   cursor: pointer;
+   font-size: 1.2em;
+   display:block
+}
+.dropdown-menu i {
+   font-size: 1.33333333em;
+   line-height: 0.75em;
+   vertical-align: -15%;
+   color: #000;
+}
+
+.required:after {
+   display: inline-block;
+   font: normal normal normal 24px/1 FontAwesome;
+   font-size: inherit;
+   text-rendering: auto;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   transform: translate(0, 0);
+   font-family: "Font Awesome 5 Free";
+   content: "\f005";
+   color: #FF0000;
+   padding-left: 3px;
+   vertical-align: top;
+   font-weight: 900;
+   font-size: 10px;
+}
+
