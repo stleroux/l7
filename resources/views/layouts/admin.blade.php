@@ -107,11 +107,7 @@
             <!-- Main content -->
             <section class="content">
                <div class="container-fluid">
-                  @yield('formStart')
-                  @yield('formActions')
-                  @yield('massDestroy')
                   @yield('content')
-                  @yield('formEnd')
                </div>
             </section>
             <!-- /.content -->
@@ -148,30 +144,6 @@
       <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
       <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
       <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-      <!-- AdminLTE for demo purposes -->
-      {{-- <script src="{{ asset('dist/js/demo.js') }}"></script> --}}
-
-      {{--
-         Add sidebar item highlight automatically
-         Does not work in multi-level menus
-      --}}
-{{--       <script>
-         var url = window.location;
-         const allLinks = document.querySelectorAll('.nav-item a');
-         const currentLink = [...allLinks].filter(e => {
-             return e.href == url;
-         });
-
-         currentLink[0].classList.add("active");
-         currentLink[0].closest(".nav-treeview").style.display = "block ";
-         currentLink[0].closest(".has-treeview").classList.add("menu-open");
-         $('.menu-open').find('a').each(function() {
-             if (!$(this).parents().hasClass('active')) {
-                 $(this).parents().addClass("active");
-                 $(this).addClass("active");
-             }
-         });
-      </script> --}}
 
       <script>
          @if(Session::has('message'))
@@ -196,16 +168,6 @@
             }
          @endif
       </script>
-
-    {{--   <script>
-         $(function(){
-          $('#navRight').hover(function(){
-              $(this).animate({width:'200px'},500);
-          },function(){
-              $(this).animate({width:'5px'},500);
-          }).trigger('mouseleave');
-         });
-      </script> --}}
 
       @yield('scripts')
    </body>

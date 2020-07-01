@@ -14,12 +14,12 @@
             @method('DELETE')
 
             <div class="modal-body">
-               Are you sure you want to delete this permission?
+               Are you sure you want to PERMANENTLY delete this permission?
             </div>
             
             <div class="modal-footer">
                <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
-               <button type="submit" class="btn btn-warning">Yes, Delete</button>
+               <button type="submit" class="btn btn-danger">Yes, Delete</button>
             </div>
          </form>
       

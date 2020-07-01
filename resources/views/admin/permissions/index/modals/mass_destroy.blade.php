@@ -17,13 +17,13 @@
             @method('DELETE')
 
             <div class="modal-body">
-               <p>Are you sure you want to trash the selected permissions?</p>
+               <p>Are you sure you want to PERMANENTLY delete the selected permissions?</p>
             </div>
 
             <div class="modal-footer align-items-start">
                <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
                <input name="mass_destroy_pass_checkedvalue" type="hidden" value="mass_destroy_pass_checkedvalue" id="mass_destroy_hidden_checkedinput">
-               <button type="submit" class="btn btn-warning">Yes, Trash</button>
+               <button type="submit" class="btn btn-warning">Yes, Delete</button>
             </form>
 
          </div><!-- Modal Footer -->

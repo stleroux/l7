@@ -36,16 +36,30 @@ Route::namespace('Admin\Projects')->prefix('admin/projects/finishes')->name('adm
    Route::get('{finish}/delete',          'FinishesController@delete')           ->name('delete');
 });
 
-Route::namespace('Admin\Projects')->prefix('admin/projects')->name('admin.projects.')->group(function() {
-   Route::get('create',                   'ProjectsController@create')           ->name('create');
-   Route::get('{filter?}',                'ProjectsController@index')            ->name('index');
-   Route::post('store',                   'ProjectsController@store')            ->name('store');
-   Route::get('{project}/show',           'ProjectsController@show')             ->name('show');
-   Route::get('{project}/edit',           'ProjectsController@edit')             ->name('edit');
-   Route::put('{project}',                'ProjectsController@update')           ->name('update');
-   Route::delete('{project}',             'ProjectsController@destroy')          ->name('destroy');
-   Route::get('{project}/delete',         'ProjectsController@delete')           ->name('delete');
+// Route::namespace('Admin\Projects')->prefix('admin/projects')->name('admin.projects.')->group(function() {
+//    Route::get('create',                   'ProjectsController@create')           ->name('create');
+//    Route::get('{filter?}',                'ProjectsController@index')            ->name('index');
+//    Route::post('store',                   'ProjectsController@store')            ->name('store');
+//    Route::get('{project}/show',           'ProjectsController@show')             ->name('show');
+//    Route::get('{project}/edit',           'ProjectsController@edit')             ->name('edit');
+//    Route::put('{project}',                'ProjectsController@update')           ->name('update');
+//    Route::delete('{project}',             'ProjectsController@destroy')          ->name('destroy');
+//    Route::get('{project}/delete',         'ProjectsController@delete')           ->name('delete');
+// });
+
+//////////////////////////////////////////////////////////////////////////////
+// ROLES ROUTES
+//////////////////////////////////////////////////////////////////////////////
+Route::namespace('Admin\Projects')->prefix('admin/projects')->name('admin.')->group(function() {
+   Route::get('restore/{role}',     'ProjectsController@restore')             ->name('projects.restore');
+   Route::post('delete/{role}',     'ProjectsController@delete')              ->name('projects.delete');
+   Route::delete('mass_destroy',    'ProjectsController@massDestroy')         ->name('projects.mass_destroy');
+   Route::post('mass_restore',      'ProjectsController@massRestore')         ->name('projects.mass_restore');
+   Route::delete('mass_delete',     'ProjectsController@massDelete')          ->name('projects.mass_delete');
+   Route::get('trashed',            'ProjectsController@trashed')             ->name('projects.trashed');
+   Route::get('noPermissions',      'ProjectsController@noPermissions')       ->name('projects.noPermissions');
+   Route::get('{filter?}',          'ProjectsController@index')      ->name('projects.index');
+   Route::resource('projects',      'ProjectsController')->except('index');
 });
 
-Route::get('/projects/{project}/show',    'Projects\ProjectsController@show')                   ->name('projects.show');
-Route::get('/projects/{filter?}',         'Projects\ProjectsController@index')                  ->name('projects.index');
+// Route::get('/projects/{project}/show',    'Projects\ProjectsController@show')                   ->name('projects.show');

@@ -27,11 +27,11 @@
                style="display:none"
                data-target="#massDestroy-modal">
                <i class="fas fa-trash nav-icon"></i>
-               Trash Selected
+               Delete Selected
             </a>
          </form>
          
-         <form action="{{ route('admin.permissions.mass_delete') }}" method="post" class="float-right p-0 pl-1">
+         {{-- <form action="{{ route('admin.permissions.mass_delete') }}" method="post" class="float-right p-0 pl-1">
             @csrf
             @method('DELETE')
             <input type="hidden" name="mass_delete_ids" id="mass_delete_ids" value="" class="bg-warning" size="3" />
@@ -43,9 +43,9 @@
                <i class="fas fa-trash nav-icon"></i>
                Delete Selected
             </a>
-         </form>
+         </form> --}}
 
-         <form action="" method="POST" class="float-right p-0 pl-1">
+         {{-- <form action="" method="POST" class="float-right p-0 pl-1">
             @csrf
             <input type="hidden" name="mass_restore_ids" id="mass_restore_ids" value="" class="bg-primary" size="3" />
             <a 
@@ -57,7 +57,7 @@
                <i class="fas fa-trash-restore"></i>
                Restore Selected
             </a>
-         </form>
+         </form> --}}
 
       </div>
    </div>

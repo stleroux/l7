@@ -1,13 +1,14 @@
 @extends('layouts.admin')
 
+@section('stylesheet')
+@endsection
+
 @section('pageHeader')
    @if(Route::currentRouteName('') == 'admin.users.trashed')
       Trashed Users
    @else
       Users
    @endif
-@endsection
-@section('stylesheet')
 @endsection
 
 @section('breadcrumbs')
@@ -16,15 +17,6 @@
 
 @section('rightSidebar')
    @include('admin.users.index.sidebar')
-@endsection
-
-@section('formStart')
-@endsection
-
-@section('formActions')
-@endsection
-
-@section('formEnd')
 @endsection
 
 @section('content')

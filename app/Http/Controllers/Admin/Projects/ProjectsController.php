@@ -30,7 +30,8 @@ class ProjectsController extends Controller
 ##################################################################################################################
    public function __construct()
    {
-      $this->middleware('auth')->except('index','show');
+      $this->middleware('auth');
+      // ->except('index','show');
       $this->enablePermissions = true;
    }
 
@@ -149,10 +150,10 @@ class ProjectsController extends Controller
     public function edit(Project $project)
     {
         // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('project_edit')) { abort(401, 'Unauthorized Access'); }
-        }
+        // if($this->enablePermissions)
+        // {
+        //     if(!checkPerm('project_edit')) { abort(401, 'Unauthorized Access'); }
+        // }
 
         $project = Project::with('finishes')->with('materials')->with('images')->find($project->id);
 
@@ -213,10 +214,10 @@ class ProjectsController extends Controller
     public function index()
     {
         // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('project_browse')) { abort(401, 'Unauthorized Access'); }
-        }
+        // if($this->enablePermissions)
+        // {
+        //     if(!checkPerm('project_browse')) { abort(401, 'Unauthorized Access'); }
+        // }
 
         // Set the session to the current page route
         Session::put('fromPage', url()->full());
@@ -239,10 +240,10 @@ class ProjectsController extends Controller
     public function store()
     {
       // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('project_add')) { abort(401, 'Unauthorized Access'); }
-        }
+        // if($this->enablePermissions)
+        // {
+        //     if(!checkPerm('project_add')) { abort(401, 'Unauthorized Access'); }
+        // }
 
         Project::create($this->validateRequest());
 
@@ -262,10 +263,10 @@ class ProjectsController extends Controller
     public function show(Project $project, Request $request)
     {
         // Check if user has required permission
-        if($this->enablePermissions)
-        {
-            if(!checkPerm('project_read')) { abort(401, 'Unauthorized Access'); }
-        }
+        // if($this->enablePermissions)
+        // {
+        //     if(!checkPerm('project_read')) { abort(401, 'Unauthorized Access'); }
+        // }
 
         // Increase the view count if viewed from the frontend
         // if (url()->previous() != url('/projects/list')) {
@@ -275,14 +276,14 @@ class ProjectsController extends Controller
         // get previous project
         $previous = Project::where('name', '<', $project->name)->orderBy('name','asc')->max('name');
         if($previous){
-            $p = Project::where('name',$previous)->get();
+            $p = Project::where('name', $previous)->get();
             $previous = $p[0]->id;
         }
 
         // get next project
         $next = Project::where('name', '>', $project->name)->orderBy('name','desc')->min('name');
         if($next){
-            $n = Project::where('name',$next)->get();
+            $n = Project::where('name', $next)->get();
             $next = $n[0]->id;
         }
 

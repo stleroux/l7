@@ -12,12 +12,12 @@
             </button>
          </div>
 
-         <form action="{{ route('admin.roles.mass_delete') }}" method="POST">
+         <form action="{{ route('admin.projects.mass_delete') }}" method="POST">
             @csrf
             @method('DELETE')
 
             <div class="modal-body">
-               <p>Are you sure you want to PERMANENTLY delete the selected roles?</p>
+               <p>Are you sure you want to PERMANENTLY delete the selected projects?</p>
                <p>This action CANNOT be reverted.</p>
             </div>
 

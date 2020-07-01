@@ -23,8 +23,13 @@
                <div class="col-6">
                   <div class="form-group">
                      <label for="modelName" class="required">Model Name</label>
-                     <input type="text" name="modelName" class="form-control form-control-sm" placeholder="Model Name">
-                     <div class="pl-1 bg-danger">{{ $errors->first('modelName') }}</div>
+                     <input type="text" name="modelName" class="form-control form-control-sm @error('modelName') is-invalid @enderror" placeholder="Model Name">
+                     {{-- <div class="pl-1 bg-danger">{{ $errors->first('modelName') }}</div> --}}
+                     @error('modelName')
+                        <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                        </span>
+                     @enderror
                   </div>
                </div>
             </div>
@@ -40,6 +45,11 @@
                               <a href="#" class="btn btn-sm btn-info addRow">
                                  <i class="far fa-plus-square"></i>
                               </a>
+                              @error('permName')
+                                 <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                 </span>
+                              @enderror
                            </th>
                         </tr>
                      </thead>

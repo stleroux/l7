@@ -1,56 +1,58 @@
 @extends('layouts.admin')
 
-@section('pageHeader', 'Edit Role')
+@section('stylesheet')
+@endsection
+
+@section('pageHeader')
+   Edit Role
+@endsection
 
 @section('breadcrumbs')
    <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">Roles</a></li>
    <li class="breadcrumb-item active">Edit</li>
 @endsection
 
-@section('formStart')
-   <form action="{{ route('admin.roles.update', $role) }}" method="POST">
-      @csrf
-      @method('PUT')
-@endsection
-
-@section('formActions')
-   @include('admin.roles.edit.topbar')
-@endsection
-
-@section('formEnd')
-   </form>
+@section('rightSidebar')
+   {{-- @include('admin.roles.index.sidebar') --}}
 @endsection
 
 @section('content')
 
-   <div class="row">
+   <form action="{{ route('admin.roles.update', $role) }}" method="POST">
+      @csrf
+      @method('PUT')
 
-      <div class="col-md-3">
+      @include('admin.roles.edit.topbar')
 
-         <div class="card card-primary">
-            <div class="card-header">
-               <div class="card-title">Role Information</div>
-            </div>
-            <div class="card-body">
-               <div class="row">
-                  @include('admin.roles.edit.fields.name')
-                  @include('admin.roles.edit.fields.description')
+      <div class="row">
+
+         <div class="col-md-3">
+
+            <div class="card card-primary">
+               <div class="card-header">
+                  <div class="card-title">Role Information</div>
                </div>
+               <div class="card-body">
+                  <div class="row">
+                     @include('admin.roles.edit.fields.name')
+                     @include('admin.roles.edit.fields.description')
+                  </div>
 
-            </div> <!-- Card body -->
-         </div><!-- Card -->
-      
-      </div><!-- Col -->
+               </div> <!-- Card body -->
+            </div><!-- Card -->
+         
+         </div><!-- Col -->
 
-{{-- @if($user->roles->pluck('id')->contains($role->id)) checked @endif --}}
 
-      <div class="col-md-9">
-         @include('admin.roles.edit.fields.permissions')
-      </div>
+         <div class="col-md-9">
+            @include('admin.roles.edit.fields.permissions')
+         </div>
 
-   </div><!-- Row -->
+      </div><!-- Row -->
 
-   @include('admin.roles.help')
+      @include('admin.roles.help')
+
+   </form>
 
 @endsection
 

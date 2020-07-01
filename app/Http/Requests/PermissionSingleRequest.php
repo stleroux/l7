@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Permission;
+use App\Rules\MustContainDash;
+use Illuminate\Foundation\Http\FormRequest;
 
 class PermissionSingleRequest extends FormRequest
 {
@@ -35,7 +36,10 @@ class PermissionSingleRequest extends FormRequest
          case 'POST':
          {
             return [
-               'name'   => 'required',
+               'name'   => [
+                  'required',
+                  new MustContainDash,
+               ],
             ];
          }
          case 'PUT':

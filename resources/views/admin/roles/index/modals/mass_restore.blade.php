@@ -12,12 +12,12 @@
             </button>
          </div>
 
-         <form action="{{ route('admin.roles.mass_restore') }}" method="POST">
+         <form action="{{ route('admin.projects.mass_restore') }}" method="POST">
             @csrf
             {{-- @method('DELETE') --}}
 
             <div class="modal-body">
-               <p>Are you sure you want to restore the selected roles?</p>
+               <p>Are you sure you want to restore the selected projects?</p>
             </div>
 
             <div class="modal-footer align-items-start">

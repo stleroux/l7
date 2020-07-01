@@ -1,54 +1,56 @@
 @extends('layouts.admin')
 
-@section('pageHeader', 'Create Role')
+@section('stylesheet')
+@endsection
+
+@section('pageHeader')
+   Create Role
+@endsection
 
 @section('breadcrumbs')
    <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">Roles</a></li>
    <li class="breadcrumb-item active">Create</li>
 @endsection
 
-@section('formStart')
-   <form action="{{ route('admin.roles.store') }}" method="POST" class="m-0 p-0">
-      @csrf   
-@endsection
-
-@section('formActions')
-   @include('admin.roles.create.topbar')
-@endsection
-
-@section('formEnd')
-   </form>
+@section('rightSidebar')
+   {{-- @include('admin.roles.index.sidebar') --}}
 @endsection
 
 @section('content')
+   <form action="{{ route('admin.roles.store') }}" method="POST" class="m-0 p-0">
+      @csrf
 
-   <div class="row">
+      @include('admin.roles.create.topbar')
 
-      <div class="col-md-3">
+      <div class="row">
 
-         <div class="card card-primary">
+         <div class="col-md-3">
 
-            <div class="card-header">
-               <div class="card-title">Role Information</div>
-            </div>
-            <div class="card-body">
-               
-               <div class="row">
-                  @include('admin.roles.create.fields.name')
-                  @include('admin.roles.create.fields.description')
+            <div class="card card-primary">
+
+               <div class="card-header">
+                  <div class="card-title">Role Information</div>
                </div>
+               <div class="card-body">
+                  
+                  <div class="row">
+                     @include('admin.roles.create.fields.name')
+                     @include('admin.roles.create.fields.description')
+                  </div>
 
-            </div> <!-- Card body -->
-         </div><!-- Card -->
-      </div><!-- Col -->
+               </div> <!-- Card body -->
+            </div><!-- Card -->
+         </div><!-- Col -->
 
-      <div class="col-md-9">
-         @include('admin.roles.create.fields.permissions')
-      </div>
+         <div class="col-md-9">
+            @include('admin.roles.create.fields.permissions')
+         </div>
 
-   </div><!-- Row -->
+      </div><!-- Row -->
 
-   @include('admin.roles.help')
+      @include('admin.roles.help')
+
+   </form>
 
 @endsection
 

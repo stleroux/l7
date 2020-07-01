@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('pageHeader')
-   Permissions
+@section('stylesheet')
 @endsection
 
-@section('stylesheet')
+@section('pageHeader')
+   Permissions
 @endsection
 
 @section('breadcrumbs')
@@ -13,15 +13,6 @@
 
 @section('rightSidebar')
    @include('admin.permissions.index.sidebar')
-@endsection
-
-@section('formStart')
-@endsection
-
-@section('formActions')
-@endsection
-
-@section('formEnd')
 @endsection
 
 @section('content')

@@ -3,7 +3,7 @@
    <div class="modal-dialog" role="document"> <!-- modal-dialog-centered -->
       <div class="modal-content bg-danger">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Trash Role?</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Trash Project?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -14,7 +14,7 @@
             @method('DELETE')
 
             <div class="modal-body">
-               Are you sure you want to trash this role?
+               Are you sure you want to trash this project?
             </div>
             
             <div class="modal-footer">

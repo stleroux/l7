@@ -46,8 +46,8 @@
 
 @can('project-manage')
    <li class="nav-item">
-      <a href="{{ Route('admin.users.index') }}" class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}">
-         <i class="fas fa-users nav-icon"></i>
+      <a href="{{ Route('admin.projects.index') }}" class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}">
+         <i class="fab fa-pagelines nav-icon"></i>
          <p>Projects</p>
       </a>
    </li>

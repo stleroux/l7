@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 
+@section('stylesheet')
+@endsection
+
 @section('pageHeader')
    @if(Route::currentRouteName('') == 'admin.roles.trashed')
       Trashed Roles
@@ -10,24 +13,12 @@
    @endif
 @endsection
 
-@section('stylesheet')
-@endsection
-
 @section('breadcrumbs')
    <li class="breadcrumb-item active">Roles</li>
 @endsection
 
 @section('rightSidebar')
    @include('admin.roles.index.sidebar')
-@endsection
-
-@section('formStart')
-@endsection
-
-@section('formActions')
-@endsection
-
-@section('formEnd')
 @endsection
 
 @section('content')

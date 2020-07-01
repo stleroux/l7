@@ -1,51 +1,54 @@
 @extends('layouts.admin')
 
-@section('pageHeader', 'Edit Permission')
+@section('stylesheet')
+@endsection
+
+@section('pageHeader')
+   Edit Permission
+@endsection
 
 @section('breadcrumbs')
    <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">Permisisons</a></li>
    <li class="breadcrumb-item active">Edit</li>
 @endsection
 
-@section('formStart')
-   <form action="{{ route('admin.permissions.update', $permission) }}" method="POST">
-      @csrf
-      @method('PUT')
-@endsection
-
-@section('formActions')
-   @include('admin.permissions.edit.topbar')
-@endsection
-
-@section('formEnd')
-   </form>
+@section('rightSidebar')
+   {{-- @include('admin.roles.index.sidebar') --}}
 @endsection
 
 @section('content')
 
-   <div class="row">
+   <form action="{{ route('admin.permissions.update', $permission) }}" method="POST">
+      @csrf
+      @method('PUT')
 
-      <div class="col">
+      @include('admin.permissions.edit.topbar')
 
-         <div class="card card-primary">
-            <div class="card-header">
-               <div class="card-title">Permission Information</div>
-            </div>
-            <div class="card-body">
+      <div class="row">
 
-               <div class="row">
-                  @include('admin.permissions.edit.fields.name')
-                  @include('admin.permissions.edit.fields.description')
+         <div class="col">
+
+            <div class="card card-primary">
+               <div class="card-header">
+                  <div class="card-title">Permission Information</div>
                </div>
+               <div class="card-body">
 
-            </div> <!-- Card body -->
-         </div><!-- Card -->
+                  <div class="row">
+                     @include('admin.permissions.edit.fields.name')
+                     @include('admin.permissions.edit.fields.description')
+                  </div>
+
+               </div> <!-- Card body -->
+            </div><!-- Card -->
+         
+         </div><!-- Col -->
+
+      </div><!-- Row -->
+
+      @include('admin.permissions.help')
       
-      </div><!-- Col -->
-
-   </div><!-- Row -->
-
-   @include('admin.permissions.help')
+   </form>
 
 @endsection
 

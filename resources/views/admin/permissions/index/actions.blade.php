@@ -25,7 +25,7 @@
                data-url="{{ url('admin/permissions', $permission->id) }}"
                >
                <i class="fa fa-trash text-danger nav-item"></i>
-               Trash
+               Delete
             </button>
          @endcan
       @endif

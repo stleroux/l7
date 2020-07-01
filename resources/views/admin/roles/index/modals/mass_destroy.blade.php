@@ -12,12 +12,12 @@
             </button>
          </div>
 
-         <form action="{{ route('admin.roles.mass_destroy') }}" method="POST">
+         <form action="{{ route('admin.projects.mass_destroy') }}" method="POST">
             @csrf
             @method('DELETE')
 
             <div class="modal-body">
-               <p>Are you sure you want to trash the selected roles?</p>
+               <p>Are you sure you want to trash the selected projects?</p>
             </div>
 
             <div class="modal-footer align-items-start">
