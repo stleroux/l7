@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\Projects;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Projects\Finish;
-use App\Models\Projects\Project;
+use App\Models\Admin\Category;
+use App\Models\Admin\Projects\Finish;
+use App\Models\Admin\Projects\Project;
 use DB;
 use Session;
 
@@ -23,8 +23,8 @@ class FinishController extends Controller
 ##################################################################################################################
    public function __construct()
    {
-      $this->middleware('auth');
-      $this->enablePermissions = false;
+     $this->middleware('auth');
+     $this->enablePermissions = false;
    }
 
 
@@ -38,16 +38,16 @@ class FinishController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-    public function destroy(Request $request, $id)
-    {
-        DB::table('projects__finish_project')
-            ->where('project_id', '=', $request->project_id)
-            ->where('finish_id', '=', $id)
-            ->delete();
+   public function destroy(Request $request, $id)
+   {
+      DB::table('projects__finish_project')
+         ->where('project_id', '=', $request->project_id)
+         ->where('finish_id', '=', $id)
+         ->delete();
 
-        Session::flash('success', 'Finish removed succesfully.');
-        return redirect()->back();
-    }
+      Session::flash('success', 'Finish removed succesfully.');
+      return redirect()->back();
+   }
 
 
 ##################################################################################################################
@@ -59,23 +59,23 @@ class FinishController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-    public function store(Request $request, $id)
-    {
-        $rules = [
-            'finish' => 'required',
-        ];
+   public function store(Request $request, $id)
+   {
+      $rules = [
+         'finish' => 'required',
+      ];
 
-        $customMessages = [
-            'finish.required' => 'Required',
-        ];
+      $customMessages = [
+         'finish.required' => 'Required',
+      ];
 
-        $this->validate($request, $rules, $customMessages);
+      $this->validate($request, $rules, $customMessages);
 
-        $project = Project::find($id);
-        $project->finishes()->syncWithoutDetaching($request->finish);
+      $project = Project::find($id);
+      $project->finishes()->syncWithoutDetaching($request->finish);
 
-        Session::flash('success', 'Finish added succesfully.');
-        return redirect()->back();
-    }
+      Session::flash('success', 'Finish added succesfully.');
+      return redirect()->back();
+   }
 
 }

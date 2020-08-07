@@ -4,7 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import autosize from 'autosize';
+// autosize(document.querySelectorAll('textarea'));
+// Use data-autosize as an attribute on a textarea
+autosize(document.querySelectorAll('*[data-autosize]'));
+
+// REMOVED ALL BECAUSE AUTOSIZE MAKES IT SO THE DROPWDOWNS IN ACTIONS FILE NO LONGER WORK
+// require('./bootstrap');
 
 window.Vue = require('vue');
 

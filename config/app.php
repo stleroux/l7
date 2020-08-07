@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'TheWoodBarn.ca'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Toronto',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,11 @@ return [
         /*
          * Package Service Providers...
          */
+
+        /* * Customer Service Providers */
+        App\Providers\MovieServiceProvider::class,
+        App\Providers\ArticleServiceProvider::class,
+        App\Providers\RecipeServiceProvider::class,
 
         /*
          * Application Service Providers...

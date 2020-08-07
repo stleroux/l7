@@ -1,0 +1,63 @@
+/**************************************************************************************
+BEGIN : change background color on all pages
+**************************************************************************************/
+body {
+   background-image: url('/images/16.jpg');
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+	font-size: 12pt;
+}
+/**************************************************************************************
+END : change background color on all pages
+**************************************************************************************/
+
+/* CARDS */
+.card {
+	/*background-image: url("/images/14.jpg");*/
+	/*background-repeat: no-repeat;*/
+	/*background-size: 100% 100%;*/
+	/*background-attachment: fixed;*/
+	/*background-color: #000;*/
+	color: white;
+	/*font-weight: bold;*/
+}
+
+.section_header {
+	background-image: url("/images/16.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	color: white;
+	font-weight: bold;
+}
+
+.section_body {
+  background-image: url('/images/14.jpg');
+   /*background-image: url('/images/16.jpg');*/
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  color: white;
+}
+
+   /*background-image: url("../images/9.jpg");*/
+#card-hover {
+   /*background-image: url("/images/17.jpg");*/
+	/*background-color: rgba(245, 245, 245, 0.5);*/
+	color: white;
+}
+
+#card-hover a {
+	color: white;
+}
+
+#card-hover:hover {
+   /*background-image: url("/images/17.jpg");*/
+	background-color: rgba(245, 245, 245, 0.4);
+}
+
+#card-hover:hover a {
+   /*background-image: url("/images/17.jpg");*/
+	/*background-color: rgba(245, 245, 245, 0.5);*/
+	color: black;
+}

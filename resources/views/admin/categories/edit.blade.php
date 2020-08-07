@@ -1,13 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
 @endsection
 
 @section('pageHeader')
-   Edit User
+   <i class="{{ Config::get('icons.edit') }}"></i>
+   Edit Category
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">Categories</a></li>
    <li class="breadcrumb-item active">Edit</li>
 @endsection

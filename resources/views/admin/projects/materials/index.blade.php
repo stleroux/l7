@@ -1,78 +1,48 @@
-@extends('layouts.master')
+@extends('layouts.admin.admin')
 
-@section('stylesheets')
-   {{ Html::style('/css/woodbarn.css') }}
+@section('stylesheet')
 @endsection
 
-@section('left_column')
+@section('pageHeader')
+   <i class="{{ Config::get('icons.materials') }}"></i>
+   @if(Route::currentRouteName('') == 'admin.projects.materials.trashed')
+      Trashed Project Materials
+   @else
+      Project Materials
+   @endif
 @endsection
 
-@section('right_column')
+@section('breadcrumb')
+   <li class="breadcrumb-item"><a href="{{ route('admin.projects.index') }}">Projects</a></li>
+   <li class="breadcrumb-item active">Project Materials</li>
+@endsection
+
+@section('rightSidebar')
 @endsection
 
 @section('content')
 
+   @include('admin.projects.materials.index.topbar')
+
    <div class="row">
       <div class="col">
-         <div class="card mb-2">
-            <!--CARD HEADER-->
-            <div class="card-header section_header p-2">
-               <i class="fa fa-hammer"></i>
-               Project Materials
-               <span class="float-right">
-                  <div class="btn-group">
-                     @include('admin.projects.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
-                     @include('admin.projects.buttons.BEProjects', ['size'=>'xs'])
-                     @include('admin.projects.finishes.buttons.finishes', ['size'=>'xs'])
-                     @include('admin.projects.materials.buttons.materials', ['size'=>'xs'])
-                     @include('admin.projects.materials.buttons.add', ['size'=>'xs'])
-                  </div>
-               </span>
-            </div>
-
+         <div class="card mb-3">
             <!--CARD BODY-->
-            @if($materials->count() > 0)
-               <div class="card-body section_body p-2">
-                  {{-- @include('common.alphabet', ['model'=>'woodproject', 'page'=>'index']) --}}
-                  <table id="datatable" class="table table-hover table-sm">
-                     <thead>
-                        <tr>
-                           <th>ID</th>
-                           <th>Name</th>
-                           <th>Type</th>
-                           <th>Created On</th>
-                           {{-- <th>Updated On</th> --}}
-                           <th class="no-sort"></th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach ($materials as $material)
-                           <tr>
-                              <td>{{ $material->id }}</td>
-                              <td><a href="{{ route('admin.projects.materials.show', $material->id) }}">{{ $material->name }}</a></td>
-                              <td>{{ $material->type }}</td>
-                              {{-- Add more columns here --}}
-                              <td data-order="{{ $material->created_at}}">{{ $material->created_at }}</td>
-                              <td class="text-right">
-                                 <div class="btn-group">
-                                    @include('admin.projects.materials.buttons.show', ['size'=>'xs'])
-                                    @include('admin.projects.materials.buttons.edit', ['size'=>'xs'])
-                                    @include('admin.projects.materials.buttons.delete', ['size'=>'xs'])
-                                 </div>
-                              </td>
-                           </tr>
-                        @endforeach
-                     </tbody>
-                  </table>
-               </div>
-            @else
-               <div class="card-body card_body">
-                  {{ setting('no_records_found') }}
-               </div>
-            @endif
-            
+            <div class="card-body p-3">
+               @include('admin.projects.materials.index.grid')
+            </div>
          </div>
       </div>
    </div>
+      
+   {{-- @include('admin.projects.finishes.index.modals.mass_destroy') --}}
+   @include('modals.destroy', ['modelName'=>'material'])
+   @include('modals.massDestroy', ['modelName'=>'material'])
+
+   @include('modals.massRestore', ['modelName'=>'material'])
+   @include('modals.delete', ['modelName'=>'material'])
+   @include('modals.massDelete', ['modelName'=>'material'])
+   
+   @include('admin.projects.materials.help')
 
 @endsection

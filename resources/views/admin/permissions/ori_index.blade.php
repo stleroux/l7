@@ -2,7 +2,7 @@
 
 @section('pageHeader', 'Permissions')
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item active">Permissions</li>
 @endsection
 

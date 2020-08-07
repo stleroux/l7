@@ -9,11 +9,11 @@
             <div class="card-title">Add Category</div>
             <div class="float-right">
                <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="fas fa-sync-alt nav-icon"></i>
+                  <i class="{{ Config::get('icons.reset') }}"></i>
                   Reset
                </button>
                <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="far fa-save nav-icon"></i>
+                  <i class="{{ Config::get('icons.save') }}"></i>
                   Save
                </button>
             </div>
@@ -68,13 +68,6 @@
                   </div>
                </div>
 
-               {{-- <div class="col-6">
-                  <div class="form-group">
-                     <label for="cValue">Value</label>
-                     <input type="text" name="cValue" class="form-control form-control-sm" placeholder="See Category Help for details." />
-                  </div>
-               </div> --}}
-
                <div class="w-100"></div>
 
                <div class="col">
@@ -90,7 +83,7 @@
          </div>
 
          <div class="card-footer bg-secondary px-1 py-1">
-            <div>Fields with <i class="fa fa-star" style="color:#ff0000" aria-hidden="true"></i> are required</div>
+            <div>Fields with <span class="required"></span> are required</div>
          </div>
       </div>
    </form>

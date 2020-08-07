@@ -1,6 +1,6 @@
 <!-- Info boxes -->
 <div class="row">
-   
+
    <div class="col-12 col-sm-6 col-md-2">
       <div class="info-box">
          <span class="info-box-icon bg-info elevation-1">
@@ -17,18 +17,21 @@
    </div><!-- /.col -->
 
    <div class="col-12 col-sm-6 col-md-2">
-      <div class="info-box mb-3">
-         <span class="info-box-icon bg-danger elevation-1">
-            <i class="fas fa-thumbs-up"></i>
-         </span>
-
-         <div class="info-box-content">
-            <span class="info-box-text">Projects</span>
-            <span class="info-box-number">
-               {{-- {{ DB::table("projects")->count() }} --}}
+      <a href="{{ route('admin.projects.index') }}">
+         <div class="info-box mb-3">
+            <span class="info-box-icon bg-danger elevation-1">
+               <i class="fas fa-thumbs-up"></i>
             </span>
-         </div><!-- /.info-box-content -->
-      </div><!-- /.info-box -->
+
+            <div class="info-box-content">
+               <span class="info-box-text">Projects</span>
+               <span class="info-box-number">
+                  {{-- {{ DB::table("projects")->count() }} --}}
+                  {{ $projectsCount }}
+               </span>
+            </div><!-- /.info-box-content -->
+         </div><!-- /.info-box -->
+      </a>
    </div><!-- /.col -->
 
    <!-- fix for small devices only -->
@@ -70,7 +73,7 @@
       </a>
    </div><!-- /.col -->
 
-    <div class="col-12 col-sm-6 col-md-2">
+   <div class="col-12 col-sm-6 col-md-2">
       <a href="{{ route('admin.roles.index') }}">
          <div class="info-box mb-3">
             <span class="info-box-icon bg-success elevation-1">

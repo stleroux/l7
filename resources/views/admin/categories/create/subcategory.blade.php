@@ -8,11 +8,11 @@
             <div class="card-title">Add Sub Category</div>
             <div class="float-right">
                <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="fas fa-sync-alt nav-icon"></i>
+                  <i class="{{ Config::get('icons.reset') }}"></i>
                   Reset
                </button>
                <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="far fa-save nav-icon"></i>
+                  <i class="{{ Config::get('icons.save') }}"></i>
                   Save
                </button>
             </div>
@@ -26,30 +26,31 @@
                   <div class="form-group">
                      {{-- {{ Form::label('sSubs', 'Main Category', ['class'=>'required']) }} --}}
                      <label for="sSubs" class="required">Parent Category Name</label>
-                     <select name="sSubs" id="sSubs" class="form-control form-control-sm">
+                     <select name="sSubs" id="sSubs" class="form-control form-control-sm @error('sSubs') is-invalid @enderror">
                         <option value="">Select One</option>
                         @foreach($parentCategories as $k)
                            <option value="{{ $k['id'] }}">{{ ucwords($k['name']) }}</option>
                         @endforeach
                      </select>
-                     <div class="pl-1 bg-danger">{{ $errors->first('sSubs') }} </div>
+                     @error('sSubs')
+                        <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                        </span>
+                     @enderror
                   </div>
                </div>
 
                <div class="col-6">
                   <div class="form-group">
                      <label for="sName" class="required">Category Name</label>
-                     <input type="text" name="sName" class="form-control form-control-sm">
-                     <div class="pl-1 bg-danger">{{ $errors->first('sName') }}</div>
+                     <input type="text" name="sName" class="form-control form-control-sm @error('sName') is-invalid @enderror">
+                     @error('sName')
+                        <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                        </span>
+                     @enderror
                   </div>
                </div>
-
-   {{--             <div class="col-3">
-                  <div class="form-group">
-                     <label for="sValue">Value</label>
-                     <input type="text" name="sValue" class="form-control form-control-sm" placeholder="See Category Help for details." />
-                  </div>
-               </div> --}}
 
                <div class="w-100"></div>
 
@@ -65,7 +66,7 @@
          </div>
 
          <div class="card-footer bg-secondary px-1 py-1">
-            <div>Fields with <i class="fa fa-star" style="color:#ff0000" aria-hidden="true"></i> are required</div>
+            <div>Fields with <span class="required"></span> are required</div>
          </div>
       </div>
    </form>

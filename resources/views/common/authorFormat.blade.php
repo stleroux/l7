@@ -5,15 +5,15 @@
    @if (Config::get('settings.authorFormat') == "username")
 	{{-- @if(setting('authorFormat') == "username") --}}
 		@if($field == 'user')
-			<i class="fas fa-sm fa-link"></i>
+			<i class="{{ Config::get('icons.link') }}"></i>
 			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-				{{ $model->user->name }}
+				{{ $model->user->email }}
 			</a>
 		@elseif($field == 'modifiedBy')
 			@if($model->modified_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-					{{ $model->modifiedBy->name }}
+					{{ $model->modifiedBy->email }}
 				</a>
 			@else
 				N/A
@@ -22,7 +22,7 @@
 			@if($model->last_viewed_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-					{{ $model->lastViewedBy->name }}
+					{{ $model->lastViewedBy->email }}
 				</a>
 			@else
 				N/A
@@ -110,11 +110,11 @@
 @else
 	<!-- Username -->
 	@if($field == 'user')
-		{{ $model->user->name }}
+		{{ $model->user->email }}
 	@elseif($field == 'modifiedBy')
-		{{ $model->modifiedBy->name }}
+		{{ $model->modifiedBy->email }}
 	@elseif($field == 'lastViewedBy')
-		{{ $model->lastViewedBy->name }}
+		{{ $model->lastViewedBy->email }}
 	@endif
 	
 @endif

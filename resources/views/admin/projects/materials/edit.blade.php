@@ -1,44 +1,57 @@
-@extends('layouts.master')
+@extends('layouts.admin.admin')
 
-@section('stylesheets')
-   {{ Html::style('/css/woodbarn.css') }}
+@section('stylesheet')
 @endsection
 
-@section('left_column')
+@section('pageHeader')
+   <i class="{{ Config::get('icons.edit') }}"></i>
+   Edit {{ $material->name }} Material
 @endsection
 
-@section('right_column')
+@section('breadcrumb')
+   <li class="breadcrumb-item"><a href="{{ route('admin.projects.index') }}">Projects</a></li>
+   <li class="breadcrumb-item"><a href="{{ route('admin.projects.materials.index') }}">Project Materials</a></li>
+   <li class="breadcrumb-item active">Edit</li>
+@endsection
+
+@section('rightSidebar')
 @endsection
 
 @section ('content')
    
-   {!! Form::model($material, ['route'=>['admin.projects.materials.update', $material->id], 'method'=>'PUT', 'files'=>'true']) !!}
-      
-      <div class="card mb-3">
-         
-         <div class="card-header section_header p-2">
-            <i class="fa fa-edit"></i>
-            Edit Material
-            <span class="float-right">
-               <div class="btn-group">
-                  @include('admin.projects.materials.buttons.help', ['size'=>'xs', 'bookmark'=>'materials'])
-                  @include('admin.projects.materials.buttons.back', ['size'=>'xs'])
-                  @include('admin.projects.materials.buttons.update', ['size'=>'xs'])
-               </div>
-            </span>
-         </div>
+   <form action="{{ route('admin.projects.materials.update', $material) }}" method="POST">
+      @csrf
+      @method('PUT')
 
-         <div class="card-body section_body p-2">
-            @include('admin.projects.materials.form')
-         </div>
+      @include('admin.projects.materials.edit.topbar')
 
+      <div class="card mb-2">
+         <!-- CARD HEADER -->
+         <div class="card-header py-1">
+            General Information
+            <div class="card-tools">
+               <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+         </div>
+         <!-- CARD BODY -->
+         <div class="card-body p-3">
+            <div class="form-row">
+               @include('admin.projects.materials.fields.name')
+               @include('admin.projects.materials.fields.type')
+               @include('admin.projects.materials.fields.manufacturer')
+               @include('admin.projects.materials.fields.upcCode')
+               @include('admin.projects.materials.fields.notes')
+            </div>
+         </div>
          <!-- CARD FOOTER -->
-         <div class="card-footer pt-1 pb-1 pl-2">
+         <div class="card-footer card_footer p-1">
             Fields marked with an <span class="required"></span> are required
          </div>
 
       </div>
 
-   {!! Form::Close() !!}
+   </form>
+
+   @include('admin.projects.materials.help')
 
 @endsection

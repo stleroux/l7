@@ -1,13 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
 @endsection
 
 @section('pageHeader')
+   <i class="{{ Config::get('icons.edit') }}"></i>
    Edit Permission
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">Permisisons</a></li>
    <li class="breadcrumb-item active">Edit</li>
 @endsection

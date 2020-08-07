@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
+use App\Models\Admin\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Auth;
@@ -26,72 +26,56 @@ use Storage;
 class CategoriesController extends Controller
 {
 
-
 ##################################################################################################################
-#  ██████╗ ██████╗ ███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗
-# ██╔════╝██╔═══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
-# ██║     ██║   ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   
-# ██║     ██║   ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   
-# ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
-#  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
+#  ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████ 
+# ██      ██    ██ ████   ██ ██         ██    ██   ██ ██    ██ ██         ██    
+# ██      ██    ██ ██ ██  ██ ███████    ██    ██████  ██    ██ ██         ██    
+# ██      ██    ██ ██  ██ ██      ██    ██    ██   ██ ██    ██ ██         ██    
+#  ██████  ██████  ██   ████ ███████    ██    ██   ██  ██████   ██████    ██    
 ##################################################################################################################
    public function __construct()
    {
       $this->middleware('auth');
-      $this->enablePermissions = true;
-      // If set to false, users will be able to access the different functions using the address bar
       //Log::useFiles(storage_path().'/logs/audits.log');
    }
 
 
 ##################################################################################################################
-#  ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
-# ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
-# ██║     ██████╔╝█████╗  ███████║   ██║   █████╗  
-# ██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝  
-# ╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗
-#  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+#  ██████ ██████  ███████  █████  ████████ ███████ 
+# ██      ██   ██ ██      ██   ██    ██    ██      
+# ██      ██████  █████   ███████    ██    █████   
+# ██      ██   ██ ██      ██   ██    ██    ██      
+#  ██████ ██   ██ ███████ ██   ██    ██    ███████ 
 // Show the form for creating a new resource
 ##################################################################################################################
-   public function create()
-   {
-      // // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('category_add')) { abort(401, 'Unauthorized Access'); }
-      // }
+   // public function create()
+   // {
+   //    // Check if user has required permission
 
-      $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
-      // $categories = Category::whereNull('category_id')->with('childrenCategories')->get();
+   //    $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
 
-      
-      return view('admin.categories.create', compact('categories'));
-   }
+   //    return view('admin.categories.create', compact('categories'));
+   // }
 
 
 ##################################################################################################################
-# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
-# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
-# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
-# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
-# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
-# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+# ██████  ███████ ██      ███████ ████████ ███████ 
+# ██   ██ ██      ██      ██         ██    ██      
+# ██   ██ █████   ██      █████      ██    █████   
+# ██   ██ ██      ██      ██         ██    ██      
+# ██████  ███████ ███████ ███████    ██    ███████ 
 // Mass Delete selected rows - all selected records
 ##################################################################################################################
    public function delete($id)
    {
-      if(Gate::denies('category-delete'))
-      {
-         return redirect()->route('admin.categories.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-delete'), 403);
 
       $category = Category::onlyTrashed()->findOrFail($id);
-      
+
       // delete the user
       if($category->forceDelete())
       {
-         // remove the user's roles from the role_user table
-         // $user->roles()->detach();
-
          $notification = array(
             'message' => 'The category was deleted successfully!', 
             'alert-type' => 'success'
@@ -108,25 +92,20 @@ class CategoriesController extends Controller
 
 
 ##################################################################################################################
-# ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
-# ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
-# ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
-# ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
-# ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
-# ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+# ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██████  ███████ ███████    ██    ██   ██  ██████     ██  
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
    public function destroy(Category $category)
    {
-      if(Gate::denies('category-delete'))
-      {
-         return redirect()->route('admin.categories.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-delete'), 403);
 
-      // dd($category);
       $subCategories = Category::where('parent_id',$category->id)->get();
-      // dd($subCategories);
 
       // delete the permission
       if($category->delete())
@@ -151,8 +130,18 @@ class CategoriesController extends Controller
    }
 
 
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+##################################################################################################################
    public function massDestroy(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-delete'), 403);
+
       $categories = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
       if(!$request->input('mass_destroy_pass_checkedvalue'))
@@ -162,7 +151,7 @@ class CategoriesController extends Controller
             'alert-type' => 'error'
          );
       } else {
-         
+
          foreach ($categories as $category_id) {
             $category = Category::findOrFail($category_id);
             $category->delete();
@@ -173,21 +162,23 @@ class CategoriesController extends Controller
             'alert-type' => 'success'
          );
       }
-      
+
       return redirect()->back()->with($notification);
    }
 
 
 ##################################################################################################################
-# ██████╗  ██████╗ ██╗    ██╗███╗   ██╗██╗      ██████╗  █████╗ ██████╗     ███████╗██╗  ██╗ ██████╗███████╗██╗     
-# ██╔══██╗██╔═══██╗██║    ██║████╗  ██║██║     ██╔═══██╗██╔══██╗██╔══██╗    ██╔════╝╚██╗██╔╝██╔════╝██╔════╝██║     
-# ██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║██║     ██║   ██║███████║██║  ██║    █████╗   ╚███╔╝ ██║     █████╗  ██║     
-# ██║  ██║██║   ██║██║███╗██║██║╚██╗██║██║     ██║   ██║██╔══██║██║  ██║    ██╔══╝   ██╔██╗ ██║     ██╔══╝  ██║     
-# ██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║███████╗╚██████╔╝██║  ██║██████╔╝    ███████╗██╔╝ ██╗╚██████╗███████╗███████╗
-# ╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝╚══════╝
+# ██████   ██████  ██     ██ ███    ██ ██       ██████   █████  ██████      ███████ ██   ██  ██████ ███████ ██      
+# ██   ██ ██    ██ ██     ██ ████   ██ ██      ██    ██ ██   ██ ██   ██     ██       ██ ██  ██      ██      ██      
+# ██   ██ ██    ██ ██  █  ██ ██ ██  ██ ██      ██    ██ ███████ ██   ██     █████     ███   ██      █████   ██      
+# ██   ██ ██    ██ ██ ███ ██ ██  ██ ██ ██      ██    ██ ██   ██ ██   ██     ██       ██ ██  ██      ██      ██      
+# ██████   ██████   ███ ███  ██   ████ ███████  ██████  ██   ██ ██████      ███████ ██   ██  ██████ ███████ ███████ 
 ##################################################################################################################
    public function downloadExcel($type)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
+
       $data = Category::get()->toArray();
       return Excel::create('Categories_List', function($excel) use ($data) {
          $excel->sheet('mySheet', function($sheet) use ($data)
@@ -199,40 +190,36 @@ class CategoriesController extends Controller
 
 
 ##################################################################################################################
-# ███████╗██████╗ ██╗████████╗
-# ██╔════╝██╔══██╗██║╚══██╔══╝
-# █████╗  ██║  ██║██║   ██║   
-# ██╔══╝  ██║  ██║██║   ██║   
-# ███████╗██████╔╝██║   ██║   
-# ╚══════╝╚═════╝ ╚═╝   ╚═╝   
+# ███████ ██████  ██ ████████ 
+# ██      ██   ██ ██    ██    
+# █████   ██   ██ ██    ██    
+# ██      ██   ██ ██    ██    
+# ███████ ██████  ██    ██    
 // Show the form for editing the specified resource
 ##################################################################################################################
    public function edit($id)
    {
-      $category = Category::find($id);
-      // dd($category);
-
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
-      // }
+      abort_unless(Gate::allows('category-edit'), 403);
 
-      // $categories = Category::where('parent_id', $category->parent_id)->get();
+      $category = Category::find($id);
 
       return  view('admin.categories.edit', compact('category'));
    }
 
 
 ##################################################################################################################
-# ███████╗██╗  ██╗██████╗  ██████╗ ██████╗ ████████╗    ██████╗ ██████╗ ███████╗
-# ██╔════╝╚██╗██╔╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██╔══██╗██╔════╝
-# █████╗   ╚███╔╝ ██████╔╝██║   ██║██████╔╝   ██║       ██████╔╝██║  ██║█████╗  
-# ██╔══╝   ██╔██╗ ██╔═══╝ ██║   ██║██╔══██╗   ██║       ██╔═══╝ ██║  ██║██╔══╝  
-# ███████╗██╔╝ ██╗██║     ╚██████╔╝██║  ██║   ██║       ██║     ██████╔╝██║     
-# ╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═════╝ ╚═╝     
+# ███████ ██   ██ ██████   ██████  ██████  ████████     ██████  ██████  ███████ 
+# ██       ██ ██  ██   ██ ██    ██ ██   ██    ██        ██   ██ ██   ██ ██      
+# █████     ███   ██████  ██    ██ ██████     ██        ██████  ██   ██ █████   
+# ██       ██ ██  ██      ██    ██ ██   ██    ██        ██      ██   ██ ██      
+# ███████ ██   ██ ██       ██████  ██   ██    ██        ██      ██████  ██      
 ##################################################################################################################
    public function exportPDF()
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
+
       $data = Category::get()->toArray();
       return Excel::create('Categories_List', function($excel) use ($data) {
          $excel->sheet('mySheet', function($sheet) use ($data)
@@ -244,30 +231,34 @@ class CategoriesController extends Controller
 
 
 ##################################################################################################################
-# ██╗███╗   ███╗██████╗  ██████╗ ██████╗ ████████╗
-# ██║████╗ ████║██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝
-# ██║██╔████╔██║██████╔╝██║   ██║██████╔╝   ██║   
-# ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██╔══██╗   ██║   
-# ██║██║ ╚═╝ ██║██║     ╚██████╔╝██║  ██║   ██║   
-# ╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+# ██ ███    ███ ██████   ██████  ██████  ████████ 
+# ██ ████  ████ ██   ██ ██    ██ ██   ██    ██    
+# ██ ██ ████ ██ ██████  ██    ██ ██████     ██    
+# ██ ██  ██  ██ ██      ██    ██ ██   ██    ██    
+# ██ ██      ██ ██       ██████  ██   ██    ██    
 // IMPORT :: Show the form for importing entries to storage.
 ##################################################################################################################
    public function import()
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
+
       return view('admin.categories.import');
    }
 
 
 ##################################################################################################################
-# ██╗███╗   ███╗██████╗  ██████╗ ██████╗ ████████╗    ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗
-# ██║████╗ ████║██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
-# ██║██╔████╔██║██████╔╝██║   ██║██████╔╝   ██║       █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║
-# ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██╔══██╗   ██║       ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║
-# ██║██║ ╚═╝ ██║██║     ╚██████╔╝██║  ██║   ██║       ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
-# ╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+# ██ ███    ███ ██████   ██████  ██████  ████████     ███████ ██    ██ ███    ██  ██████ ████████ ██  ██████  ███    ██ 
+# ██ ████  ████ ██   ██ ██    ██ ██   ██    ██        ██      ██    ██ ████   ██ ██         ██    ██ ██    ██ ████   ██ 
+# ██ ██ ████ ██ ██████  ██    ██ ██████     ██        █████   ██    ██ ██ ██  ██ ██         ██    ██ ██    ██ ██ ██  ██ 
+# ██ ██  ██  ██ ██      ██    ██ ██   ██    ██        ██      ██    ██ ██  ██ ██ ██         ██    ██ ██    ██ ██  ██ ██ 
+# ██ ██      ██ ██       ██████  ██   ██    ██        ██       ██████  ██   ████  ██████    ██    ██  ██████  ██   ████ 
 ##################################################################################################################
    public function importExcel()
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
+
       if(Input::hasFile('import_file')){
          $path = Input::file('import_file')->getRealPath();
          $data = Excel::load($path, function($reader) {})->get();
@@ -275,11 +266,11 @@ class CategoriesController extends Controller
          if(!empty($data) && $data->count()){
             foreach ($data as $key => $value) {
                $insert[] = [
-               'name'         => $value->name,
-               'description'  => $value->description,
-               'module_id'    => $value->module_id,
-               'created_at'   => $value->created_at,
-               'updated_at'   => $value->updated_at,
+                  'name'         => $value->name,
+                  'description'  => $value->description,
+                  'module_id'    => $value->module_id,
+                  'created_at'   => $value->created_at,
+                  'updated_at'   => $value->updated_at,
                ];
             }
 
@@ -295,81 +286,80 @@ class CategoriesController extends Controller
 
 
 ##################################################################################################################
-# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
-# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
-# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
-# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
-# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
-# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+# ██ ███    ██ ██████  ███████ ██   ██ 
+# ██ ████   ██ ██   ██ ██       ██ ██  
+# ██ ██ ██  ██ ██   ██ █████     ███   
+# ██ ██  ██ ██ ██   ██ ██       ██ ██  
+# ██ ██   ████ ██████  ███████ ██   ██ 
 // Display a list of resources
 ##################################################################################################################
    public function index(Request $request, $key=null)
    {
-      // abort_unless(\Gate::allows('permission-manage'), 403);
-
-      // if(Gate::denies('permission-manage'))
-      // {
-      //    return redirect()->route('home');
-      // }
-
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('category_browse')) { abort(401, 'Unauthorized Access'); }
-      // }
+      abort_unless(Gate::allows('category-manage'), 403);
 
-      // $alphas = DB::table('categories')
-      //    ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
-  //        ->where('deleted_at', '=', null)
-      //    ->orderBy('letter')
-      //    ->get();
 
-      // $letters = [];
-      // foreach($alphas as $alpha) {
-      //    $letters[] = $alpha->letter;
-      // }
+// if(Gate::denies('permission-manage'))
+// {
+//    return redirect()->route('home');
+// }
 
-      // If $key value is passed
-      // if ($key) {
-      //    $categories = Category::with('parent','children')->where('name', 'like', $key . '%')
-      //       ->orderBy('name', 'asc')
-      //       ->get();
-      // } else {
-         // No $key value is passed
-         $categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
-         // $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
-         // dd($categories);
+// Check if user has required permission
+// if($this->enablePermissions) {
+//    if(!checkPerm('category_browse')) { abort(401, 'Unauthorized Access'); }
+// }
 
-         $parentCategories = Category::with('children')->where('parent_id', 0)->get();
-         // $categoriesList = Category::with('children')->get();
-         // dd($categoriesList);
-      // }
-         // $categories = Category::all()->sortBy('name');
+// $alphas = DB::table('categories')
+//    ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+//        ->where('deleted_at', '=', null)
+//    ->orderBy('letter')
+//    ->get();
+
+// $letters = [];
+// foreach($alphas as $alpha) {
+//    $letters[] = $alpha->letter;
+// }
+
+// If $key value is passed
+// if ($key) {
+//    $categories = Category::with('parent','children')->where('name', 'like', $key . '%')
+//       ->orderBy('name', 'asc')
+//       ->get();
+// } else {
+// No $key value is passed
+      $categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
+// $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
+// dd($categories);
+
+      $parentCategories = Category::with('children')->where('parent_id', 0)->get();
+// $categoriesList = Category::with('children')->get();
+// dd($categoriesList);
+// }
+// $categories = Category::all()->sortBy('name');
 
       return view('admin.categories.index', compact('categories','parentCategories'));
    }
 
 
 ##################################################################################################################
-# ███╗   ██╗███████╗██╗    ██╗     ██████╗ █████╗ ████████╗███████╗ ██████╗  ██████╗ ██████╗ ██╗███████╗███████╗
-# ████╗  ██║██╔════╝██║    ██║    ██╔════╝██╔══██╗╚══██╔══╝██╔════╝██╔════╝ ██╔═══██╗██╔══██╗██║██╔════╝██╔════╝
-# ██╔██╗ ██║█████╗  ██║ █╗ ██║    ██║     ███████║   ██║   █████╗  ██║  ███╗██║   ██║██████╔╝██║█████╗  ███████╗
-# ██║╚██╗██║██╔══╝  ██║███╗██║    ██║     ██╔══██║   ██║   ██╔══╝  ██║   ██║██║   ██║██╔══██╗██║██╔══╝  ╚════██║
-# ██║ ╚████║███████╗╚███╔███╔╝    ╚██████╗██║  ██║   ██║   ███████╗╚██████╔╝╚██████╔╝██║  ██║██║███████╗███████║
+# ███    ██ ███████ ██     ██      ██████  █████  ████████ ███████  ██████   ██████  ██████  ██ ███████ ███████ 
+# ████   ██ ██      ██     ██     ██      ██   ██    ██    ██      ██       ██    ██ ██   ██ ██ ██      ██      
+# ██ ██  ██ █████   ██  █  ██     ██      ███████    ██    █████   ██   ███ ██    ██ ██████  ██ █████   ███████ 
+# ██  ██ ██ ██      ██ ███ ██     ██      ██   ██    ██    ██      ██    ██ ██    ██ ██   ██ ██ ██           ██ 
+# ██   ████ ███████  ███ ███       ██████ ██   ██    ██    ███████  ██████   ██████  ██   ██ ██ ███████ ███████ 
 // Display a listing of the resource that were created since the user's last login.
 ##################################################################################################################
    public function newCategories(Request $request, $key=null)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless(Gate::allows('category-manage'), 403);      
 
       //$alphas = range('A', 'Z');
       $alphas = DB::table('categories')
-         ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
-         ->where('created_at', '>=' , Auth::user()->last_login_date)
-         ->orderBy('letter')
-         ->get();
+      ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
+      ->where('created_at', '>=' , Auth::user()->last_login_date)
+      ->orderBy('letter')
+      ->get();
 
       $letters = [];
       foreach($alphas as $alpha) {
@@ -379,8 +369,8 @@ class CategoriesController extends Controller
       // If $key value is passed
       if ($key) {
          $categories = Category::newCategories()
-            ->where('name', 'like', $key . '%')
-            ->get();
+         ->where('name', 'like', $key . '%')
+         ->get();
       } else {
          $categories = Category::newCategories()->get();
       }
@@ -390,42 +380,36 @@ class CategoriesController extends Controller
 
 
 ##################################################################################################################
-# ███████╗██╗  ██╗ ██████╗ ██╗    ██╗
-# ██╔════╝██║  ██║██╔═══██╗██║    ██║
-# ███████╗███████║██║   ██║██║ █╗ ██║
-# ╚════██║██╔══██║██║   ██║██║███╗██║
-# ███████║██║  ██║╚██████╔╝╚███╔███╔╝
-# ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
+# ███████ ██   ██  ██████  ██     ██ 
+# ██      ██   ██ ██    ██ ██     ██ 
+# ███████ ███████ ██    ██ ██  █  ██ 
+#      ██ ██   ██ ██    ██ ██ ███ ██ 
+# ███████ ██   ██  ██████   ███ ███  
 // Display the specified resource
 ##################################################################################################################
    public function show($id)
    {
-      $category = Category::findOrFail($id);
-
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('category_read')) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless(Gate::allows('category-manage'), 403);
+
+      $category = Category::findOrFail($id);
 
       return view('admin.categories.show', compact('category'));
    }
 
 
 ##################################################################################################################
-# ███████╗████████╗ ██████╗ ██████╗ ███████╗
-# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
-# ███████╗   ██║   ██║   ██║██████╔╝█████╗  
-# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
-# ███████║   ██║   ╚██████╔╝██║  ██║███████╗
-# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
+# ███████ ████████  ██████  ██████  ███████ 
+# ██         ██    ██    ██ ██   ██ ██      
+# ███████    ██    ██    ██ ██████  █████   
+#      ██    ██    ██    ██ ██   ██ ██      
+# ███████    ██     ██████  ██   ██ ███████ 
 // Store a newly created resource in storage
 ##################################################################################################################
    public function store(Request $request)
    {
-      // Check if user has required module
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('category_add')) { abort(401, 'Unauthorized Access'); }
-      // }
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-create'), 403);
 
       if($request->part === 'main')
       {
@@ -497,10 +481,7 @@ class CategoriesController extends Controller
 
          $this->validate($request, $rules, $customMessages);
 
-         $cSubCategory = Category::
-            where('name', '=', $request->cSubcategory)
-            ->where('parent_id', '=', $request->cCategory)
-            ->pluck('id');
+         $cSubCategory = Category::where('name', '=', $request->cSubcategory)->where('parent_id', '=', $request->cCategory)->pluck('id');
 
          $category = new Category;
             $category->parent_id = $cSubCategory[0];
@@ -512,25 +493,22 @@ class CategoriesController extends Controller
          Session::flash('success','The new category has been created.');
          return redirect()->route('admin.categories.index');
       }
-      
+
    }
 
 
 ##################################################################################################################
-# ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
-# ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
-# ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  
-# ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
-# ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
-#  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+# ██    ██ ██████  ██████   █████  ████████ ███████ 
+# ██    ██ ██   ██ ██   ██ ██   ██    ██    ██      
+# ██    ██ ██████  ██   ██ ███████    ██    █████   
+# ██    ██ ██      ██   ██ ██   ██    ██    ██      
+#  ██████  ██      ██████  ██   ██    ██    ███████ 
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
    public function update(Request $request, $id)
    {
-      // Check if user has required module
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('category_edit')) { abort(401, 'Unauthorized Access'); }
-      // }
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-edit'), 403);
 
       $rules = [
          'name' => 'required|min:3|max:50',
@@ -543,12 +521,13 @@ class CategoriesController extends Controller
       ];
 
       $this->validate($request, $rules, $customMessages);
-      
+
       // Get the category value from the database
       $category = Category::find($id);
-         $category->name = $request->input('name');
-         $category->value = $request->input('value');
-         $category->description = $request->input('description');
+      $category->name = $request->input('name');
+      $category->value = $request->input('value');
+      $category->description = $request->input('description');
+      
       // Save the data to the database
       $category->save();
 
@@ -559,15 +538,21 @@ class CategoriesController extends Controller
    }
 
 
+##################################################################################################################
+# ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
+# ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
+# ██████  █████   ███████    ██    ██    ██ ██████  █████   
+# ██   ██ ██           ██    ██    ██    ██ ██   ██ ██      
+# ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
+// RESTORE TRASHED FILE
+##################################################################################################################
    public function restore($id)
    {
-      if(Gate::denies('category-delete'))
-      {
-         return redirect()->route('admin.categories.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
 
       $category = Category::withTrashed()->findOrFail($id);
-      
+
       // restore the user
       if($category->restore())
       {
@@ -586,8 +571,19 @@ class CategoriesController extends Controller
    }
 
 
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
+# ██ ████ ██ ███████ ███████ ███████     ██████  █████   ███████    ██    ██    ██ ██████  █████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██    ██ ██   ██ ██      
+# ██      ██ ██   ██ ███████ ███████     ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
+##################################################################################################################
+
    public function massRestore(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
+
       $categories = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
       if(!$request->input('mass_restore_pass_checkedvalue'))
@@ -597,7 +593,7 @@ class CategoriesController extends Controller
             'alert-type' => 'error'
          );
       } else {
-         
+
          foreach ($categories as $category_id) {
             $category = Category::withTrashed()->findOrFail($category_id);
             $category->restore();
@@ -608,13 +604,23 @@ class CategoriesController extends Controller
             'alert-type' => 'success'
          );
       }
-      
+
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ██      ███████ ████████ ███████ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██      ██         ██    ██      
+# ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ██      █████      ██    █████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██      ██      ██         ██    ██      
+# ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████ ███████    ██    ███████ 
+##################################################################################################################
    public function massDelete(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-delete'), 403);
+
       $categories = explode(',', $request->input('mass_delete_pass_checkedvalue'));
 
       if(!$request->input('mass_delete_pass_checkedvalue'))
@@ -624,11 +630,10 @@ class CategoriesController extends Controller
             'alert-type' => 'error'
          );
       } else {
-         
+
          foreach ($categories as $category_id) {
             $category = Category::withTrashed()->findOrFail($category_id);
             $category->forceDelete();
-            // $category->roles()->detach();
          }
 
          $notification = array(
@@ -636,23 +641,27 @@ class CategoriesController extends Controller
             'alert-type' => 'success'
          );
       }
-      
+
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ████████ ██████   █████  ███████ ██   ██ ███████ ██████  
+#    ██    ██   ██ ██   ██ ██      ██   ██ ██      ██   ██ 
+#    ██    ██████  ███████ ███████ ███████ █████   ██   ██ 
+#    ██    ██   ██ ██   ██      ██ ██   ██ ██      ██   ██ 
+#    ██    ██   ██ ██   ██ ███████ ██   ██ ███████ ██████  
+// Display a list of resources that have been trashed (Soft Deleted)
+##################################################################################################################
    public function trashed()
    {
-      if(Gate::denies('category-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('category-manage'), 403);
 
       $categories = Category::onlyTrashed()->get();
-               // $categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
-         // $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
-         // dd($categories);
       $parentCategories = Category::with('children')->where('parent_id', 0)->get();
+
       return view('admin.categories.index', compact('categories','parentCategories'));
    }
 

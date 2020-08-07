@@ -4,8 +4,8 @@
       - fn
 --}}
 {{-- {{ $field }} --}}
-<div class="modal bg-secondary fade" id="view{{ $field }}Modal{{ $model->id}}" tabindex="-1" role="dialog" aria-labelledby="view{{ $field }}ModalLabel">
-   <div class="modal-dialog" role="document">
+<div class="modal bg-secondary" id="view{{ $field }}Modal{{ $model->id}}" tabindex="-1" role="dialog" aria-labelledby="view{{ $field }}ModalLabel">
+   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
             
          <div class="modal-header bg-info">

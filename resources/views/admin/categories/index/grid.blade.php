@@ -1,6 +1,9 @@
 @if($categories->count() > 0)
+
    <div class="card-body section_body p-2">
+
       <table id="datatable" class="table table-hover table-sm">
+
          <thead>
             <tr>
                <th class="no-sort" width="30px">
@@ -20,6 +23,7 @@
                <th class="no-sort"></th>
             </tr>
          </thead>
+
          <tbody>
             @foreach ($categories as $category)
                <tr class="{{ ($category->deleted_at ? 'text-danger' : '') }}">
@@ -28,7 +32,7 @@
                         <input
                            type="checkbox"
                            class="record checkbox_record"
-                           name="entries_to_delete[]"
+                           name="entries[]"
                            onchange="showHide(this.checked)"
                            value="{{ $category->id }}"
                            id="{{ $category->id}}" />
@@ -52,11 +56,13 @@
             @endforeach
 
          </tbody>
+
       </table>
+
    </div>
+   
 @else
    <div class="card-body p-0 m-0">
-      {{-- {{ setting('no_records_found') }} --}}
-      NO DATA FOUND
+      {{ Config::get('settings.noRecordsFound') }}
    </div>
 @endif

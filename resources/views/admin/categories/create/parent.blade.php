@@ -8,11 +8,11 @@
             <div class="card-title">Add Parent Category</div>
             <div class="float-right">
                <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="fas fa-sync-alt nav-icon"></i>
+                  <i class="{{ Config::get('icons.reset') }}"></i>
                   Reset
                </button>
                <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="far fa-save nav-icon"></i>
+                  <i class="{{ Config::get('icons.save') }}"></i>
                   Save
                </button>
             </div>
@@ -24,17 +24,14 @@
                <div class="col-6">
                   <div class="form-group">
                      <label for="mName" class="required">Category Name</label>
-                     <input type="text" name="mName" class="form-control form-control-sm">
-                     <div class="pl-1 bg-danger">{{ $errors->first('mName') }}</div>
+                     <input type="text" name="mName" class="form-control form-control-sm @error('mName') is-invalid @enderror">
+                     @error('mName')
+                        <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                        </span>
+                     @enderror
                   </div>
                </div>
-
-               {{-- <div class="col">
-                  <div class="form-group">
-                     <label for="mValue">Value</label>
-                     <input type="text" name="mValue" class="form-control form-control-sm" placeholder="See Category Help for details.">
-                  </div>
-               </div> --}}
 
                <div class="w-100"></div>
 
@@ -49,7 +46,7 @@
          </div>
          
          <div class="card-footer bg-secondary px-1 py-1">
-            <div>Fields with <i class="fa fa-star" style="color:#ff0000" aria-hidden="true"></i> are required</div>
+            <div>Fields with <span class="required"></span> are required</div>
          </div>
       </div>
    </form>

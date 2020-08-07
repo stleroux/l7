@@ -1,13 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
 @endsection
 
 @section('pageHeader')
+   <i class="{{ Config::get('icons.edit') }}"></i>
    Edit User
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
    <li class="breadcrumb-item active">Edit</li>
 @endsection
@@ -24,31 +25,32 @@
 
       @include('admin.users.edit.topbar')
 
+      {{-- <div class="row justify-content-center">
+         <div class="col-12 col-xl-1">
+            @include('admin.users.form.fields.approved')
+         </div>
+      </div> --}}
+
       <div class="row">
-
-         <div class="col-9">
-
-            <div class="card card-primary">
-               <div class="card-header">
-                  <div class="card-title">User Information</div>
-               </div>
-               <div class="card-body">
-                  
-                  <div class="row">
-                     @include('admin.users.edit.fields.name')
-                     @include('admin.users.edit.fields.email')
-                  </div>
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         
-         </div><!-- Col -->
-
-         <div class="col-3">
-            @include('admin.users.edit.fields.roles')         
+         <div class="col-xl-6">
+            @include('admin.users.form.account')
+            @include('admin.users.form.user')
+            @include('admin.users.form.contact')
+            @include('admin.users.form.address')
          </div>
 
-      </div><!-- Row -->
+         <div class="col-xl-3">
+            @include('admin.users.form.image')
+            @include('admin.users.form.other')
+         </div>
+
+         <div class="col-xl-3">
+            @include('admin.users.form.fields.roles')
+            @include('admin.users.form.password')
+            {{-- @include('admin.users.form.login') --}}
+         </div>
+
+      </div>
 
       @include('admin.users.help')
 
@@ -56,18 +58,18 @@
 
 @endsection
 
-@section('scripts')
+{{-- @section('scripts') --}}
    <!-- Bootstrap Switch -->
-   <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+{{--    <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
    <script>
       $("input[data-bootstrap-switch]").each(function(){
          $(this).bootstrapSwitch('state', $(this).prop('checked'));
       });
-   </script>
+   </script> --}}
    
-   <script>
+{{--    <script>
       window.onload = function() {
-          document.getElementById("name").focus();
+          document.getElementById("first_name").focus();
       }
-   </script>
-@endsection
+   </script> --}}
+{{-- @endsection --}}

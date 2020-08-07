@@ -1,12 +1,16 @@
 <div class="row mb-2">
 
    <div class="col">
-      @can('role-create')
-         <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-success">
-            <i class="nav-icon fas fa-user-tag"></i>
-            Create Role
-         </a>
-      @endcan
+      @if(Route::currentRouteName() == 'admin.roles.index')
+         @can('role-create')
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-success" title="Create Role">
+               <i class="{{ Config::get('icons.add') }}"></i>
+               <div class="d-none d-lg-inline">
+                  Create Role
+               </div>
+            </a>
+         @endcan
+      @endif
    </div>
 
    <div class="col">
@@ -18,16 +22,17 @@
                data-toggle="dropdown"
                data-boundary="viewport"
                aria-haspopup="true"
-               aria-expanded="false">
-               <i class="fa fa-ellipsis-v px-3"></i>
+               aria-expanded="false"
+               title="Actions">
+               <i class="{{ Config::get('icons.ellipsis') }} mx-3"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu">
                <a href="{{ route('admin.roles.index') }}" class="dropdown-item bg-light">
-                  <i class="fa fa-user text-primary nav-item"></i>
+                  <i class="{{ Config::get('icons.roles') }}"></i>
                   All Roles
                </a>
                <a href="{{ route('admin.roles.trashed') }}" class="dropdown-item bg-light">
-                  <i class="fa fa-user text-primary nav-item"></i>
+                  <i class="{{ Config::get('icons.trashed') }} text-pink"></i>
                   Trashed
                </a>
             </div>
@@ -35,9 +40,11 @@
       </div>
 
       <div class="float-right px-1">
-         <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
-            <i class="nav-icon fas fa-question-circle"></i>
-            Help
+         <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal" title="Help">
+            <i class="{{ Config::get('icons.help') }}"></i>
+            <div class="d-none d-lg-inline">
+               Help
+            </div>
          </a>
       </div>
 
@@ -47,27 +54,27 @@
             @method('DELETE')
             <input type="hidden" name="mass_destroy_ids" id="mass_destroy_ids" value="" class="bg-danger" size="3" />
             <a data-toggle="modal"
-               class="btn btn-sm bg-danger"
+               class="btn btn-sm bg-pink"
                id="btn_multidestroy"
                style="display:none"
                data-target="#massDestroy-modal">
-               <i class="fas fa-trash nav-icon"></i>
+               <i class="{{ Config::get('icons.trash') }}"></i>
                Trash Selected
             </a>
          </form>
       @endif
 
-      @if(Route::currentRouteName() == 'admin.roles.trashed')      
+      @if(Route::currentRouteName() == 'admin.roles.trashed')
          <form action="{{ route('admin.roles.mass_delete') }}" method="post" class="float-right p-0 pl-1">
             @csrf
             @method('DELETE')
             <input type="hidden" name="mass_delete_ids" id="mass_delete_ids" value="" class="bg-warning" size="3" />
             <a data-toggle="modal"
-               class="btn btn-sm bg-warning"
+               class="btn btn-sm bg-danger"
                id="btn_multidelete"
                style="display:none"
                data-target="#massDelete-modal">
-               <i class="fas fa-trash nav-icon"></i>
+               <i class="{{ Config::get('icons.delete') }}"></i>
                Delete Selected
             </a>
          </form>
@@ -75,13 +82,12 @@
          <form action="" method="POST" class="float-right p-0 pl-1">
             @csrf
             <input type="hidden" name="mass_restore_ids" id="mass_restore_ids" value="" class="bg-primary" size="3" />
-            <a 
-               data-toggle="modal"
+            <a data-toggle="modal"
                class="btn btn-sm bg-primary"
                id="btn_multirestore"
                style="display:none"
                data-target="#massRestore-modal">
-               <i class="fas fa-trash-restore"></i>
+               <i class="{{ Config::get('icons.restore') }}"></i>
                Restore Selected
             </a>
          </form>

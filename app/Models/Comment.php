@@ -10,6 +10,8 @@ class Comment extends Model
 
 	protected $fillable = [];
 
+   protected $dates = ['created_at','updated_at','deleted_at'];
+
 	public function commentable()
 	{
 		return $this->morphTo();
@@ -25,7 +27,7 @@ class Comment extends Model
 
    public function user()
    {
-      return $this->belongsTo('App\User');
+      return $this->belongsTo('App\Models\Admin\User');
    }
 
    // public function modifiedBy()
@@ -40,12 +42,12 @@ class Comment extends Model
 
 	public function recipe()
 	{
-		return $this->belongsTo('App\Models\Recipe');
+		return $this->belongsTo('App\Models\UI\Recipe');
 	}
 
    public function project()
    {
-      return $this->belongsTo('App\Models\Projects\Project');
+      return $this->belongsTo('App\Models\Admin\Projects\Project');
    }
 	// public function scopeNewComments($query)
  //   	{

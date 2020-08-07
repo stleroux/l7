@@ -1,13 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
 @endsection
 
 @section('pageHeader')
+   <i class="{{ Config::get('icons.add') }}"></i>
    Create User
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
    <li class="breadcrumb-item active">Create</li>
 @endsection
@@ -23,33 +24,31 @@
 
       @include('admin.users.create.topbar')
 
+      {{-- <div class="row justify-content-center">
+         <div class="col-12 col-md-3">
+            @include('admin.users.form.fields.approved')
+         </div>
+      </div> --}}
+
       <div class="row">
-
-         <div class="col-9">
-
-            <div class="card card-primary">
-
-               <div class="card-header">
-                  <div class="card-title">User Information</div>
-               </div>
-               <div class="card-body">
-                  
-                  <div class="row">
-                     @include('admin.users.create.fields.name')
-                     @include('admin.users.create.fields.email')
-                  </div>
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         
-         </div><!-- Col -->
-
-         <div class="col-3">
-            @include('admin.users.create.fields.roles')
-            
+         <div class="col-xl-6">
+            {{-- @include('admin.users.form.account') --}}
+            @include('admin.users.form.user')
+            @include('admin.users.form.contact')
+            @include('admin.users.form.address')
          </div>
 
-      </div><!-- Row -->
+         <div class="col-xl-3">
+            @include('admin.users.form.image')
+            @include('admin.users.form.other')
+         </div>
+
+         <div class="col-xl-3">
+            @include('admin.users.form.fields.roles')
+            @include('admin.users.form.password')
+         </div>
+
+      </div>
 
       @include('admin.users.help')
 
@@ -64,11 +63,5 @@
       $("input[data-bootstrap-switch]").each(function(){
          $(this).bootstrapSwitch('state', $(this).prop('checked'));
       });
-   </script>
-
-   <script>
-      window.onload = function() {
-          document.getElementById("name").focus();
-      }
    </script>
 @endsection

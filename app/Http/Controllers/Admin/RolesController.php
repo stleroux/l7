@@ -4,214 +4,218 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
-use App\Role;
-use App\Permission;
+use App\Models\Admin\Role;
+use App\Models\Admin\Permission;
+use DB;
 use Gate;
 use Illuminate\Http\Request;
 
-
-
 class RolesController extends Controller
 {
+##################################################################################################################
+#  ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████ 
+# ██      ██    ██ ████   ██ ██         ██    ██   ██ ██    ██ ██         ██    
+# ██      ██    ██ ██ ██  ██ ███████    ██    ██████  ██    ██ ██         ██    
+# ██      ██    ██ ██  ██ ██      ██    ██    ██   ██ ██    ██ ██         ██    
+#  ██████  ██████  ██   ████ ███████    ██    ██   ██  ██████   ██████    ██    
+##################################################################################################################
    public function __construct()
    {
       $this->middleware('auth');
-
-      if(Gate::denies('role-manage'))
-      {
-         return redirect()->route('admin.roles.index');
-      }
    }
 
-   /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+# ██ ███    ██ ██████  ███████ ██   ██ 
+# ██ ████   ██ ██   ██ ██       ██ ██  
+# ██ ██ ██  ██ ██   ██ █████     ███   
+# ██ ██  ██ ██ ██   ██ ██       ██ ██  
+# ██ ██   ████ ██████  ███████ ██   ██ 
+// Display a list of resources
+##################################################################################################################
    public function index()
    {
-      if(Gate::denies('role-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
 
       $roles = Role::All();
       return view('admin.roles.index', compact('roles'));
    }
 
-   /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+#  ██████ ██████  ███████  █████  ████████ ███████ 
+# ██      ██   ██ ██      ██   ██    ██    ██      
+# ██      ██████  █████   ███████    ██    █████   
+# ██      ██   ██ ██      ██   ██    ██    ██      
+#  ██████ ██   ██ ███████ ██   ██    ██    ███████ 
+// Show the form for creating a new resource
+##################################################################################################################
    public function create()
    {
-      if(Gate::denies('role-create'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-create'), 403);
 
+      $role = New Role();
       $permissions = Permission::all()->groupBy('group');
 
-      return view('admin.roles.create', compact('permissions'));
+      return view('admin.roles.create', compact('role','permissions'));
    }
 
-   /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+# ███████ ████████  ██████  ██████  ███████ 
+# ██         ██    ██    ██ ██   ██ ██      
+# ███████    ██    ██    ██ ██████  █████   
+#      ██    ██    ██    ██ ██   ██ ██      
+# ███████    ██     ██████  ██   ██ ███████ 
+// Store a newly created resource in storage
+##################################################################################################################
    public function store(RoleRequest $request, Role $role)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-create'), 403);
+
       // assign values from form fields
       $role->name = $request->name;
       $role->description = $request->description;
 
-
       // Save the data
-      if($role->save())
-      {
-         $role->permissions()->attach($request->permissions);
+      $role->save();
 
-         $notification = array(
-            'message' => 'The role has been created successfully!', 
-            'alert-type' => 'success'
-         );
-      } else {
-         $notification = array(
-            'message' => 'There was an error creating the role.',
-            'alert-type' => 'error'
-         );
-      }
+      $role->permissions()->attach($request->permissions);
+
+      $notification = [
+         'message' => 'The role has been created successfully!', 
+         'alert-type' => 'success'
+      ];
 
       if ($request->submit == 'new')
       {
-         $notification = array(
-            'message' => 'The role has been updated successfully!', 
-            'alert-type' => 'success'
-         );
-
          return redirect()->back()->with($notification);
       }
 
       return redirect()->route('admin.roles.index')->with($notification);
    }
 
-   /**
-   * Display the specified resource.
-   *
-   * @param  \App\Role  $role
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+# ███████ ██   ██  ██████  ██     ██ 
+# ██      ██   ██ ██    ██ ██     ██ 
+# ███████ ███████ ██    ██ ██  █  ██ 
+#      ██ ██   ██ ██    ██ ██ ███ ██ 
+# ███████ ██   ██  ██████   ███ ███  
+// Display the specified resource
+##################################################################################################################
    public function show(Role $role)
    {
-      //
+      // Check if user has required permission
+      // abort_unless(Gate::allows('role-manage'), 403);
    }
 
-   /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Role  $role
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+# ███████ ██████  ██ ████████ 
+# ██      ██   ██ ██    ██    
+# █████   ██   ██ ██    ██    
+# ██      ██   ██ ██    ██    
+# ███████ ██████  ██    ██    
+// Show the form for editing the specified resource
+##################################################################################################################
    public function edit(Role $role)
    {
-      if(Gate::denies('role-edit'))
-      {
-         return redirect()->route('admin.roles.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-edit'), 403);
 
       $permissions = Permission::all()->groupBy('group');
 
       return view('admin.roles.edit', compact('role','permissions'));
    }
 
-   /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Role  $role
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+# ██    ██ ██████  ██████   █████  ████████ ███████ 
+# ██    ██ ██   ██ ██   ██ ██   ██    ██    ██      
+# ██    ██ ██████  ██   ██ ███████    ██    █████   
+# ██    ██ ██      ██   ██ ██   ██    ██    ██      
+#  ██████  ██      ██████  ██   ██    ██    ███████ 
+// UPDATE :: Update the specified resource in storage
+##################################################################################################################
    public function update(RoleRequest $request, Role $role)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-edit'), 403);
+
       // assign values from form fields
       $role->name = $request->name;
       $role->description = $request->description;
       
       // Save the data
-      if($role->save())
-      {
-         if($role->permissions()->sync($request->permissions))
-         {
-            $notification = array(
-               'message' => 'The role has been updated successfully!', 
-               'alert-type' => 'success'
-            );
-         }
-      } else {
-         $notification = array(
-            'message' => 'There was an error updating the role.',
-            'alert-type' => 'error'
-         );
-      }
+      $role->save();
+
+      $role->permissions()->sync($request->permissions);
+
+      $notification = [
+         'message' => 'The role has been updated successfully!', 
+         'alert-type' => 'success'
+      ];
 
       if ($request->submit == 'continue') {
-         $notification = array(
-            'message' => 'The role has been updated successfully!', 
-            'alert-type' => 'success'
-         );
-
          return redirect()->back()->with($notification);
       }
 
       return redirect()->route('admin.roles.index')->with($notification);
    }
 
-   /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Role  $role
-   * @return \Illuminate\Http\Response
-   */
+
+##################################################################################################################
+# ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
    public function destroy(Request $request, Role $role)
    {
-      // dd($role);
-
-      if(Gate::denies('role-delete'))
-      {
-         return redirect()->route('admin.roles.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-delete'), 403);
 
       // delete the role
-      if($role->delete())
-      {
-         $notification = array(
-            'message' => 'The role was deleted successfully.',
-            'alert-type' => 'success'
-         );
-      } else {
-         $notification = array(
-            'message' => 'There was an error deleting the role.',
-            'alert-type' => 'error'
-         );
-      }
+      $role->delete();
+
+      $notification = [
+         'message' => 'The role was deleted successfully.',
+         'alert-type' => 'success'
+      ];
 
       return redirect()->route('admin.roles.index')->with($notification);
    }
 
 
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+##################################################################################################################
    public function massDestroy(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-delete'), 403);
+
       $roles = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
       
       if(!$request->input('mass_destroy_pass_checkedvalue'))
       {
+
          $notification = array(
             'message' => 'Please select entries to be deleted.', 
             'alert-type' => 'error'
          );
+
       } else {
          
          foreach ($roles as $role_id) {
@@ -223,52 +227,65 @@ class RolesController extends Controller
             'message' => 'The selected roles have been deleted successfully!', 
             'alert-type' => 'success'
          );
+
       }
       
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ██████  ███████ ██      ███████ ████████ ███████ 
+# ██   ██ ██      ██      ██         ██    ██      
+# ██   ██ █████   ██      █████      ██    █████   
+# ██   ██ ██      ██      ██         ██    ██      
+# ██████  ███████ ███████ ███████    ██    ███████ 
+// Mass Delete selected rows - all selected records
+##################################################################################################################
    public function delete($id)
    {
-      if(Gate::denies('role-delete'))
-      {
-         return redirect()->route('admin.roles.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-delete'), 403);
 
       $role = Role::onlyTrashed()->findOrFail($id);
       
       // delete the user
-      if($role->forceDelete())
-      {
-         // remove the role's permissions from the permission_role table
-         $role->permissions()->detach();
+      $role->forceDelete();
 
-         $notification = array(
-            'message' => 'The role was deleted successfully!', 
-            'alert-type' => 'success'
-         );
-      } else {
-         $notification = array(
-            'message' => 'There was an error deleting the role.',
-            'alert-type' => 'error'
-         );
-      }
+      // remove the role's permissions from the permission_role table
+      $role->permissions()->detach();
+
+      $notification = [
+         'message' => 'The role was deleted successfully!', 
+         'alert-type' => 'success'
+      ];
 
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ██      ███████ ████████ ███████ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██      ██         ██    ██      
+# ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ██      █████      ██    █████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██      ██      ██         ██    ██      
+# ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████ ███████    ██    ███████ 
+##################################################################################################################
    public function massDelete(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-delete'), 403);
+
       $roles = explode(',', $request->input('mass_delete_pass_checkedvalue'));
       
       if(!$request->input('mass_delete_pass_checkedvalue'))
       {
-         $notification = array(
+
+         $notification = [
             'message' => 'Please select entries to be deleted.', 
             'alert-type' => 'error'
-         );
+         ];
+
       } else {
          
          foreach ($roles as $role_id) {
@@ -277,53 +294,66 @@ class RolesController extends Controller
             $role->permissions()->detach();
          }
 
-         $notification = array(
+         $notification = [
             'message' => 'The selected roles have been permanently deleted!',
             'alert-type' => 'success'
-         );
+         ];
+
       }
       
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
+# ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
+# ██████  █████   ███████    ██    ██    ██ ██████  █████   
+# ██   ██ ██           ██    ██    ██    ██ ██   ██ ██      
+# ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
+// RESTORE TRASHED FILE
+##################################################################################################################
    public function restore($id)
    {
-      if(Gate::denies('role-delete'))
-      {
-         return redirect()->route('admin.roles.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
 
       $role = Role::onlyTrashed()->findOrFail($id);
       
-      // delete the user
-      if($role->restore())
-      {
-         $notification = array(
-            'message' => 'The role was restored successfully!', 
-            'alert-type' => 'success'
-         );
-      } else {
-         $notification = array(
-            'message' => 'There was an error restoring the role.',
-            'alert-type' => 'error'
-         );
-      }
+      // Restore the user
+      $role->restore();
+
+      $notification = [
+         'message' => 'The role was restored successfully!', 
+         'alert-type' => 'success'
+      ];
 
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
+# ██ ████ ██ ███████ ███████ ███████     ██████  █████   ███████    ██    ██    ██ ██████  █████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██    ██ ██   ██ ██      
+# ██      ██ ██   ██ ███████ ███████     ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
+##################################################################################################################
    public function massRestore(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
+
       $roles = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
       if(!$request->input('mass_restore_pass_checkedvalue'))
       {
-         $notification = array(
+
+         $notification = [
             'message' => 'Please select entries to be restore.', 
             'alert-type' => 'error'
-         );
+         ];
+
       } else {
          
          foreach ($roles as $role_id) {
@@ -331,37 +361,104 @@ class RolesController extends Controller
             $role->restore();
          }
 
-         $notification = array(
+         $notification = [
             'message' => 'The selected roles have been restored successfully!', 
             'alert-type' => 'success'
-         );
+         ];
+
       }
       
       return redirect()->back()->with($notification);
    }
 
 
+##################################################################################################################
+# ████████ ██████   █████  ███████ ██   ██ ███████ ██████  
+#    ██    ██   ██ ██   ██ ██      ██   ██ ██      ██   ██ 
+#    ██    ██████  ███████ ███████ ███████ █████   ██   ██ 
+#    ██    ██   ██ ██   ██      ██ ██   ██ ██      ██   ██ 
+#    ██    ██   ██ ██   ██ ███████ ██   ██ ███████ ██████  
+// Display a list of resources that have been trashed (Soft Deleted)
+##################################################################################################################
    public function trashed()
    {
-      if(Gate::denies('role-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
 
       $roles = Role::onlyTrashed()->get();
       return view('admin.roles.index', compact('roles'));
    }
 
 
+##################################################################################################################
+# ███    ██  ██████      ██████  ███████ ██████  ███    ███ ██ ███████ ███████ ██  ██████  ███    ██ ███████ 
+# ████   ██ ██    ██     ██   ██ ██      ██   ██ ████  ████ ██ ██      ██      ██ ██    ██ ████   ██ ██      
+# ██ ██  ██ ██    ██     ██████  █████   ██████  ██ ████ ██ ██ ███████ ███████ ██ ██    ██ ██ ██  ██ ███████ 
+# ██  ██ ██ ██    ██     ██      ██      ██   ██ ██  ██  ██ ██      ██      ██ ██ ██    ██ ██  ██ ██      ██ 
+# ██   ████  ██████      ██      ███████ ██   ██ ██      ██ ██ ███████ ███████ ██  ██████  ██   ████ ███████ 
+##################################################################################################################
    public function noPermissions()
    {
-      if(Gate::denies('role-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
 
       $roles = Role::whereDoesntHave('permissions')->get();
 
       return view('admin.roles.index', compact('roles'));
    }
+
+
+##################################################################################################################
+#  █████  ██████  ██████       █████  ██      ██          ██████  ███████ ██████  ███    ███ ███████
+# ██   ██ ██   ██ ██   ██     ██   ██ ██      ██          ██   ██ ██      ██   ██ ████  ████ ██     
+# ███████ ██   ██ ██   ██     ███████ ██      ██          ██████  █████   ██████  ██ ████ ██ ███████
+# ██   ██ ██   ██ ██   ██     ██   ██ ██      ██          ██      ██      ██   ██ ██  ██  ██      ██
+# ██   ██ ██████  ██████      ██   ██ ███████ ███████     ██      ███████ ██   ██ ██      ██ ███████
+##################################################################################################################
+   public function addAllPerms(Role $role)
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
+      
+      // Get all permissions
+      $permissions = Permission::all();
+
+      // Add all permissions to this role
+      $role->permissions()->sync($permissions);
+
+      $notification = [
+            'message' => 'All permissions added to the role successfully!', 
+            'alert-type' => 'success'
+         ];
+      
+      // return redirect()->route('admin.roles.index')->with($notification);
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
+# ██████  ███████ ███    ███  ██████  ██    ██ ███████      █████  ██      ██          ██████  ███████ ██████  ███    ███ ███████ 
+# ██   ██ ██      ████  ████ ██    ██ ██    ██ ██          ██   ██ ██      ██          ██   ██ ██      ██   ██ ████  ████ ██      
+# ██████  █████   ██ ████ ██ ██    ██ ██    ██ █████       ███████ ██      ██          ██████  █████   ██████  ██ ████ ██ ███████ 
+# ██   ██ ██      ██  ██  ██ ██    ██  ██  ██  ██          ██   ██ ██      ██          ██      ██      ██   ██ ██  ██  ██      ██ 
+# ██   ██ ███████ ██      ██  ██████    ████   ███████     ██   ██ ███████ ███████     ██      ███████ ██   ██ ██      ██ ███████ 
+##################################################################################################################
+   public function removeAllPerms(Role $role)
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('role-manage'), 403);
+      
+      // remove the role's permissions from the permission_role table
+      $role->permissions()->detach();
+      
+      $notification = [
+            'message' => 'All permissions added to the role successfully!', 
+            'alert-type' => 'success'
+         ];
+      
+      // return redirect()->route('admin.roles.index')->with($notification);
+      return redirect()->back()->with($notification);
+   }
+
+
 }

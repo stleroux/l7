@@ -1,7 +1,7 @@
 <?php
 
-use App\Role;
-use App\User;
+use App\Models\Admin\Role;
+use App\Models\Admin\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,19 +25,21 @@ class UsersTableSeeder extends Seeder
 
       // create test users
       $admin = User::create([
-         'name' => 'Admin User',
+         'first_name' => 'Admin User',
          'email' => 'admin@admin.com',
-         'password' => Hash::make('password')
+         'password' => Hash::make('password'),
+         'account_status' => 1,
+         'public_email' => 1
       ]);
 
       $author = User::create([
-         'name' => 'Author User',
+         'first_name' => 'Author User',
          'email' => 'author@author.com',
          'password' => Hash::make('password')
       ]);
 
       $user = User::create([
-         'name' => 'Generic User',
+         'first_name' => 'Generic User',
          'email' => 'user@user.com',
          'password' => Hash::make('password')
       ]);

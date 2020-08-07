@@ -14,15 +14,15 @@
                data-boundary="viewport"
                aria-haspopup="true"
                aria-expanded="false">
-               <i class="fa fa-ellipsis-v px-3"></i>
+               <i class="{{ Config::get('icons.ellipsis') }} mx-3"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu">
                <a href="{{ route('admin.categories.index') }}" class="dropdown-item bg-light">
-                  <i class="fa fa-sitemap"></i>
+                  <i class="{{ Config::get('icons.categories') }}"></i>
                   All Categories
                </a>
                <a href="{{ route('admin.categories.trashed') }}" class="dropdown-item bg-light">
-                  <i class="fa fa-sitemap"></i>
+                  <i class="{{ Config::get('icons.categories') }}"></i>
                   Trashed
                </a>
             </div>
@@ -31,7 +31,7 @@
 
       <div class="float-right px-1">
          <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
-            <i class="nav-icon fas fa-question-circle"></i>
+            <i class="{{ Config::get('icons.help') }}"></i>
             Help
          </a>
       </div>
@@ -46,7 +46,7 @@
                id="btn_multidestroy"
                style="display:none"
                data-target="#massDestroy-modal">
-               <i class="fas fa-trash nav-icon"></i>
+               <i class="{{ Config::get('icons.trash') }}"></i>
                Trash Selected
             </a>
          </form>
@@ -62,7 +62,7 @@
                id="btn_multidelete"
                style="display:none"
                data-target="#massDelete-modal">
-               <i class="fas fa-trash-alt nav-icon"></i>
+               <i class="{{ Config::get('icons.delete') }}"></i>
                Delete Selected
             </a>
          </form>
@@ -76,7 +76,7 @@
                id="btn_multirestore"
                style="display:none"
                data-target="#massRestore-modal">
-               <i class="fas fa-trash-restore"></i>
+               <i class="{{ Config::get('icons.restore') }}"></i>
                Restore Selected
             </a>
          </form>

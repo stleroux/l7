@@ -1,0 +1,61 @@
+/**************************************************************************************
+BEGIN : change background color on all pages
+**************************************************************************************/
+body {
+   background-image: url('/images/recipes_2.jpg');
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-attachment: fixed;
+   color: black;
+   font-size: 12pt;
+   padding-bottom: 65px;
+}
+/**************************************************************************************
+END : change background color on all pages
+**************************************************************************************/
+
+/*.card {
+   background-color: rgba(245, 245, 245, 0.2);
+   color: white;
+}*/
+
+#card-hover:hover {
+   background-image: url("/images/17.jpg");
+   color: white;
+}
+
+/* SECTIONS */
+.section_header {
+   /*background-image: url("/images/16.jpg");*/
+   /*background-repeat: no-repeat;*/
+   /*background-size: 100% 100%;*/
+   /*background-attachment: fixed;*/
+   background-color: black;
+   color: white;
+   font-weight: bold;
+}
+
+/* CARDS */
+.card_header {
+   /*background-image: url("/images/14.jpg");*/
+   /*background-repeat: no-repeat;*/
+   /*background-size: 100% 100%;*/
+   /*background-attachment: fixed;*/
+   background-color: maroon;
+   color: white;
+   font-weight: bold;
+}
+
+/* Block Headers */
+.block_header {
+   /*background-image: url("/images/birch.jpg");*/
+   /*background-repeat: no-repeat;*/
+   /*background-size: 100% 100%;*/
+   /*background-attachment: fixed;*/
+   background-color: gray;
+   color: black;
+}
+
+.border-2 {
+   border: 3px maroon solid;
+}

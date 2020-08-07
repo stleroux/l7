@@ -2,7 +2,7 @@
    <a href="{{ route('admin.projects.delete', $project->id) }}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
       title="Delete Project">
-      <i class="{{ Config::get('buttons.delete') }}"></i>
+      <i class="{{ Config::get('icons.delete') }}"></i>
       {{ $btn_label ?? '' }}
    </a>
 @endif

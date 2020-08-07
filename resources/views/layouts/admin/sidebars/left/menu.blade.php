@@ -1,62 +1,14 @@
 <li class="nav-item">
    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Request::is('admin/dashboard*') ? 'active' : '' }}">
-      <i class="nav-icon fas fa-tachometer-alt"></i>
+      <i class="{{ Config::get('icons.dashboard') }}"></i>
       <p>Dashboard</p>
    </a>
 </li>
 
-@can('permission-manage')
-   <li class="nav-item">
-      <a href="{{ Route('admin.permissions.index') }}" class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
-         <i class="fas fa-user-shield nav-icon"></i>
-         <p>Permissions</p>
-      </a>
-   </li>
-@endcan
-
-@can('role-manage')
-   <li class="nav-item">
-      <a href="{{ route('admin.roles.index') }}" class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
-         <i class="fas fa-user-tag nav-icon"></i>
-         <p>Roles</p>
-      </a>
-   </li>
-@endcan
-
-@can('user-manage')
-   <li class="nav-item">
-      <a href="{{ Route('admin.users.index') }}" class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}">
-         <i class="fas fa-users nav-icon"></i>
-         <p>Users</p>
-      </a>
-   </li>
-@endcan
-
-
-<hr />
-
-@can('recipe-manage')
-   <li class="nav-item">
-      <a href="{{ Route('admin.users.index') }}" class="nav-link {{ Request::is('admin/recipes*') ? 'active' : '' }}">
-         <i class="fas fa-users nav-icon"></i>
-         <p>Recipes</p>
-      </a>
-   </li>
-@endcan
-
-@can('project-manage')
-   <li class="nav-item">
-      <a href="{{ Route('admin.projects.index') }}" class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}">
-         <i class="fab fa-pagelines nav-icon"></i>
-         <p>Projects</p>
-      </a>
-   </li>
-@endcan
-
 @can('article-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.users.index') }}" class="nav-link {{ Request::is('admin/articles*') ? 'active' : '' }}">
-         <i class="fas fa-users nav-icon"></i>
+         <i class="{{ Config::get('icons.articles') }}"></i>
          <p>Articles</p>
       </a>
    </li>
@@ -65,12 +17,23 @@
 @can('category-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.categories.index') }}" class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
-         <i class="fa fa-sitemap nav-icon"></i>
+         <i class="{{ Config::get('icons.categories') }}"></i>
          <p>Categories</p>
       </a>
    </li>
 @endcan
 
+{{-- @can('recipe-manage') --}}
+   <li class="nav-item">
+      <a href="{{ Route('admin.recipes.index') }}" class="nav-link {{ Request::is('admin/recipes*') ? 'active' : '' }}">
+         <i class="{{ Config::get('icons.recipes') }}"></i>
+         <p>Recipes</p>
+      </a>
+   </li>
+{{-- @endcan --}}
+
+@include('layouts.admin.sidebars.left.projects')
+@include('layouts.admin.sidebars.left.userManagement')
 
 {{-- <li class="nav-item has-treeview">
    
@@ -106,3 +69,4 @@
    </ul>
 
 </li> --}}
+

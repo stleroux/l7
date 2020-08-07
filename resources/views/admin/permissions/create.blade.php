@@ -1,19 +1,19 @@
-@extends('layouts.admin')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
 @endsection
 
 @section('pageHeader')
+   <i class="{{ Config::get('icons.add') }}"></i>
    Create Permission
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">Permissions</a></li>
    <li class="breadcrumb-item active">Create</li>
 @endsection
 
 @section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
 @endsection
 
 @section('content')

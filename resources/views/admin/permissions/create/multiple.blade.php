@@ -8,30 +8,20 @@
             <div class="card-title">Add Model Permissions</div>
             <div class="float-right">
                <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="fas fa-sync-alt nav-icon"></i>
+                  <i class="{{ Config::get('icons.reset') }}"></i>
                   Reset
                </button>
                <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="far fa-save nav-icon"></i>
+                  <i class="{{ Config::get('icons.save') }}"></i>
                   Save
                </button>
             </div>
          </div>
          
-         <div class="card-body pb-0">
+         <div class="card-body pt-2">
+
             <div class="row">
-               <div class="col-6">
-                  <div class="form-group">
-                     <label for="modelName" class="required">Model Name</label>
-                     <input type="text" name="modelName" class="form-control form-control-sm @error('modelName') is-invalid @enderror" placeholder="Model Name">
-                     {{-- <div class="pl-1 bg-danger">{{ $errors->first('modelName') }}</div> --}}
-                     @error('modelName')
-                        <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
-                        </span>
-                     @enderror
-                  </div>
-               </div>
+               @include('admin.permissions.fields.modelName')
             </div>
 
             <div class="row">
@@ -45,27 +35,10 @@
                               <a href="#" class="btn btn-sm btn-info addRow">
                                  <i class="far fa-plus-square"></i>
                               </a>
-                              @error('permName')
-                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                 </span>
-                              @enderror
                            </th>
                         </tr>
                      </thead>
                      <tbody>
-                        {{-- <tr>
-                           <td>
-                              <input type="text" name="permName[]" class="form-control form-control-sm" placeholder="Permission Name">
-                              <div class="pl-1 bg-danger">{{ $errors->first('permName') }}</div>
-                           </td>
-                           <td><input type="text" name="permDescription[]" class="form-control form-control-sm"></td>
-                           <td class="text-center">
-                              <a href="#" class="btn btn-sm btn-danger remove">
-                                 <i class="far fa-minus-square"></i>
-                              </a>
-                           </td>
-                        </tr> --}}
                      </tbody>
                   </table>
                </div>

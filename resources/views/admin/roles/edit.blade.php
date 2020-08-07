@@ -1,13 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
 @endsection
 
 @section('pageHeader')
+   <i class="{{ Config::get('icons.edit') }}"></i>
    Edit Role
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">Roles</a></li>
    <li class="breadcrumb-item active">Edit</li>
 @endsection
@@ -34,8 +35,8 @@
                </div>
                <div class="card-body">
                   <div class="row">
-                     @include('admin.roles.edit.fields.name')
-                     @include('admin.roles.edit.fields.description')
+                     @include('admin.roles.fields.name')
+                     @include('admin.roles.fields.description')
                   </div>
 
                </div> <!-- Card body -->
@@ -45,7 +46,7 @@
 
 
          <div class="col-md-9">
-            @include('admin.roles.edit.fields.permissions')
+            @include('admin.roles.fields.permissions')
          </div>
 
       </div><!-- Row -->

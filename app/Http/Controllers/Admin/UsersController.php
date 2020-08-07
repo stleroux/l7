@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Role;
-use App\User;
+use App\Models\Admin\Role;
+use App\Models\Admin\User;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,61 +13,95 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+   ##################################################################################################################
+   #  ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████ 
+   # ██      ██    ██ ████   ██ ██         ██    ██   ██ ██    ██ ██         ██    
+   # ██      ██    ██ ██ ██  ██ ███████    ██    ██████  ██    ██ ██         ██    
+   # ██      ██    ██ ██  ██ ██      ██    ██    ██   ██ ██    ██ ██         ██    
+   #  ██████  ██████  ██   ████ ███████    ██    ██   ██  ██████   ██████    ██    
+   ##################################################################################################################
    public function __construct()
    {
       $this->middleware('auth');
       
-      if(Gate::denies('user-manage'))
-      {
-         return redirect()->route('admin.users.index');
-      }
+      // Check if user has required permission
+      // abort_unless(\Gate::allows('user-manage'), 403);
    }
 
-   /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+   ##################################################################################################################
+   # ██ ███    ██ ██████  ███████ ██   ██ 
+   # ██ ████   ██ ██   ██ ██       ██ ██  
+   # ██ ██ ██  ██ ██   ██ █████     ███   
+   # ██ ██  ██ ██ ██   ██ ██       ██ ██  
+   # ██ ██   ████ ██████  ███████ ██   ██ 
+   // Display a list of resources
+   ##################################################################################################################
    public function index()
    {
-      if(Gate::denies('user-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
 
       $users = User::All();
       return view('admin.users.index', compact('users'));
    }
 
-   /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+   ##################################################################################################################
+   #  ██████ ██████  ███████  █████  ████████ ███████ 
+   # ██      ██   ██ ██      ██   ██    ██    ██      
+   # ██      ██████  █████   ███████    ██    █████   
+   # ██      ██   ██ ██      ██   ██    ██    ██      
+   #  ██████ ██   ██ ███████ ██   ██    ██    ███████ 
+   // Show the form for creating a new resource
+   ##################################################################################################################
    public function create()
    {
-      if(Gate::denies('user-create'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-create'), 403);
 
+      $user = new User();
       $roles = Role::all();
 
-      return view('admin.users.create', compact('roles'));
+      return view('admin.users.create', compact('roles','user'));
    }
 
-   /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
+   ##################################################################################################################
+   # ███████ ████████  ██████  ██████  ███████ 
+   # ██         ██    ██    ██ ██   ██ ██      
+   # ███████    ██    ██    ██ ██████  █████   
+   #      ██    ██    ██    ██ ██   ██ ██      
+   # ███████    ██     ██████  ██   ██ ███████ 
+   // Store a newly created resource in storage
+   ##################################################################################################################
    public function store(UserRequest $request, User $user)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-create'), 403);
+
       // assign values from form fields
-      $user->name = $request->name;
+      $user->first_name = $request->first_name;
+      $user->last_name = $request->last_name;
       $user->email = $request->email;
-      $user->password = Hash::make('password');
+      if($request->password) {
+         $user->password = Hash::make($request->password);
+      } else {
+         $user->password = Hash::make('password');
+      }
+      $user->account_status = 1;
+      $user->public_email = 1;
+      $user->telephone = $request->telephone;
+      $user->cell = $request->cell;
+      $user->fax = $request->fax;
+      $user->website = $request->website;
+      $user->company_name = $request->company_name;
+      // Image
+      $user->address_1 = $request->address_1;
+      $user->address_2 = $request->address_2;
+      $user->city = $request->city;
+      $user->province = $request->province;
+      $user->postal_code = $request->postal_code;
+      $user->notes = $request->notes;
+      $user->dart_doubleOut = $request->dart_doubleOut;
+      $user->invoicer_client = (!isset($request->invoicer_client)) ? 0 : 1 ;
 
       // Save the data
       if($user->save())
@@ -78,6 +112,17 @@ class UsersController extends Controller
             'message' => 'The user has been created successfully!', 
             'alert-type' => 'success'
          );
+
+         if ($request->submit == 'new')
+         {
+            return redirect()->back()->with($notification);
+         }
+
+         if ($request->submit == 'continue')
+         {
+            return redirect()->route('admin.users.edit', $user->id)->with($notification);
+         }
+
       } else {
          $notification = array(
             'message' => 'There was an error creating the user.',
@@ -85,60 +130,81 @@ class UsersController extends Controller
          );
       }
 
-      if ($request->submit == 'new')
-      {
-         $notification = array(
-            'message' => 'The user has been updated successfully!', 
-            'alert-type' => 'success'
-         );
-
-         return redirect()->back()->with($notification);
-      }
-
       return redirect()->route('admin.users.index')->with($notification);
    }
 
-   /**
-   * Display the specified resource.
-   *
-   * @param  \App\User  $user
-   * @return \Illuminate\Http\Response
-   */
+
+   ##################################################################################################################
+   # ███████ ██   ██  ██████  ██     ██ 
+   # ██      ██   ██ ██    ██ ██     ██ 
+   # ███████ ███████ ██    ██ ██  █  ██ 
+   #      ██ ██   ██ ██    ██ ██ ███ ██ 
+   # ███████ ██   ██  ██████   ███ ███  
+   // Display the specified resource
+   ##################################################################################################################
    public function show(User $user)
    {
       //
+      // Check if user has required permission
+      // abort_unless(Gate::allows('user-manage'), 403);
    }
 
-   /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\User  $user
-   * @return \Illuminate\Http\Response
-   */
+   ##################################################################################################################
+   # ███████ ██████  ██ ████████ 
+   # ██      ██   ██ ██    ██    
+   # █████   ██   ██ ██    ██    
+   # ██      ██   ██ ██    ██    
+   # ███████ ██████  ██    ██    
+   // Show the form for editing the specified resource
+   ##################################################################################################################
    public function edit(User $user)
    {
-      if(Gate::denies('user-edit'))
-      {
-         return redirect()->route('admin.users.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-edit'), 403);
 
       $roles = Role::all();
 
       return view('admin.users.edit', compact('user', 'roles'));
    }
 
-   /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\User  $user
-   * @return \Illuminate\Http\Response
-   */
+   ##################################################################################################################
+   # ██    ██ ██████  ██████   █████  ████████ ███████ 
+   # ██    ██ ██   ██ ██   ██ ██   ██    ██    ██      
+   # ██    ██ ██████  ██   ██ ███████    ██    █████   
+   # ██    ██ ██      ██   ██ ██   ██    ██    ██      
+   #  ██████  ██      ██████  ██   ██    ██    ███████ 
+   // UPDATE :: Update the specified resource in storage
+   ##################################################################################################################
    public function update(UserRequest $request, User $user)
    {
+      // dd($user);
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-edit'), 403);
+
       // assign values from form fields
-      $user->name = $request->name;
+      $user->first_name = $request->first_name;
+      $user->last_name = $request->last_name;
       $user->email = $request->email;
+      if($request->password)
+      {
+         $user->password = Hash::make($request->password);
+      }
+      $user->account_status = (!isset($request->account_status)) ? 0 : 1 ;
+      $user->public_email = (!isset($request->public_email)) ? 0 : 1 ;
+      $user->telephone = $request->telephone;
+      $user->cell = $request->cell;
+      $user->fax = $request->fax;
+      $user->website = $request->website;
+      $user->invoicer_client = (!isset($request->invoicer_client)) ? 0 : 1 ;
+      $user->company_name = $request->company_name;
+      // Image
+      $user->address_1 = $request->address_1;
+      $user->address_2 = $request->address_2;
+      $user->city = $request->city;
+      $user->province = $request->province;
+      $user->postal_code = $request->postal_code;
+      $user->notes = $request->notes;
+      $user->dart_doubleOut = $request->dart_doubleOut;
       
       // Save the data
       if($user->save())
@@ -169,18 +235,20 @@ class UsersController extends Controller
       return redirect()->route('admin.users.index')->with($notification);
    }
 
-   /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\User  $user
-   * @return \Illuminate\Http\Response
-   */
+   ##################################################################################################################
+   # ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+   # ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+   # ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+   # ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+   # ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+   // Remove the specified resource from storage
+   // Used in the index page and trashAll action to soft delete multiple records
+   ##################################################################################################################
+   
    public function destroy(Request $request, User $user)
    {
-      if(Gate::denies('user-delete'))
-      {
-         return redirect()->route('admin.users.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-delete'), 403);
 
       // delete the user
       if($user->delete())
@@ -199,9 +267,18 @@ class UsersController extends Controller
       return redirect()->route('admin.users.index')->with($notification);
    }
 
-
+   ##################################################################################################################
+   # ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+   # ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+   # ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+   # ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+   # ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+   ##################################################################################################################
    public function massDestroy(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-delete'), 403);
+
       $users = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
       if(!$request->input('mass_destroy_pass_checkedvalue'))
@@ -226,13 +303,18 @@ class UsersController extends Controller
       return redirect()->back()->with($notification);
    }
 
-
+   ##################################################################################################################
+   # ██████  ███████ ██      ███████ ████████ ███████ 
+   # ██   ██ ██      ██      ██         ██    ██      
+   # ██   ██ █████   ██      █████      ██    █████   
+   # ██   ██ ██      ██      ██         ██    ██      
+   # ██████  ███████ ███████ ███████    ██    ███████ 
+   // Mass Delete selected rows - all selected records
+   ##################################################################################################################
    public function delete($id)
    {
-      if(Gate::denies('user-delete'))
-      {
-         return redirect()->route('admin.users.index');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-delete'), 403);
 
       $user = User::onlyTrashed()->findOrFail($id);
       
@@ -256,9 +338,19 @@ class UsersController extends Controller
       return redirect()->back()->with($notification);
    }
 
-
+   ##################################################################################################################
+   # ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
+   # ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
+   # ██████  █████   ███████    ██    ██    ██ ██████  █████   
+   # ██   ██ ██           ██    ██    ██    ██ ██   ██ ██      
+   # ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
+   // RESTORE TRASHED FILE
+   ##################################################################################################################
    public function restore($id)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
+
       if(Gate::denies('user-delete'))
       {
          return redirect()->route('admin.users.index');
@@ -283,9 +375,18 @@ class UsersController extends Controller
       return redirect()->back()->with($notification);
    }
 
-
+   ##################################################################################################################
+   # ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
+   # ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
+   # ██ ████ ██ ███████ ███████ ███████     ██████  █████   ███████    ██    ██    ██ ██████  █████   
+   # ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██    ██ ██   ██ ██      
+   # ██      ██ ██   ██ ███████ ███████     ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
+   ##################################################################################################################
    public function massRestore(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
+
       $users = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
       if(!$request->input('mass_restore_pass_checkedvalue'))
@@ -310,9 +411,18 @@ class UsersController extends Controller
       return redirect()->back()->with($notification);
    }
 
-
+   ##################################################################################################################
+   # ███    ███  █████  ███████ ███████     ██████  ███████ ██      ███████ ████████ ███████ 
+   # ████  ████ ██   ██ ██      ██          ██   ██ ██      ██      ██         ██    ██      
+   # ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ██      █████      ██    █████   
+   # ██  ██  ██ ██   ██      ██      ██     ██   ██ ██      ██      ██         ██    ██      
+   # ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████ ███████    ██    ███████ 
+   ##################################################################################################################
    public function massDelete(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-delete'), 403);
+
       $users = explode(',', $request->input('mass_delete_pass_checkedvalue'));
 
       if(!$request->input('mass_delete_pass_checkedvalue'))
@@ -338,25 +448,34 @@ class UsersController extends Controller
       return redirect()->back()->with($notification);
    }
 
-
+   ##################################################################################################################
+   # ████████ ██████   █████  ███████ ██   ██ ███████ ██████  
+   #    ██    ██   ██ ██   ██ ██      ██   ██ ██      ██   ██ 
+   #    ██    ██████  ███████ ███████ ███████ █████   ██   ██ 
+   #    ██    ██   ██ ██   ██      ██ ██   ██ ██      ██   ██ 
+   #    ██    ██   ██ ██   ██ ███████ ██   ██ ███████ ██████  
+   // Display a list of resources that have been trashed (Soft Deleted)
+   ##################################################################################################################
    public function trashed()
    {
-      if(Gate::denies('user-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
 
       $users = User::onlyTrashed()->get();
       return view('admin.users.index', compact('users'));
    }
 
-
+   ##################################################################################################################
+   # ███    ██  ██████      ██████   ██████  ██      ███████ ███████ 
+   # ████   ██ ██    ██     ██   ██ ██    ██ ██      ██      ██      
+   # ██ ██  ██ ██    ██     ██████  ██    ██ ██      █████   ███████ 
+   # ██  ██ ██ ██    ██     ██   ██ ██    ██ ██      ██           ██ 
+   # ██   ████  ██████      ██   ██  ██████  ███████ ███████ ███████ 
+   ##################################################################################################################
    public function noRoles()
    {
-      if(Gate::denies('user-manage'))
-      {
-         return redirect()->route('home');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
 
       $users = User::whereDoesntHave('roles')->get();
 
