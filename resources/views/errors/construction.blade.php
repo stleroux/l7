@@ -1,8 +1,9 @@
-<div class="card card-trans-0 text-center mb-2">
+<div class="card card-trans-2 text-center mb-2">
    
    <div class="card-header bg-info">
    	<span class="text-black font-weight-bold">
-   		Under Construction
+   		<i class="fas fa-tools"></i>
+         Under Construction
    	</span>
    </div>
 

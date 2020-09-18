@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
@@ -22,12 +22,12 @@ class Comment extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 	public function post()
 	{
-		return $this->belongsTo('Modules\Posts\Entities\Post');
+		return $this->belongsTo('App\Models\Post');
 	}
 
    public function user()
    {
-      return $this->belongsTo('App\Models\Admin\User');
+      return $this->belongsTo('App\Models\User');
    }
 
    // public function modifiedBy()
@@ -42,12 +42,12 @@ class Comment extends Model
 
 	public function recipe()
 	{
-		return $this->belongsTo('App\Models\UI\Recipe');
+		return $this->belongsTo('App\Models\Recipe');
 	}
 
    public function project()
    {
-      return $this->belongsTo('App\Models\Admin\Projects\Project');
+      return $this->belongsTo('App\Models\Project');
    }
 	// public function scopeNewComments($query)
  //   	{

@@ -1,4 +1,4 @@
-@extends('layouts.UI.app-10-2')
+@extends('layouts.UI.app-10')
 
 @section('stylesheet')
    <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
@@ -14,7 +14,7 @@
 @endsection
 
 @section('right_column')
-   @include('UI.blocks.popularItems')
+   {{-- @include('UI.blocks.popularItems') --}}
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
    @include('errors.construction')
 
    {{-- ABOUT US  --}}
-   <div class="card card-trans-2 mb-2">
+   <div class="card card-trans-4 mb-2">
       <div class="card-header section_header">
          <i class="{{ Config::get('icons.about-us') }}"></i>
          About Us
@@ -36,8 +36,11 @@
    <div class="row">
       {{-- ABOUT STEPHANE --}}
       <div class="col-sm-6 pr-1">
-         <div class="card card-trans-2 mb-2">
-            <div class="card-header section_header">About Stephane</div>
+         <div class="card card-trans-4 mb-2">
+            <div class="card-header section_header">
+               <i class="{{ Config::get('icons.male') }}"></i>
+               About Stephane
+            </div>
             <div class="card-body">
                <p>Just some text about me</p>
                <p>Just some text about me</p>
@@ -47,8 +50,11 @@
 
       {{-- ABOUT STACIE --}}
       <div class="col-sm-6 pl-1">
-         <div class="card card-trans-2 mb-2">
-            <div class="card-header section_header">About Stacie</div>
+         <div class="card card-trans-4 mb-2">
+            <div class="card-header section_header">
+               <i class="{{ Config::get('icons.female') }}"></i>
+               About Stacie
+            </div>
             <div class="card-body">
                <p>Just some text about her</p>
                <p>Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her</p>

@@ -14,9 +14,10 @@ class AddProfileFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'first_name');
-            $table->string('last_name')->nullable()->after('name');
-            $table->boolean('account_status')->nullable();
+            // $table->renameColumn('name', 'first_name');
+            $table->string('first_name')->nullable()->after('username');
+            $table->string('last_name')->nullable()->after('first_name');
+            $table->boolean('account_status')->default(0)->nullable()->after('last_name');
             $table->boolean('public_email')->nullable();
             $table->string('telephone')->nullable();
             $table->string('cell')->nullable();

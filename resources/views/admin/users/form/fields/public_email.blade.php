@@ -21,6 +21,7 @@
 	   placeholder="public"
 	   data-inputmask=""
 	   @if($user->public_email || old('public_email')) checked @endif
+	   {{ $disabled ?? '' }}
 	/>
 
 	@error('public_email')

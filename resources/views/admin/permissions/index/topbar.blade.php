@@ -39,7 +39,9 @@
 
          <a href="#" class="btn btn-sm btn-light border float-right mx-2" data-toggle="modal" data-target="#helpModal">
             <i class="{{ Config::get('icons.help') }}"></i>
-            Help
+            <div class="d-none d-lg-inline">
+               Help
+            </div>
          </a>
 
          @if(Route::currentRouteName() == 'admin.permissions.index')

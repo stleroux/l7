@@ -27,13 +27,18 @@
             </div>
          @endif
 
-         @if(!View::hasSection('pageHeader'))
+<div class="row {{ (!View::hasSection('pageHeader')) ? ' mt-5 pt-4' : '' }}">
+   <div class="col">
+      
+
+         {{-- @if(!View::hasSection('pageHeader'))
             <div class="row mt-5 pt-4">
          @else
             <div class="row">
-         @endif
+         @endif --}}
                @yield('content')
             </div>
+   </div>
 
          @include('layouts.UI.common.footer')
 

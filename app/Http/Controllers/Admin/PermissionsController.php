@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionSingleRequest;
 use App\Http\Requests\PermissionMultipleRequest;
-use App\Models\Admin\Permission;
+use App\Models\Permission;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

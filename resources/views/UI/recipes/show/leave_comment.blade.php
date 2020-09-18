@@ -1,5 +1,6 @@
 {{-- @if(checkPerm('comment_add')) --}}
 {{-- @if(checkACL('user')) --}}
+@auth
 	<div class="card mb-3">
 		
 		<div class="card-header block_header p-2">
@@ -10,6 +11,7 @@
 		<div class="card-body p-2">
 			{{-- {{ Form::open(['route' => ['recipes.storeComment', $recipe->id], 'method' => 'POST']) }} --}}
 			<form action="{{ route('recipes.storeComment',  $recipe->id) }}" method="POST">
+				@csrf
 {{-- 			<div class="row">
 				<div class="col-xs-12">
 					<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -64,3 +66,4 @@
 	</div>
 {{-- @endif --}}
 {{-- @endif --}}
+@endauth

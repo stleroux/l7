@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
+
+class InvoicerClient extends Model
+{
+	use Sortable;
+
+	protected $table = 'invoicer__clients';
+
+	protected $fillable = [
+		'company_name',
+		'contact_name',
+		'address',
+		'city',
+		'state',
+		'zip',
+		'telephone',
+		'cell',
+		'fax',
+		'email',
+		'website'
+	];
+
+	public $sortable = [
+		'id',
+		'company_name',
+		'contact_name',
+		'address',
+		'city',
+		'state',
+		'zip',
+		'telephone',
+		'cell',
+		'fax',
+		'email',
+		'website'
+	];
+
+//////////////////////////////////////////////////////////////////////////////////////
+// RELATIONSHIPS
+//////////////////////////////////////////////////////////////////////////////////////
+	// A client has many invoices
+	public function invoices() {
+		return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+	}
+	
+	// public function user() { 
+	// 	return $this->belongsTo('App\Models\User');
+	// }
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+// ACCESSORS
+//////////////////////////////////////////////////////////////////////////////////////
+   public function getCreatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      // return 'N/A';
+   }
+
+   public function getUpdatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(setting('dateFormat'));
+         return $date;
+      }
+      
+      // return 'N/A';
+   }
+
+
+}

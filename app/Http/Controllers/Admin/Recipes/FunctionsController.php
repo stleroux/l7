@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\Admin\Recipes;
 
-use App\Http\Controllers\Controller; // Required for validation
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCommentRequest;
 use App\Http\Requests\CreateRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Recipe;
 use App\Models\User;
-use App\Models\Recipes\Recipe;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Input;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Excel;
 use File;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Input;
 use Image;
 use JavaScript;
 use Log;
@@ -44,7 +45,46 @@ class FunctionsController extends RecipesController
    {
       // Only allow authenticated users access to these functions
       $this->middleware('auth');
-      $this->enablePermissions = false;
+   }
+
+
+   ##################################################################################################################
+   # ██████  ███████ ██      ███████ ████████ ███████ 
+   # ██   ██ ██      ██      ██         ██    ██      
+   # ██   ██ █████   ██      █████      ██    █████   
+   # ██   ██ ██      ██      ██         ██    ██      
+   # ██████  ███████ ███████ ███████    ██    ███████ 
+   // Mass Delete selected rows - all selected records
+   ##################################################################################################################
+   public function delete($id)
+   {
+      // Check if user has required permission
+      // abort_unless(Gate::allows('recipe-delete'), 403);
+
+      $recipe = Recipe::onlyTrashed()->findOrFail($id);
+      // dd($recipe);
+
+      // delete the user
+      if($recipe->forceDelete())
+      {
+
+         if($recipe->image) {
+            $image = public_path().'/_recipes/'.$recipe->image;
+            unlink($image);
+         }
+
+         $notification = array(
+            'message' => 'The recipe was deleted successfully!', 
+            'alert-type' => 'success'
+         );
+      } else {
+         $notification = array(
+            'message' => 'There was an error deleting the recipe.',
+            'alert-type' => 'error'
+         );
+      }
+
+      return redirect()->back()->with($notification);
    }
 
 
@@ -57,12 +97,10 @@ class FunctionsController extends RecipesController
 # ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝
 // Mass Delete selected rows - all selected records
 ##################################################################################################################
-   public function deleteAll(Request $request)
+   public function massDelete(Request $request)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       $this->validate($request, [
          'checked' => 'required',
@@ -72,8 +110,11 @@ class FunctionsController extends RecipesController
 
       Recipe::whereIn('id', $checked)->forceDelete();
 
-      Session::flash('success','The recipes were deleted successfully.');
-      return redirect()->route($ref);
+      $notification = [
+         'message' => 'The recipes were deleted successfully.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->route($ref)->with($notification);
    }
 
 
@@ -91,16 +132,17 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_duplicate', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+
       
       $newRecipe = $recipe->replicate();
       $newRecipe->user_id = Auth::user()->id;
       $newRecipe->save();
 
-      Session::flash ('success','The recipe was duplicated successfully!');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe was duplicated successfully!', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
    }
 
 
@@ -263,9 +305,7 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
       
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       $recipe->personal = 1;
       $recipe->save();
@@ -273,8 +313,11 @@ class FunctionsController extends RecipesController
       // Delete this recipe's favorites
       DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
 
-      Session::flash('success','The recipe was successfully made private');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe was successfully made private.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
    }
 
 
@@ -291,15 +334,16 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       $recipe->personal = 0;
       $recipe->save();
 
-      Session::flash('success','The recipe was successfully made public');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe was successfully made public.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
    }
 
 
@@ -316,16 +360,18 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_publish', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
+
 
          $recipe->published_at = Carbon::now();
          $recipe->deleted_at = Null;
       $recipe->save();
 
-      Session::flash ('success','The recipe was successfully published.');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe was successfully published.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
    }
 
 
@@ -337,30 +383,40 @@ class FunctionsController extends RecipesController
 # ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║    ██║  ██║███████╗███████╗
 # ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚══════╝╚══════╝
 ##################################################################################################################
-   public function publishAll(Request $request)
+   public function massPublish(Request $request)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_publish')) { abort(401, 'Unauthorized Access'); }
+      // abort_unless(Gate::allows('permission-manage'), 403);
+
+      $recipes = explode(',', $request->input('mass_publish_pass_checkedvalue'));
+
+      if(!$request->input('mass_publish_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be published.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($recipes as $recipe) {
+            $recipe = Recipe::withTrashed()->find($recipe);
+               $recipe->published_at = Carbon::now();
+               $recipe->deleted_at = Null;
+            $recipe->save();
+         }
+
+         $notification = [
+            'message' => 'The selected recipes have been published successfully!', 
+            'alert-type' => 'success'
+         ];
+
       }
+      
+      return redirect()->back()->with($notification);
 
-      $this->validate($request, [
-         'checked' => 'required',
-      ]);
-
-      $checked = $request->input('checked');
-
-      foreach ($checked as $item) {
-         $recipe = Recipe::withTrashed()->find($item);
-            $recipe->published_at = Carbon::now();
-            $recipe->deleted_at = Null;
-         $recipe->save();
-      }
-
-      Session::flash('success','The recipes were published successfully.');
-      return redirect()->back();
    }
-
 
 ##################################################################################################################
 # ██████╗ ███████╗███████╗███████╗████████╗    ██╗   ██╗██╗███████╗██╗    ██╗███████╗
@@ -374,16 +430,17 @@ class FunctionsController extends RecipesController
    public function resetViews($id)
    {
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
-      // }
+
 
       $recipe = Recipe::find($id);
          $recipe->views = 0;
       $recipe->save();
 
-      Session::flash('success','The recipe\'s views count was reset to 0.');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe\'s views count was reset to 0.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
    }
 
 
@@ -398,16 +455,18 @@ class FunctionsController extends RecipesController
 ##################################################################################################################
    public function restore($id)
    {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_restore')) { abort(401, 'Unauthorized Access'); }
-      }
-
       $recipe = Recipe::withTrashed()->findOrFail($id);
+
+      // Check if user has required permission
+      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
+
       $recipe->restore();
 
-      Session::flash ('success','The recipe was successfully restored.');
-      return redirect()->route('admin.recipes.trashed');
+      $notification = [
+         'message' => 'The recipe was successfully restored.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->route('admin.recipes.trashed')->with($notification);
    }
 
 
@@ -420,21 +479,37 @@ class FunctionsController extends RecipesController
 # ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝
 // RESTORE ALL TRASHED FILE
 ##################################################################################################################
-   public function restoreAll(Request $request)
+   public function massRestore(Request $request)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_restore')) { abort(401, 'Unauthorized Access'); }
+      // abort_unless(Gate::allows('recipe-manage'), 403);
+
+      $recipes = explode(',', $request->input('mass_restore_pass_checkedvalue'));
+
+      if(!$request->input('mass_restore_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be restore.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($recipes as $recipe_id) {
+            $recipe = Recipe::onlyTrashed()->findOrFail($recipe_id);
+            $recipe->restore();
+         }
+
+         $notification = [
+            'message' => 'The selected recipes have been restored successfully!', 
+            'alert-type' => 'success'
+         ];
+
       }
-
-      $checked = $request->input('checked');
-
-      Recipe::whereIn('id', $checked)->restore();
-
-      Session::flash('success','The recipes were restored successfully.');
-      return redirect()->route('recipes.trashed');
+      
+      return redirect()->back()->with($notification);
    }
-
 
 ##################################################################################################################
 # ███████╗████████╗ ██████╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗████████╗
@@ -463,25 +538,29 @@ class FunctionsController extends RecipesController
    // }
 
 
-##################################################################################################################
-# ████████╗██████╗  █████╗ ███████╗██╗  ██╗
-# ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║  ██║
-#    ██║   ██████╔╝███████║███████╗███████║
-#    ██║   ██╔══██╗██╔══██║╚════██║██╔══██║
-#    ██║   ██║  ██║██║  ██║███████║██║  ██║
-#    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-##################################################################################################################
-   public function trash($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_trash')) { abort(401, 'Unauthorized Access'); }
-      }
+// ##################################################################################################################
+// # ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+// # ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+// # ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+// # ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+// # ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+// // Remove the specified resource from storage
+// // Used in the index page and trashAll action to soft delete multiple records
+// ##################################################################################################################
+//    public function destroy($id)
+//    {
+//       // Check if user has required permission
 
-      $recipe = Recipe::findOrFail($id);
 
-      return view('admin.recipes.trash', compact('recipe'));
-   }
+//       $recipe = Recipe::findOrFail($id);
+
+//       $notification = [
+//          'message' => 'The recipe has been trashed successfully!', 
+//          'alert-type' => 'success'
+//       ];
+
+//       return view('admin.recipes.trash', compact('recipe'))->with($notification);
+//    }
 
 
 ##################################################################################################################
@@ -494,23 +573,60 @@ class FunctionsController extends RecipesController
 // Remove the specified resource from storage
 // Used in the index page to soft delete multiple records
 ##################################################################################################################
-   public function trashAll(Request $request)
+   // public function trashAll(Request $request)
+   // {
+   //    // Check if user has required permission
+
+
+   //    $this->validate($request, [
+   //       'checked' => 'required',
+   //    ]);
+
+   //    $checked = $request->input('checked');
+
+   //    Recipe::destroy($checked);
+
+   //    $notification = [
+   //       'message' => 'The recipes were trashed successfully.', 
+   //       'alert-type' => 'success'
+   //    ];
+   //    return redirect()->back()->with($notification);
+   // }
+
+##################################################################################################################
+# ███    ███  █████  ███████ ███████     ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ████  ████ ██   ██ ██      ██          ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██ ████ ██ ███████ ███████ ███████     ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██  ██  ██ ██   ██      ██      ██     ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██      ██ ██   ██ ███████ ███████     ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+##################################################################################################################
+   public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_trash')) { abort(401, 'Unauthorized Access'); }
+      // abort_unless(Gate::allows('permission-delete'), 403);
+
+      $recipes = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
+
+      if(!$request->input('mass_destroy_pass_checkedvalue'))
+      {
+         $notification = array(
+            'message' => 'Please select entries to be deleted.', 
+            'alert-type' => 'error'
+         );
+      } else {
+         
+         foreach ($recipes as $recipe) {
+            $recipe = Recipe::findOrFail($recipe);
+            $recipe->delete();
+         }
+
+         $notification = array(
+            'message' => 'The selected recipes have been deleted successfully!', 
+            'alert-type' => 'success'
+         );
       }
-
-      $this->validate($request, [
-         'checked' => 'required',
-      ]);
-
-      $checked = $request->input('checked');
-
-      Recipe::destroy($checked);
-
-      Session::flash('success','The recipes were trashed successfully.');
-      return redirect()->back();
+      
+      return redirect()->back()->with($notification);
    }
 
 
@@ -524,24 +640,25 @@ class FunctionsController extends RecipesController
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function trashDestroy($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+   // public function trashDestroy($id)
+   // {
+   //    // Check if user has required permission
 
-      $recipe = Recipe::find($id);
 
-      // Delete this recipe's favorites
-      DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
-      // Delete the recipe
-      $recipe->delete();
+   //    $recipe = Recipe::find($id);
 
-      Session::flash('success', 'The recipe was successfully trashed!');
-      // return redirect(Session::get('fromPage'));
-      return redirect()->back();
-   }
+   //    // Delete this recipe's favorites
+   //    DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
+   //    // Delete the recipe
+   //    $recipe->delete();
+
+   //    $notification = [
+   //       'message' => 'The recipe was successfully trashed!', 
+   //       'alert-type' => 'success'
+   //    ];
+
+   //    return redirect()->back()->with($notification);
+   // }
 
 
 ##################################################################################################################
@@ -557,17 +674,19 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_publish', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless((Gate::allows('recipe-publish') || ($recipe->user_id == Auth::id())), 403);
 
          $recipe->published_at = NULL;
          // Delete this recipe's favorites
          DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
       $recipe->save();
 
-      Session::flash ('success','The recipe was successfully unpublished.');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe was successfully unpublished.', 
+         'alert-type' => 'success'
+      ];
+      
+      return redirect()->back()->with($notification);
    }
 
 
@@ -579,29 +698,39 @@ class FunctionsController extends RecipesController
 # ╚██████╔╝██║ ╚████║██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║    ██║  ██║███████╗███████╗
 #  ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚══════╝╚══════╝
 ##################################################################################################################
-   public function unpublishAll(Request $request)
+   public function massUnpublish(Request $request)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_publish')) { abort(401, 'Unauthorized Access'); }
-      }
+      // abort_unless(Gate::allows('permission-manage'), 403);
 
-      $this->validate($request, [
-         'checked' => 'required',
-      ]);
+      $recipes = explode(',', $request->input('mass_unpublish_pass_checkedvalue'));
 
-      $checked = $request->input('checked');
+      if(!$request->input('mass_unpublish_pass_checkedvalue'))
+      {
 
-      foreach ($checked as $item) {
-         $recipe = Recipe::withTrashed()->find($item);
-            $recipe->published_at = Null;
-            // Delete this recipe's favorites
+         $notification = [
+            'message' => 'Please select entries to be unpublished.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($recipes as $recipe) {
+            $recipe = Recipe::findOrFail($recipe);
+               $recipe->published_at = Null;
+            $recipe->save();
             DB::table('favorites')->where('favoriteable_id', '=', $recipe->id)->delete();
-         $recipe->save();
+         }
+
+         $notification = [
+            'message' => 'The selected recipes have been unpublished successfully!', 
+            'alert-type' => 'success'
+         ];
+
       }
       
-      Session::flash('success','The recipes were unpublished successfully.');
-      return redirect()->route('recipes.'. Session::get('pageName'));
+      return redirect()->back()->with($notification);
+
    }
 
 

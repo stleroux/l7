@@ -1,7 +1,6 @@
 @extends('layouts.admin.admin')
 
 @section('stylesheet')
-   <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
 @endsection
 
 @section('pageHeader')
@@ -37,7 +36,6 @@
       <div class="card-footer pt-1 pb-1 pl-2">
          Fields marked with an <span class="required"></span> are required
       </div>
-
    
    </form>
 
@@ -53,17 +51,7 @@
 
 
 @section('scripts')
-   <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
 
-   <script>
-      $("#datePicker").datetimepicker({
-         step: 30,
-         showOn: 'button',
-         buttonImage: '',
-         buttonImageOnly: true,
-         format:'Y-m-d H:i'+':00'
-      });
-   </script>
 
    {{-- <script>
       // Add the following code if you want the name of the file appear on select

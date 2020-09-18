@@ -13,7 +13,8 @@
    	rows="2"
    	data-autosize
    	placeholder="Notes"
-      data-inputmask="">{{ old('notes') ?? $user->notes }}</textarea>
+      data-inputmask=""
+      {{ $disabled ?? '' }}>{{ old('notes') ?? $user->notes }}</textarea>
 
    @error('notes')
       <div class="text-danger" role="alert">

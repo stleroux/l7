@@ -14,6 +14,7 @@
       value="{{ old('fax') ?? $user->fax }}"
       placeholder="Fax Number"
       data-inputmask="'mask': '(999) 999-9999'"
+      {{ $disabled ?? '' }}
    />
    
    @error('fax')

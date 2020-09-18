@@ -6,13 +6,25 @@ body {
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-attachment: fixed;
-   color: black;
-   font-size: 12pt;
-   padding-bottom: 65px;
 }
 /**************************************************************************************
 END : change background color on all pages
 **************************************************************************************/
+
+.recipeActive {
+   /*background-color: red;*/
+   /*background-color: rgba(245, 245, 245, 0.6);*/
+   background-color: rgba(245, 245, 245);
+}
+
+.btn-alphabet {
+   background-color: #800000;
+   color: white;
+   border: 1px solid gray;
+}
+.btn-alphabet:hover {
+   color: black;
+}
 
 /*.card {
    background-color: rgba(245, 245, 245, 0.2);
@@ -59,3 +71,8 @@ END : change background color on all pages
 .border-2 {
    border: 3px maroon solid;
 }
+
+
+
+
+

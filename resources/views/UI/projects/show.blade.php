@@ -24,12 +24,12 @@
 
    <div class="row">
    
-      <div class="col-12 col-xl-6">
+      <div class="col-12 col-xl-5">
          @include('UI.projects.blocks.imageSlider')
          @include('UI.projects.show.description')
       </div>
       
-      <div class="col-12 col-xl-3">
+      <div class="col-12 col-xl-4">
          @include('UI.projects.show.materials')
          @include('UI.projects.show.finishes')
       </div>
@@ -40,19 +40,23 @@
    
    </div>
 
-   {{-- <div class="row"> --}}
-   @guest
-      @include('common.view_more')
-   @endguest
-
-   <div class="col">
-      @include('UI.projects.show.comments', ['model'=>$project])
-      @auth
-         @include('UI.projects.blocks.leave_comment')
-      @endauth
+   <div class="row">
+      <div class="col-xl-9">
+         @include('common.view_more')         
+      </div>
    </div>
 
-   {{-- </div> --}}
+   <div class="row">
+      <div class="col-xl-9">
+         @include('UI.projects.show.comments', ['model'=>$project])
+      </div>
+   
+      @auth
+         <div class="col-xl-3">
+            @include('UI.projects.show.leave_comment')
+         </div>
+      @endauth
+   </div>
 
 </div>
 

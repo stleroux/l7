@@ -14,6 +14,7 @@
       value="{{ old('first_name') ?? $user->first_name }}"
       placeholder="First name"
       data-inputmask=""
+      {{ $disabled ?? '' }}
    />
 
    @error('first_name')

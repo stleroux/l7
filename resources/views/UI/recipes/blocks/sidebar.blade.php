@@ -1,10 +1,48 @@
 @auth
-   <div class="card card-trans-4 mb-2">
-      <div class="card-header block_header p-2">
+
+   <div class="card card-trans-4 mb-2" style="background-color: #800000">
+
+      <div class="card-header text-light p-2">
          <i class="{{ Config::get('icons.recipes') }}"></i>
          Recipes
       </div>
-      
+
+      <div class="card-body card-trans-6 p-0 m-0">
+         
+         <ul class="list-group">
+            
+            <a href="{{ route('recipes.myRecipesGrid', 'all') }}"
+               class="card-trans-2 list-group-item list-group-item-action p-1
+                     {{ (route('recipes.myRecipesGrid', 'all') === url()->current()) || (route('recipes.myRecipesList', 'all') === url()->current()) ? 'recipeActive' : '' }}
+            ">
+               <i class="{{ Config::get('icons.mine') }}"></i>
+               My Recipes
+            </a>
+
+@if($privateRecipesCount > 0)
+            <a href="{{ route('recipes.privateRecipesGrid', 'all') }}"
+               class="card-trans-2 list-group-item list-group-item-action p-1
+                     {{ (route('recipes.privateRecipesGrid', 'all') === url()->current()) || (route('recipes.privateRecipesList', 'all') === url()->current()) ? 'recipeActive' : '' }}
+            ">
+               <i class="{{ Config::get('icons.private') }}"></i>
+               My Private Recipes
+            </a>
+@endif
+
+            <a href="{{ route('recipes.favoriteRecipesGrid', 'all') }}"
+               class="card-trans-2 list-group-item list-group-item-action p-1
+                     {{ (route('recipes.favoriteRecipesGrid', 'all') === url()->current()) || (route('recipes.favoriteRecipesList', 'all') === url()->current()) ? 'recipeActive' : '' }}
+            ">
+               <i class="{{ Config::get('icons.favorite') }}"></i>
+               My Favorite Recipes
+            </a>
+
+         </ul>
+
+      </div>
+
+
+
       {{-- <div class="list-group pt-0 pb-0"> --}}
 
          {{-- @if(checkPerm('recipe_browse'))
@@ -36,7 +74,6 @@
             </a>
          @endif --}}
 
-         @auth
 {{--             <a href="{{ route('recipes.myRecipesGrid') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.myRecipes*') ? 'active' : '' }}">
                <i class="{{ Config::get('icons.mine') }}"></i>
                My Recipes
@@ -51,37 +88,6 @@
                <i class="{{ Config::get('icons.favorite') }}"></i>
                My Favorite Recipes
             </a> --}}
-
-            <table class="table table-sm table-hover mb-0">
-               <tbody>
-                  <tr class="{{ Route::is('recipes.myRecipes*') ? 'bg-dark' : '' }}">
-                     <td>
-                        <a href="{{ route('recipes.myRecipesGrid', 'all') }}" class="text-light">
-                           <i class="{{ Config::get('icons.mine') }}"></i>
-                           My Recipes
-                        </a>
-                     </td>
-                  </tr>
-                  <tr class="{{ Route::is('recipes.privateRecipes*') ? 'bg-dark' : '' }}">
-                     <td>
-                        <a href="{{ route('recipes.privateRecipesGrid', 'all') }}" class="text-light">
-                           <i class="{{ Config::get('icons.private') }}"></i>
-                           My Private Recipes
-                        </a>
-                     </td>
-                  </tr>
-                  <tr class="{{ Route::is('recipes.favoriteRecipes*') ? 'bg-dark' : '' }}">
-                     <td>
-                        <a href="{{ route('recipes.favoriteRecipesGrid', 'all') }}" class="text-light">
-                           <i class="{{ Config::get('icons.favorite') }}"></i>
-                           My Favorite Recipes
-                        </a>
-                     </td>
-                  </tr>
-               </tbody>
-               
-            </table>
-         @endauth
 
          {{-- <hr /> --}}
 
@@ -131,4 +137,5 @@
 
       {{-- </div> --}}
    </div>
+
 @endauth

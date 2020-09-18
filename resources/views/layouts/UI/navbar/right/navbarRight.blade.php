@@ -15,7 +15,8 @@
 	   	</li>
 	   {{-- @endcan --}}
 
-      @include('layouts.UI.navbar.right.user')
+      {{-- @include('layouts.UI.navbar.right.user') --}}
+      @include('layouts.common.navbar.user')
 
    @endguest
 

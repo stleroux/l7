@@ -14,6 +14,7 @@
    	value="{{ old('website') ?? $user->website }}"
       placeholder="Website Address"
       data-inputmask=""
+      {{ $disabled ?? '' }}
    />
    
    @error('website')

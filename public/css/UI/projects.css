@@ -6,11 +6,24 @@ body {
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-attachment: fixed;
-	font-size: 12pt;
 }
 /**************************************************************************************
 END : change background color on all pages
 **************************************************************************************/
+
+.projectActive {
+   /*background-color: red;*/
+   background-color: rgba(245, 245, 245, 0.6);
+}
+
+.btn-alphabet {
+   background-color: #5bc0de;
+   color: white;
+   border: 1px solid gray;
+}
+.btn-alphabet:hover {
+   color: black;
+}
 
 /* CARDS */
 .card {
@@ -21,6 +34,17 @@ END : change background color on all pages
 	/*background-color: #000;*/
 	color: white;
 	/*font-weight: bold;*/
+}
+
+/* CARDS */
+.card_header {
+   /*background-image: url("/images/14.jpg");*/
+   /*background-repeat: no-repeat;*/
+   /*background-size: 100% 100%;*/
+   /*background-attachment: fixed;*/
+   background-color: #5bc0de;
+   color: white;
+   font-weight: bold;
 }
 
 .section_header {

@@ -36,6 +36,16 @@ class DatabaseSeeder extends Seeder
       $this->call(RecipeUserTableSeeder::class);
 
       $this->call(FavoritesTableSeeder::class);
+      
+      $this->call(InvoicerClientsTableSeeder::class);
+      $this->call(InvoicerProductsTableSeeder::class);
+      $this->call(InvoicerInvoicesTableSeeder::class);
+      $this->call(InvoicerInvoiceItemsTableSeeder::class);
+
+      $this->call(DartPlayersTableSeeder::class);
+      $this->call(DartGamesTableSeeder::class);
+      $this->call(DartScoresTableSeeder::class);
+      $this->call(FavoritesTableSeeder::class);
 
       // supposed to only apply to a single connection and reset it's self
       // but I like to explicitly undo what I've done for clarity

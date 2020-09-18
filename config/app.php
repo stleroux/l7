@@ -170,6 +170,8 @@ return [
         App\Providers\MovieServiceProvider::class,
         App\Providers\ArticleServiceProvider::class,
         App\Providers\RecipeServiceProvider::class,
+        App\Providers\ProjectServiceProvider::class,
+        App\Providers\PostServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -179,6 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 

@@ -4,6 +4,8 @@
 // USER ROUTES
 //////////////////////////////////////////////////////////////////////////////
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+   Route::get('users/approve/{user}',		'UsersController@approve')			->name('users.approve');
+   Route::get('users/disable/{user}',		'UsersController@disable')			->name('users.disable');
    Route::get('users/restore/{user}',		'UsersController@restore')			->name('users.restore');
    Route::post('users/delete/{user}',		'UsersController@delete')			->name('users.delete');
    Route::delete('users/mass_destroy',		'UsersController@massDestroy')	->name('users.mass_destroy');

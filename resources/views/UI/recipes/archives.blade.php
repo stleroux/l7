@@ -25,7 +25,7 @@
 @endsection
 
 @section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('recipes.index', 'all') }}">Recipes</a></li>
+   <li class="breadcrumb-item"><a href="{{ route('recipes.indexGrid', 'all') }}">Recipes</a></li>
    <li class="breadcrumb-item">Archived Recipes</li>
 @endsection
 

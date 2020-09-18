@@ -1,14 +1,9 @@
 <div class="row mb-2">
 
    <div class="col">
-      @if(Route::currentRouteName() == 'admin.recipes.index')
-         @can('recipe-create')
-            <a href="{{ route('admin.recipes.create') }}" class="btn btn-sm btn-success">
-               <i class="{{ Config::get('icons.add') }}"></i>
-               Create Recipe
-            </a>
-         @endcan
-      @endif
+      @can('recipe-create')
+         @include('admin.recipes.buttons.add')
+      @endcan
    </div>
 
    <div class="col">
@@ -24,18 +19,40 @@
                <i class="{{ Config::get('icons.ellipsis') }} mx-3"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu">
-               @can('project_materials-manage')
+               {{-- @can('recipe-list') --}}
                   <a href="{{ route('admin.recipes.index') }}" class="dropdown-item bg-light">
                      <i class="{{ Config::get('icons.recipes') }}"></i>
-                     All Recipes
+                     Published Recipes
                   </a>
-               @endcan
-               @can('project_materials-delete')
+               {{-- @endcan --}}
+
+               {{-- @can('recipe-list') --}}
+                  <a href="{{ route('admin.recipes.unpublished') }}" class="dropdown-item bg-light">
+                     <i class="{{ Config::get('icons.recipes') }}"></i>
+                     Unpublished Recipes
+                  </a>
+               {{-- @endcan --}}
+
+               {{-- @can('recipe-list') --}}
+                  <a href="{{ route('admin.recipes.newRecipes') }}" class="dropdown-item bg-light">
+                     <i class="{{ Config::get('icons.recipes') }}"></i>
+                     New Recipes
+                  </a>
+               {{-- @endcan --}}
+
+               {{-- @can('recipe-list') --}}
+                  <a href="{{ route('admin.recipes.future') }}" class="dropdown-item bg-light">
+                     <i class="{{ Config::get('icons.recipes') }}"></i>
+                     Future Recipes
+                  </a>
+               {{-- @endcan --}}
+               
+               {{-- @can('recipe-delete') --}}
                   <a href="{{ route('admin.recipes.trashed') }}" class="dropdown-item bg-light">
                      <i class="{{ Config::get('icons.trashed') }} text-danger"></i>
                      Trashed Recipes
                   </a>
-               @endcan
+               {{-- @endcan --}}
             </div>
          </div>
       </div>
@@ -43,11 +60,13 @@
       <div class="float-right px-1">         
          <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
             <i class="{{ Config::get('icons.help') }}"></i>
-            Help
+            <div class="d-none d-lg-inline">
+               Help
+            </div>
          </a>
       </div>
 
-      @if(Route::currentRouteName() == 'admin.recipes.index')
+      {{-- @if(Route::currentRouteName() == 'admin.recipes.index') --}}
          <form action="{{ route('admin.recipes.mass_destroy') }}" method="post" class="float-right p-0 pl-1">
             @csrf
             @method('DELETE')
@@ -61,9 +80,69 @@
                Trash Selected
             </a>
          </form>
-      @endif
+         
+         <form action="{{ route('admin.recipes.mass_unpublish') }}" method="post" class="float-right p-0 pl-1">
+            @csrf
+            <input type="hidden" name="mass_unpublish_ids" id="mass_unpublish_ids" value="" size="3" />
+            <a data-toggle="modal"
+               class="btn btn-sm bg-warning"
+               id="btn_multiunpublish"
+               style="display:none"
+               data-target="#massUnpublish-modal">
+               <i class="{{ Config::get('icons.unpublish') }}"></i>
+               Unpublish Selected
+            </a>
+         </form>
 
-      @if(Route::currentRouteName() == 'admin.recipes.trashed')
+      {{-- @endif --}}
+
+{{--          <form action="{{ route('admin.recipes.mass_publish') }}" method="post" class="float-right p-0 pl-1">
+            @csrf
+            <input type="text" name="mass_publish_ids" id="mass_publish_ids" value="" size="3" />
+            <a data-toggle="modal"
+               class="btn btn-sm bg-primary"
+               id="btn_multipublish"
+               style="display:none"
+               data-target="#massPublish-modal">
+               <i class="{{ Config::get('icons.publish') }}"></i>
+               Publish Selected
+            </a>
+         </form> --}}
+
+
+
+{{--          <form action="" method="POST" class="float-right p-0 pl-1">
+            @csrf
+            <input type="hidden" name="mass_publish_ids" id="mass_publish_ids" value="" size="3" />
+            <a 
+               data-toggle="modal"
+               class="btn btn-sm bg-primary"
+               id="btn_multipublish"
+               style="display:none"
+               data-target="#massPublish-modal">
+               <i class="{{ Config::get('icons.publish') }}"></i>
+               Publish Selected
+            </a>
+         </form> --}}
+
+
+{{--          <form action="" method="POST" class="float-right p-0 pl-1">
+            @csrf
+            <input type="hidden" name="mass_unpublish_ids" id="mass_unpublish_ids" value="" size="3" />
+            <a 
+               data-toggle="modal"
+               class="btn btn-sm bg-warning"
+               id="btn_multiunpublish"
+               style="display:none"
+               data-target="#massUnpublish-modal">
+               <i class="{{ Config::get('icons.unpublish') }}"></i>
+               Unpublish Selected
+            </a>
+         </form> --}}
+
+
+
+{{--       @if(Route::currentRouteName() == 'admin.recipes.trashed')
          <form action="{{ route('admin.recipes.mass_delete') }}" method="post" class="float-right p-0 pl-1">
             @csrf
             @method('DELETE')
@@ -91,7 +170,7 @@
                Restore Selected
             </a>
          </form>
-      @endif
+      @endif --}}
       
    </div>
 </div>

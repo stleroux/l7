@@ -41,26 +41,29 @@
 			<div class="text-right">
 				<div class="btn-group">
 					@include('UI.recipes.buttons.back', ['size'=>'sm', 'btn_label'=>'Back'])
-					@include('UI.recipes.buttons.print', ['size'=>'sm', 'btn_label'=>'Print'])
-					@include('UI.recipes.buttons.printPDF', ['size'=>'sm', 'btn_label'=>'Print PDF'])
-					@include('UI.recipes.buttons.favorite', ['size'=>'sm', 'btn_label'=>'Favorite'])
+					@auth
+						@include('UI.recipes.buttons.print', ['size'=>'sm', 'btn_label'=>'Print'])
+						@include('UI.recipes.buttons.printPDF', ['size'=>'sm', 'btn_label'=>'Print PDF'])
+						@include('UI.recipes.buttons.favorite', ['size'=>'sm', 'btn_label'=>'Favorite'])
+						{{-- @include('UI.recipes.show.buttons.privatize', ['size'=>'sm', 'btn_label'=>'']) --}}
+					@endauth
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<form style="display:inline;">
+	{{-- <form style="display:inline;"> --}}
 		<div class="card card-trans-2 mb-3">
 {{-- 			<div class="card-header section_header p-2">
 			</div> --}}
 
-			<div class="card-body section_body p-2">
+			<div class="card-body p-2">
 				<div class="row">
 					@include('UI.recipes.show.ingredients')
 					@include('UI.recipes.show.image')
 				</div>
 
-				@include('common.view_more', ['message'=>'If you would like to see the full recipe'])
+				@include('common.view_more')
 
 				@auth
 					<div class="row">
@@ -72,10 +75,11 @@
 						@include('UI.recipes.show.servings')
 						@include('UI.recipes.show.prep_time')
 						@include('UI.recipes.show.cook_time')
-						@include('UI.recipes.show.personal')
+						{{-- @include('UI.recipes.show.personal') --}}
 						@include('UI.recipes.show.views')
 						@include('UI.recipes.show.source')
 						@include('UI.recipes.show.publishDate')
+						@include('UI.recipes.show.author')
 					</div>
 
 					<div class="row">
@@ -88,13 +92,14 @@
 					</div>
 				@endauth
 
-				<div class="row m-0 p-0">
-					<div class="col m-0 p-0">
-						@include('common.comments', ['model'=>$recipe])
+				<div class="row">
+					<div class="col">
+						@include('UI.recipes.show.comments', ['model'=>$recipe])
 					</div>
 				</div>
 
 			</div>
 		</div>
-	</form>
+	{{-- </form> --}}
+
 @endsection

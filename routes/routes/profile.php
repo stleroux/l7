@@ -1,5 +1,5 @@
 <?php
-// Route::resource('resetPassword', 'UI\ResetPasswordController')->only(['edit','update']);
+Route::resource('resetPassword', 'UI\ResetPasswordController')->only(['edit','update']);
 
 // Route::namespace('Users')->prefix('users/')->name('users.changePassword.')->group(function() {
 //    Route::get('{id}/edit',                 'UI\ResetPasswordController@edit')                 ->name('edit');

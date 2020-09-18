@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin\Projects;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Comment;
-use App\Models\Admin\Category;
-use App\Models\Admin\Projects\Project;
-use App\Models\Admin\Projects\Finish;
-use App\Models\Admin\Projects\Material;
-use App\Models\Admin\Projects\Image;
+use App\Models\Category;
+use App\Models\Project;
+use App\Models\ProjectFinish;
+use App\Models\ProjectMaterial;
+use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -154,8 +154,8 @@ class ProjectsController extends Controller
 
       $project = Project::with('finishes')->with('materials')->with('images')->find($project->id);
 
-      $materials = Material::all();
-      $finishes = Finish::all();
+      $materials = ProjectMaterial::all();
+      $finishes = ProjectFinish::all();
 
       return view('admin.projects.projects.edit', compact('project','finishes','materials'));
    }
@@ -278,20 +278,22 @@ class ProjectsController extends Controller
 
       // get previous project
       $previous = Project::where('name', '<', $project->name)->orderBy('name','asc')->max('name');
+      
       if($previous){
-            $p = Project::where('name', $previous)->get();
-            $previous = $p[0]->id;
+         $p = Project::where('name', $previous)->get();
+         $previous = $p[0]->id;
       }
 
       // get next project
       $next = Project::where('name', '>', $project->name)->orderBy('name','desc')->min('name');
+
       if($next){
-            $n = Project::where('name', $next)->get();
-            $next = $n[0]->id;
+         $n = Project::where('name', $next)->get();
+         $next = $n[0]->id;
       }
 
       // Get the first image associated to this project
-      $image = Image::where('project_id', '=', $project->id)->first();
+      $image = ProjectImage::where('project_id', '=', $project->id)->first();
 
       return view('admin.projects.projects.show', compact('project','image','previous','next'));
    }
@@ -433,36 +435,35 @@ class ProjectsController extends Controller
          foreach ($projects as $project_id) {
             $project = Project::onlyTrashed()->findOrFail($project_id);
 
+            // Delete images from file system
+            $images = DB::table('projects__images')->where('project_id', '=', $project->id)->get();
 
-// Delete images from file system
-$images = DB::table('projects__images')->where('project_id', '=', $project->id)->get();
+            if($images) {
+               foreach($images as $image) {
+                  // Delete the image(s) and thumbnail(s) from storage
+                  $image_path = public_path().'/_projects/'.$project->id.'/'.$image->name;
+                  $thumbs_path = public_path().'/_projects/'.$project->id.'/thumbs/'.$image->name;
+                  unlink($image_path);
+                  unlink($thumbs_path);
+               }
+            }
 
-if($images) {
-   foreach($images as $image) {
-      // Delete the image(s) and thumbnail(s) from storage
-      $image_path = public_path().'/_projects/'.$project->id.'/'.$image->name;
-      $thumbs_path = public_path().'/_projects/'.$project->id.'/thumbs/'.$image->name;
-      unlink($image_path);
-      unlink($thumbs_path);
-   }
-}
+            // Check if there are any files left in the thumbs folder, if not, delete the folder
+            if (count(glob('_projects/' . $project->id . "/thumbs/*")) === 0 ) { // empty
+               // Delete the thumbs folder
+               File::deleteDirectory(public_path('_projects/'.$project->id.'/thumbs/'));
+               // Delete the main folder
+               File::deleteDirectory(public_path('_projects/' . $project->id));
+            }
 
-// Check if there are any files left in the thumbs folder, if not, delete the folder
-if (count(glob('_projects/' . $project->id . "/thumbs/*")) === 0 ) { // empty
-   // Delete the thumbs folder
-   File::deleteDirectory(public_path('_projects/'.$project->id.'/thumbs/'));
-   // Delete the main folder
-   File::deleteDirectory(public_path('_projects/' . $project->id));
-}
+            // Delete related images from DB
+            DB::table('projects__images')->where('project_id', '=', $project->id)->delete();
 
-// Delete related images from DB
-DB::table('projects__images')->where('project_id', '=', $project->id)->delete();
+            // Delete related materials from DB
+            DB::table('projects__material_project')->where('project_id', '=', $project->id)->delete();
 
-// Delete related materials from DB
-DB::table('projects__material_project')->where('project_id', '=', $project->id)->delete();
-
-// Delete related finishes from DB
-DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
+            // Delete related finishes from DB
+            DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
 
 
 

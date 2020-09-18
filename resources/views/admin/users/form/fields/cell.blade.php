@@ -14,6 +14,7 @@
       value="{{ old('cell') ?? $user->cell }}"
       placeholder="Cell Number"
       data-inputmask="'mask': '(999) 999-9999'"
+      {{ $disabled ?? '' }}
    />
    
    @error('cell')

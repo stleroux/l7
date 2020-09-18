@@ -14,6 +14,7 @@
       value="{{ old('company_name') ?? $user->company_name }}"
       placeholder="Company Name"
       data-inputmask=""
+      {{ $disabled ?? '' }}
    />
    
    @error('company_name')

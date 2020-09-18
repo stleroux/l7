@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Posts\Post;
+use App\Models\Post;
 use Carbon\Carbon;
 use DB;
 
@@ -27,16 +27,16 @@ class PostServiceProvider extends ServiceProvider
    public function boot()
    {
       //
-      view()->composer('blog.blocks.popular', function ($view) {
+      view()->composer('UI.blog.blocks.popular', function ($view) {
          $popular = Post::published()
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
-             ->take(setting('homepage_popular_count'))
+             // ->take(setting('homepage_popular_count'))
              ->get();
          $view->with('popular', $popular);
       });
 
-      view()->composer('blog.blocks.archives', function ($view) {
+      view()->composer('UI.blog.blocks.archives', function ($view) {
          $postlinks = DB::table('posts')
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
             ->where('published_at', '<=', Carbon::now())

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\Projects;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
-use App\Models\Admin\Projects\Finish;
-use App\Models\Admin\Projects\Project;
+use App\Models\Category;
+use App\Models\Project;
+use App\Models\ProjectFinish;
 use DB;
 use Session;
 
@@ -24,7 +24,6 @@ class FinishController extends Controller
    public function __construct()
    {
      $this->middleware('auth');
-     $this->enablePermissions = false;
    }
 
 

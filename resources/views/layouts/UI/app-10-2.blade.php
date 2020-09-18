@@ -22,6 +22,11 @@
             <div class="col-1"></div>
          </div>
 
+         <div class="row">
+            <div class="col-xl-10 offset-xl-1 text-right">
+               @yield('topbar')
+            </div>
+         </div>
 
          <div class="row">
             <div class="col-xl-8 offset-xl-1">

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Projects\Project;
-use App\Models\Admin\Permission;
-use App\Models\Admin\Role;
-use App\Models\Admin\User;
+use App\Models\Project;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Auth;
 use Gate;
 
 class AdminController extends Controller
@@ -38,11 +40,38 @@ class AdminController extends Controller
       // Check if user has required permission
       // abort_unless(Gate::allows('admin-dashboard'), 403);
 
-      $usersCount = User::count();
+      $usersTotalCount = User::count();
+      $usersActiveCount = User::active()->count();
+      $usersInactiveCount = User::inactive()->count();
+
       $rolesCount = Role::count();
       $permissionsCount = Permission::count();
       $projectsCount = Project::count();
-      return view('admin.dashboard.index', compact('usersCount','rolesCount','permissionsCount','projectsCount'));
+      $recipesCount = Recipe::count();
+      $userRecipesTotalCount = Recipe::where('user_id', Auth::id())->count();
+      $userRecipesPublishedCount = Recipe::where('user_id', Auth::id())->published()->count();
+      $userRecipesUnpublishedCount = Recipe::where('user_id', Auth::id())->unpublished()->count();
+      $userRecipesFutureCount = Recipe::where('user_id', Auth::id())->future()->count();
+      $userRecipesTrashedCount = Recipe::where('user_id', Auth::id())->trashed()->count();
+      
+
+      return
+         view('admin.dashboard.index',
+            compact(
+              'usersTotalCount',
+              'usersActiveCount',
+              'usersInactiveCount',
+              'rolesCount',
+              'permissionsCount',
+              'projectsCount',
+              'recipesCount',
+              'userRecipesTotalCount',
+              'userRecipesUnpublishedCount',
+              'userRecipesPublishedCount',
+              'userRecipesFutureCount',
+              'userRecipesTrashedCount'
+            )
+      );
    }
 }
 

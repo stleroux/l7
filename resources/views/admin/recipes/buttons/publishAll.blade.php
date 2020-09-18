@@ -1,4 +1,5 @@
-{{-- @if(checkPerm('recipe_edit')) --}}
+@if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-publish'))
+
    <button
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary border border-light text-warning"
       type="submit"
@@ -8,7 +9,8 @@
       title="Publish Selected"
       style="display:none;"
       onclick="return confirm('Are you sure you want to publish these recipes?')">
-      <i class="{{ Config::get('buttons.publish') }} text-success"></i>
+      <i class="{{ Config::get('icons.publish') }} text-success"></i>
       {{ $btn_label ?? '' }}
    </button>
-{{-- @endif --}}
+
+@endif

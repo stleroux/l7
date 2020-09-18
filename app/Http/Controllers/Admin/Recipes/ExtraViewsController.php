@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller; // Required for validation
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
-use App\Models\Recipes\Recipe;
+use App\Models\Recipe;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,7 +42,6 @@ class ExtraViewsController extends RecipesController
       // Only allow authenticated users access to these functions
       // $this->middleware('auth')->except('archives','myFavorites','myPrivateRecipes','myRecipes');
       $this->middleware('auth')->except('archives');
-      $this->enablePermissions = false;
    }
 
 
@@ -58,9 +57,7 @@ class ExtraViewsController extends RecipesController
    public function archives($year, $month)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       // Set the session to the current page route
       Session::put('fromLocation', 'recipes.archives'); // Required for Alphabet listing
@@ -92,9 +89,7 @@ class ExtraViewsController extends RecipesController
    public function future(Request $request, $key=null)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_future')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       // Set the session to the current page route
       Session::put('fromLocation', 'recipes.future'); // Required for Alphabet listing
@@ -123,12 +118,19 @@ class ExtraViewsController extends RecipesController
             ->get();
       } else {
          // No $key value is passed
-         $recipes = Recipe::with('user','category')
-            ->future()
-            ->get();
+         if(Auth::user()->can('recipe-list')) {
+            $recipes = Recipe::with('user','category')
+               ->future()
+               ->get();
+         } else {
+            $recipes = Recipe::with('user','category')
+               ->future()
+               ->myRecipes()
+               ->get();
+         }
       }
 
-      return view('admin.recipes.pages.future', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.future.index', compact('recipes','letters','categories'));
    }
 
 
@@ -269,9 +271,7 @@ class ExtraViewsController extends RecipesController
    public function newRecipes(Request $request, $key=null)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_new')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       // Set the session to the current page route
       Session::put('fromLocation', 'recipes.newRecipes'); // Required for Alphabet listing
@@ -303,7 +303,7 @@ class ExtraViewsController extends RecipesController
             ->paginate(18);
       }
 
-      return view('admin.recipes.pages.newRecipes', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.new.index', compact('recipes','letters','categories'));
    }
 
 
@@ -374,9 +374,7 @@ class ExtraViewsController extends RecipesController
    public function trashed(Request $request, $key=null)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_trashed')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       // Set the session to the current page route
       Session::put('fromLocation', 'admin.recipes.trashed'); // Required for Alphabet listing
@@ -404,13 +402,21 @@ class ExtraViewsController extends RecipesController
             ->orderBy('title', 'asc')
             ->get();
       } else {
-         $recipes = Recipe::with('user','category')
-            ->onlyTrashed()
-            ->orderBy('id','desc')
-            ->get();
+         if(Auth::user()->can('recipe-list')) {
+            $recipes = Recipe::with('user','category')
+               ->onlyTrashed()
+               ->orderBy('id','desc')
+               ->get();
+         } else {
+            $recipes = Recipe::with('user','category')
+               ->onlyTrashed()
+               ->myRecipes()
+               ->orderBy('id','desc')
+               ->get();
+         }
       }
       
-      return view('admin.recipes.pages.trashed', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.trashed.index', compact('recipes','letters','categories'));
    }
 
 
@@ -448,9 +454,7 @@ class ExtraViewsController extends RecipesController
    public function unpublished(Request $request, $key=null)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_published')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       // Set the session to the current page route
       Session::put('fromLocation', 'admin.recipes.unpublished'); // Required for Alphabet listing
@@ -479,12 +483,19 @@ class ExtraViewsController extends RecipesController
             ->get();
       } else {
          // No $key value is passed
-         $recipes = Recipe::with('user','category')
-            ->unpublished()
-            ->get();
+         if(Auth::user()->can('recipe-list')) {
+            $recipes = Recipe::with('user','category')
+               ->unpublished()
+               ->get();
+         } else {
+            $recipes = Recipe::with('user','category')
+               ->unpublished()
+               ->myRecipes()
+               ->get();
+         }
       }
 
-      return view('admin.recipes.pages.unpublished', compact('recipes','letters','categories'));
+      return view('admin.recipes.pages.unpublished.index', compact('recipes','letters','categories'));
    }
 
 

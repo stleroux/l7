@@ -10,7 +10,7 @@
       	id="name"
       	name="name"
       	class="form-control form-control-sm @error('name') is-invalid @enderror"
-      	value="{{ old('name') }}"
+         value="{{ old('name') ?? $permission->name }}"
          placeholder="i.e.: Model-Permission">
 
       @error('name')

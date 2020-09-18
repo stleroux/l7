@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Projects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCommentRequest;
-use App\Models\Admin\Comment;
-use App\Models\Admin\Projects\Project;
+use App\Models\Comment;
+use App\Models\Project;
 use Auth;
 use DB;
 use Session;
@@ -60,8 +60,8 @@ class CommentController extends Controller
    public function store(CreateCommentRequest $request, $id)
    {
       // Check if user has required module
-      if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
-
+      // if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
+dd('HERE');
       $project = project::find($id);
 
       $comment = new Comment();

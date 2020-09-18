@@ -20,6 +20,7 @@
       {{-- <div class="card-header section_header p-2"></div> --}}
 
       <div class="card-body p-2">
+         <p>Thank you for contacting us.</p>
          <p>We will be in touch shortly if needed.</p>
       </div>
 

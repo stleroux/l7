@@ -21,6 +21,7 @@
 	   placeholder="Invoicer Client"
 	   data-inputmask=""
 	   @if($user->invoicer_client || old('invoicer_client')) checked @endif
+	   {{ $disabled ?? '' }}
 	/>
 
 	@error('invoicer_client')

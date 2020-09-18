@@ -12,7 +12,7 @@
             </th>
             <th>#</th>
             <th>Name</th>
-            <th>Description</th>
+            <th class="d-none d-lg-table-cell">Description</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
             <th class="no-sort" width="30px">Actions</th>
@@ -36,11 +36,11 @@
             </td>
             <td>{{ $permission->id }}</td>
             <td>{{ $permission->name }}</td>
-            <td>{{ $permission->description }}</td>
-            <td nowrap="nowrap" title="@if($permission->created_at){{ $permission->created_at }}@endif">
+            <td class="d-none d-lg-table-cell">{{ $permission->description }}</td>
+            <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($permission->created_at){{ $permission->created_at }}@endif">
                {{ $permission->created_at->toDateString() }}
             </td>
-            <td title="@if($permission->updated_at){{ $permission->updated_at }}@endif">
+            <td class="d-none d-lg-table-cell" title="@if($permission->updated_at){{ $permission->updated_at }}@endif">
                {{ $permission->updated_at->toDateString() }}
             </td>
             <td>

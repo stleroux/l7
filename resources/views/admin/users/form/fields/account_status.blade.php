@@ -19,6 +19,7 @@
 	   placeholder="Status"
 	   data-inputmask=""
 	   @if($user->account_status || old('account_status')) checked @endif
+	   {{ $disabled ?? '' }}
 	/>
 
 	@error('account_status')

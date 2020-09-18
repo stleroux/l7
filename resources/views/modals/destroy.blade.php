@@ -18,7 +18,7 @@
 
             <div class="modal-body text-dark">
                <p class="font-weight-bold">Are you sure you want to trash this {{ $modelName }}?</p>
-               <p class="small font-weight-bold text-danger">Only an Administrator will be able to undo this action.</p>
+               {{-- <p class="small font-weight-bold text-danger">Only an Administrator will be able to undo this action.</p> --}}
             </div>
             
             <div class="modal-footer">

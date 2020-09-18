@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
-use App\Models\Admin\Projects\Finish;
+use App\Models\Category;
+use App\Models\ProjectFinish;
 use Illuminate\Http\Request;
 use Gate;
 use Session;
@@ -37,7 +37,7 @@ class FinishesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-manage'), 403);
 
-      $finishes = Finish::All();
+      $finishes = ProjectFinish::All();
 
       return view('admin.projects.finishes.index', compact('finishes'));
    }
@@ -56,7 +56,7 @@ class FinishesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-create'), 403);
 
-      $finish = New Finish();
+      $finish = New ProjectFinish();
 
       return view('admin.projects.finishes.create', compact('finish'));
    }
@@ -70,12 +70,12 @@ class FinishesController extends Controller
 # ███████    ██     ██████  ██   ██ ███████ 
 // Store a newly created resource in storage
 ##################################################################################################################
-   public function store(Finish $finish)
+   public function store(ProjectFinish $finish, Request $request)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-create'), 403);
 
-      Finish::create($this->validateRequest());
+      ProjectFinish::create($this->validateRequest());
 
       $notification = [
          'message' => 'The project finish has been created successfully!', 
@@ -99,7 +99,7 @@ class FinishesController extends Controller
 # ███████ ██   ██  ██████   ███ ███  
 // Display the specified resource
 ##################################################################################################################
-   public function show(Finish $finish)
+   public function show(ProjectFinish $finish)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-manage'), 403);
@@ -118,7 +118,7 @@ class FinishesController extends Controller
 # ███████ ██████  ██    ██    
 // Show the form for editing the specified resource
 ##################################################################################################################
-   public function edit(Finish $finish)
+   public function edit(ProjectFinish $finish)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-edit'), 403);
@@ -135,7 +135,7 @@ class FinishesController extends Controller
 #  ██████  ██      ██████  ██   ██    ██    ███████ 
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   public function update(Finish $finish)
+   public function update(ProjectFinish $finish, Request $request)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-edit'), 403);
@@ -165,7 +165,7 @@ class FinishesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function destroy(Finish $finish)
+   public function destroy(ProjectFinish $finish)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-delete'), 403);
@@ -206,7 +206,7 @@ class FinishesController extends Controller
       } else {
          
          foreach ($finishes as $finish_id) {
-            $finish = Finish::findOrFail($finish_id);
+            $finish = ProjectFinish::findOrFail($finish_id);
             $finish->delete();
          }
 
@@ -234,7 +234,7 @@ class FinishesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-delete'), 403);
 
-      $finish = Finish::onlyTrashed()->findOrFail($id);
+      $finish = ProjectFinish::onlyTrashed()->findOrFail($id);
       // dd($finish);
       
       // delete the user
@@ -275,7 +275,7 @@ class FinishesController extends Controller
       } else {
          
          foreach ($finishes as $finish_id) {
-            $finish = Finish::onlyTrashed()->findOrFail($finish_id);
+            $finish = ProjectFinish::onlyTrashed()->findOrFail($finish_id);
             $finish->forceDelete();
             // $finish->permissions()->detach();
          }
@@ -301,7 +301,7 @@ class FinishesController extends Controller
 ##################################################################################################################
    public function restore($id)
    {
-      $finish = Finish::onlyTrashed()->findOrFail($id);
+      $finish = ProjectFinish::onlyTrashed()->findOrFail($id);
 
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-manage'), 403);
@@ -344,7 +344,7 @@ class FinishesController extends Controller
       } else {
          
          foreach ($finishes as $finish_id) {
-            $finish = Finish::onlyTrashed()->findOrFail($finish_id);
+            $finish = ProjectFinish::onlyTrashed()->findOrFail($finish_id);
             $finish->restore();
          }
 
@@ -372,7 +372,7 @@ class FinishesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_finishes-manage'), 403);
 
-      $finishes = Finish::onlyTrashed()->get();
+      $finishes = ProjectFinish::onlyTrashed()->get();
       return view('admin.projects.finishes.index', compact('finishes'));
    }
 

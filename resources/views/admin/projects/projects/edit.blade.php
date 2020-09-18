@@ -1,7 +1,6 @@
 @extends('layouts.admin.admin')
 
 @section('stylesheet')
-   <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
 @endsection
 
 @section('pageHeader')
@@ -56,17 +55,6 @@
 @endsection
 
 @section('scripts')
-   <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
-
-   <script>
-      $("#datePicker").datetimepicker({
-         step: 30,
-         showOn: 'button',
-         buttonImage: '',
-         buttonImageOnly: true,
-         format:'Y-m-d H:i'+':00'
-      });
-   </script>
 
    <script>
       $(document).ready(function(){

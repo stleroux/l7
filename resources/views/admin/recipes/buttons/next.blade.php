@@ -3,6 +3,6 @@
       class="btn {{ $size ? 'btn-'.$size : '' }}btn-primary text-light col-sm-5"
       title="Next Recipe">
       {{ $btn_label ?? '' }}
-      <i class="{{ Config::get('buttons.next') }}"></i>
+      <i class="{{ Config::get('icons.next') }}"></i>
    </a>
 @endif

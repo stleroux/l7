@@ -11,10 +11,13 @@
                </div>
             </th>
             <th>#</th>
-            <th>Name</th>
+            <th>Username</th>
+            <th class="d-none d-sm-table-cell">First Name</th>
+            <th class="d-none d-sm-table-cell">Last Name</th>
             <th class="d-none d-sm-table-cell">Email</th>
             <th class="d-none d-table-cell">Account Status</th>
             <th class="d-none d-md-table-cell">Roles</th>
+            <th class="d-none d-sm-table-cell">Company Name</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
             @if(Route::currentRouteName() == 'admin.users.trashed')
@@ -40,16 +43,19 @@
                   </div>
                </td>
                <td>{{ $user->id }}</td>
-               <td>{{ $user->first_name }}</td>
+               <td>{{ $user->username }}</td>
+               <td class="d-none d-sm-table-cell">{{ $user->first_name }}</td>
+               <td class="d-none d-sm-table-cell">{{ $user->last_name }}</td>
                <td class="d-none d-sm-table-cell">{{ $user->email }}</td>
                <td class="d-none d-table-cell">
                   @if($user->account_status)
-                     <span class="badge badge-success">Enabled</span>
+                     <span class="badge badge-success">Approved</span>
                   @else
                      <span class="badge badge-danger">Inactive</span>
                   @endif
                </td>
                <td class="d-none d-md-table-cell">{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+               <td class="d-none d-sm-table-cell">{{ $user->company_name }}</td>
                <td class="d-none d-md-table-cell" title="@if($user->created_at){{ $user->created_at }}@endif">{{ $user->created_at->toDateString() }}</td>
                <td class="d-none d-md-table-cell" title="@if($user->updated_at){{ $user->updated_at }}@endif">{{ $user->updated_at->toDateString() }}</td>
                @if(Route::currentRouteName() == 'admin.users.trashed')

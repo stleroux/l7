@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Admin\Recipes;
 
-use App\Http\Controllers\Controller; // Required for validation
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCommentRequest;
-use App\Http\Requests\CreateRecipeRequest;
-use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Admin\Category;
+use App\Http\Requests\RecipeRequest;
+use App\Models\Category;
 use App\Models\Comment;
-use App\Models\Admin\User;
-use App\Models\Admin\Recipe;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Input;
+use App\Models\Recipe;
+use App\Models\User;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use File;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Input;
 use Image;
 use Route;
 use Session;
@@ -37,7 +37,6 @@ class RecipesController extends Controller
    {
       // Only allow authenticated users access to these functions
       $this->middleware('auth');
-      $this->enablePermissions = false;
    }
 
 
@@ -53,9 +52,9 @@ class RecipesController extends Controller
    public function create()
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_create')) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless(Gate::allows('recipe-create'), 403);
+
+      $recipe = New Recipe();
 
       // Get id of specified category
       $pcat = Category::where('name','recipes')->first();
@@ -63,30 +62,55 @@ class RecipesController extends Controller
       // Get all related categories
       $categories = Category::where('parent_id', $pcat->id)->with('children')->get();
 
-      return view('admin.recipes.create', compact('categories'));
+      return view('admin.recipes.create', compact('recipe','categories'));
    }
 
 
 ##################################################################################################################
-# ██████╗ ███████╗██╗     ███████╗████████╗███████╗
-# ██╔══██╗██╔════╝██║     ██╔════╝╚══██╔══╝██╔════╝
-# ██║  ██║█████╗  ██║     █████╗     ██║   █████╗  
-# ██║  ██║██╔══╝  ██║     ██╔══╝     ██║   ██╔══╝  
-# ██████╔╝███████╗███████╗███████╗   ██║   ███████╗
-# ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-// 
+# ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function delete($id)
+   public function destroy(Recipe $recipe)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_trash')) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless((Gate::allows('recipe-delete') || ($recipe->user_id == Auth::id())), 403);
 
-      $recipe = Recipe::onlyTrashed()->findOrFail($id);
+      // delete the permission
+      $recipe->delete();
 
-      return view('admin.recipes.delete', compact('recipe'));
+      $notification = [
+         'message' => 'The recipe has been deleted successfully!', 
+         'alert-type' => 'success'
+      ];
+
+      // return redirect()->route('admin.projects.index')->with($notification);
+      return redirect()->back()->with($notification);
    }
+
+
+##################################################################################################################
+# ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
+# ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
+# ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
+# ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
+# ██████  ███████ ███████    ██    ██   ██  ██████     ██    
+// Remove the specified resource from storage
+// Used in the index page and trashAll action to soft delete multiple records
+##################################################################################################################
+   // public function delete($id)
+   // {
+   //    // Check if user has required permission
+   //    abort_unless((Gate::allows('recipe-delete') || ($recipe->user_id == Auth::id())), 403);
+
+   //    $recipe = Recipe::onlyTrashed()->findOrFail($id);
+
+   //    return view('admin.recipes.delete', compact('recipe'));
+   // }
 
 
 
@@ -100,23 +124,25 @@ class RecipesController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function deleteDestroy($id)
-   {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_delete')) { abort(401, 'Unauthorized Access'); }
-      }
+   // public function deleteDestroy($id)
+   // {
+   //    // Check if user has required permission
+   //    abort_unless((Gate::allows('recipe-delete') || ($recipe->user_id == Auth::id())), 403);
 
-      $recipe = Recipe::withTrashed()->findOrFail($id);
+   //    $recipe = Recipe::withTrashed()->findOrFail($id);
 
-      // Delete the associated image if any
-      File::delete('_recipes/' . $recipe->image);
+   //    // Delete the associated image if any
+   //    File::delete('_recipes/' . $recipe->image);
 
-      $recipe->forceDelete();
+   //    $recipe->forceDelete();
 
-      Session::flash('success', 'The recipe was successfully deleted!');
-      return redirect()->route('admin.recipes.trashed');
-   }
+   //    // Session::flash('success', 'The recipe was successfully deleted!');
+   //    $notification = [
+   //       'message' => 'The recipe has been deleted successfully!', 
+   //       'alert-type' => 'success'
+   //    ];
+   //    return redirect()->route('admin.recipes.trashed')->with($notification);
+   // }
 
 
 ##################################################################################################################
@@ -189,9 +215,7 @@ class RecipesController extends Controller
       $recipe = Recipe::findOrFail($id);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_edit', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
 
       // find all categories in the categories table and pass them to the view
       $categories = Category::with('children')->where('parent_id',1)->get();
@@ -212,9 +236,6 @@ class RecipesController extends Controller
    public function index(Request $request, $key=null) // PUBLISHED RECIPES
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_browse')) { abort(401, 'Unauthorized Access'); }
-      }
 
       // Set the session to the current page route
       Session::put('fromLocation', 'admin.recipes.index'); // Required for Alphabet listing
@@ -239,22 +260,31 @@ class RecipesController extends Controller
 
       // If $key value is passed
       if ($key) {
-         $recipes = Recipe::with('user','category')
-            ->published()
-            ->public()
-            ->where('title', 'like', $key . '%')
-            ->orderBy('title', 'asc')
-            ->get();
+         // following is not being used as the ALPHABET listing is not displayed
+         // $recipes = Recipe::with('user','category')
+         //    ->published()
+         //    ->public()
+         //    ->where('title', 'like', $key . '%')
+         //    ->orderBy('title', 'asc')
+         //    ->get();
       } else {
          // No $key value is passed
-         $recipes = Recipe::with('user','category')
-            ->published()
-            ->public()
-            ->orderBy('title', 'asc')
-            ->get();
+         if(Auth::user()->can('recipe-list')) {
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->orderBy('title', 'asc')
+               ->get();
+         }else{
+            $recipes = Recipe::with('user','category')
+               ->published()
+               ->public()
+               ->myRecipes()
+               ->orderBy('title', 'asc')
+               ->get();
+         }
       }
 
-      // return view('admin.recipes.index', compact('recipes','letters','categories'));
       return view('admin.recipes.index', compact('recipes','letters'));
    }
 
@@ -270,12 +300,10 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function show($id)
    {
-      // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_show')) { abort(401, 'Unauthorized Access'); }
-      }
-
       $recipe = Recipe::withTrashed()->findOrFail($id);
+
+      // Check if user has required permission
+      abort_unless((Gate::allows('recipe-list') || ($recipe->user_id == Auth::id())), 403);
 
       // Increase the view count since this is viewed from the frontend
       // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
@@ -309,12 +337,11 @@ class RecipesController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   public function store(CreateRecipeRequest $request, Recipe $recipe)
+   public function store(RecipeRequest $request, Recipe $recipe)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_create')) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless(Gate::allows('recipe-create'), 403);
+
 
       $recipe = new Recipe;
          $recipe->title = $request->title;
@@ -347,8 +374,17 @@ class RecipesController extends Controller
 
       $recipe->save();
 
-      Session::flash('success','Recipe created successfully!');
-      return redirect()->back();
+      $notification = [
+         'message' => 'The recipe has been created successfully!', 
+         'alert-type' => 'success'
+      ];
+
+      if ($request->submit == 'new')
+      {
+         return redirect()->back()->with($notification);
+      }
+
+      return redirect()->route('admin.recipes.index')->with($notification);
    }
 
 
@@ -361,15 +397,14 @@ class RecipesController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   public function update(UpdateRecipeRequest $request, $id)
+   public function update(RecipeRequest $request, $id)
    {
       // Get the recipe values from the database
       $recipe = Recipe::find($id);
+      // dd($recipe);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_edit', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
 
          // save the data in the database
          $recipe->title = $request->title;
@@ -412,13 +447,16 @@ class RecipesController extends Controller
       $recipe->save();
 
       // set a flash message to be displayed on screen
-      Session::flash('success','The recipe was successfully updated!');
+      $notification = [
+         'message' => 'The recipe has been updated successfully!', 
+         'alert-type' => 'success'
+      ];
 
       if(Session::get('fromPage') === 'recipes.index') {
-         return redirect()->route('recipes.index', 'all');
+         return redirect()->route('recipes.index', 'all')->with($notification);
       } else {
          // return redirect()->route(Session::get('fromPage'));
-         return redirect(Session::get('fromPage'));
+         return redirect(Session::get('fromPage'))->with($notification);
       }
   }
 
@@ -435,9 +473,7 @@ class RecipesController extends Controller
    public function view($id)
    {
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_show')) { abort(401, 'Unauthorized Access'); }
-      }
+
 
       $recipe = Recipe::withTrashed()->find($id);
 

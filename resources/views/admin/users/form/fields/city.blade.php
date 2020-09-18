@@ -14,6 +14,7 @@
       value="{{ old('city') ?? $user->city }}"
       placeholder="City"
       data-inputmask=""
+      {{ $disabled ?? '' }}
    />
    
    @error('city')

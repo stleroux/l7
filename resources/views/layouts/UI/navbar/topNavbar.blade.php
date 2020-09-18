@@ -10,6 +10,6 @@
       @include('layouts.UI.navbar.left.navbarLeft')
       {{-- @include('layouts.UI.navbar.search') --}}
       @include('layouts.UI.navbar.center.navbarCenter')
-      @include('layouts.UI.navbar.right.navbarRight')      
+      @include('layouts.UI.navbar.right.navbarRight')
    </div>
 </nav>

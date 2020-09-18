@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller; // Required for validation
 use App\Http\Requests\CreateCommentRequest;
 use App\Http\Requests\CreateRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Admin\Category;
+use App\Models\Category;
 use App\Models\Comment;
-use App\Models\Admin\User;
-use App\Models\UI\Recipe;
+use App\Models\User;
+use App\Models\Recipe;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -237,14 +237,17 @@ class FunctionsController extends RecipesController
 ##################################################################################################################
    public function privatize($id)
    {
+      // dd($id);
       $recipe = Recipe::find($id);
+      // dd('Privatize '. $recipe);
+      // dd('Privatize');
       
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
+      // }
 
-      $recipe->personal = 1;
+         $recipe->personal = 1;
       $recipe->save();
 
       // Delete this recipe's favorites
@@ -265,14 +268,16 @@ class FunctionsController extends RecipesController
 ##################################################################################################################
    public function publicize($id)
    {
+      // dd($id);
       $recipe = Recipe::find($id);
+      // dd('Publicize ' . $recipe);
 
       // Check if user has required permission
-      if($this->enablePermissions) {
-         if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
-      }
+      // if($this->enablePermissions) {
+      //    if(!checkPerm('recipe_private', $recipe)) { abort(401, 'Unauthorized Access'); }
+      // }
 
-      $recipe->personal = 0;
+         $recipe->personal = 0;
       $recipe->save();
 
       Session::flash('success','The recipe was successfully made public');
@@ -434,9 +439,14 @@ class FunctionsController extends RecipesController
          $comment->comment = $request->comment;
       $recipe->comments()->save($comment);
 
-      Session::flash('success','Comment added succesfully.');
+      // Session::flash('success','Comment added succesfully.');
       // return redirect()->route('recipes.show', $recipe->id);
-      return redirect()->back();
+      $notification = [
+         'message' => 'The comment has been added successfully!', 
+         'alert-type' => 'success'
+      ];
+
+      return redirect()->back()->with($notification);
    }
 
 

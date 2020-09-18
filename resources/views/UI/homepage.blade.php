@@ -27,6 +27,6 @@
       @include('UI.homepage.warning')
       @include('UI.homepage.newUser')
       @include('UI.homepage.interests')
-      {{-- @include('UI.homepage.blog') --}}
+      @include('UI.homepage.blog')
    {{-- </div> --}}
 @endsection

@@ -10,7 +10,7 @@ Route::delete('/projects/{project}/material',         'Admin\Projects\MaterialCo
 Route::post('/projects/{project}/finish',             'Admin\Projects\FinishController@store')             ->name('projects.finish.store');
 Route::delete('/projects/{project}/finish',           'Admin\Projects\FinishController@destroy')           ->name('projects.finish.delete');
 
-Route::post('projects/{project}/comment',             'Admin\Projects\CommentController@store')            ->name('projects.comment.store');
+// Route::post('projects/{project}/comment',             'Admin\Projects\CommentController@store')            ->name('projects.comment.store');
 
 //////////////////////////////////////////////////////////////////////////////
 // PROJECTS MATERIALS ROUTES
@@ -59,4 +59,5 @@ Route::namespace('Admin\Projects')->prefix('admin')->name('admin.')->group(funct
 Route::namespace('UI\Projects')->prefix('projects')->name('projects.')->group(function() {
    Route::get('{project}/show',    'ProjectsController@show')                   ->name('show');
    Route::get('{filter?}',         'ProjectsController@index')                  ->name('index');
+   Route::post('{project}/comment',             'CommentController@store')            ->name('comment.store');
 });

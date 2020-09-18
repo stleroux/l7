@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Projects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Admin\Projects\Project;
-use App\Models\Admin\Projects\Image;
+use App\Models\Project;
+use App\Models\ProjectImage;
 use Session;
 use Image as Img;
 use File;
@@ -155,7 +155,7 @@ class ImageController extends Controller
                 ->save($fs_image_location);
         }
 
-        $img = New Image();
+        $img = New ProjectImage();
             $img->project_id = $id;
             $img->name = $filename;
             $img->display_name = $request->display_name; 

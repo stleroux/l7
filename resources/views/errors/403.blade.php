@@ -1,59 +1,61 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Unauthorized Access</title>
+@extends('layouts.UI.app-fw')
 
-		{{-- <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css"> --}}
+@section('stylesheet')
+   <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
+@endsection
 
-		<style>
-			html, body {
-				height: 100%;
-			}
+@section('pageHeader')
+   <i class="{{ Config::get('icons.tree') }} col-2 col-sm-1 text-steel pr-2"></i>
+   <div class="col-8 col-sm-7">
+      Welcome to TheWoodBarn.ca
+   </div>
+   <i class="{{ Config::get('icons.tree') }} col-2 col-sm-1 text-steel pl-2"></i>
+@endsection
 
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				/*color: #B0BEC5;*/
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato', sans-serif;
-			}
+@section('breadcrumb')
+   {{-- <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
+@endsection
 
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
+@section('right_column')
+   @include('UI.blocks.popularItems')
+@endsection
 
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
+@section('content')
 
-			.title {
-				font-size: 72px;
-				margin-bottom: 40px;
-				background-color: red;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<img src="{{ asset('images\dog.jpg') }}">
-				<br />
-				<div class="title">Unauthorized access.</div>
-				It seems like you do not have sufficient permissions to view this page or your session has timed out due to inactiviy.
-				<br />
-				<br />
-				If you think this is an error, please contact the system administrator by using the <a href="/contact">Contact Us</a> page
-				<br /><br />
-				<a href="{{ URL::previous() }}" class="btn btn-default btn-xs">Back</a>
+	<div class="container">
+
+		<div class="card bg-danger text-center">
+
+			<div class="card-header">
+				<div class="card-title">Unauthorized access.</div>
 			</div>
-		</div>
-	</body>
-</html>
 
-	
-{{-- @stop --}}
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<img src="{{ asset('images\dog.jpg') }}">
+					</div>
+				</div>
+				<div class="row pt-3">
+					<div class="col">
+						<p class="bg-warning">
+							It seems like you do not have sufficient permissions to view this page, perform this action or your session has timed out due to inactiviy.
+						</p>
+						<p>
+							If you think this is an error, please contact the system administrator by using the <a href="/contact">Contact Us</a> page
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-footer p-2 mb-0">
+				<p class="pb-0 mb-0">
+					<a href="{{ URL::previous() }}" class="btn btn-default btn-xs">Back To Previous Page</a>
+				</p>					
+			</div>
+
+		</div>
+
+	</div>
+
+@endsection

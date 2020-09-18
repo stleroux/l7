@@ -31,9 +31,9 @@ class InvoicedPDFMail extends Mailable
      */
     public function build()
     {
-        $pdf = (public_path("/invoices") . DIRECTORY_SEPARATOR . $this->invoice->id . '.pdf');
+        $pdf = (public_path("/_invoices") . DIRECTORY_SEPARATOR . $this->invoice->id . '.pdf');
             
-        return $this->view('invoicer.emails.invoicedPDF')
+        return $this->view('admin.invoicer.emails.invoicedPDF')
             ->subject('Invoice from TheWoodBarn.ca')
             ->attach($pdf);
     }

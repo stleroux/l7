@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Admin\Role;
+use App\Models\Role;
 
 class RoleRequest extends FormRequest
 {

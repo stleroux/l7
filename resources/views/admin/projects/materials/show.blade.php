@@ -19,6 +19,8 @@
 
 @section('content')
 
+   @include('admin.projects.materials.show.topbar')
+
    <div class="card mb-3">
 
       {{-- <div class="card-header section_header p-2">
@@ -67,7 +69,7 @@
             </tbody>
          </table>
 
-         @include('admin.projects.materials.form')
+         {{-- @include('admin.projects.materials.form') --}}
 
       </div>
 

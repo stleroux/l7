@@ -1,4 +1,12 @@
-<div class="card card-primary collapsed-card">
+@if(
+   $errors->get('address_1') ||
+   $errors->get('city') ||
+   $errors->get('province') ||
+   $errors->get('postal_code'))
+   <div class="card card-primary">
+@else
+   <div class="card card-primary collapsed-card">
+@endif
 
    <div class="card-header">
       <div class="card-title">Address Information</div>

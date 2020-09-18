@@ -9,6 +9,21 @@
    </a>
    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $user->id }}">
       @if(!$user->deleted_at)
+
+         @can('user-edit')
+            @if($user->account_status)
+               <a href="{{ route('admin.users.disable', $user) }}" class="dropdown-item bg-light">
+                  <i class="{{ Config::get('icons.disable') }} text-pink"></i>
+                  Disable
+               </a>
+            @else
+               <a href="{{ route('admin.users.approve', $user) }}" class="dropdown-item bg-light">
+                  <i class="{{ Config::get('icons.approve') }} text-primary"></i>
+                  Approve
+               </a>
+            @endif
+         @endcan
+
          @can('user-edit')
             <a href="{{ route('admin.users.edit', $user) }}" class="dropdown-item bg-light">
                <i class="{{ Config::get('icons.edit') }} text-primary"></i>

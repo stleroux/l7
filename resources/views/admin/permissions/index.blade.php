@@ -26,7 +26,7 @@
 
    <div class="row">
 
-      <div class="col-{{ ((Route::currentRouteName() == 'admin.permissions.index') && (Gate::allows('permission-create')) ? '8' : '12') }}">
+      <div class="col-xl-{{ ((Route::currentRouteName() == 'admin.permissions.index') && (Gate::allows('permission-create')) ? '8' : '12') }}">
 
          <div class="card mb-3">
             <div class="card-body p-3">
@@ -36,7 +36,7 @@
       </div>
 
       @if(Route::currentRouteName() == 'admin.permissions.index')
-         <div class="col-4">
+         <div class="col-xl-4">
             @include('admin.permissions.create.single')
             @include('admin.permissions.create.multiple')
          </div>

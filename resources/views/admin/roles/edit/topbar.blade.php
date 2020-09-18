@@ -2,28 +2,38 @@
 
    <button type="submit" class="btn btn-sm btn-success" name="submit" value="update">
       <i class="{{ Config::get('icons.update') }}"></i>
-      Update and Close
+      <div class="d-none d-lg-inline">
+         Update and Close
+      </div>
    </button>
    
    <button type="submit" class="btn btn-sm btn-info" name="submit"value="continue">
       <i class="{{ Config::get('icons.update_continue') }}"></i>
-      Update and Continue
+      <div class="d-none d-lg-inline">
+         Update and Continue
+      </div>
    </button>
 
    <button type="reset" class="btn btn-sm btn-light border">
       <i class="{{ Config::get('icons.reset') }}"></i>
-      Reset Form
+      <div class="d-none d-lg-inline">
+         Reset Form
+      </div>
    </button>
 
    <a href="{{ route('admin.roles.index') }}"
       class="btn btn-sm btn-light border">
       <i class="{{ Config::get('icons.back') }}"></i>
-      Cancel
+      <div class="d-none d-lg-inline">
+         Cancel
+      </div>
    </a>
 
    <a href="#" class="btn btn-sm btn-light border float-right mx-2" data-toggle="modal" data-target="#helpModal">
       <i class="{{ Config::get('icons.help') }}"></i>
-      Help
+      <div class="d-none d-lg-inline">
+         Help
+      </div>
    </a>
 
 </div>

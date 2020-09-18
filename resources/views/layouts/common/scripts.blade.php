@@ -11,6 +11,9 @@
       <!-- Toastr -->
       <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
+      <!-- Select2 -->
+      <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
       <!-- AdminLTE App -->
       <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
@@ -32,8 +35,20 @@
          });
       </script>
 
+      <!-- DateTime Picker -->
+      <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
+      <script>
+         $("#datePicker").datetimepicker({
+            step: 30,
+            showOn: 'button',
+            buttonImage: '',
+            buttonImageOnly: true,
+            format:'Y-m-d H:i'+':00'
+         });
+      </script>
 
       @include('scripts.datatables')
+      @include('scripts.tinyMCE')
       @include('scripts.showHideMassButtons')
       @include('scripts.massModals')
 
@@ -62,5 +77,5 @@
       </script>
 
       @yield('scripts')
-      
+
       <script src="{{ asset('/js/app.js') }}"></script>

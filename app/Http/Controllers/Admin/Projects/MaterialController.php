@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin\Projects;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
-use App\Models\Admin\Projects\Material;
-use App\Models\Admin\Projects\Project;
+use App\Models\Category;
+use App\Models\Project;
+use App\Models\ProjectMaterial;
 use DB;
 use Session;
 

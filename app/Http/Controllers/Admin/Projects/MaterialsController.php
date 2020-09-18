@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
-use App\Models\Admin\Projects\Material;
+use App\Models\Category;
+use App\Models\ProjectMaterial;
 use Illuminate\Http\Request;
 use Gate;
 use Session;
@@ -39,7 +39,7 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-create'), 403);
 
-      $material = New Material();
+      $material = New ProjectMaterial();
 
       return view('admin.projects.materials.create', compact('material'));
    }
@@ -55,7 +55,7 @@ class MaterialsController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-   public function destroy(Material $material)
+   public function destroy(ProjectMaterial $material)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-delete'), 403);
@@ -98,7 +98,7 @@ class MaterialsController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-   public function edit(Material $material)
+   public function edit(ProjectMaterial $material)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-edit'), 403);
@@ -123,7 +123,7 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-manage'), 403);
 
-      $materials = Material::All();
+      $materials = ProjectMaterial::All();
 
       return view('admin.projects.materials.index', compact('materials'));
    }
@@ -138,12 +138,12 @@ class MaterialsController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-   public function store(Request $request, Material $material)
+   public function store(Request $request, ProjectMaterial $material)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-create'), 403);
 
-      Material::create($this->validateRequest());
+      ProjectMaterial::create($this->validateRequest());
 
       $notification = [
          'message' => 'The project material has been created successfully!', 
@@ -169,12 +169,12 @@ class MaterialsController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-   public function show(Material $material, $id)
+   public function show(ProjectMaterial $material, Request $request)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-manage'), 403);
 
-      $material = Material::find($id);
+      $material = ProjectMaterial::find($material->id);
 
       return view('admin.projects.materials.show', compact('material'));
    }
@@ -189,7 +189,7 @@ class MaterialsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   public function update(Request $request, Material $material)
+   public function update(Request $request, ProjectMaterial $material)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-edit'), 403);
@@ -241,7 +241,7 @@ class MaterialsController extends Controller
       } else {
          
          foreach ($materials as $material_id) {
-            $material = Material::findOrFail($material_id);
+            $material = ProjectMaterial::findOrFail($material_id);
             $material->delete();
          }
 
@@ -269,7 +269,7 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-delete'), 403);
 
-      $material = Material::onlyTrashed()->findOrFail($id);
+      $material = ProjectMaterial::onlyTrashed()->findOrFail($id);
       // dd($material);
       
       // delete the user
@@ -309,7 +309,7 @@ class MaterialsController extends Controller
       } else {
          
          foreach ($materials as $material_id) {
-            $material = Material::onlyTrashed()->findOrFail($material_id);
+            $material = ProjectMaterial::onlyTrashed()->findOrFail($material_id);
             $material->forceDelete();
          }
 
@@ -337,7 +337,7 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-manage'), 403);
       
-      $material = Material::onlyTrashed()->findOrFail($id);
+      $material = ProjectMaterial::onlyTrashed()->findOrFail($id);
 
       // Restore the user
       $material->restore();
@@ -376,7 +376,7 @@ class MaterialsController extends Controller
       } else {
          
          foreach ($materials as $material_id) {
-            $material = Material::onlyTrashed()->findOrFail($material_id);
+            $material = ProjectMaterial::onlyTrashed()->findOrFail($material_id);
             $material->restore();
          }
 
@@ -404,9 +404,12 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project_materials-manage'), 403);
 
-      $materials = Material::onlyTrashed()->get();
+      $materials = ProjectMaterial::onlyTrashed()->get();
+
       return view('admin.projects.materials.index', compact('materials'));
    }
+
+
 ##################################################################################################################
 #██╗   ██╗ █████╗ ██╗     ██╗██████╗  █████╗ ████████╗███████╗    ██████╗ ███████╗ ██████╗ ██╗   ██╗███████╗███████╗████████╗
 #██║   ██║██╔══██╗██║     ██║██╔══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔═══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝

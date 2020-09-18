@@ -116,22 +116,24 @@
                      <tr>
                         <th class="text-right">Email Address</th>
                         @if($field == 'user')
-                           @if($model->user->public_email === 1)
+                           
+                           @if($model->user->public_email)
                               <td class="text-left">{{ $model->user->email }}</td>
                            @else
                               <td class="text-left">*************************</td>
                            @endif
+
                         @elseif($field == 'modifiedBy')
-                           @if($model->modifiedBy->public_email === 1)
+                           @if($model->modifiedBy->public_email)
                               <td class="text-left">{{ $model->modifiedBy->email }}</td>
                            @else
                               <td class="text-left">*************************</td>
                            @endif
                         @elseif($field == 'lastViewedBy')
-                           @if($model->lastViewedBy->public_email === 1)
+                           @if($model->lastViewedBy->public_email)
                               <td class="text-left">{{ $model->lastViewedBy->email }}</td>
                            @else
-                              <td class="text-left">*************************</td>
+                              <td class="text-left">*************************111</td>
                            @endif
                         @endif
                      </tr>

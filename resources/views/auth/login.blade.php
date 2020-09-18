@@ -10,6 +10,9 @@
          <div class="col-md-8">
             <div class="card card-trans-2">
 
+
+
+
                <div class="card-header bg-info">
                   <i class="{{ Config::get('icons.login') }}"></i>
                   {{ __('Login') }}
@@ -19,7 +22,14 @@
                   <form method="POST" action="{{ route('login') }}">
                      @csrf
 
-                     <div class="form-group row">
+
+@if(session()->has('message'))
+   <p class="alert alert-info">
+      {{ session()->get('message') }}
+   </p>
+@endif
+
+{{--                      <div class="form-group row">
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                         <div class="col-md-6">
@@ -40,7 +50,26 @@
                               </span>
                            @enderror
                         </div>
-                     </div>
+                     </div> --}}
+
+
+<div class="form-group row">
+    <label for="login" class="col-sm-4 col-form-label text-md-right">
+        {{ __('Username or Email') }}
+    </label>
+ 
+    <div class="col-md-6">
+        <input id="login" type="text"
+               class="form-control{{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
+               name="login" value="{{ old('username') ?: old('email') }}" required autofocus>
+ 
+        @if ($errors->has('username') || $errors->has('email'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
 
                      <div class="form-group row">
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

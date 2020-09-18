@@ -18,15 +18,15 @@
 
 				<div class="carousel-inner">
 					@foreach($project->images as $image)
-					<div class="carousel-item {{ ($loop->first) ? 'active' : '' }} text-center">
+					<div class="carousel-item {{ ($loop->first) ? 'active' : '' }} text-center py-2">
 						
 	               @if(auth::check())
 							<a href="" data-toggle="modal" data-target="#imageModal{{ $image->id }}_XL" class="">
 		                  <img class="w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" alt="{{ $image->name }}">
 	   	            </a>
-	      	         <a href="/_projects/{{ $project->id }}/full_size/{{ $image->name }}" target="_blank">
+	      	         {{-- <a href="/_projects/{{ $project->id }}/full_size/{{ $image->name }}" target="_blank">
 	         	         View Full Size
-	            	   </a>
+	            	   </a> --}}
 	               @else
 	                  <img class="w-100" src="/_projects/{{ $project->id }}/thumbs/{{ $image->name }}" alt="{{ $image->name }}">
 	               @endauth

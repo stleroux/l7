@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\AdminNewUserNotification;
 use App\Providers\RouteServiceProvider;
-use App\Models\Admin\Role;
-use App\Models\Admin\User;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +32,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -51,9 +53,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'reasonToRegister' => ['required', 'min:5']
         ]);
     }
 
@@ -66,14 +69,26 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'reasonToRegister' => $data['reasonToRegister'],
         ]);
 
         $role = Role::select('id')->where('name','registered')->first();
 
         $user->roles()->attach($role);
+
+        // getlist of administrators on the site
+        $administrators = User::whereHas('roles', function($q) {
+            $q->where('name', 'admin');
+        })->get();
+        // dd($administrators);
+
+        //
+        foreach ($administrators as $adminitrator){
+            $adminitrator->notify(new AdminNewUserNotification($user));
+        }
 
         return $user;
     }

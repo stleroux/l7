@@ -6,7 +6,6 @@ body {
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-attachment: fixed;
-	font-size: 12pt;
 }
 /**************************************************************************************
 END : change background color on all pages
@@ -29,7 +28,7 @@ END : change background color on all pages
 	background-size: 100% 100%;
 	background-attachment: fixed;
 	color: white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 
    /*background-image: url("../images/9.jpg");*/

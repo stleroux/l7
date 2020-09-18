@@ -10,7 +10,8 @@
       	id="description"
       	name="description"
       	class="form-control form-control-sm @error('description') is-invalid @enderror"
-      	value="{{ old('description') }}" >
+         value="{{ old('description') ?? $permission->description }}"
+      >
 
       @error('description')
          <span class="invalid-feedback" role="alert">

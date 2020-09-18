@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Models\Admin\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
 

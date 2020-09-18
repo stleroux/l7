@@ -14,6 +14,7 @@
    	value="{{ old('postal_code') ?? $user->postal_code }}"
       placeholder="Postal Code"
       data-inputmask="'mask': 'A9A-9A9'"
+      {{ $disabled ?? '' }}
    />
    
    @error('postal_code')

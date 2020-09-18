@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
-use App\Models\Admin\Role;
-use App\Models\Admin\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 use DB;
 use Gate;
 use Illuminate\Http\Request;

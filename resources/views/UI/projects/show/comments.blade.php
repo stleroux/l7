@@ -14,22 +14,23 @@
 		@if($model->comments->count())
 			<table class="table table-sm table-hover mb-0">
 				<thead>
-					<tr>
-						<th scope="col">Name</th>
-						<th scope="col">Comment</th>
-						<th scope="col">Posted On</th>
+					<tr class="d-flex">
+						<th class="col-3">Name</th>
+						<th class="col-7">Comment</th>
+						<th class="col-2">Posted On</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($model->comments as $comment)
-					<tr scope="row">
-						<td>
-							@include('common.authorFormat', ['model'=>$comment, 'field'=>'user'])
-							{{-- {{ $comment->user->email }} --}}
+					<tr class="d-flex">
+						<td class="col-3">
+							{{-- @include('common.authorFormat', ['model'=>$comment, 'field'=>'user']) --}}
+							{{ $comment->user->username }}
 						</td>
-						<td>{!! $comment->comment !!}</td>
-						<td>
-							@include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
+						<td class="col-7">{!! $comment->comment !!}</td>
+						<td class="col-2">
+							{{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
+							{{ ($comment->created_at) ? date(Config::get('settings.dateFormat'), strtotime($comment->created_at)) : 'N/A' }}
 						</td>
 						
 					</tr>

@@ -1,8 +1,10 @@
-{{-- @if(checkPerm('recipe_delete', $recipe)) --}}
+@if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-delete'))
+
    <a href="{{ route('admin.recipes.trash', $recipe->id) }}"
-      class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-outline-pink"
       title="Trash Recipe">
-      <i class="{{ Config::get('buttons.trash') }}"></i>
+      <i class="{{ Config::get('icons.trash') }}"></i>
       {{ $btn_label ?? '' }}
    </a>
-{{-- @endif --}}
+
+@endif

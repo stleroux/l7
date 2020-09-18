@@ -41,6 +41,7 @@ class UserApprovedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('User account approved.')
                     ->line('Your account has been approved.')
                     ->action('You can now login', route('login'))
                     ->line('Thank you for using our website!');

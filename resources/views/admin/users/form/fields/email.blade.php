@@ -16,6 +16,7 @@
       autocomplete="email"
       placeholder="Email address"
       data-inputmask="'mask': '*{1,64}@*{1,63}.*{1,63}'"
+      {{ $disabled ?? '' }}
    />
 
    @error('email')

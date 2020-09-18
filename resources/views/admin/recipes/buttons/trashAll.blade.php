@@ -1,4 +1,5 @@
-{{-- @if(checkPerm('recipe_delete')) --}}
+@if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-delete'))
+
    <button
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger"
       type="submit"
@@ -8,7 +9,8 @@
       title="Trash Selected"
       style="display:none;"
       onclick="return confirm('Are you sure you want to trash these recipes?')">
-      <i class="{{ Config::get('buttons.trash') }}"></i>
+      <i class="{{ Config::get('icons.trash') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
-{{-- @endif --}}
+
+@endif

@@ -12,8 +12,10 @@
       
       <input type="text"
          name="completed_at"
+         id="datePicker"
          value="{{ old('completed_at') ?? $project->completed_at }}"
-         class="form-control form-control-sm" id="datePicker"
+         class="form-control form-control-sm"
+         autocomplete="off" 
       />
 
    </div>

@@ -17,6 +17,9 @@ return [
    'version' => '2.0',
 
    'homepage_popular_count' => 5,
-   
 
+   'invoicer_version' => "2.0",
+   
+   'homepage_blog_count' => 1,
+   
 ];

@@ -36,8 +36,8 @@
                <div class="card-body">
 
                   <div class="row">
-                     @include('admin.permissions.edit.fields.name')
-                     @include('admin.permissions.edit.fields.description')
+                     @include('admin.permissions.fields.name')
+                     @include('admin.permissions.fields.description')
                   </div>
 
                </div> <!-- Card body -->

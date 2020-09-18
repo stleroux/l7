@@ -1,8 +1,10 @@
-{{-- @if(checkPerm('recipe_delete')) --}}
+@if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-edit'))
+
    <a href="{{ route('admin.recipes.restore', $recipe->id) }}"
-      class="btn b{{ $size ? 'btn-'.$size : '' }} btn-info text-light"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-outline-primary"
       title="Restore Recipe">
-      <i class="{{ Config::get('buttons.restore') }}"></i>
+      <i class="{{ Config::get('icons.restore') }}"></i>
       {{ $btn_label ?? '' }}
    </a>
-{{-- @endif --}}
+
+@endif

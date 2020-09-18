@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\UI\Recipe;
+use App\Models\Recipe;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Config;

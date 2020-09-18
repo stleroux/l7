@@ -14,6 +14,7 @@
       value="{{ old('address_1') ?? $user->address_1 }}"
       placeholder="Address"
       data-inputmask=""
+      {{ $disabled ?? '' }}
    >
    
    @error('address_1')

@@ -23,8 +23,13 @@
    </div>
 
    <div class="col mb-2 text-right">
+      <a href="#"
+         class="btn btn-sm btn-dark">
+         <i class="{{ Config::get('icons.addToCart') }}"></i>
+         Add to Cart
+      </a>
       <a href="{{ route('projects.index') }}"
-         class="btn btn-sm btn-light border">
+         class="btn btn-sm btn-secondary">
          <i class="{{ Config::get('icons.back') }}"></i>
          Back
       </a>

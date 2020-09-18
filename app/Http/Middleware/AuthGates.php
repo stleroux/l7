@@ -2,15 +2,18 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin\Role;
+use App\Models\Role;
+use App\Models\User;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthGates
 {
    public function handle($request, Closure $next)
    {
-      $user = \Auth::user();
+
+      $user = Auth::user();
 
       if(!app()->runningInConsole() && $user)
       {
@@ -28,7 +31,7 @@ class AuthGates
 
          foreach($permissionsArray as $name => $roles)
          {
-            Gate::define($name, function (\App\Models\Admin\User $user) use ($roles)
+            Gate::define($name, function (\App\Models\User $user) use ($roles)
             {
                return count(array_intersect($user->roles->pluck('id')->toArray(), $roles)) > 0;
             });

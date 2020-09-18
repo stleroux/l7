@@ -1,28 +1,38 @@
 <div class="row-col mb-2">
 
-   <button type="submit" class="btn btn-sm btn-success" name="submit" value="update">
+   <button type="submit" class="btn btn-sm btn-success" name="submit" value="update" title="Update and Close">
       <i class="{{ Config::get('icons.update') }}"></i>
-      Update and Close
+      <div class="d-none d-lg-inline">
+         Update and Close
+      </div>
    </button>
 
-   <button type="submit" class="btn btn-sm btn-info" name="submit" value="continue">
+   <button type="submit" class="btn btn-sm btn-info" name="submit" value="continue" title="Update and Continue">
       <i class="{{ Config::get('icons.update_continue') }}"></i>
-      Update and Continue
+      <div class="d-none d-lg-inline">
+         Update and Continue
+      </div>
    </button>
 
-   <button type="reset" class="btn btn-sm btn-light border">
+   <button type="reset" class="btn btn-sm btn-light border" title="Reset Form">
       <i class="{{ Config::get('icons.reset') }}"></i>
-      Reset Form
+      <div class="d-none d-lg-inline">
+         Reset Form
+      </div>
    </button>
 
-   <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-light border">
+   <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-light border" title="Cancel">
       <i class="{{ Config::get('icons.back') }}"></i>
-      Cancel
+      <div class="d-none d-lg-inline">
+         Cancel
+      </div>
    </a>
 
-   <a href="#" class="btn btn-sm btn-light border float-right mx-2" data-toggle="modal" data-target="#helpModal">
+   <a href="#" class="btn btn-sm btn-light border float-right mx-2" data-toggle="modal" data-target="#helpModal" title="Help">
       <i class="{{ Config::get('icons.help') }}"></i>
-      Help
+      <div class="d-none d-lg-inline">
+         Help
+      </div>
    </a>
 
 </div>

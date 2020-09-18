@@ -1,6 +1,6 @@
 @if(Session::get('fromPage'))
    <a href="{{ Session::get('fromPage') }}"
-      class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary d-print-none"
+      class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon d-print-none"
       title="Back">
       <i class="{{ Config::get('icons.back') }}"></i>
       {{-- Back --}}

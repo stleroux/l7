@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Movies\Movie;
+use App\Models\Movie;
 use Carbon\Carbon;
 use DB;
 

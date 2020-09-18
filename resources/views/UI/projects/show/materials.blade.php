@@ -10,7 +10,7 @@
    @if($project->materials->count() > 0)
       <table class="table table-hover table-striped mb-0">
          <thead>
-            <tr>
+            <tr class="text-dark">
                <th>Name</th>
                <th>Type</th>
                <th>Manufacturer</th>

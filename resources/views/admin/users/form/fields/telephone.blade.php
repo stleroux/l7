@@ -14,6 +14,7 @@
    	value="{{ old('telephone') ?? $user->telephone }}"
       placeholder="Phone Number"
       data-inputmask="'mask': '(999) 999-9999'"
+      {{ $disabled ?? '' }}
    />
    
    @error('telephone')

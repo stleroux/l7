@@ -9,7 +9,9 @@
    <select
       name="dart_doubleOut"
       id="dart_doubleOut"
-      class="form-control">
+      class="form-control"
+      {{ $disabled ?? '' }}
+   >
       <option value="{{ $user->dart_doubleOut }}" selected="selected">{{ $user->dart_doubleOut }}</option>
       <option value="1">1</option>
       <option value="2">2</option>

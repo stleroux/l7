@@ -2,7 +2,7 @@
 {{-- @if(checkPerm('recipe_browse')) --}}
    @if(!$recipe->isFavorited())
       <a href="{{ route('recipes.favoriteAdd', $recipe->id) }}"
-         class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary"
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon"
          title="Add Favorite">
          <i class="{{ Config::get('icons.favorite') }} text-success"></i>
          <div class="d-none d-lg-inline">
@@ -11,7 +11,7 @@
       </a>
    @else
       <a href="{{ route('recipes.favoriteRemove', $recipe->id) }}"
-         class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary"
+         class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon"
          title="Remove Favorite">
          <i class="{{ Config::get('icons.favorite') }} text-danger"></i>
          <div class="d-none d-lg-inline">

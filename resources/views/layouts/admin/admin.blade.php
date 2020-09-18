@@ -3,6 +3,7 @@
    <head>
       @include('layouts.common.head')
       <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+      @yield('stylesheet')
    </head>
 
    <body class="hold-transition sidebar-mini sidebar-collapse layout-navbar-fixed layout-footer-fixed">
@@ -23,7 +24,7 @@
                <!-- Notifications Dropdown Menu -->
                @include('layouts.admin.navbar.notifications')
                <!-- User Dropdown Menu -->               
-               @include('layouts.admin.navbar.user')
+               @include('layouts.common.navbar.user')
                <!-- Button to show right sidebar -->
                <li class="nav-item">
                   <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">

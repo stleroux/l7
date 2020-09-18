@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Models\Admin\Role;
-use App\Models\Admin\User;
+use App\Models\Role;
+use App\Models\User;
+use App\Notifications\UserApprovedNotification;
+use App\Notifications\UserDisabledNotification;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +25,6 @@ class UsersController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      
-      // Check if user has required permission
-      // abort_unless(\Gate::allows('user-manage'), 403);
    }
 
    ##################################################################################################################
@@ -177,9 +176,10 @@ class UsersController extends Controller
    ##################################################################################################################
    public function update(UserRequest $request, User $user)
    {
-      // dd($user);
       // Check if user has required permission
       abort_unless(Gate::allows('user-edit'), 403);
+
+      $account_status = $user->account_status;
 
       // assign values from form fields
       $user->first_name = $request->first_name;
@@ -222,6 +222,21 @@ class UsersController extends Controller
             'alert-type' => 'error'
          );
       }
+
+      // account goes from active to inactive
+      if($account_status == 0 && $user->account_status == 1)
+      {
+         // notify user via email
+         $user->notify(new UserApprovedNotification($user));
+      }
+
+      // account goes from inactive to active
+      if($account_status == 1 && $user->account_status == 0)
+      {
+         // notify user via email
+         $user->notify(new UserDisabledNotification($user));
+      }
+
 
       if ($request->submit == 'continue') {
          $notification = array(
@@ -482,5 +497,58 @@ class UsersController extends Controller
       return view('admin.users.index', compact('users'));
    }
 
+
+   ##################################################################################################################
+   # APPROVE ACCOUNT
+   ##################################################################################################################
+   public function approve(UserRequest $request, User $user)
+   {
+      // Check if user has required permission
+
+      $account_status = $user->account_status;
+
+      $user = User::findOrFail($user->id);
+         $user->account_status = 1;
+      $user->save();
+
+      if($account_status == 0 && $user->account_status == 1)
+      {
+         $user->notify(new UserApprovedNotification($user));
+      }
+
+      $notification = array(
+         'message' => 'The user has been approved!',
+         'alert-type' => 'success'
+      );
+
+      return redirect()->back()->with($notification);
+   }
+
+   ##################################################################################################################
+   # DISABLE ACCOUNT
+   ##################################################################################################################
+   public function disable(UserRequest $request, User $user)
+   {
+      // Check if user has required permission
+
+      $account_status = $user->account_status;
+
+      $user = User::findOrFail($user->id);
+         $user->account_status = 0;
+      $user->save();
+
+      if($account_status == 1 && $user->account_status == 0)
+      {
+         $user->notify(new UserDisabledNotification($user));
+      }
+
+
+      $notification = array(
+         'message' => 'The user has been disabled!',
+         'alert-type' => 'success'
+      );
+
+      return redirect()->back()->with($notification);
+   }
 
 }

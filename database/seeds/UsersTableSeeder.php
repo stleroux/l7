@@ -1,52 +1,255 @@
 <?php
 
-use App\Models\Admin\Role;
-use App\Models\Admin\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
-   /**
-    * Run the database seeds.
-    *
-    * @return void
-    */
-   public function run()
-   {
-      // clear tables
-      User::truncate();
-      DB::table('role_user')->truncate();
 
-      // get the various roles
-      $adminRole = Role::where('name','admin')->first();
-      $authorRole = Role::where('name','author')->first();
-      $userRole = Role::where('name','user')->first();
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
 
-      // create test users
-      $admin = User::create([
-         'first_name' => 'Admin User',
-         'email' => 'admin@admin.com',
-         'password' => Hash::make('password'),
-         'account_status' => 1,
-         'public_email' => 1
-      ]);
-
-      $author = User::create([
-         'first_name' => 'Author User',
-         'email' => 'author@author.com',
-         'password' => Hash::make('password')
-      ]);
-
-      $user = User::create([
-         'first_name' => 'Generic User',
-         'email' => 'user@user.com',
-         'password' => Hash::make('password')
-      ]);
-
-      // assign roles to the users via roles relationship
-      $admin->roles()->attach($adminRole);
-      $author->roles()->attach($authorRole);
-      $user->roles()->attach($userRole);
-   }
+        \DB::table('users')->delete();
+        
+        \DB::table('users')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'username' => 'admin',
+                'first_name' => 'Admin',
+                'last_name' => 'User',
+                'account_status' => 1,
+                'email' => 'admin@admin.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$6mO/sENF07xOxKprzD7Cq.eo7GiuvtrxEa/3n8bJI5LkM3IqUsBgy',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-07 08:51:04',
+                'updated_at' => '2020-09-08 07:11:30',
+                'deleted_at' => NULL,
+                'public_email' => 1,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => '2020-09-07 23:38:53',
+                'last_login_date' => '2020-09-08 07:11:30',
+                'login_count' => 5,
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'username' => 'author',
+                'first_name' => 'Author',
+                'last_name' => 'User',
+                'account_status' => 0,
+                'email' => 'author@author.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$4wRLKlJmly1k/hezj8ljOufFhv4wicjYlAYSCHo..tldO3tOUV85K',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-07 08:51:05',
+                'updated_at' => '2020-09-07 08:51:05',
+                'deleted_at' => NULL,
+                'public_email' => NULL,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => NULL,
+                'last_login_date' => NULL,
+                'login_count' => 0,
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'username' => 'generic',
+                'first_name' => 'Generic',
+                'last_name' => 'User',
+                'account_status' => 0,
+                'email' => 'user@user.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$PvktleuFxX154aoaYcv9dOkqlj4kB0euFVZf.XKQM1yCdrTlRP8QC',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-07 08:51:05',
+                'updated_at' => '2020-09-07 08:51:05',
+                'deleted_at' => NULL,
+                'public_email' => NULL,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => NULL,
+                'last_login_date' => NULL,
+                'login_count' => 0,
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'username' => 'lerouxs',
+                'first_name' => 'Stephane',
+                'last_name' => 'Leroux',
+                'account_status' => 1,
+                'email' => 'stleroux@hotmail.ca',
+                'email_verified_at' => '2020-09-08 03:34:09',
+                'password' => '$2y$10$a3VOdvKkx9i6yZ3soekk/uhxC8mX76Enn9KJeOCilynZhHQvzitFe',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-08 03:34:09',
+                'updated_at' => '2020-09-08 07:12:01',
+                'deleted_at' => NULL,
+                'public_email' => 1,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => '2020-09-07 23:39:05',
+                'last_login_date' => '2020-09-08 07:12:01',
+                'login_count' => 2,
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'username' => 'hayness',
+                'first_name' => 'Stacie',
+                'last_name' => 'Haynes',
+                'account_status' => 1,
+                'email' => 'stacie.haynes@hotmail.com',
+                'email_verified_at' => NULL,
+                'password' => '5f4dcc3b5aa765d61d8327deb882cf99',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-08 11:22:45',
+                'updated_at' => '2020-09-08 11:22:45',
+                'deleted_at' => NULL,
+                'public_email' => 0,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => NULL,
+                'last_login_date' => NULL,
+                'login_count' => 0,
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'username' => 'leveillel',
+                'first_name' => 'Luc',
+                'last_name' => 'Leveille',
+                'account_status' => 1,
+                'email' => 'leveillel@gmail.com',
+                'email_verified_at' => '2020-09-08 11:23:54',
+                'password' => '5f4dcc3b5aa765d61d8327deb882cf99',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-08 11:23:54',
+                'updated_at' => '2020-09-08 11:23:54',
+                'deleted_at' => NULL,
+                'public_email' => 1,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => NULL,
+                'last_login_date' => NULL,
+                'login_count' => 0,
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'username' => 'haynesb',
+                'first_name' => 'Brenda',
+                'last_name' => 'Haynes',
+                'account_status' => 1,
+                'email' => 'brenda.haynes@example.com',
+                'email_verified_at' => '2020-09-08 11:24:40',
+                'password' => '5f4dcc3b5aa765d61d8327deb882cf99',
+                'remember_token' => NULL,
+                'created_at' => '2020-09-08 11:24:40',
+                'updated_at' => '2020-09-08 11:24:40',
+                'deleted_at' => NULL,
+                'public_email' => NULL,
+                'telephone' => NULL,
+                'cell' => NULL,
+                'fax' => NULL,
+                'website' => NULL,
+                'company_name' => NULL,
+                'image' => NULL,
+                'address_1' => NULL,
+                'address_2' => NULL,
+                'city' => NULL,
+                'province' => NULL,
+                'postal_code' => NULL,
+                'notes' => NULL,
+                'dart_doubleOut' => 10,
+                'invoicer_client' => NULL,
+                'previous_login_date' => NULL,
+                'last_login_date' => NULL,
+                'login_count' => 0,
+            ),
+        ));
+        
+        
+    }
 }

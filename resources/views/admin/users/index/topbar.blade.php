@@ -5,7 +5,9 @@
          @can('user-create')
             <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-success">
                <i class="{{ Config::get('icons.add') }}"></i>
-               Create User
+               <div class="d-none d-lg-inline">
+                  Create User
+               </div>
             </a>
          @endcan
       @endif
@@ -43,7 +45,9 @@
       <div class="float-right px-1">
          <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
             <i class="{{ Config::get('icons.help') }}"></i>
-            Help
+            <div class="d-none d-lg-inline">
+               Help
+            </div>
          </a>
       </div>
 
