@@ -38,7 +38,7 @@ class AdminController extends Controller
    public function index(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('admin-dashboard'), 403);
+      abort_unless(Gate::allows('admin-dashboard'), 403);
 
       $usersTotalCount = User::count();
       $usersActiveCount = User::active()->count();

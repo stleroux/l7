@@ -82,6 +82,8 @@ Route::namespace('Admin\Recipes')->prefix('admin')->name('admin.')->group(functi
    Route::post('/recipes/mass_publish',            'FunctionsController@massPublish')           ->name('recipes.mass_publish');
    Route::post('/recipes/mass_unpublish',          'FunctionsController@massUnpublish')         ->name('recipes.mass_unpublish');
    Route::post('/recipes/publishAll',              'FunctionsController@publishAll')            ->name('recipes.publishAll');
+   Route::post('/recipes/resetViews/{recipe}',     'FunctionsController@resetViews')            ->name('recipes.resetViews');
+   Route::post('/recipes/mass_resetViews',         'FunctionsController@massResetViews')        ->name('recipes.mass_resetViews');
 
    Route::get('/recipes/trashed',                  'ExtraViewsController@trashed')              ->name('recipes.trashed');
    Route::get('/recipes/unpublished/{key?}',       'ExtraViewsController@unpublished')          ->name('recipes.unpublished');

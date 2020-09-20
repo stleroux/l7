@@ -1,13 +1,13 @@
 @extends('layouts.admin.admin')
 
 @section('stylesheet')
-<style>
+{{-- <style>
 .cover {
   object-fit: cover;
   /*width: 50px;*/
   /*height: 100px;*/
 }
-</style>
+</style> --}}
 @endsection
 
 @section('pageHeader', 'DASHBOARD')
@@ -23,7 +23,7 @@
 		<div class="col-xl-10">
 			<div class="card">
 				<div class="card-body">
-					
+					Content will go here
 				</div>				
 			</div>
 		</div>

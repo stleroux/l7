@@ -34,14 +34,16 @@
    </div>
 
 	@include('modals.destroy', ['modelName'=>'recipe'])
-   @include('modals.restore', ['modelName'=>'recipe'])
    @include('modals.massDestroy', ['modelName'=>'recipe'])
+   @include('modals.restore', ['modelName'=>'recipe'])
    @include('modals.massRestore', ['modelName'=>'recipe'])
    @include('modals.delete', ['modelName'=>'recipe'])
    @include('modals.massDelete', ['modelName'=>'recipe'])
    @include('modals.massPublish', ['modelName'=>'recipe'])
    @include('modals.massUnpublish', ['modelName'=>'recipe'])
    @include('modals.unpublish', ['modelName'=>'recipe'])
+   @include('modals.resetViews', ['modelName'=>'recipe'])
+   @include('modals.massResetViews', ['modelName'=>'recipe'])
 
    @include('admin.recipes.help')
 

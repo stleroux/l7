@@ -445,6 +445,43 @@ class FunctionsController extends RecipesController
 
 
 ##################################################################################################################
+// REST VIEW COUNTS
+##################################################################################################################
+   public function massResetViews(Request $request)
+   {
+      // Check if user has required permission
+      // abort_unless(Gate::allows('recipe-manage'), 403);
+
+      $recipes = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
+
+      if(!$request->input('mass_resetViews_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be restore.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($recipes as $recipe_id) {
+            $recipe = Recipe::findOrFail($recipe_id);
+               $recipe->views = 0;
+            $recipe->save();
+         }
+
+         $notification = [
+            'message' => 'The views counts for the selected recipes have been reset successfully!', 
+            'alert-type' => 'success'
+         ];
+
+      }
+      
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
 # ██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗
 # ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
 # ██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗  

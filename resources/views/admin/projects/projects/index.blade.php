@@ -40,6 +40,9 @@
    @include('modals.massRestore', ['modelName'=>'project'])
    @include('modals.delete', ['modelName'=>'project'])
    @include('modals.massDelete', ['modelName'=>'project'])
+   @include('modals.resetViews', ['modelName'=>'project'])
+   @include('modals.massResetViews', ['modelName'=>'project'])
+
    @include('admin.projects.projects.help')
 
 @endsection

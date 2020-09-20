@@ -67,6 +67,7 @@ return [
    'register'        => 'fas fa-fw fa-plus-circle',
    'reject'          => 'far fa-fw fa-thumbs-down',
    'reset'           => 'fas fa-fw fa-sync-alt',
+   'resetViews'      => 'fas fa-fw fa-power-off',
    'restore'         => 'fas fa-fw fa-trash-restore-alt',
    'role'            => 'fas fa-fw fa-user-tag',
    'roles'           => 'fas fa-fw fa-user-tag',

@@ -94,6 +94,20 @@
             </a>
          </form>
 
+         <form action="{{ route('admin.recipes.mass_resetViews') }}" method="post" class="float-right p-0 pl-1">
+            @csrf
+            <input type="hidden" name="mass_resetViews_ids" id="mass_resetViews_ids" value="" size="3" />
+            <a data-toggle="modal"
+               class="btn btn-sm bg-secondary"
+               id="btn_multiresetViews"
+               style="display:none"
+               data-target="#massResetViews-modal">
+               <i class="{{ Config::get('icons.resetViews') }}"></i>
+               Reset View Counts
+            </a>
+         </form>
+
+
       {{-- @endif --}}
 
 {{--          <form action="{{ route('admin.recipes.mass_publish') }}" method="post" class="float-right p-0 pl-1">

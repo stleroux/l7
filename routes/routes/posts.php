@@ -81,6 +81,8 @@ Route::namespace('Admin\Posts')->prefix('admin')->name('admin.')->group(function
    Route::post('/posts/mass_publish',                   'FunctionsController@massPublish')           ->name('posts.mass_publish');
    Route::post('/posts/mass_unpublish',                 'FunctionsController@massUnpublish')         ->name('posts.mass_unpublish');
    Route::post('/posts/publishAll',                     'FunctionsController@publishAll')            ->name('posts.publishAll');
+   Route::post('/posts/resetViews/{post}',        'FunctionsController@resetViews')            ->name('posts.resetViews');
+   Route::post('/posts/mass_resetViews',          'FunctionsController@massResetViews')        ->name('posts.mass_resetViews');
 
    Route::get('/posts/trashed',                  'ExtraViewsController@trashed')              ->name('posts.trashed');
    Route::get('/posts/unpublished/{key?}',       'ExtraViewsController@unpublished')          ->name('posts.unpublished');

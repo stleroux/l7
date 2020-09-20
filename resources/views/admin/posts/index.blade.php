@@ -34,14 +34,16 @@
    </div>
 
 	@include('modals.destroy', ['modelName'=>'post'])
-   @include('modals.restore', ['modelName'=>'post'])
    @include('modals.massDestroy', ['modelName'=>'post'])
+   @include('modals.restore', ['modelName'=>'post'])
    @include('modals.massRestore', ['modelName'=>'post'])
    @include('modals.delete', ['modelName'=>'post'])
    @include('modals.massDelete', ['modelName'=>'post'])
    @include('modals.massPublish', ['modelName'=>'post'])
-   @include('modals.massUnpublish', ['modelName'=>'post'])
    @include('modals.unpublish', ['modelName'=>'post'])
+   @include('modals.massUnpublish', ['modelName'=>'post'])
+   @include('modals.resetViews', ['modelName'=>'post'])
+   @include('modals.massResetViews', ['modelName'=>'post'])
 
    @include('admin.posts.help')
 

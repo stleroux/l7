@@ -37,7 +37,16 @@
    Unpublish
 </button>
 
-
+<button type="button"
+   class="dropdown-item resetViews-model bg-light"
+   data-toggle="modal"
+   data-target="#resetViewsModal"
+   data-id="{{ $post->id }}"
+   data-url="{{ url('admin/posts/resetViews', $post) }}"
+   >
+   <i class="{{ Config::get('icons.resetViews') }} text-secondary"></i>
+   Reset Views
+</button>
 
 
 

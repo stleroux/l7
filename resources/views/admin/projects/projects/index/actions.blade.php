@@ -16,6 +16,19 @@
             </a>
          @endcan
 
+         @can('project-manage')
+            <button type="button"
+               class="dropdown-item resetViews-model bg-light"
+               data-toggle="modal"
+               data-target="#resetViewsModal"
+               data-id="{{ $project->id }}"
+               data-url="{{ url('admin/projects/resetViews', $project) }}"
+               >
+               <i class="{{ Config::get('icons.resetViews') }} text-secondary"></i>
+               Reset Views
+            </button>
+         @endcan
+
          @can('project-delete')
             <button type="button"
                class="dropdown-item destroy-model bg-light"

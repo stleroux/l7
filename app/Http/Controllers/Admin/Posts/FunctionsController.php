@@ -282,6 +282,69 @@ class FunctionsController extends Controller
 
 
 ##################################################################################################################
+# ██████╗ ███████╗███████╗███████╗████████╗    ██╗   ██╗██╗███████╗██╗    ██╗███████╗
+# ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝    ██║   ██║██║██╔════╝██║    ██║██╔════╝
+# ██████╔╝█████╗  ███████╗█████╗     ██║       ██║   ██║██║█████╗  ██║ █╗ ██║███████╗
+# ██╔══██╗██╔══╝  ╚════██║██╔══╝     ██║       ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║╚════██║
+# ██║  ██║███████╗███████║███████╗   ██║        ╚████╔╝ ██║███████╗╚███╔███╔╝███████║
+# ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝         ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚══════╝
+// RESET VIEWS COUNT
+##################################################################################################################
+   public function resetViews($id)
+   {
+      // Check if user has required permission
+
+
+      $post = Post::find($id);
+         $post->views = 0;
+      $post->save();
+
+      $notification = [
+         'message' => 'The post\'s views count was reset to 0.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
+// REST VIEW COUNTS
+##################################################################################################################
+   public function massResetViews(Request $request)
+   {
+      // Check if user has required permission
+      // abort_unless(Gate::allows('recipe-manage'), 403);
+
+      $posts = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
+
+      if(!$request->input('mass_resetViews_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be restore.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($posts as $post_id) {
+            $post = Post::findOrFail($post_id);
+               $post->views = 0;
+            $post->save();
+         }
+
+         $notification = [
+            'message' => 'The views counts for the selected posts have been reset successfully!', 
+            'alert-type' => 'success'
+         ];
+
+      }
+      
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
 # ██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗
 # ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
 # ██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗  

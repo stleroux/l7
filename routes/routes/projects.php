@@ -51,6 +51,10 @@ Route::namespace('Admin\Projects')->prefix('admin')->name('admin.')->group(funct
    Route::delete('/projects/mass_destroy',    'ProjectsController@massDestroy')         ->name('projects.mass_destroy');
    Route::get('/projects/trashed',            'ProjectsController@trashed')             ->name('projects.trashed');
    // Route::get('{filter?}',          'Projects\ProjectsController@index')               ->name('projects.index');
+
+   Route::post('/projects/resetViews/{recipe}',     'ProjectsController@resetViews')            ->name('projects.resetViews');
+   Route::post('/projects/mass_resetViews',         'ProjectsController@massResetViews')        ->name('projects.mass_resetViews');
+
    Route::resource('projects',                'ProjectsController');
 });
 

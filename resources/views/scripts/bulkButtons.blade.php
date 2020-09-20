@@ -8,6 +8,7 @@
             $("#bulk-trash").show();
             $("#bulk-delete").show();
             $("#bulk-restore").show();
+            $("#bulk-resetViews").show();
             $("#bulk-unpublish").show();
             $("#bulk-publish").show();
             $(".selectmenu").hide();
@@ -20,6 +21,7 @@
             $("#bulk-trash").hide();
             $("#bulk-delete").hide();
             $("#bulk-restore").hide();
+            $("#bulk-resetViews").hide();
             $("#bulk-unpublish").hide();
             $("#bulk-publish").hide();
             $(".selectmenu").show();
@@ -34,6 +36,7 @@
          $("#bulk-trash").show();
          $("#bulk-delete").show();
          $("#bulk-restore").show();
+         $("#bulk-resetViews").show();
          $("#bulk-unpublish").show();
          $("#bulk-publish").show();
          $(".selectmenu").hide();
@@ -43,6 +46,7 @@
          $("#bulk-trash").hide();
          $("#bulk-delete").hide();
          $("#bulk-restore").hide();
+         $("#bulk-resetViews").hide();
          $("#bulk-unpublish").hide();
          $("#bulk-publish").hide();
          $(".selectmenu").show();

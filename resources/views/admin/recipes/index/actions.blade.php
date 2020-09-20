@@ -38,6 +38,17 @@
 </button>
 
 
+<button type="button"
+   class="dropdown-item resetViews-model bg-light"
+   data-toggle="modal"
+   data-target="#resetViewsModal"
+   data-id="{{ $recipe->id }}"
+   data-url="{{ url('admin/recipes/resetViews', $recipe) }}"
+   >
+   <i class="{{ Config::get('icons.resetViews') }} text-secondary"></i>
+   Reset Views
+</button>
+
 
 
 

@@ -483,6 +483,69 @@ class ProjectsController extends Controller
 
 
 ##################################################################################################################
+# ██████╗ ███████╗███████╗███████╗████████╗    ██╗   ██╗██╗███████╗██╗    ██╗███████╗
+# ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝    ██║   ██║██║██╔════╝██║    ██║██╔════╝
+# ██████╔╝█████╗  ███████╗█████╗     ██║       ██║   ██║██║█████╗  ██║ █╗ ██║███████╗
+# ██╔══██╗██╔══╝  ╚════██║██╔══╝     ██║       ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║╚════██║
+# ██║  ██║███████╗███████║███████╗   ██║        ╚████╔╝ ██║███████╗╚███╔███╔╝███████║
+# ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝         ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚══════╝
+// RESET VIEWS COUNT
+##################################################################################################################
+   public function resetViews($id)
+   {
+      // Check if user has required permission
+
+
+      $project = Project::find($id);
+         $project->views = 0;
+      $project->save();
+
+      $notification = [
+         'message' => 'The projects\'s views count was reset to 0.', 
+         'alert-type' => 'success'
+      ];
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
+// REST VIEW COUNTS
+##################################################################################################################
+   public function massResetViews(Request $request)
+   {
+      // Check if user has required permission
+      // abort_unless(Gate::allows('recipe-manage'), 403);
+
+      $projects = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
+
+      if(!$request->input('mass_resetViews_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be restore.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($projects as $project_id) {
+            $project = Project::findOrFail($project_id);
+               $project->views = 0;
+            $project->save();
+         }
+
+         $notification = [
+            'message' => 'The views counts for the selected projects have been reset successfully!', 
+            'alert-type' => 'success'
+         ];
+
+      }
+      
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
 # ██████  ███████ ███████ ████████  ██████  ██████  ███████ 
 # ██   ██ ██      ██         ██    ██    ██ ██   ██ ██      
 # ██████  █████   ███████    ██    ██    ██ ██████  █████   
