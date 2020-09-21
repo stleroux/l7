@@ -1,4 +1,3 @@
-
 <div class="card mb-2 card-trans-4" style="background-color: #800000">
    
    <div class="card-header text-light p-2">
@@ -9,6 +8,7 @@
    <div class="card-body card-trans-6 p-0 m-0">
       
       @if($popular->count() > 0)
+
          <ul class="list-group">
             
             @foreach ($popular as $r)
@@ -30,9 +30,15 @@
             @endforeach
 
          </ul>
+
       @else
-         {{ Config::get('settings.noRecordsFound') }}
+
+         <div class="col-row p-2 card-trans-4">
+            {{ Config::get('settings.noRecordsFound') }}
+         </div>
+
       @endif
+
    </div>
 
 </div>

@@ -4,15 +4,12 @@
 
         {{-- First Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled badge badge-maroon p-2" style="background-color: #ff8080">
-                {{-- <a href="{{ $paginator->toArray()['first_page_url'] }}">
-                    First
-                </a> --}}
+            <li class="disabled btn btn-xs btn-maroon p-2 font-weight-bold">
                 <span>First</span>
             </li>
         @else
-            <a href="{{ $paginator->toArray()['first_page_url'] }}" class="text-light">
-                <li class="badge badge-maroon text-light p-2">
+            <a href="{{ $paginator->toArray()['first_page_url'] }}">
+                <li class="btn btn-xs btn-maroon p-2 font-weight-bold">
                     First
                 </li>
             </a>
@@ -20,12 +17,12 @@
 
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled badge badge-maroon p-2" style="background-color: #ff8080">
+            <li class="disabled btn btn-xs btn-maroon p-2 font-weight-bold">
                 <span>Previous</span>
             </li>
         @else
-            <a href="{{ $paginator->previousPageUrl() }}" class="text-light" rel="prev">
-                <li class="badge badge-maroon text-light p-2">
+            <a href="{{ $paginator->previousPageUrl() }}" rel="prev">
+                <li class="btn btn-xs btn-maroon p-2 font-weight-bold">
                     Previous
                 </li>
             </a>
@@ -45,12 +42,12 @@
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li class="badge badge-light p-2">
+                        <li class="btn btn-xs btn-light p-2">
                             <span>{{ $page }}</span>
                         </li>
                     @else
-                        <a href="{{ $url }}" class="text-light">
-                            <li class="badge badge-maroon p-2">
+                        <a href="{{ $url }}">
+                            <li class="btn btn-xs btn-maroon p-2 font-weight-bold">
                                 {{ $page }}
                             </li>
                         </a>
@@ -64,25 +61,25 @@
         {{-- Next Page Link --}}
 
         @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}" class="text-light" rel="next">
-                <li class="badge badge-maroon p-2">
+            <a href="{{ $paginator->nextPageUrl() }}" rel="next">
+                <li class="btn btn-xs btn-maroon p-2 font-weight-bold">
                     Next
                 </li>
             </a>
         @else
-            <li class="disabled badge badge-maroon p-2" style="background-color: #ff8080">
+            <li class="disabled btn btn-xs btn-maroon p-2 font-weight-bold">
                 <span>Next</span>
             </li>
         @endif
 
         {{-- Last Page Link --}}
         @if ($paginator->lastPage() == $paginator->currentPage())
-            <li class="disabled badge badge-maroon p-2" style="background-color: #ff8080">
+            <li class="disabled btn btn-xs btn-maroon p-2 font-weight-bold">
                 <span>Last</span>
             </li>
         @else
-            <a href="{{ $paginator->toArray()['last_page_url'] }}" class="text-light">
-                <li class="badge badge-maroon text-light p-2">
+            <a href="{{ $paginator->toArray()['last_page_url'] }}">
+                <li class="btn btn-xs btn-maroon p-2 font-weight-bold">
                     Last
                 </li>
             </a>

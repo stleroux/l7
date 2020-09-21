@@ -28,9 +28,9 @@
 
 @section('content')
 
-	<div class="card card-trans-2 mb-3">
+	@if($recipes->count() > 0)
+		<div class="card card-trans-2 mb-3">
 
-		@if($recipes->count() > 0)
 			<div class="card-body section_body p-1">
 				<div class="my-1">
 					@include('UI.recipes.index.grid.alphabet')
@@ -111,21 +111,21 @@
 					<div class="col ml-2 text-light">
 						Showing {{ $recipes->firstItem() }} to {{ $recipes->lastItem() }} of {{$recipes->total()}} entries
 					</div>
-					<div class="col text-right pagination-sm p-0 m-0">
+					<div class="col text-right p-0 m-0">
 						{{ $recipes->links('UI.recipes.pagination.custom') }}
 					</div>
 				</div>
 
 			</div>
 
-		@else
+		</div>
+	@else
 			
-			<div class="card-body card_body p-2 text-light">
-				{{ Config::get('settings.noRecordsFound') }}
-			</div>
+		<div class="col-row p-3 card-trans-4 text-light">
+			{{ Config::get('settings.noRecordsFound') }}
+		</div>
 
-		@endif
+	@endif
 
-	</div>
 
 @endsection
