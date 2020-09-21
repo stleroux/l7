@@ -29,11 +29,13 @@ class RecipeServiceProvider extends ServiceProvider
 	{
 		//
 		view()->composer('UI.recipes.blocks.popular', function ($view) {
-			 $popular = Recipe::published()
+			 $popular = Recipe::
+			 		where('views', '>=', 10)
+			 		->published()
 					->public()
 					->orderBy('views', 'desc')
-					->orderBy('title')            
-					->take(Config::get('settings.homepage_popular_count'))
+					->orderBy('title')
+					->take(Config::get('settings.popular_count'))
 					->get();
 			 $view->with('popular', $popular);
 		});

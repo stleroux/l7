@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Post;
 use Carbon\Carbon;
+use Config;
 use DB;
 
 class PostServiceProvider extends ServiceProvider
@@ -31,7 +32,7 @@ class PostServiceProvider extends ServiceProvider
          $popular = Post::published()
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
-             // ->take(setting('homepage_popular_count'))
+             ->take(Config::get('settings.popular_count'))
              ->get();
          $view->with('popular', $popular);
       });

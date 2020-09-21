@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
 
-    <ul class="">
+    <ul class="pagination pagination-sm float-right pb-2 mb-0 mr-3" role="navigation">
 
         {{-- First Page Link --}}
         @if ($paginator->onFirstPage())
