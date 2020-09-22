@@ -2,23 +2,23 @@
 <div class="card card-trans-2 mb-2">
    <div class="card-header bg-primary p-2">Profile Info</div>
    <div class="card-body p-2">
-      <div class="form-row">
+      <div class="form-row" disabled>
          <div class="col-md-3">
-            @include('admin.users.form.fields.first_name', ['required'=>'required'])
+            @include('admin.users.form.fields.first_name', ['disabled'=>'disabled'])
          </div>
          <div class="col-md-3">
             <div class="form-group">
-               @include('admin.users.form.fields.last_name', ['required'=>'required'])
+               @include('admin.users.form.fields.last_name', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-4">
             <div class="form-group">
-               @include('admin.users.form.fields.email', ['required'=>'required'])
+               @include('admin.users.form.fields.email', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.public_email')
+               @include('admin.users.form.fields.public_email', ['disabled'=>'disabled'])
             </div>
          </div>
       </div>
@@ -26,22 +26,22 @@
       <div class="form-row">
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.telephone')
+               @include('admin.users.form.fields.telephone', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.cell')
+               @include('admin.users.form.fields.cell', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.fax')
+               @include('admin.users.form.fields.fax', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-3">
             <div class="form-group">
-               @include('admin.users.form.fields.website')
+               @include('admin.users.form.fields.website', ['disabled'=>'disabled'])
             </div>
          </div>
       </div>
@@ -50,14 +50,14 @@
          <div class="col-md-6">
             <div class="form-group">
                <label for="company_name">Company Name</label>
-               <input name="company_name" type="text" class="form-control form-control-sm" value="{{ $user->company_name }}">
+               <input name="company_name" type="text" class="form-control" value="{{ $user->company_name }}" disabled>
                <span><small>Required if user is a client member of the Invoicer module</small></span>
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
                <label for="dart_doubleOut">Dart Double Out</label>
-               <select name="dart_doubleOut" class="form-control form-control-sm">
+               <select name="dart_doubleOut" class="form-control" disabled>
                   <option value="{{ $user->dart_doubleOut }}" selected="selected">{{ $user->dart_doubleOut }}</option>
                   <option value="1">1</option>
                   <option value="2">2</option>

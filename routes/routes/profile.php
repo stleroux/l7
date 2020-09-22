@@ -1,5 +1,7 @@
 <?php
 Route::resource('resetPassword', 'UI\ResetPasswordController')->only(['edit','update']);
+// Route::get('changePassword', 'UI\Profile\ResetPasswordController')->name('profile.changePassword');
+// Route::resource('resetPassword', 'Auth\ResetPasswordController')->only(['edit','update']);
 
 // Route::namespace('Users')->prefix('users/')->name('users.changePassword.')->group(function() {
 //    Route::get('{id}/edit',                 'UI\ResetPasswordController@edit')                 ->name('edit');
@@ -16,5 +18,8 @@ Route::get('profile/{id}/show',              ['uses'=>'UI\ProfileController@show
 
 
 // Route::resource('resetPassword', 'Users\ResetPasswordController')->only(['edit','update']);
-// Route::get('profile/{id}/resetPwd',          ['uses'=>'ProfileController@resetPwd',          'as'=>'profile.resetPwd']);
-// Route::post('profile/{id}/resetPwdPost',     ['uses'=>'ProfileController@resetPwdPost',      'as'=>'profile.resetPwdPost']);
+// Route::get('profile/{id}/resetPwd',          ['uses'=>'UI\ProfileController@resetPwd',          'as'=>'profile.resetPwd']);
+// Route::post('profile/{id}/resetPwdPost',     ['uses'=>'UI\ProfileController@resetPwdPost',      'as'=>'profile.resetPwdPost']);
+
+Route::get('profile/{id}/resetPwd',          ['uses'=>'UI\ResetPasswordController@edit',          'as'=>'profile.resetPwd']);
+Route::post('profile/{id}/resetPwdPost',     ['uses'=>'UI\ResetPasswordController@update',        'as'=>'profile.resetPwdPost']);

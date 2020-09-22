@@ -2,7 +2,7 @@
 
 <div class="form-group">
 
-   <label for="first" class="{{ $required ?? '' }}">
+   <label for="first_name" class="{{ $required ?? '' }}">
       {{ $label ?? 'First name' }}
    </label>
    

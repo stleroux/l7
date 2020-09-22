@@ -236,7 +236,8 @@ class ProfileController extends Controller
          return redirect()->back()->with($notification);
       }
       
-      return redirect()->route('homepage')->with($notification);
+      // return redirect()->route('homepage')->with($notification);
+      return redirect()->route('profile.show', $user->id)->with($notification);
    }
 
 

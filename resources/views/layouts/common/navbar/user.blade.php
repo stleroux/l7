@@ -113,11 +113,13 @@
          
          {{-- <div class="row"> --}}
 	         {{-- <div class="float-left"> --}}
-	            <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-outline-primary btn-sm btn-block mt-0">Edit Profile</a>
+	            <a href="{{ route('profile.show', Auth::user()->id) }}" class="btn btn-outline-primary btn-sm btn-block mt-0">View Profile</a>
+
+	            <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-outline-primary btn-sm btn-block mt-1">Edit Profile</a>
 	         {{-- </div> --}}
 	         
 	         {{-- <div class="float-right"> --}}
-	         	<a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-outline-primary btn-sm btn-block mt-1">Change Password</a>
+	         	<a href="{{ route('profile.resetPwd', Auth::user()->id) }}" class="btn btn-outline-primary btn-sm btn-block mt-1">Change Password</a>
 	         {{-- </div> --}}
 	      {{-- </div> --}}
 

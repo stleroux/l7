@@ -1,4 +1,4 @@
-@extends('layouts.UI.app-10-2')
+@extends('layouts.UI.app-10')
 
 @section ('stylesheet')
    <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
