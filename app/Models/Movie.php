@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Models\Movies;
+namespace App\Models;
 
+use App\Models\User;
+use Auth;
+use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Auth;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
-use App\Models\User;
 use Kyslik\ColumnSortable\Sortable;
 
 class Movie extends Model
@@ -135,7 +136,7 @@ public function scopePublished($query)
    {
       if($date){
          $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
+         $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
    }
@@ -144,7 +145,7 @@ public function scopePublished($query)
    {
       if($date){
          $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
+         $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
    }
@@ -153,7 +154,7 @@ public function scopePublished($query)
    {
       if($date){
          $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
+         $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
    }

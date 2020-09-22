@@ -30,10 +30,10 @@
       
          <div class="card-body card-trans-2 pb-0 mb-0">
 
-            <div class="row card-trans-0 p-0 m-0">
+            <div class="row card-trans-0 p-0 m-0 mb-0">
 
                @foreach($projects as $project)
-                  <div  class="col-xl-3 pb-3">
+                  <div  class="col-xl-3 pb-2">
                      <div id="card-hover" class="h-100 w-100" style="border: 2px black solid;">
                         <div class="h-100 thumbnail pt-2 text-center" {{-- style="background-image: url('/images/nav.jpg');" --}}>
                            <a href="{{ route('projects.show', $project->id) }}">
@@ -73,7 +73,7 @@
 
             {{-- SHOW PAGINATION --}}
             @if (strpos($_SERVER['REQUEST_URI'], "1000") === false)
-               <div class="row">
+               <div class="row mb-2">
                   <div class="col ml-2 text-light">
                      Showing {{ $projects->firstItem() }} to {{ $projects->lastItem() }} of {{$projects->total()}} entries
                   </div>

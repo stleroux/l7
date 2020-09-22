@@ -22,7 +22,6 @@ class MoviesController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->enablePermissions = false;
 	}
 
 
@@ -38,9 +37,7 @@ class MoviesController extends Controller
 	public function index(Request $request, $key=null)
 	{
 		// Check if user has required permission
-		if($this->enablePermissions) {
-			if(!checkPerm('movie_browse')) { abort(401, 'Unauthorized Access'); }
-		}
+
 
 		// Set the session to the current page route
 		Session::put('fromPage', url()->full());
@@ -66,7 +63,7 @@ class MoviesController extends Controller
 				->orderBy('title', 'asc')
 				// ->get();
 				->paginate(15);
-			return view('movies.index', compact('movies','letters'));
+			return view('UI.movies.index', compact('movies','letters'));
 		}
 
 		// No $key value is passed
@@ -80,7 +77,7 @@ class MoviesController extends Controller
 		// Required to be able to list the "catagories" in the search block
 		$movie = New Movie();
 
-		return view('movies.index', compact('movies','letters','movie'));
+		return view('UI.movies.index', compact('movies','letters','movie'));
 	}
 
 
@@ -97,9 +94,7 @@ class MoviesController extends Controller
 	public function show(Request $request, $id, $previous=null, $next=null)
 	{
 		// Check if user has required permission
-		if($this->enablePermissions) {
-			if(!checkPerm('movie_read')) { abort(401, 'Unauthorized Access'); }
-		}
+
 
 		// Get the current movie to display
 		$movie = Movie::findOrFail($id);
@@ -123,7 +118,7 @@ class MoviesController extends Controller
 			$previous = $previous->id;
 		}
 
-		return view('movies.show', compact('movie','next','previous'));
+		return view('UI.movies.show', compact('movie','next','previous'));
 	}
 
 

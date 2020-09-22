@@ -1,15 +1,15 @@
-@extends('layouts.master')
+@extends('layouts.UI.app-10')
 
-@section('stylesheets')
-   {{ Html::style('css/woodbarn.css') }}
+@section('stylesheet')
+   <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
 @endsection
 
 @section('left_column')
 @endsection
 
 @section('right_column')
-   @include('movies.blocks.popular')
-   @include('movies.blocks.archives')
+   {{-- @include('movies.blocks.popular') --}}
+   {{-- @include('movies.blocks.archives') --}}
 @endsection
 
 @section('content')
@@ -26,8 +26,8 @@
                @if(Route::currentRouteName() != "movies.search")
                   <div class="text-center">
                      <div class="btn-group">
-                        @include('movies.buttons.previous', ['size'=>'xs', 'btn_label'=>'Previous', $previous])
-                        @include('movies.buttons.next', ['size'=>'xs', 'btn_label'=>'Next', $next])
+                        {{-- @include('movies.buttons.previous', ['size'=>'xs', 'btn_label'=>'Previous', $previous]) --}}
+                        {{-- @include('movies.buttons.next', ['size'=>'xs', 'btn_label'=>'Next', $next]) --}}
                      </div>
                   </div>
                @endif
@@ -35,10 +35,10 @@
             <div class="col-sm-12 col-md-6 col-lg-4 px-0">
                <div class="text-right">
                   <div class="btn-group">
-                     @include('movies.buttons.back', ['size'=>'xs', 'btn_label'=>'Back'])
+                     {{-- @include('movies.buttons.back', ['size'=>'xs', 'btn_label'=>'Back']) --}}
                      {{-- @include('movies.buttons.print', ['size'=>'xs', 'btn_label'=>'Print']) --}}
                      {{-- @include('movies.buttons.printPDF', ['size'=>'xs', 'btn_label'=>'Print PDF']) --}}
-                     @include('movies.buttons.favorite', ['size'=>'xs', 'btn_label'=>'Favorite'])
+                     {{-- @include('movies.buttons.favorite', ['size'=>'xs', 'btn_label'=>'Favorite']) --}}
                   </div>
                </div>
             </div>

@@ -73,7 +73,7 @@ class InvoicerInvoiceItemsTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'invoice_id' => 5,
-                'product_id' => 4,
+                'product_id' => 3,
                 'notes' => NULL,
                 'quantity' => 1.0,
                 'price' => '123.00',

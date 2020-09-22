@@ -23,7 +23,7 @@
       @csrf
       @method('PUT')
 
-      <div class="card card-trans-0 mb-3">
+      <div class="card card-trans-2 mb-3">
       
          @include('UI.profile.edit.topbar')
 

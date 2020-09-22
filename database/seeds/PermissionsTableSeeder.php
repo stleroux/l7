@@ -347,6 +347,96 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => '2020-08-25 21:25:40',
                 'deleted_at' => NULL,
             ),
+            33 => 
+            array (
+                'id' => 112,
+                'name' => 'admin-dashboard',
+                'group' => 'admin',
+                'description' => NULL,
+                'created_at' => '2020-09-22 09:41:43',
+                'updated_at' => '2020-09-22 09:41:43',
+                'deleted_at' => NULL,
+            ),
+            34 => 
+            array (
+                'id' => 113,
+                'name' => 'dart-access',
+                'group' => 'dart',
+                'description' => NULL,
+                'created_at' => '2020-09-22 09:44:37',
+                'updated_at' => '2020-09-22 09:44:37',
+                'deleted_at' => NULL,
+            ),
+            35 => 
+            array (
+                'id' => 114,
+                'name' => 'dart-delete',
+                'group' => 'dart',
+                'description' => NULL,
+                'created_at' => '2020-09-22 09:44:37',
+                'updated_at' => '2020-09-22 09:44:37',
+                'deleted_at' => NULL,
+            ),
+            36 => 
+            array (
+                'id' => 115,
+                'name' => 'invoicer-invoice',
+                'group' => 'invoicer',
+                'description' => 'Access to the Invoicer Invoices module',
+                'created_at' => '2020-09-22 10:36:05',
+                'updated_at' => '2020-09-22 10:36:05',
+                'deleted_at' => NULL,
+            ),
+            37 => 
+            array (
+                'id' => 116,
+                'name' => 'invoicer-dashboard',
+                'group' => 'invoicer',
+                'description' => 'Access to the Invocier dashboard',
+                'created_at' => '2020-09-22 10:36:05',
+                'updated_at' => '2020-09-22 10:36:05',
+                'deleted_at' => NULL,
+            ),
+            38 => 
+            array (
+                'id' => 117,
+                'name' => 'invoicer-client',
+                'group' => 'invoicer',
+                'description' => 'Access to the Invoicer Clients module',
+                'created_at' => '2020-09-22 10:36:05',
+                'updated_at' => '2020-09-22 10:36:05',
+                'deleted_at' => NULL,
+            ),
+            39 => 
+            array (
+                'id' => 118,
+                'name' => 'invoicer-product',
+                'group' => 'invoicer',
+                'description' => 'Access to the Invoicer Producs module',
+                'created_at' => '2020-09-22 10:36:05',
+                'updated_at' => '2020-09-22 10:36:05',
+                'deleted_at' => NULL,
+            ),
+            40 => 
+            array (
+                'id' => 119,
+                'name' => 'invoicer-ledger',
+                'group' => 'invoicer',
+                'description' => 'Access to the Invoicer Ledger module',
+                'created_at' => '2020-09-22 10:36:05',
+                'updated_at' => '2020-09-22 10:36:05',
+                'deleted_at' => NULL,
+            ),
+            41 => 
+            array (
+                'id' => 120,
+                'name' => 'invoicer-access',
+                'group' => 'invoicer',
+                'description' => 'Access Invoicer module menu',
+                'created_at' => '2020-09-22 10:38:39',
+                'updated_at' => '2020-09-22 10:38:39',
+                'deleted_at' => NULL,
+            ),
         ));
         
         

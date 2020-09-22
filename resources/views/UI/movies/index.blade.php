@@ -1,16 +1,26 @@
-@extends('layouts.master')
+@extends('layouts.UI.app-10-2')
 
-@section('stylesheets')
-   {{ Html::style('css/woodbarn.css') }}
+@section('stylesheet')
+   <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
+@stop
+
+@section('pageHeader')
+   <i class="{{ Config::get('icons.movies') }}"></i>
+   Movies
 @endsection
 
-@section('left_column')
+@section('breadcrumb')
+   <li class="breadcrumb-item">Movies</li>
 @endsection
 
 @section('right_column')
-   @include('movies.blocks.popular')
-   @include('movies.blocks.search')
-   @include('movies.blocks.archives')
+   {{-- @include('UI.movies.blocks.popular') --}}
+   @include('UI.movies.blocks.search')
+   {{-- @include('UI.movies.blocks.archives') --}}
+@endsection
+
+@section('topbar')
+   {{-- @include('UI.movies.index.topbar') --}}
 @endsection
 
 @section('content')
@@ -25,7 +35,7 @@
             Movies
          @endif
          <div class="float-right">
-            @include('movies.buttons.myFavorites', ['size'=>'xs', 'btn_label'=>'My Favorites'])
+            {{-- @include('movies.buttons.myFavorites', ['size'=>'xs', 'btn_label'=>'My Favorites']) --}}
          </div>
       </div>
 
@@ -72,7 +82,7 @@
                         <td>
                            <div class="float-right">
                               <div class="btn-group">
-                                 @include('movies.buttons.favorite', ['size'=>'xs'])
+                                 {{-- @include('movies.buttons.favorite', ['size'=>'xs']) --}}
                               </div>
                            </div>
                         </td>
@@ -83,7 +93,7 @@
             {{-- {{ $movies->links() }} --}}
             {!! $movies->appends(\Request::except('page'))->render() !!}
          @else
-            {{ setting('no_records_found') }}
+            {{ Config::get ('settings.noRecordsFound') }}
          @endif
       </div>
       

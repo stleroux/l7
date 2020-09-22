@@ -47,8 +47,14 @@ class DatabaseSeeder extends Seeder
       $this->call(DartScoresTableSeeder::class);
       $this->call(FavoritesTableSeeder::class);
 
+      $this->call(PostTagTableSeeder::class);
+      $this->call(PostsTableSeeder::class);
+      $this->call(TagsTableSeeder::class);
+      
+      $this->call(MoviesTableSeeder::class);
+
       // supposed to only apply to a single connection and reset it's self
       // but I like to explicitly undo what I've done for clarity
       DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-   }
+    }
 }

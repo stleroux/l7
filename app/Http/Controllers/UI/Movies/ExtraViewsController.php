@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Movies;
+namespace App\Http\Controllers\UI\Movies;
 
 // use App\Http\Requests\MovieRequest;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;

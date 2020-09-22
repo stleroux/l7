@@ -38,7 +38,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 20,
                 'personal' => 0,
-                'views' => 63,
+                'views' => 79,
                 'source' => 'Recipe Box',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -48,8 +48,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-09-17 09:13:44',
                 'published_at' => '2019-11-16 07:26:50',
                 'deleted_at' => NULL,
-                'created_at' => '2019-05-15 12:11:12',
-                'updated_at' => '2019-11-16 07:26:50',
+                'created_at' => '2019-05-15 16:11:12',
+                'updated_at' => '2019-11-16 12:26:50',
             ),
             1 => 
             array (
@@ -72,7 +72,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 329,
+                'views' => 361,
                 'source' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -82,8 +82,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-05-06 09:39:44',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2019-02-21 07:03:32',
-                'updated_at' => '2019-05-28 13:12:32',
+                'created_at' => '2019-02-21 12:03:32',
+                'updated_at' => '2019-05-28 17:12:32',
             ),
             2 => 
             array (
@@ -99,25 +99,26 @@ class RecipesTableSeeder extends Seeder
 <p>1 teaspoon of baking powder</p>
 <p>1 1/2 cups of flour</p>
 <p>2-2 1/2 bananas</p>',
-            'methodology' => '<p>Mash bananas up completely and mix in all other ingredients. Pour into a loaf pan (greased) and bake at 350 degrees for 50 minutes.</p>',
+                'methodology' => '<p>Mash bananas up completely and mix in all other ingredients.</p>
+<p>Pour into a loaf pan (greased) and bake at 350 degrees for 50 minutes.</p>',
                 'image' => '4.jpg',
-                'category_id' => 1,
+                'category_id' => 5,
                 'servings' => 0,
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 102,
+                'views' => 116,
                 'source' => 'Recipe Box',
-                'private_notes' => '',
-                'public_notes' => '',
+                'private_notes' => NULL,
+                'public_notes' => NULL,
                 'user_id' => 3,
-                'modified_by_id' => 2,
+                'modified_by_id' => 3,
                 'last_viewed_by_id' => 3,
-                'last_viewed_on' => '2016-10-02 12:27:03',
-                'published_at' => '2019-05-28 11:49:09',
+                'last_viewed_on' => '2020-07-07 22:35:32',
+                'published_at' => '2020-07-07 22:40:21',
                 'deleted_at' => NULL,
-                'created_at' => '2019-02-21 07:03:32',
-                'updated_at' => '2019-09-15 23:21:34',
+                'created_at' => '2019-02-21 12:03:32',
+                'updated_at' => '2020-07-08 02:40:21',
             ),
             3 => 
             array (
@@ -136,7 +137,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 1,
-                'views' => 43,
+                'views' => 53,
                 'source' => 'Recipe Box',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -146,8 +147,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-09-13 19:34:32',
                 'published_at' => '2019-09-16 07:26:17',
                 'deleted_at' => NULL,
-                'created_at' => '2019-02-21 07:03:32',
-                'updated_at' => '2019-09-16 07:26:17',
+                'created_at' => '2019-02-21 12:03:32',
+                'updated_at' => '2019-09-16 11:26:17',
             ),
             4 => 
             array (
@@ -166,7 +167,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 33,
+                'views' => 49,
                 'source' => 'Recipe Box',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -176,8 +177,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2018-02-13 11:02:05',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:17:37',
-                'updated_at' => '2019-02-17 07:18:04',
+                'created_at' => '2016-10-02 18:17:37',
+                'updated_at' => '2019-02-17 12:18:04',
             ),
             5 => 
             array (
@@ -195,7 +196,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 5,
+                'views' => 17,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
                 'public_notes' => '',
@@ -205,8 +206,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2016-10-02 11:19:13',
                 'published_at' => '2016-10-02 11:19:13',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:19:13',
-                'updated_at' => '2019-05-29 12:01:29',
+                'created_at' => '2016-10-02 18:19:13',
+                'updated_at' => '2019-05-29 16:01:29',
             ),
             6 => 
             array (
@@ -215,23 +216,23 @@ class RecipesTableSeeder extends Seeder
                 'ingredients' => '<p>Beat eggs well and add in all other ingredients. Mix well and soak bread until soft. Fry in a well greased frying pan.</p>',
                 'methodology' => '<p>Beat eggs well and add in all other ingredients. Mix well and soak bread until soft. Fry in a well greased frying pan.</p>',
                 'image' => '8.jpg',
-                'category_id' => 10,
+                'category_id' => 71,
                 'servings' => 6,
                 'prep_time' => 10,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 111,
+                'views' => 138,
                 'source' => 'Recipe Box',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
                 'user_id' => 3,
                 'modified_by_id' => 3,
                 'last_viewed_by_id' => 3,
-                'last_viewed_on' => '2019-09-11 13:05:36',
-                'published_at' => '2019-09-16 07:26:17',
+                'last_viewed_on' => '2020-06-15 15:12:47',
+                'published_at' => '2020-06-15 15:45:03',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:20:36',
-                'updated_at' => '2019-09-17 09:12:04',
+                'created_at' => '2016-10-02 18:20:36',
+                'updated_at' => '2020-06-15 19:45:03',
             ),
             7 => 
             array (
@@ -256,7 +257,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 71,
+                'views' => 89,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
                 'public_notes' => '',
@@ -266,8 +267,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2016-10-02 11:22:47',
                 'published_at' => '2019-02-19 20:06:13',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:22:46',
-                'updated_at' => '2019-02-19 20:06:13',
+                'created_at' => '2016-10-02 18:22:46',
+                'updated_at' => '2019-02-20 01:06:13',
             ),
             8 => 
             array (
@@ -299,18 +300,18 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 25,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 148,
+                'views' => 179,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => '<p>436 calories per wedge</p>',
-                'user_id' => 3,
+                'user_id' => 5,
                 'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2019-02-19 19:02:00',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:25:20',
-                'updated_at' => '2019-02-21 22:08:12',
+                'created_at' => '2016-10-02 18:25:20',
+                'updated_at' => '2019-02-22 03:08:12',
             ),
             9 => 
             array (
@@ -343,7 +344,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 35,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 202,
+                'views' => 233,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -353,8 +354,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-05-16 13:02:06',
                 'published_at' => '2016-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:27:37',
-                'updated_at' => '2019-05-16 13:02:06',
+                'created_at' => '2016-10-02 18:27:37',
+                'updated_at' => '2019-05-16 17:02:06',
             ),
             10 => 
             array (
@@ -380,7 +381,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 25,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 38,
+                'views' => 60,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => NULL,
@@ -390,8 +391,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-02-19 19:14:40',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:31:35',
-                'updated_at' => '2019-02-19 19:14:40',
+                'created_at' => '2016-10-02 18:31:35',
+                'updated_at' => '2019-02-20 00:14:40',
             ),
             11 => 
             array (
@@ -420,7 +421,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 35,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 60,
+                'views' => 75,
                 'source' => '',
                 'private_notes' => '',
                 'public_notes' => '',
@@ -430,8 +431,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2016-10-02 11:33:31',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:33:30',
-                'updated_at' => '2019-02-13 12:29:49',
+                'created_at' => '2016-10-02 18:33:30',
+                'updated_at' => '2019-02-13 17:29:49',
             ),
             12 => 
             array (
@@ -446,25 +447,28 @@ class RecipesTableSeeder extends Seeder
 <p>2 1/2 cups of cooking oil</p>
 <p>6 cups of grated carrots</p>
 <p>8 eggs (whipped)</p>',
-                'methodology' => '<p>Mix sugar, cinnamon, baking soda, baking powder, flour and salt together. Then add oil, carrots and eggs. Place mixture into muffin cups. Bake at 325 degrees for about 20-25 minutes or until golden brown.</p>',
+                'methodology' => '<p>Mix sugar, cinnamon, baking soda, baking powder, flour and salt together.</p>
+<p>Then add oil, carrots and eggs.</p>
+<p>Place mixture into muffin cups.</p>
+<p>Bake at 325 degrees for about 20-25 minutes or until golden brown.</p>',
                 'image' => '15.jpg',
-                'category_id' => 1,
+                'category_id' => 5,
                 'servings' => 90,
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 39,
+                'views' => 51,
                 'source' => 'Recipe Box',
-                'private_notes' => '',
-                'public_notes' => '',
+                'private_notes' => NULL,
+                'public_notes' => NULL,
                 'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2016-10-02 11:35:01',
-                'published_at' => '2019-02-28 22:53:42',
+                'modified_by_id' => 3,
+                'last_viewed_by_id' => 3,
+                'last_viewed_on' => '2020-07-07 22:36:19',
+                'published_at' => '2020-07-07 22:40:24',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:35:01',
-                'updated_at' => '2019-02-28 22:53:42',
+                'created_at' => '2016-10-02 18:35:01',
+                'updated_at' => '2020-07-08 02:40:24',
             ),
             13 => 
             array (
@@ -488,7 +492,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 29,
+                'views' => 48,
                 'source' => 'Recipe Box',
                 'private_notes' => '<p>hghgfhgfhf</p>',
                 'public_notes' => NULL,
@@ -498,8 +502,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-04-01 15:28:38',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:36:29',
-                'updated_at' => '2019-04-01 15:28:38',
+                'created_at' => '2016-10-02 18:36:29',
+                'updated_at' => '2019-04-01 19:28:38',
             ),
             14 => 
             array (
@@ -518,7 +522,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 30,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 32,
+                'views' => 40,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
             'public_notes' => '<p>Variations: add onions and peppers (sauteed), add sliced hot dog pieces topped with buttered bread crumbs.</p>',
@@ -528,8 +532,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2016-10-02 11:38:18',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:38:17',
-                'updated_at' => '2019-02-13 14:09:45',
+                'created_at' => '2016-10-02 18:38:17',
+                'updated_at' => '2019-02-13 19:09:45',
             ),
             15 => 
             array (
@@ -551,7 +555,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 24,
+                'views' => 42,
                 'source' => 'Recipe Box',
                 'private_notes' => '',
                 'public_notes' => '<p>You may increase the sauce depending on the number of chops. Each batch covers approximately 4 chops.</p>
@@ -562,8 +566,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2016-10-02 11:40:16',
                 'published_at' => '2019-02-13 14:13:21',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:40:15',
-                'updated_at' => '2019-02-13 14:09:45',
+                'created_at' => '2016-10-02 18:40:15',
+                'updated_at' => '2019-02-13 19:09:45',
             ),
             16 => 
             array (
@@ -586,7 +590,7 @@ class RecipesTableSeeder extends Seeder
                 'prep_time' => 20,
                 'cook_time' => 0,
                 'personal' => 0,
-                'views' => 18,
+                'views' => 35,
                 'source' => 'Company\'s Coming',
                 'private_notes' => NULL,
                 'public_notes' => '<p>97 calories per serving</p>',
@@ -596,8 +600,8 @@ class RecipesTableSeeder extends Seeder
                 'last_viewed_on' => '2019-03-03 17:14:58',
                 'published_at' => '2019-02-17 19:27:37',
                 'deleted_at' => NULL,
-                'created_at' => '2016-10-02 14:42:26',
-                'updated_at' => '2019-05-29 12:01:14',
+                'created_at' => '2016-10-02 18:42:26',
+                'updated_at' => '2019-05-29 16:01:14',
             ),
             17 => 
             array (
@@ -626,7 +630,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 45,
                     'cook_time' => 0,
                     'personal' => 0,
-                    'views' => 26,
+                    'views' => 44,
                     'source' => 'Company\'s Coming',
                     'private_notes' => '',
                     'public_notes' => '',
@@ -636,8 +640,8 @@ class RecipesTableSeeder extends Seeder
                     'last_viewed_on' => '2016-10-02 12:32:00',
                     'published_at' => '2019-02-13 14:13:21',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:44:42',
-                    'updated_at' => '2019-02-28 22:53:57',
+                    'created_at' => '2016-10-02 18:44:42',
+                    'updated_at' => '2019-03-01 03:53:57',
                 ),
                 18 => 
                 array (
@@ -662,7 +666,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 0,
                     'personal' => 0,
-                    'views' => 44,
+                    'views' => 53,
                     'source' => 'Company\'s Coming',
                     'private_notes' => '',
                     'public_notes' => '<p>Muffins may be stored in an airtight container for up to 3 months.</p>',
@@ -672,8 +676,8 @@ class RecipesTableSeeder extends Seeder
                     'last_viewed_on' => '2016-10-02 11:46:42',
                     'published_at' => '2019-02-13 14:13:21',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:46:42',
-                    'updated_at' => '2019-02-17 18:39:27',
+                    'created_at' => '2016-10-02 18:46:42',
+                    'updated_at' => '2019-02-17 23:39:27',
                 ),
                 19 => 
                 array (
@@ -704,7 +708,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 30,
                     'personal' => 0,
-                    'views' => 106,
+                    'views' => 113,
                     'source' => 'Recipe Box',
                     'private_notes' => '',
                     'public_notes' => '',
@@ -714,8 +718,8 @@ class RecipesTableSeeder extends Seeder
                     'last_viewed_on' => '2016-10-02 11:49:30',
                     'published_at' => '2019-02-28 22:53:42',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:49:30',
-                    'updated_at' => '2019-02-28 22:53:42',
+                    'created_at' => '2016-10-02 18:49:30',
+                    'updated_at' => '2019-03-01 03:53:42',
                 ),
                 20 => 
                 array (
@@ -731,25 +735,30 @@ class RecipesTableSeeder extends Seeder
 <p>1 tablespoon of basil</p>
 <p>8-10 cups of chicken or beef stock ( I use 1/2 and 1/2)</p>
 <p>Parmesan cheese to grate on top at serving</p>',
-                    'methodology' => '<p>Brown sausage and chop into chunks. place in large roasting pan. Cook onion and garlic in the same pan as sausage until transparent and add to roasting pan. Add all other ingredients, cover and bake in oven at 350 degrees for 3-4 hours. About half hour before serving add 1 1/2 cups of el dente cooked pasta. I like fusilli. Top with cheese and enjoy!</p>',
+                    'methodology' => '<p>Brown sausage and chop into chunks.</p>
+<p>Place in large roasting pan.</p>
+<p>Cook onion and garlic in the same pan as sausage until transparent and add to roasting pan.</p>
+<p>Add all other ingredients, cover and bake in oven at 350 degrees for 3-4 hours.</p>
+<p>About half hour before serving add 1 1/2 cups of el dente cooked pasta (I like fusilli).</p>
+<p>Top with cheese and enjoy!</p>',
                     'image' => '23.jpeg',
                     'category_id' => 39,
                     'servings' => 10,
                     'prep_time' => 30,
                     'cook_time' => 180,
                     'personal' => 0,
-                    'views' => 97,
+                    'views' => 116,
                     'source' => 'Recipe Box',
-                    'private_notes' => '',
-                    'public_notes' => '',
-                    'user_id' => 2,
+                    'private_notes' => NULL,
+                    'public_notes' => NULL,
+                    'user_id' => 3,
                     'modified_by_id' => 3,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2018-02-01 14:07:56',
-                    'published_at' => '2019-08-23 21:51:09',
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2020-07-07 22:34:12',
+                    'published_at' => '2020-07-07 22:40:26',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:52:19',
-                    'updated_at' => '2019-08-23 21:51:09',
+                    'created_at' => '2016-10-02 18:52:19',
+                    'updated_at' => '2020-07-08 02:40:26',
                 ),
                 21 => 
                 array (
@@ -767,26 +776,33 @@ class RecipesTableSeeder extends Seeder
 <p>Chocolate chips, for sprinkling (optional)</p>
 <p>Chocolate syrup, for drizzling</p>',
                 'methodology' => '<p>In a large bowl, whisk together flour, milk, cocoa powder, powdered sugar, eggs and oil until smooth. (You can also do this with an electric mixer.)</p>
-<p>Heat a large nonstick pan on medium-low heat, and grease with cooking spray. Pour 1/4 cup crepe mixture into pan, immediately the pan so that the batter spreads out thin into a large circle. Cook for 1 to 2 minutes or until bottom of crepe is light golden brown. Flip; cook 30 seconds to 1 minute or until light golden brown. Repeat with remaining cooking spray and crepe mixture.</p>
-<p>To serve, spoon whipped cream into center of each crepe. Top with sliced bananas and fold each edge of crepe over filling. Drizzle with chocolate syrup and any additional toppings. Serve warm.</p>',
+<p>Heat a large nonstick pan on medium-low heat, and grease with cooking spray.</p>
+<p>Pour 1/4 cup crepe mixture into pan, immediately the pan so that the batter spreads out thin into a large circle.</p>
+<p>Cook for 1 to 2 minutes or until bottom of crepe is light golden brown.</p>
+<p>Flip; cook 30 seconds to 1 minute or until light golden brown.</p>
+<p>Repeat with remaining cooking spray and crepe mixture.</p>
+<p>To serve, spoon whipped cream into center of each crepe.</p>
+<p>Top with sliced bananas and fold each edge of crepe over filling.</p>
+<p>Drizzle with chocolate syrup and any additional toppings.</p>
+<p>Serve warm.</p>',
                     'image' => '24.jpg',
-                    'category_id' => 1,
+                    'category_id' => 5,
                     'servings' => 12,
                     'prep_time' => 30,
                     'cook_time' => 0,
                     'personal' => 0,
-                    'views' => 46,
+                    'views' => 58,
                     'source' => 'Recipe Box',
-                    'private_notes' => '',
+                    'private_notes' => NULL,
                     'public_notes' => '<p>This batter will also keep in the refrigerator for up to a day.</p>',
-                    'user_id' => 2,
-                    'modified_by_id' => 2,
+                    'user_id' => 3,
+                    'modified_by_id' => 3,
                     'last_viewed_by_id' => 3,
-                    'last_viewed_on' => '2016-10-02 12:32:22',
-                    'published_at' => '2019-02-13 14:13:21',
+                    'last_viewed_on' => '2020-07-07 22:39:59',
+                    'published_at' => '2020-07-07 22:40:28',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:55:51',
-                    'updated_at' => '2019-02-17 08:08:22',
+                    'created_at' => '2016-10-02 18:55:51',
+                    'updated_at' => '2020-07-08 02:40:28',
                 ),
                 22 => 
                 array (
@@ -811,18 +827,18 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 45,
                     'personal' => 0,
-                    'views' => 5,
+                    'views' => 14,
                     'source' => 'Company\'s Coming',
                     'private_notes' => '',
                     'public_notes' => '',
-                    'user_id' => 2,
+                    'user_id' => 3,
                     'modified_by_id' => 2,
                     'last_viewed_by_id' => 2,
                     'last_viewed_on' => '2016-10-02 11:58:10',
                     'published_at' => '2019-02-13 14:13:21',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:58:10',
-                    'updated_at' => '2019-02-28 22:53:51',
+                    'created_at' => '2016-10-02 18:58:10',
+                    'updated_at' => '2019-03-01 03:53:51',
                 ),
                 23 => 
                 array (
@@ -845,18 +861,18 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 50,
                     'cook_time' => 40,
                     'personal' => 0,
-                    'views' => 53,
+                    'views' => 73,
                     'source' => 'Mom\'s recipe book',
                     'private_notes' => '',
                     'public_notes' => '',
-                    'user_id' => 2,
+                    'user_id' => 3,
                     'modified_by_id' => 2,
                     'last_viewed_by_id' => 2,
                     'last_viewed_on' => '2016-10-02 11:59:47',
                     'published_at' => '2019-02-13 14:13:21',
                     'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 14:59:47',
-                    'updated_at' => '2016-10-02 14:59:47',
+                    'created_at' => '2016-10-02 18:59:47',
+                    'updated_at' => '2016-10-02 18:59:47',
                 ),
                 24 => 
                 array (
@@ -879,7 +895,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 30,
                     'cook_time' => 20,
                     'personal' => 0,
-                    'views' => 298,
+                    'views' => 317,
                     'source' => 'Recipe Box',
                     'private_notes' => NULL,
                     'public_notes' => '<p>Old family recipe</p>',
@@ -889,8 +905,8 @@ class RecipesTableSeeder extends Seeder
                     'last_viewed_on' => '2019-05-16 14:29:48',
                     'published_at' => '2019-05-16 14:18:05',
                     'deleted_at' => NULL,
-                    'created_at' => '2019-03-05 12:31:22',
-                    'updated_at' => '2019-05-16 14:29:48',
+                    'created_at' => '2019-03-05 17:31:22',
+                    'updated_at' => '2019-05-16 18:29:48',
                 ),
                 25 => 
                 array (
@@ -912,7 +928,7 @@ class RecipesTableSeeder extends Seeder
                     'prep_time' => 20,
                     'cook_time' => 30,
                     'personal' => 0,
-                    'views' => 21,
+                    'views' => 39,
                     'source' => 'My mom\'s recipe book',
                     'private_notes' => NULL,
                     'public_notes' => NULL,
@@ -922,10 +938,222 @@ class RecipesTableSeeder extends Seeder
                     'last_viewed_on' => '2019-03-05 12:33:14',
                     'published_at' => '2019-03-01 12:32:00',
                     'deleted_at' => NULL,
-                    'created_at' => '2019-03-05 12:33:14',
-                    'updated_at' => '2019-03-05 12:33:14',
+                    'created_at' => '2019-03-05 17:33:14',
+                    'updated_at' => '2019-03-05 17:33:14',
                 ),
-            ));
+                26 => 
+                array (
+                    'id' => 29,
+                    'title' => 'French Toast Bake',
+                    'ingredients' => '<p>* 1/2 cup melted butter 1 stick<br />* 1 cup brown sugar<br />* 1 loaf Texas toast<br />* 4 eggs<br />* 1 1/2 cup milk<br />* 1 tsp vanilla<br />* Powdered sugar for sprinkling</p>',
+                'methodology' => '<p>1. Melt butter in microwave &amp; add brown sugar&hellip;.stir till mixed.<br />2. Pour butter/sugar mix into bottom of 9 x 13 pan&hellip;.spread around<br />3. Beat eggs, milk, &amp; vanilla<br />4. Lay single layer of Texas Toast in pan<br />5. Spoon 1/2 of egg mixture on bread layer<br />6. Add 2nd layer of Texas Toast<br />7. Spoon on remaining egg mixture<br />8. Cover &amp; chill in fridge overnight<br />9. Bake at 350 for 45 minutes (covered for the first 30 minutes)<br />10. Sprinkle with powdered sugar<br />11. Serve with warm maple syrup</p>',
+                    'image' => '1592248259.png',
+                    'category_id' => 71,
+                    'servings' => 12,
+                    'prep_time' => 20,
+                    'cook_time' => 45,
+                    'personal' => 0,
+                    'views' => 8,
+                    'source' => 'Facebook',
+                    'private_notes' => NULL,
+                    'public_notes' => '<p>Servings are based one one piece of toast each</p>',
+                    'user_id' => 3,
+                    'modified_by_id' => 3,
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2020-06-15 15:54:46',
+                    'published_at' => '2020-06-15 15:55:22',
+                    'deleted_at' => NULL,
+                    'created_at' => '2020-06-15 19:08:57',
+                    'updated_at' => '2020-06-15 19:55:22',
+                ),
+                27 => 
+                array (
+                    'id' => 30,
+                    'title' => 'Five Minute Nacho Cheese Sauce',
+                    'ingredients' => '<p>2 Tbsp butter</p>
+<p>2 Tbsp flour</p>
+<p>1 cup whole milk</p>
+<p>6 oz. medium cheddar, shredded (about 1.5 cups</p>
+<p>1/4 tsp salt</p>
+<p>1/4 tsp chili powder</p>',
+                        'methodology' => '<p>Add the butter and flour to a small sauce pot. Heat and whisk the butter and flour together until they become bubbly and foamy. Continue to cook and whisk the bubbly mixture for about 60 seconds.</p>
+<p>Whisk the milk into the flour and butter mixture. Turn the heat up slightly and allow the milk to come to a simmer while whisking. When it reaches a simmer, the mixture will thicken. Once it\'s thick enough to coat a spoon, turn off the heat.</p>
+<p>Stir in the shredded cheddar, one handful at a time, until melted into the sauce. If needed, place the pot over a low flame to help the cheese melt. Do not over heat the cheese sauce.</p>
+<p>Once all the cheese is melted into the sauce, stir in the salt and chili powder. Taste and adjust the seasoning as needed. If the sauce becomes too thick, simply whisk in an additional splash of milk.</p>',
+                        'image' => '1592254465.jpeg',
+                        'category_id' => 73,
+                        'servings' => 0,
+                        'prep_time' => 5,
+                        'cook_time' => 5,
+                        'personal' => 0,
+                        'views' => 9,
+                        'source' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => '<p>The servings size is 1/4 cup</p>',
+                        'user_id' => 3,
+                        'modified_by_id' => 3,
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-06-15 16:54:25',
+                        'published_at' => '2020-06-15 16:55:04',
+                        'deleted_at' => NULL,
+                        'created_at' => '2020-06-15 19:34:31',
+                        'updated_at' => '2020-06-15 20:55:04',
+                    ),
+                    28 => 
+                    array (
+                        'id' => 31,
+                        'title' => 'Chewy Peanut Butter Brownies',
+                        'ingredients' => '<p>1/2 cup of peanut butter</p>
+<p>1/3 cup of margarine, softened</p>
+<p>2/3 cup of white sugar</p>
+<p>1/2 cup of brown sugar</p>
+<p>2 eggs</p>
+<p>1/2 teaspoon of vanilla extract</p>
+<p>1 cup of all-purpose flour</p>
+<p>1 tsp of baking powder</p>
+<p>1/4 teaspoon salt</p>
+<p>&nbsp;</p>',
+                    'methodology' => '<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Preheat oven to 350 degrees F (175 degrees C ). Grease a 9x9 inch baking pan.</span></span></p>
+<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">In a medium bowl, cream together peanut butter and margarine. </span></span></p>
+<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Gradually blend in the brown sugar, white sugar, eggs, and vanilla; mix until fluffy. </span></span></p>
+<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Combine flour, baking powder, and salt; stir into the peanut butter mixture until well blended.</span></span></p>
+<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Bake for 30 to 35 minutes in preheated oven, or until the top springs back when touched. </span></span></p>
+<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Cool, and cut into 16 squares.</span></span></p>
+<p>&nbsp;</p>',
+                        'image' => '1592250172.jpg',
+                        'category_id' => 9,
+                        'servings' => 16,
+                        'prep_time' => 15,
+                        'cook_time' => 25,
+                        'personal' => 0,
+                        'views' => 8,
+                        'source' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => '<p align="left"><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Great with chocolate frosting!</span></span></p>',
+                        'user_id' => 3,
+                        'modified_by_id' => 3,
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-07-07 22:38:40',
+                        'published_at' => '2020-07-07 22:40:30',
+                        'deleted_at' => NULL,
+                        'created_at' => '2020-06-15 19:42:52',
+                        'updated_at' => '2020-07-08 02:40:30',
+                    ),
+                    29 => 
+                    array (
+                        'id' => 32,
+                        'title' => 'Crispy Rice Cereal Chocolate Cheesecake',
+                        'ingredients' => '<p>unsalted butter, 1/2 stick</p>
+<p>mini marshmallows (285 g)</p>
+<p>crispy rice cereal (180g)</p>
+<p>semisweet chocolate (225g)</p>
+<p>haevy cream ( 60ml)</p>
+<p>cream cheese, softened (445g)</p>
+<p>sugar (100g)</p>
+<p>vanilla</p>
+<p>whipped cream, divided (150g)</p>
+<p>choclate bar for shaving (90g)</p>',
+                    'methodology' => '<p>1. In a large saucepan over medium heat, melt the butter.<br />2. Add the marshmallows and stir until melted. Add the crispy rice cereal and stir to coat.<br />3. While the crispy rice cereal mix is still warm, transfer them to a greased 10-inch (25 cm) springform pan.<br />4. Using a greased measuring cup, press down into the cereal to form to the pan. Press the edges against the springform pan to create walls. Set aside.<br />5. Place the chocolate in a small microwave-safe bowl and pour the heavy cream on top. Microwave in 30-second intervals, stirring until melted, about 1 minute.<br />6. In a large bowl, mix the cream cheese, sugar, and vanilla until smooth.<br />7. Pour in the melted chocolate and stir to incorporate.<br />8. Add 1&frac12; cups (90 g) of whipped cream to the chocolate mixture and fold with a spatula until combined.<br />9. Pour the cheesecake mixture into the crispy rice base and smooth the top with a spatula.<br />10. Refrigerate for 3-4 hours or overnight, until the cheesecake is set. Release the springform.<br />11. Put the remaining cup of whipped cream in a piping bag fitted with a star tip and decorate the top of the cheesecake.<br />12. Use a vegetable peeler to shave the chocolate into the middle of the cheesecake.<br />13. Slice and serve.<br />14. Enjoy!</p>',
+                        'image' => '1592253793.png',
+                        'category_id' => 8,
+                        'servings' => 10,
+                        'prep_time' => 180,
+                        'cook_time' => 0,
+                        'personal' => 0,
+                        'views' => 7,
+                        'source' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'user_id' => 3,
+                        'modified_by_id' => 3,
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-06-15 16:43:13',
+                        'published_at' => '2020-06-15 16:43:32',
+                        'deleted_at' => NULL,
+                        'created_at' => '2020-06-15 20:43:13',
+                        'updated_at' => '2020-06-15 20:43:32',
+                    ),
+                    30 => 
+                    array (
+                        'id' => 33,
+                        'title' => 'Snickerdoodle Cheesecake',
+                        'ingredients' => '<p>1 log refrigerated sugar cookie dough<br />3 tbsp. cinnamon sugar, plus more for garnish<br />3 8-oz. blocks cream cheese, softened<br />1 c. granulated sugar<br />1/4 c. sour cream<br />3 large eggs<br />2 tsp. pure vanilla extract<br />1/4 tsp. ground cinnamon<br />pinch of kosher salt<br />vanilla frosting</p>',
+                        'methodology' => '<p>Preheat oven to 350&deg; and grease an 8&rdquo; springform pan with cooking spray.</p>
+<p>In a large bowl, combine cookie dough and cinnamon sugar and stir until<br />evenly incorporated. Press about half of the dough into the bottom of the<br />springform pan. (Reserve extra dough to bake as cookies.)</p>
+<p>In another large bowl, beat the cream cheese until smooth. Add sugar and sour<br />cream and beat until light and uffy. Add eggs one at a time, beating well<br />between each addition. Stir in vanilla, cinnamon and salt. Pour batter over the<br />cookie dough crust.</p>
+<p>Bake until slightly jiggly in the center, about 1 hour. Turn off the oven and open<br />the door slightly to let the cheesecake cool for about 1 hour. Then refrigerate<br />until completely cool, at least 4 hours and up to overnight.</p>
+<p>Roll remaining dough into small balls (about a tablespoon) then atten slightly.<br />Place on baking sheet and bake until starting to turn golden around the edges,<br />about 10 minutes. Transfer to a cooling rack to cool completely.</p>
+<p>Before serving, sprinkle the top of the cheesecake with more cinnamon sugar.<br />Using a large star tip, pipe frosting around the edges of the cheesecake then<br />garnish with snickerdoodle cookies.</p>',
+                        'image' => '1592254727.jpeg',
+                        'category_id' => 8,
+                        'servings' => 10,
+                        'prep_time' => 20,
+                        'cook_time' => 30,
+                        'personal' => 0,
+                        'views' => 7,
+                        'source' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'user_id' => 3,
+                        'modified_by_id' => 3,
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-06-15 16:58:47',
+                        'published_at' => '2020-06-15 16:59:50',
+                        'deleted_at' => NULL,
+                        'created_at' => '2020-06-15 20:50:17',
+                        'updated_at' => '2020-06-15 20:59:50',
+                    ),
+                    31 => 
+                    array (
+                        'id' => 34,
+                        'title' => 'Apple Caramel Cheesecake',
+                        'ingredients' => '<p><strong>Crust:</strong></p>
+<p>2 cups graham cracker crumbs</p>
+<p>⅛ cup brown sugar</p>
+<p>⅓ cup butter, melted</p>
+<p><strong>Filling:</strong></p>
+<p>16 ounces cream cheese, softened</p>
+<p>&frac14; cup brown sugar</p>
+<p>&frac14; cup white sugar</p>
+<p>2 tablespoons cornstarch</p>
+<p>1 teaspoon cinnamon</p>
+<p>&frac14; teaspoon ginger</p>
+<p>1 teaspoon vanilla extract</p>
+<p>2 green apples, peeled and thinly sliced</p>
+<p><strong>Topping:</strong></p>
+<p>&frac14; cup rolled oats</p>
+<p>&frac14; cup flour</p>
+<p>&frac14; cup brown sugar</p>
+<p>1 teaspoon cinnamon</p>
+<p>2 tablespoons butter, melted</p>
+<p>Caramel sauce</p>',
+                        'methodology' => '<p>1. Preheat oven to 350&deg;F/180&deg;C.</p>
+<p>2. In a bowl, mix the crust ingredients. Press into the bottom of a greased 8-inch springform pan. Bake for 5 minutes.</p>
+<p>3. In another bowl, mix all the filling ingredients except the apples. Spread over the graham cracker crust, then layer the apple slices on top.</p>
+<p>4. In another bowl, mix all the topping ingredients except the caramel, and sprinkle evenly over the apple layer. Bake for 30 minutes.</p>
+<p>5. Drizzle on caramel sauce.</p>
+<p>6. Enjoy!</p>
+<p>&nbsp;</p>',
+                        'image' => '1592257388.jpeg',
+                        'category_id' => 8,
+                        'servings' => 12,
+                        'prep_time' => 0,
+                        'cook_time' => 35,
+                        'personal' => 0,
+                        'views' => 9,
+                        'source' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => '<p>I have made this cheesecake recently and it tastes amazing. The texture is nice and it was not too sweet. All flavors blended very well. It is super easy to make. I did mine in an 8" x 8" glass pan as I did not have a springform pan.</p>',
+                        'user_id' => 3,
+                        'modified_by_id' => 3,
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-07-07 22:31:27',
+                        'published_at' => '2020-07-07 22:31:38',
+                        'deleted_at' => NULL,
+                        'created_at' => '2020-06-15 21:38:55',
+                        'updated_at' => '2020-07-08 02:31:38',
+                    ),
+                ));
         
         
     }
