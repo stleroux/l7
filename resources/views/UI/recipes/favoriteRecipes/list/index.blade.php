@@ -23,33 +23,14 @@
    @include('UI.recipes.blocks.archives')
 @endsection
 
+@section('topbar')
+   @include('UI.recipes.favoriteRecipes.list.topbar')
+@endsection
+
 @section('content')
 
-   <div class="row pb-2">
-      <div class="col">
-         <span class="float-right">
-            {{-- <div class="btn-group">
-               @include('UI.recipes.myRecipes.buttons.list', ['size'=>'sm', 'btn_label'=>'My Recipes'])
-               @include('UI.recipes.myRecipes.buttons.ddList', ['size'=>'sm'])
-               @include('UI.recipes.buttons.printAll', ['size'=>'sm', 'btn_label'=>'Print All'])
-               <!-- @include('admin.recipes.buttons.add', ['size'=>'sm']) -->
-            </div> --}}
-            <div class="btn-group">
-               <a href="{{ route('recipes.favoriteRecipesGrid', 'all') }}" class="btn btn-sm btn-maroon">
-                  <i class="{{ Config::get('icons.grid') }}"></i>
-                  Grid
-               </a>
-               <a href="{{ route('recipes.favoriteRecipesList', 'all') }}" class="btn btn-sm btn-light">
-                  <i class="{{ Config::get('icons.list') }}"></i>
-                  List
-               </a>
-            </div>
-         </span>
-      </div>
-   </div>
-
-   <div class="card card-trans-2 mb-3 text-light">
-      @if($recipes->count() > 0)
+   @if($recipes->count() > 0)
+      <div class="card card-trans-2 mb-3 text-light">
          <div class="card-body card-trans-2 p-2">
             {{-- @include('UI.recipes.myRecipes.list.alphabet') --}}
             <table id="datatable" class="table table-sm table-hover">
@@ -94,11 +75,14 @@
                </tbody>
             </table>
          </div>
-      @else
-         <div class="card-body card_body p-2">
-            {{ Config::get('settings.noRecordsFound') }}
-           </div>
-      @endif
+      </div>
 
-   </div>
+   @else
+
+      <div class="col-row p-3 card-trans-4 text-light">
+         {{ Config::get('settings.noRecordsFound') }}
+        </div>
+   @endif
+   
+
 @endsection

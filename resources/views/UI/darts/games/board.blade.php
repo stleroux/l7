@@ -253,10 +253,10 @@
 		
 		{{-- SHOW PAGINATION --}}
 		<div class="row">
-			<div class="col ml-2 border">
+			<div class="col ml-2">
 				Showing records {{ $games->firstItem() }} to {{ $games->lastItem() }} of {{$games->total()}}						
 			</div>
-			<div class="col mr-2 border justify-content-right">
+			<div class="col mr-2 justify-content-right">
 				{{ $games->links('UI.darts.pagination.custom') }}						
 			</div>
 		</div>

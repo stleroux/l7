@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Permission;
+use App\Models\Permission;
 use App\Rules\MustContainDash;
 use Illuminate\Foundation\Http\FormRequest;
 

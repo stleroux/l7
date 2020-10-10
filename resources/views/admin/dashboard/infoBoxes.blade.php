@@ -3,6 +3,7 @@
 <div class="row">
 
    @include('admin.dashboard.infoBoxes.recipes')
+   @include('admin.dashboard.infoBoxes.posts')
    @include('admin.dashboard.infoBoxes.projects')
 
    <!-- fix for small devices only -->

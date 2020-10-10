@@ -57,7 +57,8 @@ class RolesController extends Controller
       abort_unless(Gate::allows('role-create'), 403);
 
       $role = New Role();
-      $permissions = Permission::all()->groupBy('group');
+      // $permissions = Permission::all()->groupBy('group')->orderBy('model.name', 'desc');
+      $permissions = Permission::all()->sortBy("name")->groupBy('group');
 
       return view('admin.roles.create', compact('role','permissions'));
    }
@@ -127,7 +128,9 @@ class RolesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('role-edit'), 403);
 
-      $permissions = Permission::all()->groupBy('group');
+      // $permissions = Permission::groupBy('group')->orderBy('name', 'desc')->get();
+      $permissions = Permission::all()->sortBy("name")->groupBy('group');
+      // dd($permissions);
 
       return view('admin.roles.edit', compact('role','permissions'));
    }

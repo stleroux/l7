@@ -3,13 +3,16 @@
 @if (Auth::check())
 
    @if (Config::get('settings.authorFormat') == "username")
-	{{-- @if(setting('authorFormat') == "username") --}}
+
 		@if($field == 'user')
-			<i class="{{ Config::get('icons.link') }}"></i>
-			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
-				{{ $model->user->username }}
+			
+			<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}" class="btn btn-xs border text-light">
+				<i class="{{ Config::get('icons.link') }}  {{ ((\Request::is('admin/*')) ? 'text-dark' : 'text-light') }}"></i>
 			</a>
+			{{ $model->user->username }}
+
 		@elseif($field == 'modifiedBy')
+			
 			@if($model->modified_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
@@ -18,7 +21,9 @@
 			@else
 				N/A
 			@endif
+
 		@elseif($field == 'lastViewedBy')
+
 			@if($model->last_viewed_by_id)
 				<i class="fas fa-sm fa-link"></i>
 				<a href="" data-toggle="modal" data-target="#view{{ $field }}Modal{{ $model->id }}">
@@ -27,7 +32,9 @@
 			@else
 				N/A
 			@endif
+
 		@endif
+
    @endif
 
 	{{-- @elseif (setting('authorFormat') == "last_name, first_name")

@@ -67,7 +67,6 @@ class BlogController extends Controller
    public function getIndex()
    {
       $posts = Post::published()->with('user')->orderBy('published_at','desc')->paginate(5);
-      // $posts=[];
 
       return view ('UI.blog.index', compact('posts'));
    }
@@ -111,7 +110,6 @@ class BlogController extends Controller
           ->paginate(10)
           ->appends(['search' => $search]);
 
-      // return view('UI.blog.search', compact('posts','postlinks'));
       return view('UI.blog.search', compact('posts'));
     }
 

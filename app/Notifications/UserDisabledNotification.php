@@ -41,9 +41,10 @@ class UserDisabledNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('User Account Disabled.') // If omitted, the name of the notification will be used
                     ->line('Your account has been disabled.')
                     // ->action('You can now login', route('login'))
-                    ->line('Please contact us via the Contact Us form on our website to re-actiate your account.');
+                    ->line('Please contact us via the Contact Us form on our website to re-activate your account.');
     }
 
     /**

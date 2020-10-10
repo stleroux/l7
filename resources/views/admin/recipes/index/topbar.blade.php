@@ -1,14 +1,14 @@
 <div class="row mb-2">
 
    <div class="col">
-      @can('recipe-create')
-         @include('admin.recipes.buttons.add')
-      @endcan
-   </div>
-
-   <div class="col">
-
       <div class="float-right">
+      {{-- @can('recipe-create')
+         @include('admin.recipes.buttons.add')
+      @endcan --}}
+   {{-- </div>
+
+   <div class="col"> --}}
+
          <div class="dropdown text-center float-right">
             <a class="dropdown-button border"
                id="dropdown-menu"
@@ -58,6 +58,9 @@
       </div>
 
       <div class="float-right px-1">         
+      @can('recipe-create')
+         @include('admin.recipes.buttons.add')
+      @endcan
          <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
             <i class="{{ Config::get('icons.help') }}"></i>
             <div class="d-none d-lg-inline">
@@ -65,6 +68,7 @@
             </div>
          </a>
       </div>
+
 
       {{-- @if(Route::currentRouteName() == 'admin.recipes.index') --}}
          <form action="{{ route('admin.recipes.mass_destroy') }}" method="post" class="float-right p-0 pl-1">

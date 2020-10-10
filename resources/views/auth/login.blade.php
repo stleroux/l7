@@ -22,7 +22,7 @@
                   <form method="POST" action="{{ route('login') }}">
                      @csrf
 
-
+<!-- Display message if account has not been approved by an administrator yet -->
 @if(session()->has('message'))
    <p class="alert alert-info">
       {{ session()->get('message') }}

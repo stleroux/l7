@@ -14,6 +14,15 @@
    </li>
 @endcan
 
+@can('bug-manage')
+   <li class="nav-item">
+      <a href="{{ Route('admin.bugs.index') }}" class="nav-link {{ Request::is('admin/bugs*') ? 'active' : '' }}">
+         <i class="{{ Config::get('icons.bugs') }}"></i>
+         <p>Bug Reports</p>
+      </a>
+   </li>
+@endcan
+
 @can('category-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.categories.index') }}" class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
@@ -23,14 +32,34 @@
    </li>
 @endcan
 
-{{-- @can('recipe-manage') --}}
+@can('feature-manage')
+   <li class="nav-item">
+      <a href="{{ Route('admin.features.index') }}" class="nav-link {{ Request::is('admin/features*') ? 'active' : '' }}">
+         <i class="{{ Config::get('icons.features') }}"></i>
+         <p>Feature Requests</p>
+      </a>
+   </li>
+@endcan
+
+@can('movie-manage')
+   <li class="nav-item">
+      <a href="{{ Route('admin.movies.index') }}" class="nav-link {{ Request::is('admin/movies*') ? 'active' : '' }}">
+         <i class="{{ Config::get('icons.movies') }}"></i>
+         <p>Movies</p>
+      </a>
+   </li>
+@endcan
+
+@can('recipe-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.recipes.index') }}" class="nav-link {{ Request::is('admin/recipes*') ? 'active' : '' }}">
          <i class="{{ Config::get('icons.recipes') }}"></i>
          <p>Recipes</p>
       </a>
    </li>
-{{-- @endcan --}}
+@endcan
+
+
 
    {{-- <li class="nav-item">
       <a href="{{ Route('admin.posts.index') }}" class="nav-link {{ Request::is('admin/posts*') ? 'active' : '' }}">

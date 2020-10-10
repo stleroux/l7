@@ -1,4 +1,4 @@
-<script>
+{{-- <script>
    $(function () {
       $("#selectall").click(function () {
          if ($("#selectall").is(':checked')) {
@@ -52,4 +52,4 @@
          $(".selectmenu").show();
       }
    };
-</script>
+</script> --}}

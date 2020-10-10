@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Movie;
+use bfinlay\SpreadsheetSeeder\SpreadsheetSeeder;
 
-class MoviesTableSeeder extends Seeder
+class MoviesTableSeeder extends SpreadsheetSeeder
 {
 	/**
 	* Run the database seeds.
@@ -12,23 +13,9 @@ class MoviesTableSeeder extends Seeder
 	*/
 	public function run()
 	{
-
-		foreach (File::allFiles(database_path('data/movies/')) as $js) {
-
-			$json = File::get($js);
-
-			$data = json_decode($json);
-			
-			foreach($data as $obj) {
-				Movie::create(array(
-					'title' => $obj->Title,
-					'col_no' => $obj->CollectionNumber,
-					'upc' => $obj->UPC,
-					'production_year' => $obj->ProductionYear
-				));
-			}
-		}
+		$this->call([
+         SpreadsheetSeeder::class,
+      ]);
 	}
+
 }
-
-

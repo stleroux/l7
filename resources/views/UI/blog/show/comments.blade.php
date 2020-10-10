@@ -7,25 +7,25 @@
 		{{-- </div> --}}
 	</div>
 
-	<div class="card-body card-trans-2 text-dark p-0">
+	<div class="card-body card-trans-2 text-dark p-2">
 		@if($post->comments->count())
 			<table class="table table-sm table-hover">
 				<thead>
-					<tr class="">
-						<th class="col-3">Name</th>
-						<th class="col-7">Comment</th>
-						<th class="col-2">Posted On</th>
+					<tr class="row">
+						<th class="col-xl-3">Name</th>
+						<th class="col-xl-7">Comment</th>
+						<th class="col-xl-2">Posted On</th>
 					</tr>
 				</thead>
-				<tbody">
+				<tbody>
 					@foreach($post->comments as $comment)
-					<tr class="">
-						<td class="col-3">
+					<tr class="row">
+						<td class="col-xl-3">
 							{{-- @include('common.authorFormat', ['model'=>$comment, 'field'=>'user']) --}}
 							{{ $comment->user->username }}
 						</td>
-						<td class="col-7">{!! $comment->comment !!}</td>
-						<td class="col-2">
+						<td class="col-xl-7">{!! $comment->comment !!}</td>
+						<td class="col-xl-2">
 							{{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
 							{{ ($comment->created_at) ? date(Config::get('settings.dateFormat'), strtotime($comment->created_at)) : 'N/A' }}
 						</td>

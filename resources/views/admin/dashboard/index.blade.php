@@ -1,43 +1,65 @@
 @extends('layouts.admin.admin')
 
 @section('stylesheet')
-{{-- <style>
-.cover {
-  object-fit: cover;
-  /*width: 50px;*/
-  /*height: 100px;*/
-}
-</style> --}}
 @endsection
 
 @section('pageHeader', 'DASHBOARD')
 
 @section('breadcrumb')
-   {{-- <li class="breadcrumb-item"><a href="#">Layout</a></li> --}}
-   {{-- <li class="breadcrumb-item active">123 Fixed Navbar Layout</li> --}}
 @endsection
 
 @section('content')
 
-	<div class="row">
-		<div class="col-xl-10">
-			<div class="card">
-				<div class="card-body">
-					Content will go here
-				</div>				
+<div class="row">
+	<div class="col-xl-10">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-xl-2">
+						@include('admin.dashboard.infoBoxes.bugs')							
+					</div>
+					<div class="col-xl-2">
+						@include('admin.dashboard.infoBoxes.features')							
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-xl-2">
-			{{-- <div class="card"> --}}
-				{{-- <div class="card-body"> --}}
-					@include('admin.dashboard.infoBoxes.permissions')
-					@include('admin.dashboard.infoBoxes.projects')
-					@include('admin.dashboard.infoBoxes.recipes')
-					@include('admin.dashboard.infoBoxes.roles')
-					@include('admin.dashboard.infoBoxes.users')
-				{{-- </div> --}}
-			{{-- </div> --}}
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+         		<div class="col-xl-4">
+	               <h3>{{ $usersPerMonthChart->options['chart_title'] }}</h3>
+	             	{!! $usersPerMonthChart->renderHtml() !!}            			
+         		</div>
+         		<div class="col-xl-4">
+	             	<h3>{{ $bugsByTypeChart->options['chart_title'] }}</h3>
+	             	{!! $bugsByTypeChart->renderHtml() !!}            			
+         		</div>
+         		<div class="col-xl-4">
+	             	<h3>{{ $featuresByTypeChart->options['chart_title'] }}</h3>
+	             	{!! $featuresByTypeChart->renderHtml() !!}            			
+         		</div>
+         	</div>
+			</div>
 		</div>
 	</div>
+	<div class="col-xl-2">
+		@include('admin.dashboard.infoBoxes.permissions')
+		@include('admin.dashboard.infoBoxes.posts')
+		@include('admin.dashboard.infoBoxes.projects')
+		@include('admin.dashboard.infoBoxes.recipes')
+		@include('admin.dashboard.infoBoxes.roles')
+		@include('admin.dashboard.infoBoxes.users')
+	</div>
+</div>
 
+
+@endsection
+
+@section('scripts')
+	{!! $usersPerMonthChart->renderChartJsLibrary() !!}
+	{{-- {!! $bugsByTypeChart->renderChartJsLibrary() !!} --}}
+	{!! $usersPerMonthChart->renderJs() !!}
+	{!! $bugsByTypeChart->renderJs() !!}
+	{!! $featuresByTypeChart->renderJs() !!}
 @endsection

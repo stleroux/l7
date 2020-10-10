@@ -169,7 +169,7 @@
       var checkedValues = $('.record:checked').map(function(){ return this.value; }).get();
       //put the ids in the hidden input as a comma separated string
       $('#mass_resetViews_hidden_checkedinput').val(checkedValues.join(','));
-      });
+   });
 
 
 

@@ -59,7 +59,7 @@
             {{-- @include('recipes.addins.links.back', ['size'=>'xs']) --}}
          {{-- </span>
       </div> --}}
-      <div class="card-body section_body p-2">
+      <div class="card-body p-2 card-trans-2 text-light">
          <table id="datatable" class="table table-hover table-sm">
             <thead>
                <tr>
@@ -69,7 +69,7 @@
                   <th>Author</th>
                   <th>Create Date</th>
                   <th>Publish Date</th>
-                  <th></th>
+                  <th class="no-sort"></th>
                </tr>
             </thead>
             <tbody>
@@ -78,11 +78,13 @@
                      <td>{{ $archive->title }}</td>
                      <td>{{ ucwords($archive->category->name) }}</td>
                      <td>{{ $archive->views }}</td>
-                     <td>@include('common.authorFormat', ['model'=>$archive, 'field'=>'user'])</td>
+                     <td>
+                        @include('common.authorFormat', ['model'=>$archive, 'field'=>'user'])
+                     </td>
                      <td>@include('common.dateFormat', ['model'=>$archive, 'field'=>'created_at'])</td>
                      <td>@include('common.dateFormat', ['model'=>$archive, 'field'=>'published_at'])</td>
                      <td class="text-right">
-                        <a href="{{ route('recipes.show', $archive->id) }}" class="btn btn-xs btn-primary">
+                        <a href="{{ route('recipes.show', $archive->id) }}" class="btn btn-sm btn-primary">
                            <i class="far fa-eye"></i>
                         </a>
                      </td>

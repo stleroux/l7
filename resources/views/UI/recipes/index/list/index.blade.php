@@ -22,40 +22,15 @@
 	@include('UI.recipes.blocks.archives')
 @endsection
 
+@section('topbar')
+   @include('UI.recipes.index.list.topbar')
+@endsection
+
 @section('content')
-	<div class="row pb-2">
 
-		<div class="col">
-
-			<span class="float-right">
-
-				<div class="btn-group">
-					@include('UI.recipes.index.list.buttons.list', ['size'=>'sm', 'btn_label'=>'All Recipes'])
-					@include('UI.recipes.index.list.buttons.ddList', ['size'=>'sm'])
-					@include('UI.recipes.buttons.printAll', ['size'=>'sm', 'btn_label'=>'Print All'])
-					{{-- @include('admin.recipes.buttons.add', ['size'=>'sm']) --}}
-				</div>
-
-            <div class="btn-group">
-               <a href="{{ route('recipes.indexGrid', 'all') }}" class="btn btn-sm btn-maroon">
-                  <i class="{{ Config::get('icons.grid') }}"></i>
-                  Grid
-               </a>
-               <a href="{{ route('recipes.indexList', 'all') }}" class="btn btn-sm btn-light">
-                  <i class="{{ Config::get('icons.list') }}"></i>
-                  List
-               </a>
-            </div>
-
-         </span>
-
-      </div>
-      
-   </div>
-
-	<div class="card card-trans-2 mb-3">
-
-		@if($recipes->count() > 0)
+	@if($recipes->count() > 0)
+	  
+     <div class="card card-trans-2 mb-3">
 
          <div class="card-body card-trans-2 p-2 text-light">
 
@@ -69,32 +44,31 @@
                      <th class="d-none d-lg-table-cell">Views</th>
                      <th class="d-none d-lg-table-cell">Created By</th>
                      <th class="d-none d-lg-table-cell">Created On</th>
-                     {{-- <th class="d-none d-lg-table-cell">Private</th> --}}
                      <th class="d-none d-lg-table-cell">Publish(ed) On</th>
                      <th data-orderable="false"></th>
                   </tr>
                </thead>
                <tbody class="">
                   @foreach($recipes as $recipe)
-                  <tr>
-                     <td>
-                        {{ ucwords($recipe->title) }}
-                     </td>
-                     <td>
-                        {{ ucwords($recipe->category->name) }}
-                     </td>
-                     <td class="d-none d-lg-table-cell">
-                        {{ $recipe->views }}
-                     </td>
-                     <td class="d-none d-lg-table-cell">
-                        {{ $recipe->user->username }}
-                     </td>
-                     <td class="d-none d-lg-table-cell">
-                        @include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
-                     </td>
-                     <td class="d-none d-lg-table-cell">
-                        @include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])
-                     </td>
+                     <tr>
+                        <td>
+                           {{ ucwords($recipe->title) }}
+                        </td>
+                        <td>
+                           {{ ucwords($recipe->category->name) }}
+                        </td>
+                        <td class="d-none d-lg-table-cell">
+                           {{ $recipe->views }}
+                        </td>
+                        <td class="d-none d-lg-table-cell">
+                           @include('common.authorFormat', ['model'=>$recipe, 'field'=>'user'])
+                        </td>
+                        <td class="d-none d-lg-table-cell">
+                           @include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
+                        </td>
+                        <td class="d-none d-lg-table-cell">
+                           @include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])
+                        </td>
                         <td class="text-right">
                            <div class="btn-group">
                               @auth
@@ -103,17 +77,19 @@
                               @include('UI.recipes.index.list.buttons.show', ['size'=>'sm'])
                            </div>
                         </td>
-                  </tr>
+                     </tr>
                   @endforeach
                </tbody>
             </table>
          </div>
-      @else
-         <div class="card-body card_body p-2">
-            {{ Config::get('settings.noRecordsFound') }}
-         </div>
-      @endif
+	  </div>
 
-	</div>
+   @else
+
+      <div class="col-row p-3 card-trans-4 text-light">
+         {{ Config::get('settings.noRecordsFound') }}
+      </div>
+
+   @endif
 
 @endsection

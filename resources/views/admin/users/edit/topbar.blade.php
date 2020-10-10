@@ -28,11 +28,27 @@
       </div>
    </a>
 
-   <a href="#" class="btn btn-sm btn-light border float-right mx-2" data-toggle="modal" data-target="#helpModal" title="Help">
-      <i class="{{ Config::get('icons.help') }}"></i>
-      <div class="d-none d-lg-inline">
-         Help
-      </div>
-   </a>
+
+   <div class="float-right">
+      
+      @if($user->account_status)
+         <a href="{{ route('admin.users.disable', $user) }}" class="btn btn-sm btn-primary">
+            <i class="{{ Config::get('icons.disable') }}"></i>
+            Disable Account
+         </a>
+      @else
+         <a href="{{ route('admin.users.approve', $user) }}" class="btn btn-sm btn-primary">
+            <i class="{{ Config::get('icons.approve') }}"></i>
+            Enable Account
+         </a>
+      @endif
+
+      <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal" title="Help">
+         <i class="{{ Config::get('icons.help') }}"></i>
+         <div class="d-none d-lg-inline">
+            Help
+         </div>
+      </a>
+   </div>
 
 </div>

@@ -1,4 +1,4 @@
-<li class="nav-item dropdown">
+{{-- <li class="nav-item dropdown">
 	
 	<a class="nav-link" data-toggle="dropdown" href="#">
 		<i class="far fa-comments"></i>
@@ -64,3 +64,4 @@
 		<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
 	</div>
 </li>
+ --}}

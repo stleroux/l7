@@ -626,6 +626,7 @@ class ProjectsController extends Controller
       abort_unless(Gate::allows('project-manage'), 403);
 
       $projects = Project::onlyTrashed()->get();
+      
       return view('admin.projects.projects.index', compact('projects'));
    }
 }

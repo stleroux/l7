@@ -5,7 +5,7 @@
 
 @section('pageHeader')
    <i class="{{ Config::get('icons.edit') }}"></i>
-   Edit User
+   Edit User :: {{ $user->username }}
 @endsection
 
 @section('breadcrumb')
@@ -24,12 +24,6 @@
       @method('PUT')
 
       @include('admin.users.edit.topbar')
-
-      {{-- <div class="row justify-content-center">
-         <div class="col-12 col-xl-1">
-            @include('admin.users.form.fields.approved')
-         </div>
-      </div> --}}
 
       <div class="row">
          <div class="col-xl-6">

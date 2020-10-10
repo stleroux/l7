@@ -114,7 +114,9 @@ class FunctionsController extends RecipesController
          'message' => 'The recipes were deleted successfully.', 
          'alert-type' => 'success'
       ];
-      return redirect()->route($ref)->with($notification);
+
+      // return redirect()->route($ref)->with($notification);
+      return redirect()->back()->with($notification);
    }
 
 

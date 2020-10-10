@@ -29,6 +29,7 @@
 @section('content')
 
 	@if($recipes->count() > 0)
+
 		<div class="card card-trans-2 mb-3">
 
 			<div class="card-body section_body p-1">
@@ -74,37 +75,27 @@
 							@auth
 								<div class="card-text pb-1 m-0">
 									<div class="align-self-end text-center">
-										{{-- @if(!$recipe->isFavorited()) --}}
-											@include('UI.recipes.index.grid.buttons.favorite')
-										{{-- @else --}}
-											{{-- @include('common.buttons.favoriteRemove', ['name'=>'recipe', 'model'=>$recipe]) --}}
-										{{-- @endif --}}
+										<div class="col">
+											@include('UI.recipes.index.grid.buttons.favorite')											
+											@if(auth::user()->hasRole('admin'))
+												<a href="{{ route('admin.recipes.edit', $recipe) }}" class="btn btn-sm btn-maroon text-light">
+													<i class="{{ Config::get('icons.edit') }}"></i>
+												</a>
+											@endif
+										</div>
 									</div>
 								</div>
 							@endauth
 
-							<div class="card-footer px-1 py-0 text-center">
-								<small class="">
-									By
-									{{-- @if($recipe->user->first_name && $recipe->user->last_name)
-										{{ ucwords($recipe->user->first_name) }} {{ ucwords($recipe->user->last_name) }}
-									@else --}}
-										{{-- @if($recipe->user->public_email)
-											{{ $recipe->user->email }}
-										@else --}}
-											{{ $recipe->user->username }}
-										{{-- @endif --}}
-									{{-- @endif --}}
-								</small>
+							<div class="card-footer px-1 py-0 mb-0">
+								<div class="text-center">
+									By {{ $recipe->user->username }}
+								</div>
 							</div>
 
 						</div>
 					@endforeach
 				</div>
-
-				{{-- <div class="row justify-content-center pagination-sm p-1">
-					{{ $recipes->links('UI.recipes.pagination.custom') }}
-				</div> --}}
 
 				{{-- SHOW PAGINATION --}}
 				<div class="row">
@@ -117,8 +108,8 @@
 				</div>
 
 			</div>
-
 		</div>
+
 	@else
 			
 		<div class="col-row p-3 card-trans-4 text-light">

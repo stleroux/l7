@@ -5,7 +5,7 @@
 
 @section('pageHeader')
    <i class="{{ Config::get('icons.projects') }}"></i>
-   @if(Route::currentRouteName('') == 'admin.projects.trashed')
+   @if(Route::currentRouteName() == 'admin.projects.trashed')
       Trashed Projects
    @else
       Projects
@@ -13,7 +13,7 @@
 @endsection
 
 @section('breadcrumb')
-   <li class="breadcrumb-item active">Projects</li>
+   <li class="breadcrumb-item active"><a href="{{ route('admin.projects.index') }}">Projects</a></li>
 @endsection
 
 @section('rightSidebar')

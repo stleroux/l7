@@ -39,7 +39,6 @@ class ProfileController extends Controller
    {
       // Find the user
       $user = User::find(Auth::user()->id);
-      // dd($user);
 
       // Delete the image from the system
       File::delete('_profiles/' . $user->image);
@@ -49,13 +48,11 @@ class ProfileController extends Controller
       $user->save();
 
       // Set flash data with success message and return user to same tab
-      // Session::flash ('success', 'Your profile image was successfully removed!');
       $notification = array(
          'message' => 'Your profile image was successfully removed!',
          'alert-type' => 'error'
       );
 
-      // return redirect()->route('profile.show', $user->id)->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -71,17 +68,9 @@ class ProfileController extends Controller
 ##################################################################################################################
    public function edit(Request $request, $id)
    {
-      // $user = User::findOrFail($id);
       $user = Auth::user();
-      // dd($user);
-
-      // if($this->enablePermissions)
-      // {
-      //    if(!checkPerm('auto', $user)) { abort(401, 'Unauthorized Access'); }
-      // }
 
       return view('UI.profile.edit', compact('user'));
-      // return view('users.profile.edit')->with('user', Auth::user());
    }
 
 
@@ -126,12 +115,6 @@ class ProfileController extends Controller
     {
       // Find the user
       $user = User::findOrFail(Auth::user()->id);
-      // dd($user);
-
-      // if($this->enablePermissions)
-      // {
-      //    if(!checkPerm('', $user)) { abort(401, 'Unauthorized Access'); }
-      // }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -152,7 +135,7 @@ class ProfileController extends Controller
    public function update(Request $request)
    {
       $rules = [
-         'email' => 'required|email|unique:users,email,'.Auth::user()->id,
+         'email' => 'required|email|unique:users,email,' . Auth::user()->id,
          'first_name' => 'required|min:2',
          'last_name' => 'required|min:2',
       ];
@@ -169,23 +152,16 @@ class ProfileController extends Controller
       $this->validate($request, $rules, $customMessages);
       
       $user = User::findOrFail(Auth::user()->id);
-         // $user->username = $request->input('username');
-         // $user->invoicer_client = $request->input('invoicer_client');         
-
-// dd($request->public_email);
 
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');
          $user->email = $request->input('email');
          $user->public_email = $request->input('public_email') ? true : false;
-         // (Input::has('portfolio')) ? true : false;
          $user->telephone = $request->input('telephone');
          $user->cell = $request->input('cell');
          $user->fax = $request->input('fax');
          $user->website = $request->input('website');
          $user->company_name = $request->input('company_name');
-
-         // $user->civic_number = $request->input('civic_number');
          $user->address_1 = $request->input('address_1');
          $user->address_2 = $request->input('address_2');
          $user->city = $request->input('city');
@@ -193,13 +169,6 @@ class ProfileController extends Controller
          $user->postal_code = $request->input('postal_code');
          $user->notes = $request->input('notes');
          $user->dart_doubleOut = $request->input('dart_doubleOut');
-
-         // $user->action_buttons = $request->input('action_buttons');
-         // $user->alert_fade_time = $request->input('alert_fade_time');
-         // $user->author_format = $request->input('author_format');
-         // $user->date_format = $request->input('date_format');
-         // $user->landing_page_id = $request->input('landing_page_id');
-         // $user->rows_per_page = $request->input('rows_per_page');
 
          // Check if a new image was submitted
          if ($request->hasFile('image')) {
@@ -216,27 +185,21 @@ class ProfileController extends Controller
             $user->image = $filename;
 
             // Delete old photo
-            //Storage::delete($oldImageName);
             File::delete('_profiles/' . $oldImageName);
           }
 
       $user->save();
 
-      // $user->permissions()->sync($request->input('permission'));
-
-      // Session::flash('success','Your profile has been updated.');
       $notification = array(
          'message' => 'Your profile has been updated.',
          'alert-type' => 'success'
       );
 
-      // return view('UI.profile.show', compact('user'))->with($notification);
       if($request->submit == "continue")
       {
          return redirect()->back()->with($notification);
       }
       
-      // return redirect()->route('homepage')->with($notification);
       return redirect()->route('profile.show', $user->id)->with($notification);
    }
 

@@ -1,7 +1,9 @@
-<div class="card card-info">
+<div class="card {{ ($user->account_status ? 'card-info' : 'card-danger') }}">
+
    <div class="card-header">
       <div class="card-title">Roles</div>
    </div>
+
    <div class="card-body">
       <!-- ROLES -->
       <div class="form-group">
@@ -39,4 +41,5 @@
          </dl>
       </div>
    </div>
+
 </div>

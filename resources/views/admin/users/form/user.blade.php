@@ -1,4 +1,4 @@
-<div class="card card-primary">
+<div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
 
    <div class="card-header">
       <div class="card-title">User Information</div>

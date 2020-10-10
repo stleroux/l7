@@ -6,7 +6,8 @@
       @yield('stylesheet')
    </head>
 
-   <body class="hold-transition sidebar-mini sidebar-collapse layout-navbar-fixed layout-footer-fixed">
+   {{-- <body class="hold-transition sidebar-mini sidebar-collapse layout-navbar-fixed layout-footer-fixed"> --}}
+   <body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed">
 
       <!-- Site wrapper -->
       <div class="wrapper">
@@ -77,16 +78,23 @@
             <!-- Main content -->
             <section class="content">
                <div class="container-fluid">
-                  {{-- @yield('content') --}}
-<div class="row">
-<div class="col-xl-8 offset-xl-1">
-@yield('content')
-</div>
 
-<div class="col-xl-2">
-@yield('right_column')
-</div>
-</div>
+                  <div class="row">
+                     <div class="col">
+                        @yield('topbar')
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <div class="col-xl-10">
+                        @yield('content')
+                     </div>
+
+                     <div class="col-xl-2">
+                        @yield('right_column')
+                     </div>
+                  </div>
+
                </div>
             </section>
             <!-- /.content -->

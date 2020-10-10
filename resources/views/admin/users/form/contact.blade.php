@@ -1,7 +1,7 @@
 @if($errors->get('telephone'))
-   <div class="card card-primary">
+   <div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
 @else
-   <div class="card card-primary collapsed-card">
+   <div class="card {{ ($user->account_status ? 'card-primary collapsed-card' : 'card-danger collapsed-card') }}">
 @endif
 
    <div class="card-header">

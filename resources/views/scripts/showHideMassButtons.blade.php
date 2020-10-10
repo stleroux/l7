@@ -15,7 +15,7 @@
          $("#btn_multidestroy").hide();
          $("#btn_multidelete").hide();
          $("#btn_multirestore").hide();
-         $("#btn_multiresetviews").hide();
+         $("#btn_multiresetViews").hide();
          $("#btn_multipublish").hide();
          $("#btn_multiunpublish").hide();
       }

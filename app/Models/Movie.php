@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Auth;
 use Config;
 use Illuminate\Database\Eloquent\Model;
@@ -19,9 +18,9 @@ class Movie extends Model
 
    protected $guarded = [];
 
-   protected $dates = ['published_at'];
+   protected $dates = ['deleted_at'];
 
-   public $sortable = ['col_no', 'title', 'category', 'views', 'running_time', 'created_at', 'updated_at'];
+   public $sortable = ['id', 'title', 'category', 'views', 'imdb_no', 'running_time', 'created_at', 'updated_at'];
 
    // Set the default value for the status field to 0
    protected $attributes = [
@@ -74,60 +73,11 @@ class Movie extends Model
       return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
    }
    
-   public function user()
-   {
-      return $this->belongsTo('App\Models\User');
-   }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // SCOPES
 //////////////////////////////////////////////////////////////////////////////////////
-public function scopePublished($query)
-   {
-      return $query
-         ->where('published_at', '<', Carbon::now())
-         ->where('deleted_at', NULL);
-   }
 
-   public function scopeMymovies($query)
-   {
-      return $query
-         ->where('user_id', '=', Auth::user()->id)
-         ->orderBy('title','DESC');
-   }
-
-   public function scopeUnpublished($query)
-   {
-      return $query
-         ->whereNull('published_at');
-   }
-
-   public function scopeFuture($query)
-   {
-      return $query
-         ->where('published_at', '>', Carbon::Now());
-   }
-   
-   public function scopeTrashed($query)
-   {
-      return $query
-         ->whereNotNull('deleted_at')
-         ->withTrashed();
-   }
-
-   public function scopeTrashedCount($query)
-   {
-      return $query
-         ->whereNotNull('deleted_at')
-         ->withTrashed();
-   }
-
-   public function scopeNewmovies($query)
-   {
-      return $query
-         ->where('created_at', '>=' , Auth::user()->previous_login_date)
-         ->orderBy('title','DESC');
-   }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS

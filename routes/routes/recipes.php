@@ -1,6 +1,6 @@
 <?php
 
-Route::namespace('Admin\Recipes')->prefix('admin/recipes')->name('admin.recipes.')->group(function() {
+// Route::namespace('Admin\Recipes')->prefix('admin/recipes')->name('admin.recipes.')->group(function() {
 //    Route::get('future/{key?}',            'ExtraViewsController@future')         ->name('future');
 //    Route::get('newRecipes/{key?}',        'ExtraViewsController@newRecipes')     ->name('newRecipes');
 //    Route::get('unpublished/{key?}',       'ExtraViewsController@unpublished')    ->name('unpublished');
@@ -37,9 +37,9 @@ Route::namespace('Admin\Recipes')->prefix('admin/recipes')->name('admin.recipes.
 //    Route::get('{key?}',                   'RecipesController@index')             ->name('index');
 //    // Make sure this one stays last as it will catch everything else
 //    Route::get('archives/{year}/{month}',  'ExtraViewsController@archives')       ->name('archives');
-});
+// });
 
-Route::namespace('UI\Recipes')->prefix('recipes')->name('recipes.')->group(function() {
+// Route::namespace('UI\Recipes')->prefix('recipes')->name('recipes.')->group(function() {
 //    Route::get('{id}/show/{byCatName?}',   'RecipesController@show')                    ->name('show');
    // Route::get('{id}/printPDF',            'FunctionsController@printPDF')              ->name('printPDF');
    // Route::get('{id}/print',               'FunctionsController@print')                 ->name('print');
@@ -62,7 +62,7 @@ Route::namespace('UI\Recipes')->prefix('recipes')->name('recipes.')->group(funct
 
 
 
-});
+// });
 
 //////////////////////////////////////////////////////////////////////////////
 // PROJECTS ROUTES

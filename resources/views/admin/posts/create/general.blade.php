@@ -5,7 +5,7 @@
 	<div class="row">
 
 		<div class="col-xl-6">
-			@include('admin.posts.form.fields.title')
+			@include('admin.posts.form.fields.title', ['required'=>'required'])
 		</div>
 
 		<div class="col-xl-3">
