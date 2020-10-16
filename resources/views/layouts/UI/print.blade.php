@@ -12,12 +12,14 @@
    --}}
    
    <!-- Font Awesome -->
-   <link rel="stylesheet" href="/css/fontawesome/all.css">
+   {{-- <link rel="stylesheet" href="/css/fontawesome/all.css"> --}}
    <!--load all styles 5.9.0-->
 
    {{-- {{ Html::style('css/font-awesome.css') }} --}}
-   {{ Html::style('css/bootstrap_4/bootstrap.css') }}
+   {{-- {{ Html::style('css/bootstrap_4/bootstrap.css') }} --}}
+   {{-- <link rel="stylesheet" href="{{ asset('css/UI/__bootstrap.css') }}"> --}}
    {{-- {{ Html::style('css/print.css') }} --}}
+   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
    
    @yield ('stylesheet')
 
@@ -28,7 +30,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <![endif]-->
 </head>
-   <body>
+   <body style="font-size: 1.3em;">
       <div class="container">
          @yield ('content')
       </div>

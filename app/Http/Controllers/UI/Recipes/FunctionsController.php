@@ -204,13 +204,26 @@ class FunctionsController extends RecipesController
       // Check if user has required permission
 
       
+      // $recipe = Recipe::findOrFail($id);
+      // $recipedata = ['recipe'=>$recipe];
+      // // $pdf = PDF::loadView('UI.recipes.printPDF', array('recipedata'=>$recipedata));
+      // $pdf = PDF::loadView('UI.recipes.printPDF', compact('recipe'));
+      // $pdf->setOptions(['isPhpEnabled' => true, 'isRemoteEnabled' => true]);
+      // $filename = $recipe->title . ".pdf";
+
+      // //Download Pdf
+      // return $pdf->download($filename);
+
+      // retreive recipe from db
       $recipe = Recipe::findOrFail($id);
-      $recipedata = ['recipe'=>$recipe];
-      $pdf = PDF::loadView('UI.recipes.printPDF', array('recipedata'=>$recipedata));
-      $pdf->setOptions(['isPhpEnabled' => true,'isRemoteEnabled' => true]);
+
+      // share data to view
+      view()->share('recipe', $recipe);
+      $pdf = PDF::loadView('UI.recipes.printPDF', $recipe);
+      // set the file name
       $filename = $recipe->title . ".pdf";
 
-      //Download Pdf
+      // download PDF file with download method
       return $pdf->download($filename);
    }
 

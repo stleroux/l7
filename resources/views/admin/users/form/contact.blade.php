@@ -1,7 +1,11 @@
-@if($errors->get('telephone'))
-   <div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
+@if(Route::currentRouteName('') == 'admin.users.create')
+   <div class="card card-primary collapsed-card">
 @else
-   <div class="card {{ ($user->account_status ? 'card-primary collapsed-card' : 'card-danger collapsed-card') }}">
+   @if($errors->get('telephone'))
+      <div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
+   @else
+      <div class="card {{ ($user->account_status ? 'card-primary collapsed-card' : 'card-danger collapsed-card') }}">
+   @endif
 @endif
 
    <div class="card-header">

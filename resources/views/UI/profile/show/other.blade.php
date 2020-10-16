@@ -1,4 +1,4 @@
-<!-- OTHE RINFO -->
+<!-- OTHER INFO -->
 <div class="card card-trans-2 mb-2 collapsed-card">
    
    <div class="card-header bg-primary p-2">

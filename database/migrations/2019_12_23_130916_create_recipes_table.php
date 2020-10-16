@@ -21,8 +21,10 @@ class CreateRecipesTable extends Migration {
 			$table->string('image')->nullable();
 			$table->integer('category_id')->unsigned()->index('category_id');
 			$table->integer('servings')->unsigned()->nullable();
-			$table->integer('prep_time')->unsigned()->nullable();
-			$table->integer('cook_time')->unsigned()->nullable();
+			$table->integer('prep_time_hours')->unsigned()->nullable();
+			$table->integer('prep_time_minutes')->unsigned()->nullable();
+			$table->integer('cook_time_hours')->unsigned()->nullable();
+			$table->integer('cook_time_minutes')->unsigned()->nullable();
 			$table->boolean('personal')->default(0);
 			$table->integer('views')->unsigned()->nullable()->default(0);
 			$table->string('source')->nullable();

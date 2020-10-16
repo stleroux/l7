@@ -12,7 +12,7 @@
 @section('breadcrumb')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('projects.blocks.purchase')   --}}
 @endsection
 

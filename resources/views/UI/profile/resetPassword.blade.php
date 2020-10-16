@@ -12,7 +12,7 @@
    <li class="breadcrumb-item">Edit Profile</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.blocks.member') --}}
    @include('UI.profile.blocks.contributions')
    {{-- @include('blocks.member') --}}

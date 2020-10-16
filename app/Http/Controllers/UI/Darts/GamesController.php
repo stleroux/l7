@@ -164,7 +164,12 @@ class GamesController extends Controller
       abort_unless(Gate::allows('dart-access'), 403);
 
       $game = DartsGame::find($game_id);
-      $players = User::where('id', '!=', 1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('last_name', 'asc')->get();
+      $players = User::where('id', '!=', 1)
+                     ->whereNotNull('first_name')
+                     ->whereNotNull('last_name')
+                     ->where('dart_doubleOut', "!=", 0)
+                     ->orderby('last_name', 'asc')
+                     ->get();
       // dd($players);
       return view('UI.darts.games.selectTeamPlayers', compact('players','game'));
    }
@@ -226,7 +231,12 @@ class GamesController extends Controller
       abort_unless(Gate::allows('dart-access'), 403);
 
       $game = DartsGame::find($game_id);
-      $players = User::where('id', '!=', 1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('last_name', 'asc')->get();
+      $players = User::where('id', '!=', 1)
+                     ->whereNotNull('first_name')
+                     ->whereNotNull('last_name')
+                     ->where('dart_doubleOut', "!=", 0)
+                     ->orderby('last_name', 'asc')
+                     ->get();
       return view('UI.darts.games.selectPlayers', compact('players','game'));
    }
 

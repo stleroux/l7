@@ -14,7 +14,7 @@
    <li class="breadcrumb-item">{{ $project->name }}</li>   
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.projects.blocks.popular') --}}
    @include('UI.projects.blocks.imageSlider')
    {{-- @include('UI.projects.blocks.leave_comment') --}}

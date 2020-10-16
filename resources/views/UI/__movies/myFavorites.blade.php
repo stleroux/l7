@@ -7,7 +7,7 @@
 @section('left_column')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('movies.blocks.popular')
    @include('movies.blocks.archives')
 @endsection

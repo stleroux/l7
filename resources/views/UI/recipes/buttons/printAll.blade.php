@@ -5,7 +5,7 @@
          {{ $btn_label ?? '' }}
       </a>
    @else
-      <a href="{{ route('recipes.printAll', Request::segment(2)) }}" class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon" title="Print All Recipes In Category">
+      <a href="{{ route('recipes.printAll', Request::segment(3)) }}" class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon" title="Print All Recipes In Category">
          <i class="{{ Config::get('icons.print') }}"></i>
          {{ $btn_label ?? '' }}
       </a>

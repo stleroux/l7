@@ -1,31 +1,19 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
-   Create Recipe
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.recipes.index') }}">Recipes</a></li>
-   <li class="breadcrumb-item">Create Recipe</li>
-@endsection
-
-@section('rightSidebar')
-@endsection
-
-@section('right_column')
-@endsection
+@include('admin.recipes.create.sections.stylesheet')
+@include('admin.recipes.create.sections.pageHeader')
+@include('admin.recipes.create.sections.breadcrumb')
+@include('admin.recipes.create.sections.sidebar')
+@include('admin.recipes.create.sections.functions')
+@include('admin.recipes.create.sections.formBegin')
+@include('admin.recipes.create.sections.formEnd')
 
 @section ('content')
 
    {{-- {!! Form::open(['route' => 'admin.recipes.store', 'files'=>'true']) !!} --}}
-   <form action="{{ route('admin.recipes.store', $recipe) }}" method="POST" enctype="multipart/form-data">
-      @csrf
 
-      @include('admin.recipes.create.topbar')
+
+      {{-- @include('admin.recipes.create.topbar') --}}
          
       <div class="card card-primary card-outline card-outline-tabs">
          

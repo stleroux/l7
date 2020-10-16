@@ -1,4 +1,8 @@
-<div class="card {{ ($user->account_status ? 'card-info' : 'card-danger') }}">
+@if(Route::currentRouteName('') == 'admin.users.create')
+	<div class="card card-info">
+@else
+	<div class="card {{ ($user->account_status ? 'card-info' : 'card-danger') }}">
+@endif
 
    <div class="card-header">
       <div class="card-title">Password</div>

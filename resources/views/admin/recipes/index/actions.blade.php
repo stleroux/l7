@@ -1,23 +1,13 @@
-<div class="dropdown text-center">
-   <a class="dropdown-button"
-      id="dropdown-menu-{{ $recipe->id }}"
-      data-toggle="dropdown"
-      data-boundary="viewport"
-      aria-haspopup="true"
-      aria-expanded="false">
-      <i class="{{ Config::get('icons.ellipsis') }}"></i>
-   </a>
-   <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $recipe->id }}">
       @if(!$recipe->deleted_at)
          {{-- @can('recipe-edit') --}}
          @if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-edit'))
-            <a href="{{ route('admin.recipes.edit', $recipe) }}" class="dropdown-item bg-light">
+            <a href="{{ route('admin.recipes.edit', $recipe) }}" class="btn btn-sm btn-light" title="Edit Recipe">
                <i class="{{ Config::get('icons.edit') }} text-primary"></i>
-               Edit
+               {{-- Edit --}}
             </a>
 
 {{--             <a href="{{ route('admin.recipes.unpublish', $recipe) }}"
-               class="dropdown-item bg-light"
+               class="btn btn-sm bg-light"
                onclick="return confirm('Are you sure you want to unpublish this recipe?');"
             >
                <i class="{{ Config::get('icons.publish') }} text-pink"></i>
@@ -27,26 +17,28 @@
 
 
 <button type="button"
-   class="dropdown-item unpublish-model bg-light"
+   class="unpublish-model btn btn-sm btn-light"
    data-toggle="modal"
    data-target="#unpublishModal"
    data-id="{{ $recipe->id }}"
    data-url="{{ url('admin/recipes/unpublish', $recipe) }}"
+   title="Unpublish Recipe"
    >
    <i class="{{ Config::get('icons.publish') }} text-warning"></i>
-   Unpublish
+   {{-- Unpublish --}}
 </button>
 
 
 <button type="button"
-   class="dropdown-item resetViews-model bg-light"
+   class="resetViews-model btn btn-sm btn-light"
    data-toggle="modal"
    data-target="#resetViewsModal"
    data-id="{{ $recipe->id }}"
    data-url="{{ url('admin/recipes/resetViews', $recipe) }}"
+   title="Reset Views Count"
    >
    <i class="{{ Config::get('icons.resetViews') }} text-secondary"></i>
-   Reset Views
+   {{-- Reset Views --}}
 </button>
 
 
@@ -60,14 +52,15 @@
          {{-- @can('recipe-delete') --}}
          @if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-delete'))
             <button type="button"
-               class="dropdown-item destroy-model bg-light"
+               class="destroy-model btn btn-sm btn-light"
                data-toggle="modal"
                data-target="#destroyModal"
                data-id="{{ $recipe->id }}"
                data-url="{{ url('admin/recipes', $recipe) }}"
+               title="Trash Recipe"
                >
                <i class="{{ Config::get('icons.trash') }} text-pink"></i>
-               Trash
+               {{-- Trash --}}
             </button>
          @endif
          {{-- @endcan --}}
@@ -77,14 +70,14 @@
          @can('recipe-edit')
             <h4 class="dropdown-header">Admin Functions</h4>
 
-            <a href="{{ route('admin.recipes.restore', $recipe) }}" class="dropdown-item bg-light">
+            <a href="{{ route('admin.recipes.restore', $recipe) }}" class="btn btn-sm bg-light">
                <i class="{{ Config::get('icons.restore') }} text-primary"></i>
                Restore
             </a>
 
             <!-- CANNOT use a link here, must use a button -->
             <button type="button"
-               class="dropdown-item delete-model bg-light"
+               class="btn btn-sm delete-model bg-light"
                data-toggle="modal"
                data-target="#deleteModal"
                data-id="{{ $recipe->id }}"

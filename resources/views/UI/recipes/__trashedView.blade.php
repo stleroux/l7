@@ -9,7 +9,7 @@
    {{-- @include('recipes::backend.sidebar') --}}
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('recipes::backend.trashedView.controls') --}}
    {{-- @include('recipes::backend.trashedView.leave_comment') --}}
 @endsection

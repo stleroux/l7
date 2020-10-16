@@ -12,7 +12,7 @@
    <li class="breadcrumb-item">Requested Features</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.blocks.popularItems') --}}
 @endsection
 

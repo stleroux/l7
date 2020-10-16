@@ -1,4 +1,10 @@
-@extends('layouts.UI.app-10-2')
+@isset($teamGameDone)
+   @if(!$teamGameDone)
+		@extends('layouts.UI.app-10-2')
+	@else
+		@extends('layouts.UI.app-10')			
+   @endif
+@endisset
 
 @section('stylesheet')
 	<link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
@@ -27,11 +33,11 @@
 @section('rightSidebar')
 @endsection
 
-{{-- @section('right_column')
+{{-- @section('rightColumn')
    @include('UI.darts.blocks.sidebar')
 @endsection --}}
 
-@section('right_column')
+@section('rightColumn')
    <p>&nbsp;</p>
    @include('UI.darts.blocks.possibleOuts')
    @include('UI.darts.01.teams.help')

@@ -1,4 +1,4 @@
-<div class="dropdown text-center">
+{{-- <div class="dropdown text-center">
 
    <a class="dropdown-button"
       id="dropdown-menu-{{ $role->id }}"
@@ -76,3 +76,71 @@
    </div>
 
 </div>
+ --}}
+
+
+
+
+      @if(!$role->deleted_at)
+
+         @can('role-edit')
+            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-outline-light border" title="Edit Role">
+               <i class="{{ Config::get('icons.edit') }} text-primary"></i>
+               {{-- Edit --}}
+            </a>
+         @endcan
+
+         @can('role-manage')
+            <a href="{{ route('admin.roles.addAllPerms', $role) }}" class="btn btn-sm btn-outline-light border" title="Add All Permissions">
+               <i class="{{ Config::get('icons.permissions') }} text-primary"></i>
+               {{-- Add All Permissions --}}
+            </a>
+
+            <a href="{{ route('admin.roles.removeAllPerms', $role) }}" class="btn btn-sm btn-outline-light border" title="Remove All Permissions">
+               <i class="{{ Config::get('icons.permissions') }} text-danger"></i>
+               {{-- Remove All Permissions --}}
+            </a>
+         @endcan
+
+         @can('role-delete')
+            <a href="#"
+               class="destroy-model btn btn-sm btn-outline-light border"
+               data-toggle="modal"
+               data-target="#destroyModal"
+               data-id="{{ $role->id }}"
+               data-url="{{ url('admin/roles', $role->id) }}"
+               title="Trash Role">
+               <i class="{{ Config::get('icons.trash') }} text-pink"></i>
+               {{-- Trash --}}
+            </a>
+         @endcan
+
+      @endif
+
+      @if($role->deleted_at)
+
+         @can('role-manage')
+
+            {{-- <h4 class="dropdown-header">Admin Functions</h4> --}}
+
+            <a href="{{ route('admin.roles.restore', $role) }}" class="btn btn-sm btn-outline-light border" title="Restore Role">
+               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               {{-- Restore --}}
+            </a>
+
+            <!-- CANNOT use a link here, must use a button -->
+            <button
+               type="button"
+               class="delete-model btn btn-sm btn-outline-light border"
+               data-toggle="modal"
+               data-target="#deleteModal"
+               data-id="{{ $role->id }}"
+               data-url="{{ url('admin/roles/delete', $role->id) }}"
+               title="Permanently Delete Role">
+               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+               {{-- Delete Permanently --}}
+            </button>
+         
+         @endcan
+
+      @endif

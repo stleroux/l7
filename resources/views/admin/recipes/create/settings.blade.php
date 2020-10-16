@@ -4,7 +4,7 @@
 
 	<div class="row">
 	
-		<div class="col-xl-1">
+		<div class="col-xl-2">
 			@include('admin.recipes.form.fields.personal')
 		</div>
 

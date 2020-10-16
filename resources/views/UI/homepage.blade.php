@@ -16,7 +16,7 @@
    {{-- <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('UI.blocks.popularItems')
 @endsection
 

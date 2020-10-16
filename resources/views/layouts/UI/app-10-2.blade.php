@@ -34,7 +34,7 @@
             </div>
 
             <div class="col-xl-2">
-               @yield('right_column')
+               @yield('rightColumn')
             </div>
          </div>
       

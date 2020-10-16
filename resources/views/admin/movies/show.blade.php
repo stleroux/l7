@@ -13,7 +13,7 @@
    <li class="breadcrumb-item"><a href="{{ route('admin.movies.index') }}">Movies</a></li>
 @endsection
 
-{{-- @section('right_column') --}}
+{{-- @section('rightColumn') --}}
    {{-- @include('admin.movies.blocks.sidebar') --}}
    {{-- @include('admin.movies.blocks.search') --}}
    {{-- @include('admin.movies.blocks.archives') --}}

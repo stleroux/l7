@@ -13,7 +13,7 @@
 	<li class="breadcrumb-item">Request a New Feature</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 @endsection
 
 @section('content')

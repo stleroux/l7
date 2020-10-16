@@ -13,7 +13,7 @@
    <li class="breadcrumb-item">Privacy Policy</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('blocks.popularItems') --}}
    {{-- @include('projects.blocks.popularProjects') --}}
    {{-- @include('blog.blocks.popularPosts') --}}

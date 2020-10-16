@@ -14,7 +14,7 @@
    	class="form-control @error('previous_login_date') is-invalid @enderror"
       placeholder="Previous Login Date"
       data-inputmask=""
-      readonly
+      {{ $disabled ?? '' }}
    />
    
    @error('previous_login_date')

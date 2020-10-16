@@ -39,6 +39,10 @@
 	             	<h3>{{ $featuresByTypeChart->options['chart_title'] }}</h3>
 	             	{!! $featuresByTypeChart->renderHtml() !!}            			
          		</div>
+{{--          		<div class="col-xl-4">
+	             	<h3>{{ $rolesByTypeChart->options['chart_title'] }}</h3>
+	             	{!! $rolesByTypeChart->renderHtml() !!}            			
+         		</div> --}}
          	</div>
 			</div>
 		</div>
@@ -62,4 +66,5 @@
 	{!! $usersPerMonthChart->renderJs() !!}
 	{!! $bugsByTypeChart->renderJs() !!}
 	{!! $featuresByTypeChart->renderJs() !!}
+	{{-- {!! $rolesByTypeChart->renderJs() !!} --}}
 @endsection

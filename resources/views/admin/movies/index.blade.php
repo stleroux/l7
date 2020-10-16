@@ -25,7 +25,7 @@
 @section('rightSidebar')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('admin.movies.blocks.search')
    @include('admin.movies.help')
    {{-- @include('admin.movies.blocks.sidebar') --}}

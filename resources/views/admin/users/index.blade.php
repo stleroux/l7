@@ -1,34 +1,22 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.users') }}"></i>
-   @if(Route::currentRouteName('') == 'admin.users.trashed')
-      Trashed Users
-   @elseif(Route::currentRouteName('') == 'admin.users.noRoles')
-      Users Without Roles
-   @else
-      Users
-   @endif
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item active">Users</li>
-@endsection
-
-@section('rightSidebar')
-   @include('admin.users.index.sidebar')
-@endsection
+@include('admin.users.index.sections.stylesheet')
+@include('admin.users.index.sections.pageHeader')
+@include('admin.users.index.sections.breadcrumb')
+@include('admin.users.index.sections.sidebar')
+@include('admin.users.index.sections.functions')
+@include('admin.users.index.sections.formBegin')
+@include('admin.users.index.sections.formEnd')
 
 @section('content')
-
-   @include('admin.users.index.topbar')
 
    <div class="card card-trans mb-3">
       <div class="card-body p-3">
           @include('admin.users.index.grid')
+      </div>
+      <div class="card-footer p-1">
+         <span class="badge badge-dark">Active accounts</span>
+         <span class="badge badge-danger">Inactive Accounts</span>
       </div>
    </div>
 

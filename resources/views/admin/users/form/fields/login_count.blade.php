@@ -14,7 +14,7 @@
    	class="form-control @error('login_count') is-invalid @enderror"
       placeholder="Login Count"
       data-inputmask=""
-      readonly
+      {{ $disabled ?? '' }}
    />
    
    @error('login_count')

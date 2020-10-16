@@ -28,7 +28,7 @@
 @section('rightSidebar')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 @endsection
 
 @section('content')

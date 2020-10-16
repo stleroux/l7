@@ -13,7 +13,7 @@
    <li class="breadcrumb-item">Movies</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.movies.blocks.popular') --}}
    @include('UI.movies.blocks.search')
    {{-- @include('UI.movies.blocks.archives') --}}

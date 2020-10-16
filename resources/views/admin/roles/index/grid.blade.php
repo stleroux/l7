@@ -15,7 +15,7 @@
             <th class="d-none d-lg-table-cell">Permissions</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
-            <th class="no-sort" width="30px">Actions</th>
+            <th class="no-sort text-center" width="140px">Actions</th>
          </tr>
       </thead>
 
@@ -39,7 +39,7 @@
                <td class="d-none d-lg-table-cell">{{ implode(', ', $role->permissions()->get()->pluck('name')->toArray()) }}</td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($role->created_at){{ $role->created_at }}@endif">{{ $role->created_at->toDateString() }}</td>
                <td class="d-none d-lg-table-cell" title="@if($role->updated_at){{ $role->updated_at }}@endif">{{ $role->updated_at->toDateString() }}</td>
-               <td>
+               <td class="text-right">
                   @include('admin.roles.index.actions')
                </td>
             </tr>

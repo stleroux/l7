@@ -28,7 +28,7 @@
 @section('rightSidebar')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    <p>&nbsp;</p>
    @include('UI.darts.blocks.possibleOuts')
    @include('UI.darts.01.players.help')

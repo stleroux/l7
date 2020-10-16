@@ -7,7 +7,7 @@
 @section('left_column')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('admin.movies.blocks.sidebar')
    @include('admin.movies.blocks.archives')
 @endsection

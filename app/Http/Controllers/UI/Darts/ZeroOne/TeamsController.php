@@ -5,6 +5,7 @@ namespace App\Http\Controllers\UI\Darts\ZeroOne;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Gate;
 use Session;
 use App\Models\DartsGame;
 use App\Models\DartsScore;

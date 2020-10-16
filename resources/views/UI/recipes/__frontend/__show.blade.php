@@ -8,7 +8,7 @@
    @include('blocks.main_menu')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 	{{-- @include('recipes::frontend.show.controls') --}}
 	@include('recipes::frontend.show.leave_comment')
 @endsection

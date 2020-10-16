@@ -76,24 +76,26 @@
             </section>
 
             <!-- Main content -->
+
             <section class="content">
                <div class="container-fluid">
+                  @yield('formBegin')
 
-                  <div class="row">
+{{--                   <div class="row">
                      <div class="col">
                         @yield('topbar')
                      </div>
-                  </div>
+                  </div> --}}
 
                   <div class="row">
                      <div class="col-xl-10">
                         @yield('content')
                      </div>
-
                      <div class="col-xl-2">
-                        @yield('right_column')
+                        @yield('functions')
                      </div>
                   </div>
+                  @yield('formEnd')
 
                </div>
             </section>
@@ -108,7 +110,7 @@
             <!-- Control sidebar content goes here -->
             <div class="mx-2">
                @include('layouts.admin.sidebars.right.test')
-               @yield('rightSidebar')
+               @yield('sidebar')
             </div>
          </aside>
          <!-- /.control-sidebar -->

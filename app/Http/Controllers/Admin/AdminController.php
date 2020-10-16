@@ -129,7 +129,18 @@ $featuresByTypeChart_options = [
 ];
 $featuresByTypeChart = new LaravelChart($featuresByTypeChart_options);
 
-
+// $rolesByTypeChart_options = [
+//   'chart_title' => 'Users by Roles',
+//   // 'report_type' => 'group_by_string',
+//   'report_type' => 'group_by_relationship',
+//   'model' => 'App\Models\Role',
+//   'relationship_name' => 'users', // represents function user() on Role model
+//   'group_by_field' => 'id', // users.name
+//   // 'aggregate_function' => 'sum',
+//   // 'aggregate_field' => 'name',
+//   'chart_type' => 'bar',
+// ];
+// $rolesByTypeChart = new LaravelChart($rolesByTypeChart_options);
       
       return
          view('admin.dashboard.index',
@@ -155,6 +166,7 @@ $featuresByTypeChart = new LaravelChart($featuresByTypeChart_options);
               'usersPerMonthChart',
               'bugsByTypeChart',
               'featuresByTypeChart',
+              // 'rolesByTypeChart',
               // ,
               // 'newBugsCount',
               // 'newFeaturesCount',

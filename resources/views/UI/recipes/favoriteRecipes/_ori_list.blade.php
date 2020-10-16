@@ -14,7 +14,7 @@
    <li class="breadcrumb-item">My Favorite Recipes</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('UI.recipes.blocks.sidebar')
    @include('UI.recipes.blocks.popular')
    @include('UI.recipes.blocks.archives')

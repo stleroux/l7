@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Kyslik\ColumnSortable\Sortable;
+// use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable
 // class User extends Authenticatable implements MustVerifyEmail
@@ -16,7 +16,7 @@ class User extends Authenticatable
    use Notifiable;
    use SoftDeletes;
    use Favoriteability;
-   use Sortable;
+   // use Sortable;
 
    /**
    * The attributes that are mass assignable.
@@ -47,6 +47,45 @@ class User extends Authenticatable
    ];
 
    protected $dates = ['created_at','updated_at','deleted_at'];
+
+   /////////////////////////////////////////////////////////////////////
+   // Set the default value for the status field to 0
+   protected $attributes = [
+      'dart_doubleOut' => 0,
+   ];
+
+   public function getDartAttribute($attribute)
+   {
+      return $this->dartOptions()[$attribute];
+   }
+
+   public static function dartOptions()
+   {
+      return [
+         0 => '0',         
+         1 => '1',
+         2 => '2',
+         3 => '3',
+         4 => '4',
+         5 => '5',
+         6 => '6',
+         7 => '7',
+         8 => '8',
+         9 => '9',
+         10 => '10',
+         11 => '11',
+         12 => '12',
+         13 => '13',
+         14 => '14',
+         15 => '15',
+         16 => '16',
+         17 => '17',
+         18 => '18',
+         19 => '19',
+         20 => '20',
+      ];
+   }
+   /////////////////////////////////////////////////////////////////////
 
    /////////////////////////////////////////////////////////////////////
    // 
@@ -108,6 +147,19 @@ class User extends Authenticatable
    {
       return $query
          ->where('account_status', '=', 0);
+   }
+
+   // public function scopeNoRoles($query)
+   // {
+   //    return $query
+   //       ->whereNull('roles');
+   // }
+
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
    }
 
 }

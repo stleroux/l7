@@ -8,7 +8,7 @@
    @include('blocks.main_menu')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('recipes::blocks.archives')
 @endsection
 

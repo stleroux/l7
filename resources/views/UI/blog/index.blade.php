@@ -8,7 +8,7 @@
    Blog
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('UI.blog.blocks.search')
    @include('UI.blog.blocks.popular')
    @include('UI.blog.blocks.archives')

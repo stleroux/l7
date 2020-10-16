@@ -48,12 +48,12 @@
       <!-- Menu Footer-->
       <li class="user-footer">
          
-         <div class="px-1 py-0"><small>Features</small></div>
+         {{-- <div class="px-1 py-0"><small>Features</small></div> --}}
          <div class="form-row pb-1">
             <div class="col pt-1">
                <a href="{{ route('features.create') }}" class="btn btn-outline-secondary btn-xs btn-block mt-0">
    			      <i class="{{ Config::get('icons.feature') }} text-success"></i>
-   			      Request Feature
+   			      Request A Feature
    		       </a>
             </div>
          
@@ -64,11 +64,11 @@
             </div>
          </div>
 
-         <div class="px-1 py-0"><small>Bugs</small></div>
+         {{-- <div class="px-1 py-0"><small>Bugs</small></div> --}}
          <div class="form-row pb-1">
             <div class="col">
                <a href="{{ route('bugs.create') }}" class="btn btn-outline-secondary btn-xs btn-block mt-1">
-                  Report Bug
+                  Report A Bug
                </a>
             </div>
             <div class="col">
@@ -91,17 +91,17 @@
             {{-- </div>
          </div> --}}
 
-         <div class="px-1 py-0"><small>Profile</small></div>
-         <div class="form-row">
+         {{-- <div class="px-1 py-0"><small>Profile</small></div> --}}
+         <div class="form-row pb-1">
             <div class="col">
                <a href="{{ route('profile.show', Auth::user()->id) }}" class="btn btn-outline-primary btn-xs btn-block mt-1">
-                  View
+                  View Profile
                </a>
             </div>
 
             <div class="col">
                <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-outline-primary btn-xs btn-block mt-1">
-               	Edit
+               	Edit Profile
                </a>
             </div>
          </div>
@@ -114,9 +114,9 @@
            </div>
         </div>
 
-        <div class="p-1">&nbsp;</div>
+        {{-- <div class="p-0">&nbsp;</div> --}}
 
-         <a class="btn btn-outline-danger btn-sm btn-block mt-1" href="{{ route('logout') }}"
+         <a class="btn btn-outline-danger btn-sm btn-block mt-3" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();">
             {{ __('Logout') }}

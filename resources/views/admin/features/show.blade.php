@@ -14,7 +14,7 @@
    <li class="breadcrumb-item">Show</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.blocks.popularItems') --}}
 @endsection
 

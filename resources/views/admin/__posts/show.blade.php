@@ -7,7 +7,7 @@
 @section('pageHeader')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('admin.posts.sidebar')
 @endsection
 

@@ -65,11 +65,11 @@
 {{-- </li> --}}
 
 
-<small>
-	<ul class="navbar-nav mr-5">
+<small class="">
+	<ul class="mr-3">
 		@if($newBugsCount)
-			<li class="nav-item d-none d-sm-inline-block">
-				<a class="nav-link text-danger" href="{{ route('admin.bugs.new') }}">
+			<li class="d-none d-sm-inline-block p-2">
+				<a class="text-danger" href="{{ route('admin.bugs.new') }}">
 					<i class="{{ Config::get('icons.bugs') }} text-danger"></i>
 					{{ $newBugsCount }}
 				</a>
@@ -77,8 +77,8 @@
 		@endif
 
 		@if($newFeaturesCount)
-			<li class="nav-item d-none d-sm-inline-block">
-				<a class="nav-link text-success" href="{{ route('admin.features.new') }}">
+			<li class="d-none d-sm-inline-block p-2">
+				<a class="text-success" href="{{ route('admin.features.new') }}">
 					<i class="{{ Config::get('icons.features') }} text-success"></i>
 					{{ $newFeaturesCount }}
 				</a>

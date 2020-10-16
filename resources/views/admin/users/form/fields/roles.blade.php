@@ -1,4 +1,8 @@
-<div class="card {{ ($user->account_status ? 'card-info' : 'card-danger') }}">
+@if(Route::currentRouteName('') == 'admin.users.create')
+   <div class="card card-info">
+@else
+   <div class="card {{ ($user->account_status ? 'card-info' : 'card-danger') }}">
+@endif
 
    <div class="card-header">
       <div class="card-title">Roles</div>
@@ -10,10 +14,10 @@
          <dl class="pl-3">
             @foreach($roles as $role)
                <div class="row">
-                  <div class="col-7">
+                  <div class="col-6">
                      {{ ucfirst($role->name) }}
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                      <input
                         class="form-check-input"
                         id="roles"
@@ -28,7 +32,7 @@
                         @if($user->roles->pluck('id')->contains($role->id)) checked @endif
                      />
                   </div>
-                  <div class="col">
+                  <div class="col text-right">
                      <i class="far fa-question-circle"
                         data-toggle="tooltip"
                         data-placement="left"

@@ -13,5 +13,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    Route::delete('users/mass_delete',		'UsersController@massDelete')		->name('users.mass_delete');
    Route::get('users/trashed',				'UsersController@trashed')			->name('users.trashed');
    Route::get('users/noRoles',				'UsersController@noRoles')			->name('users.noRoles');
+   Route::get('users/active',             'UsersController@active')        ->name('users.active');
+   Route::get('users/inactive',           'UsersController@inactive')      ->name('users.inactive');
    Route::resource('users',					'UsersController');
 });

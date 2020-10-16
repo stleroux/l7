@@ -9,7 +9,7 @@
 	@include('recipes::frontend.sidebar')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 	@include('blocks.popularRecipes')
 	@include('recipes::frontend.blocks.archives')
 @endsection

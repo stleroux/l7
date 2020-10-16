@@ -1,4 +1,8 @@
-<div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
+@if(Route::currentRouteName('') == 'admin.users.create')
+   <div class="card card-primary">
+@else
+   <div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
+@endif
 
    <div class="card-header">
       <div class="card-title">Account Information</div>
@@ -7,11 +11,11 @@
    <div class="card-body p-3">
    	
    	<div class="form-row">
-         <div class="col-12 col-md-2">@include('admin.users.form.fields.account_status')</div>
+         <div class="col-12 col-md-3">@include('admin.users.form.fields.account_status')</div>
          @if(Route::currentRouteName('') == 'admin.users.edit')
             <div class="col-12 col-md-3">@include('admin.users.form.fields.previous_login_date')</div>
             <div class="col-12 col-md-3">@include('admin.users.form.fields.last_login_date')</div>
-            <div class="col-12 col-md-3">@include('admin.users.form.fields.login_count')</div>
+            <div class="col-12 col-md-2">@include('admin.users.form.fields.login_count')</div>
          @endif
       </div>
 

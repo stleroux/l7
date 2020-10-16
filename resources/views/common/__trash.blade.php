@@ -4,7 +4,7 @@
    @include('blocks.admin_menu')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 @endsection
 
 @section('content')

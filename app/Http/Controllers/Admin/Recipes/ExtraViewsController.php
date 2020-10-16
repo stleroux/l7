@@ -130,7 +130,8 @@ class ExtraViewsController extends RecipesController
          }
       }
 
-      return view('admin.recipes.pages.future.index', compact('recipes','letters','categories'));
+      // return view('admin.recipes.pages.future.index', compact('recipes','letters','categories'));
+      return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 
 
@@ -303,7 +304,8 @@ class ExtraViewsController extends RecipesController
             ->paginate(18);
       }
 
-      return view('admin.recipes.pages.new.index', compact('recipes','letters','categories'));
+      // return view('admin.recipes.pages.new.index', compact('recipes','letters','categories'));
+      return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 
 
@@ -416,7 +418,8 @@ class ExtraViewsController extends RecipesController
          }
       }
       
-      return view('admin.recipes.pages.trashed.index', compact('recipes','letters','categories'));
+      // return view('admin.recipes.pages.trashed.index', compact('recipes','letters','categories'));
+      return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 
 
@@ -495,7 +498,8 @@ class ExtraViewsController extends RecipesController
          }
       }
 
-      return view('admin.recipes.pages.unpublished.index', compact('recipes','letters','categories'));
+      // return view('admin.recipes.pages.unpublished.index', compact('recipes','letters','categories'));
+      return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 
 

@@ -1,26 +1,16 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.recipes') }}"></i>
-   Published Recipes
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item">Recipes</li>
-@endsection
-
-@section('rightSidebar')
-@endsection
-
-@section('right_column')
-@endsection
+@include('admin.recipes.index.sections.stylesheet')
+@include('admin.recipes.index.sections.pageHeader')
+@include('admin.recipes.index.sections.breadcrumb')
+@include('admin.recipes.index.sections.sidebar')
+@include('admin.recipes.index.sections.functions')
+@include('admin.recipes.index.sections.formBegin')
+@include('admin.recipes.index.sections.formEnd')
 
 @section('content')
 
-	@include('admin.recipes.index.topbar')
+	{{-- @include('admin.recipes.index.topbar') --}}
 
    <div class="row">
       <div class="col">

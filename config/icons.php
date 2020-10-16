@@ -2,6 +2,7 @@
 
 return [
    'about-us'        => 'fas fa-fw fa-question-circle',
+   'active'          => 'fas fa-fw fa-battery-full',
    'add'             => 'fa  fa-fw fa-plus-square',
    'addToCart'       => 'fas fa-fw fa-cart-plus',
    'approve'         => 'far fa-fw fa-thumbs-up',
@@ -36,6 +37,7 @@ return [
    'home'            => 'fas fa-fw fa-home',
    'homepage'        => 'fas fa-fw fa-home',
    'image'           => 'far fa-fw fa-image',
+   'inactive'        => 'fas fa-fw fa-battery-empty',
    'info'            => 'fas fa-fw fa-info-circle',
    'invoicer'        => 'far fa-fw fa-money-bill-alt',
    'invoicer-clients' => 'fas fa-fw fa-users',

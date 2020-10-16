@@ -22,6 +22,7 @@
 	   data-inputmask=""
 	   @if($user->invoicer_client || old('invoicer_client')) checked @endif
 	   {{ $disabled ?? '' }}
+	   {{ $readonly ?? '' }}
 	/>
 
 	@error('invoicer_client')

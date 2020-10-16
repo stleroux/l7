@@ -13,7 +13,7 @@
 	<li class="breadcrumb-item">Edit Bug Report</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 @endsection
 
 @section('content')

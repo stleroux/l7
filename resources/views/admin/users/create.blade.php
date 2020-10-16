@@ -1,38 +1,17 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
-   Create User
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
-   <li class="breadcrumb-item active">Create</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.users.create.sections.stylesheet')
+@include('admin.users.create.sections.pageHeader')
+@include('admin.users.create.sections.breadcrumb')
+@include('admin.users.create.sections.sidebar')
+@include('admin.users.create.sections.functions')
+@include('admin.users.create.sections.formBegin')
+@include('admin.users.create.sections.formEnd')
 
 @section('content')
 
-   <form action="{{ route('admin.users.store') }}" method="POST" class="m-0 p-0">
-      @csrf
-
-      @include('admin.users.create.topbar')
-
-      {{-- <div class="row justify-content-center">
-         <div class="col-12 col-md-3">
-            @include('admin.users.form.fields.approved')
-         </div>
-      </div> --}}
-
       <div class="row">
          <div class="col-xl-6">
-            {{-- @include('admin.users.form.account') --}}
             @include('admin.users.form.user')
             @include('admin.users.form.contact')
             @include('admin.users.form.address')

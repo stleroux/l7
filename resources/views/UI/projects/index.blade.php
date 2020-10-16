@@ -13,7 +13,7 @@
    <li class="breadcrumb-item">Projects</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('UI.projects.blocks.popular')
 @endsection
 

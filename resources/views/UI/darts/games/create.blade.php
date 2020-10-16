@@ -16,7 +16,7 @@
 @section('rightSidebar')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    @include('UI.darts.blocks.sidebar')
 @endsection
 

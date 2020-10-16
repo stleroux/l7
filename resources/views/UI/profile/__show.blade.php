@@ -12,7 +12,7 @@
    View Profile
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('blocks.member') --}}
    @include('UI.profile.blocks.contributions')
 @endsection

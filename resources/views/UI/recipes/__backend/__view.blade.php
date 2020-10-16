@@ -9,7 +9,7 @@
 	@include('recipes::backend.sidebar')
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 	{{-- @include('recipes::backend.view.controls') --}}
 	{{-- @include('recipes::backend.view.leave_comment') --}}
 @endsection

@@ -13,7 +13,7 @@
    <li class="breadcrumb-item">About Us</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.blocks.popularItems') --}}
 @endsection
 

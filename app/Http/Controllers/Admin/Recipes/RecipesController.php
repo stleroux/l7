@@ -352,8 +352,10 @@ class RecipesController extends Controller
          $recipe->category_id = $request->category_id;
          $recipe->published_at = $request->published_at;
          $recipe->servings = $request->servings;
-         $recipe->prep_time = $request->prep_time;
-         $recipe->cook_time = $request->cook_time;
+         $recipe->prep_time_hours = $request->prep_time_hours;
+         $recipe->prep_time_minutes = $request->prep_time_minutes;
+         $recipe->cook_time_hours = $request->cook_time_hours;
+         $recipe->cook_time_minutes = $request->cook_time_minutes;
          $recipe->personal = $request->personal;
          $recipe->source = $request->source;
          $recipe->private_notes = $request->private_notes;
@@ -399,6 +401,7 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function update(RecipeRequest $request, $id)
    {
+      // dd($request->submit);
       // Get the recipe values from the database
       $recipe = Recipe::find($id);
       // dd($recipe);
@@ -415,8 +418,10 @@ class RecipesController extends Controller
          $recipe->category_id = $request->category_id;
          $recipe->published_at = $request->published_at;
          $recipe->servings = $request->servings;
-         $recipe->prep_time = $request->prep_time;
-         $recipe->cook_time = $request->cook_time;
+         $recipe->prep_time_hours = $request->prep_time_hours;
+         $recipe->prep_time_minutes = $request->prep_time_minutes;
+         $recipe->cook_time_hours = $request->cook_time_hours;
+         $recipe->cook_time_minutes = $request->cook_time_minutes;
          $recipe->personal = $request->personal;
          $recipe->source = $request->source;
          $recipe->private_notes = $request->private_notes;
@@ -452,12 +457,19 @@ class RecipesController extends Controller
          'alert-type' => 'success'
       ];
 
-      if(Session::get('fromPage') === 'recipes.index') {
-         return redirect()->route('recipes.index', 'all')->with($notification);
-      } else {
-         // return redirect()->route(Session::get('fromPage'));
-         return redirect(Session::get('fromPage'))->with($notification);
+      // if(Session::get('fromPage') === 'recipes.index') {
+      //    return redirect()->route('recipes.index', 'all')->with($notification);
+      // } else {
+      //    // return redirect()->route(Session::get('fromPage'));
+      //    return redirect(Session::get('fromPage'))->with($notification);
+      // }
+
+      if ($request->submit == 'continue')
+      {
+         return back()->with($notification);
       }
+
+      return redirect()->route('admin.recipes.index')->with($notification);
   }
 
 

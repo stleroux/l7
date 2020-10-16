@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\UI;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
-use Session;
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
-use Image;
+use Auth;
 use File;
+use Illuminate\Http\Request;
+use Image;
+use Session;
 
 class ProfileController extends Controller
 {
@@ -132,26 +133,35 @@ class ProfileController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-   public function update(Request $request)
+   // public function update(ProfileRequest $request, User $user)
+   public function update(ProfileRequest $request)
    {
-      $rules = [
-         'email' => 'required|email|unique:users,email,' . Auth::user()->id,
-         'first_name' => 'required|min:2',
-         'last_name' => 'required|min:2',
-      ];
+      // dd($user);
+      // dd($request->invoicer_client);
+      // dd("HERE");
+      // dd($request);
 
-      $customMessages = [
-         'email.required' => 'The :attribute field can not be left blank.',
-         'email.unique' => 'This :attribute address is already taken.',
-         'email.email' => 'The email address is not valid.',
-         'first_name.required' => 'The first name field can not be left blank.',
-         'first_name.min' => 'The first name field must be at least 2 characters long.',
-         'last_name.min' => 'The last name field must be at least 2 characters long.',
-      ];
+      // $rules = [
+      //    'email' => 'required|email|unique:users,email,' . Auth::user()->id,
+      //    'first_name' => 'required|min:2',
+      //    'last_name' => 'required|min:2',
+      //    'company_name' => 'required_if:invoicer_client,==,on',
+      // ];
 
-      $this->validate($request, $rules, $customMessages);
+      // $customMessages = [
+      //    'email.required' => 'The :attribute field can not be left blank.',
+      //    'email.unique' => 'This :attribute address is already taken.',
+      //    'email.email' => 'The email address is not valid.',
+      //    'first_name.required' => 'The first name field can not be left blank.',
+      //    'first_name.min' => 'The first name field must be at least 2 characters long.',
+      //    'last_name.min' => 'The last name field must be at least 2 characters long.',
+      //    'company_name.required_if' => 'The :attribute field is required when :other is Yes.',
+      // ];
+
+      // $this->validate($request, $rules, $customMessages);
       
       $user = User::findOrFail(Auth::user()->id);
+      // dd($user);
 
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');

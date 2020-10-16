@@ -12,14 +12,14 @@
    <li class="breadcrumb-item">Edit Profile</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.blocks.member') --}}
    @include('UI.profile.blocks.contributions')
 @endsection
 
 @section('content')
 
-   <form action="{{ route('profile.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+   <form action="{{ route('profile.update', Auth::user()) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
 

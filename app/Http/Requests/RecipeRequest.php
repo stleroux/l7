@@ -42,8 +42,10 @@ class RecipeRequest extends FormRequest
             'image'         => 'image',
             'category_id'   => 'required|integer',
             'servings'      => 'required|integer',
-            'prep_time'     => 'required|integer',
-            'cook_time'     => 'required|integer',
+            'prep_time_hours'     => 'required|integer',
+            'prep_time_minutes'     => 'required|integer',
+            'cook_time_hours'     => 'required|integer',
+            'cook_time_minutes'     => 'required|integer',
             'source'        => 'sometimes',
             'personal'      => 'sometimes',
             'private_notes' => 'sometimes',
@@ -60,8 +62,10 @@ class RecipeRequest extends FormRequest
             'image'         => 'image',
             'category_id'   => 'required|integer',
             'servings'      => 'required|integer',
-            'prep_time'     => 'required|integer',
-            'cook_time'     => 'required|integer',
+            'prep_time_hours'     => 'required|integer',
+            'prep_time_minutes'     => 'required|integer',
+            'cook_time_hours'     => 'required|integer',
+            'cook_time_minutes'     => 'required|integer',
             'source'        => 'sometimes',
             'personal'      => 'sometimes',
             'private_notes' => 'sometimes',
@@ -92,8 +96,10 @@ class RecipeRequest extends FormRequest
             'ingredients.required'  => 'List the recipe ingredients',
             'methodology.required'  => 'Please enter the recipe\'s methodology',
             'servings.required'     => 'Required',
-            'prep_time.required'    => 'Required',
-            'cook_time.required'    => 'Required',
+            'prep_time_hours.required'    => 'Required',
+            'prep_time_minutes.required'    => 'Required',
+            'cook_time_hours.required'    => 'Required',
+            'cook_time_minutes.required'    => 'Required',
             ];
          }
          case 'PUT':
@@ -108,8 +114,10 @@ class RecipeRequest extends FormRequest
             'ingredients.required'  => 'List the recipe ingredients',
             'methodology.required'  => 'Please enter the recipe\'s methodology',
             'servings.required'     => 'Required',
-            'prep_time.required'    => 'Required',
-            'cook_time.required'    => 'Required',
+            'prep_time_hours.required'    => 'Required',
+            'prep_time_minutes.required'    => 'Required',
+            'cook_time_hours.required'    => 'Required',
+            'cook_time_minutes.required'    => 'Required',
             ];
          }
          default:break;

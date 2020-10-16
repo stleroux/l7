@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
 @section('stylesheet')
 @endsection
@@ -22,9 +22,13 @@
    @include('admin.roles.index.sidebar')
 @endsection
 
+@section('rightColumn')
+   @include('admin.roles.index.rightColumn')   
+@endsection
+
 @section('content')
 
-   @include('admin.roles.index.topbar')
+   {{-- @include('admin.roles.index.topbar') --}}
 
    <div class="card mb-3">
       <div class="card-body p-3">

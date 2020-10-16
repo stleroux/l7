@@ -16,7 +16,7 @@
 	<li class="breadcrumb-item active">{{ $recipe->title }}</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
 	@include('UI.recipes.blocks.sidebar')
 	@include('UI.recipes.blocks.popular')
 	@include('UI.recipes.blocks.archives')

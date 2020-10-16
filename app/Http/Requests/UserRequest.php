@@ -36,30 +36,30 @@ class UserRequest extends FormRequest
 			case 'POST':
 			{
 				return [
-					'first_name' => 'required',
-					'last_name' => 'required',
+					// 'first_name' => 'required',
+					// 'last_name' => 'required',
 					'email'  => 'required|email|unique:users,email',
-					'company_name' => 'required_if:invoicer_client,==,on',
-					'telephone' => 'required_if:invoicer_client,==,on',
-					'address_1' => 'required_if:invoicer_client,==,on',
-					'city' => 'required_if:invoicer_client,==,on',
-					'province' => 'required_if:invoicer_client,==,on',
-					'postal_code' => 'required_if:invoicer_client,==,on',
+					// 'company_name' => 'required_if:invoicer_client,==,on',
+					// 'telephone' => 'required_if:invoicer_client,==,on',
+					// 'address_1' => 'required_if:invoicer_client,==,on',
+					// 'city' => 'required_if:invoicer_client,==,on',
+					// 'province' => 'required_if:invoicer_client,==,on',
+					// 'postal_code' => 'required_if:invoicer_client,==,on',
 				];
 			}
 			case 'PUT':
 			case 'PATCH':
 			{
 				return [
-					'first_name' => 'required',
-					'last_name' => 'required',
+					// 'first_name' => 'required',
+					// 'last_name' => 'required',
 					'email' => "required|unique:users,email,{$this->user->id}",
-					'company_name' => 'required_if:invoicer_client,==,on',
-					'telephone' => 'required_if:invoicer_client,==,on',
-					'address_1' => 'required_if:invoicer_client,==,on',
-					'city' => 'required_if:invoicer_client,==,on',
-					'province' => 'required_if:invoicer_client,==,on',
-					'postal_code' => 'required_if:invoicer_client,==,on',
+					// 'company_name' => 'required_if:invoicer_client,==,on',
+					// 'telephone' => 'required_if:invoicer_client,==,on',
+					// 'address_1' => 'required_if:invoicer_client,==,on',
+					// 'city' => 'required_if:invoicer_client,==,on',
+					// 'province' => 'required_if:invoicer_client,==,on',
+					// 'postal_code' => 'required_if:invoicer_client,==,on',
 				];
 			}
 			default:break;

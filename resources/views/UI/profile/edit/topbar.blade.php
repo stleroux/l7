@@ -1,4 +1,4 @@
-<div class="col">   
+<div class="col mt-2">   
 
    <button type="submit" class="btn btn-sm btn-success" name="submit" value="update" title="Update and Close">
       <i class="{{ Config::get('icons.update') }}"></i>

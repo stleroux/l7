@@ -12,7 +12,7 @@
    <li class="breadcrumb-item">Show Profile</li>
 @endsection
 
-@section('right_column')
+@section('rightColumn')
    {{-- @include('UI.blocks.member') --}}
    @include('UI.profile.blocks.contributions')
 @endsection
@@ -35,7 +35,7 @@
                <div class="col-xl-9">
                   @include('UI.profile.show.general')
                   @include('UI.profile.show.address')
-                  @include('UI.profile.show.other')                  
+                  @include('UI.profile.show.other')
                </div>
 
                <div class="col-xl-3">

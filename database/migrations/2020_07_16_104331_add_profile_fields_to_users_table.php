@@ -31,7 +31,7 @@ class AddProfileFieldsToUsersTable extends Migration
             $table->string('province', 60)->nullable();
             $table->string('postal_code', 20)->nullable();
             $table->text('notes', 65535)->nullable();
-            $table->integer('dart_doubleOut')->unsigned()->nullable()->default(10);
+            $table->integer('dart_doubleOut')->unsigned()->nullable()->default(0);
             $table->boolean('invoicer_client')->nullable();
             $table->timestamp('previous_login_date')->nullable();
             $table->timestamp('last_login_date')->nullable();

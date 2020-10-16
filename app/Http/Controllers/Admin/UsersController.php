@@ -179,7 +179,9 @@ class UsersController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('user-edit'), 403);
 
+      // used to email user is accoutn status changes
       $account_status = $user->account_status;
+      // dd($user->account_status);
 
       // assign values from form fields
       $user->first_name = $request->first_name;
@@ -189,7 +191,10 @@ class UsersController extends Controller
       {
          $user->password = Hash::make($request->password);
       }
-      $user->account_status = (!isset($request->account_status)) ? 0 : 1 ;
+      
+      $user->account_status = (isset($request->account_status)) ? 0 : 1 ;
+      // $user->account_status = $request->account_status;
+
       $user->public_email = (!isset($request->public_email)) ? 0 : 1 ;
       $user->telephone = $request->telephone;
       $user->cell = $request->cell;
@@ -493,6 +498,42 @@ class UsersController extends Controller
       abort_unless(Gate::allows('user-manage'), 403);
 
       $users = User::whereDoesntHave('roles')->get();
+
+      return view('admin.users.index', compact('users'));
+   }
+
+
+   ##################################################################################################################
+   #
+   #
+   #
+   #
+   #
+   ##################################################################################################################
+   public function active()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
+
+      $users = User::active()->get();
+
+      return view('admin.users.index', compact('users'));
+   }
+
+
+   ##################################################################################################################
+   #
+   #
+   #
+   #
+   #
+   ##################################################################################################################
+   public function inactive()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
+
+      $users = User::inactive()->get();
 
       return view('admin.users.index', compact('users'));
    }

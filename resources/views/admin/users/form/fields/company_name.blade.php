@@ -22,5 +22,6 @@
          <strong>{{ $message }}</strong>
       </span>
    @enderror
+   {{-- <span><small>Required if user is a client member of the Invoicer module</small></span> --}}
 
 </div>
