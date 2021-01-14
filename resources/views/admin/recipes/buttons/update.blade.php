@@ -5,7 +5,7 @@
       type="submit"
       formmethod="POST"
       title="Update Recipe">
-      <i class="{{ Config::get('icons.save') }}"></i>
+      <i class="{{ config('icons.save') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
 

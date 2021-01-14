@@ -4,7 +4,7 @@
       <div class="modal-content text-dark">
          <div class="modal-header bg-primary p-2 m-0">
             <h5 class="modal-title" id="exampleModalLongTitle">
-               <i class="{{ Config::get('icons.roles') }}"></i>
+               <i class="{{ config('icons.roles') }}"></i>
                Roles Help
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -16,39 +16,39 @@
 
             <div class="card m-0 p-0">
                <div class="card-body p-2 m-0">
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
-                  <p>Role(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
+                  <p>Tag(s) related help content will go here</p>
                </div>
             </div>
 
@@ -62,4 +62,4 @@
    
    </div><!-- modal dialog -->
 
-</div><!-- modal
+</div><!-- modal -->

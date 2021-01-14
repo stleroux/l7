@@ -18,7 +18,7 @@
    <div class="card mb-3">
       <!--CARD HEADER-->
       <div class="card-header section_header p-2">
-         <i class="{{ Config::get('buttons.movies') }}"></i>
+         <i class="{{ config('buttons.movies') }}"></i>
          Movies
          <div class="float-right">
             @include('movies.buttons.myFavorites', ['size'=>'xs', 'btn_label'=>'My Favorites'])

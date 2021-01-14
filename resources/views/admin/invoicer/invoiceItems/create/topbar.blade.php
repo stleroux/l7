@@ -11,7 +11,7 @@
 				Cancel
 			</a>
 			<button type="submit" name="submit" class="btn btn-sm btn-primary">
-				<i class="{{ Config::get('icons.save') }}"></i>
+				<i class="{{ config('icons.save') }}"></i>
 				Add Billable
 			</button>
 		</div>

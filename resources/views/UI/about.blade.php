@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.about-us') }}"></i>
+   <i class="{{ config('icons.about-us') }}"></i>
    About Us
 @endsection
 
@@ -24,11 +24,11 @@
    {{-- ABOUT US  --}}
    <div class="card card-trans-4 mb-2">
       <div class="card-header section_header">
-         <i class="{{ Config::get('icons.about-us') }}"></i>
+         <i class="{{ config('icons.about-us') }}"></i>
          About Us
       </div>
 
-      <div class="card-body">
+      <div class="card-body text-light">
          <p>Just some text about us</p>
       </div>
    </div>
@@ -38,10 +38,10 @@
       <div class="col-sm-6 pr-1">
          <div class="card card-trans-4 mb-2">
             <div class="card-header section_header">
-               <i class="{{ Config::get('icons.male') }}"></i>
+               <i class="{{ config('icons.male') }}"></i>
                About Stephane
             </div>
-            <div class="card-body">
+            <div class="card-body text-light">
                <p>Just some text about me</p>
                <p>Just some text about me</p>
             </div>
@@ -52,10 +52,10 @@
       <div class="col-sm-6 pl-1">
          <div class="card card-trans-4 mb-2">
             <div class="card-header section_header">
-               <i class="{{ Config::get('icons.female') }}"></i>
+               <i class="{{ config('icons.female') }}"></i>
                About Stacie
             </div>
-            <div class="card-body">
+            <div class="card-body text-light">
                <p>Just some text about her</p>
                <p>Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her</p>
             </div>

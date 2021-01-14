@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.contact-us') }}"></i>
+   <i class="{{ config('icons.contact-us') }}"></i>
    Thank you for your message
 @endsection
 

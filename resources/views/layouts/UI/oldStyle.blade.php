@@ -31,7 +31,7 @@
 @endif
 
    <a class="navbar-brand m-0 p-0" href="/">
-      <h4 class="my-0 mx-0 py-0 px-0">{{ Config::get('settings.app_name') }}</h4>
+      <h4 class="my-0 mx-0 py-0 px-0">{{ config('settings.app_name') }}</h4>
    </a>
    
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

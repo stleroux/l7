@@ -45,9 +45,15 @@ class InvoicerClient extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 	// A client has many invoices
 	public function invoices() {
-		return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+		// return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+		return $this->hasMany('App\Models\InvoicerInvoice', 'client_id')->orderBy('id', 'desc');
 	}
-	
+
+	// A client has many invoices
+	public function payments() {
+		// return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+		return $this->hasMany('App\Models\InvoicerActivity', 'client_id')->where('activity','payment')->orderBy('id', 'desc');
+	}	
 	// public function user() { 
 	// 	return $this->belongsTo('App\Models\User');
 	// }
@@ -56,27 +62,27 @@ class InvoicerClient extends Model
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
-   public function getCreatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getCreatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(settings('dateFormat'));
+   //       return $date;
+   //    }
       
       // return 'N/A';
-   }
+   // }
 
-   public function getUpdatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(setting('dateFormat'));
-         return $date;
-      }
+   // public function getUpdatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(settings('dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
 
 }

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Admin\Invoicer;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InvoiceItemRequest;
+use App\Models\Carving;
 use App\Models\InvoicerInvoice;
 use App\Models\InvoicerInvoiceItem;
 use App\Models\InvoicerProduct;
-use Session;
 use Config;
 use DB;
 use Gate;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
+use Session;
 
 class InvoiceItemsController extends Controller
 {
@@ -45,11 +48,12 @@ class InvoiceItemsController extends Controller
 
 		$invoice = InvoicerInvoice::findOrFail($inv_id);
 		$products = InvoicerProduct::orderBy('code', 'asc')->get();
+		$carvings = Carving::all();
 		// ->pluck('code','id');
 		// dd($products);
 		// $products = Product::orderBy('code', 'asc')->get()->toArray();
 
-		return view('admin.invoicer.invoiceItems.create.create', compact('invoice', 'products'));
+		return view('admin.invoicer.invoiceItems.create.create', compact('invoice', 'products','carvings'));
 	}
 
 
@@ -153,22 +157,31 @@ class InvoiceItemsController extends Controller
 # ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 // Store a newly created resource in storage
 ##################################################################################################################
-	public function store(Request $request)
+	public function store(InvoiceItemRequest $request)
 	{
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
-		// validate the data
-		$this->validate($request, [
-			'product_id' => 'required',
-			'work_date' => 'required',
-			'quantity' => 'required',
-			'price' => 'required'
-		]);
+		if($request->carving)
+		{
+			$product = $request->carving ;
+			// dd($product);
+		}
+		if($request->product)
+		{
+			$product = $request->product;
+			// dd($product);
+		}
+		if($request->item)
+		{
+			$product = $request->item;
+			// dd($product);
+		}
 
 		$item = new InvoicerInvoiceItem;
 			$item->invoice_id = $request->invoice_id;
-			$item->product_id = $request->product_id;
+			// $item->product_id = $request->product_id;
+			$item->product = $product;
 			$item->notes = $request->notes;
 			$item->work_date = $request->work_date;
 			$item->quantity = $request->quantity;
@@ -181,7 +194,7 @@ class InvoiceItemsController extends Controller
 		// \App\Invoice::update($request->invoice_id);
 
 		// set a flash message to be displayed on screen
-		Session::flash('success','');
+		// Session::flash('success','');
 		$notification = [
 			'message' => 'The billable item was successfully added!',
 			'alert-type' => 'success'
@@ -201,22 +214,15 @@ class InvoiceItemsController extends Controller
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, $id)
+	public function update(InvoiceItemRequest $request, $id)
 	{
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 		
-		// validate the data
-		$this->validate($request, [
-			'product_id' => 'required',
-			'work_date' => 'required',
-			'quantity' => 'required',
-			'price' => 'required'
-		]);
-
 		$item = InvoicerInvoiceItem::find($id);
 			$item->invoice_id = $request->invoice_id;
-			$item->product_id = $request->product_id;
+			// $item->product_id = $request->product_id;
+			$item->product = $request->product;
 			$item->notes = $request->notes;
 			$item->work_date = $request->work_date;
 			$item->quantity = $request->quantity;

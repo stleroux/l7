@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\Invoicer\Invoice;
+use App\Models\InvoicerInvoice;
 
 class InvoicedPDFMail extends Mailable
 {

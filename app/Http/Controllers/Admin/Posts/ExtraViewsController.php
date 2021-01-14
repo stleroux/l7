@@ -80,7 +80,8 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('admin.posts.pages.future.index', compact('posts','letters'));
+      // return view('admin.posts.pages.future.index', compact('posts','letters'));
+      return view('admin.posts.index', compact('posts','letters'));
    }
 
 
@@ -125,7 +126,8 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('admin.posts.pages.new.index', compact('posts','letters'));
+      // return view('admin.posts.pages.new.index', compact('posts','letters'));
+      return view('admin.posts.index', compact('posts','letters'));
    }
 
 
@@ -204,7 +206,8 @@ class ExtraViewsController extends Controller
          $posts = Post::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
       }
       
-      return view('admin.posts.pages.trashed.index', compact('posts','letters'));
+      // return view('admin.posts.pages.trashed.index', compact('posts','letters'));
+      return view('admin.posts.index', compact('posts','letters'));
    }
 
 
@@ -253,7 +256,8 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      return view('admin.posts.pages.unpublished.index', compact('posts','letters'));
+      // return view('admin.posts.pages.unpublished.index', compact('posts','letters'));
+      return view('admin.posts.index', compact('posts','letters'));
    }
 
 

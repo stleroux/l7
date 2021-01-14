@@ -2,9 +2,9 @@
 
 use Spatie\Honeypot\ProtectAgainstSpam;
 
-// Route::get('/', function () {
-// 	return view('UI/homepage');
-// });
+Route::get('/phpinfo', function () {
+	return view('phpinfo');
+});
 
 // Route::group(['middleware' => 'verified'], function () {
 
@@ -14,6 +14,7 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 
 // });
 
+
 Route::get('/', 'UI\SiteController@index')->name('homepage');
 Route::get('/about', 'UI\SiteController@about')->name('about');
 Route::get('/terms', 'UI\SiteController@terms')->name('terms');
@@ -22,3 +23,6 @@ Route::get('contact', 'UI\ContactFormController@create')->name('contact');
 Route::post('contact', 'UI\ContactFormController@store')->middleware(ProtectAgainstSpam::class);
 // Auth::routes(['verify' => true]);
 Auth::routes();
+
+Route::view('/inactive', 'errors.inactive')->name('errors.inactive');
+// Route::view('/welcome', 'errors.inactive');

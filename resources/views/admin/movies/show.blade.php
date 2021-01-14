@@ -5,7 +5,7 @@
 @stop
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.movies') }}"></i>
+   <i class="{{ config('icons.movies') }}"></i>
    Movie :: {{ $movie->title }}
 @endsection
 

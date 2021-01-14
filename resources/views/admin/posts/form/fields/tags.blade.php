@@ -13,7 +13,7 @@
          @endif
 
          @if(last(request()->segments()) === 'edit')
-            <option value="{{$tag->id}}" {{$post->tags->contains($tag->id)?"selected='selected":""}}>{{$tag->name}}</option>               
+            <option value="{{ $tag->id }}" {{ $post->tags->contains($tag->id) ? "selected='selected" : ""}}>{{ $tag->name }}</option>               
          @endif
 
       @endforeach

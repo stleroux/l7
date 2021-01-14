@@ -129,13 +129,18 @@ class MoviesController extends Controller
 				sortable()
 				->where('title', 'like', $key . '%')
 				->orderBy('title', 'asc')
-				->paginate(25);
+				->paginate(20);
+				// ->get();
 			return view('admin.movies.index', compact('movies','letters'));
 		}
 
 		// No $key value is passed
 		// $movies = Movie::with('user')->published()->get();
-		$movies = Movie::sortable()->orderBy('title', 'asc')->paginate(25);
+		$movies = Movie::
+			sortable()
+			->orderBy('title', 'asc')
+			->paginate(20);
+			// ->get();
 
 		// Required to be able to list the "catagories" in the search block
 		$movie = New Movie();

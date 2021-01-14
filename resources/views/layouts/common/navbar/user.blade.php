@@ -52,7 +52,7 @@
          <div class="form-row pb-1">
             <div class="col pt-1">
                <a href="{{ route('features.create') }}" class="btn btn-outline-secondary btn-xs btn-block mt-0">
-   			      <i class="{{ Config::get('icons.feature') }} text-success"></i>
+   			      <i class="{{ config('icons.feature') }} text-success"></i>
    			      Request A Feature
    		       </a>
             </div>

@@ -1,28 +1,16 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
-   Request a New Feature
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.features.index') }}">Features</a></li>
-   <li class="breadcrumb-item active">Request</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.features.create.sections.stylesheet')
+@include('admin.features.create.sections.pageHeader')
+@include('admin.features.create.sections.breadcrumb')
+@include('admin.features.create.sections.sidebar')
+@include('admin.features.create.sections.functions')
+@include('admin.features.create.sections.formBegin')
+@include('admin.features.create.sections.formEnd')
 
 @section('content')
 
-   <form action="{{ route('admin.features.store') }}" method="POST" class="m-0 p-0">
-      @csrf
-
-      @include('admin.features.create.topbar')
+      {{-- @include('admin.features.create.topbar') --}}
 
       <div class="row">
 

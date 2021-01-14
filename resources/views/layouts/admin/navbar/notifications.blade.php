@@ -14,13 +14,13 @@
 		{{-- <div class="dropdown-divider"></div>
 		
 		<a href="{{ route('admin.bugs.index') }}" class="dropdown-item">
-			<i class="{{ Config::get('icons.bugs') }} mr-2"></i> {{ $newBugsCount }} New Bugs Reported
+			<i class="{{ config('icons.bugs') }} mr-2"></i> {{ $newBugsCount }} New Bugs Reported
 		</a>
 		
 		<div class="dropdown-divider"></div>
 		
 		<a href="{{ route('admin.features.index') }}" class="dropdown-item">
-			<i class="{{ Config::get('icons.features') }} mr-2"></i> {{ $newFeaturesCount }} New Features Requests
+			<i class="{{ config('icons.features') }} mr-2"></i> {{ $newFeaturesCount }} New Features Requests
 		</a> --}}
 		
 {{-- 		<div class="dropdown-divider"></div>
@@ -44,7 +44,7 @@
 	{{-- <a class="nav-link px-3" href="{{ route('admin.bugs.index') }}"> --}}
 	{{-- <a class="btn btn-sm btn-outline-warning py-0" href="{{ route('admin.bugs.index') }}">
 		<span class="text-dark p-0">
-		<i class="{{ Config::get('icons.bugs') }} text-danger"></i> --}}
+		<i class="{{ config('icons.bugs') }} text-danger"></i> --}}
 		{{-- <span class="badge badge-warning navbar-badge"> --}}
 			{{-- {{ $newBugsCount }}
 		</span>
@@ -55,7 +55,7 @@
 {{-- <li class="border"> --}}
 	{{-- @if($newFeaturesCount)
 		<a class="btn btn-sm btn-outline-warning py-0" href="{{ route('admin.features.index') }}">
-			<i class="{{ Config::get('icons.features') }} text-dark"></i> --}}
+			<i class="{{ config('icons.features') }} text-dark"></i> --}}
 			{{-- <span class="badge badge-warning navbar-badge"> --}}
 			{{-- <span class="text-dark">
 				{{ $newFeaturesCount }}
@@ -70,7 +70,7 @@
 		@if($newBugsCount)
 			<li class="d-none d-sm-inline-block p-2">
 				<a class="text-danger" href="{{ route('admin.bugs.new') }}">
-					<i class="{{ Config::get('icons.bugs') }} text-danger"></i>
+					<i class="{{ config('icons.bugs') }} text-danger"></i>
 					{{ $newBugsCount }}
 				</a>
 			</li>
@@ -79,7 +79,7 @@
 		@if($newFeaturesCount)
 			<li class="d-none d-sm-inline-block p-2">
 				<a class="text-success" href="{{ route('admin.features.new') }}">
-					<i class="{{ Config::get('icons.features') }} text-success"></i>
+					<i class="{{ config('icons.features') }} text-success"></i>
 					{{ $newFeaturesCount }}
 				</a>
 			</li>

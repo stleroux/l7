@@ -19,12 +19,12 @@ class CreateProjectsProjectsTable extends Migration {
 			$table->string('name');
 			$table->text('description', 65535);
 			$table->integer('views')->unsigned()->default(0);
-			$table->integer('time_invested')->unsigned()->nullable();
-			$table->integer('price')->unsigned()->nullable();
-			$table->integer('width')->unsigned()->nullable();
-			$table->integer('depth')->unsigned()->nullable();
-			$table->integer('height')->unsigned()->nullable();
-			$table->integer('weight')->unsigned()->nullable();
+			$table->string('time_invested')->nullable();
+			$table->string('price')->nullable();
+			$table->string('width')->nullable();
+			$table->string('depth')->nullable();
+			$table->string('height')->nullable();
+			$table->string('weight')->nullable();
 			$table->dateTime('completed_at')->nullable();
 			$table->timestamps();
 			$table->softDeletes();

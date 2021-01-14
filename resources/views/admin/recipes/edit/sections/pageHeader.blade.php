@@ -1,4 +1,4 @@
 @section('pageHeader')
-   <i class="{{ Config::get('icons.edit') }}"></i>
+   <i class="{{ config('icons.edit') }}"></i>
    Edit Recipe :: {{ ucwords($recipe->title) }}
 @endsection

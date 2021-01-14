@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Projects;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectImage;
 use Session;
@@ -45,7 +45,7 @@ class ImageController extends Controller
     public function destroy(Request $request, $id)
     {
         // Find the image ID
-        $image = Image::find($id);
+        $image = ProjectImage::find($id);
 
         // Delete the image(s) and thumbnail(s) from storage
         $image_path = public_path().'/_projects/'.$request->project_id.'/'.$image->name;
@@ -85,7 +85,7 @@ class ImageController extends Controller
     public function store(Request $request, $id)
     {
         $rules = [
-            'image' => 'required | mimes:jpeg,jpg,png | max:20000',
+            'image' => 'required | image | max:20000',
             'display_name' => 'required',
             'image_description' => 'required',
         ];
@@ -189,7 +189,7 @@ class ImageController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        $image = Image::findOrFail($id);
+        $image = ProjectImage::findOrFail($id);
         // dd($image);
         // dd($request);
         // dd($id);

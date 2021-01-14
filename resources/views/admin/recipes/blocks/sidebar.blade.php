@@ -9,7 +9,7 @@
 
          {{-- @if(checkPerm('recipe_browse')) --}}
             <a href="{{ route('admin.recipes.index') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.index') ? 'menu_active' : '' }}">
-               <i class="{{ Config::get('icons.published') }}"></i>
+               <i class="{{ config('icons.published') }}"></i>
                Published Recipes
                <span class="badge badge-secondary border float-right">{{ App\Models\Recipe::published()->count() }}</span>
             </a>
@@ -17,25 +17,25 @@
 
          {{-- @if(checkPerm('recipe_edit')) --}}
             <a href="{{ route('admin.recipes.unpublished') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.unpublished') ? 'menu_active' : '' }}">
-               <i class="{{ Config::get('icons.unpublished') }}"></i>
+               <i class="{{ config('icons.unpublished') }}"></i>
                Unpublished Recipes
                <span class="badge badge-secondary border float-right">{{ App\Models\Recipe::unpublished()->count() }}</span>
             </a>
 
             <a href="{{ route('admin.recipes.newRecipes') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.newRecipes') ? 'menu_active' : '' }}">
-               <i class="{{ Config::get('icons.new') }}"></i>
+               <i class="{{ config('icons.new') }}"></i>
                New Recipes
                <span class="badge badge-secondary border float-right">{{ App\Models\Recipe::newRecipes()->count() }}</span>
             </a>
 
             <a href="{{ route('admin.recipes.future') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.future') ? 'menu_active' : '' }}">
-               <i class="{{ Config::get('icons.future') }}"></i>
+               <i class="{{ config('icons.future') }}"></i>
                Future Recipes
                <span class="badge badge-secondary border float-right">{{ App\Models\Recipe::future()->count() }}</span>
             </a>
 
             <a href="{{ route('admin.recipes.trashed') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('admin.recipes.trashed') ? 'menu_active' : '' }}">
-               <i class="{{ Config::get('icons.trashed') }}"></i>
+               <i class="{{ config('icons.trashed') }}"></i>
                Trashed Recipes
                <span class="badge badge-secondary border float-right">{{ App\Models\Recipe::trashedCount()->count() }}</span>
             </a>

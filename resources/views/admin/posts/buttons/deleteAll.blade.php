@@ -9,7 +9,7 @@
       title="Delete Selected"
       style="display:none"
       onclick="return confirm('Are you sure you want to permanently delete these posts?')">
-      <i class="{{ Config::get('icons.delete') }}"></i>
+      <i class="{{ config('icons.delete') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
 

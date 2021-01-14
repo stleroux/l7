@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.invoicer') }}"></i>
+   <i class="{{ config('icons.invoicer') }}"></i>
    Invoicer
 @endsection
 
@@ -23,7 +23,7 @@
 	<div class="card">
 		<div class="card-header">
 			<span class="h3">Welcome to the Invoicer</span>
-			<span class="float-right"><small>V {{ Config::get('settings.invoicer_version') }}</small></span>
+			<span class="float-right"><small>V {{ config('settings.invoicer_version') }}</small></span>
 		</div>
 		<div class="card-body">
 			<h5 class="card-title"></h5>

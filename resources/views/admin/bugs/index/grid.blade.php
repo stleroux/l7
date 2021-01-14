@@ -16,7 +16,7 @@
             <th class="d-none d-lg-table-cell">Status</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
-            <th class="no-sort" width="30px">Actions</th>
+            <th class="no-sort text-center" width="140px">Actions</th>
          </tr>
       </thead>
 
@@ -41,7 +41,7 @@
                <td nowrap="nowrap">{{ $bug->status }}</td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($bug->created_at){{ $bug->created_at }}@endif">{{ $bug->created_at->toDateString() }}</td>
                <td class="d-none d-lg-table-cell" title="@if($bug->updated_at){{ $bug->updated_at }}@endif">{{ $bug->updated_at->toDateString() }}</td>
-               <td>
+               <td class="text-right">
                   @include('admin.bugs.index.actions')
                </td>
             </tr>
@@ -51,5 +51,5 @@
    </table>
 
 @else
-   {{ Config::get('settings.noRecordsFound') }}
+   {{ config('settings.noRecordsFound') }}
 @endif

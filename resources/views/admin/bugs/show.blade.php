@@ -1,26 +1,16 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-   <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.bugs') }}"></i>
-   My Bug Reports
-@endsection
-
-@section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('admin.bugs.index') }}">Bug Reports</a></li>
-   <li class="breadcrumb-item">Show</li>
-@endsection
-
-@section('rightColumn')
-   {{-- @include('UI.blocks.popularItems') --}}
-@endsection
+@include('admin.bugs.show.sections.stylesheet')
+@include('admin.bugs.show.sections.pageHeader')
+@include('admin.bugs.show.sections.breadcrumb')
+@include('admin.bugs.show.sections.sidebar')
+@include('admin.bugs.show.sections.functions')
+@include('admin.bugs.show.sections.formBegin')
+@include('admin.bugs.show.sections.formEnd')
 
 @section('content')
 
-   @include('admin.bugs.show.topbar')
+   {{-- @include('admin.bugs.show.topbar') --}}
    
    <div class="card card-trans-4">
       
@@ -74,5 +64,7 @@
       </div>
 
    </div>
+
+   @include('admin.bugs.help')
 
 @endsection

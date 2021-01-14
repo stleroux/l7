@@ -22,7 +22,7 @@
       <div class="card mb-3">
 
          <div class="card-header section_header p-2">
-            <i class="{{ Config::get('buttons.future') }}"></i>
+            <i class="{{ config('buttons.future') }}"></i>
             Future Movies
             <div class="float-right">
                <div class="btn-group">

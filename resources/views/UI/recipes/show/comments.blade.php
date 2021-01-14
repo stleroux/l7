@@ -2,7 +2,7 @@
 
 	<div class="card-header text-light font-weight-bold" style="background-color: #800000">
 		{{-- <div class="card-title"> --}}
-			<i class="{{ Config::get('icons.comments') }}"></i>
+			<i class="{{ config('icons.comments') }}"></i>
 			Comments <small>({{ $model->comments()->count() }} total)</small>
 		{{-- </div> --}}
 	</div>
@@ -27,7 +27,7 @@
 						<td class="col-7">{!! $comment->comment !!}</td>
 						<td class="col-2">
 							{{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
-							{{ ($comment->created_at) ? date(Config::get('settings.dateFormat'), strtotime($comment->created_at)) : 'N/A' }}
+							{{ ($comment->created_at) ? date(config('settings.dateFormat'), strtotime($comment->created_at)) : 'N/A' }}
 						</td>
 						
 					</tr>

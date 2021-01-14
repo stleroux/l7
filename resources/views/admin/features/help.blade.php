@@ -4,8 +4,8 @@
       <div class="modal-content text-dark">
          <div class="modal-header bg-primary p-2 m-0">
             <h5 class="modal-title" id="exampleModalLongTitle">
-               <i class="{{ Config::get('icons.bugs') }}"></i>
-               Bugs Help
+               <i class="{{ config('icons.features') }}"></i>
+               Features Help
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
@@ -16,39 +16,7 @@
 
             <div class="card m-0 p-0">
                <div class="card-body p-2 m-0">
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
-                  <p>Bug(s) related help content will go here</p>
+                  <p>Feature(s) related help content will go here</p>
                </div>
             </div>
 
@@ -62,4 +30,4 @@
    
    </div><!-- modal dialog -->
 
-</div><!-- modal
+</div><!-- modal -->

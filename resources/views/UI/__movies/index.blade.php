@@ -5,7 +5,7 @@
 @stop
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.movies') }}"></i>
+   <i class="{{ config('icons.movies') }}"></i>
    Movies
 @endsection
 
@@ -28,7 +28,7 @@
    <div class="card mb-3">
       <!--CARD HEADER-->
       <div class="card-header section_header p-2">
-         <i class="{{ Config::get('buttons.movies') }}"></i>
+         <i class="{{ config('buttons.movies') }}"></i>
          @if (Route::currentRouteName() == "movies.search")
             Movies :: Search Results for "{{ $search }}"
          @else

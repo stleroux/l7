@@ -8,7 +8,7 @@
          <div class="modal-header bg-primary p-2 m-0">
 
             <h5 class="modal-title" id="exampleModalLongTitle">
-               <i class="{{ Config::get('icons.darts') }}"></i>
+               <i class="{{ config('icons.darts') }}"></i>
                01 Teams Help
             </h5>
             

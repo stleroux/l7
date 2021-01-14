@@ -1,5 +1,5 @@
 @section('pageHeader')
-   <i class="{{ Config::get('icons.recipes') }}"></i>
+   <i class="{{ config('icons.recipes') }}"></i>
    @if(Route::currentRouteName('') == 'admin.recipes.trashed')
       Trashed Recipes
    @elseif(Route::currentRouteName('') == 'admin.recipes.future')

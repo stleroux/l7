@@ -1,49 +1,43 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-7-2-3')
 
-@section('stylesheet')
-@endsection
+@include('admin.permissions.index.sections.stylesheet')
+@include('admin.permissions.index.sections.pageHeader')
+@include('admin.permissions.index.sections.breadcrumb')
+@include('admin.permissions.index.sections.sidebar')
+@include('admin.permissions.index.sections.formBegin')
+@include('admin.permissions.index.sections.formEnd')
 
-@section('pageHeader')
-   <i class="{{ Config::get('icons.permissions') }}"></i>
+@section('addition')
    @if(Route::currentRouteName() == 'admin.permissions.index')
-      Permissions
-   @else
-      Trashed Permissions
+      {{-- <div class="col-xl-4"> --}}
+         @include('admin.permissions.create.single')
+         @include('admin.permissions.create.multiple')
+      {{-- </div> --}}
    @endif
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item active">Permissions</li>
-@endsection
-
-@section('rightSidebar')
-   @include('admin.permissions.index.sidebar')
 @endsection
 
 @section('content')
 
-   @include('admin.permissions.index.topbar')
+   {{-- @include('admin.permissions.index.topbar') --}}
 
-   <div class="row">
+   {{-- <div class="row"> --}}
 
-      <div class="col-xl-{{ ((Route::currentRouteName() == 'admin.permissions.index') && (Gate::allows('permission-create')) ? '8' : '12') }}">
+      {{-- <div class="col-xl-{{ ((Route::currentRouteName() == 'admin.permissions.index') && (Gate::allows('permission-create')) ? '8' : '12') }}"> --}}
 
          <div class="card mb-3">
             <div class="card-body p-3">
                @include('admin.permissions.index.grid')
+               @include('admin.permissions.index.sections.functions')
             </div>
          </div>
-      </div>
+      {{-- </div> --}}
 
-      @if(Route::currentRouteName() == 'admin.permissions.index')
-         <div class="col-xl-4">
-            @include('admin.permissions.create.single')
-            @include('admin.permissions.create.multiple')
-         </div>
-      @endif
-    
+   {{-- </div> --}}
+   
    @include('modals.destroy', ['modelName'=>'permission'])
    @include('modals.massDestroy', ['modelName'=>'permission'])
+   @include('modals.restore', ['modelName'=>'permission'])
+   @include('modals.massRestore', ['modelName'=>'permission'])
    @include('modals.delete', ['modelName'=>'permission'])
    @include('modals.massDelete', ['modelName'=>'permission'])
    @include('admin.permissions.help')

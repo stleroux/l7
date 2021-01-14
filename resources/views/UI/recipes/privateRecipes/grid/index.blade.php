@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.private') }}"></i>
+   <i class="{{ config('icons.private') }}"></i>
    Private Recipes
    @if($byCatName)
 		:: {{  deliciousCamelcase(ucwords($byCatName->name)) }}
@@ -36,11 +36,11 @@
 				</div>
             <div class="btn-group">
                <a href="{{ route('recipes.privateRecipesGrid', 'all') }}" class="btn btn-sm btn-light">
-                  <i class="{{ Config::get('icons.grid') }}"></i>
+                  <i class="{{ config('icons.grid') }}"></i>
                   Grid
                </a>
                <a href="{{ route('recipes.privateRecipesList', 'all') }}" class="btn btn-sm btn-maroon">
-                  <i class="{{ Config::get('icons.list') }}"></i>
+                  <i class="{{ config('icons.list') }}"></i>
                   List
                </a>
             </div>
@@ -125,7 +125,7 @@
 			</div>
 		@else
 			<div class="card-body card_body p-2 text-light">
-            {{ Config::get('settings.noRecordsFound') }}
+            {{ config('settings.noRecordsFound') }}
          </div>
       @endif
 	</div>

@@ -61,10 +61,10 @@
             <section class="content-header py-2">
                <div class="container-fluid">
                   <div class="row">
-                     <div class="col-sm-6">
+                     <div class="col-sm-8">
                         <h1>@yield('pageHeader')</h1>
                      </div>
-                     <div class="col-sm-6">
+                     <div class="col-sm-4">
                         <ol class="breadcrumb float-sm-right">
                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                            @yield('breadcrumb')
@@ -97,9 +97,22 @@
                   </div>
                   @yield('formEnd')
 
+               <!-- Secondary content -->
+               <section class="subcontent">
+                  <div class="container-fluid">
+                     <div class="row">
+                        <div class="col-xl-10">
+                           @yield('secondary')
+                        </div>
+                     </div>
+                  </div>
+               </section>
+
                </div>
             </section>
             <!-- /.content -->
+
+
          </div>
          <!-- /.content-wrapper -->
 
@@ -109,7 +122,7 @@
          <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="mx-2">
-               @include('layouts.admin.sidebars.right.test')
+               @include('layouts.admin.sidebars.right.popout')
                @yield('sidebar')
             </div>
          </aside>

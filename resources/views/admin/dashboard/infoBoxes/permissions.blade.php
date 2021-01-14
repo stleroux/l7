@@ -6,7 +6,7 @@
 	   <a href="{{ route('admin.permissions.index') }}">
 	      <div class="info-box mb-3">
 	         <span class="info-box-icon bg-warning elevation-1">
-	            <i class="{{ Config::get('icons.permissions') }}"></i>
+	            <i class="{{ config('icons.permissions') }}"></i>
 	         </span>
 
 	         <div class="info-box-content">

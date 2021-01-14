@@ -53,7 +53,7 @@ class ProjectsController extends Controller
 
         if($filter) {
             if($filter == 1000) {
-                $projects = Project::with('images')->orderBy('id','desc')->take(6)->get();
+                $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
                 return view('UI.projects.index', compact('projects','project'));
             }
 
@@ -81,7 +81,7 @@ class ProjectsController extends Controller
 
         // Increase the view count if viewed from the frontend
         if (url()->previous() != url('/projects/list')) {
-            DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
+            DB::table('projects')->where('id','=',$project->id)->increment('views',1);
         }
 
         // get previous project

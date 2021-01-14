@@ -73,4 +73,6 @@
 
    </div>
 
+   @include('help.index', ['title'=>'Show Bug Report', 'icon'=>'bugs', 'path'=>'UI.bugs.show'])
+
 @endsection

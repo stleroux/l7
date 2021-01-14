@@ -105,17 +105,25 @@ class FeaturesController extends Controller
          $feature->user_id = Auth::user()->id;
 
       // Save the data
-      $feature->save();
-
-      $notification = [
-         'message' => 'The feature has been created successfully!', 
-         'alert-type' => 'success'
-      ];
-
-      if ($request->submit == 'new')
+      if($feature->save())
       {
-         return redirect()->back()->with($notification);
+         $notification = [
+            'message' => 'The feature has been created successfully!', 
+            'alert-type' => 'success'
+         ];
+
+         if ($request->submit == 'new')
+         {
+            return redirect()->back()->with($notification);
+         }
+
+         if ($request->submit == 'continue')
+         {
+         return redirect()->route('admin.features.edit', $feature)->with($notification);
+         }
+
       }
+
 
       // return redirect()->route('admin.features.index')->with($notification);
       return redirect()->route('admin.features.index')->with($notification);

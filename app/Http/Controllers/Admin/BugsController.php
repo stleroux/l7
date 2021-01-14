@@ -34,7 +34,7 @@ class BugsController extends Controller
 ##################################################################################################################
    public function index()
     {
-        // Check if user has required permission
+      // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
         $bugs = Bug::all();
@@ -106,19 +106,27 @@ class BugsController extends Controller
          $bug->user_id = Auth::user()->id;
 
       // Save the data
-      $bug->save();
-
-      $notification = [
-         'message' => 'The bug has been created successfully!', 
-         'alert-type' => 'success'
-      ];
-
-      if ($request->submit == 'new')
+      if($bug->save())
       {
-         return redirect()->back()->with($notification);
+        $notification = [
+           'message' => 'The bug has been created successfully!', 
+           'alert-type' => 'success'
+        ];
+
+        if ($request->submit == 'new')
+        {
+          // return view('admin.bugs.create')->with($notification);
+          return redirect()->back()->with($notification);
+        }
+
+        if ($request->submit == 'continue')
+        {
+          return view('admin.bugs.edit', compact('bug'))->with($notification);
+        }
+
       }
 
-      // return redirect()->route('admin.bugs.index')->with($notification);
+
       return redirect()->route('admin.bugs.index')->with($notification);
    }
 
@@ -136,7 +144,7 @@ class BugsController extends Controller
         // Check if user has required permission
       abort_unless(Gate::allows('bug-edit'), 403);
       
-      // $bug = Bug::find($bug->id);
+      $bug = Bug::find($bug->id);
       // dd($bug);
 
       return view('admin.bugs.edit', compact('bug'));

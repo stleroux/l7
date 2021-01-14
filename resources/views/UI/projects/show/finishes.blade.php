@@ -3,7 +3,7 @@
       <div class="card card-trans-4 card-outline card-primary">
          <div class="card-header bg-info">
             <div class="card-title font-weight-bold">
-               <i class="{{ Config::get('icons.finishes') }}"></i>
+               <i class="{{ config('icons.finishes') }}"></i>
                Finish(es) Used In This Project
             </div>
          </div>
@@ -14,7 +14,7 @@
                      <th>Name</th>
                      <th>Type</th>
                      <th>Color</th>
-                     <th>Manufacturer</th>
+                     <th>Sheen</th>
                   </tr>
                </thead>
                <tbody>
@@ -23,7 +23,7 @@
                         <td>{{ $f->name }}</td>
                         <td>{{ $f->type }}</td>
                         <td>{{ $f->color_name }}</td>
-                        <td>{{ $f->manufacturer }}</td>
+                        <td>{{ $f->sheen }}</td>
                      </tr>
                   @endforeach
                </tbody>

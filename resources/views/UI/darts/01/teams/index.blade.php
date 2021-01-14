@@ -1,10 +1,4 @@
-@isset($teamGameDone)
-   @if(!$teamGameDone)
-		@extends('layouts.UI.app-10-2')
-	@else
-		@extends('layouts.UI.app-10')			
-   @endif
-@endisset
+@extends(''.($teamGameDone == 0) ? 'layouts.UI.app-10-2' : 'layouts.UI.app-10')
 
 @section('stylesheet')
 	<link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
@@ -21,7 +15,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.add') }}"></i> --}}
+   {{-- <i class="{{ config('icons.add') }}"></i> --}}
    Game Scoreboard
 @endsection
 
@@ -44,44 +38,45 @@
 @endsection
 
 @section('content')
-{{-- {!! Form::open(['route' => 'UI.darts.01.teams.store', 'class'=>'inline-form']) !!} --}}
 
-@include('UI.darts.01.teams.topbar')
+	@include('UI.darts.01.teams.topbar')
 
-<form action="{{ route('darts.01.teams.store') }}" method="POST">
-	@csrf
+	<form action="{{ route('darts.01.teams.store') }}" method="POST">
+		@csrf
 
-   @isset($teamGameDone)
-      @if(!$teamGameDone)
-         @include('UI.darts.01.inc.scoreboard')
-      @endif
-   @endisset
-	
-	<div class="form-row">
-		<div class="col-sm-4">
-			@include('UI.darts.01.teams.t1playersPanel')
-			@include('UI.darts.01.teams.t1scoresheet')
+	   @isset($teamGameDone)
+	      @if(!$teamGameDone)
+	         @include('UI.darts.01.inc.scoreboard')
+	      @endif
+	   @endisset
+		
+		<div class="form-row">
+			<div class="col-sm-4">
+				@include('UI.darts.01.teams.t1playersPanel')
+				@include('UI.darts.01.teams.t1scoresheet')
+			</div>
+
+			<div class="col-sm-4">
+	         @isset($teamGameDone)
+	            @if(!$teamGameDone)
+	               @include('UI.darts.01.teams.scorePad')
+				      @include('UI.darts.01.inc.dartboard')
+	            @endif
+	         @endisset
+	         @include('UI.darts.01.teams.gameInfo')
+				@include('UI.darts.01.teams.teamStats')
+				@include('UI.darts.01.teams.playerStats')
+			</div>
+
+			<div class="col-sm-4">
+				@include('UI.darts.01.teams.t2playersPanel')
+				@include('UI.darts.01.teams.t2scoresheet')
+			</div>
 		</div>
 
-		<div class="col-sm-4">
-         @isset($teamGameDone)
-            @if(!$teamGameDone)
-               @include('UI.darts.01.teams.scorePad')
-			      @include('UI.darts.01.inc.dartboard')
-            @endif
-         @endisset
-         @include('UI.darts.01.teams.gameInfo')
-			@include('UI.darts.01.teams.teamStats')
-			@include('UI.darts.01.teams.playerStats')
-		</div>
+	</form>
 
-		<div class="col-sm-4">
-			@include('UI.darts.01.teams.t2playersPanel')
-			@include('UI.darts.01.teams.t2scoresheet')
-		</div>
-	</div>
-
-</form>
+	@include('UI.darts.01.teams.help')
 
 @endsection
 

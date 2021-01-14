@@ -19,7 +19,7 @@
 
       <div class="card mb-2">
          <div class="card-header section_header p-2">
-            <i class="{{ Config::get('buttons.published') }}"></i>
+            <i class="{{ config('buttons.published') }}"></i>
             Published Posts
             <div class="float-right">
                <div class="btn-group">

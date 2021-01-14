@@ -1,31 +1,21 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
-   Create Tag
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.tags.index') }}">Tags</a></li>
-   <li class="breadcrumb-item active">Create</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.tags.create.sections.stylesheet')
+@include('admin.tags.create.sections.pageHeader')
+@include('admin.tags.create.sections.breadcrumb')
+@include('admin.tags.create.sections.sidebar')
+@include('admin.tags.create.sections.functions')
+@include('admin.tags.create.sections.formBegin')
+@include('admin.tags.create.sections.formEnd')
 
 @section('content')
-   <form action="{{ route('admin.tags.store') }}" method="POST" class="m-0 p-0">
-      @csrf
 
-      @include('admin.tags.create.topbar')
 
-      <div class="row">
+      {{-- @include('admin.tags.create.topbar') --}}
 
-         <div class="col-md-3">
+      {{-- <div class="row">
+
+         <div class="col-md-3"> --}}
 
             <div class="card card-primary">
 
@@ -35,21 +25,21 @@
                <div class="card-body">
                   <div class="row">
                      @include('admin.tags.fields.name')
+                     @include('admin.tags.fields.category')
                   </div>
 
                </div> <!-- Card body -->
             </div><!-- Card -->
-         </div><!-- Col -->
+         {{-- </div><!-- Col -->
 
          <div class="col-md-9">
             
          </div>
 
-      </div><!-- Row -->
+      </div><!-- Row --> --}}
 
       @include('admin.tags.help')
 
-   </form>
 
 @endsection
 

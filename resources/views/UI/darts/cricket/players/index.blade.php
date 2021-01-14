@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.add') }}"></i> --}}
+   {{-- <i class="{{ config('icons.add') }}"></i> --}}
    CRICKET - @if($players->count() > 1) Multi @else Individual @endif Player Game
 @endsection
 

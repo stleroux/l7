@@ -11,7 +11,7 @@ class Project extends Model
    
    protected $guarded = [];
 
-   protected $table = 'projects__projects';
+   // protected $table = 'projects__projects';
 
    protected $dates = ['created_at','updated_at','deleted_at','completed_at'];
 
@@ -34,15 +34,14 @@ class Project extends Model
          3 => 'General',
          4 => 'Storage',
          5 => 'Wall Hanging',
-         6 => 'CNC',
          1000 => 'Lastest 4',
       ];
    }
 
 
-//////////////////////////////////////////////////////////////////////////////////////
-// RELATIONSHIPS
-//////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////
+   // RELATIONSHIPS
+   //////////////////////////////////////////////////////////////////////////////////////
    // public function category()
    // {
    //    return $this->hasOne(\App\Models\Category::class);
@@ -50,12 +49,14 @@ class Project extends Model
 
    public function finishes()
    {
-      return $this->belongsToMany(\App\Models\ProjectFinish::class, 'projects__finish_project', 'project_id', 'finish_id');
+      // return $this->belongsToMany(\App\Models\ProjectFinish::class, 'projects__finish_project', 'project_id', 'finish_id');
+      return $this->belongsToMany(\App\Models\Finish::class);
    }
 
    public function materials()
    {
-      return $this->belongsToMany(\App\Models\ProjectMaterial::class, 'projects__material_project', 'project_id', 'material_id');
+      // return $this->belongsToMany(\App\Models\ProjectMaterial::class, 'projects__material_project', 'project_id', 'material_id');
+      return $this->belongsToMany(\App\Models\Material::class);
    }
 
    public function images()
@@ -68,10 +69,24 @@ class Project extends Model
       return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
    }
 
+   public function tags()
+   {
+      return $this->belongsToMany('App\Models\Tag')->orderBy('name','asc');
+   }
+   
+   //////////////////////////////////////////////////////////////////////////////////////
+   // SCOPES
+   //////////////////////////////////////////////////////////////////////////////////////
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
 
-//////////////////////////////////////////////////////////////////////////////////////
-// ACCESSORS
-//////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////
+   // ACCESSORS
+   //////////////////////////////////////////////////////////////////////////////////////
    // public function getCreatedAtAttribute($date)
    // {
    //    if($date){

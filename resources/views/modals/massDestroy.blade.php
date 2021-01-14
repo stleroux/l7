@@ -1,5 +1,5 @@
 <!-- MASS DESTROY MODAL -->
-@php
+{{-- @php
    $modelNamePlural = Illuminate\Support\Str::plural($modelName);
    if(($modelName == "finish") || ($modelName == "material"))
    {
@@ -9,6 +9,12 @@
       $action = $modelNamePlural;
       $fullName = ucfirst($modelNamePlural);
    }
+@endphp --}}
+
+@php
+   $modelNamePlural = Illuminate\Support\Str::plural($modelName);
+   $action = $modelNamePlural;
+   $fullName = ucfirst($modelNamePlural);
 @endphp
 
 <div class="modal bg-secondary" tabindex="-1" role="dialog" id="massDestroy-modal">
@@ -19,7 +25,7 @@
          
          <div class="modal-header bg-pink">
             <h5 class="modal-title">
-               <i class="{{ Config::get('icons.') }}"></i>
+               <i class="{{ config('icons.') }}"></i>
                Trash Multiple {{ $fullName }}
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

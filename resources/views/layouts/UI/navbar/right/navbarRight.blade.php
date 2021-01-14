@@ -9,7 +9,7 @@
 	   {{-- @can('admin-dashboard') --}}
 	   	<li class="nav-item {{ Route::is('admin.dashboard*') ? 'active' : '' }}">
 		      <a class="nav-link p-2" href="{{ route('admin.dashboard') }}">
-		         <i class="{{ Config::get('icons.dashboard') }}"></i>
+		         <i class="{{ config('icons.dashboard') }}"></i>
 		         Dashboard
 		      </a>
 	   	</li>

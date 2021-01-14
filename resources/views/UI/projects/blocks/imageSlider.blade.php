@@ -1,7 +1,7 @@
-<div class="card card-trans-4 card-outline card-danger mb-2">
+<div class="card card-trans-4 card-outline card-primary mb-2">
 	<div class="card-header bg-info">
       <div class="card-title font-weight-bold">
-		   <i class="{{ Config::get('icons.image') }}"></i>
+		   <i class="{{ config('icons.image') }}"></i>
 		   Project Image(s)
       </div>
 	</div>

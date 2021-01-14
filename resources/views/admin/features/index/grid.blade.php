@@ -16,7 +16,7 @@
             <th class="d-none d-lg-table-cell">Status</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
-            <th class="no-sort" width="30px">Actions</th>
+            <th class="no-sort text-center" width="140px">Actions</th>
          </tr>
       </thead>
 
@@ -41,7 +41,7 @@
                <td nowrap="nowrap">{{ $feature->status }}</td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($feature->created_at){{ $feature->created_at }}@endif">{{ $feature->created_at->toDateString() }}</td>
                <td class="d-none d-lg-table-cell" title="@if($feature->updated_at){{ $feature->updated_at }}@endif">{{ $feature->updated_at->toDateString() }}</td>
-               <td>
+               <td class="text-right">
                   @include('admin.features.index.actions')
                </td>
             </tr>
@@ -51,5 +51,5 @@
    </table>
 
 @else
-   {{ Config::get('settings.noRecordsFound') }}
+   {{ config('settings.noRecordsFound') }}
 @endif

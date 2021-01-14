@@ -4,6 +4,6 @@
       title="Next Project">
       {{-- Next --}}
       {{ $btn_label ?? '' }}
-      <i class="{{ Config::get('icons.next') }}"></i>
+      <i class="{{ config('icons.next') }}"></i>
    </a>
 @endif

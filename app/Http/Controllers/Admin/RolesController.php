@@ -82,18 +82,25 @@ class RolesController extends Controller
       $role->description = $request->description;
 
       // Save the data
-      $role->save();
-
-      $role->permissions()->attach($request->permissions);
-
-      $notification = [
-         'message' => 'The role has been created successfully!', 
-         'alert-type' => 'success'
-      ];
-
-      if ($request->submit == 'new')
+      if($role->save())
       {
-         return redirect()->back()->with($notification);
+         $role->permissions()->attach($request->permissions);
+
+         $notification = [
+            'message' => 'The role has been created successfully!', 
+            'alert-type' => 'success'
+         ];
+
+         if ($request->submit == 'new')
+         {
+            return redirect()->back()->with($notification);
+         }
+
+         if ($request->submit == 'continue')
+         {
+          return redirect()->route('admin.roles.edit', $role)->with($notification);
+         }
+
       }
 
       return redirect()->route('admin.roles.index')->with($notification);

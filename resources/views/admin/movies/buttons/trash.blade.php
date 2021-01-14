@@ -2,6 +2,6 @@
    <a href="{{ route('admin.movies.trash', $movie->id) }}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
       title="Trash Movie">
-      <i class="{{ Config::get('buttons.trash') }}"></i>
+      <i class="{{ config('buttons.trash') }}"></i>
    </a>
 {{-- @endif --}}

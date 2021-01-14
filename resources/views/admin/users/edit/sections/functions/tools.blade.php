@@ -3,7 +3,7 @@
    <div class="card-body p-1">
 
       <a href="#" class="btn btn-block btn-outline-secondary" data-toggle="modal" data-target="#helpModal" title="Help">
-         <i class="{{ Config::get('icons.help') }}"></i>
+         <i class="{{ config('icons.help') }}"></i>
          <div class="d-none d-lg-inline">
             Help
          </div>

@@ -6,6 +6,6 @@
       <div class="d-none d-lg-inline col-xl-4">
       	{{ $btn_label ?? '' }}
       </div>
-      <i class="{{ Config::get('icons.next') }}"></i>
+      <i class="{{ config('icons.next') }}"></i>
    </a>
 @endif

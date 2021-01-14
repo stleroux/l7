@@ -8,7 +8,7 @@
       style="display:none;"
       title="Publish Selected"
       onclick="return confirm('Are you sure you want to publish these posts?')">
-      <i class="{{ Config::get('buttons.publish') }} text-success"></i>
+      <i class="{{ config('buttons.publish') }} text-success"></i>
       {{ $btn_label ?? '' }}
    </button>
 {{-- @endif --}}

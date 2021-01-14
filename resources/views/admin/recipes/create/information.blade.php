@@ -4,8 +4,8 @@
 
 	<div class="row">
 		
-		<div class="col-xl-2">
-	   	@include('admin.recipes.form.fields.servings', ['required'=>'required'])
+		<div class="col-xs-6 col-md-3 col-lg-2">
+	   	@include('admin.recipes.form.fields.servings')
 	   </div>
 	   
 	   {{-- <div class="col-xl-2">
@@ -16,8 +16,8 @@
 		   @include('admin.recipes.form.fields.prep_time_minutes')
 		</div> --}}
 
-		<div class="col-xl-3">
-		   @include('admin.recipes.form.fields.prep_time', ['required'=>'required'])
+		<div class="col-xs-6 col-md-3 col-lg-2">
+		   @include('admin.recipes.form.fields.prep_time')
 		</div>
 		
 		{{-- <div class="col-xl-2">
@@ -28,11 +28,11 @@
 		   @include('admin.recipes.form.fields.cook_time_minutes')
 		</div> --}}
 
-		<div class="col-xl-3">
-		   @include('admin.recipes.form.fields.cook_time', ['required' => 'required'])
+		<div class="col-xs-6 col-md-3 col-lg-2">
+		   @include('admin.recipes.form.fields.cook_time')
 		</div>
 		
-		<div class="col-xl-3">
+		<div class="col-xs-6 col-md-3 col-lg-2">
 	   	@include('admin.recipes.form.fields.source')
 	   </div>
 	

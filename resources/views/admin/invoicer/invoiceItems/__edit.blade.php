@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
+   <i class="{{ config('icons.add') }}"></i>
    Invoicer :: Edit Billable Item on Invoice : {{ $invoice->id }}
 @endsection
 
@@ -40,7 +40,7 @@
 					</a>
 					{{-- {{ Form::button('<i class="fa fa-save"></i> Update Billable', ['class' => 'btn btn-sm btn-primary', 'type' => 'submit']) }} --}}
 					<button type="submit" name="save" class="btn btn-sm btn-primary">
-						<i class="{{ Config::get('icons.save') }}"></i>
+						<i class="{{ config('icons.save') }}"></i>
 						Update Billable
 					</button>
 				</span>

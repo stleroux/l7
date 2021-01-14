@@ -77,8 +77,10 @@ Route::namespace('Admin\Recipes')->prefix('admin')->name('admin.')->group(functi
    Route::post('/recipes/delete/{recipe}',         'FunctionsController@delete')                ->name('recipes.delete');
    Route::delete('/recipes/mass_delete',           'FunctionsController@massDelete')            ->name('recipes.mass_delete');
    Route::delete('/recipes/mass_destroy',          'FunctionsController@massDestroy')           ->name('recipes.mass_destroy');
+   
    Route::post('/recipes/unpublish/{recipe}',      'FunctionsController@unpublish')             ->name('recipes.unpublish');
    Route::post('/recipes/publish/{recipe}',        'FunctionsController@publish')               ->name('recipes.publish');
+   
    Route::post('/recipes/mass_publish',            'FunctionsController@massPublish')           ->name('recipes.mass_publish');
    Route::post('/recipes/mass_unpublish',          'FunctionsController@massUnpublish')         ->name('recipes.mass_unpublish');
    Route::post('/recipes/publishAll',              'FunctionsController@publishAll')            ->name('recipes.publishAll');

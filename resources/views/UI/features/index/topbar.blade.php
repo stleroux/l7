@@ -5,7 +5,7 @@
    <div class="col">
 
       <a href="#" class="btn btn-sm btn-light float-right border" data-toggle="modal" data-target="#helpModal">
-         <i class="{{ Config::get('icons.help') }}"></i>
+         <i class="{{ config('icons.help') }}"></i>
          <div class="d-none d-lg-inline">
             Help
          </div>

@@ -48,3 +48,6 @@
    <link rel="stylesheet" href="{{ asset('css/common/bootstrap-colors.css') }}">
    <link rel="stylesheet" href="{{ asset('css/UI/styles.css') }}">
    {{-- @yield('stylesheet') --}}
+
+   {{-- @livewireStyles --}}
+   <livewire:styles>

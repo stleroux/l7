@@ -1,4 +1,6 @@
-@extends ('layouts.UI.app-10-2')
+{{-- @extends ('layouts.UI.app-10-2') --}}
+@extends(''.($gameDone == 0) ? 'layouts.UI.app-10-2' : 'layouts.UI.app-10')
+
 
 @section('stylesheet')
    <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
@@ -16,7 +18,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.add') }}"></i> --}}
+   {{-- <i class="{{ config('icons.add') }}"></i> --}}
    Game Scoreboard
 @endsection
 
@@ -85,6 +87,8 @@
          </div>
       </div>
    </div>
+
+   @include('UI.darts.01.players.help')
 
 @endsection
 

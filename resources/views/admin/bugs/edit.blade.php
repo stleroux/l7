@@ -1,71 +1,47 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.edit') }}"></i>
-   Edit Bug
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.bugs.index') }}">Bugs</a></li>
-   <li class="breadcrumb-item active">Edit</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.bugs.edit.sections.stylesheet')
+@include('admin.bugs.edit.sections.pageHeader')
+@include('admin.bugs.edit.sections.breadcrumb')
+@include('admin.bugs.edit.sections.sidebar')
+@include('admin.bugs.edit.sections.functions')
+@include('admin.bugs.edit.sections.formBegin')
+@include('admin.bugs.edit.sections.formEnd')
 
 @section('content')
 
-   <form action="{{ route('admin.bugs.update', $bug) }}" method="POST">
-      @csrf
-      @method('PUT')
+   <div class="card card-primary">
 
-      @include('admin.bugs.edit.topbar')
+      <div class="card-header">
+         <div class="card-title">Bug Information</div>
+      </div>
+      <div class="card-body">
+         <div class="row">
+            <div class="col">
+               @include('admin.bugs.edit.title', ['required'=>'required'])
+            </div>
+            <div class="col">
+               @include('admin.bugs.edit.page_url')
+            </div>
+            <div class="col-xl-2">
+               @include('admin.bugs.edit.status')
+            </div>
+         </div>
+         <div class="row">
+            <div class="col">
+               @include('admin.bugs.edit.description', ['required'=>'required'])
+            </div>
+         </div>
+         <div class="row">
+            <div class="col">
+               @include('admin.bugs.edit.resolution')
+            </div>
+         </div>
 
-      <div class="row">
-
-         <div class="col">
-
-            <div class="card card-primary">
-
-               <div class="card-header">
-                  <div class="card-title">Bug Information</div>
-               </div>
-               <div class="card-body">
-                  <div class="row">
-                     <div class="col">
-                        @include('admin.bugs.edit.title', ['required'=>'required'])
-                     </div>
-                     <div class="col">
-                        @include('admin.bugs.edit.page_url')
-                     </div>
-                     <div class="col-xl-2">
-                        @include('admin.bugs.edit.status')
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        @include('admin.bugs.edit.description', ['required'=>'required'])
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        @include('admin.bugs.edit.resolution')
-                     </div>
-                  </div>
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         </div><!-- Col -->
-
-      </div><!-- Row -->
-
+      </div> <!-- Card body -->
+   </div><!-- Card -->
+         
       @include('admin.bugs.help')
-
-   </form>
 
 @endsection
 

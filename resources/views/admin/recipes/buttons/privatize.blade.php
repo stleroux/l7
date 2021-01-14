@@ -4,14 +4,14 @@
       <a href="{{ route('admin.recipes.privatize', $recipe->id) }}"
          class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary"
          title="Make Private">
-         <i class="{{ Config::get('icons.public') }} text-success"></i>
+         <i class="{{ config('icons.public') }} text-success"></i>
          {{ $btn_label ?? '' }}
       </a>
    @else
       <a href="{{ route('admin.recipes.publicize', $recipe->id) }}"
          class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary"
          title="Make Public">
-         <i class="{{ Config::get('icons.private') }} text-danger"></i>
+         <i class="{{ config('icons.private') }} text-danger"></i>
          {{ $btn_label ?? '' }}
       </a>
    @endif

@@ -6,7 +6,7 @@
       <div class="card card-trans-2 card-outline card-primary mb-2">
 
          <div class="card-header bg-info font-weight-bold">
-            <i class="{{ Config::get('icons.comment') }}"></i>
+            <i class="{{ config('icons.comment') }}"></i>
             Leave a comment
          </div>
          
@@ -25,7 +25,7 @@
             </div>
 
             <button type="submit" class="btn btn-sm btn-success">
-               <i class="{{ Config::get('icons.add') }}"></i>
+               <i class="{{ config('icons.add') }}"></i>
                Add Comment
             </button>
 

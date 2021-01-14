@@ -11,7 +11,7 @@
    @if(checkPerm('recipe_private', $recipe))
       <a href="{{ route('recipes.publicize', $recipe->id) }}"
          class="btn btn-{{ $size }} btn-secondary"
-         title="Make Public"><i class="{{ Config::get('buttons.public') }}"></i>
+         title="Make Public"><i class="{{ config('buttons.public') }}"></i>
       </a>
    @endif
 @endauth

@@ -1,30 +1,18 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
-   Create Post
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Posts</a></li>
-   <li class="breadcrumb-item">Create Post</li>
-@endsection
-
-@section('rightSidebar')
-@endsection
-
-@section('rightColumn')
-@endsection
+@include('admin.posts.create.sections.stylesheet')
+@include('admin.posts.create.sections.pageHeader')
+@include('admin.posts.create.sections.breadcrumb')
+@include('admin.posts.create.sections.sidebar')
+@include('admin.posts.create.sections.functions')
+@include('admin.posts.create.sections.formBegin')
+@include('admin.posts.create.sections.formEnd')
 
 @section ('content')
 
-   <form action="{{ route('admin.posts.store', $post) }}" method="POST" enctype="multipart/form-data">
-      @csrf
 
-      @include('admin.posts.create.topbar')
+
+      {{-- @include('admin.posts.create.topbar') --}}
          
       <div class="card card-primary card-outline card-outline-tabs">
          

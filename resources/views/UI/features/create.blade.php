@@ -53,8 +53,9 @@
 
 		</div><!-- Row -->
 
-	@include('UI.features.help')
 
 	</form>
+	
+	@include('help.index', ['title'=>'Request a Feature', 'icon'=>'features', 'path'=>'UI.features.create'])
 
 @endsection

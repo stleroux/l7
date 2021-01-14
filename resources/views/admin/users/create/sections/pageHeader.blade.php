@@ -1,4 +1,4 @@
 @section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
+   <i class="{{ config('icons.add') }}"></i>
    Create User
 @endsection

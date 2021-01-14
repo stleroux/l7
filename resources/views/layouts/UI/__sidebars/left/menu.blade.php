@@ -1,6 +1,6 @@
 <li class="nav-item">
    <a href="{{ route('homepage') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
-      <i class="{{ Config::get('icons.homepage') }}"></i>
+      <i class="{{ config('icons.homepage') }}"></i>
       <p>Home</p>
    </a>
 </li>
@@ -8,7 +8,7 @@
 {{-- @can('post-browse') --}}
    <li class="nav-item">
       <a href="{{-- {{ Route('posts.index') }} --}}" class="nav-link {{ Request::is('posts*') ? 'active' : '' }}">
-         <i class="{{ Config::get('icons.articles') }}"></i>
+         <i class="{{ config('icons.articles') }}"></i>
          <p>Articles / Blog / Posts</p>
       </a>
    </li>
@@ -17,7 +17,7 @@
 {{-- @can('recipe-browse') --}}
    <li class="nav-item">
       <a href="{{-- {{ Route('recipes.index') }} --}}" class="nav-link {{ Request::is('recipes*') ? 'active' : '' }}">
-         <i class="{{ Config::get('icons.recipes') }}"></i>
+         <i class="{{ config('icons.recipes') }}"></i>
          <p>Recipes</p>
       </a>
    </li>
@@ -26,7 +26,7 @@
 {{-- @can('recipe-browse') --}}
    <li class="nav-item">
       <a href="#" class="nav-link {{ ((Request::is('admin/projects*')) || (Request::is('admin/projects/finishes*')) || (Request::is('admin/projects/materials*'))) ? 'active' : '' }}">
-         <i class="{{ Config::get('icons.projects') }}"></i>
+         <i class="{{ config('icons.projects') }}"></i>
          <p>Projects</p>
       </a>
    </li>

@@ -18,7 +18,7 @@
    <div class="col text-right">
 
       <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
-         <i class="{{ Config::get('icons.help') }}"></i>
+         <i class="{{ config('icons.help') }}"></i>
          Help
       </a>
 

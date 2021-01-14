@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\Recipe;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Auth;
@@ -105,6 +107,27 @@ class CategoriesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('category-delete'), 403);
 
+      if(Post::where('category_id', $category->id)->count() > 0)
+      {
+         $notification = array(
+            'message' => 'Cannot delete this category as some posts are using it!', 
+            'alert-type' => 'error'
+         );
+
+         return redirect()->back()->with($notification);
+      }
+
+      if(Recipe::where('category_id', $category->id)->count() > 0)
+      {
+         $notification = array(
+            'message' => 'Cannot delete this category as some recipes are using it!', 
+            'alert-type' => 'error'
+         );
+
+         return redirect()->back()->with($notification);
+      }
+      
+
       $subCategories = Category::where('parent_id',$category->id)->get();
 
       // delete the permission
@@ -143,6 +166,31 @@ class CategoriesController extends Controller
       abort_unless(Gate::allows('category-delete'), 403);
 
       $categories = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
+      // dd($categories);
+
+      foreach ($categories as $category_id) {
+         if(Post::where('category_id', $category_id)->count() > 0)
+         {
+            $notification = array(
+               'message' => 'Cannot delete category : ['.$category_id.'] as some posts are using it!', 
+               'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+         }
+      }
+
+      foreach ($categories as $category_id) {
+         if(Recipe::where('category_id', $category_id)->count() > 0)
+         {
+            $notification = array(
+               'message' => 'Cannot delete category : ['.$category_id.'] as some recipes are using it!', 
+               'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+         }
+      }
 
       if(!$request->input('mass_destroy_pass_checkedvalue'))
       {

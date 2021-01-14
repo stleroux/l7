@@ -18,4 +18,15 @@ class Permission extends Model
    {
       return $this->belongsToMany('App\Models\Role');
    }
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // SCOPES
+   //////////////////////////////////////////////////////////////////////////////////////
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
+
 }

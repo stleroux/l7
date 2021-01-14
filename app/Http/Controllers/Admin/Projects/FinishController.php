@@ -7,7 +7,7 @@ use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Project;
-use App\Models\ProjectFinish;
+use App\Models\Finish;
 use DB;
 use Session;
 
@@ -39,7 +39,7 @@ class FinishController extends Controller
 ##################################################################################################################
    public function destroy(Request $request, $id)
    {
-      DB::table('projects__finish_project')
+      DB::table('finish_project')
          ->where('project_id', '=', $request->project_id)
          ->where('finish_id', '=', $id)
          ->delete();

@@ -49,6 +49,11 @@ class Comment extends Model
    {
       return $this->belongsTo('App\Models\Project');
    }
+
+   public function carving()
+   {
+      return $this->belongsTo('App\Models\Carving');
+   }
 	// public function scopeNewComments($query)
  //   	{
  //    	return $query

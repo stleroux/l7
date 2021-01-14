@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.contact-us') }}"></i>
+   <i class="{{ config('icons.contact-us') }}"></i>
    Contact Us
 @endsection
 
@@ -19,7 +19,7 @@
    <div class="card card-trans-4 mb-2">
 
       {{-- <div class="card-header section_header p-2">
-            <i class="{{ Config::get('icons.contact-us') }}"></i>
+            <i class="{{ config('icons.contact-us') }}"></i>
             Contact Us
       </div> --}}
       

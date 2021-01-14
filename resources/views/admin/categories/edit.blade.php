@@ -1,58 +1,37 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.edit') }}"></i>
-   Edit Category
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">Categories</a></li>
-   <li class="breadcrumb-item active">Edit</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.categories.edit.sections.stylesheet')
+@include('admin.categories.edit.sections.pageHeader')
+@include('admin.categories.edit.sections.breadcrumb')
+@include('admin.categories.edit.sections.sidebar')
+@include('admin.categories.edit.sections.functions')
+@include('admin.categories.edit.sections.formBegin')
+@include('admin.categories.edit.sections.formEnd')
 
 @section('content')
 
-   <form action="{{ route('admin.categories.update', $category) }}" method="POST">
-      @csrf
-      @method('PUT')
-
-      @include('admin.categories.edit.topbar')
-
-      <div class="row">
-
-         <div class="col-9">
-
-            <div class="card card-primary">
-               <div class="card-header">
-                  <div class="card-title">Category Information</div>
-               </div>
-               <div class="card-body">
-                  
-                  <div class="row">
-                     @include('admin.categories.edit.fields.name')
-                     @include('admin.categories.edit.fields.description')
-                  </div> <!-- Row -->
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
+   <div class="card card-primary">
+      <div class="card-header">
+         <div class="card-title">Category Information</div>
+      </div>
+      <div class="card-body">
          
-         </div><!-- Col -->
+         <div class="row">
+            <div class="col-xl-3">
+               @include('admin.categories.edit.fields.name')                        
+            </div>
+            <div class="col-xl-9">
+               @include('admin.categories.edit.fields.description')                        
+            </div>
+         </div> <!-- Row -->
 
-      </div><!-- Row -->
-
-      @include('admin.categories.help')
-      
-   </form>
+      </div> <!-- Card body -->
+   </div><!-- Card -->
+         
+   @include('admin.categories.help')
 
 @endsection
-
+{{-- 
 @section('scripts')
    <script>
       window.onload = function() {
@@ -60,3 +39,4 @@
       }
    </script>
 @endsection
+ --}}

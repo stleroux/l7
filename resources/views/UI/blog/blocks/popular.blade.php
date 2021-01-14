@@ -19,7 +19,7 @@
             @endforeach
          </ul>
        @else
-         {{ Config::get('settings.noRecordsFound') }}
+         {{ config('settings.noRecordsFound') }}
       @endif
    </div>
 

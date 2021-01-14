@@ -9,7 +9,7 @@
       title="Restore Selected"
       style="display:none;"
       onclick="return confirm('Are you sure you want to restore all these posts?')">
-      <i class="{{ Config::get('icons.restore') }}"></i>
+      <i class="{{ config('icons.restore') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
 

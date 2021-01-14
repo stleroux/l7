@@ -8,7 +8,7 @@
       style="display:none;"
       title="Unpublish Selected"
       onclick="return confirm('Are you sure you want to unpublish these posts?')">
-      <i class="{{ Config::get('icons.unpublish') }} text-danger"></i>
+      <i class="{{ config('icons.unpublish') }} text-danger"></i>
       {{ $btn_label ?? 'Unpublish Selected' }}
    </button>
 {{-- @endif --}}

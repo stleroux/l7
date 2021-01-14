@@ -8,7 +8,7 @@
       style="display:none;"
       title="Unpublish Selected"
       onclick="return confirm('Are you sure you want to unpublish these movies?')">
-      <i class="{{ Config::get('buttons.unpublish') }} text-danger"></i>
+      <i class="{{ config('buttons.unpublish') }} text-danger"></i>
       Unpublish All
    </button>
 {{-- @endif --}}

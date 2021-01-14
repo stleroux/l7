@@ -1,7 +1,7 @@
 <div class="card mb-2 card-trans-4" style="background-color: #800000">
    
    <div class="card-header text-light p-2">
-      <i class="{{ Config::get('icons.recipes') }}"></i>
+      <i class="{{ config('icons.recipes') }}"></i>
       Popular Recipes
    </div>
    
@@ -18,7 +18,7 @@
                
                   <div class="text text-left">
                
-                     <i class="{{ Config::get('icons.recipes') }}"></i>
+                     <i class="{{ config('icons.recipes') }}"></i>
                      {{ $r->title }}
                
                      <span class="badge badge-maroon float-right">{{ $r->views }}</span>
@@ -34,7 +34,7 @@
       @else
 
          <div class="col-row p-2 card-trans-4">
-            {{ Config::get('settings.noRecordsFound') }}
+            {{ config('settings.noRecordsFound') }}
          </div>
 
       @endif

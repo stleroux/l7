@@ -60,8 +60,10 @@ class TeamsController extends Controller
       
       if (!$teamGameOver){
          $teamGameDone = 0;
+         // $teamGameDone = 'app-10-2';
       } else {
          $teamGameDone = 1;
+         // $teamGameDone = 'app-10';
       }
 
       return view('UI.darts.01.teams.index', compact('game','tID','nextShot','player','user','remainingScore','teamGameDone'));

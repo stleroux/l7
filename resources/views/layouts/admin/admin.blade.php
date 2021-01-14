@@ -102,7 +102,7 @@
          <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="mx-2">
-               @include('layouts.admin.sidebars.right.test')
+               @include('layouts.admin.sidebars.right.popout')
                @yield('rightSidebar')
             </div>
          </aside>

@@ -1,10 +1,21 @@
 @extends('layouts.admin.admin')
 
 @section('stylesheet')
+	<style>
+/* .invalid class prevents CSS from automatically applying */
+.invalid input:required:invalid {
+  background: #BE4C54;
+}
+
+/* Mark valid inputs during .invalid state */
+.invalid input:required:valid {
+  background: #17D654;
+}
+	</style>
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
+   <i class="{{ config('icons.add') }}"></i>
    Invoicer :: Create New Invoice
 @endsection
 
@@ -37,7 +48,7 @@
 						Cancel
 					</a>
 					<button type="submit" name="save" class="btn btn-sm btn-primary">
-						<i class="{{ Config::get('icons.save') }}"></i>
+						<i class="{{ config('icons.save') }}"></i>
 						Save Invoice
 					</button>
 				</span>
@@ -61,12 +72,12 @@
 							@endphp --}}
 								<select name="client_id" class="form-control">
 										@if(!empty($client))
-											<option value="{{ $client->id }}" >{{ $client->company_name }}</option>
+											<option value="{{ $client->id }}" >{{ $client->contact_name }} :: {{ $client->company_name }}</option>
 										@else
 											<option value="" >Select One</option>
 										@endif
 									@foreach($clients as $c)
-										<option value="{{ $c->id }}" >{{ $c->company_name }}</option>
+										<option value="{{ $c->id }}" >{{ $c->contact_name ? $c->contact_name . ' :: ' : '' }} {{ $c->company_name }}</option>
 									@endforeach
 								</select>
 								{{-- {{ $client }} --}}
@@ -123,4 +134,8 @@
 
 	</form>
 
+@include('admin.invoicer.clients.createModal')
+
 @endsection
+
+

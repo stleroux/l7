@@ -40,16 +40,23 @@ class LedgerController extends Controller
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-ledger'), 403);	  
 
-		$invoices = InvoicerInvoice::sortable()->with('user')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+		$invoices = InvoicerInvoice::sortable()->with('client')->with('activities')->orderBy('id','desc')->paginate(5);
+		// ->paginate(Config::get('settings.rowsPerPage'));
+		// dd($invoices);
 		$totalAmountCharged = DB::table('invoicer__invoices')->sum('amount_charged');
 		$totalHST = DB::table('invoicer__invoices')->sum('hst');
 		$totalSubTotal = DB::table('invoicer__invoices')->sum('sub_total');
 		$totalWSIB = DB::table('invoicer__invoices')->sum('wsib');
 		$totalIncomeTaxes = DB::table('invoicer__invoices')->sum('income_taxes');
 		$totalTotalDeductions = DB::table('invoicer__invoices')->sum('total_deductions');
+		
+		$totalDeposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
+		$totalDiscounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
+		$totalPayments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
+
 		$totalTotal = DB::table('invoicer__invoices')->sum('total');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','totalHST','totalAmountCharged','totalSubTotal', 'totalWSIB', 'totalIncomeTaxes','totalTotalDeductions', 'totalTotal'));
+		return view('admin.invoicer.ledger.index', compact('invoices','totalHST','totalAmountCharged','totalSubTotal', 'totalWSIB', 'totalIncomeTaxes','totalTotalDeductions', 'totalDeposits', 'totalDiscounts', 'totalPayments', 'totalTotal'));
       // return view('invoicer.ledger.index', compact('invoices'));
 	}
 

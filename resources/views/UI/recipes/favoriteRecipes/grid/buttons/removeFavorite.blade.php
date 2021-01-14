@@ -4,7 +4,7 @@
       <a href="{{ route('recipes.favoriteAdd', $recipe->id) }}"
          class="btn btn-sm btn-maroon"
          title="Add Favorite">
-         <i class="{{ Config::get('icons.favorite') }} text-success"></i>
+         <i class="{{ config('icons.favorite') }} text-success"></i>
          <div class="d-none d-lg-inline">
             Add Favorite
          </div>
@@ -13,7 +13,7 @@
       <a href="{{ route('recipes.favoriteRemove', $recipe->id) }}"
          class="btn btn-sm btn-maroon"
          title="Remove Favorite">
-         <i class="{{ Config::get('icons.favorite') }} text-danger"></i>
+         <i class="{{ config('icons.favorite') }} text-danger"></i>
          <div class="d-none d-lg-inline">
             Remove Favorite
          </div>

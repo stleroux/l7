@@ -20,7 +20,7 @@
 
    @include('UI.features.show.topbar')
    
-   <div class="card card-trans-4">
+   <div class="card card-trans-4 text-light">
       
       <div class="card-header">
          <div class="row">
@@ -66,4 +66,6 @@
 
    </div>
 
+   @include('help.index', ['title'=>'View Requested Feature', 'icon'=>'features', 'path'=>'UI.features.show'])
+   
 @endsection

@@ -26,12 +26,13 @@ class MovieServiceProvider extends ServiceProvider
    */
    public function boot()
    {
-      view()->composer('movies.blocks.popular', function ($view) {
-         $popular = Movie::published()
+      view()->composer('admin.movies.blocks.popular', function ($view) {
+         $popular = Movie::
+            // published()
              // ->where('deleted_at', NULL)
-             ->where('views', '>=', 10)
+             where('views', '>=', 10)
              ->orderBy('views', 'desc')
-             ->take(setting('homepage_popular_count'))
+             ->take(config('popularCount'))
              ->get();
          $view->with('popular', $popular);
       });
@@ -49,7 +50,7 @@ class MovieServiceProvider extends ServiceProvider
          $view->with('archivesLinks', $archivesLinks);
       });
 
-      view()->composer('movies.blocks.archives', function ($view) {
+      view()->composer('admin.movies.blocks.archives', function ($view) {
          $archivesLinks = DB::table('movies')
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) archivesLinks_count'))
             ->where('created_at', '<=', Carbon::now())

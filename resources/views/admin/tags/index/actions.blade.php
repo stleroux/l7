@@ -1,34 +1,24 @@
-<div class="dropdown text-center">
 
-   <a class="dropdown-button"
-      id="dropdown-menu-{{ $tag->id }}"
-      data-toggle="dropdown"
-      data-boundary="viewport"
-      aria-haspopup="true"
-      aria-expanded="false">
-      <i class="{{ Config::get('icons.ellipsis') }}"></i>
-   </a>
-
-   <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $tag->id }}">
 
       @if(!$tag->deleted_at)
 
          {{-- @can('tag-edit') --}}
-            <a href="{{ route('admin.tags.edit', $tag) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.edit') }} text-primary"></i>
-               Edit
+            <a href="{{ route('admin.tags.edit', $tag) }}" class="btn btn-sm btn-default" title="Edit Tag">
+               <i class="{{ config('icons.edit') }} text-primary"></i>
+               {{-- Edit --}}
             </a>
          {{-- @endcan --}}
 
          {{-- @can('tag-delete') --}}
             <a href="#"
-               class="dropdown-item destroy-model bg-light"
+               class="destroy-model btn btn-sm btn-default"
                data-toggle="modal"
                data-target="#destroyModal"
                data-id="{{ $tag->id }}"
-               data-url="{{ url('admin/tags', $tag->id) }}">
-               <i class="{{ Config::get('icons.trash') }} text-pink"></i>
-               Trash
+               data-url="{{ url('admin/tags', $tag) }}"
+               title="Trash Tag">
+               <i class="{{ config('icons.trash') }} text-pink"></i>
+               {{-- Trash --}}
             </a>
          {{-- @endcan --}}
 
@@ -38,29 +28,32 @@
 
          {{-- @can('tag-manage') --}}
 
-            <h4 class="dropdown-header">Admin Functions</h4>
+            <button type="button"
+               class="restore-model btn btn-sm btn-default"
+               data-toggle="modal"
+               data-target="#restoreModal"
+               data-id="{{ $tag->id }}"
+               data-url="{{ url('admin/tags/restore', $tag) }}"
+               title="Restore Tag"
+               >
+               <i class="{{ config('icons.restore') }}"></i>
+               {{-- Restore --}}
+            </button>
 
-            <a href="{{ route('admin.tags.restore', $tag) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
-               Restore
-            </a>
 
             <!-- CANNOT use a link here, must use a button -->
             <button
                type="button"
-               class="dropdown-item delete-model bg-light"
+               class="delete-model btn btn-sm btn-default"
                data-toggle="modal"
                data-target="#deleteModal"
                data-id="{{ $tag->id }}"
-               data-url="{{ url('admin/tags/delete', $tag->id) }}">
-               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
-               Delete Permanently
+               data-url="{{ url('admin/tags/delete', $tag) }}"
+               title="Permanently Delete Tag">
+               <i class="{{ config('icons.delete') }} text-danger"></i>
+               {{-- Delete Permanently --}}
             </button>
          
          {{-- @endcan --}}
 
       @endif
-
-   </div>
-
-</div>

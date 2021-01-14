@@ -32,7 +32,7 @@ class PostServiceProvider extends ServiceProvider
          $popular = Post::published()
              ->where('views', '>=', 10)
              ->orderBy('views', 'desc')
-             ->take(Config::get('settings.popular_count'))
+             ->take(config('settings.popularCount'))
              ->get();
          $view->with('popular', $popular);
       });
@@ -42,6 +42,7 @@ class PostServiceProvider extends ServiceProvider
             ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
             ->where('published_at', '<=', Carbon::now())
             //->where('created_at', '<=', Carbon::now()->subMonth(3))
+            ->where('deleted_at', null)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'desc')

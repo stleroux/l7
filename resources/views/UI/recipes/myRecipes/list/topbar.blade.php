@@ -9,11 +9,11 @@
          </div>
          <div class="btn-group">
             <a href="{{ route('recipes.myRecipesGrid', 'all') }}" class="btn btn-sm btn-maroon">
-               <i class="{{ Config::get('icons.grid') }}"></i>
+               <i class="{{ config('icons.grid') }}"></i>
                Grid
             </a>
             <a href="{{ route('recipes.myRecipesList', 'all') }}" class="btn btn-sm btn-light">
-               <i class="{{ Config::get('icons.list') }}"></i>
+               <i class="{{ config('icons.list') }}"></i>
                List
             </a>
          </div>

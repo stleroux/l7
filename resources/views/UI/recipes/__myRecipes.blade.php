@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.mines') }}"></i>
+   <i class="{{ config('icons.mines') }}"></i>
    My Recipes
 @endsection
 
@@ -27,7 +27,7 @@
  --}}      
       <div class="card mb-3 card-trans-8">
          {{-- <div class="card-header section_header p-2"> --}}
-            {{-- <i class="{{ Config::get('icons.mine') }}"></i> --}}
+            {{-- <i class="{{ config('icons.mine') }}"></i> --}}
             {{-- My Recipes --}}
             {{-- <span class="float-right"> --}}
                {{-- <div class="btn-group"> --}}
@@ -86,7 +86,7 @@
             </div>
          @else
             <div class="card-body card_body p-2">
-               {{ Config::get('settings.noRecordsFound') }}
+               {{ config('settings.noRecordsFound') }}
               </div>
          @endif
 

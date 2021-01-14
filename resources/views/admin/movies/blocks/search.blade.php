@@ -1,7 +1,7 @@
 @auth
 	<div class="card mb-2">
 		<div class="card-header block_header p-2">
-			<i class="{{ Config::get('buttons.movies') }}"></i>
+			<i class="{{ config('buttons.movies') }}"></i>
 			Search
 		</div>
 		<div class="card-body pb-2 p-0 m-0">

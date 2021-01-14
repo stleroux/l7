@@ -1,38 +1,16 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.bugs') }}"></i>
-   @if(Route::currentRouteName('') == 'admin.bugs.new')
-      Newly Reported Bugs
-   @elseif(Route::currentRouteName('') == 'admin.bugs.pending')
-      Pending Bugs
-   @elseif(Route::currentRouteName('') == 'admin.bugs.notreproducible')
-      Not Reproducible
-   @elseif(Route::currentRouteName('') == 'admin.bugs.nonissue')
-      Non Issue
-   @elseif(Route::currentRouteName('') == 'admin.bugs.resolved')
-      Resolved
-   @elseif(Route::currentRouteName('') == 'admin.bugs.trashed')
-      Trashed Bugs
-   @else
-      Bugs
-   @endif
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item active">Bugs</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.bugs.index.sidebar') --}}
-@endsection
+@include('admin.bugs.index.sections.stylesheet')
+@include('admin.bugs.index.sections.pageHeader')
+@include('admin.bugs.index.sections.breadcrumb')
+@include('admin.bugs.index.sections.sidebar')
+@include('admin.bugs.index.sections.functions')
+@include('admin.bugs.index.sections.formBegin')
+@include('admin.bugs.index.sections.formEnd')
 
 @section('content')
 
-   @include('admin.bugs.index.topbar')
+   {{-- @include('admin.bugs.index.topbar') --}}
 
    <div class="card mb-3">
       <div class="card-body p-3">
@@ -42,6 +20,7 @@
       
    @include('modals.destroy', ['modelName'=>'bug'])
    @include('modals.massDestroy', ['modelName'=>'bug'])
+   @include('modals.restore', ['modelName'=>'bug'])
    @include('modals.massRestore', ['modelName'=>'bug'])
    @include('modals.delete', ['modelName'=>'bug'])
    @include('modals.massDelete', ['modelName'=>'bug'])

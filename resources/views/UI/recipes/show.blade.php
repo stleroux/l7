@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-	<i class="{{ Config::get('icons.recipes') }}"></i>
+	<i class="{{ config('icons.recipes') }}"></i>
 	Recipes :: {{ $recipe->title }}
 @endsection
 

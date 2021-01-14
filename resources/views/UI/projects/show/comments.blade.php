@@ -3,7 +3,7 @@
 	<div class="card-header bg-info text-light">
 		{{-- <div class="card-title"> --}}
 			<strong>
-				<i class="{{ Config::get('icons.comments') }}"></i>
+				<i class="{{ config('icons.comments') }}"></i>
 				Comments
 			</strong>
 			<small>({{ $model->comments()->count() }} total)</small>

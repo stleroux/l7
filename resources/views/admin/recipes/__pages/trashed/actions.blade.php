@@ -5,14 +5,14 @@
       data-boundary="viewport"
       aria-haspopup="true"
       aria-expanded="false">
-      <i class="{{ Config::get('icons.ellipsis') }}"></i>
+      <i class="{{ config('icons.ellipsis') }}"></i>
    </a>
    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $recipe->id }}">
       @if($recipe->deleted_at)
          {{-- @can('recipe-edit') --}}
          @if($recipe->user_id == Auth::id() || Auth::user()->can('recipe-edit'))
 {{--             <a href="{{ route('admin.recipes.restore', $recipe) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </a> --}}
          {{-- @endcan --}}
@@ -24,7 +24,7 @@
             data-id="{{ $recipe->id }}"
             data-url="{{ url('admin/recipes/restore', $recipe) }}"
             >
-            <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+            <i class="{{ config('icons.restore') }} text-primary"></i>
             Restore
          </button>
          @endif
@@ -38,7 +38,7 @@
                data-id="{{ $recipe->id }}"
                data-url="{{ url('admin/recipes/restore') }}"
                >
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </button> --}}
 
@@ -50,7 +50,7 @@
                data-id="{{ $recipe->id }}"
                data-url="{{ url('admin/recipes/delete', $recipe) }}"
                >
-               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+               <i class="{{ config('icons.delete') }} text-danger"></i>
                Delete Permanently
             </button>
 
@@ -63,7 +63,7 @@
             <h4 class="dropdown-header">Admin Functions</h4>
 
             <a href="{{ route('admin.recipes.restore', $recipe) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </a>
 
@@ -75,7 +75,7 @@
                data-id="{{ $recipe->id }}"
                data-url="{{ url('admin/recipes/delete', $recipe) }}"
                >
-               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+               <i class="{{ config('icons.delete') }} text-danger"></i>
                Delete Permanently
             </button>
          @endcan

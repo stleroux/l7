@@ -43,11 +43,11 @@
 
                      <div class="card-header">
                         <div class="row">
-                           <div class="col font-weight-bold h3">{{ $player->first_name }}</div>
-                           <div class="col-3 text-right">
-                              <select name="" class="form-control card-trans-4 font-weight-bold">
+                           <div class="col font-weight-bold h4">{{ $player->first_name }}</div>
+                           <div class="col-5 text-right">
+                              <select name="" class="form-control card-trans-4">
                                  @for ($i = 0; $i < 21; $i++)
-                                    <option value="{{ $i }}" class="font-weight-bold">{{ $i }}</option>
+                                    <option value="{{ $i }}" class="">{{ $i }}</option>
                                  @endfor
                               </select>
                            </div>

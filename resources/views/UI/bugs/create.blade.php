@@ -56,7 +56,7 @@
 
 		</div><!-- Row -->
 
-	@include('UI.bugs.help')
+	@include('help.index', ['title'=>'Report a Bug', 'icon'=>'bugs', 'path'=>'UI.bugs.create'])
 
 	</form>
 

@@ -2,7 +2,7 @@
    <a href="{{-- {{ route('admin.posts.delete', $post->id) }} --}}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
       title="Delete Image">
-      <i class="{{ Config::get('buttons.trash') }}"></i>
+      <i class="{{ config('buttons.trash') }}"></i>
       {{ $btn_label ?? '' }}
    </a>
 {{-- @endif --}}

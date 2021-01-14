@@ -171,6 +171,26 @@
       $('#mass_resetViews_hidden_checkedinput').val(checkedValues.join(','));
    });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MASS APPROVE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+   {{-- This script allows checked values to be passed to multi-restore modal  --}}
+   $('#massApprove-modal').on('show.bs.modal', function(e) {
+      var checkedValues = $('.record:checked').map(function(){ return this.value; }).get();
+      //put the ids in the hidden input as a comma separated string
+      $('#mass_approve_hidden_checkedinput').val(checkedValues.join(','));
+      });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MASS DISABLE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+   {{-- This script allows checked values to be passed to multi-restore modal  --}}
+   $('#massDisable-modal').on('show.bs.modal', function(e) {
+      var checkedValues = $('.record:checked').map(function(){ return this.value; }).get();
+      //put the ids in the hidden input as a comma separated string
+      $('#mass_disable_hidden_checkedinput').val(checkedValues.join(','));
+      });
+
 
 
 

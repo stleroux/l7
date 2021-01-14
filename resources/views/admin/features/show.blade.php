@@ -1,26 +1,16 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-   <link rel="stylesheet" href="{{ asset('css/UI/woodbarn.css') }}">
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.features') }}"></i>
-   Show Feature Request
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.features.index') }}">Feature Requests</a></li>
-   <li class="breadcrumb-item">Show</li>
-@endsection
-
-@section('rightColumn')
-   {{-- @include('UI.blocks.popularItems') --}}
-@endsection
+@include('admin.features.show.sections.stylesheet')
+@include('admin.features.show.sections.pageHeader')
+@include('admin.features.show.sections.breadcrumb')
+@include('admin.features.show.sections.sidebar')
+@include('admin.features.show.sections.functions')
+@include('admin.features.show.sections.formBegin')
+@include('admin.features.show.sections.formEnd')
 
 @section('content')
 
-   @include('admin.features.show.topbar')
+   {{-- @include('admin.features.show.topbar') --}}
    
    <div class="card card-trans-4">
       
@@ -68,4 +58,6 @@
 
    </div>
 
+   @include('admin.features.help')
+   
 @endsection

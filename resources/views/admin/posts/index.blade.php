@@ -1,26 +1,16 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.posts') }}"></i>
-   Published Posts
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item">Posts</li>
-@endsection
-
-@section('rightSidebar')
-@endsection
-
-@section('rightColumn')
-@endsection
+@include('admin.posts.index.sections.stylesheet')
+@include('admin.posts.index.sections.pageHeader')
+@include('admin.posts.index.sections.breadcrumb')
+@include('admin.posts.index.sections.sidebar')
+@include('admin.posts.index.sections.functions')
+@include('admin.posts.index.sections.formBegin')
+@include('admin.posts.index.sections.formEnd')
 
 @section('content')
 
-	@include('admin.posts.index.topbar')
+	{{-- @include('admin.posts.index.topbar') --}}
 
    <div class="row">
       <div class="col">
@@ -39,6 +29,7 @@
    @include('modals.massRestore', ['modelName'=>'post'])
    @include('modals.delete', ['modelName'=>'post'])
    @include('modals.massDelete', ['modelName'=>'post'])
+   @include('modals.publish', ['modelName'=>'post'])
    @include('modals.massPublish', ['modelName'=>'post'])
    @include('modals.unpublish', ['modelName'=>'post'])
    @include('modals.massUnpublish', ['modelName'=>'post'])

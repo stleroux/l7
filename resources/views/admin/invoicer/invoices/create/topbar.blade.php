@@ -20,8 +20,18 @@
             </a>
          {{-- @endif --}}
 
+         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+            <i class="{{ Config('icons.add') }}"></i>
+            Create Client
+         </button>
+
+         {{-- <a href="{{ route('admin.invoicer.clients.create') }}" class="btn btn-sm btn-outline-primary" target="_blank">
+            <i class="{{ Config('icons.add') }}"></i>
+            Create Client
+         </a> --}}
+
          <button type="submit" name="save" class="btn btn-sm btn-primary">
-            <i class="{{ Config::get('icons.save') }}"></i>
+            <i class="{{ config('icons.save') }}"></i>
             Create Invoice
          </button>
       </div>

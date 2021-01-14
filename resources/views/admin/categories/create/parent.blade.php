@@ -8,11 +8,11 @@
             <div class="card-title">Add Parent Category</div>
             <div class="float-right">
                <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="{{ Config::get('icons.reset') }}"></i>
+                  <i class="{{ config('icons.reset') }}"></i>
                   Reset
                </button>
                <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="{{ Config::get('icons.save') }}"></i>
+                  <i class="{{ config('icons.save') }}"></i>
                   Save
                </button>
             </div>

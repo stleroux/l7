@@ -2,7 +2,7 @@
    <a href="{{ route('admin.posts.printPDF', $post->id) }}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon"
       title="Print Post to PDF">
-      <i class="{{ Config::get('icons.pdf') }}"></i>
+      <i class="{{ config('icons.pdf') }}"></i>
       <div class="d-none d-lg-inline">
       	{{ $btn_label ?? '' }}
       </div>

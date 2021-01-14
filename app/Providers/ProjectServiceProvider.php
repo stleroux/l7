@@ -30,7 +30,7 @@ class ProjectServiceProvider extends ServiceProvider
          $popular = Project::
             where('views', '>=', 10)
             ->orderBy('views', 'desc')
-            ->take(Config::get('settings.popular_count'))
+            ->take(config('settings.popularCount'))
             ->get();
          $view->with('popular', $popular);
      });

@@ -19,7 +19,7 @@
 
          <div class="card mb-3">
             <div class="card-header section_header p-2">
-               <i class="{{ Config::get('buttons.movies') }}"></i>
+               <i class="{{ config('buttons.movies') }}"></i>
                My Favorite Movies
                <span class="float-right">
                   <div class="btn-group">

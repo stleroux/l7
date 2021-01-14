@@ -5,19 +5,19 @@
       data-boundary="viewport"
       aria-haspopup="true"
       aria-expanded="false">
-      <i class="{{ Config::get('icons.ellipsis') }}"></i>
+      <i class="{{ config('icons.ellipsis') }}"></i>
    </a>
    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $user->id }}">
       @if(!$user->deleted_at)
 
          <a href="{{ route('profile.show', $user) }}" class="dropdown-item bg-light">
-            <i class="{{ Config::get('icons.show') }} text-primary"></i>
+            <i class="{{ config('icons.show') }} text-primary"></i>
             Show Profile
          </a>
 
          @can('user-edit')
             <a href="{{ route('admin.users.edit', $user) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.edit') }} text-primary"></i>
+               <i class="{{ config('icons.edit') }} text-primary"></i>
                Edit
             </a>
          @endcan
@@ -25,12 +25,12 @@
          @can('user-edit')
             @if($user->account_status)
                <a href="{{ route('admin.users.disable', $user) }}" class="dropdown-item bg-light">
-                  <i class="{{ Config::get('icons.disable') }} text-pink"></i>
+                  <i class="{{ config('icons.disable') }} text-pink"></i>
                   Disable
                </a>
             @else
                <a href="{{ route('admin.users.approve', $user) }}" class="dropdown-item bg-light">
-                  <i class="{{ Config::get('icons.approve') }} text-primary"></i>
+                  <i class="{{ config('icons.approve') }} text-primary"></i>
                   Approve
                </a>
             @endif
@@ -43,7 +43,7 @@
                data-target="#destroyModal"
                data-id="{{ $user->id }}"
                data-url="{{ url('admin/users', $user->id) }}">
-               <i class="{{ Config::get('icons.trash') }} text-pink"></i>
+               <i class="{{ config('icons.trash') }} text-pink"></i>
                Trash
             </button>
          @endcan
@@ -54,7 +54,7 @@
             <h4 class="dropdown-header">Admin Functions</h4>
             
             <a href="{{ route('admin.users.restore', $user) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </a>
 
@@ -64,7 +64,7 @@
                data-target="#deleteModal"
                data-id="{{ $user->id }}"
                data-url="{{ url('admin/users/delete', $user->id) }}">
-               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+               <i class="{{ config('icons.delete') }} text-danger"></i>
                Delete Permanently
             </button>
          @endcan
@@ -77,13 +77,13 @@
 @if(!$user->deleted_at)
 
    <a href="{{ route('profile.show', $user) }}" class="btn btn-sm btn-light border" title="Show Profile">
-      <i class="{{ Config::get('icons.show') }} text-primary"></i>
+      <i class="{{ config('icons.show') }} text-primary"></i>
       {{-- Show Profile --}}
    </a>
 
    @can('user-edit')
       <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-light border" title="Edit User">
-         <i class="{{ Config::get('icons.edit') }} text-primary"></i>
+         <i class="{{ config('icons.edit') }} text-primary"></i>
          {{-- Edit --}}
       </a>
    @endcan
@@ -91,12 +91,12 @@
    @can('user-edit')
       @if($user->account_status)
          <a href="{{ route('admin.users.disable', $user) }}" class="btn btn-sm btn-light border" title="Disable User">
-            <i class="{{ Config::get('icons.disable') }} text-pink"></i>
+            <i class="{{ config('icons.disable') }} text-pink"></i>
             {{-- Disable --}}
          </a>
       @else
          <a href="{{ route('admin.users.approve', $user) }}" class="btn btn-sm btn-light border" title="Enable User">
-            <i class="{{ Config::get('icons.approve') }} text-primary"></i>
+            <i class="{{ config('icons.approve') }} text-primary"></i>
             {{-- Approve --}}
          </a>
       @endif
@@ -108,9 +108,9 @@
          data-toggle="modal"
          data-target="#destroyModal"
          data-id="{{ $user->id }}"
-         data-url="{{ url('admin/users', $user->id) }}"
+         data-url="{{ url('admin/users', $user) }}"
          title="Trash User">
-         <i class="{{ Config::get('icons.trash') }} text-pink"></i>
+         <i class="{{ config('icons.trash') }} text-pink"></i>
          {{-- Trash --}}
       </button>
    @endcan
@@ -118,21 +118,26 @@
 
 @if($user->deleted_at)
    @can('user-manage')
-      {{-- <h4 class="dropdown-header">Admin Functions</h4> --}}
-      
-      <a href="{{ route('admin.users.restore', $user) }}" class="btn btn-sm btn-light border" title="Restore User">
-         <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+      <button type="button"
+         class="restore-model btn btn-sm btn-default"
+         data-toggle="modal"
+         data-target="#restoreModal"
+         data-id="{{ $user->id }}"
+         data-url="{{ url('admin/users/restore', $user) }}"
+         title="Restore User"
+         >
+         <i class="{{ config('icons.restore') }}"></i>
          {{-- Restore --}}
-      </a>
+      </button>
 
       <button type="button"
-         class="delete-model btn btn-sm btn-light border"
+         class="delete-model btn btn-sm btn-default"
          data-toggle="modal"
          data-target="#deleteModal"
          data-id="{{ $user->id }}"
-         data-url="{{ url('admin/users/delete', $user->id) }}"
+         data-url="{{ url('admin/users/delete', $user) }}"
          title="Permanently Delete User">
-         <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+         <i class="{{ config('icons.delete') }} text-danger"></i>
          {{-- Delete Permanently --}}
       </button>
    @endcan

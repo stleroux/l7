@@ -28,4 +28,14 @@ class Role extends Model
       return $this->belongsToMany('App\Models\Permission');
    }
 
+   //////////////////////////////////////////////////////////////////////////////////////
+   // SCOPES
+   //////////////////////////////////////////////////////////////////////////////////////
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
+
 }

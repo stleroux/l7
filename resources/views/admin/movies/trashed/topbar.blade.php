@@ -16,16 +16,16 @@
                data-boundary="viewport"
                aria-haspopup="true"
                aria-expanded="false">
-               <i class="{{ Config::get('icons.ellipsis') }} mx-3"></i>
+               <i class="{{ config('icons.ellipsis') }} mx-3"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu">
                   <a href="{{ route('admin.movies.index') }}" class="dropdown-item bg-light">
-                     <i class="{{ Config::get('icons.movies') }}"></i>
+                     <i class="{{ config('icons.movies') }}"></i>
                      All Movies
                   </a>
                {{-- @can('movie-delete') --}}
                   <a href="{{ route('admin.movies.trashed') }}" class="dropdown-item bg-light">
-                     <i class="{{ Config::get('icons.trashed') }} text-danger"></i>
+                     <i class="{{ config('icons.trashed') }} text-danger"></i>
                      Trashed Movies
                   </a>
                {{-- @endcan --}}
@@ -35,7 +35,7 @@
 
       <div class="float-right px-1">         
          <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
-            <i class="{{ Config::get('icons.help') }}"></i>
+            <i class="{{ config('icons.help') }}"></i>
             <div class="d-none d-lg-inline">
                Help
             </div>
@@ -52,7 +52,7 @@
                id="btn_multidestroy"
                style="display:none"
                data-target="#massDestroy-modal">
-               <i class="{{ Config::get('icons.trash') }}"></i>
+               <i class="{{ config('icons.trash') }}"></i>
                Trash Selected
             </a>
          </form>
@@ -65,7 +65,7 @@
                id="btn_multiresetViews"
                style="display:none"
                data-target="#massResetViews-modal">
-               <i class="{{ Config::get('icons.resetViews') }}"></i>
+               <i class="{{ config('icons.resetViews') }}"></i>
                Reset View Counts
             </a>
          </form> --}}
@@ -81,7 +81,7 @@
                id="btn_multipublish"
                style="display:none"
                data-target="#massPublish-modal">
-               <i class="{{ Config::get('icons.publish') }}"></i>
+               <i class="{{ config('icons.publish') }}"></i>
                Publish Selected
             </a>
          </form> --}}
@@ -97,7 +97,7 @@
                id="btn_multipublish"
                style="display:none"
                data-target="#massPublish-modal">
-               <i class="{{ Config::get('icons.publish') }}"></i>
+               <i class="{{ config('icons.publish') }}"></i>
                Publish Selected
             </a>
          </form> --}}
@@ -112,7 +112,7 @@
                id="btn_multiunpublish"
                style="display:none"
                data-target="#massUnpublish-modal">
-               <i class="{{ Config::get('icons.unpublish') }}"></i>
+               <i class="{{ config('icons.unpublish') }}"></i>
                Unpublish Selected
             </a>
          </form> --}}
@@ -129,7 +129,7 @@
                id="btn_multidelete"
                style="display:none"
                data-target="#massDelete-modal">
-               <i class="{{ Config::get('icons.trash') }}"></i>
+               <i class="{{ config('icons.trash') }}"></i>
                Delete Selected
             </a>
          </form>
@@ -143,7 +143,7 @@
                id="btn_multirestore"
                style="display:none"
                data-target="#massRestore-modal">
-               <i class="{{ Config::get('icons.restore') }}"></i>
+               <i class="{{ config('icons.restore') }}"></i>
                Restore Selected
             </a>
          </form>

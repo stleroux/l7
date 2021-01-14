@@ -30,6 +30,22 @@ Route::prefix('admin/invoicer')->namespace('Admin\Invoicer')->name('admin.invoic
 });
 
 Route::prefix('admin/invoicer')->namespace('Admin\Invoicer')->name('admin.invoicer.')->group(function() {
+   Route::get('activities',                             'ActivitiesController@index')              ->name('activities');
+   Route::get('activities/create/{id?}',                'ActivitiesController@create')             ->name('activities.create');
+   // Route::get('activities/receivePayment/{id?}',        'ActivitiesController@receivePayment')     ->name('activities.receivePayment');
+   // Route::get('activities/applyDeposit/{id?}',          'ActivitiesController@applyDeposit')       ->name('activities.applyDeposit');
+   // Route::get('activities/apllyDiscount/{id?}',         'ActivitiesController@applyDiscount')      ->name('activities.applyDiscount');
+   Route::post('activities/store',                      'ActivitiesController@store')              ->name('activities.store');
+   // Route::post('activities/storePayment',               'ActivitiesController@storePayment')       ->name('activities.storePayment');
+   // Route::post('activities/storeDiscount',              'ActivitiesController@storeDiscount')      ->name('activities.storeDiscount');
+   // Route::get('activities/{id}',                        'ActivitiesController@show')                ->name('activities.show');
+   Route::get('activities/{id}/edit',                   'ActivitiesController@edit')                ->name('activities.edit');
+   Route::put('activities/{id}',                        'ActivitiesController@update')              ->name('activities.update');
+   Route::delete('activities/{id}',                     'ActivitiesController@destroy')             ->name('activities.destroy');
+});
+
+
+Route::prefix('admin/invoicer')->namespace('Admin\Invoicer')->name('admin.invoicer.')->group(function() {
    Route::get('invoices',                             'InvoicesController@index')               ->name('invoices');
    Route::get('invoices/create/{id?}',                'InvoicesController@create')              ->name('invoices.create');
    Route::post('invoices/store',                      'InvoicesController@store')               ->name('invoices.store');
@@ -43,12 +59,12 @@ Route::prefix('admin/invoicer')->namespace('Admin\Invoicer')->name('admin.invoic
 Route::prefix('admin/invoicer')->namespace('Admin\Invoicer')->name('admin.invoicer.')->group(function() {
    Route::get('clients/search',                       'ClientsController@search')               ->name('clients.search');
    Route::get('clients',                              'ClientsController@index')                ->name('clients');
-   // Route::get('clients/create',                       'ClientsController@create')               ->name('clients.create');
-   // Route::post('clients/store',                       'ClientsController@store')                ->name('clients.store');
+   Route::get('clients/create',                       'ClientsController@create')               ->name('clients.create');
+   Route::post('clients/store',                       'ClientsController@store')                ->name('clients.store');
    Route::get('clients/{id}',                         'ClientsController@show')                 ->name('clients.show');
-   // Route::get('clients/{id}/edit',                    'ClientsController@edit')                 ->name('clients.edit');
-   // Route::put('clients/{id}',                         'ClientsController@update')               ->name('clients.update');
-   // Route::delete('clients/{id}',                      'ClientsController@destroy')              ->name('clients.destroy');
+   Route::get('clients/{id}/edit',                    'ClientsController@edit')                 ->name('clients.edit');
+   Route::put('clients/{id}',                         'ClientsController@update')               ->name('clients.update');
+   Route::delete('clients/{id}',                      'ClientsController@destroy')              ->name('clients.destroy');
 });
 
 

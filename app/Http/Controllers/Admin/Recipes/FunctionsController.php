@@ -100,22 +100,29 @@ class FunctionsController extends RecipesController
    public function massDelete(Request $request)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('user-delete'), 403);
 
+      $recipes = explode(',', $request->input('mass_delete_pass_checkedvalue'));
 
-      $this->validate($request, [
-         'checked' => 'required',
-      ]);
+      if(!$request->input('mass_delete_pass_checkedvalue'))
+      {
+         $notification = array(
+            'message' => 'Please select entries to be deleted.', 
+            'alert-type' => 'error'
+         );
+      } else {
+         
+         foreach ($recipes as $recipe_id) {
+            $recipe = Recipe::onlyTrashed()->findOrFail($recipe_id);
+            $recipe->forceDelete();
+         }
 
-      $checked = $request->input('checked');
-
-      Recipe::whereIn('id', $checked)->forceDelete();
-
-      $notification = [
-         'message' => 'The recipes were deleted successfully.', 
-         'alert-type' => 'success'
-      ];
-
-      // return redirect()->route($ref)->with($notification);
+         $notification = array(
+            'message' => 'The selected recipes have been permanently deleted!',
+            'alert-type' => 'success'
+         );
+      }
+      
       return redirect()->back()->with($notification);
    }
 

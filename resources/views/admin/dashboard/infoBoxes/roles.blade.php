@@ -6,7 +6,7 @@
       <a href="{{ route('admin.roles.index') }}">
          <div class="info-box mb-3">
             <span class="info-box-icon bg-success elevation-1">
-               <i class="{{ Config::get('icons.roles') }}"></i>
+               <i class="{{ config('icons.roles') }}"></i>
             </span>
 
             <div class="info-box-content">

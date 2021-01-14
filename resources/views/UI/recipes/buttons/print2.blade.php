@@ -2,7 +2,7 @@
    <a href=""
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon d-print-none"
       onClick="window.print()">
-      <i class="{{ Config::get('icons.print') }}"></i>
+      <i class="{{ config('icons.print') }}"></i>
       {{ $btn_label ?? '' }}
    </a>
 {{-- @endif --}}

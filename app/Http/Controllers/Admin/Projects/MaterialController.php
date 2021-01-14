@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin\Projects;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Project;
-use App\Models\ProjectMaterial;
+use App\Models\Material;
 use DB;
 use Session;
 
@@ -38,7 +39,7 @@ class MaterialController extends Controller
 ##################################################################################################################
     public function destroy(Request $request, $id)
     {
-        DB::table('projects__material_project')
+        DB::table('material_project')
             ->where('project_id', '=', $request->project_id)
             ->where('material_id', '=', $id)
             ->delete();

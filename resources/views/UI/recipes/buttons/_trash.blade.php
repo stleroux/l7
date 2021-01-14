@@ -2,7 +2,7 @@
    <a href="{{ route('recipes.trash', $recipe->id) }}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-danger text-light"
       title="Trash Recipe">
-      <i class="{{ Config::get('icons.trash') }}"></i>
+      <i class="{{ config('icons.trash') }}"></i>
       {{ $btn_label ?? '' }}
    </a>
 {{-- @endif --}}

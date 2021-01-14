@@ -374,17 +374,23 @@ class RecipesController extends Controller
             $recipe->image = $filename;
          }
 
-      $recipe->save();
-
-      $notification = [
-         'message' => 'The recipe has been created successfully!', 
-         'alert-type' => 'success'
-      ];
-
-      if ($request->submit == 'new')
+      if($recipe->save())
       {
-         return redirect()->back()->with($notification);
+         $notification = [
+            'message' => 'The recipe has been created successfully!', 
+            'alert-type' => 'success'
+         ];
+
+         if ($request->submit == 'new')
+         {
+            return redirect()->back()->with($notification);
+         }
+         if ($request->submit == 'continue')
+         {
+            return redirect()->route('admin.recipes.edit', $recipe)->with($notification);
+         }
       }
+
 
       return redirect()->route('admin.recipes.index')->with($notification);
    }

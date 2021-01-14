@@ -85,7 +85,7 @@ class UsersController extends Controller
       } else {
          $user->password = Hash::make('password');
       }
-      $user->account_status = 1;
+      $user->account_status = 0;
       $user->public_email = 1;
       $user->telephone = $request->telephone;
       $user->cell = $request->cell;
@@ -119,7 +119,7 @@ class UsersController extends Controller
 
          if ($request->submit == 'continue')
          {
-            return redirect()->route('admin.users.edit', $user->id)->with($notification);
+            return redirect()->route('admin.users.edit', $user)->with($notification);
          }
 
       } else {
@@ -228,14 +228,14 @@ class UsersController extends Controller
          );
       }
 
-      // account goes from active to inactive
+      // account goes from active to disabled
       if($account_status == 0 && $user->account_status == 1)
       {
          // notify user via email
          $user->notify(new UserApprovedNotification($user));
       }
 
-      // account goes from inactive to active
+      // account goes from disabled to active
       if($account_status == 1 && $user->account_status == 0)
       {
          // notify user via email
@@ -510,12 +510,12 @@ class UsersController extends Controller
    #
    #
    ##################################################################################################################
-   public function active()
+   public function approved()
    {
       // Check if user has required permission
       abort_unless(Gate::allows('user-manage'), 403);
 
-      $users = User::active()->get();
+      $users = User::approved()->get();
 
       return view('admin.users.index', compact('users'));
    }
@@ -528,14 +528,101 @@ class UsersController extends Controller
    #
    #
    ##################################################################################################################
-   public function inactive()
+   public function disabled()
    {
       // Check if user has required permission
       abort_unless(Gate::allows('user-manage'), 403);
 
-      $users = User::inactive()->get();
+      $users = User::disabled()->get();
 
       return view('admin.users.index', compact('users'));
+   }
+
+
+   ##################################################################################################################
+   #
+   #
+   #
+   #
+   #
+   ##################################################################################################################
+   public function massApprove(Request $request)
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
+
+      $users = explode(',', $request->input('mass_approve_pass_checkedvalue'));
+      // dd($users);
+
+      if(!$request->input('mass_approve_pass_checkedvalue'))
+      {
+         $notification = array(
+            'message' => 'Please select entries to be restore.', 
+            'alert-type' => 'error'
+         );
+      } else {
+         
+         foreach ($users as $user_id) {
+
+            // $account_status = $user->account_status;
+
+            $user = User::findOrFail($user_id);
+               $user->account_status = 1;
+            $user->save();
+
+            // if($account_status == 0 && $user->account_status == 1)
+            // {
+               $user->notify(new UserApprovedNotification($user));
+            // }
+         }
+
+         $notification = array(
+            'message' => 'The selected users have been approved successfully!', 
+            'alert-type' => 'success'
+         );
+      }
+      
+      return redirect()->back()->with($notification);
+   }
+
+
+   ##################################################################################################################
+   #
+   #
+   #
+   #
+   #
+   ##################################################################################################################
+   public function massDisable(Request $request)
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
+
+      $users = explode(',', $request->input('mass_disable_pass_checkedvalue'));
+
+      if(!$request->input('mass_disable_pass_checkedvalue'))
+      {
+         $notification = array(
+            'message' => 'Please select entries to be restore.', 
+            'alert-type' => 'error'
+         );
+      } else {
+         
+         foreach ($users as $user_id) {
+            $user = User::findOrFail($user_id);
+               $user->account_status = 0;
+            $user->save();
+
+            $user->notify(new UserDisabledNotification($user));
+         }
+
+         $notification = array(
+            'message' => 'The selected users have been restored successfully!', 
+            'alert-type' => 'success'
+         );
+      }
+      
+      return redirect()->back()->with($notification);
    }
 
 

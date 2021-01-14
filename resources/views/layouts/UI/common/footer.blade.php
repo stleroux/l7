@@ -13,7 +13,7 @@
 	   </div>
 
 	   <div class="col text-right d-none d-sm-block">
-	      <b>Version</b> {{ Config::get('settings.version') }}
+	      <b>Version</b> {{ config('settings.siteVersionNo') }}
 	   </div>
 	
 	</div>

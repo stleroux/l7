@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.invoicer-clients') }}"></i>
+   <i class="{{ config('icons.invoicer-clients') }}"></i>
    Invoicer :: Clients
 	@if(strpos($_SERVER['REQUEST_URI'], 'search?selection=contact') !== false)
 		&nbsp; [Filtered By Contact]
@@ -45,8 +45,8 @@
 					<thead>
 						<tr>
 							<th>@sortablelink('id','Client ID')</th>
-							<th>@sortablelink('company_name','Company Name')</th>
 							<th>@sortablelink('last_name','Contact Name')</th>
+							<th>@sortablelink('company_name','Company Name')</th>
 							<th>@sortablelink('email','Contact Email')</th>
 							<th>Phone N<supp>o</supp></th>
                      <th>Invoices</th>
@@ -57,11 +57,13 @@
 						@foreach($clients as $client)
 						<tr>
 							<td>{{ $client->id }}</td>
+							<td>{{ $client->contact_name }}</td>
 							<td>{{ $client->company_name }}</td>
-							<td>{{ $client->first_name }} {{ $client->last_name }}</td>
 							<td>{{ $client->email }}</td>
 							<td>{{ $client->telephone }}</td>
-                     <td>{{ $client->invoices->count() }}</td>
+                     <td>
+                     	{{ $client->invoices->count() }}
+                     </td>
 							<td>
 								<div class="float-right">
 									@can('invoicer-invoice')
@@ -71,12 +73,17 @@
 										</a>
 									@endcan
 
-									{{-- @can('invoicer-client') --}}
+									<!-- @can('invoicer-client') -->
 										<a href="{{ route('admin.invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
 											<i class="fa fa-eye" aria-hidden="true"></i>
 											View
 										</a>
-									{{-- @endcan --}}
+
+										<a href="{{ route('admin.invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-outline-primary">
+											<i class="fa fa-eye" aria-hidden="true"></i>
+											Edit
+										</a>
+									<!-- @endcan -->
 								</div>
 							</td>
 						</tr>

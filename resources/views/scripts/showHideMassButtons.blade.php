@@ -11,6 +11,8 @@
          $("#btn_multiresetViews").show();
          $("#btn_multipublish").show();
          $("#btn_multiunpublish").show();
+         $("#btn_multiapprove").show();
+         $("#btn_multidisable").show();
       } else {
          $("#btn_multidestroy").hide();
          $("#btn_multidelete").hide();
@@ -18,6 +20,8 @@
          $("#btn_multiresetViews").hide();
          $("#btn_multipublish").hide();
          $("#btn_multiunpublish").hide();
+         $("#btn_multiapprove").hide();
+         $("#btn_multidisable").hide();
       }
    }
 </script>
@@ -45,6 +49,8 @@
       $('#mass_resetViews_ids').val(ids.join());
       $('#mass_publish_ids').val(ids.join());
       $('#mass_unpublish_ids').val(ids.join());
+      $('#mass_approve_ids').val(ids.join());
+      $('#mass_disable_ids').val(ids.join());
    }
 
    $(".checkbox_all").click(function(){

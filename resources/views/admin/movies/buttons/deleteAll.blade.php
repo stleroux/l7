@@ -8,6 +8,6 @@
       title="Delete Selected"
       style="display:none"
       onclick="return confirm('Are you sure you want to permanently delete these movies?')">
-      <i class="{{ Config::get('buttons.delete') }}"></i>
+      <i class="{{ config('buttons.delete') }}"></i>
    </button>
 @endif

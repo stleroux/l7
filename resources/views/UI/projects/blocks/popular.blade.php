@@ -1,7 +1,7 @@
 <div class="card mb-2 card-trans-4 bg-info">
    
    <div class="card-header p-2">
-      <i class="{{ Config::get('icons.projects') }}"></i>
+      <i class="{{ config('icons.projects') }}"></i>
       Popular Projects
    </div>
    
@@ -16,7 +16,7 @@
                <a href="{{ route('projects.show', $p->id) }}" class="card-trans-2 list-group-item list-group-item-action p-1 {{ (route('projects.show', $p->id) === url()->current()) ? 'projectActive' : '' }}">
 
                   <div class="text text-left">
-                     <i class="{{ Config::get('icons.projects') }}"></i>
+                     <i class="{{ config('icons.projects') }}"></i>
                      {{ ucwords($p->name) }}
 
                      <span class="badge badge-info float-right">{{ $p->views }}</span>
@@ -32,7 +32,7 @@
       @else
       
          <div class="col-row p-2 card-trans-4 text-dark">
-            {{ Config::get('settings.noRecordsFound') }}
+            {{ config('settings.noRecordsFound') }}
          </div>
       
       @endif

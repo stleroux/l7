@@ -59,20 +59,24 @@ class InvoicerInvoice extends Model
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
 	// An invoice belongs to a client
-	// public function client()
-	// {
-	// 	return $this->belongsTo('App\Models\Invoicer\Client');
-	// }
-   public function user()
-   {
-      return $this->belongsTo('App\Models\User');
-   }
+	public function client()
+	{
+		return $this->belongsTo('App\Models\InvoicerClient');
+	}
+   // public function user()
+   // {
+   //    return $this->belongsTo('App\Models\User');
+   // }
 
 	// An invoice has many items
 	public function invoiceItems() {
 		return $this->hasMany('App\Models\InvoicerInvoiceItem', 'invoice_id');
 	}
 
+   // An invoice has many activities
+   public function activities() {
+      return $this->hasMany('App\Models\InvoicerActivity', 'invoice_id')->orderBy('id','desc');
+   }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS

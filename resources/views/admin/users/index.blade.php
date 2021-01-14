@@ -22,6 +22,9 @@
 
    @include('modals.destroy', ['modelName'=>'user'])
    @include('modals.massDestroy', ['modelName'=>'user'])
+   @include('modals.massApprove', ['modelName'=>'user'])
+   @include('modals.massDisable', ['modelName'=>'user'])
+   @include('modals.restore', ['modelName'=>'user'])
    @include('modals.massRestore', ['modelName'=>'user'])
    @include('modals.delete', ['modelName'=>'user'])
    @include('modals.massDelete', ['modelName'=>'user'])

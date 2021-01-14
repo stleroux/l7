@@ -12,7 +12,7 @@
          </a>
 
          <button type="submit" class="btn btn-sm btn-primary">
-            <i class="{{ Config::get('icons.update') }}"></i>
+            <i class="{{ config('icons.update') }}"></i>
             Update Product
          </button>
       </div>

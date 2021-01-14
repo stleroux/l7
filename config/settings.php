@@ -5,8 +5,11 @@ return [
    // The name of the Application \ Website
 	'appName' => 'TheWoodBarn.ca',
 
+   // The URL of the Application \ Website
+   'appURL' => 'http://TheWoodBarn.ca',
+
    // The number of times a user has to login to the site before the "New User" panel will no longer be shown on the Homepage
-	'login_count_warning' => 500,
+	'loginCountWarning' => '500',
    
    // The information to display in Author modal or in tables and grids
    'authorFormat' => 'username',
@@ -20,15 +23,33 @@ return [
    'noRecordsFound' => 'No records found',
 
    // Site version number
-   'version' => '2.0',
+   'siteVersionNo' => '2.0',
 
    // Invoicer version number
-   'invoicer_version' => "2.0",
+   'invoicerVersionNo' => '2.0',
    
    // The number of blog entries to show on the Homepage
-   'homepage_blog_count' => 5,
+   'homepageBlogCount' => '5',
 
    // The number of popular items to display in each block
-   'popular_count' => 5,
+   'popularCount' => '10',
+
+   // The number of rows to return by default in Livewire tables
+   'perPage' => '15',
+
+   // 
+   'carvings' => 'hidden',
+
+   // 
+   'projects' => 'visible',
+
+   // 
+   'recipes' => 'visible',
+
+   // 
+   'blog' => 'visible',
+
+   //
+   'darts' => 'visible',
    
 ];

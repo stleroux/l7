@@ -2,7 +2,7 @@
 
 	<div class="card-header font-weight-bold">
 		{{-- <div class="card-title"> --}}
-			<i class="{{ Config::get('icons.comments') }}"></i>
+			<i class="{{ config('icons.comments') }}"></i>
 			Comments <small>({{ $recipe->comments()->count() }} total)</small>
 		{{-- </div> --}}
 	</div>

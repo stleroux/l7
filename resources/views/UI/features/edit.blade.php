@@ -50,8 +50,8 @@
 
       </div><!-- Row -->
 
-      @include('UI.features.help')
-
    </form>
+   
+   @include('help.index', ['title'=>'Edit Requested Feature', 'icon'=>'features', 'path'=>'UI.features.edit'])
 
 @endsection

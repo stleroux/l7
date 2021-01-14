@@ -11,7 +11,7 @@
 			<div class="col-md-8">
 				<div class="card card-trans-2">
 					<div class="card-header bg-info">
-						<i class="{{ Config::get('icons.register') }}"></i>
+						<i class="{{ config('icons.register') }}"></i>
 						{{ __('Register') }}
 					</div>
 

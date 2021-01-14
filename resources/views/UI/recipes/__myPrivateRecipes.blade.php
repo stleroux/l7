@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.private') }}"></i>
+   <i class="{{ config('icons.private') }}"></i>
    My Private Recipes
 @endsection
 
@@ -27,7 +27,7 @@
       
       <div class="card card-trans-8 mb-3">
          {{-- <div class="card-header section_header p-2">
-            <i class="{{ Config::get('buttons.private') }}"></i>
+            <i class="{{ config('buttons.private') }}"></i>
             My Private Recipes
             <span class="float-right">
                <div class="btn-group"> --}}
@@ -82,7 +82,7 @@
             </div>
          @else
             <div class="card-body card_body p-2">
-               {{ Config::get('settings.noRecordsFound') }}
+               {{ config('settings.noRecordsFound') }}
             </div>
          @endif
 

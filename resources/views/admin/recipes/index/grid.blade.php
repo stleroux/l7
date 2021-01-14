@@ -80,7 +80,7 @@
 	
 	@else
 	
-		{{ Config::get('settings.noRecordsFound') }}
+		{{ config('settings.noRecordsFound') }}
 	
 	@endif
 

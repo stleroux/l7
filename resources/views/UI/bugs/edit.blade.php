@@ -62,9 +62,9 @@
 
       </div><!-- Row -->
 
-      @include('UI.bugs.help')
-
    </form>
+
+   @include('help.index', ['title'=>'Edit Bug Report', 'icon'=>'bugs', 'path'=>'UI.bugs.edit'])
 
 @endsection
 

@@ -2,7 +2,7 @@
 
    <div class="card-header bg-info">
       <div class="card-title font-weight-bold">
-         <i class="{{ Config::get('icons.materials') }}"></i>
+         <i class="{{ config('icons.materials') }}"></i>
          Material(s) Used In This Project
       </div>
    </div>

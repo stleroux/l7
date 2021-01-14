@@ -4,8 +4,12 @@
       <div class="modal-content">
          <div class="modal-header bg-pink">
             <h5 class="modal-title" id="exampleModalLongTitle">
-               <i class="{{ Config::get('icons.') }}"></i>
-               Trash {{ ucwords(Illuminate\Support\Str::of($modelName)->replace('.', ' ')) }}?
+               <i class="{{ config('icons.') }}"></i>
+               {{-- @if($modelName == "faq")
+                  Trash Question
+               @else --}}
+                  Trash {{ ucwords(Illuminate\Support\Str::of($modelName)->replace('.', ' ')) }}?
+               {{-- @endif --}}
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
@@ -17,13 +21,21 @@
             @method('DELETE')
 
             <div class="modal-body text-dark">
+               {{-- <p class="font-weight-bold">Are you sure you want to trash this {{ $modelName == "faq" ? 'question' : $modelName }}?</p> --}}
                <p class="font-weight-bold">Are you sure you want to trash this {{ $modelName }}?</p>
                {{-- <p class="small font-weight-bold text-danger">Only an Administrator will be able to undo this action.</p> --}}
             </div>
             
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-               <button type="submit" class="btn bg-pink">Trash {{ ucwords(Illuminate\Support\Str::of($modelName)->replace('.', ' ')) }}</button>
+               <button type="submit" class="btn bg-pink">
+                  Trash
+                  {{-- @if($modelName == "faq")
+                     Question
+                  @else --}}
+                     {{ ucwords(Illuminate\Support\Str::of($modelName)->replace('.', ' ')) }}
+                  {{-- @endif --}}
+               </button>
             </div>
          </form>
       

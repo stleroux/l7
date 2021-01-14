@@ -35,7 +35,7 @@ class RecipeServiceProvider extends ServiceProvider
 					->public()
 					->orderBy('views', 'desc')
 					->orderBy('title')
-					->take(Config::get('settings.popular_count'))
+					->take(config('settings.popularCount'))
 					->get();
 			 $view->with('popular', $popular);
 		});

@@ -12,44 +12,44 @@
       <td colspan="6">
          <div class="col-sm-12">
             <div class="text-center" style="font-size: 16pt">
-               {{ Config::get('invoicer.companyName') }}
+               {{ config('invoicer.companyName') }}
             </div>
          </div>
          <div class="row">
             <div class="col-sm-12 text-center">
-               {{ Config::get('invoicer.address_1') . ', ' }}
+               {{ config('invoicer.address_1') . ', ' }}
                {{ (Config::get('invoicer.address_2')) ? Config::get('invoicer.address_2') . ', ' : '' }}
                {{ (Config::get('invoicer.city')) ? Config::get('invoicer.city') . ', ' : '' }}
                {{ (Config::get('invoicer.state')) ? Config::get('invoicer.state') . ', ' : '' }}
                {{ (Config::get('invoicer.zip')) ? Config::get('invoicer.zip') : '' }}
                <br />
                @if(Config::get('invoicer.telephone') && (Config::get('invoicer.fax')))
-                  <i class='fas fa-phone'></i> {{ Config::get('invoicer.telephone') }} &nbsp;
-                  <i class="fas fa-fax"></i> {{ Config::get('invoicer.fax') }}
+                  <i class='fas fa-phone'></i> {{ config('invoicer.telephone') }} &nbsp;
+                  <i class="fas fa-fax"></i> {{ config('invoicer.fax') }}
                @elseif(Config::get('invoicer.telephone'))
-                  <i class='fas fa-phone'></i> {{ Config::get('invoicer.telephone') }}
+                  <i class='fas fa-phone'></i> {{ config('invoicer.telephone') }}
                @elseif (Config::get('invoicer.fax'))
-                  <i class="fas fa-fax"></i> {{ Config::get('invoicer.fax') }}
+                  <i class="fas fa-fax"></i> {{ config('invoicer.fax') }}
                @endif
 
                <br />
                @if(Config::get('invoicer.email') && (Config::get('invoicer.website')))
-                  <i class="fas fa-at"></i> {{ Config::get('invoicer.email') }} &nbsp;
-                  <i class="fas fa-newspaper"></i> {{ Config::get('invoicer.website') }}
+                  <i class="fas fa-at"></i> {{ config('invoicer.email') }} &nbsp;
+                  <i class="fas fa-newspaper"></i> {{ config('invoicer.website') }}
                @elseif(Config::get('invoicer.email'))
-                  <i class="fas fa-at"></i> {{ Config::get('invoicer.email') }}
+                  <i class="fas fa-at"></i> {{ config('invoicer.email') }}
                @elseif(Config::get('invoicer.website'))
-                  <i class="fas fa-newspaper"></i> {{ Config::get('invoicer.website') }}
+                  <i class="fas fa-newspaper"></i> {{ config('invoicer.website') }}
                @endif
 
                <br />
                @if(Config::get('invoicer.wsibNo') && (Config::get('invoicer.hstNo')))
-                  WSIB N<sup>o</sup>: {{ Config::get('invoicer.wsibNo') }} &nbsp;
-                  HST N<sup>o</sup>: {{ Config::get('invoicer.hstNo') }}
+                  WSIB N<sup>o</sup>: {{ config('invoicer.wsibNo') }} &nbsp;
+                  HST N<sup>o</sup>: {{ config('invoicer.hstNo') }}
                @elseif(Config::get('invoicer.wsibNo'))
-                  WSIB N<sup>o</sup>: {{ Config::get('invoicer.wsibNo') }}
+                  WSIB N<sup>o</sup>: {{ config('invoicer.wsibNo') }}
                @elseif(Config::get('invoicer.hstNo'))
-                  HST N<sup>o</sup>: {{ Config::get('invoicer.hstNo') }}
+                  HST N<sup>o</sup>: {{ config('invoicer.hstNo') }}
                @endif
             </div>
          </div>
@@ -67,15 +67,16 @@
       <td colspan="6">
          <table cellspacing="0" cellpadding="0" border="0">
             <tr>
-               <th>Billed To</th>
+               <th align="left">Billed To</th>
             </tr>
             <tr>
                <td>
-                  {{ $invoice->user->company_name }}<br />
-                  {{ $invoice->user->address }}<br />
-                  {{ $invoice->user->city }}, {{ $invoice->user->province }}<br />
-                  {{ $invoice->user->postal_code }}<br />
-                  {{ $invoice->user->telephone }}
+                  {{ $invoice->client->company_name }}<br />
+                  {{ $invoice->client->contact_name }}<br />
+                  {{ $invoice->client->address }}<br />
+                  {{ $invoice->client->city }}, {{ $invoice->client->province }}<br />
+                  {{ $invoice->client->postal_code }}<br />
+                  {{ $invoice->client->telephone }}
                </td>
             </tr>
          </table>
@@ -89,6 +90,10 @@
             <tr>
                <th width="50%" align="right">Invoice Date</th>
                <td width="50%" align="right">{{ $invoice->invoiced_at }}</td>
+            </tr>
+            <tr>
+               <th width="50%" align="right">Paid Date</th>
+               <td width="50%" align="right">{{ $invoice->paid_at }}</td>
             </tr>
          </table>
       </td>
@@ -111,23 +116,24 @@
    <tr>
       <td colspan="12">
          @if($invoice->invoiceItems->count() > 0)
-            <table border="0" width="100%" cellpdding="0" cellspacing="0" border="1">
+            <table width="100%" cellpdding="0" cellspacing="0" border="0">
+            {{-- <table class=""> --}}
                <thead>
                   <tr>
-                     <th>Product 111</th>
-                     <th nowrap="nowrap">Work Date</th>
-                     <th>Notes</th>
-                     <th align="center">Quantity</th>
-                     <th align="right">Price</th>
-                     <th align="right">Amount</th>
+                     <th align="left" width="55%">Product</th>
+                     {{-- <th nowrap="nowrap">Work Date</th> --}}
+                     {{-- <th>Notes</th> --}}
+                     <th align="center" width="15%">Quantity</th>
+                     <th align="right" width="15%">Price</th>
+                     <th align="right" width="15%">Amount</th>
                   </tr>
                </thead>
                <tbody>
                   @foreach($invoice->invoiceItems->sortByDesc('work_date') as $item)
                      <tr>
-                        <td>{{ $item->product->details }}</td>
-                        <td nowrap="nowrap">{{ $item->work_date }}</td>
-                        <td>{!! nl2br(e($item->notes)) !!}</td>
+                        <td>{{ $item->product }}</td>
+                        {{-- <td nowrap="nowrap">{{ $item->work_date }}</td> --}}
+                        {{-- <td>{!! nl2br(e($item->notes)) !!}</td> --}}
                         <td align="center" nowrap="nowrap">{{ $item->quantity }}</td>
                         <td align="right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>
                         <td align="right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
@@ -159,11 +165,27 @@
                <td width="20%" align="right">{{ number_format($invoice->hst, 2, '.', ' ') }}$</td>
             </tr>
             <tr>
+               <th width="80%" align="right">Discount</th>
+               <td width="20%" align="right">{{ number_format($invoice->discounts, 2, '.', ' ') }}$</td>
+            </tr>
+            <tr>
+               <th width="80%" align="right">Deposit</th>
+               <td width="20%" align="right">{{ number_format($invoice->deposits, 2, '.', ' ') }}$</td>
+            </tr>
+            <tr>
+               <th width="80%" align="right">Payments</th>
+               <td width="20%" align="right">{{ number_format($invoice->payments, 2, '.', ' ') }}$</td>
+            </tr>
+{{--             <tr>
+               <th width="80%" align="right">Total</th>
+               <td width="20%" align="right">{{ number_format($invoice->total, 2, '.', ' ') }}$</td>
+            </tr> --}}
+            <tr>
                <td colspan="2">&nbsp;</td>
             </tr>
             <tr>
-               <th width="80%" align="right">Total</th>
-               <td width="20%" align="right">{{ number_format($invoice->sub_total, 2, '.', ' ') }}$</td>
+               <th width="80%" align="right">Total Owing</th>
+               <td width="20%" align="right">{{ number_format($invoice->total, 2, '.', ' ') }}$</td>
             </tr>
          </table>
       </td>

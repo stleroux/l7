@@ -3,6 +3,6 @@
    type="reset"
    formmethod="POST"
    title="Reset Form">
-   <i class="{{ Config::get('buttons.reset') }}"></i>
+   <i class="{{ config('buttons.reset') }}"></i>
    {{ $btn_label ?? '' }}
 </button>

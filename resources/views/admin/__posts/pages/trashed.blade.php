@@ -18,7 +18,7 @@
 
 		<div class="card mb-3">
 			<div class="card-header section_header p-2">
-				<i class="{{ Config::get('buttons.trashed') }}"></i>
+				<i class="{{ config('buttons.trashed') }}"></i>
 				Trashed Posts
 				<div class="float-right">
 					<div class="btn-group">

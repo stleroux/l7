@@ -31,6 +31,7 @@
    @include('modals.massDelete', ['modelName'=>'recipe'])
    @include('modals.massPublish', ['modelName'=>'recipe'])
    @include('modals.massUnpublish', ['modelName'=>'recipe'])
+   @include('modals.publish', ['modelName'=>'recipe'])
    @include('modals.unpublish', ['modelName'=>'recipe'])
    @include('modals.resetViews', ['modelName'=>'recipe'])
    @include('modals.massResetViews', ['modelName'=>'recipe'])

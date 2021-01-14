@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.movies') }}"></i>
+   <i class="{{ config('icons.movies') }}"></i>
    Trashed Movies
 @endsection
 
@@ -32,7 +32,7 @@
       <div class="card mb-3">
 
          {{-- <div class="card-header section_header p-2">
-            <i class="{{ Config::get('buttons.trashed') }}"></i>
+            <i class="{{ config('buttons.trashed') }}"></i>
             Trashed Movies
             <div class="float-right">
                <div class="btn-group"> --}}
@@ -116,7 +116,7 @@
                   </tbody>
                </table>
             @else
-               {{ Config::get('settings.noRecordsFound') }}
+               {{ config('settings.noRecordsFound') }}
             @endif
          </div>
 {{--          <div class="card-footer">

@@ -4,7 +4,7 @@
    <a href="{{ route('admin.posts.index') }}">
       <div class="info-box">
          <span class="info-box-icon bg-info elevation-1">
-            <i class="{{ Config::get('icons.posts') }}"></i>
+            <i class="{{ config('icons.posts') }}"></i>
          </span>
 
          <div class="info-box-content">

@@ -5,7 +5,7 @@
 @stop
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.projects') }}"></i>
+   <i class="{{ config('icons.projects') }}"></i>
    Projects
 @endsection
 
@@ -35,30 +35,40 @@
                @foreach($projects as $project)
                   <div  class="col-xl-3 pb-2">
                      <div id="card-hover" class="h-100 w-100" style="border: 2px black solid;">
-                        <div class="h-100 thumbnail pt-2 text-center" {{-- style="background-image: url('/images/nav.jpg');" --}}>
-                           <a href="{{ route('projects.show', $project->id) }}">
-                              @if($project->images->count() > 0)
-                                 <img src="/_projects/{{ $project->id }}/thumbs/{{ $project->images[0]->name }}" alt="{{ $project->name}}" {{-- class="mx-auto mw-100" --}} height="150px" width="95%" />
-                              @else
-                                 <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
-                              @endif
-                              <h4 class="badge-dark p-1 m-1">{{ ucwords($project->name) }}</h4>
-                              <div class=""><strong>Category</strong> : {{ $project->category }}</div>
-                              <div class=""><strong>Views</strong> : {{ $project->views }}</div>
-                              <div class=""><strong>Comments</strong> : {{ $project->comments->count() }}</div>
-                              <div class="">
-                                 <span>
-                                    <strong>
-                                    @if(count($project->images) > 0)
-                                       {{ count($project->images) > 1 ? 'Images' : 'Image' }} : 
-                                       {{ count($project->images) }} 
-                                    @else
-                                       No Images
-                                    @endif
-                                    </strong>
-                                 </span>
+
+                        <div class="position-relative p-0">
+                           
+                           @if($project->created_at > \Carbon\Carbon::now()->subMonth())
+                              <div class="ribbon-wrapper">
+                                 <div class="ribbon bg-lime m-0">New</div>
                               </div>
-                           </a>
+                           @endif
+
+                           <div class="h-100 thumbnail pt-2 text-center" {{-- style="background-image: url('/images/nav.jpg');" --}}>
+                              <a href="{{ route('projects.show', $project->id) }}">
+                                 @if($project->images->count() > 0)
+                                    <img src="/_projects/{{ $project->id }}/thumbs/{{ $project->images[0]->name }}" alt="{{ $project->name}}" {{-- class="mx-auto mw-100" --}} height="150px" width="95%" />
+                                 @else
+                                    <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
+                                 @endif
+                                 <h4 class="badge-dark p-1 m-1">{{ ucwords($project->name) }}</h4>
+                                 <div class=""><strong>Category</strong> : {{ $project->category }}</div>
+                                 <div class=""><strong>Views</strong> : {{ $project->views }}</div>
+                                 <div class=""><strong>Comments</strong> : {{ $project->comments->count() }}</div>
+                                 <div class="">
+                                    <span>
+                                       <strong>
+                                       @if(count($project->images) > 0)
+                                          {{ count($project->images) > 1 ? 'Images' : 'Image' }} : 
+                                          {{ count($project->images) }} 
+                                       @else
+                                          No Images
+                                       @endif
+                                       </strong>
+                                    </span>
+                                 </div>
+                              </a>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -86,7 +96,7 @@
       </div>
    @else
       <div class="col-row p-3 card-trans-4 text-dark">
-         {{ Config::get('settings.noRecordsFound') }}
+         {{ config('settings.noRecordsFound') }}
       </div>
    @endif
 

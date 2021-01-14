@@ -1,4 +1,5 @@
 {{-- @if(checkPerm('comment_add')) --}}
+@auth
 	<div class="card mb-3 card-trans-4">
 		<div class="card-header block_header p-2">
 			<i class="fa fa-comment"></i>
@@ -24,7 +25,8 @@
 						{{-- {{ Form::submit('Add Comment', ['class' => 'btn btn-success btn-block', 'style' => 'margin-top:15px;']) }} --}}
 						{{-- {{ Form::button('<i class="fa fa-plus-circle"></i> Add Comment', ['type' => 'submit', 'class' => 'btn btn-sm btn-success btn-block'] )  }} --}}
 						<button type="submit" name="add" class="btn btn-sm btn-success btn-block">
-							<i class="fa fa-plus-circle"></i>
+							<i class="{{ Config::get('icons.create') }}"></i>
+
 							Add Comment
 						</button>
 					</div>
@@ -35,4 +37,5 @@
 			Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.
 		</div>
 	</div>
+@endauth
 {{-- @endif --}}

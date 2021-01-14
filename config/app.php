@@ -172,6 +172,7 @@ return [
         App\Providers\RecipeServiceProvider::class,
         App\Providers\ProjectServiceProvider::class,
         App\Providers\PostServiceProvider::class,
+        App\Providers\CarvingServiceProvider::class,
 
         /*
          * Application Service Providers...

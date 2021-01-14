@@ -1,13 +1,13 @@
-<a href="{{ route('admin.recipes.index') }}" class="btn btn-block btn-light border" title="Recipes">
-   <i class="{{ Config::get('icons.recipes') }}"></i>
+<a href="{{ route('admin.recipes.index') }}" class="btn btn-block btn-default" title="Recipes">
+   <i class="{{ config('icons.back') }}"></i>
    <div class="d-none d-lg-inline">
-      Recipes
+      Back
    </div>
 </a>
 
 @if(app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName() == "admin.recipes.show")
    <a href="{{ url()->previous() }}" class="btn btn-block btn-default" title="Back">
-      <i class="{{ Config::get('icons.back') }}"></i>
+      <i class="{{ config('icons.back') }}"></i>
       <div class="d-none d-lg-inline">
          Back
       </div>
@@ -20,7 +20,7 @@
 
 {{--       @can('user-create')
          <a href="{{ route('admin.recipes.create') }}" class="btn btn-block btn-outline-success">
-            <i class="{{ Config::get('icons.add') }}"></i>
+            <i class="{{ config('icons.add') }}"></i>
             <div class="d-none d-lg-inline">
                Create Recipe
             </div>
@@ -37,7 +37,7 @@
                id="btn_multidestroy"
                style="display:none"
                data-target="#massDestroy-modal">
-               <i class="{{ Config::get('icons.trash') }}"></i>
+               <i class="{{ config('icons.trash') }}"></i>
                Trash Selected Recipes
             </a>
          </form>
@@ -53,7 +53,7 @@
                id="btn_multidelete"
                style="display:none"
                data-target="#massDelete-modal">
-               <i class="{{ Config::get('icons.delete') }}"></i>
+               <i class="{{ config('icons.delete') }}"></i>
                Delete Selected Recipes
             </a>
          </form>
@@ -67,32 +67,39 @@
                id="btn_multirestore"
                style="display:none"
                data-target="#massRestore-modal">
-               <i class="{{ Config::get('icons.restore') }}"></i>
+               <i class="{{ config('icons.restore') }}"></i>
                Restore Selected Recipes
             </a>
          </form>
       @endif --}}
 
-   <button type="submit" class="btn btn-block btn-outline-success" name="submit" value="update" title="Save and Close">
-      <i class="{{ Config::get('icons.save') }}"></i>
-      <div class="d-none d-lg-inline">
-         Save and Close
-      </div>
-   </button>
-   
-   <button type="submit" class="btn btn-block btn-outline-info" name="submit" value="continue" title="Save and Continue">
-      <i class="{{ Config::get('icons.save_continue') }}"></i>
-      <div class="d-none d-lg-inline">
-         Save and Continue
-      </div>
-   </button>
+      <button type="submit" class="btn btn-block btn-outline-success" name="submit" value="save" title="Save and Close">
+         <i class="{{ config('icons.save') }}"></i>
+         <div class="d-none d-lg-inline">
+            Save and Close
+         </div>
+      </button>
+      
+      <button type="submit" class="btn btn-block btn-outline-info" name="submit" value="continue" title="Save and Continue">
+         <i class="{{ config('icons.save_continue') }}"></i>
+         <div class="d-none d-lg-inline">
+            Save and Continue
+         </div>
+      </button>
 
-   <button type="reset" class="btn btn-block btn-light border" title="Reset Form">
-      <i class="{{ Config::get('icons.reset') }}"></i>
-      <div class="d-none d-lg-inline">
-         Reset Form
-      </div>
-   </button>
+      <button type="submit" class="btn btn-block btn-outline-primary" name="submit" value="new">
+         <i class="{{ config('icons.save_new') }}"></i>
+         <div class="d-none d-lg-inline">
+            Save and New
+         </div>
+      </button>
+
+      <button type="reset" class="btn btn-block btn-default" title="Reset Form">
+         <i class="{{ config('icons.reset') }}"></i>
+         <div class="d-none d-lg-inline">
+            Reset Form
+         </div>
+      </button>
 
 
    </div>

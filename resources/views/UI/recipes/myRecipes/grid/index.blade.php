@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.mine') }}"></i>
+   <i class="{{ config('icons.mine') }}"></i>
    My Recipes
    @if($byCatName)
 		:: {{  deliciousCamelcase(ucwords($byCatName->name)) }}
@@ -112,7 +112,7 @@
 	@else
 	
 		<div class="col-row p-3 card-trans-4 text-light">
-         {{ Config::get('settings.noRecordsFound') }}
+         {{ config('settings.noRecordsFound') }}
       </div>
 
    @endif

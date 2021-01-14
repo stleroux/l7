@@ -4,7 +4,7 @@
       <div class="modal-content">
          <div class="modal-header bg-danger">
             <h5 class="modal-title" id="exampleModalLongTitle">
-               <i class="{{ Config::get('icons.') }}"></i>
+               <i class="{{ config('icons.') }}"></i>
                PERMANENTLY Delete {{ ucfirst($modelName) }}?
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

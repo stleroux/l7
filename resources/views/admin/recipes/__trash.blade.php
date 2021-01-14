@@ -25,13 +25,13 @@
             <input type="hidden" name="_method" value="DELETE" />
 
             <a href="{{ URL::previous() }}" class="btn btn-secondary">
-               <i class="{{ Config::get('buttons.back') }}"></i>
+               <i class="{{ config('buttons.back') }}"></i>
                 No - Return To Previous Page
             </a>
             
             {{-- @if(checkPerm('post_delete')) --}}
                <button type="submit" class="btn btn-danger">
-                  <i class="{{ Config::get('buttons.trash') }}"></i>
+                  <i class="{{ config('buttons.trash') }}"></i>
                   Yes - Trash This Recipe
                </button>
             {{-- @endif --}}

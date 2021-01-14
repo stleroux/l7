@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// use Kyslik\ColumnSortable\Sortable;
+use Kyslik\ColumnSortable\Sortable; //Required by Invoicer Clients
 
 class User extends Authenticatable
 // class User extends Authenticatable implements MustVerifyEmail
@@ -16,7 +16,7 @@ class User extends Authenticatable
    use Notifiable;
    use SoftDeletes;
    use Favoriteability;
-   // use Sortable;
+   use Sortable; //Required by Invoicer Clients
 
    /**
    * The attributes that are mass assignable.
@@ -102,10 +102,10 @@ class User extends Authenticatable
       return $this->belongsToMany('App\Models\Role');
    }
 
-   // A client has many invoices
-   public function invoices() {
-      return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
-   }
+   // // A client has many invoices
+   // public function invoices() {
+   //    return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+   // }
 
    /////////////////////////////////////////////////////////////////////
    // 
@@ -137,13 +137,13 @@ class User extends Authenticatable
 //////////////////////////////////////////////////////////////////////////////////////
 // SCOPES
 //////////////////////////////////////////////////////////////////////////////////////
-   public function scopeActive($query)
+   public function scopeApproved($query)
    {
       return $query
          ->where('account_status', '=', 1);
    }
 
-   public function scopeInactive($query)
+   public function scopeDisabled($query)
    {
       return $query
          ->where('account_status', '=', 0);

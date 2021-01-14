@@ -59,7 +59,7 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		$tags = Tag::all();
+		$tags = Tag::where('category',2)->get();
 
 		return view('admin.posts.create', compact('categories','tags', 'post'));
 	}
@@ -169,7 +169,7 @@ class PostsController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.projects.index')->with($notification);
+      // return redirect()->route('admin.postss.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -194,7 +194,8 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		$tags = Tag::all();
+		// $tags = Tag::all();
+		$tags = Tag::where('category',2)->get();
 
 		return view('admin.posts.edit', compact('post','categories','tags'));
 	}
@@ -274,11 +275,30 @@ class PostsController extends Controller
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
 
-		$tags = Tag::all();
+		// $tags = Tag::all();
+		$tags = Tag::where('category',2)->get();
+
+		      // get previous project
+      $previous = Post::where('title', '<', $post->title)->published()->orderBy('title','asc')->max('title');
+      
+      if($previous){
+         $p = Post::where('title', $previous)->get();
+         $previous = $p[0]->id;
+      }
+
+      // get next posts
+      $next = Post::where('title', '>', $post->title)->published()->orderBy('title','desc')->min('title');
+
+      if($next){
+         $n = Post::where('title', $next)->get();
+         $next = $n[0]->id;
+      }
 
 		return view('admin.posts.show')
 			->withPost($post)
 			->withTags($tags)
+			->withPrevious($previous)
+			->withNext($next)
 			->withCategories($cats);
 	}
 
@@ -323,19 +343,35 @@ class PostsController extends Controller
 				$post->image = $filename;
 			}
 
-		$post->save();
-
-		// save the tags in the post_tag table
-		// false required as default (otherwise override existing association)
-		if (isset($request->tags))
+		if($post->save())
 		{
-			 $post->tags()->sync($request->tags, false);
-		} else {
-			 $post->tags()->sync(array());
+			$notification = [
+           'message' => 'The post has been created successfully!', 
+           'alert-type' => 'success'
+        ];
+
+			// save the tags in the post_tag table
+			// false required as default (otherwise override existing association)
+			if (isset($request->tags))
+			{
+				 $post->tags()->sync($request->tags, false);
+			} else {
+				 $post->tags()->sync(array());
+			}
+
+		   if ($request->submit == 'new')
+	      {
+	         return redirect()->back()->with($notification);
+	      }
+
+	      if ($request->submit == 'continue')
+	      {
+	         return redirect()->route('admin.posts.edit', $post->id)->with($notification);
+	      }
 		}
 
 		// set a flash message to be displayed on screen
-		Session::flash('success','The post was successfully saved!');
+		// Session::flash('success','The post was successfully saved!');
 		// redirect to another page
 		return redirect()->route('admin.posts.index');
 	}
@@ -402,6 +438,5 @@ class PostsController extends Controller
 		Session::flash ('success', 'This post was successfully updated!');
 		return redirect()->route('admin.posts.index');
 	}
-
 
 }

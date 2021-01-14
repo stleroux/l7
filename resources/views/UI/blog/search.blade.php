@@ -67,7 +67,7 @@
 				<!-- Display pagination links -->
 				<div class="text-center">{!! $posts->render() !!}</div>
 			@else
-				{{ Config::get('settings.noRecordsFound') }}
+				{{ config('settings.noRecordsFound') }}
 			@endif
 		</div>
 	</div>

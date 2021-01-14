@@ -1,13 +1,13 @@
-<div class="card card-trans-0 mb-3">
+<div class="card card-secondary mb-3">
 
-	<div class="card-header font-weight-bold">
+	<div class="card-header font-weight-bold p-1">
 		{{-- <div class="card-title"> --}}
-			<i class="{{ Config::get('icons.comments') }}"></i>
+			<i class="{{ config('icons.comments') }}"></i>
 			Comments <small>({{ $recipe->comments()->count() }} total)</small>
 		{{-- </div> --}}
 	</div>
 
-	<div class="card-body card-trans-6 text-dark p-0">
+	<div class="card-body text-dark p-1">
 		@if($recipe->comments->count())
 			<table class="table table-sm table-hover mb-0">
 				<thead>

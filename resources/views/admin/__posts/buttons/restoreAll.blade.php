@@ -8,7 +8,7 @@
       style="display:none;"
       title="Restore Selected"
       onclick="return confirm('Are you sure you want to restore these posts?')">
-      <i class="{{ Config::get('buttons.restore') }}"></i>
+      <i class="{{ config('buttons.restore') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
 {{-- @endif --}}

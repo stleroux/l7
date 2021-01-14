@@ -29,7 +29,7 @@ class InvoicerClientsTableSeeder extends Seeder
                 'telephone' => '613-370-0275',
                 'cell' => '613-402-0275',
                 'fax' => NULL,
-                'email' => 'stleroux@hotmaill.ca',
+                'email' => 'stleroux@hotmail.ca',
                 'website' => 'thewoodbarn.ca',
                 'notes' => NULL,
                 'created_at' => '2018-10-30 16:44:04',

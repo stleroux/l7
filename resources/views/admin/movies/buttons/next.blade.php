@@ -3,6 +3,6 @@
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-primary text-light"
       title="Next Movie">
       View Next
-      <i class="{{ Config::get('buttons.next') }}"></i>
+      <i class="{{ config('buttons.next') }}"></i>
    </a>
 @endif

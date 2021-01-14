@@ -76,6 +76,12 @@ class Category extends Model //implements AuditableContract
  //         //->where('user_id', '=', Auth::user()->id)
  //         ->orderBy('name','DESC');
  //   }
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
 
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS

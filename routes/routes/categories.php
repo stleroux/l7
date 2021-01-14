@@ -4,7 +4,7 @@
 // CATEGORIES ROUTES
 //////////////////////////////////////////////////////////////////////////////
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
-   Route::get('categories/restore/{category}', 'CategoriesController@restore')        ->name('categories.restore');
+   Route::post('categories/restore/{category}','CategoriesController@restore')        ->name('categories.restore');
    Route::post('categories/delete/{category}', 'CategoriesController@delete')         ->name('categories.delete');
    Route::delete('categories/mass_destroy',    'CategoriesController@massDestroy')    ->name('categories.mass_destroy');
    Route::post('categories/mass_restore',      'CategoriesController@massRestore')    ->name('categories.mass_restore');

@@ -15,7 +15,7 @@
 		</table>
 	@else
 		<div class="card-body p-2">
-			{{ Config::get('settings.noRecordsFound') }}
+			{{ config('settings.noRecordsFound') }}
 		</div>
 	@endif
 

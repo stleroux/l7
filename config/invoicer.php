@@ -13,9 +13,15 @@ return [
 	'email' => 'stleroux@hotmail.ca',
 	'website' => 'Thewoodbarn.ca',
 	'wsibNo' => '',
-	'wsibRate' => '0.12',
-	'hstNo' => 'hstNo',
-	'hstRate' => '0.13',
-	'incomeTaxRate' => '0.26',
-	'termsAndConditions' => 'T&<b>C</b>',
+	// 'wsibRate' => '0.12',
+	'wsibRate' => '0',
+	// 'hstNo' => 'hstNo',
+	'hstNo' => '0',
+	// 'hstRate' => '0.13',
+	'hstRate' => '0',
+	// 'incomeTaxRate' => '0.26',
+	'incomeTaxRate' => '0',
+	'version' => '2.0',
+	
+	// For Terms and Conditions, please see termsAndConditions.blade.php in views\invoicer
 ];

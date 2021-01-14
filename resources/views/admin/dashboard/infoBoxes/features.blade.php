@@ -1,4 +1,4 @@
-<!-- PERMISSIONS -->
+<!-- FEATURES -->
 
 @if(Auth::user()->can('feature-manage') || Auth::user()->hasRole('admin'))
 
@@ -6,7 +6,7 @@
 	   <a href="{{ route('admin.features.new') }}">
 	      <div class="info-box mb-3">
 	         <span class="info-box-icon bg-secondary elevation-1">
-	            <i class="{{ Config::get('icons.features') }}"></i>
+	            <i class="{{ config('icons.features') }}"></i>
 	         </span>
 
 	         <div class="info-box-content">

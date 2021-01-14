@@ -1,29 +1,18 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.edit') }}"></i>
-   Edit Feature
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.features.index') }}">Features</a></li>
-   <li class="breadcrumb-item active">Edit</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.features.edit.sections.stylesheet')
+@include('admin.features.edit.sections.pageHeader')
+@include('admin.features.edit.sections.breadcrumb')
+@include('admin.features.edit.sections.sidebar')
+@include('admin.features.edit.sections.functions')
+@include('admin.features.edit.sections.formBegin')
+@include('admin.features.edit.sections.formEnd')
 
 @section('content')
 
-   <form action="{{ route('admin.features.update', $feature) }}" method="POST">
-      @csrf
-      @method('PUT')
 
-      @include('admin.features.edit.topbar')
+
+      {{-- @include('admin.features.edit.topbar') --}}
 
       <div class="row">
 
@@ -62,7 +51,6 @@
 
       @include('admin.features.help')
 
-   </form>
 
 @endsection
 

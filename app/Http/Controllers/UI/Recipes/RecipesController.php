@@ -174,7 +174,6 @@ class RecipesController extends Controller
       foreach($alphas as $alpha) {
          $letters[] = $alpha->letter;
       }
-      
 
       $privateRecipesCount = Recipe::myRecipes()->private()->count();
 
@@ -219,13 +218,13 @@ class RecipesController extends Controller
                ->public()
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
-               ->paginate(10);
+               ->get();
          } else {
             $recipes = Recipe::with('user','category')
                ->published()
                ->public()
                ->orderBy('title', 'asc')
-               ->paginate(10);
+               ->get();
          }
       
       } else {
@@ -247,19 +246,20 @@ class RecipesController extends Controller
                   ->where('category_id', '=', $byCatName->id)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
-                  ->paginate(10);
+                  ->get();
             } else {
                $recipes = Recipe::with('user','category')
                   ->published()
                   ->public()
                   ->where('category_id', '=', $byCatName->id)
                   ->orderBy('title', 'asc')
-                  ->paginate(10);
+                  ->get();
             }
          
          } else {
 
             $allc = Category::where('parent_id', $byCatName->id)->pluck('id');
+            // dd($allc);
             
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
@@ -277,14 +277,15 @@ class RecipesController extends Controller
                   ->whereIn('category_id', $allc)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
-                  ->paginate(10);
+                  ->get();
             } else {
                $recipes = Recipe::with('user','category')
                   ->published()
                   ->public()
                   ->whereIn('category_id', $allc)
                   ->orderBy('title', 'asc')
-                  ->paginate(10);
+                  // ->paginate(10)
+                  ->get();
             }
          }
       }

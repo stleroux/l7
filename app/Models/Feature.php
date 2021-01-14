@@ -40,5 +40,20 @@ class Feature extends Model
       return $this->belongsTo('App\Models\User');
    }
 
+//////////////////////////////////////////////////////////////////////////////////////
+// SCOPES
+//////////////////////////////////////////////////////////////////////////////////////
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
 
+   // public function scopeNew($query)
+   // {
+   //    return $query
+   //       ->where('status', 1);
+   // }
+   
 }

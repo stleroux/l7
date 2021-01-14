@@ -4,12 +4,13 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.edit') }}"></i>
-   Invoicer :: Edit Invoice
+   <i class="{{ config('icons.edit') }}"></i>
+   Invoicer :: Edit Invoice #{{ $invoice->id }}
 @endsection
 
 @section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.invoicer') }}">Invoicer</a></li>
+   <li class="breadcrumb-item"><a href="{{ route('admin.invoicer.invoices') }}">Invoices</a></li>
    <li class="breadcrumb-item">Edit Invoice</li>
 @endsection
 
@@ -34,22 +35,22 @@
 					<div class="col-sm-9">
 
 						<!-- CLIENT -->
-						<div class="form-group {{ $errors->has('user_id') ? 'has-error' : '' }}">
-							<label for="user_id" class="required">Client</label>
-							<select name="user_id" class="form-control">
-								<option value="{{ $invoice->user_id }}">{{ $invoice->user->company_name }}</option>
+						<div class="form-group {{ $errors->has('client_id') ? 'has-error' : '' }}">
+							<label for="client_id" class="required">Client</label>
+							<select name="client_id" class="form-control">
+								<option value="{{ $invoice->client_id }}">{{ $invoice->client->company_name }}</option>
 								@foreach($clients as $client)
 									<option value="{{ $client->id }}">{{ $client->company_name }}</option>
 									}
 								@endforeach
 							</select>
-							<span class="text-danger">{{ $errors->first('user_id') }}</span>
+							<span class="text-danger">{{ $errors->first('client_id') }}</span>
 						</div>
 
 						<!-- NOTES -->
 						<div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">
 							<label for="notes">Notes</label>
-							<textarea name="notes" rows="4" class="form-control">{{ $client->notes }}</textarea>
+							<textarea name="notes" rows="4" class="form-control">{{ $invoice->notes }}</textarea>
 							<span class="text-danger">{{ $errors->first('notes') }}</span>
 							<small id="passwordHelpBlock" class="form-text text-muted">
 								These notes will not be shown on invoice
@@ -77,8 +78,8 @@
 								<div class="form-group {{ $errors->has('invoiced_at') ? 'has-error' : '' }}">
 									<label for="invoiced_at">Invoiced Date</label>
 									<div class="input-group">
-										@if($invoice->invoiced_at)
-											<input type="text" name="created_at" value="{{ $invoice->created_at }}" class="form-control" readonly />
+										@if($invoice->invoiced_at || $invoice->status == 'paid')
+											<input type="text" name="created_at" value="{{ $invoice->invoiced_at }}" class="form-control" readonly />
 										@else
 											<input type="text" name="invoiced_at" id="datePicker" value="{{ $invoice->invoiced_at }}" class="form-control" />
 										@endif
@@ -120,9 +121,9 @@
 					<div class="col-md-3">
 
 						<!-- STATUS -->
-						<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-							<label for="status" class="required">Status</label>
-							<select name="status" class="form-control">
+						<div class="form-group form-inline {{ $errors->has('status') ? 'has-error' : '' }}">
+							<label for="status" class="col-6 control-label required">Status</label>
+							<select name="status" class="col-6 form-control pull-right">
 								<option value="invoiced" {{ ($invoice->status == 'invoiced' ? 'selected' : '') }}>Invoiced</option>
 								<option value="logged" {{ ($invoice->status == 'logged' ? 'selected' : '') }}>Logged</option>
 								<option value="paid" {{ ($invoice->status == 'paid' ? 'selected' : '') }}>Paid</option>
@@ -131,10 +132,16 @@
 						</div>
 
 						<!-- SUB TOTAL -->
-						<div class="form-group">
-							<label for="amount_charged">SubTotal</label>
-							<div class="input-group">
-								<input type="text" name="amount_charged" value="{{ number_format($invoice->amount_charged, 2, '.', ' ') }}" class="form-control text-right" readonly />
+						<div class="form-group form-inline">
+							<label for="amount_charged" class="col-6">Amount</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="amount_charged"
+									value="{{ number_format($invoice->amount_charged, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
 								<div class="input-group-append">
 									<span class="input-group-text">$</span>
 								</div>
@@ -142,10 +149,85 @@
 						</div>
 
 						<!-- HST -->
-						<div class="form-group">
-							<label for="hst">HST</label>
-							<div class="input-group">
-								<input type="text" name="hst" value="{{ number_format($invoice->hst, 2, '.', ' ') }}" class="form-control text-right" readonly />
+						<div class="form-group form-inline">
+							<label for="hst" class="col-6">HST</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="hst"
+									value="{{ number_format($invoice->hst, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
+								<div class="input-group-append">
+									<span class="input-group-text">$</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- SUB TOTAL -->
+						{{-- <div class="form-group form-inline">
+							<label for="amount_charged" class="col-6">SubTotal</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="amount_charged"
+									value="{{ number_format($invoice->sub_total, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
+								<div class="input-group-append">
+									<span class="input-group-text">$</span>
+								</div>
+							</div>
+						</div> --}}
+
+						<!-- PAYMENTS -->
+						<div class="form-group form-inline">
+							<label for="amount_charged" class="col-6">Payments</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="amount_charged"
+									value="{{ number_format($invoice->payments, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
+								<div class="input-group-append">
+									<span class="input-group-text">$</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- DEPOSIT -->
+						<div class="form-group form-inline">
+							<label for="amount_charged" class="col-6">Deposit</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="amount_charged"
+									value="{{ number_format($invoice->deposits, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
+								<div class="input-group-append">
+									<span class="input-group-text">$</span>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- DISCOUNT -->
+						<div class="form-group form-inline">
+							<label for="amount_charged" class="col-6">Discount</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="amount_charged"
+									value="{{ number_format($invoice->discounts, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
 								<div class="input-group-append">
 									<span class="input-group-text">$</span>
 								</div>
@@ -153,10 +235,16 @@
 						</div>
 
 						<!-- TOTAL -->
-						<div class="form-group">
-							<label for="total">Total Charged</label>
-							<div class="input-group">
-								<input type="text" name="total" value="{{ number_format($invoice->sub_total, 2, '.', ' ') }}" class="form-control text-right" readonly />
+						<div class="form-group form-inline">
+							<label for="total" class="col-6">Total Owing</label>
+							<div class="input-group col-6 p-0">
+								<input
+									type="text"
+									name="total"
+									value="{{ number_format($invoice->total, 2, '.', ' ') }}"
+									class="form-control text-right"
+									readonly
+								/>
 								<div class="input-group-append">
 									<span class="input-group-text">$</span>
 								</div>
@@ -173,82 +261,20 @@
 		</div>
 	</form>
 
-		<br />
-		<div class="card">
+		
+@include('admin.invoicer.invoices.edit.billables')
+@if ($invoice->invoiceItems->count() > 0)
+	@include('admin.invoicer.invoices.edit.activities')
+@endif
 
-			<div class="card-header">
-				<span class="h3">Billable Items</span>
-				{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
-					@if($invoice->status == 'logged')
-						<span class="float-right">
-							<a href="{{ route('admin.invoicer.invoiceItems.create', $invoice->id) }}" class="btn btn-sm btn-primary">
-								<i class="far fa-plus-square"></i>
-								Add Billable
-							</a>
-						</span>
-					@endif
-				{{-- @endif --}}
-			</div>
 
-			{{-- <div class="card-body"> --}}
-				@if($invoice->invoiceItems->count() > 0)
-					<table class="table table-sm table-striped">
-						<thead>
-							<tr>
-								<th>Product</th>
-								<th>Work Date</th>
-								<th>Notes</th>
-								<th class="text-center">Quantity</th>
-								<th class="text-right">Price</th>
-								<th class="text-right">Total</th>
-								@if($invoice->status == 'logged')
-									<th></th>
-								@endif
-							</tr>
-						</thead>
-						<tbody>
-							{{-- @foreach($invoice->invoiceItems->sortByDesc('work_date') as $item) --}}
-							@foreach($invoice->invoiceItems->sortByDesc('id') as $item)
-								<tr>
-									<td>{{ $item->product->details }}</td>
-									<td nowrap="nowrap">{{ $item->work_date }}</td>
-									<td>{!! nl2br(e($item->notes)) !!}</td>
-									<td class="text-center">{{ $item->quantity }}</td>
-									<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>
-									<td class="text-right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
-									@if($invoice->status == 'logged')
-										<td class="text-right" nowrap="nowrap">
-											<form action="{{ route('admin.invoicer.invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
-												class="pull-right">
-												{{ csrf_field() }}
-												<input type="hidden" name="_method" value="DELETE" />
 
-												{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
-													<a href="{{ route('admin.invoicer.invoiceItems.edit', $item->id) }}" class="btn btn-sm btn-primary">
-														<i class="fa fa-edit"></i>
-														Edit
-													</a>
-												{{-- @endif --}}
-												
-												{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
-													<button type="submit" class="btn btn-sm btn-danger">
-														<i class="fa fa-trash-alt"></i>
-														Delete
-													</button>
-												{{-- @endif --}}
-											</form>
-										</td>
-									@endif
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				@else
-					<div class="card-body">
-						No billable items found for this invoice.
-					</div>
-				@endif
-			{{-- </div> --}}
-		</div>
+
+
+
+
+
+		
+
 
 @endsection

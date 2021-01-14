@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.invoicer-dashboard') }}"></i>
+   <i class="{{ config('icons.invoicer-dashboard') }}"></i>
    Invoicer :: Dashboard
 @endsection
 
@@ -40,7 +40,8 @@
 			</div>
 
 			<div class="col-xs-12 col-sm-6">
-				@include('admin.invoicer.dashboard.inc.clients')
+				@include('admin.invoicer.dashboard.inc.owingClients')
+				@include('admin.invoicer.dashboard.inc.bestClients')
 			</div>
 
 			<div class="col-xs-12 col-sm-3">
@@ -51,7 +52,7 @@
 
 	<div class="card-footer p-2">
 		<span class="float-right">
-			<small>V {{ Config::get('settings.invoicer_version') }}</small>
+			<small>V {{ config('invoicer.version') }}</small>
 		</span>		
 	</div>
 

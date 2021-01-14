@@ -9,7 +9,7 @@ use App\Models\InvoicerClient;
 use App\Models\InvoicerInvoice;
 use App\Models\InvoicerInvoiceItem;
 use App\Models\InvoicerProduct;
-use App\models\User;
+// use App\models\User;
 use Gate;
 //use Auth;
 //use Charts;
@@ -46,8 +46,16 @@ class DashboardController extends Controller
 	  // Check if user has required permission
 		abort_unless(Gate::allows('invoicer-dashboard'), 403);
 
-	  // $clients = Client::orderBy('company_name','asc')->get();
-	  $clients = User::has('invoices')->orderBy('company_name','asc')->get();
+	  // Get clients with remaining balances
+	  $owingClients = InvoicerClient::whereHas('invoices', function ($query) {
+    		return $query->where('total', '>', 0);
+		})->get();
+
+	  $bestClients = InvoicerClient::whereHas('invoices', function ($query) {
+     $query->where('payments', '>', 0);
+})->with('invoices')->get();
+	  // dd($customers);
+
 	  $invoicesTotal = InvoicerInvoice::all();
 	  $invoicesLogged = InvoicerInvoice::where('status','logged')->get();
 	  $invoicesInvoiced = InvoicerInvoice::where('status','invoiced')->get();
@@ -56,7 +64,7 @@ class DashboardController extends Controller
 	  $products = InvoicerProduct::orderByRaw('RAND()')->take(10)->get();;
 	  $productsCount = InvoicerProduct::count();
 	  
-		return view('admin.invoicer.dashboard.index', compact('clients', 'invoicesTotal', 'invoicesLogged', 'invoicesInvoiced', 'invoicesPaid', 'invoiceItems', 'products', 'productsCount'));
+		return view('admin.invoicer.dashboard.index', compact('owingClients', 'bestClients', 'invoicesTotal', 'invoicesLogged', 'invoicesInvoiced', 'invoicesPaid', 'invoiceItems', 'products', 'productsCount'));
 	}
 
 }

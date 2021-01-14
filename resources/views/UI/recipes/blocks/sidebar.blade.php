@@ -3,7 +3,7 @@
    <div class="card card-trans-4 mb-2" style="background-color: #800000">
 
       <div class="card-header text-light p-2">
-         <i class="{{ Config::get('icons.recipes') }}"></i>
+         <i class="{{ config('icons.recipes') }}"></i>
          Recipes
       </div>
 
@@ -15,7 +15,7 @@
                class="card-trans-2 list-group-item list-group-item-action p-1
                      {{ (route('recipes.myRecipesGrid', 'all') === url()->current()) || (route('recipes.myRecipesList', 'all') === url()->current()) ? 'recipeActive' : '' }}
             ">
-               <i class="{{ Config::get('icons.mine') }}"></i>
+               <i class="{{ config('icons.mine') }}"></i>
                My Recipes
             </a>
 
@@ -24,7 +24,7 @@
                class="card-trans-2 list-group-item list-group-item-action p-1
                      {{ (route('recipes.privateRecipesGrid', 'all') === url()->current()) || (route('recipes.privateRecipesList', 'all') === url()->current()) ? 'recipeActive' : '' }}
             ">
-               <i class="{{ Config::get('icons.private') }}"></i>
+               <i class="{{ config('icons.private') }}"></i>
                My Private Recipes
             </a>
 @endif
@@ -33,7 +33,7 @@
                class="card-trans-2 list-group-item list-group-item-action p-1
                      {{ (route('recipes.favoriteRecipesGrid', 'all') === url()->current()) || (route('recipes.favoriteRecipesList', 'all') === url()->current()) ? 'recipeActive' : '' }}
             ">
-               <i class="{{ Config::get('icons.favorite') }}"></i>
+               <i class="{{ config('icons.favorite') }}"></i>
                My Favorite Recipes
             </a>
 
@@ -75,17 +75,17 @@
          @endif --}}
 
 {{--             <a href="{{ route('recipes.myRecipesGrid') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.myRecipes*') ? 'active' : '' }}">
-               <i class="{{ Config::get('icons.mine') }}"></i>
+               <i class="{{ config('icons.mine') }}"></i>
                My Recipes
             </a>
 
             <a href="{{ route('recipes.myPrivateRecipes') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.myPrivateRecipes') ? 'active' : '' }}">
-               <i class="{{ Config::get('icons.private') }}"></i>
+               <i class="{{ config('icons.private') }}"></i>
                My Private Recipes
             </a>
 
             <a href="{{ route('recipes.myFavoriteRecipes') }}" class="list-group-item list-group-item-action p-1 {{ Route::is('recipes.myFavoriteRecipes') ? 'active' : '' }}">
-               <i class="{{ Config::get('icons.favorite') }}"></i>
+               <i class="{{ config('icons.favorite') }}"></i>
                My Favorite Recipes
             </a> --}}
 

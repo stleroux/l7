@@ -5,14 +5,14 @@
       data-boundary="viewport"
       aria-haspopup="true"
       aria-expanded="false">
-      <i class="{{ Config::get('icons.ellipsis') }}"></i>
+      <i class="{{ config('icons.ellipsis') }}"></i>
    </a>
    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $movie->id }}">
       @if($movie->deleted_at)
          {{-- @can('movie-edit') --}}
          @if($movie->user_id == Auth::id() || Auth::user()->can('movie-edit'))
 {{--             <a href="{{ route('admin.movies.restore', $movie) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </a> --}}
          {{-- @endcan --}}
@@ -24,7 +24,7 @@
             data-id="{{ $movie->id }}"
             data-url="{{ url('admin/movies/restore', $movie) }}"
             >
-            <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+            <i class="{{ config('icons.restore') }} text-primary"></i>
             Restore
          </button>
          @endif
@@ -38,7 +38,7 @@
                data-id="{{ $movie->id }}"
                data-url="{{ url('admin/movies/restore') }}"
                >
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </button> --}}
 
@@ -50,7 +50,7 @@
                data-id="{{ $movie->id }}"
                data-url="{{ url('admin/movies/delete', $movie) }}"
                >
-               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+               <i class="{{ config('icons.delete') }} text-danger"></i>
                Delete Permanently
             </button>
 
@@ -63,7 +63,7 @@
             <h4 class="dropdown-header">Admin Functions</h4>
 
             <a href="{{ route('admin.movies.restore', $movie) }}" class="dropdown-item bg-light">
-               <i class="{{ Config::get('icons.restore') }} text-primary"></i>
+               <i class="{{ config('icons.restore') }} text-primary"></i>
                Restore
             </a>
 
@@ -75,7 +75,7 @@
                data-id="{{ $movie->id }}"
                data-url="{{ url('admin/movies/delete', $movie) }}"
                >
-               <i class="{{ Config::get('icons.delete') }} text-danger"></i>
+               <i class="{{ config('icons.delete') }} text-danger"></i>
                Delete Permanently
             </button>
          @endcan

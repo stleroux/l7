@@ -3,7 +3,14 @@
 
    <label for="name" class="col-form-label">Name</label>
 
-   <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') ?? $role->name }}">
+   <input
+   	type="text"
+   	id="name"
+   	name="name"
+   	class="form-control @error('name') is-invalid @enderror"
+   	value="{{ old('name') ?? $role->name }}"
+   	autofocus
+   >
    
    @error('name')
       <span class="invalid-feedback" role="alert">

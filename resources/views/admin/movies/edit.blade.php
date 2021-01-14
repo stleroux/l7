@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.add') }}"></i>
+   <i class="{{ config('icons.add') }}"></i>
    Edit Movie :: {{ $movie->title }}
 @endsection
 

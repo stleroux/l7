@@ -8,7 +8,7 @@
       style="display:none;"
       title="Delete Selected"
       onclick="return confirm('Are you sure you want to delete these posts?')">
-      <i class="{{ Config::get('buttons.delete') }}"></i>
+      <i class="{{ config('buttons.delete') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
 {{-- @endif --}}

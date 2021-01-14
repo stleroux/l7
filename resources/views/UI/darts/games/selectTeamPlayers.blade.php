@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.add') }}"></i> --}}
+   {{-- <i class="{{ config('icons.add') }}"></i> --}}
    Create Game - Step : 2 :: Select Player(s)
 @endsection
 

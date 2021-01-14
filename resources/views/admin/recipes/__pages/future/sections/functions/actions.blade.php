@@ -4,7 +4,7 @@
 
       @can('user-create')
          <a href="{{ route('admin.recipes.create') }}" class="btn btn-block btn-outline-success">
-            <i class="{{ Config::get('icons.add') }}"></i>
+            <i class="{{ config('icons.add') }}"></i>
             <div class="d-none d-lg-inline">
                Create Recipe
             </div>
@@ -21,7 +21,7 @@
                id="btn_multidestroy"
                style="display:none"
                data-target="#massDestroy-modal">
-               <i class="{{ Config::get('icons.trash') }}"></i>
+               <i class="{{ config('icons.trash') }}"></i>
                Trash Selected Recipes
             </a>
          </form>
@@ -37,7 +37,7 @@
                id="btn_multidelete"
                style="display:none"
                data-target="#massDelete-modal">
-               <i class="{{ Config::get('icons.delete') }}"></i>
+               <i class="{{ config('icons.delete') }}"></i>
                Delete Selected Recipes
             </a>
          </form>
@@ -51,7 +51,7 @@
                id="btn_multirestore"
                style="display:none"
                data-target="#massRestore-modal">
-               <i class="{{ Config::get('icons.restore') }}"></i>
+               <i class="{{ config('icons.restore') }}"></i>
                Restore Selected Recipes
             </a>
          </form>

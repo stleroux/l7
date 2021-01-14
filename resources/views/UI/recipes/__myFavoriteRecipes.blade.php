@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.favorite') }}"></i>
+   <i class="{{ config('icons.favorite') }}"></i>
    My Favorite Recipes
 @endsection
 
@@ -97,7 +97,7 @@
                @endforeach
             @else
             {{-- <div class="card-body card_body p-2"> --}}
-               {{ Config::get('settings.noRecordsFound') }}
+               {{ config('settings.noRecordsFound') }}
             @endif
          </div>
       </div>

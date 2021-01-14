@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.invoicer-products') }}"></i>
+   <i class="{{ config('icons.invoicer-products') }}"></i>
    Invoicer :: Products
    @if(strpos($_SERVER['REQUEST_URI'], 'search?') !== false)
 		[Filtered]

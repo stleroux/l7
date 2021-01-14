@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.invoicer-products') }}"></i>
+   <i class="{{ config('icons.invoicer-products') }}"></i>
    Invoicer :: Edit Product
 @endsection
 
@@ -39,7 +39,7 @@
 						Cancel
 					</a>
 					<button type="submit" class="btn btn-sm btn-primary">
-						<i class="{{ Config::get('icons.update') }}"></i>
+						<i class="{{ config('icons.update') }}"></i>
 						Update Product
 					</button>
 				</span>

@@ -2,7 +2,7 @@
    <a href="{{ route('recipes.print', $recipe->id) }}"
       class="btn {{ $size ? 'btn-'.$size : '' }} btn-maroon"
       title="Print Recipe">
-      <i class="{{ Config::get('icons.print') }}"></i>
+      <i class="{{ config('icons.print') }}"></i>
       <div class="d-none d-lg-inline">
       	{{ $btn_label ?? '' }}
       </div>

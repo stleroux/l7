@@ -5,11 +5,11 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.tree') }} col-2 col-sm-1 text-steel pr-2"></i>
+   <i class="{{ config('icons.tree') }} col-2 col-sm-1 text-steel pr-2"></i>
    <div class="col-8 col-sm-7">
       Welcome to TheWoodBarn.ca
    </div>
-   <i class="{{ Config::get('icons.tree') }} col-2 col-sm-1 text-steel pl-2"></i>
+   <i class="{{ config('icons.tree') }} col-2 col-sm-1 text-steel pl-2"></i>
 @endsection
 
 @section('breadcrumb')

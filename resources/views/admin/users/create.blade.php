@@ -31,7 +31,7 @@
 
       @include('admin.users.help')
 
-   </form>
+   {{-- </form> --}}
 
 @endsection
 

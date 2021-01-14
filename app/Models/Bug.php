@@ -41,5 +41,14 @@ class Bug extends Model
       return $this->belongsTo('App\Models\User', 'user_id');
    }
 
+//////////////////////////////////////////////////////////////////////////////////////
+// SCOPES
+//////////////////////////////////////////////////////////////////////////////////////
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
 
 }

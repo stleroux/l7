@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.projects') }}"></i>
+   <i class="{{ config('icons.projects') }}"></i>
    {{ ucwords($project->name) }} Project Information
 @endsection
 

@@ -8,7 +8,7 @@
       <div class="col p-0">
       
          <input
-         	type="number"
+         	type="text"
          	name="cook_time_hours"
          	id="cook_time_hours"
          	value="{{ old('cook_time_hours') ?? $recipe->cook_time_hours }}"
@@ -27,7 +27,7 @@
       <div class="col p-0">
 
          <input
-            type="number"
+            type="text"
             name="cook_time_minutes"
             id="cook_time_minutes"
             value="{{ old('cook_time_minutes') ?? $recipe->cook_time_minutes }}"

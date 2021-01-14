@@ -1,0 +1,2 @@
+@section('stylesheet')
+@endsection

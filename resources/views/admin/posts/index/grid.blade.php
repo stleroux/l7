@@ -13,7 +13,7 @@
 	                  <label for="checkbox_all"></label>
 	               </div>
 	            </th>
-					<th>Name</th>
+					<th>Title</th>
 					<th>Category</th>
 					<th>Views</th>
 					<th>Favorited</th>
@@ -80,7 +80,7 @@
 	
 	@else
 	
-		{{ Config::get('settings.noRecordsFound') }}
+		{{ config('settings.noRecordsFound') }}
 	
 	@endif
 

@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.') }}"></i>
+   <i class="{{ config('icons.') }}"></i>
    {{ ucwords($post->title) }}
 @endsection
 

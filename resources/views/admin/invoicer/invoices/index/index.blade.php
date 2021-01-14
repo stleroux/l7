@@ -4,7 +4,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.invoicer-invoices') }}"></i>
+   <i class="{{ config('icons.invoicer-invoices') }}"></i>
 	<span class="h3">Invoicer :: Invoices
 		{{ (Request::is('admin/invoicer/invoices/logged') ? '- Logged':'') }}
 		{{ (Request::is('admin/invoicer/invoices/invoiced') ? '- Invoiced':'') }}
@@ -60,9 +60,13 @@
 							<th>@sortablelink('created_at','Created')</th>
 							<th>@sortablelink('invoiced_at','Invoiced')</th>
 							<th>@sortablelink('paid_at','Paid')</th>
-							<th>@sortablelink('user.company_name','Company Name')</th>
+							<th>@sortablelink('client.contact_name','Contact Name')</th>
+							{{-- <th>@sortablelink('client.company_name','Company Name')</th> --}}
 							<th class="text-right">@sortablelink('amount_charged','Charged')</th>
-							<th class="text-right">@sortablelink('total','Net Total')</th>
+							<th class="text-right">@sortablelink('deposits','Deposits')</th>
+							<th class="text-right">@sortablelink('discounts','Discounts')</th>
+							<th class="text-right">@sortablelink('payments','Payments')</th>
+							<th class="text-right">@sortablelink('total','Owed')</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -93,15 +97,25 @@
 							<td>{{ $invoice->created_at }}</td>
 							<td>{{ $invoice->invoiced_at }}</td>
 							<td>{{ $invoice->paid_at }}</td>
-							{{-- <td><a href="{{ route('admin.invoicer.clients.show', $invoice->user->id) }}">{{ $invoice->user->company_name }}</a></td> --}}
+							{{-- <td><a href="{{ route('admin.invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->company_name }}</a></td> --}}
 							<td>
 								@can('invoicer-client')
-									<a href="{{ route('admin.invoicer.clients.show', $invoice->user->id) }}">{{ $invoice->user->company_name }}</a>
+									<a href="{{ route('admin.invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->contact_name }}</a>
 								@else
-									{{ $invoice->user->company_name }}
+									{{ $invoice->client->contact_name }}
 								@endcan
 							</td>
+							{{-- <td>
+								@can('invoicer-client')
+									<a href="{{ route('admin.invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->company_name }}</a>
+								@else
+									{{ $invoice->client->company_name }}
+								@endcan
+							</td> --}}
 							<td class="text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
+							<td class="text-right">{{ number_format($invoice->deposits, 2, '.', ', ') }}$</td>
+							<td class="text-right">{{ number_format($invoice->discounts, 2, '.', ', ') }}$</td>
+							<td class="text-right">{{ number_format($invoice->payments, 2, '.', ', ') }}$</td>
 							<td class="text-right">{{ number_format($invoice->total, 2, '.', ', ') }}$</td>
 							<td>
 								<form action="{{ route('admin.invoicer.invoices.destroy',[$invoice->id]) }}" method="POST" 
@@ -110,23 +124,30 @@
 									{{ csrf_field() }}
 
 									{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
-										@if($invoice->status == 'logged')
+										@if($invoice->status == 'logged' && $invoice->invoiceItems->count() > 0)
+										{{-- @if($invoice->status == 'logged') --}}
 											<a href="{{ route('admin.invoicer.invoices.status_invoiced', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="Invoice">
-												<i class="far fa-file-alt"></i>
+												<i class="far fa-fw fa-file-alt"></i>
 												Invoice
 											</a>
 										@endif
-										@if($invoice->status == 'invoiced')
+
+										{{-- @if($invoice->status == 'invoiced' && $invoice->total == 0)
 											<a href="{{ route('admin.invoicer.invoices.status_paid', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="Paid">
-												<i class="far fa-money-bill-alt"></i>
+												<i class="far fa-fw fa-money-bill-alt"></i>
 												Paid
 											</a>
+										@endif --}}
+										@if($invoice->status == 'logged' && $invoice->invoiceItems->count() > 0)
+											<a href="{{ route('admin.invoicer.activities.create', $invoice) }}" class="btn btn-sm btn-primary" title="New Activity">
+												<i class="far fa-fw fa-plus-square"></i>
+												Activity
+											</a>
 										@endif
-									{{-- @endif --}}
 
 									{{-- @if(checkPerm('invoicer_invoice_show')) --}}
 										<a href="{{ route('admin.invoicer.invoices.show', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="View invoice">
-											<i class="fa fa-eye"></i>
+											<i class="fa fa-fw fa-eye"></i>
 											View
 										</a>
 									{{-- @endif --}}
@@ -134,7 +155,7 @@
 									{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
 										@if(!$invoice->paid_at)
 										<a href="{{ route('admin.invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-primary" title="Edit invoice">
-											<i class="fa fa-edit"></i>
+											<i class="fa fa-fw fa-edit"></i>
 											Edit
 										</a>
 										@endif
@@ -143,8 +164,8 @@
 									<input type="hidden" name="_method" value="DELETE" />
 									{{-- @if(checkPerm('invoicer_invoice_delete')) --}}
 										@if(!$invoice->paid_at)
-											<button type="submit" class="btn btn-sm btn-danger">
-												<i class="fa fa-trash-alt"></i>
+											<button type="submit" class="btn btn-sm btn-danger" title="Delete invoice">
+												<i class="fa fa-fw fa-trash-alt"></i>
 												Delete
 											</button>
 										@endif

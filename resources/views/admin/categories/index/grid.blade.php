@@ -1,6 +1,6 @@
 @if($categories->count() > 0)
 
-   <div class="card-body section_body p-2">
+   {{-- <div class="card-body section_body p-2"> --}}
 
       <table id="datatable" class="table table-hover table-sm">
 
@@ -15,8 +15,8 @@
                <th>ID</th>
                <th>Category Name</th>
                <th>Parent Category</th>
-               <th>Created</th>
-               <th>Updated</th>
+               {{-- <th>Created</th> --}}
+               {{-- <th>Updated</th> --}}
                @if(Route::currentRouteName() == 'admin.categories.trashed')
                   <th>Deleted</th>
                @endif
@@ -44,8 +44,8 @@
                   <td>
                      {{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>(Parent:{{ $category->parent_id }})</small>
                   </td>
-                  <td title="@if($category->created_at){{ $category->created_at }}@endif">{{ $category->created_at->toDateString() }}</td>
-                  <td title="@if($category->updated_at){{ $category->updated_at }}@endif">{{ $category->updated_at->toDateString() }}</td>
+                  {{-- <td title="@if($category->created_at){{ $category->created_at }}@endif">{{ $category->created_at->toDateString() }}</td> --}}
+                  {{-- <td title="@if($category->updated_at){{ $category->updated_at }}@endif">{{ $category->updated_at->toDateString() }}</td> --}}
                   @if(Route::currentRouteName() == 'admin.categories.trashed')
                      <td title="@if($category->deleted_at){{ $category->deleted_at }}@endif">@if($category->deleted_at){{ $category->deleted_at->toDateString() }}@endif</td>
                   @endif
@@ -59,10 +59,10 @@
 
       </table>
 
-   </div>
+   {{-- </div> --}}
    
 @else
-   <div class="card-body p-0 m-0">
-      {{ Config::get('settings.noRecordsFound') }}
-   </div>
+   {{-- <div class="card-body p-0 m-0"> --}}
+      {{ config('settings.noRecordsFound') }}
+   {{-- </div> --}}
 @endif

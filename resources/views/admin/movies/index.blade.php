@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin-10-2')
+@extends('layouts.admin.admin')
 
 @section('stylesheet')
    <style>
@@ -10,7 +10,7 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ Config::get('icons.movies') }}"></i>
+   <i class="{{ config('icons.movies') }}"></i>
    Movies
 @endsection
 
@@ -25,15 +25,25 @@
 @section('rightSidebar')
 @endsection
 
-@section('rightColumn')
+@section('functions')
    @include('admin.movies.blocks.search')
-   @include('admin.movies.help')
-   {{-- @include('admin.movies.blocks.sidebar') --}}
+   {{-- @include('admin.movies.blocks.popular') --}}
    {{-- @include('admin.movies.blocks.archives') --}}
 @endsection
 
 
+
 @section('content')
+   @livewire('movies-table', ['perPage'=>config('settings.perPage')])
+@endsection
+
+
+
+
+
+
+
+@section('content1')
 {{-- <form style="display:inline;">
    {!! csrf_field() !!} --}}
 
@@ -101,7 +111,7 @@
                               <div class="btn-group">
                                  <a href="{{ route('admin.movies.edit', $movie) }}"
                                     title="Edit Movie">
-                                    <i class="{{ Config::get('icons.edit') }}"></i>
+                                    <i class="{{ config('icons.edit') }}"></i>
                                  </a>
                                  <a type="button"
                                     class="resetViews-model"
@@ -111,7 +121,7 @@
                                     data-url="{{ url('admin/movies/resetViews', $movie) }}"
                                     title="Reset Views Count"
                                     >
-                                    <i class="{{ Config::get('icons.resetViews') }} text-secondary"></i>
+                                    <i class="{{ config('icons.resetViews') }} text-secondary"></i>
                                  </a>
                                  @can('movie-delete')
                                     <a type="button"
@@ -122,7 +132,7 @@
                                        data-url="{{ url('admin/movies', $movie) }}"
                                        title="Delete Movie"
                                        >
-                                       <i class="{{ Config::get('icons.trash') }} text-danger pl-1"></i>
+                                       <i class="{{ config('icons.trash') }} text-danger pl-1"></i>
                                     </a>
                                  @endcan
                               </div>
@@ -134,7 +144,7 @@
             </table>
             {{-- {{ $movies->links() }} --}}
          @else
-            {{ Config::get('settings.noRecordsFound') }}
+            {{ config('settings.noRecordsFound') }}
          @endif
       </div>
 
@@ -164,5 +174,6 @@
    @include('modals.massDestroy', ['modelName'=>'movie'])
    @include('modals.resetViews', ['modelName'=>'movie'])
    @include('modals.massResetViews', ['modelName'=>'movie'])
+   @include('admin.movies.help')
 
 @endsection

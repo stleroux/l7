@@ -12,7 +12,7 @@
          </a>
 
          <button type="submit" class="btn btn-sm btn-primary">
-            <i class="{{ Config::get('icons.save') }}"></i>
+            <i class="{{ config('icons.save') }}"></i>
             Save Product
          </button>
       </div>

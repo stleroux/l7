@@ -1,70 +1,47 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin.admin-10-2')
 
-@section('stylesheet')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ Config::get('icons.edit') }}"></i>
-   Edit Role
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">Roles</a></li>
-   <li class="breadcrumb-item active">Edit</li>
-@endsection
-
-@section('rightSidebar')
-   {{-- @include('admin.roles.index.sidebar') --}}
-@endsection
+@include('admin.roles.edit.sections.stylesheet')
+@include('admin.roles.edit.sections.pageHeader')
+@include('admin.roles.edit.sections.breadcrumb')
+@include('admin.roles.edit.sections.sidebar')
+@include('admin.roles.edit.sections.functions')
+@include('admin.roles.edit.sections.formBegin')
+@include('admin.roles.edit.sections.formEnd')
 
 @section('content')
 
-   <form action="{{ route('admin.roles.update', $role) }}" method="POST">
-      @csrf
-      @method('PUT')
+   <div class="row">
 
-      @include('admin.roles.edit.topbar')
+      <div class="col-md-3">
 
-      <div class="row">
-
-         <div class="col-md-3">
-
-            <div class="card card-primary">
-               <div class="card-header">
-                  <div class="card-title">Role Information</div>
+         <div class="card card-primary">
+            <div class="card-header">
+               <div class="card-title">Role Information</div>
+            </div>
+            <div class="card-body">
+               <div class="row">
+                  @include('admin.roles.fields.name')
+                  @include('admin.roles.fields.description')
                </div>
-               <div class="card-body">
-                  <div class="row">
-                     @include('admin.roles.fields.name')
-                     @include('admin.roles.fields.description')
-                  </div>
 
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         
-         </div><!-- Col -->
+            </div> <!-- Card body -->
+         </div><!-- Card -->
+      
+      </div><!-- Col -->
 
 
-         <div class="col-md-9">
-            @include('admin.roles.fields.permissions')
-         </div>
+      <div class="col-md-9">
+         @include('admin.roles.fields.permissions')
+      </div>
 
-      </div><!-- Row -->
+   </div><!-- Row -->
 
-      @include('admin.roles.help')
+   @include('admin.roles.help')
 
-   </form>
 
 @endsection
 
 @section('scripts')
-   <!-- Bootstrap Switch -->
-{{--    <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
-   <script>
-      $("input[data-bootstrap-switch]").each(function(){
-         $(this).bootstrapSwitch('state', $(this).prop('checked'));
-      });
-   </script> --}}
    <script>
       window.onload = function() {
           document.getElementById("name").focus();

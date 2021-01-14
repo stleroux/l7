@@ -9,7 +9,7 @@
       title="Reset View Counts for Selected"
       style="display:none;"
       onclick="return confirm('Are you sure you want to reset the view counts for these recipes?')">
-      <i class="{{ Config::get('icons.') }} text-success"></i>
+      <i class="{{ config('icons.') }} text-success"></i>
       {{ $btn_label ?? '' }}
    </button>
 

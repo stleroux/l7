@@ -4,7 +4,7 @@
       <div class="modal-content text-dark">
          <div class="modal-header bg-primary p-2 m-0">
             <h5 class="modal-title" id="exampleModalLongTitle">
-               <i class="{{ Config::get('icons.users') }}"></i>
+               <i class="{{ config('icons.users') }}"></i>
                Users Help
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -7,8 +7,16 @@
 			</div>
 			
 			<div class="card-body p-1 text-center text-dark">
-				{{ $recipe->cook_time_hours }} Hours & 
-				{{ $recipe->cook_time_minutes }} Minutes
+				@if(($recipe->cook_time_hours > 0) && ($recipe->cook_time_minutes > 0))
+               {{ $recipe->cook_time_hours > 1 ? $recipe->cook_time_hours . ' hours' : $recipe->cook_time_hours .' hour' }}
+               {{ $recipe->cook_time_minutes > 1 ? $recipe->cook_time_minutes . ' minutes' : $recipe->cook_time_minutes .' minute' }}
+            @elseif(($recipe->cook_time_hours > 0) && (!$recipe->cook_time_minutes))
+               {{ $recipe->cook_time_hours > 1 ? $recipe->cook_time_hours . ' hours' : $recipe->cook_time_hours .' hour' }}
+            @elseif((!$recipe->cook_time_hours) && ($recipe->cook_time_minutes > 0))
+               {{ $recipe->cook_time_minutes > 1 ? $recipe->cook_time_minutes . ' minutes' : $recipe->cook_time_minutes .' minute' }}
+            @else
+               N/A
+            @endif
 			</div>
 
 		</div>

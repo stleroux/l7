@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
-use App\Models\Comment;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Finish;
+use App\Models\Material;
 use App\Models\Project;
-use App\Models\ProjectFinish;
-use App\Models\ProjectMaterial;
 use App\Models\ProjectImage;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -49,8 +50,9 @@ class ProjectsController extends Controller
       abort_unless(Gate::allows('project-create'), 403);
 
       $project = New Project();
+      $tags = Tag::where('category',3)->get();
 
-      return view('admin.projects.projects.create', compact('project'));
+      return view('admin.projects.create', compact('project','tags'));
    }
 
 
@@ -123,6 +125,9 @@ class ProjectsController extends Controller
       // Delete related finishes from DB
       DB::table('projects__finish_project')->where('project_id', '=', $id)->delete();
 
+      // Delete related tags from DB
+      DB::table('project_tag')->where('project_id', '=', $id)->delete();
+
       // Delete the project from the database
       $project = Project::onlyTrashed()->findOrFail($id);
       $project->forceDelete();
@@ -154,10 +159,11 @@ class ProjectsController extends Controller
 
       $project = Project::with('finishes')->with('materials')->with('images')->find($project->id);
 
-      $materials = ProjectMaterial::all();
-      $finishes = ProjectFinish::all();
+      $materials = Material::all();
+      $finishes = Finish::all();
+      $tags = Tag::where('category',2)->get();
 
-      return view('admin.projects.projects.edit', compact('project','finishes','materials'));
+      return view('admin.projects.edit', compact('project','finishes','materials','tags'));
    }
 
 
@@ -217,7 +223,7 @@ class ProjectsController extends Controller
 
       $projects = Project::with('images')->orderBy('name','asc')->get();
 
-      return view('admin.projects.projects.index', compact('projects'));
+      return view('admin.projects.index', compact('projects'));
    }
 
 
@@ -247,12 +253,35 @@ class ProjectsController extends Controller
       $project->time_invested = $request->time_invested;
 
       // Save the data
-      $project->save();
+      if($project->save())
+      {
+         $notification = [
+            'message' => 'The project has been created successfully!', 
+            'alert-type' => 'success'
+         ];
 
-      $notification = [
-         'message' => 'The project has been created successfully!', 
-         'alert-type' => 'success'
-      ];
+
+         // save the tags in the post_tag table
+         // false required as default (otherwise override existing association)
+         if (isset($request->tags))
+         {
+             $project->tags()->sync($request->tags, false);
+         } else {
+             $project->tags()->sync(array());
+         }
+
+         if ($request->submit == 'new')
+         {
+            return redirect()->back()->with($notification);
+         }
+
+         if ($request->submit == 'continue')
+         {
+            return redirect()->route('admin.projects.edit', $project)->with($notification);
+         }
+
+      }
+
 
       return redirect()->route('admin.projects.index')->with($notification);
    }
@@ -294,8 +323,9 @@ class ProjectsController extends Controller
 
       // Get the first image associated to this project
       $image = ProjectImage::where('project_id', '=', $project->id)->first();
+      $tags = Tag::where('category',2)->get();
 
-      return view('admin.projects.projects.show', compact('project','image','previous','next'));
+      return view('admin.projects.show', compact('project','image','previous','next','tags'));
    }
 
 
@@ -323,13 +353,46 @@ class ProjectsController extends Controller
       $project->price         = $request->price;
       $project->time_invested = $request->time_invested;
 
-      // Save the data
-      $project->save();
+      // // Save the data
+      // $project->save();
 
-      $notification = [
-         'message' => 'The project has been created successfully!',
-         'alert-type' => 'success'
-      ];
+      // $notification = [
+      //    'message' => 'The project has been created successfully!',
+      //    'alert-type' => 'success'
+      // ];
+
+      // return redirect()->route('admin.projects.index')->with($notification);
+      // Save the data
+      if($project->save())
+      {
+         $notification = [
+            'message' => 'The project has been created successfully!', 
+            'alert-type' => 'success'
+         ];
+
+         //save the tags in the databse
+         // not adding 2nd param will delete all entries in array and replace them with new ones
+         // check that there is something in the array and then save it else pass an empty array
+         if (isset($request->tags))
+         {
+             $project->tags()->sync($request->tags);
+         } else {
+             $project->tags()->sync(array());
+         }
+
+         if ($request->submit == 'update')
+         {
+            // return redirect()->back()->with($notification);
+            return redirect()->route('admin.projects.index')->with($notification);
+         }
+
+         if ($request->submit == 'continue')
+         {
+            return redirect()->route('admin.projects.edit', $project)->with($notification);
+         }
+
+      }
+
 
       return redirect()->route('admin.projects.index')->with($notification);
    }
@@ -465,6 +528,9 @@ class ProjectsController extends Controller
             // Delete related finishes from DB
             DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
 
+            // Delete related tags from DB
+            DB::table('project_tag')->where('project_id', '=', $project->id)->delete();
+
 
 
             $project->forceDelete();
@@ -553,12 +619,12 @@ class ProjectsController extends Controller
 # ██   ██ ███████ ███████    ██     ██████  ██   ██ ███████ 
 // RESTORE TRASHED FILE
 ##################################################################################################################
-   public function restore($id)
+   public function restore($project)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('project-manage'), 403);
 
-      $project = Project::onlyTrashed()->findOrFail($id);
+      $project = Project::onlyTrashed()->findOrFail($project);
       
       // Restore the user
       $project->restore();
@@ -627,6 +693,6 @@ class ProjectsController extends Controller
 
       $projects = Project::onlyTrashed()->get();
       
-      return view('admin.projects.projects.index', compact('projects'));
+      return view('admin.projects.index', compact('projects'));
    }
 }

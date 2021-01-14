@@ -4,6 +4,6 @@
       title="Next Blog">
       {{-- Next --}}
       {{ $btn_label ?? 'Next ' }}
-      <i class="{{ Config::get('icons.next') }}"></i>
+      <i class="{{ config('icons.next') }}"></i>
    </a>
 @endif

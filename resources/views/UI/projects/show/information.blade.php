@@ -2,7 +2,7 @@
 
    <div class="card-header bg-info">
       <div class="card-title font-weight-bold">
-         <i class="{{ Config::get('icons.info') }}"></i>
+         <i class="{{ config('icons.info') }}"></i>
          Information
       </div>
    </div>

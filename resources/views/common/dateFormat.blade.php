@@ -8,7 +8,7 @@
 
 	@if (Auth::check())
 		{{-- {{ ($model->$field) ? date(setting('dateFormat'), strtotime($model->$field)) : 'N/A' }} --}}
-		{{ ($model->$field) ? date(Config::get('settings.dateFormat'), strtotime($model->$field)) : 'N/A' }}
+		{{ ($model->$field) ? date(config('settings.dateFormat'), strtotime($model->$field)) : 'N/A' }}
 	@else
 		{{-- Jan 1, 2017 --}}
 		{{ ($model->$field) ? date('M j, Y', strtotime($model->$field)) : 'N/A' }}

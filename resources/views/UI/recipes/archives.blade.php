@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.private') }}"></i> --}}
+   {{-- <i class="{{ config('icons.private') }}"></i> --}}
    <i class="fas fa-fw fa-address-card" aria-hidden="true"></i>
    Recipe Archives for 
       @if ($month == 1) January 

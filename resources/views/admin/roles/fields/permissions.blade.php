@@ -17,11 +17,11 @@
    <div class="card-body py-0">
       <div class="row my-2">
          <a href="#" type="button" class="btn btn-sm btn-primary check mr-1">
-            <i class="{{ Config::get('icons.checked') }}"></i>
+            <i class="{{ config('icons.checked') }}"></i>
             Check All
          </a>
          <a href="#" class="btn btn-sm btn-primary uncheck">
-            <i class="{{ Config::get('icons.unchecked') }}"></i>
+            <i class="{{ config('icons.unchecked') }}"></i>
             UnCheck All
          </a>
       </div>

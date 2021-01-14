@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.add') }}"></i> --}}
+   {{-- <i class="{{ config('icons.add') }}"></i> --}}
    Games Board
 @endsection
 
@@ -247,17 +247,17 @@
 
 
 			@else
-				{{ Config::get('settings.noRecordsFound') }}
+				{{ config('settings.noRecordsFound') }}
 			@endif
 		</div>
 		
 		{{-- SHOW PAGINATION --}}
-		<div class="row">
+		<div class="row d-flex">
 			<div class="col ml-2">
-				Showing records {{ $games->firstItem() }} to {{ $games->lastItem() }} of {{$games->total()}}						
+				Showing records {{ $games->firstItem() }} to {{ $games->lastItem() }} of {{$games->total()}}
 			</div>
-			<div class="col mr-2 justify-content-right">
-				{{ $games->links('UI.darts.pagination.custom') }}						
+			<div class="col mr-2">
+				{{ $games->links('UI.darts.pagination.simple') }}
 			</div>
 		</div>
 

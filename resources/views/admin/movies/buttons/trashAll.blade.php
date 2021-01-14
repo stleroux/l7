@@ -8,7 +8,7 @@
       style="display:none;"
       title="Trash Selected"
       onclick="return confirm('Are you sure you want to trash these movies?')">
-      <i class="{{ Config::get('buttons.trash') }}"></i>
+      <i class="{{ config('buttons.trash') }}"></i>
       Trash All
    </button>
 {{-- @endif --}}

@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-   {{-- <i class="{{ Config::get('icons.add') }}"></i> --}}
+   {{-- <i class="{{ config('icons.add') }}"></i> --}}
    BASEBALL - @if($players->count() > 1) Multi @else Individual @endif Player Game
 @endsection
 
@@ -53,6 +53,7 @@
                            <td class="p-1">
                               <div class="form-group_{{$p->id}} input-group p-1 h4">
                                  <select class="custom-select custom-select-lg py-0 prc" id="" name="p{{$p->id}}[]">
+                                    <option class="" value=""></option>
                                     <option class="" value="0">0</option>
                                     @foreach($scores as $score)
                                        <option class="" value="{{ $score }}">{{ $score }}</option>

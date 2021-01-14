@@ -5,7 +5,7 @@
 @endsection
 
 @section('pageHeader')
-	<i class="{{ Config::get('icons.recipes') }}"></i>
+	<i class="{{ config('icons.recipes') }}"></i>
 	Recipes
 	@if($byCatName)
 		:: {{  deliciousCamelcase(ucwords($byCatName->name)) }}
@@ -37,7 +37,7 @@
             @include('UI.recipes.index.list.alphabet')
 
             <table id="datatable" class="table table-sm table-hover">
-               <thead class="">
+               <thead>
                   <tr>
                      <th>Name</th>
                      <th>Category</th>
@@ -48,7 +48,7 @@
                      <th data-orderable="false"></th>
                   </tr>
                </thead>
-               <tbody class="">
+               <tbody>
                   @foreach($recipes as $recipe)
                      <tr>
                         <td>
@@ -87,9 +87,11 @@
    @else
 
       <div class="col-row p-3 card-trans-4 text-light">
-         {{ Config::get('settings.noRecordsFound') }}
+         {{ config('settings.noRecordsFound') }}
       </div>
 
    @endif
+
+{{-- {{ $recipes->links() }} --}}
 
 @endsection

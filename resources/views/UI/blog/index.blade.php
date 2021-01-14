@@ -5,6 +5,7 @@
 @endsection
 
 @section('pageHeader')
+   <i class="{{ config('icons.blog') }}"></i>
    Blog
 @endsection
 
@@ -76,7 +77,7 @@
          @else
             <div class="card mb-2 card-trans-4">
                <div class="card-body p-2">
-                  {{ Config::get('settings.noRecordsFound') }}
+                  {{ config('settings.noRecordsFound') }}
                </div>
             </div>
          @endif

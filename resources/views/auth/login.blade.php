@@ -14,7 +14,7 @@
 
 
                <div class="card-header bg-info">
-                  <i class="{{ Config::get('icons.login') }}"></i>
+                  <i class="{{ config('icons.login') }}"></i>
                   {{ __('Login') }}
                </div>
 

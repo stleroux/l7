@@ -55,7 +55,8 @@ class TagsController extends Controller
       // Check if user has required tag
       // abort_unless(Gate::allows('tag-create'), 403);
 
-        $tag = New Tag();
+      $tag = New Tag();
+      
       return view('admin.tags.create', compact('tag'));
    }
 
@@ -75,19 +76,28 @@ class TagsController extends Controller
 
       // assign values from form fields
       $tag->name = $request->name;
-      $tag->save();
+      $tag->category = $request->category;
       
-      $notification = [
-         'message' => 'The tag has been created successfully!', 
-         'alert-type' => 'success'
-      ];
+      if($tag->save())
+      {
+        $notification = [
+           'message' => 'The tag has been created successfully!', 
+           'alert-type' => 'success'
+        ];
 
         if ($request->submit == 'new')
         {
             return redirect()->back()->with($notification);
         }
 
-        return redirect()->route('admin.tags.index')->with($notification);
+        if ($request->submit == 'continue')
+        {
+          return redirect()->route('admin.tags.edit', $tag)->with($notification);
+        }
+
+      }
+
+      return redirect()->route('admin.tags.index')->with($notification);
    }
 
 
@@ -143,6 +153,7 @@ class TagsController extends Controller
 
       // assign values from form fields
       $tag->name = $request->name;
+      $tag->category = $request->category;
       
       // Save the data
       $tag->save();

@@ -20,7 +20,7 @@
          <div class="card mb-3">
 
 				<div class="card-header section_header p-2">
-					<i class="{{ Config::get('buttons.new') }}"></i>
+					<i class="{{ config('buttons.new') }}"></i>
 					New Movies
 					<span class="float-right">
             		<div class="btn-group">

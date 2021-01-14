@@ -9,7 +9,7 @@
       title="Unpublish Selected"
       style="display:none;"
       onclick="return confirm('Are you sure you want to unpublish these posts?')">
-      <i class="{{ Config::get('icons.publish') }}"></i>
+      <i class="{{ config('icons.publish') }}"></i>
       {{ $btn_label ?? '' }}
    </button>
 

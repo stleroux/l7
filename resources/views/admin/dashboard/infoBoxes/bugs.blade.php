@@ -1,12 +1,12 @@
-<!-- PERMISSIONS -->
+<!-- BUGS -->
 
-@if(Auth::user()->can('feature-manage') || Auth::user()->hasRole('admin'))
+@if(Auth::user()->can('bug-manage') || Auth::user()->hasRole('admin'))
 
 	<div class="col">
 	   <a href="{{ route('admin.bugs.new') }}">
 	      <div class="info-box mb-3">
 	         <span class="info-box-icon bg-secondary elevation-1">
-	            <i class="{{ Config::get('icons.bugs') }}"></i>
+	            <i class="{{ config('icons.bugs') }}"></i>
 	         </span>
 
 	         <div class="info-box-content">

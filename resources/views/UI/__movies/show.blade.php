@@ -19,7 +19,7 @@
       <div class="card-header section_header p-2">
          <div class="row p-0 m-0">
             <div class="col-sm-12 col-md-12 col-lg-4 px-0">
-               <i class="{{ Config::get('buttons.movies') }}"></i>
+               <i class="{{ config('buttons.movies') }}"></i>
                {{ $movie->title }}
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 px-0">

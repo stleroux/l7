@@ -6,7 +6,7 @@
       <a href="{{ route('admin.users.index') }}">
          <div class="info-box mb-3">
             <span class="info-box-icon bg-primary elevation-2">
-               <i class="{{ Config::get('icons.users') }}"></i>
+               <i class="{{ config('icons.users') }}"></i>
             </span>
 
             <div class="info-box-content">

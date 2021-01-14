@@ -13,16 +13,48 @@ class Tag extends Model
 	//use Auditable;
 	use SoftDeletes;
 	
-	protected $fillable = ['name'];
+	// protected $fillable = ['name','category'];
+   protected $guarded = [];
 
-//////////////////////////////////////////////////////////////////////////////////////
-// RELATIONSHIPS
-//////////////////////////////////////////////////////////////////////////////////////
-	public function posts()
-	{
-		return $this->belongsToMany('App\Models\Post');
-		// return $this->belongsToMany('App\Post', 'nameOfTable (post_tag)', 'this model id', 'foreign model id');
-	}
+   // Set the default value for the status field to 0
+   protected $attributes = [
+      'category' => 0,
+   ];
+
+   public function getCategoryAttribute($attribute)
+   {
+      return $this->categoryOptions()[$attribute];
+   }
+
+   public function categoryOptions()
+   {
+      return [
+         0 => 'Select',
+         1 => 'Carving',
+         2 => 'Post',
+         3 => 'Project',
+         4 => 'Other',
+      ];
+   }
+   //////////////////////////////////////////////////////////////////////////////////////
+   // RELATIONSHIPS
+   //////////////////////////////////////////////////////////////////////////////////////
+	// public function posts()
+	// {
+	// 	return $this->belongsToMany('App\Models\Post');
+	// }
+
+   public function projects()
+   {
+      return $this->belongsToMany('App\Models\Project');
+      // return $this->belongsToMany('App\Post', 'nameOfTable (post_tag)', 'this model id', 'foreign model id');
+   }
+
+   public function carvings()
+   {
+      return $this->belongsToMany('App\Models\Carving');
+      // return $this->belongsToMany('App\Post', 'nameOfTable (post_tag)', 'this model id', 'foreign model id');
+   }
 
    // public function scopeNewTags($query)
    // {
@@ -31,4 +63,14 @@ class Tag extends Model
    //       //->where('user_id', '=', Auth::user()->id)
    //       ->orderBy('name','DESC');
    // }
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // SCOPES
+   //////////////////////////////////////////////////////////////////////////////////////
+   public function scopeTrashedCount($query)
+   {
+      return $query
+         ->whereNotNull('deleted_at')
+         ->withTrashed();
+   }
 }

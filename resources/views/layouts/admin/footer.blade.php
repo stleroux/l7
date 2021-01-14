@@ -1,9 +1,9 @@
 <footer class="main-footer">
 
    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 2.0
+      <b>Version</b> {{ config('settings.siteVersionNo') }}
    </div>
 
-   <strong>Copyright &copy; 2020 <a href="http://www.thewoodbarn.ca">TheWoodBarn.ca</a>.</strong> All rights reserved.
+   <strong>Copyright &copy; 2020 <a href="{{ config('settings.appURL') }}">{{ config('settings.appName') }}</a>.</strong> All rights reserved.
 
 </footer>
