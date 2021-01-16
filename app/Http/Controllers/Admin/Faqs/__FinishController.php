@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Carvings;
+namespace App\Http\Controllers\Admin\Faqs;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;

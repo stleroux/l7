@@ -3,7 +3,7 @@
 <div class="form-group">
 
    <label for="modules" class="<?php echo e($required ?? ''); ?>">
-      <?php echo e($label ?? 'Modules'); ?>
+      <?php echo e($label ?? 'Frontend Modules'); ?>
 
    </label>
 

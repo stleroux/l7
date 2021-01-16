@@ -16,16 +16,8 @@
 
             <div class="card m-0 p-0 text-dark">
                <div class="card-body p-2 m-0">
-                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project-manage')): ?>
+                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('carving-manage')): ?>
                      <p>Carving(s) related help content will go here</p>
-                  <?php endif; ?>
-                  
-                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project_materials-manage')): ?>
-                     <p>Carving MATERIALS related help content will go here</p>
-                  <?php endif; ?>
-
-                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project_finishes-manage')): ?>
-                     <p>Carving FINISHES  related help content will go here</p>
                   <?php endif; ?>
                </div>
             </div>

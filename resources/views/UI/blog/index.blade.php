@@ -11,8 +11,8 @@
 
 @section('rightColumn')
    @include('UI.blog.blocks.search')
-   @include('UI.blog.blocks.popular')
    @include('UI.blog.blocks.archives')
+   @include('UI.blog.blocks.popular')
 @endsection
 
 @section('topbar')

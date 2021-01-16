@@ -3,7 +3,7 @@
 <div class="form-group">
 
    <label for="modules" class="{{ $required ?? '' }}">
-      {{ $label ?? 'Modules' }}
+      {{ $label ?? 'Frontend Modules' }}
    </label>
 
    <br />

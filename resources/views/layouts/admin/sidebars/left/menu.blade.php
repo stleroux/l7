@@ -23,11 +23,17 @@
    </li>
 @endcan
 
-@can('project-manage')
+@can('carving-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.carvings.index') }}" class="nav-link {{ Request::is('admin/carvings*') ? 'active' : '' }}">
          <i class="{{ config('icons.carvings') }}"></i>
-         <p>Carvings (CNC)</p>
+         <p>
+            @if(\Config::get('settings.carvings') == 'hidden')
+               <span class="text-danger">Carvings (CNC)</span>
+            @else
+               Carvings (CNC)
+            @endif            
+         </p>
       </a>
    </li>
 @endcan
@@ -101,7 +107,13 @@
    <li class="nav-item">
       <a href="{{ Route('admin.posts.index') }}" class="nav-link {{ Request::is('admin/posts*') ? 'active' : '' }}">
          <i class="{{ config('icons.posts') }}"></i>
-         <p>Posts</p>
+         <p>
+            @if(\Config::get('settings.blog') == 'hidden')
+               <span class="text-danger">Posts</span>
+            @else
+               Posts
+            @endif
+         </p>
       </a>
    </li>
 @endcan
@@ -110,7 +122,13 @@
    <li class="nav-item">
       <a href="{{ Route('admin.projects.index') }}" class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}">
          <i class="{{ config('icons.projects') }}"></i>
-         <p>Projects</p>
+         <p>
+            @if(\Config::get('settings.projects') == 'hidden')
+               <span class="text-danger">Projects</span>
+            @else
+               Projects
+            @endif
+         </p>
       </a>
    </li>
 @endcan
@@ -119,7 +137,13 @@
    <li class="nav-item">
       <a href="{{ Route('admin.recipes.index') }}" class="nav-link {{ Request::is('admin/recipes*') ? 'active' : '' }}">
          <i class="{{ config('icons.recipes') }}"></i>
-         <p>Recipes</p>
+         <p>
+            @if(\Config::get('settings.recipes') == 'hidden')
+               <span class="text-danger">Recipes</span>
+            @else
+               Recipes
+            @endif
+         </p>
       </a>
    </li>
 @endcan

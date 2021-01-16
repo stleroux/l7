@@ -2,7 +2,7 @@
 
 	<div class="card mb-2 card-trans-4">
 
-		<div class="card-header block_header p-2">
+		<div class="card-header bg-steel p-2">
 			<i class="{{ config('buttons.archives') }}"></i>
 			Blog Archives
 		</div>

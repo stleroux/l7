@@ -2,7 +2,7 @@
 
    <div class="col">
       @if(Route::currentRouteName() == 'admin.projects.finishes.index')
-         @can('project_finishes-create')
+         @can('finish-create')
             <a href="{{ route('admin.projects.finishes.create') }}" class="btn btn-sm btn-success">
                <i class="{{ config('icons.add') }}"></i>
                Create Finish
@@ -24,13 +24,13 @@
                <i class="{{ config('icons.ellipsis') }} mx-3"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu">
-               @can('project_finishes-manage')
+               @can('finish-manage')
                   <a href="{{ route('admin.projects.finishes.index') }}" class="dropdown-item bg-light">
                      <i class="{{ config('icons.finishes') }}"></i>
                      All Finishes
                   </a>
                @endcan
-               @can('project_finishes-delete')
+               @can('finish-delete')
                   <a href="{{ route('admin.projects.finishes.trashed') }}" class="dropdown-item bg-light">
                      <i class="{{ config('icons.trashed') }} text-danger"></i>
                      Trashed Finishes

@@ -2,7 +2,7 @@
    <div class="card-header p-2">Actions</div>
    <div class="card-body p-1">
 
-      @can('user-create')
+      @can('recipe-create')
          <a href="{{ route('admin.recipes.create') }}" class="btn btn-block btn-outline-success">
             <i class="{{ config('icons.add') }}"></i>
             <div class="d-none d-lg-inline">

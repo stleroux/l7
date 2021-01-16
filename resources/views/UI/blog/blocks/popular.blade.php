@@ -1,11 +1,11 @@
 <div class="card mb-2 card-trans-4">
 
-   <div class="card-header block_header p-2">
+   <div class="card-header bg-steel p-2">
       <i class="fas fa-fw fa-blog"></i>
       Popular Blog Posts
    </div>
    
-   <div class="card-body p-2">
+   <div class="card-body bg-steel-light p-2">
       @if($popular->count() > 0)
          <ul class="list-group px-0 py-0">
             @foreach ($popular as $p)

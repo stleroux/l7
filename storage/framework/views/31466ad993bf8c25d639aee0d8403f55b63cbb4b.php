@@ -23,11 +23,17 @@
    </li>
 <?php endif; ?>
 
-<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project-manage')): ?>
+<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('carving-manage')): ?>
    <li class="nav-item">
       <a href="<?php echo e(Route('admin.carvings.index')); ?>" class="nav-link <?php echo e(Request::is('admin/carvings*') ? 'active' : ''); ?>">
          <i class="<?php echo e(config('icons.carvings')); ?>"></i>
-         <p>Carvings (CNC)</p>
+         <p>
+            <?php if(\Config::get('settings.carvings') == 'hidden'): ?>
+               <span class="text-danger">Carvings (CNC)</span>
+            <?php else: ?>
+               Carvings (CNC)
+            <?php endif; ?>            
+         </p>
       </a>
    </li>
 <?php endif; ?>
@@ -101,7 +107,13 @@
    <li class="nav-item">
       <a href="<?php echo e(Route('admin.posts.index')); ?>" class="nav-link <?php echo e(Request::is('admin/posts*') ? 'active' : ''); ?>">
          <i class="<?php echo e(config('icons.posts')); ?>"></i>
-         <p>Posts</p>
+         <p>
+            <?php if(\Config::get('settings.blog') == 'hidden'): ?>
+               <span class="text-danger">Posts</span>
+            <?php else: ?>
+               Posts
+            <?php endif; ?>
+         </p>
       </a>
    </li>
 <?php endif; ?>
@@ -110,7 +122,13 @@
    <li class="nav-item">
       <a href="<?php echo e(Route('admin.projects.index')); ?>" class="nav-link <?php echo e(Request::is('admin/projects*') ? 'active' : ''); ?>">
          <i class="<?php echo e(config('icons.projects')); ?>"></i>
-         <p>Projects</p>
+         <p>
+            <?php if(\Config::get('settings.projects') == 'hidden'): ?>
+               <span class="text-danger">Projects</span>
+            <?php else: ?>
+               Projects
+            <?php endif; ?>
+         </p>
       </a>
    </li>
 <?php endif; ?>
@@ -119,7 +137,13 @@
    <li class="nav-item">
       <a href="<?php echo e(Route('admin.recipes.index')); ?>" class="nav-link <?php echo e(Request::is('admin/recipes*') ? 'active' : ''); ?>">
          <i class="<?php echo e(config('icons.recipes')); ?>"></i>
-         <p>Recipes</p>
+         <p>
+            <?php if(\Config::get('settings.recipes') == 'hidden'): ?>
+               <span class="text-danger">Recipes</span>
+            <?php else: ?>
+               Recipes
+            <?php endif; ?>
+         </p>
       </a>
    </li>
 <?php endif; ?>

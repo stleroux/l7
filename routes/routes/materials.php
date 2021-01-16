@@ -1,7 +1,7 @@
 <?php
 
 //////////////////////////////////////////////////////////////////////////////
-// PROJECTS MATERIALS ROUTES
+// MATERIALS ROUTES
 //////////////////////////////////////////////////////////////////////////////
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    // Route::get('{material}/delete',        'MaterialsController@delete')           ->name('delete');

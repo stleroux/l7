@@ -1,7 +1,7 @@
 <div class="row mb-2">
 
    <div class="col">
-      @can('project_finishes-create')
+      @can('finish-create')
          <a href="{{ route('admin.finishes.edit', $finish->id) }}" class="btn btn-sm btn-primary">
             <i class="{{ config('icons.edit') }}"></i>
             Edit Finish

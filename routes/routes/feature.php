@@ -2,7 +2,7 @@
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
 
-	// Generate routes base don options in Model
+	// Generate routes based on options in Model
 foreach(App\Models\Feature::statusOptions() as $statusOptionKey => $statusOptionValue) {
 	Route::get(
 		'features/' . strtolower(str_replace(" ", "", $statusOptionValue)),

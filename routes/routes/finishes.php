@@ -2,7 +2,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////
-// PROJECTS FINISHES ROUTES
+// FINISHES ROUTES
 //////////////////////////////////////////////////////////////////////////////
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    // Route::get('{finish}/delete',          'FinishesController@delete')           ->name('delete');

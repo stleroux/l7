@@ -1,13 +1,13 @@
 @if(!$feature->deleted_at)
 
-   @can('bug-edit')
+   @can('feature-edit')
       <a href="{{ route('admin.features.edit', $feature) }}" class="btn btn-sm btn-default" title="Edit Fature">
          <i class="{{ config('icons.edit') }} text-primary"></i>
          {{-- Edit --}}
       </a>
    @endcan
 
-   @can('bug-delete')
+   @can('feature-delete')
       <a href="#"
          class="destroy-model btn btn-sm btn-default"
          data-toggle="modal"
@@ -24,7 +24,7 @@
 
 @if($feature->deleted_at)
 
-   @can('bug-manage')
+   @can('feature-manage')
 
       <button type="button"
          class="restore-model btn btn-sm btn-default"

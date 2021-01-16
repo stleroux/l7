@@ -16,16 +16,8 @@
 
             <div class="card m-0 p-0 text-dark">
                <div class="card-body p-2 m-0">
-                  @can('project-manage')
+                  @can('carving-manage')
                      <p>FAQ(s) related help content will go here</p>
-                  @endcan
-                  
-                  @can('project_materials-manage')
-                     <p>FAQ MATERIALS related help content will go here</p>
-                  @endcan
-
-                  @can('project_finishes-manage')
-                     <p>FAQ FINISHES  related help content will go here</p>
                   @endcan
                </div>
             </div>

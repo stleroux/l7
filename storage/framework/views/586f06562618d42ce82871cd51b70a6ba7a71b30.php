@@ -19,14 +19,6 @@
                   <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project-manage')): ?>
                      <p>Project(s) related help content will go here</p>
                   <?php endif; ?>
-                  
-                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project_materials-manage')): ?>
-                     <p>Projects MATERIALS related help content will go here</p>
-                  <?php endif; ?>
-
-                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('project_finishes-manage')): ?>
-                     <p>Projects FINISHES  related help content will go here</p>
-                  <?php endif; ?>
                </div>
             </div>
 

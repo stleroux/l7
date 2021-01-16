@@ -11,7 +11,7 @@
 // Route::delete('/faqs/{faq}/finish',           'Admin\Carvings\FinishController@destroy')           ->name('faqs.finish.delete');
 
 //////////////////////////////////////////////////////////////////////////////
-// CARVINGS ROUTES
+// FAQS ROUTES
 //////////////////////////////////////////////////////////////////////////////
 Route::namespace('Admin\Faqs')->prefix('admin')->name('admin.')->group(function() {
    Route::post('/faqs/restore/{faq}',           'FaqsController@restore')             ->name('faqs.restore');

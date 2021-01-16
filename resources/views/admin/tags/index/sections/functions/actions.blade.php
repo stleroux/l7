@@ -3,7 +3,7 @@
    <div class="card-body p-1">
 
       {{-- @if(Route::currentRouteName() == 'admin.tags.index') --}}
-         @can('role-create')
+         @can('tag-create')
             <a href="{{ route('admin.tags.create') }}" class="btn btn-block btn-outline-success" title="Create Tag">
                <i class="{{ config('icons.add') }}"></i>
                <div class="d-none d-lg-inline">

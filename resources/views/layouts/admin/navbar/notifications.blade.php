@@ -67,22 +67,26 @@
 
 <small class="">
 	<ul class="mr-3">
-		@if($newBugsCount)
-			<li class="d-none d-sm-inline-block p-2">
-				<a class="text-danger" href="{{ route('admin.bugs.new') }}">
-					<i class="{{ config('icons.bugs') }} text-danger"></i>
-					{{ $newBugsCount }}
-				</a>
-			</li>
-		@endif
+		@can('bug-manage')
+			@if($newBugsCount)
+				<li class="d-none d-sm-inline-block p-2">
+					<a class="text-danger" href="{{ route('admin.bugs.new') }}">
+						<i class="{{ config('icons.bugs') }} text-danger"></i>
+						{{ $newBugsCount }}
+					</a>
+				</li>
+			@endif
+		@endcan
 
-		@if($newFeaturesCount)
-			<li class="d-none d-sm-inline-block p-2">
-				<a class="text-success" href="{{ route('admin.features.new') }}">
-					<i class="{{ config('icons.features') }} text-success"></i>
-					{{ $newFeaturesCount }}
-				</a>
-			</li>
-		@endif
+		@can('feature-manage')
+			@if($newFeaturesCount)
+				<li class="d-none d-sm-inline-block p-2">
+					<a class="text-success" href="{{ route('admin.features.new') }}">
+						<i class="{{ config('icons.features') }} text-success"></i>
+						{{ $newFeaturesCount }}
+					</a>
+				</li>
+			@endif
+		@endcan
 	</ul>
 </small>

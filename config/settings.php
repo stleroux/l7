@@ -32,13 +32,13 @@ return [
    'homepageBlogCount' => '5',
 
    // The number of popular items to display in each block
-   'popularCount' => '10',
+   'popularCount' => '5',
 
    // The number of rows to return by default in Livewire tables
    'perPage' => '15',
 
    // 
-   'carvings' => 'hidden',
+   'carvings' => 'visible',
 
    // 
    'projects' => 'visible',

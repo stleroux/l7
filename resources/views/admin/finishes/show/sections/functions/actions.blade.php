@@ -3,7 +3,7 @@
    <div class="card-body p-1">
 
       {{-- @if(Route::currentRouteName() == 'admin.finishes.index') --}}
-         @can('role-create')
+         @can('finishes-create')
             <a href="{{ route('admin.finishes.create') }}" class="btn btn-block btn-outline-success" title="Create Finish">
                <i class="{{ config('icons.add') }}"></i>
                <div class="d-none d-lg-inline">

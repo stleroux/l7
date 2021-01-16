@@ -3,11 +3,11 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pageHeader'); ?>
-   <i class="<?php echo e(config('icons.tree')); ?> col-2 col-sm-1 text-steel pr-2"></i>
-   <div class="col-8 col-sm-7">
+   <i class="<?php echo e(config('icons.tree')); ?> col-2 text-green pr-2"></i>
+   <div class="col-8">
       Welcome to TheWoodBarn.ca
    </div>
-   <i class="<?php echo e(config('icons.tree')); ?> col-2 col-sm-1 text-steel pl-2"></i>
+   <i class="<?php echo e(config('icons.tree')); ?> col-2 text-green pl-2"></i>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
@@ -29,4 +29,4 @@
    
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.UI.app-10-2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/lerouxs/sites/l7/resources/views/UI/homepage.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.UI.homepage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/lerouxs/sites/l7/resources/views/UI/homepage.blade.php ENDPATH**/ ?>
