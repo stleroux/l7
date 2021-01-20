@@ -36,13 +36,17 @@
          FAQ
       </a>
 
+      @if (url()->previous() == request()->root() . '/UI/search')
+         <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
+      @endif
+
       @if(Session::get('fromPage'))
          <a href="{{ Session::get('fromPage') }}"
             class="btn btn-sm btn-secondary d-print-none"
             title="Back">
             <i class="{{ config('icons.back') }}"></i>
             <div class="d-none d-lg-inline">
-               Back
+               Carvings
                {{-- {{ $btn_label ?? '' }} --}}
             </div>
          </a>
@@ -50,9 +54,10 @@
          <a href="{{ route('carvings.index') }}"
             class="btn btn-sm btn-secondary">
             <i class="{{ config('icons.back') }}"></i>
-            Back
+            Carvings
          </a>
       @endif
    </div>
+
    
 </div>

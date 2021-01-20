@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 use Carbon\Carbon;
 use Str;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Post extends Model
+class Post extends Model implements Searchable
 {
 
    use SoftDeletes;
@@ -194,5 +196,18 @@ class Post extends Model
       
    //    // return 'N/A';
    // }
+
+   public function getSearchResult(): SearchResult
+   {
+      
+      $url = route('blog.show', $this->slug);
+      // dd($url);
+
+      return new SearchResult(
+         $this,
+         $this->title,
+         $url
+      );
+   }
 
 }

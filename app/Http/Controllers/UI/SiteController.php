@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\UI;
 
-use App\Models\Post;
-// use App\Models\Projects\Project;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Post;
 use Config;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Route;
 use Session;
 
@@ -41,7 +41,16 @@ class SiteController extends Controller
       Session::put('fromPage', url()->full());
 
 		$posts = Post::published()->with('user')->orderBy('id','desc')->take(Config::get('settings.homepage_blog_count'))->get();
-		return view('UI.homepage', compact('posts'));
+		$greeting   = DB::table('general')->where('name', '=', 'greeting')->first();
+      $newUser    = DB::table('general')->where('name', '=', 'newUser')->first();
+      $carvings   = DB::table('general')->where('name', '=', 'carvings')->first();
+      $projects   = DB::table('general')->where('name', '=', 'projects')->first();
+      $recipes    = DB::table('general')->where('name', '=', 'recipes')->first();
+      $blogs      = DB::table('general')->where('name', '=', 'blog')->first();
+		// dd($greeting);
+
+		return view('UI.homepage', compact('posts','greeting','newUser','carvings','projects','recipes','blogs'));
+		// return view('UI.homepage', compact('posts'));
 		// return view('UI.homepage');
 	}
 

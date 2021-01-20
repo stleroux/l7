@@ -2,6 +2,7 @@
 
 return [
 
+	// Settings used in the generation of Invoices
 	'companyName' => 'TheWoodBarn.ca',
 	'address_1' => '1216 Ste Marie Rd',
 	'address_2' => '',
@@ -12,15 +13,15 @@ return [
 	'fax' => '',
 	'email' => 'stleroux@hotmail.ca',
 	'website' => 'Thewoodbarn.ca',
+
+	// Settings
 	'wsibNo' => '',
-	// 'wsibRate' => '0.12',
-	'wsibRate' => '0',
-	// 'hstNo' => 'hstNo',
-	'hstNo' => '0',
-	// 'hstRate' => '0.13',
-	'hstRate' => '0',
-	// 'incomeTaxRate' => '0.26',
-	'incomeTaxRate' => '0',
+	'wsibRate' => '',
+	'hstNo' => '',
+	'hstRate' => '',
+	'incomeTaxRate' => '',
+
+	// Other
 	'version' => '2.0',
 	
 	// For Terms and Conditions, please see termsAndConditions.blade.php in views\invoicer

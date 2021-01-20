@@ -2,9 +2,9 @@
 BEGIN : change background color on all pages
 **************************************************************************************/
 body {
-   background-image: url('/images/9.jpg');
+   /*background-image: url('/images/9.jpg');*/
    /*background-image: url('/images/17.jpg');*/
-   /*background-image: url('/images/background.jpg');*/
+   background-image: url('/images/background.jpg');
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-attachment: fixed;
@@ -25,11 +25,11 @@ END : change background color on all pages
 }
 
 .section_header {
-	background-image: url("/images/16.jpg");
+	background-image: url("/images/9.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-attachment: fixed;
-	color: white;
+	color: lightgreen;
 	/*font-weight: bold;*/
 }
 

@@ -1,4 +1,4 @@
 @section('pageHeader')
-   <i class="{{ config('icons.settings') }}"></i>
+   <i class="{{ config('icons.dashboard') }}"></i>
    Settings
 @endsection

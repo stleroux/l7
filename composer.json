@@ -24,7 +24,8 @@
         "laraveldaily/laravel-charts": "^0.1.24",
         "livewire/livewire": "^2.3",
         "orangehill/iseed": "^2.6",
-        "spatie/laravel-honeypot": "^2.2"
+        "spatie/laravel-honeypot": "^2.2",
+        "spatie/laravel-searchable": "^1.9"
     },
     "require-dev": {
         "bfinlay/laravel-excel-seeder": "^2.1",

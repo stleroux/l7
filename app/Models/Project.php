@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Project extends Model
+class Project extends Model implements Searchable
 {
    use SoftDeletes;
    
@@ -109,5 +111,16 @@ class Project extends Model
    //    // return 'N/A';
    // }
 
+   public function getSearchResult(): SearchResult
+   {
+      
+      $url = route('projects.show', $this->id);
+
+      return new SearchResult(
+         $this,
+         $this->name,
+         $url
+      );
+   }
 
 }

@@ -28,10 +28,15 @@
          <i class="{{ config('icons.addToCart') }}"></i>
          Add to Cart
       </a>
+
+      @if (url()->previous() == request()->root() . '/UI/search')
+         <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
+      @endif
+
       <a href="{{ route('projects.index') }}"
          class="btn btn-sm btn-secondary">
          <i class="{{ config('icons.back') }}"></i>
-         Back
+         Projects
       </a>
    </div>
    

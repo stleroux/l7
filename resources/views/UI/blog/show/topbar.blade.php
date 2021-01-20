@@ -15,46 +15,61 @@
             </a>
          @endauth
 
+
+
          <!-- Only show if coming from the homepage -->
-         @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'homepage')
+         @if (url()->previous() == request()->root() . '/')
+         {{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'homepage') --}}
             <a href="{{ route('homepage') }}" class="btn btn-sm btn-primary">
                <i class="fas fa-home"></i> Home
             </a>
          @endif
 
+         <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+            <i class="fas fa-blog"></i> Blog
+         </a>
+
+         @if (url()->previous() == request()->root() . '/UI/search')
+            <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
+         @endif
          <!-- Only show if coming from the blog page -->
+{{--          @if (url()->previous() == request()->root() . '/blog')
          @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.index')
             <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
                <i class="fas fa-blog"></i> Blog
             </a>
-         @endif
+         @endif --}}
 
          <!-- Show this button after posting a comment -->
-         @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.show')
+{{--          @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.show')
             <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
                <i class="fas fa-blog"></i> Blog
             </a>
-         @endif
+         @endif --}}
 
          <!-- Only show if coming from the blog print page -->
-         @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print')
+         @if (url()->previous() == request()->root() . '/blog/print')
+         {{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.print') --}}
             <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
                <i class="fas fa-blog"></i> Blog
             </a>
          @endif
 
          <!-- Only show if coming from the blog search page -->
-         @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search')
-            <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
+         @if (url()->previous() == request()->root() . '/blog/search')
+         {{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.search') --}}
+{{--             <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
                <i class="fas fa-blog"></i> Blog
-            </a>
-            <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary">
+            </a> --}}
+            {{-- <a href="{{ URL::previous() }}" class="btn btn-sm btn-primary">
                <i class="fas fa-blog"></i> Search
-            </a>
+            </a> --}}
+            <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
          @endif
 
          <!-- Only show if coming from the blog archive page -->
-         @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive')
+         @if (url()->previous() == request()->root() . '/blog/archive')
+         {{-- @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'blog.archive') --}}
             <a href="{{ route('blog.index') }}" class="btn btn-sm btn-primary">
                <i class="fas fa-blog"></i> Blog
             </a>

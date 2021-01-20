@@ -74,6 +74,15 @@
    </li>
 @endcan
 
+@can('admin-dashboard')
+   <li class="nav-item">
+      <a href="{{ route('admin.general') }}" class="nav-link {{ Request::is('admin/general') ? 'active' : '' }}">
+         <i class="{{ config('icons.homepage') }}"></i>
+         <p>General</p>
+      </a>
+   </li>
+@endcan
+
 @include('layouts.admin.sidebars.left.invoicer')
 
 @can('material-manage')

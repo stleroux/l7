@@ -21,6 +21,8 @@ Route::get('/terms', 'UI\SiteController@terms')->name('terms');
 Route::get('/privacy', 'UI\SiteController@privacy')->name('privacy');
 Route::get('contact', 'UI\ContactFormController@create')->name('contact');
 Route::post('contact', 'UI\ContactFormController@store')->middleware(ProtectAgainstSpam::class);
+Route::post('/UI/search', 'UI\SearchController@search')->name('UI.search');
+
 // Auth::routes(['verify' => true]);
 Auth::routes();
 

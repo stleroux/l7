@@ -8,7 +8,7 @@
 
    <div class="collapse navbar-collapse" id="navbarCollapse">
       @include('layouts.UI.navbar.left.navbarLeft')
-      {{-- @include('layouts.UI.navbar.search') --}}
+      @include('layouts.UI.navbar.search')
       @include('layouts.UI.navbar.center.navbarCenter')
       @include('layouts.UI.navbar.right.navbarRight')
    </div>

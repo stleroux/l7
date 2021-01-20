@@ -16,8 +16,7 @@ return [
    // "username", "last_name, first_name", "first_name last_name", ""
    
    // Specify the format of dates for the site
-   'dateFormat' => 'M d, Y',
-   // any valid php date format
+   'dateFormat' => 'M d, Y', // any valid php date format
 
    // Message to display when no records are found in the database
    'noRecordsFound' => 'No records found',
@@ -37,19 +36,18 @@ return [
    // The number of rows to return by default in Livewire tables
    'perPage' => '15',
 
-   // 
+   // Visibity settings for frontend modules
    'carvings' => 'visible',
-
-   // 
    'projects' => 'visible',
-
-   // 
    'recipes' => 'visible',
-
-   // 
    'blog' => 'visible',
-
-   //
    'darts' => 'visible',
+
+   // COMPANY INFORMATION
+   'address' => '',
+   'city' => '',
+   'province' => '',
+   'postalCode' => '',
+   'phone' => '',
    
 ];

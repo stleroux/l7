@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Carving extends Model
+class Carving extends Model implements Searchable
 {
    use SoftDeletes;
    
@@ -110,4 +112,16 @@ class Carving extends Model
    // }
 
 
+   public function getSearchResult(): SearchResult
+   {
+      
+      $url = route('carvings.show', $this->id);
+
+      return new SearchResult(
+         $this,
+         $this->name,
+         $url
+      );
+   }
+   
 }

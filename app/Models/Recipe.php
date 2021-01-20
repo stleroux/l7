@@ -9,8 +9,10 @@ use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Recipe extends Model
+class Recipe extends Model implements Searchable
 {
    use SoftDeletes;
    use Favoriteable;
@@ -183,5 +185,17 @@ class Recipe extends Model
       // return 'N/A';
    }
 
+
+   public function getSearchResult(): SearchResult
+   {
+      
+      $url = route('recipes.show', $this->id);
+
+      return new SearchResult(
+         $this,
+         $this->title,
+         $url
+      );
+   }
 
 }

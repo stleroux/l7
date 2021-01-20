@@ -10,95 +10,68 @@
 
 @section('content')
 
-
-	<div class="card-deck mb-3">
-		
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.appName', ['required'=>'required'])
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.appURL', ['required'=>'required'])
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.noRecordsFound', ['required'=>'required'])
-			</div>
-		</div>		
-
+<div class="row px-2">
+	<div class="nav flex-column nav-pills col-2" id="tab" role="tablist" aria-orientation="vertical">
+		<a class="nav-link active border"
+			id="home-tab"
+			data-toggle="pill"
+			href="#home"
+			role="tab"
+			aria-controls="home"
+			aria-selected="true">
+			Home
+		</a>
+		<a class="nav-link border"
+			id="modules-tab"
+			data-toggle="pill"
+			href="#modules"
+			role="tab"
+			aria-controls="modules"
+			aria-selected="false">
+			Modules
+		</a>
+		<a class="nav-link border"
+			id="invoicer-tab"
+			data-toggle="pill"
+			href="#invoicer"
+			role="tab"
+			aria-controls="invoicer"
+			aria-selected="false">
+			Invoicer
+		</a>
+		<a class="nav-link border"
+			id="settings-tab"
+			data-toggle="pill"
+			href="#settings"
+			role="tab"
+			aria-controls="settings"
+			aria-selected="false">
+			Settings
+		</a>
 	</div>
-
-	<div class="card-deck mb-3">
-
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.dateFormat', ['required'=>'required'])
-			</div>
+	<div class="tab-content col-10" id="tabContent">
+		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+			@include('admin.settings.inc.home')
 		</div>
-
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.authorFormat', ['required'=>'required'])
-			</div>
+		<div class="tab-pane fade" id="modules" role="tabpanel" aria-labelledby="modules-tab">
+			@include('admin.settings.inc.modules')
 		</div>
-
-
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.siteVersionNo', ['required'=>'required'])
-			</div>
+		<div class="tab-pane fade" id="invoicer" role="tabpanel" aria-labelledby="invoicer-tab">
+			@include('admin.settings.inc.invoicer')			
 		</div>
-
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.invoicerVersionNo', ['required'=>'required'])
-			</div>
+		<div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+			@include('admin.settings.inc.settings')			
 		</div>
-
 	</div>
+</div>
 
-	<div class="card-deck mb-3">
 
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.homepageBlogCount', ['required'=>'required'])
-			</div>
-		</div>
 
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.popularCount', ['required'=>'required'])
-			</div>
-		</div>
 
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.loginCountWarning', ['required'=>'required'])
-			</div>
-		</div>
 
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.perPage', ['required'=>'required'])
-			</div>
-		</div>
 
-	</div>
 
-	<div class="card-deck mb-3">
 
-		<div class="card">
-			<div class="card-body p-2">
-				@include('admin.settings.fields.modules', ['required'=>'required'])
-			</div>
-		</div>
-
-	</div>
 
    @include('admin.settings.help')
 

@@ -23,6 +23,27 @@
 
 <script>
    tinymce.init({
+      selector: '.wysiwyg-small',
+      height: 100,
+      branding: false,
+      theme: 'modern',
+      plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern emoticons',
+      // help-> displays help menu; fullpage->save whole html codes in page
+      toolbar1: 'formatselect | undo redo | insert | styleselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat | source',
+      image_advtab: true,
+      templates: [
+         { title: 'Test template 1', content: 'Test 1' },
+         { title: 'Test template 2', content: 'Test 2' }
+      ],
+      content_css: [
+         'fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+         'www.tinymce.com/css/codepen.min.css'
+      ]
+   });
+</script>
+
+<script>
+   tinymce.init({
       selector: '.simple',
       toolbar_items_size : 'small',
       branding: false,
@@ -36,6 +57,7 @@
       content_css: '//www.tinymce.com/css/codepen.min.css'
    });
 </script>
+
 <script>
    tinymce.init({
       selector: '.plain',
