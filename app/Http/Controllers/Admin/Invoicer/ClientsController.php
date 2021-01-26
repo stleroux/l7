@@ -63,7 +63,7 @@ class ClientsController extends Controller
 	public function destroy($id)
 	{
 		// Check if user has required permission
-	  if(!checkPerm('invoicer_client_delete')) { abort(401, 'Unauthorized Access'); }
+      abort_unless(Gate::allows('invoicer-client'), 403);
 
 		$client = InvoicerClient::find($id);
 		$client->delete();
@@ -184,6 +184,9 @@ class ClientsController extends Controller
 ##################################################################################################################
 	public function store(Request $request)
 	{
+		// Check if user has required permission
+      abort_unless(Gate::allows('invoicer-client'), 403);
+
 		// validate the data
 		$this->validate($request, array(
 			'contact_name' => 'required',
@@ -233,6 +236,9 @@ class ClientsController extends Controller
 ##################################################################################################################
 	public function update(Request $request, $id)
 	{
+		// Check if user has required permission
+      abort_unless(Gate::allows('invoicer-client'), 403);
+
 		// validate the data
 		$this->validate($request, array(
 			'contact_name' => 'required',

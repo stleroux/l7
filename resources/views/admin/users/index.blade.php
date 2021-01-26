@@ -4,7 +4,7 @@
 @include('admin.users.index.sections.pageHeader')
 @include('admin.users.index.sections.breadcrumb')
 @include('admin.users.index.sections.sidebar')
-@include('admin.users.index.sections.functions')
+@include('admin.users.index.sections.blocks')
 @include('admin.users.index.sections.formBegin')
 @include('admin.users.index.sections.formEnd')
 
@@ -20,14 +20,14 @@
       </div>
    </div>
 
-   @include('modals.destroy', ['modelName'=>'user'])
-   @include('modals.massDestroy', ['modelName'=>'user'])
-   @include('modals.massApprove', ['modelName'=>'user'])
-   @include('modals.massDisable', ['modelName'=>'user'])
-   @include('modals.restore', ['modelName'=>'user'])
-   @include('modals.massRestore', ['modelName'=>'user'])
-   @include('modals.delete', ['modelName'=>'user'])
-   @include('modals.massDelete', ['modelName'=>'user'])
+   @include('modals.destroy',       ['modelName'=>'user'])
+   @include('modals.massDestroy',   ['modelName'=>'user'])
+   @include('modals.massApprove',   ['modelName'=>'user'])
+   @include('modals.massDisable',   ['modelName'=>'user'])
+   @include('modals.restore',       ['modelName'=>'user'])
+   @include('modals.massRestore',   ['modelName'=>'user'])
+   @include('modals.delete',        ['modelName'=>'user'])
+   @include('modals.massDelete',    ['modelName'=>'user'])
    @include('admin.users.help')
 
 @endsection

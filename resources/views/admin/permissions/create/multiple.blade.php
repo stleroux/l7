@@ -7,21 +7,16 @@
          <div class="card-header">
             <div class="card-title">Add Model Permissions</div>
             <div class="float-right">
-               <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="{{ config('icons.reset') }}"></i>
-                  Reset
-               </button>
-               <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="{{ config('icons.save') }}"></i>
-                  Save
-               </button>
+               @include('admin.permissions.actions.common.reset')
+               @include('admin.permissions.actions.common.save')
             </div>
          </div>
+         
          
          <div class="card-body pt-2">
 
             <div class="row">
-               @include('admin.permissions.fields.modelName')
+               @include('admin.permissions.forms.fields.modelName')
             </div>
 
             <div class="row">

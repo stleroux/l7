@@ -39,10 +39,10 @@ class Tag extends Model
    //////////////////////////////////////////////////////////////////////////////////////
    // RELATIONSHIPS
    //////////////////////////////////////////////////////////////////////////////////////
-	// public function posts()
-	// {
-	// 	return $this->belongsToMany('App\Models\Post');
-	// }
+	public function posts()
+	{
+		return $this->belongsToMany('App\Models\Post');
+	}
 
    public function projects()
    {

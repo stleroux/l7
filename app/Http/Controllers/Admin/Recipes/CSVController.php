@@ -18,6 +18,7 @@ use Auth;
 use DB;
 use Excel;
 use File;
+use Gate;
 use Image;
 use JavaScript;
 use Log;
@@ -56,9 +57,8 @@ class CSVController extends RecipesController
       // } else {
       //    $data = Recipe::get()->toArray();
       // }
-      if(!checkACL('manager')) {
-         return view('errors.403');
-      }
+      // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'recipes.index') {
             $data = Recipe::published()->get()->toArray();
@@ -103,7 +103,7 @@ class CSVController extends RecipesController
    public function import()
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       return view('recipes.import');
    }
@@ -120,7 +120,7 @@ class CSVController extends RecipesController
    public function importExcel()
    {
       // Check if user has required permission
-      // if(!checkPerm('post_delete')) { abort(401, 'Unauthorized Access'); }
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       if(Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
@@ -190,7 +190,8 @@ class CSVController extends RecipesController
 
    public function pdfview(Request $request)
    {
-      //$articles = DB::table("articles")->get();
+      // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       $referrer = request()->headers->get('referer');
       if ($referrer == 'http://localhost:8000/backend/recipes/myRecipes') {

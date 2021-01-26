@@ -4,7 +4,7 @@
 @include('admin.settings.index.sections.pageHeader')
 @include('admin.settings.index.sections.breadcrumb')
 @include('admin.settings.index.sections.sidebar')
-@include('admin.settings.index.sections.functions')
+@include('admin.settings.index.sections.blocks')
 @include('admin.settings.index.sections.formBegin')
 @include('admin.settings.index.sections.formEnd')
 

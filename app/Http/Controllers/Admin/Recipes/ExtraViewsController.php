@@ -15,6 +15,7 @@ use Auth;
 use DB;
 use Excel;
 use File;
+use Gate;
 use Image;
 use JavaScript;
 use Log;
@@ -57,6 +58,7 @@ class ExtraViewsController extends RecipesController
    public function archives($year, $month)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
 
       // Set the session to the current page route
@@ -89,6 +91,7 @@ class ExtraViewsController extends RecipesController
    public function future(Request $request, $key=null)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
 
       // Set the session to the current page route
@@ -272,6 +275,7 @@ class ExtraViewsController extends RecipesController
    public function newRecipes(Request $request, $key=null)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
 
       // Set the session to the current page route
@@ -376,6 +380,7 @@ class ExtraViewsController extends RecipesController
    public function trashed(Request $request, $key=null)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
 
       // Set the session to the current page route
@@ -457,6 +462,7 @@ class ExtraViewsController extends RecipesController
    public function unpublished(Request $request, $key=null)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
 
       // Set the session to the current page route

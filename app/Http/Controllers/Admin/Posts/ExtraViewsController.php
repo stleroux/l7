@@ -13,6 +13,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use File;
+use Gate;
 use Image;
 use Log;
 use Purifier;
@@ -51,7 +52,7 @@ class ExtraViewsController extends Controller
    public function future(Request $request, $key=null)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -97,7 +98,7 @@ class ExtraViewsController extends Controller
    public function new(Request $request, $key=null)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -142,7 +143,7 @@ class ExtraViewsController extends Controller
    public function showTrashed($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       $post = Post::onlyTrashed()->find($id);
 
@@ -180,7 +181,7 @@ class ExtraViewsController extends Controller
    public function trashed(Request $request, $key=null)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -223,7 +224,7 @@ class ExtraViewsController extends Controller
    public function unpublished(Request $request, $key=null)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());

@@ -4,7 +4,7 @@
 @include('admin.bugs.index.sections.pageHeader')
 @include('admin.bugs.index.sections.breadcrumb')
 @include('admin.bugs.index.sections.sidebar')
-@include('admin.bugs.index.sections.functions')
+@include('admin.bugs.index.sections.blocks')
 @include('admin.bugs.index.sections.formBegin')
 @include('admin.bugs.index.sections.formEnd')
 
@@ -18,11 +18,11 @@
       </div>
    </div>
       
-   @include('modals.destroy', ['modelName'=>'bug'])
-   @include('modals.massDestroy', ['modelName'=>'bug'])
-   @include('modals.restore', ['modelName'=>'bug'])
-   @include('modals.massRestore', ['modelName'=>'bug'])
-   @include('modals.delete', ['modelName'=>'bug'])
+   @include('modals.destroy',    ['modelName'=>'bug'])
+   @include('modals.massDestroy',['modelName'=>'bug'])
+   @include('modals.restore',    ['modelName'=>'bug'])
+   @include('modals.massRestore',['modelName'=>'bug'])
+   @include('modals.delete',     ['modelName'=>'bug'])
    @include('modals.massDelete', ['modelName'=>'bug'])
    @include('admin.bugs.help')
 

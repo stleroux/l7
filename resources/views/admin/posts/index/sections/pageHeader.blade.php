@@ -8,9 +8,9 @@
    	New Posts
    @elseif(Route::currentRouteName('') == 'admin.posts.unpublished')
    	Unpublished Posts
-   @elseif(Route::currentRouteName('') == 'admin.posts.published')
+   @elseif(Route::currentRouteName('') == 'admin.posts.index')
    	Published Posts
    @else
-      Posts
+      Published Posts ...
    @endif
 @endsection

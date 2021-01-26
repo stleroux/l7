@@ -180,6 +180,9 @@ class AdminController extends Controller
 ##################################################################################################################
 	public function settings()
 	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('admin-settings'), 403);
+
 		return view('admin.settings.index');
 	}
 

@@ -10,10 +10,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
-use Gate;
 use Carbon\Carbon;
 use DB;
 use File;
+use Gate;
 use Image;
 use Log;
 use Purifier;
@@ -49,11 +49,10 @@ class FunctionsController extends Controller
    ##################################################################################################################
    public function delete($id)
    {
-      // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-delete'), 403);
-
       $post = Post::onlyTrashed()->findOrFail($id);
-      // dd($post);
+
+      // Check if user has required permission
+      abort_unless((Gate::allows('post-delete') || ($post->user_id == Auth::id())), 403);
 
       // delete the user
       if($post->forceDelete())
@@ -91,21 +90,73 @@ class FunctionsController extends Controller
    public function massDelete(Request $request)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('post-delete'), 403);
 
+      $posts = explode(',', $request->input('mass_delete_pass_checkedvalue'));
+      
+      if(!$request->input('mass_delete_pass_checkedvalue'))
+      {
 
-      $this->validate($request, [
-         'checked' => 'required',
-      ]);
+         $notification = [
+            'message' => 'Please select entries to be deleted.', 
+            'alert-type' => 'error'
+         ];
 
-      $checked = $request->input('checked');
+      } else {
+         
+         foreach ($posts as $post_id) {
+            $post = Post::onlyTrashed()->findOrFail($post_id);
 
-      Post::whereIn('id', $checked)->forceDelete();
+            // Delete images from file system
+            // $images = DB::table('projects__images')->where('project_id', '=', $project->id)->get();
 
-      $notification = [
-         'message' => 'The posts were deleted successfully.', 
-         'alert-type' => 'success'
-      ];
-      return redirect()->route($ref)->with($notification);
+            if($post->image) {
+               $image = public_path().'/_posts/'.$post->image;
+               unlink($image);
+            }
+
+            // if($images) {
+            //    foreach($images as $image) {
+                  // Delete the image(s) and thumbnail(s) from storage
+                  // $image_path = public_path().'/_posts/'.$post->image;
+                  // $thumbs_path = public_path().'/_projects/'.$project->id.'/thumbs/'.$image->name;
+                  // unlink($image_path);
+                  // unlink($thumbs_path);
+               // }
+            // }
+
+            // // Check if there are any files left in the thumbs folder, if not, delete the folder
+            // if (count(glob('_projects/' . $project->id . "/thumbs/*")) === 0 ) { // empty
+            //    // Delete the thumbs folder
+            //    File::deleteDirectory(public_path('_projects/'.$project->id.'/thumbs/'));
+            //    // Delete the main folder
+            //    File::deleteDirectory(public_path('_projects/' . $project->id));
+            // }
+
+            // // Delete related images from DB
+            // DB::table('projects__images')->where('project_id', '=', $project->id)->delete();
+
+            // // Delete related materials from DB
+            // DB::table('projects__material_project')->where('project_id', '=', $project->id)->delete();
+
+            // // Delete related finishes from DB
+            // DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
+
+            // Delete related tags from DB
+            DB::table('post_tag')->where('post_id', '=', $post->id)->delete();
+
+            $post->forceDelete();
+            // $project->permissions()->detach();
+         }
+
+         $notification = [
+            'message' => 'The selected posts and all associated resources have been permanently deleted!',
+            'alert-type' => 'success'
+         ];
+
+      }
+      
+      return redirect()->back()->with($notification);
    }
 
 
@@ -123,7 +174,7 @@ class FunctionsController extends Controller
       $post = Post::find($id);
 
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-delete'), 403);
 
          // Delete the image from the system
          File::delete('_posts/' . $post->image);
@@ -151,9 +202,6 @@ class FunctionsController extends Controller
    {
       $post = Post::find($id);
 
-      // Check if user has required permission
-
-
       return view('admin.posts.viewImage')->withPost($post);
    }
 
@@ -168,7 +216,7 @@ class FunctionsController extends Controller
    public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('post-delete'), 403);
 
       $posts = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
@@ -248,7 +296,7 @@ class FunctionsController extends Controller
    public function massPublish(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-manage'), 403);
+      abort_unless(Gate::allows('post-manage'), 403);
 
       $posts = explode(',', $request->input('mass_publish_pass_checkedvalue'));
 
@@ -293,7 +341,7 @@ class FunctionsController extends Controller
    public function resetViews($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       $post = Post::find($id);
          $post->views = 0;
@@ -313,7 +361,7 @@ class FunctionsController extends Controller
    public function massResetViews(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('post-manage'), 403);
 
       $posts = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
 
@@ -383,7 +431,7 @@ class FunctionsController extends Controller
    public function massRestore(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('post-manage'), 403);
 
       $posts = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
@@ -498,7 +546,7 @@ class FunctionsController extends Controller
       $post = Post::find($id);
 
       // Check if user has required permission
-      abort_unless((Gate::allows('post-publish') || ($post->user_id == Auth::id())), 403);
+      abort_unless((Gate::allows('post-edit') || ($post->user_id == Auth::id())), 403);
 
       // Set the variable so we can use a button in other pages to come back to this page
       // Session::put('pageName', 'unpublish');
@@ -526,7 +574,7 @@ class FunctionsController extends Controller
    public function massUnpublish(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-manage'), 403);
+      abort_unless(Gate::allows('post-edit'), 403);
 
       $posts = explode(',', $request->input('mass_unpublish_pass_checkedvalue'));
 

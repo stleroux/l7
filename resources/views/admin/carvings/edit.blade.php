@@ -4,43 +4,25 @@
 @include('admin.carvings.edit.sections.pageHeader')
 @include('admin.carvings.edit.sections.breadcrumb')
 @include('admin.carvings.edit.sections.sidebar')
-@include('admin.carvings.edit.sections.functions')
+@include('admin.carvings.edit.sections.blocks')
 @include('admin.carvings.edit.sections.formBegin')
 @include('admin.carvings.edit.sections.formEnd')
 
 @section ('content')
 
-   <div class="form-row">
-      <div class="col-md-6">
-         @include('admin.carvings.fields.general')
-      </div>
-      <div class="col-md-6">
-         @include('admin.carvings.fields.others')
-      </div>
-   </div>
-
-   <div class="card-footer pt-1 pb-1 pl-2">
-      Fields marked with an <span class="required"></span> are required
-   </div>
-
+   @include('admin.carvings.forms.form')
    @include('admin.carvings.help')
 
 @endsection
 
 @section('secondary')
 
-   <div class="form-row">
-      <div class="col-md-4">
-         @include('admin.carvings.fields.finishes.finishes')
-      </div>
-      <div class="col-md-4">
-         @include('admin.carvings.fields.materials.materials')
-      </div>
-      <div class="col-md-4">
-         @include('admin.carvings.fields.images.images')
-      </div>
-   </div>
+   @include('admin.carvings.forms.extras')   
    
+   <div class="card-footer pt-1 pb-1 pl-2">
+      Fields marked with an <span class="required"></span> are required
+   </div>
+
 @endsection
 
 @section('scripts')

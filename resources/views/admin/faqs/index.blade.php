@@ -4,7 +4,7 @@
 @include('admin.faqs.index.sections.pageHeader')
 @include('admin.faqs.index.sections.breadcrumb')
 @include('admin.faqs.index.sections.sidebar')
-@include('admin.faqs.index.sections.functions')
+@include('admin.faqs.index.sections.blocks')
 @include('admin.faqs.index.sections.formBegin')
 @include('admin.faqs.index.sections.formEnd')
 
@@ -21,14 +21,14 @@
       </div>
    </div>
 
-   @include('modals.destroy', ['modelName'=>'faq'])
-   @include('modals.massDestroy', ['modelName'=>'faq'])
-   @include('modals.restore', ['modelName'=>'faq'])
-   @include('modals.massRestore', ['modelName'=>'faq'])
-   @include('modals.delete', ['modelName'=>'faq'])
-   @include('modals.massDelete', ['modelName'=>'faq'])
-   @include('modals.resetViews', ['modelName'=>'faq'])
-   @include('modals.massResetViews', ['modelName'=>'faq'])
+   @include('modals.destroy',       ['modelName'=>'faq'])
+   @include('modals.massDestroy',   ['modelName'=>'faq'])
+   @include('modals.restore',       ['modelName'=>'faq'])
+   @include('modals.massRestore',   ['modelName'=>'faq'])
+   @include('modals.delete',        ['modelName'=>'faq'])
+   @include('modals.massDelete',    ['modelName'=>'faq'])
+   @include('modals.resetViews',    ['modelName'=>'faq'])
+   @include('modals.massResetViews',['modelName'=>'faq'])
 
    @include('admin.faqs.help')
 

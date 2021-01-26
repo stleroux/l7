@@ -5,7 +5,7 @@
          <div class="modal-header bg-primary p-2 m-0">
             <h5 class="modal-title" id="exampleModalLongTitle">
                <i class="{{ config('icons.roles') }}"></i>
-               Roles Help
+               Tags Help
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>

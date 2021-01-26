@@ -4,7 +4,7 @@
 @include('admin.materials.index.sections.pageHeader')
 @include('admin.materials.index.sections.breadcrumb')
 @include('admin.materials.index.sections.sidebar')
-@include('admin.materials.index.sections.functions')
+@include('admin.materials.index.sections.blocks')
 @include('admin.materials.index.sections.formBegin')
 @include('admin.materials.index.sections.formEnd')
 
@@ -24,15 +24,12 @@
    </div>
       
    {{-- @include('admin.finishes.index.modals.mass_destroy') --}}
-   @include('modals.destroy', ['modelName'=>'material'])
-   @include('modals.massDestroy', ['modelName'=>'material'])
-
-   @include('modals.restore', ['modelName'=>'material'])
-   @include('modals.massRestore', ['modelName'=>'material'])
-   
-   @include('modals.delete', ['modelName'=>'material'])
-   @include('modals.massDelete', ['modelName'=>'material'])
-   
+   @include('modals.destroy',       ['modelName'=>'material'])
+   @include('modals.massDestroy',   ['modelName'=>'material'])
+   @include('modals.restore',       ['modelName'=>'material'])
+   @include('modals.massRestore',   ['modelName'=>'material'])
+   @include('modals.delete',        ['modelName'=>'material'])
+   @include('modals.massDelete',    ['modelName'=>'material'])
    @include('admin.materials.help')
 
 @endsection

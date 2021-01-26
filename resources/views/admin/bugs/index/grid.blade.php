@@ -37,8 +37,8 @@
                </td>
                <td class="d-none d-lg-table-cell">{{ $bug->id }}</td>
                <td nowrap="nowrap"><a href="{{ route('admin.bugs.show', $bug) }}">{{ $bug->title }}</a></td>
-               <td nowrap="nowrap">{{ $bug->creator->username }}</td>
-               <td nowrap="nowrap">{{ $bug->status }}</td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap">{{ $bug->creator->username }}</td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap">{{ $bug->status }}</td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($bug->created_at){{ $bug->created_at }}@endif">{{ $bug->created_at->toDateString() }}</td>
                <td class="d-none d-lg-table-cell" title="@if($bug->updated_at){{ $bug->updated_at }}@endif">{{ $bug->updated_at->toDateString() }}</td>
                <td class="text-right">

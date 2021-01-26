@@ -20,7 +20,7 @@
                   <i class="{{ config('icons.projects') }}"></i>
                   {{ $carvings->title }}
                </div>
-               <div class="card-body card-trans-2 p-2 border-red-1">
+               <div class="card-body card-trans-0 p-2 border-red-1">
                   {!! $carvings->body !!}
                </div>
             </div>

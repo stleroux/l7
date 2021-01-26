@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Project;
 use Auth;
 use DB;
+use Gate;
 use Session;
 
 class CommentController extends Controller
@@ -37,8 +38,8 @@ class CommentController extends Controller
 ##################################################################################################################
    public function destroy(Request $request, $id)
    {
-      // Check if user has required module
-      if(!checkPerm('comment_delete')) { abort(401, 'Unauthorized Access'); }
+      // Check if user has required permission
+      abort_unless(Gate::allows('comment-delete'), 403);
    
       DB::table('projects__finish_project')
          ->where('project_id', '=', $request->project_id)
@@ -59,9 +60,9 @@ class CommentController extends Controller
 ##################################################################################################################
    public function store(CreateCommentRequest $request, $id)
    {
-      // Check if user has required module
-      // if(!checkPerm('comment_add')) { abort(401, 'Unauthorized Access'); }
-dd('HERE');
+      // Check if user has required permission
+      abort_unless(Gate::allows('comment-create'), 403);
+
       $project = project::find($id);
 
       $comment = new Comment();

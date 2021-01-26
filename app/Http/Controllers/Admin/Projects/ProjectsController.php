@@ -168,44 +168,6 @@ class ProjectsController extends Controller
 
 
 ##################################################################################################################
-# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
-# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
-# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
-# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
-# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
-# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
-// Display a list of resources
-##################################################################################################################
-      // public function index($filter = null)
-      // {
-      //     // Check if user has required permission
-      //     if($this->enablePermissions)
-      //     {
-      //         if(!checkPerm('project_index')) { abort(401, 'Unauthorized Access'); }
-      //     }
-
-      //     // Set the session to the current page route
-      //     Session::put('fromPage', url()->full());
-
-      //     $project = New Project();
-
-      //     if($filter) {
-      //         if($filter == 1000) {
-      //             $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
-      //             return view('projects.index', compact('projects','project'));
-      //         }
-
-      //         $projects = Project::with('images')->where('category', '=', $filter)->paginate(8);
-
-      //     } else {
-      //         $projects = Project::with('images')->orderBy('name','asc')->paginate(8);
-      //     }
-            
-      //     return view('projects.index', compact('projects','project'));
-      // }
-
-
-##################################################################################################################
 # ██ ███    ██ ██████  ███████ ██   ██ 
 # ██ ████   ██ ██   ██ ██       ██ ██  
 # ██ ██ ██  ██ ██   ██ █████     ███   
@@ -444,7 +406,7 @@ class ProjectsController extends Controller
    public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('project-delete'), 403);
 
       $projects = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
@@ -481,7 +443,7 @@ class ProjectsController extends Controller
    public function massDelete(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('project-delete'), 403);
 
       $projects = explode(',', $request->input('mass_delete_pass_checkedvalue'));
       
@@ -560,7 +522,7 @@ class ProjectsController extends Controller
    public function resetViews($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('project-manage'), 403);
 
       $project = Project::find($id);
          $project->views = 0;
@@ -580,7 +542,7 @@ class ProjectsController extends Controller
    public function massResetViews(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('project-manage'), 403);
 
       $projects = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
 

@@ -33,6 +33,9 @@ class SettingsController extends Controller
 ##################################################################################################################
 	public function index(Request $request)
 	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('admin-settings'), 403);
+
 		return view('admin.settings.index');
 	}
 
@@ -48,7 +51,8 @@ class SettingsController extends Controller
 	// public function store(SettingRequest $request)
 	public function store(Request $request)
 	{
-		// dd($request->authorFormat);
+		// Check if user has required permission
+		abort_unless(Gate::allows('admin-settings'), 403);
 
 		// validate the data
       $this->validate($request, [
@@ -261,6 +265,9 @@ class SettingsController extends Controller
 ##################################################################################################################
 	public function updated()
 	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('admin-settings'), 403);
+
 		return view('admin.settings.updated');
 	}
 

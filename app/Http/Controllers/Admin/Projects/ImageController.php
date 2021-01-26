@@ -10,6 +10,7 @@ use App\Models\ProjectImage;
 use Session;
 use Image as Img;
 use File;
+use Gate;
 
 class ImageController extends Controller
 {
@@ -44,6 +45,9 @@ class ImageController extends Controller
 ##################################################################################################################
     public function destroy(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('project-delete'), 403);
+
         // Find the image ID
         $image = ProjectImage::find($id);
 
@@ -84,6 +88,9 @@ class ImageController extends Controller
 ##################################################################################################################
     public function store(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('project-create'), 403);
+
         $rules = [
             'image' => 'required | image | max:20000',
             'display_name' => 'required',
@@ -176,7 +183,9 @@ class ImageController extends Controller
 ##################################################################################################################
     public function update(Request $request, $id)
     {
-        // dd('update controller');
+        // Check if user has required permission
+        abort_unless(Gate::allows('project-edit'), 403);
+        
         $rules = [
             'display_name' => 'required',
             'image_description' => 'required',

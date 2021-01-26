@@ -74,7 +74,7 @@
    </li>
 @endcan
 
-@can('admin-dashboard')
+@can('admin-general')
    <li class="nav-item">
       <a href="{{ route('admin.general') }}" class="nav-link {{ Request::is('admin/general') ? 'active' : '' }}">
          <i class="{{ config('icons.homepage') }}"></i>

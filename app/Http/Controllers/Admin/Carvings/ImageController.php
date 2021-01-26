@@ -44,6 +44,9 @@ class ImageController extends Controller
 ##################################################################################################################
     public function destroy(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('carving-delete'), 403);
+
         // Find the image ID
         $image = CarvingImage::find($id);
 
@@ -84,6 +87,9 @@ class ImageController extends Controller
 ##################################################################################################################
     public function store(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('carving-create'), 403);
+
         $rules = [
             'image' => 'required | image | max:20000',
             'display_name' => 'required',
@@ -176,6 +182,9 @@ class ImageController extends Controller
 ##################################################################################################################
     public function update(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('carving-edit'), 403);
+
         // dd('update controller');
         $rules = [
             'display_name' => 'required',

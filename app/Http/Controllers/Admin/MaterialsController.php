@@ -147,7 +147,7 @@ class MaterialsController extends Controller
       $material->name = $request->name;
       $material->type = $request->type;
       $material->manufacturer = $request->manufacturer;
-      $material->upc = $request->upc;
+      $material->UPC = $request->UPC;
       $material->notes = $request->notes;
 
       if($material->save())
@@ -213,7 +213,7 @@ class MaterialsController extends Controller
       $material->name = $request->name;
       $material->type = $request->type;
       $material->manufacturer = $request->manufacturer;
-      $material->upc = $request->upc;
+      $material->UPC = $request->UPC;
       $material->notes = $request->notes;
 
       if($material->save())

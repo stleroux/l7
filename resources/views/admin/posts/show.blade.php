@@ -4,7 +4,7 @@
 @include('admin.posts.show.sections.pageHeader')
 @include('admin.posts.show.sections.breadcrumb')
 @include('admin.posts.show.sections.sidebar')
-@include('admin.posts.show.sections.functions')
+@include('admin.posts.show.sections.blocks')
 @include('admin.posts.show.sections.formBegin')
 @include('admin.posts.show.sections.formEnd')
 

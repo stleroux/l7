@@ -4,41 +4,19 @@
 @include('admin.projects.edit.sections.pageHeader')
 @include('admin.projects.edit.sections.breadcrumb')
 @include('admin.projects.edit.sections.sidebar')
-@include('admin.projects.edit.sections.functions')
+@include('admin.projects.edit.sections.blocks')
 @include('admin.projects.edit.sections.formBegin')
 @include('admin.projects.edit.sections.formEnd')
 
 @section ('content')
 
-   <div class="form-row">
-      <div class="col-md-6">
-         @include('admin.projects.fields.general')
-      </div>
-      <div class="col-md-6">
-         @include('admin.projects.fields.others')
-      </div>
-   </div>
-
-   <div class="card-footer pt-1 pb-1 pl-2">
-      Fields marked with an <span class="required"></span> are required
-   </div>
-
+   @include('admin.projects.forms.form')
    @include('admin.projects.help')
 
 @endsection
 
 @section('secondary')
-   <div class="form-row">
-      <div class="col-md-4">
-         @include('admin.projects.fields.finishes.finishes')
-      </div>
-      <div class="col-md-4">
-         @include('admin.projects.fields.materials.materials')
-      </div>
-      <div class="col-md-4">
-         @include('admin.projects.fields.images.images')
-      </div>
-   </div>
+   @include('admin.projects.forms.extras')
 @endsection
 
 @section('scripts')

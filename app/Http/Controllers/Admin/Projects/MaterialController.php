@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Project;
 use App\Models\Material;
 use DB;
+use Gate;
 use Session;
 
 class MaterialController extends Controller
@@ -39,6 +40,9 @@ class MaterialController extends Controller
 ##################################################################################################################
     public function destroy(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('project-delete'), 403);
+
         DB::table('material_project')
             ->where('project_id', '=', $request->project_id)
             ->where('material_id', '=', $id)
@@ -60,6 +64,9 @@ class MaterialController extends Controller
 ##################################################################################################################
     public function store(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('project-create'), 403);
+
         $rules = [
             'material' => 'required',
         ];

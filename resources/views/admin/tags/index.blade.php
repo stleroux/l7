@@ -4,7 +4,7 @@
 @include('admin.tags.index.sections.pageHeader')
 @include('admin.tags.index.sections.breadcrumb')
 @include('admin.tags.index.sections.sidebar')
-@include('admin.tags.index.sections.functions')
+@include('admin.tags.index.sections.blocks')
 @include('admin.tags.index.sections.formBegin')
 @include('admin.tags.index.sections.formEnd')
 
@@ -18,12 +18,12 @@
       </div>
    </div>
       
-   @include('modals.destroy', ['modelName'=>'tag'])
-   @include('modals.massDestroy', ['modelName'=>'tag'])
-   @include('modals.restore', ['modelName'=>'tag'])
-   @include('modals.massRestore', ['modelName'=>'tag'])
-   @include('modals.delete', ['modelName'=>'tag'])
-   @include('modals.massDelete', ['modelName'=>'tag'])
+   @include('modals.destroy',       ['modelName'=>'tag'])
+   @include('modals.massDestroy',   ['modelName'=>'tag'])
+   @include('modals.restore',       ['modelName'=>'tag'])
+   @include('modals.massRestore',   ['modelName'=>'tag'])
+   @include('modals.delete',        ['modelName'=>'tag'])
+   @include('modals.massDelete',    ['modelName'=>'tag'])
    @include('admin.tags.help')
 
 @endsection

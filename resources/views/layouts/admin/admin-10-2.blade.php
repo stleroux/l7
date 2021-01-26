@@ -92,7 +92,7 @@
                         @yield('content')
                      </div>
                      <div class="col-xl-2">
-                        @yield('functions')
+                        @yield('blocks')
                      </div>
                   </div>
                   @yield('formEnd')

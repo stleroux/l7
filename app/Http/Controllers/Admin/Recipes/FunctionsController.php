@@ -10,15 +10,16 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Recipe;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use Carbon\Carbon;
 use DB;
 use Excel;
 use File;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Input;
+use Gate;
 use Image;
 use JavaScript;
 use Log;
@@ -59,7 +60,7 @@ class FunctionsController extends RecipesController
    public function delete($id)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-delete'), 403);
+      abort_unless((Gate::allows('recipe-delete') || ($recipe->user_id == Auth::id())), 403);
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
       // dd($recipe);
@@ -141,6 +142,7 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       
       $newRecipe = $recipe->replicate();
@@ -314,6 +316,7 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
       
       // Check if user has required permission
+      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
 
 
       $recipe->personal = 1;
@@ -343,6 +346,7 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
+      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
 
 
       $recipe->personal = 0;
@@ -369,7 +373,7 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
-      abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
 
          $recipe->published_at = Carbon::now();
@@ -395,7 +399,7 @@ class FunctionsController extends RecipesController
    public function massPublish(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-manage'), 403);
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       $recipes = explode(',', $request->input('mass_publish_pass_checkedvalue'));
 
@@ -439,7 +443,7 @@ class FunctionsController extends RecipesController
    public function resetViews($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       $recipe = Recipe::find($id);
          $recipe->views = 0;
@@ -459,7 +463,7 @@ class FunctionsController extends RecipesController
    public function massResetViews(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       $recipes = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
 
@@ -528,7 +532,7 @@ class FunctionsController extends RecipesController
    public function massRestore(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       $recipes = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
@@ -649,7 +653,7 @@ class FunctionsController extends RecipesController
    public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('recipe-delete'), 403);
 
       $recipes = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
@@ -720,7 +724,8 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
-      abort_unless((Gate::allows('recipe-publish') || ($recipe->user_id == Auth::id())), 403);
+      // abort_unless((Gate::allows('recipe-publish') || ($recipe->user_id == Auth::id())), 403);
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
          $recipe->published_at = NULL;
          // Delete this recipe's favorites
@@ -747,7 +752,7 @@ class FunctionsController extends RecipesController
    public function massUnpublish(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-manage'), 403);
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       $recipes = explode(',', $request->input('mass_unpublish_pass_checkedvalue'));
 

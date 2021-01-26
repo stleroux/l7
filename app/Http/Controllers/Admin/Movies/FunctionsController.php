@@ -69,7 +69,7 @@ class FunctionsController extends MoviesController
    public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('movie-delete'), 403);
 
       $movies = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
@@ -107,7 +107,7 @@ class FunctionsController extends MoviesController
    public function delete($id)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-delete'), 403);
+      abort_unless(Gate::allows('movie-delete'), 403);
 
       $movie = Movie::onlyTrashed()->findOrFail($id);
       // dd($movie);
@@ -180,7 +180,7 @@ class FunctionsController extends MoviesController
    public function massResetViews(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('movie-manage'), 403);
 
       $movies = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
 
@@ -473,7 +473,7 @@ class FunctionsController extends MoviesController
    public function resetViews($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('movie-manage'), 403);
 
       $movie = Movie::find($id);
          $movie->views = 0;
@@ -501,7 +501,7 @@ class FunctionsController extends MoviesController
    public function restore($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('movie-manage'), 403);
 
       $movie = Movie::withTrashed()->findOrFail($id);
 
@@ -529,7 +529,7 @@ class FunctionsController extends MoviesController
    public function massRestore(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('movie-manage'), 403);
 
       $movies = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
@@ -564,6 +564,9 @@ class FunctionsController extends MoviesController
 ##################################################################################################################
    public function search(Request $request)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('movie-manage'), 403);
+
       $rules = [
          'title' => 'required',
       ];
@@ -609,9 +612,7 @@ class FunctionsController extends MoviesController
    public function storeComment(CreateCommentRequest $request, $id)
    {
       // Check if user has required permission
-      // if($this->enablePermissions) {
-      //    if(!checkPerm('')) { abort(401, 'Unauthorized Access'); }
-      // }
+      abort_unless(Gate::allows('comment-create'), 403);
 
       $movie = Movie::find($id);
 

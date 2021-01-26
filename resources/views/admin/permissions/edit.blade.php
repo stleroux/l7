@@ -4,7 +4,7 @@
 @include('admin.permissions.edit.sections.pageHeader')
 @include('admin.permissions.edit.sections.breadcrumb')
 @include('admin.permissions.edit.sections.sidebar')
-@include('admin.permissions.edit.sections.functions')
+@include('admin.permissions.edit.sections.blocks')
 @include('admin.permissions.edit.sections.formBegin')
 @include('admin.permissions.edit.sections.formEnd')
 
@@ -21,8 +21,8 @@
             <div class="card-body">
 
                <div class="row">
-                  @include('admin.permissions.fields.name')
-                  @include('admin.permissions.fields.description')
+                  @include('admin.permissions.forms.fields.name')
+                  @include('admin.permissions.forms.fields.description')
                </div>
 
             </div> <!-- Card body -->

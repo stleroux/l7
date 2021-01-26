@@ -4,33 +4,14 @@
 @include('admin.tags.edit.sections.pageHeader')
 @include('admin.tags.edit.sections.breadcrumb')
 @include('admin.tags.edit.sections.sidebar')
-@include('admin.tags.edit.sections.functions')
+@include('admin.tags.edit.sections.blocks')
 @include('admin.tags.edit.sections.formBegin')
 @include('admin.tags.edit.sections.formEnd')
 
 @section('content')
 
-
-
-      {{-- @include('admin.tags.edit.topbar') --}}
-
-
-
-            <div class="card card-primary">
-               <div class="card-header">
-                  <div class="card-title">Tag Information</div>
-               </div>
-               <div class="card-body">
-                  <div class="row">
-                     @include('admin.tags.fields.name')
-                     @include('admin.tags.fields.category')
-                  </div>
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         
-      @include('admin.tags.help')
-
+   @include('admin.tags.forms.form')
+   @include('admin.tags.help')
 
 @endsection
 

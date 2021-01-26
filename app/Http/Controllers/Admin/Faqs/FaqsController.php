@@ -163,44 +163,6 @@ class FaqsController extends Controller
 
 
 ##################################################################################################################
-# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
-# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
-# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
-# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
-# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
-# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
-// Display a list of resources
-##################################################################################################################
-      // public function index($filter = null)
-      // {
-      //     // Check if user has required permission
-      //     if($this->enablePermissions)
-      //     {
-      //         if(!checkPerm('Carving_index')) { abort(401, 'Unauthorized Access'); }
-      //     }
-
-      //     // Set the session to the current page route
-      //     Session::put('fromPage', url()->full());
-
-      //     $Carving = New Carving();
-
-      //     if($filter) {
-      //         if($filter == 1000) {
-      //             $Carvings = Carving::with('images')->orderBy('id','desc')->take(4)->get();
-      //             return view('Carvings.index', compact('Carvings','Carving'));
-      //         }
-
-      //         $Carvings = Carving::with('images')->where('category', '=', $filter)->paginate(8);
-
-      //     } else {
-      //         $Carvings = Carving::with('images')->orderBy('name','asc')->paginate(8);
-      //     }
-            
-      //     return view('Carvings.index', compact('Carvings','Carving'));
-      // }
-
-
-##################################################################################################################
 # ██ ███    ██ ██████  ███████ ██   ██ 
 # ██ ████   ██ ██   ██ ██       ██ ██  
 # ██ ██ ██  ██ ██   ██ █████     ███   
@@ -536,6 +498,7 @@ class FaqsController extends Controller
    public function resetViews($id)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('faq-manage'), 403);
 
 
       $faq = Faq::find($id);
@@ -556,7 +519,7 @@ class FaqsController extends Controller
    public function massResetViews(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('faq-manage'), 403);
 
       $faqs = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
 

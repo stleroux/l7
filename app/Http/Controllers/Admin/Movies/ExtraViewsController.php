@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use Gate;
 use Route;
 use Session;
 
@@ -202,6 +203,9 @@ class ExtraViewsController extends MoviesController
 ##################################################################################################################
    public function print($id)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('movie-manage'), 403);
+
       $movie = Movie::find($id);
 
       return view('admin.movies.print', compact('movie'));
@@ -288,6 +292,7 @@ class ExtraViewsController extends MoviesController
    public function trashed(Request $request)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('movie-manage'), 403);
 
 
       // Set the session to the current page route

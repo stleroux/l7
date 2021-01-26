@@ -53,7 +53,7 @@ class PostsController extends Controller
 	public function create()
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('post-create'), 403);
 
 		$post = new Post();
 		// Get all categories related to Posts Category
@@ -159,7 +159,7 @@ class PostsController extends Controller
    public function destroy(Post $post)
    {
       // Check if user has required permission
-      // abort_unless((Gate::allows('post-delete') || ($post->user_id == Auth::id())), 403);
+      abort_unless((Gate::allows('post-delete') || ($post->user_id == Auth::id())), 403);
 
       // delete the permission
       $post->delete();
@@ -213,7 +213,7 @@ class PostsController extends Controller
 	public function index(Request $request, $key=null)
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('post-manage'), 403);
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -264,6 +264,10 @@ class PostsController extends Controller
 		$post = Post::find($id);
 
 		// Check if user has required permission
+      // abort_unless(Gate::allows('post-'), 403);
+		// abort_unless((Gate::allows('post-edit') || ($post->user_id == Auth::id())), 403);
+
+		// Check if user has required permission
 
 
 	  // Increase the view count if viewed from the frontend
@@ -278,7 +282,7 @@ class PostsController extends Controller
 		// $tags = Tag::all();
 		$tags = Tag::where('category',2)->get();
 
-		      // get previous project
+		// get previous project
       $previous = Post::where('title', '<', $post->title)->published()->orderBy('title','asc')->max('title');
       
       if($previous){
@@ -315,7 +319,7 @@ class PostsController extends Controller
 	public function store(PostRequest $request)
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('post-create'), 403);
 
 		// save the data in the database
 		$post = new Post;
@@ -392,6 +396,7 @@ class PostsController extends Controller
 		$post = Post::find($id);
 
 		// Check if user has required permission
+      abort_unless(Gate::allows('post-edit'), 403);
 
 
 			// Save the data to the database

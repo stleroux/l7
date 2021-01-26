@@ -4,7 +4,7 @@
 @include('admin.projects.show.sections.pageHeader')
 @include('admin.projects.show.sections.breadcrumb')
 @include('admin.projects.show.sections.sidebar')
-@include('admin.projects.show.sections.functions')
+@include('admin.projects.show.sections.blocks')
 @include('admin.projects.show.sections.formBegin')
 @include('admin.projects.show.sections.formEnd')
 
@@ -16,10 +16,10 @@
       <div class="col-12 col-xl-8">
          <div class="row">
             <div class="col-12 col-lg-7 p-0 m-0">
-               <div class="col-12 col-xl-12">@include('admin.projects.show.description')</div>
-               <div class="col-12 col-xl-12">@include('admin.projects.show.materials')</div>
-               <div class="col-12 col-xl-12">@include('admin.projects.show.finishes')</div>
-               <div class="col-12 col-xl-12">@include('admin.projects.show.tags')</div>
+               <div class="col-12 col-xl-12">@include('admin.projects.show.fields.description')</div>
+               <div class="col-12 col-xl-12">@include('admin.projects.show.fields.materials')</div>
+               <div class="col-12 col-xl-12">@include('admin.projects.show.fields.finishes')</div>
+               <div class="col-12 col-xl-12">@include('admin.projects.show.fields.tags')</div>
 
             </div>
             <div class="col-12 col-xl-5">
@@ -28,7 +28,7 @@
                      <div class="card-title">Information</div>
                   </div>
                   <div class="card-body p-0">
-                     @include('admin.projects.show.information')
+                     @include('admin.projects.show.fields.information')
                   </div>
                </div>
             </div>

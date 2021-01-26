@@ -90,7 +90,7 @@ class BugsController extends Controller
    public function store(Request $request, Bug $bug)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('role-create'), 403);
+      abort_unless(Gate::allows('bug-create'), 403);
 
       // validate the data
       $this->validate($request, [

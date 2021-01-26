@@ -4,7 +4,7 @@
 @include('admin.recipes.show.sections.pageHeader')
 @include('admin.recipes.show.sections.breadcrumb')
 @include('admin.recipes.show.sections.sidebar')
-@include('admin.recipes.show.sections.functions')
+@include('admin.recipes.show.sections.blocks')
 @include('admin.recipes.show.sections.formBegin')
 @include('admin.recipes.show.sections.formEnd')
 
@@ -33,8 +33,8 @@
          <div class="card-body p-2">
       
             <div class="row">
-               @include('admin.recipes.show.ingredients')
-               @include('admin.recipes.show.image')
+               @include('admin.recipes.show.fields.ingredients')
+               @include('admin.recipes.show.fields.image')
             </div>
 
 {{--             <div class="row">
@@ -44,32 +44,32 @@
             @auth
 
                <div class="row">
-                  @include('admin.recipes.show.methodology')
+                  @include('admin.recipes.show.fields.methodology')
                </div>
 
                <div class="row">
-                  @include('admin.recipes.show.category')
-                  @include('admin.recipes.show.servings')
-                  @include('admin.recipes.show.prep_time')
-                  @include('admin.recipes.show.cook_time')
-                  @include('admin.recipes.show.personal')
-                  @include('admin.recipes.show.views')
-                  @include('admin.recipes.show.source')
-                  @include('admin.recipes.show.author')
+                  @include('admin.recipes.show.fields.category')
+                  @include('admin.recipes.show.fields.servings')
+                  @include('admin.recipes.show.fields.prep_time')
+                  @include('admin.recipes.show.fields.cook_time')
+                  @include('admin.recipes.show.fields.personal')
+                  @include('admin.recipes.show.fields.views')
+                  @include('admin.recipes.show.fields.source')
+                  @include('admin.recipes.show.fields.author')
                </div>
 
                <div class="row">
-                  @include('admin.recipes.show.public_notes')
-                  @include('admin.recipes.show.private_notes')
+                  @include('admin.recipes.show.fields.public_notes')
+                  @include('admin.recipes.show.fields.private_notes')
                </div>
 
             @endauth
 
             <div class="row d-print-none">
                <div class="col">
-               {{-- @include('recipes.show.comments') --}}
+               {{-- @include('recipes.show.fields.comments') --}}
                {{-- @include('common.comments', ['model'=>$recipe]) --}}
-                  @include('admin.recipes.show.comments', ['model'=>$recipe])
+                  @include('admin.recipes.show.fields.comments', ['model'=>$recipe])
                </div>
             </div>
 
@@ -81,18 +81,18 @@
    {{-- </form> --}}
 {{-- </div> --}}
 
-   @include('modals.destroy', ['modelName'=>'recipe'])
-   @include('modals.massDestroy', ['modelName'=>'recipe'])
-   @include('modals.restore', ['modelName'=>'recipe'])
-   @include('modals.massRestore', ['modelName'=>'recipe'])
-   @include('modals.delete', ['modelName'=>'recipe'])
-   @include('modals.massDelete', ['modelName'=>'recipe'])
-   @include('modals.massPublish', ['modelName'=>'recipe'])
+   @include('modals.destroy',       ['modelName'=>'recipe'])
+   @include('modals.massDestroy',   ['modelName'=>'recipe'])
+   @include('modals.restore',       ['modelName'=>'recipe'])
+   @include('modals.massRestore',   ['modelName'=>'recipe'])
+   @include('modals.delete',        ['modelName'=>'recipe'])
+   @include('modals.massDelete',    ['modelName'=>'recipe'])
+   @include('modals.massPublish',   ['modelName'=>'recipe'])
    @include('modals.massUnpublish', ['modelName'=>'recipe'])
-   @include('modals.publish', ['modelName'=>'recipe'])
-   @include('modals.unpublish', ['modelName'=>'recipe'])
-   @include('modals.resetViews', ['modelName'=>'recipe'])
-   @include('modals.massResetViews', ['modelName'=>'recipe'])
+   @include('modals.publish',       ['modelName'=>'recipe'])
+   @include('modals.unpublish',     ['modelName'=>'recipe'])
+   @include('modals.resetViews',    ['modelName'=>'recipe'])
+   @include('modals.massResetViews',['modelName'=>'recipe'])
 
    @include('admin.recipes.help')
 

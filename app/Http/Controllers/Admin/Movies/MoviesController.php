@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Movies;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; // Required for validation // use Illuminate\Routing\Controller;
 use App\Models\Movie;
 use Carbon\Carbon;
 use DB;
 use File;
+use Gate;
+use Illuminate\Http\Request;
 use Session;
 
 class MoviesController extends Controller
@@ -38,7 +39,7 @@ class MoviesController extends Controller
 	public function create()
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('movie-create'), 403);
 
 		$movie = New Movie();
 		$next_col_no = Movie::max('col_no') + 1;
@@ -57,11 +58,11 @@ class MoviesController extends Controller
 ##################################################################################################################
    public function destroy(Movie $movie)
    {
-      // Check if user has required permission
-      // abort_unless((Gate::allows('post-delete') || ($post->user_id == Auth::id())), 403);
-
-   	// $movie = Movie::findOrFail($movie->id);
+   	$movie = Movie::findOrFail($movie->id);
    	// dd($movie);
+
+      // Check if user has required permission
+      abort_unless((Gate::allows('movie-delete') || ($movie->user_id == Auth::id())), 403);
 
       // delete the permission
       $movie->delete();
@@ -87,6 +88,7 @@ class MoviesController extends Controller
 	public function edit(Movie $movie, $id)
 	{
 		// Check if user has required permission
+      abort_unless((Gate::allows('movie-edit') || ($movie->user_id == Auth::id())), 403);
 
 		// Find the model to edit
 		$movie = Movie::find($id);
@@ -107,7 +109,7 @@ class MoviesController extends Controller
 	public function index(Request $request, $key=null)
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('movie-manage'), 403);
 
 		// Set the session to the current page route
 		Session::put('fromPage', url()->full());
@@ -162,7 +164,7 @@ class MoviesController extends Controller
 	public function show($id)
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('movie-manage'), 403);
 
 		$movie = Movie::findOrFail($id);
 
@@ -200,7 +202,7 @@ class MoviesController extends Controller
 	public function store()
 	{
 		// Check if user has required permission
-
+      abort_unless(Gate::allows('movie-create'), 403);
 
 		Movie::create($this->validateRequest());
 
@@ -221,6 +223,7 @@ class MoviesController extends Controller
 	public function update(Movie $movie, $id)
 	{
 		// Check if user has required permission
+      abort_unless(Gate::allows('movie-edit'), 403);
 
 
 		$movie = Movie::findOrFail($id);

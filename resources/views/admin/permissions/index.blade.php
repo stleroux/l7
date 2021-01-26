@@ -27,19 +27,19 @@
          <div class="card mb-3">
             <div class="card-body p-3">
                @include('admin.permissions.index.grid')
-               @include('admin.permissions.index.sections.functions')
+               @include('admin.permissions.index.sections.blocks')
             </div>
          </div>
       {{-- </div> --}}
 
    {{-- </div> --}}
    
-   @include('modals.destroy', ['modelName'=>'permission'])
-   @include('modals.massDestroy', ['modelName'=>'permission'])
-   @include('modals.restore', ['modelName'=>'permission'])
-   @include('modals.massRestore', ['modelName'=>'permission'])
-   @include('modals.delete', ['modelName'=>'permission'])
-   @include('modals.massDelete', ['modelName'=>'permission'])
+   @include('modals.destroy',       ['modelName'=>'permission'])
+   @include('modals.massDestroy',   ['modelName'=>'permission'])
+   @include('modals.restore',       ['modelName'=>'permission'])
+   @include('modals.massRestore',   ['modelName'=>'permission'])
+   @include('modals.delete',        ['modelName'=>'permission'])
+   @include('modals.massDelete',    ['modelName'=>'permission'])
    @include('admin.permissions.help')
 
 @endsection

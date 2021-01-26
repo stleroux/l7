@@ -636,6 +636,7 @@ class UsersController extends Controller
    public function approve(UserRequest $request, User $user)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
 
       $account_status = $user->account_status;
 
@@ -666,6 +667,7 @@ class UsersController extends Controller
    public function disable(UserRequest $request, User $user)
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('user-manage'), 403);
 
       $account_status = $user->account_status;
 

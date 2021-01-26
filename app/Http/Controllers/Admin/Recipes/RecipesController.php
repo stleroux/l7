@@ -9,14 +9,15 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Recipe;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use Carbon\Carbon;
 use DB;
 use File;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Input;
+use Gate;
 use Image;
 use Route;
 use Session;
@@ -236,6 +237,7 @@ class RecipesController extends Controller
    public function index(Request $request, $key=null) // PUBLISHED RECIPES
    {
       // Check if user has required permission
+      abort_unless(Gate::allows('recipe-manage'), 403);
 
       // Set the session to the current page route
       Session::put('fromLocation', 'admin.recipes.index'); // Required for Alphabet listing
@@ -303,7 +305,7 @@ class RecipesController extends Controller
       $recipe = Recipe::withTrashed()->findOrFail($id);
 
       // Check if user has required permission
-      abort_unless((Gate::allows('recipe-list') || ($recipe->user_id == Auth::id())), 403);
+      abort_unless((Gate::allows('recipe-manage') || ($recipe->user_id == Auth::id())), 403);
 
       // Increase the view count since this is viewed from the frontend
       // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
@@ -491,6 +493,7 @@ class RecipesController extends Controller
    public function view($id)
    {
       // Check if user has required permission
+      abort_unless((Gate::allows('recipe-manage') || ($recipe->user_id == Auth::id())), 403);
 
 
       $recipe = Recipe::withTrashed()->find($id);

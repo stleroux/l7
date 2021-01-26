@@ -169,44 +169,6 @@ class CarvingsController extends Controller
 
 
 ##################################################################################################################
-# ██╗███╗   ██╗██████╗ ███████╗██╗  ██╗
-# ██║████╗  ██║██╔══██╗██╔════╝╚██╗██╔╝
-# ██║██╔██╗ ██║██║  ██║█████╗   ╚███╔╝ 
-# ██║██║╚██╗██║██║  ██║██╔══╝   ██╔██╗ 
-# ██║██║ ╚████║██████╔╝███████╗██╔╝ ██╗
-# ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
-// Display a list of resources
-##################################################################################################################
-      // public function index($filter = null)
-      // {
-      //     // Check if user has required permission
-      //     if($this->enablePermissions)
-      //     {
-      //         if(!checkPerm('Carving_index')) { abort(401, 'Unauthorized Access'); }
-      //     }
-
-      //     // Set the session to the current page route
-      //     Session::put('fromPage', url()->full());
-
-      //     $Carving = New Carving();
-
-      //     if($filter) {
-      //         if($filter == 1000) {
-      //             $Carvings = Carving::with('images')->orderBy('id','desc')->take(4)->get();
-      //             return view('Carvings.index', compact('Carvings','Carving'));
-      //         }
-
-      //         $Carvings = Carving::with('images')->where('category', '=', $filter)->paginate(8);
-
-      //     } else {
-      //         $Carvings = Carving::with('images')->orderBy('name','asc')->paginate(8);
-      //     }
-            
-      //     return view('Carvings.index', compact('Carvings','Carving'));
-      // }
-
-
-##################################################################################################################
 # ██ ███    ██ ██████  ███████ ██   ██ 
 # ██ ████   ██ ██   ██ ██       ██ ██  
 # ██ ██ ██  ██ ██   ██ █████     ███   
@@ -447,7 +409,7 @@ class CarvingsController extends Controller
    public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('carving-delete'), 403);
 
       $carvings = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
@@ -484,7 +446,7 @@ class CarvingsController extends Controller
    public function massDelete(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('permission-delete'), 403);
+      abort_unless(Gate::allows('carving-delete'), 403);
 
       $carvings = explode(',', $request->input('mass_delete_pass_checkedvalue'));
       
@@ -562,7 +524,7 @@ class CarvingsController extends Controller
    public function resetViews($id)
    {
       // Check if user has required permission
-
+      abort_unless(Gate::allows('carving-manage'), 403);
 
       $carving = Carving::find($id);
          $carving->views = 0;
@@ -582,7 +544,7 @@ class CarvingsController extends Controller
    public function massResetViews(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('recipe-manage'), 403);
+      abort_unless(Gate::allows('carving-manage'), 403);
 
       $carvings = explode(',', $request->input('mass_resetViews_pass_checkedvalue'));
 
@@ -650,7 +612,7 @@ class CarvingsController extends Controller
    public function massRestore(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('permission-manage'), 403);
+      abort_unless(Gate::allows('carving-manage'), 403);
 
       $carvings = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 

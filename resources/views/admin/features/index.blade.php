@@ -4,7 +4,7 @@
 @include('admin.features.index.sections.pageHeader')
 @include('admin.features.index.sections.breadcrumb')
 @include('admin.features.index.sections.sidebar')
-@include('admin.features.index.sections.functions')
+@include('admin.features.index.sections.blocks')
 @include('admin.features.index.sections.formBegin')
 @include('admin.features.index.sections.formEnd')
 
@@ -18,12 +18,12 @@
       </div>
    </div>
       
-   @include('modals.destroy', ['modelName'=>'feature'])
-   @include('modals.massDestroy', ['modelName'=>'feature'])
-   @include('modals.restore', ['modelName'=>'feature'])
-   @include('modals.massRestore', ['modelName'=>'feature'])
-   @include('modals.delete', ['modelName'=>'feature'])
-   @include('modals.massDelete', ['modelName'=>'feature'])
+   @include('modals.destroy',       ['modelName'=>'feature'])
+   @include('modals.massDestroy',   ['modelName'=>'feature'])
+   @include('modals.restore',       ['modelName'=>'feature'])
+   @include('modals.massRestore',   ['modelName'=>'feature'])
+   @include('modals.delete',        ['modelName'=>'feature'])
+   @include('modals.massDelete',    ['modelName'=>'feature'])
    @include('admin.features.help')
 
 @endsection

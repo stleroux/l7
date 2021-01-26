@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Project;
 use App\Models\Finish;
 use DB;
+use Gate;
 use Session;
 
 class FinishController extends Controller
@@ -39,6 +40,9 @@ class FinishController extends Controller
 ##################################################################################################################
    public function destroy(Request $request, $id)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('project-delete'), 403);
+
       DB::table('finish_project')
          ->where('project_id', '=', $request->project_id)
          ->where('finish_id', '=', $id)
@@ -60,6 +64,9 @@ class FinishController extends Controller
 ##################################################################################################################
    public function store(Request $request, $id)
    {
+      // Check if user has required permission
+      abort_unless(Gate::allows('project-create'), 403);
+
       $rules = [
          'finish' => 'required',
       ];

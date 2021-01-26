@@ -1,96 +1,16 @@
 @extends('layouts.admin.admin-10-2')
 
-@section('stylesheets')
-@endsection
-
-@section('pageHeader')
-   <i class="{{ config('icons.show') }}"></i>
-   Show Project Finish
-@endsection
-
-@section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.finishes.index') }}">Finishes</a></li>
-   <li class="breadcrumb-item active">Show Finish</li>
-@endsection
-
-@section('rightSidebar')
-@endsection
+@include('admin.finishes.show.sections.stylesheet')
+@include('admin.finishes.show.sections.pageHeader')
+@include('admin.finishes.show.sections.breadcrumb')
+@include('admin.finishes.show.sections.sidebar')
+@include('admin.finishes.show.sections.blocks')
+@include('admin.finishes.show.sections.formBegin')
+@include('admin.finishes.show.sections.formEnd')
 
 @section('content')
-   
-   @include('admin.finishes.show.topbar')
 
-   <div class="card mb-3">
+   @include('admin.finishes.forms.form')
+   @include('admin.finishes.help')
 
-      {{-- <div class="card-header section_header p-2">
-         <i class="fa fa-plus-square"></i>
-         Show Finish
-         <span class="float-right">
-            <div class="btn-group">
-               @include('admin.finishes.buttons.help', ['size'=>'xs', 'bookmark'=>'projects'])
-
-            </div>
-         </span>
-      </div> --}}
-
-      {{-- <div class="card-body section_body p-2"> --}}
-
-         <table class="table table-sm table-striped table-hover text-dark">
-            <tr>
-               <th class="w-25">ID</th>
-               <td class="w-75">{{ $finish->id }}</td>
-            </tr>
-            <tr>
-               <th>Name</th>
-               <td>{{ $finish->name }}</td>
-            </tr>
-            <tr>
-               <th>Type</th>
-               <td>{{ $finish->type }}</td>
-            </tr>
-            <tr>
-               <th>Color Name</th>
-               <td>{{ $finish->color_name }}</td>
-            </tr>
-            <tr>
-               <th>Color Code</th>
-               <td>{{ $finish->color_code }}</td>
-            </tr>
-            <tr>
-               <th>Sheen</th>
-               <td>{{ $finish->sheen }}</td>
-            </tr>
-            <tr>
-               <th>Manufacturer</th>
-               <td>{{ $finish->manufacturer }}</td>
-            </tr>
-            <tr>
-               <th>UPC Code</th>
-               <td>{{ $finish->upc }}</td>
-            </tr>
-            <tr>
-               <th>Created On</th>
-               <td>{{ $finish->created_at ? $finish->created_at->format('M d, Y') : 'no data found' }}</td>
-            </tr>
-            <tr>
-               <th>Updated On</th>
-               <td>{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td>
-            </tr>
-         </table>
-
-         {{-- <p></p> --}}
-
-      {{-- </div> --}}
-
-
-
-<div class="card-body section_body p-2">
-   {{-- @include('admin.finishes.form') --}}
-</div>
-
-
-
-
-   </div>
-   
 @endsection

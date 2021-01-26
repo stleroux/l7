@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TagRequest;
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use Gate;
 
 class TagsController extends Controller
 {
@@ -34,7 +35,7 @@ class TagsController extends Controller
    public function index()
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-manage'), 403);
+      abort_unless(Gate::allows('tag-manage'), 403);
 
       $tag = New Tag();
       $tags = Tag::all();
@@ -53,7 +54,7 @@ class TagsController extends Controller
    public function create()
    {
       // Check if user has required tag
-      // abort_unless(Gate::allows('tag-create'), 403);
+      abort_unless(Gate::allows('tag-create'), 403);
 
       $tag = New Tag();
       
@@ -72,7 +73,7 @@ class TagsController extends Controller
    public function store(TagRequest $request, Tag $tag)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-create'), 403);
+      abort_unless(Gate::allows('tag-create'), 403);
 
       // assign values from form fields
       $tag->name = $request->name;
@@ -132,7 +133,7 @@ class TagsController extends Controller
    public function edit(Tag $tag)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-edit'), 403);
+      abort_unless(Gate::allows('tag-edit'), 403);
 
       return view('admin.tags.edit', compact('tag'));
    }
@@ -149,7 +150,7 @@ class TagsController extends Controller
    public function update(TagRequest $request, Tag $tag)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-edit'), 403);
+      abort_unless(Gate::allows('tag-edit'), 403);
 
       // assign values from form fields
       $tag->name = $request->name;
@@ -183,7 +184,7 @@ class TagsController extends Controller
    public function destroy(Request $request, Tag $tag)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-delete'), 403);
+      abort_unless(Gate::allows('tag-delete'), 403);
 
       // delete the role
       $tag->delete();
@@ -207,7 +208,7 @@ class TagsController extends Controller
    public function massDestroy(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-delete'), 403);
+      abort_unless(Gate::allows('tag-delete'), 403);
 
       $tags = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
       
@@ -248,7 +249,7 @@ class TagsController extends Controller
    public function delete($id)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-delete'), 403);
+      abort_unless(Gate::allows('tag-delete'), 403);
 
       $tag = Tag::onlyTrashed()->findOrFail($id);
       
@@ -277,7 +278,7 @@ class TagsController extends Controller
    public function massDelete(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-delete'), 403);
+      abort_unless(Gate::allows('tag-delete'), 403);
 
       $tags = explode(',', $request->input('mass_delete_pass_checkedvalue'));
       
@@ -319,7 +320,7 @@ class TagsController extends Controller
    public function restore($id)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-manage'), 403);
+      abort_unless(Gate::allows('tag-manage'), 403);
 
       $tag = Tag::onlyTrashed()->findOrFail($id);
       
@@ -345,7 +346,7 @@ class TagsController extends Controller
    public function massRestore(Request $request)
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-manage'), 403);
+      abort_unless(Gate::allows('tag-manage'), 403);
 
       $tags = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
@@ -386,7 +387,7 @@ class TagsController extends Controller
    public function trashed()
    {
       // Check if user has required permission
-      // abort_unless(Gate::allows('tag-manage'), 403);
+      abort_unless(Gate::allows('tag-manage'), 403);
 
       $tags = Tag::onlyTrashed()->get();
       return view('admin.tags.index', compact('tags'));

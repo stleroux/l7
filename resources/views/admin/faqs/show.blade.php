@@ -4,15 +4,21 @@
 @include('admin.faqs.show.sections.pageHeader')
 @include('admin.faqs.show.sections.breadcrumb')
 @include('admin.faqs.show.sections.sidebar')
-@include('admin.faqs.show.sections.functions')
+@include('admin.faqs.show.sections.blocks')
 @include('admin.faqs.show.sections.formBegin')
 @include('admin.faqs.show.sections.formEnd')
 
 @section('content')
 
-   <div class="row">
+   <div class="form-row">
+      <div class="col-12">
+         @include('admin.faqs.forms.form')
+      </div>
+   </div>
+
+   {{-- <div class="row">
       <div class="col-12 col-xl-12">@include('admin.faqs.show.question')</div>
-      <div class="col-12 col-xl-12">@include('admin.faqs.show.answer')</div>
+      <div class="col-12 col-xl-12">@include('admin.faqs.show.answer')</div> --}}
       {{-- <div class="col-12 col-xl-4">@include('admin.faqs.blocks.imageSlider')</div> --}}
       
       {{-- <div class="col-12 col-xl-8">
@@ -28,7 +34,7 @@
          </div>
       </div> --}}
       
-   </div>
+   {{-- </div> --}}
 
    <div class="row">
       <div class="col">

@@ -4,15 +4,17 @@
 @include('admin.categories.edit.sections.pageHeader')
 @include('admin.categories.edit.sections.breadcrumb')
 @include('admin.categories.edit.sections.sidebar')
-@include('admin.categories.edit.sections.functions')
+@include('admin.categories.edit.sections.blocks')
 @include('admin.categories.edit.sections.formBegin')
 @include('admin.categories.edit.sections.formEnd')
 
 @section('content')
 
    <div class="card card-primary">
-      <div class="card-header">
+
+      <div class="card-header p-2">
          <div class="card-title">Category Information</div>
+      
       </div>
       <div class="card-body">
          
@@ -31,12 +33,3 @@
    @include('admin.categories.help')
 
 @endsection
-{{-- 
-@section('scripts')
-   <script>
-      window.onload = function() {
-          document.getElementById("name").focus();
-      }
-   </script>
-@endsection
- --}}

@@ -7,14 +7,8 @@
          <div class="card-header">
             <div class="card-title">Add Parent Category</div>
             <div class="float-right">
-               <button type="reset" class="btn btn-sm btn-info border">
-                  <i class="{{ config('icons.reset') }}"></i>
-                  Reset
-               </button>
-               <button type="submit" class="btn btn-sm btn-primary">
-                  <i class="{{ config('icons.save') }}"></i>
-                  Save
-               </button>
+               @include('admin.categories.actions.common.reset')
+               @include('admin.categories.actions.common.save')
             </div>
          </div>
          

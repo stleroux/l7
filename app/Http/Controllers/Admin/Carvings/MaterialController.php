@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Carving;
 use App\Models\CarvingMaterial;
 use DB;
+use Gate;
 use Session;
 
 class MaterialController extends Controller
@@ -38,6 +39,9 @@ class MaterialController extends Controller
 ##################################################################################################################
     public function destroy(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('carving-delete'), 403);
+
         DB::table('carving_material')
             ->where('carving_id', '=', $request->carving_id)
             ->where('material_id', '=', $id)
@@ -59,6 +63,9 @@ class MaterialController extends Controller
 ##################################################################################################################
     public function store(Request $request, $id)
     {
+        // Check if user has required permission
+        abort_unless(Gate::allows('carving-create'), 403);
+
         $rules = [
             'material' => 'required',
         ];

@@ -48,6 +48,9 @@ class FrontendController extends Controller
 ##################################################################################################################
 	public function index(Request $request)
 	{
+      // Check if user has required permission
+      abort_unless(Gate::allows('admin-general'), 403);
+
 		$greeting   = DB::table('general')->where('name', '=', 'greeting')->first();
       $newUser    = DB::table('general')->where('name', '=', 'newUser')->first();
       $carvings   = DB::table('general')->where('name', '=', 'carvings')->first();
@@ -91,12 +94,7 @@ class FrontendController extends Controller
     public function update(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('admin-dashboard'), 403);
-
-      // $item = DB::table('general')->where('name', '=', $request->name)->first();
-      // dd($item);
-      // Bug::findOrFail($bug->id);
-      // dd($bug);
+      abort_unless(Gate::allows('admin-general'), 403);
 
       // validate the data
       $this->validate($request, [
@@ -104,17 +102,7 @@ class FrontendController extends Controller
          'body' => 'required',
       ]);
 
-      // assign values from form fields
-      // $item->title = $request->title;
-      // $item->body = $request->body;
-      // dd($bug);
-      // Save the data
-      // $item->save();
-
-
-DB::table('general')->where('name', $request->name)->update(['title' => $request->title, 'body'=>$request->body]);
-
-
+      DB::table('general')->where('name', $request->name)->update(['title' => $request->title, 'body'=>$request->body]);
 
       $notification = [
          'message' => 'The item has been updated successfully!', 
@@ -125,7 +113,6 @@ DB::table('general')->where('name', $request->name)->update(['title' => $request
          return redirect()->back()->with($notification);
       }
 
-      // return redirect()->route('admin.bugs.index')->with($notification);
       return redirect()->back();
    }
 

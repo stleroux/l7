@@ -4,7 +4,7 @@
 @include('admin.carvings.show.sections.pageHeader')
 @include('admin.carvings.show.sections.breadcrumb')
 @include('admin.carvings.show.sections.sidebar')
-@include('admin.carvings.show.sections.functions')
+@include('admin.carvings.show.sections.blocks')
 @include('admin.carvings.show.sections.formBegin')
 @include('admin.carvings.show.sections.formEnd')
 
@@ -16,13 +16,13 @@
       <div class="col-12 col-xl-8">
          <div class="row">
             <div class="col-12 col-lg-7 p-0 m-0">
-               <div class="col-12 col-xl-12">@include('admin.carvings.show.description')</div>
-               <div class="col-12 col-xl-12">@include('admin.carvings.show.materials')</div>
-               <div class="col-12 col-xl-12">@include('admin.carvings.show.finishes')</div>
-               <div class="col-12 col-xl-12">@include('admin.carvings.show.tags')</div>
+               <div class="col-12 col-xl-12">@include('admin.carvings.show.fields.description')</div>
+               <div class="col-12 col-xl-12">@include('admin.carvings.show.fields.materials')</div>
+               <div class="col-12 col-xl-12">@include('admin.carvings.show.fields.finishes')</div>
+               <div class="col-12 col-xl-12">@include('admin.carvings.show.fields.tags')</div>
             </div>
             <div class="col-12 col-xl-5">
-               @include('admin.carvings.show.information')
+               @include('admin.carvings.show.fields.information')
             </div>
          </div>
       </div>
