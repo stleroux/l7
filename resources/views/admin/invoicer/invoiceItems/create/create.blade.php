@@ -109,7 +109,7 @@
 							</div>
 							<div class="col-6">
 								<div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-									<label for="price" class="required">Price</label>
+									<label for="price" class="required">Unit Price</label>
 									<div class="input-group">
 										<input type="text" name="price" value="{{ old('price') }}" class="form-control text-right">
 										<div class="input-group-append">

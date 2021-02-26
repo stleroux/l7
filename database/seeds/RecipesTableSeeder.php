@@ -1,5 +1,7 @@
 <?php
 
+// namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class RecipesTableSeeder extends Seeder
@@ -19,8 +21,13 @@ class RecipesTableSeeder extends Seeder
         \DB::table('recipes')->insert(array (
             0 => 
             array (
+                'category_id' => 9,
+                'cook_time_hours' => 20,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2019-05-15 16:11:12',
+                'deleted_at' => NULL,
                 'id' => 1,
-                'title' => 'Oatmeal Buds',
+                'image' => '1.jpg',
                 'ingredients' => '<p>2 cups of sugar</p>
 <p>dash of salt</p>
 <p>3 tablespoons of cocoa</p>
@@ -29,66 +36,70 @@ class RecipesTableSeeder extends Seeder
 <p>1/2 cup of peanut butter</p>
 <p>1/2 cup of milk</p>
 <p>3 cups of oatmeal (quick cooking oats)</p>',
+                'last_viewed_by_id' => 3,
+                'last_viewed_on' => '2019-09-17 09:13:44',
                 'methodology' => '<p>Place sugar, cocoa, butter, milk and salt in a pot. Bring to a full boil and boil for 1 minute.</p>
 <p>Remove from heat and stir in vanilla, peanut butter and oatmeal. Mix well.</p>
 <p>Drop from a teaspoon onto wax paper and let stand for about 30 minutes to dry.</p>',
-                'image' => '1.jpg',
-                'category_id' => 9,
-                'servings' => 0,
-                'prep_time' => 20,
-                'cook_time' => 20,
+                'modified_by_id' => 3,
                 'personal' => 0,
-                'views' => 79,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 20,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 2,
-                'modified_by_id' => 3,
-                'last_viewed_by_id' => 3,
-                'last_viewed_on' => '2019-09-17 09:13:44',
-                'published_at' => '2019-11-16 07:26:50',
-                'deleted_at' => NULL,
-                'created_at' => '2019-05-15 16:11:12',
+                'published_at' => '2020-12-16 07:26:50',
+                'servings' => 0,
+                'source' => 'Recipe Box',
+                'title' => 'Oatmeal Buds',
                 'updated_at' => '2019-11-16 12:26:50',
+                'user_id' => 2,
+                'views' => 83,
             ),
             1 => 
             array (
+                'category_id' => 9,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2019-02-21 12:03:32',
+                'deleted_at' => NULL,
                 'id' => 2,
-                'title' => 'Bouchees Aux Cacahuettes',
+                'image' => '2.jpg',
                 'ingredients' => '<p>1/2 cup of brown sugar - well packed</p>
 <p>1/2 cup of peanut butter</p>
 <p>1/2 cup of corn syrup</p>
 <p>1 cup of peanuts (non salted)</p>
 <p>4 cups of Corn Flakes</p>
 <p>2 cups semi sweet chocolate chips</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2019-05-06 09:39:44',
                 'methodology' => '<p>Mix brown sugar, peanut butter and corn syrup in a pan</p>
 <p>Cook on low heat until it starts to boil, mixing constantly</p>
 <p>Remove form heat and add peanuts and Corn Flakes</p>
 <p>Butter a 9 x 11 pan and spread mix evenly</p>
 <p>Let cool and then melt chocolate chips and spread on top</p>',
-                'image' => '2.jpg',
-                'category_id' => 9,
-                'servings' => 0,
-                'prep_time' => 30,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 361,
-                'source' => NULL,
+                'prep_time_hours' => 30,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2019-05-06 09:39:44',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2019-02-21 12:03:32',
-                'updated_at' => '2019-05-28 17:12:32',
+                'servings' => 0,
+                'source' => NULL,
+                'title' => 'Bouchees Aux Cacahuettes',
+                'updated_at' => '2021-01-22 18:37:03',
+                'user_id' => 2,
+                'views' => 0,
             ),
             2 => 
             array (
+                'category_id' => 8,
+                'cook_time_hours' => 2,
+                'cook_time_minutes' => 200,
+                'created_at' => '2019-02-21 12:03:32',
+                'deleted_at' => NULL,
                 'id' => 4,
-                'title' => 'Banana Loaf',
+                'image' => '4.jpg',
                 'ingredients' => '<p>1 1/2 cups of sugar</p>
 <p>1/2 cup of butter</p>
 <p>2 eggs</p>
@@ -99,145 +110,155 @@ class RecipesTableSeeder extends Seeder
 <p>1 teaspoon of baking powder</p>
 <p>1 1/2 cups of flour</p>
 <p>2-2 1/2 bananas</p>',
+                'last_viewed_by_id' => 3,
+                'last_viewed_on' => '2020-11-06 15:33:18',
                 'methodology' => '<p>Mash bananas up completely and mix in all other ingredients.</p>
 <p>Pour into a loaf pan (greased) and bake at 350 degrees for 50 minutes.</p>',
-                'image' => '4.jpg',
-                'category_id' => 5,
-                'servings' => 0,
-                'prep_time' => 20,
-                'cook_time' => 0,
+                'modified_by_id' => 3,
                 'personal' => 0,
-                'views' => 116,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 1,
+                'prep_time_minutes' => 20,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 3,
-                'modified_by_id' => 3,
-                'last_viewed_by_id' => 3,
-                'last_viewed_on' => '2020-07-07 22:35:32',
                 'published_at' => '2020-07-07 22:40:21',
-                'deleted_at' => NULL,
-                'created_at' => '2019-02-21 12:03:32',
-                'updated_at' => '2020-07-08 02:40:21',
+                'servings' => 0,
+                'source' => 'Recipe Box',
+                'title' => 'Banana Loaf',
+                'updated_at' => '2021-01-22 18:37:03',
+                'user_id' => 3,
+                'views' => 0,
             ),
             3 => 
             array (
+                'category_id' => 10,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2019-02-21 12:03:32',
+                'deleted_at' => NULL,
                 'id' => 5,
-                'title' => 'Pancakes',
+                'image' => '5.jpg',
                 'ingredients' => '<p>1 1/2 cups of flour</p>
 <p>3 teaspoons of baking powder</p>
 <p>1/2 teaspoon of salt</p>
 <p>2 eggs</p>
 <p>1 cup of milk</p>
 <p>4 tablespoons of melted butter</p>',
-                'methodology' => '<p>Mix flour, baking powder and salt together in large bowl. In a smaller bowl mix eggs and milk together and add to large bowl mixture. Beat well, cool and add melted butter.</p>',
-                'image' => '5.jpg',
-                'category_id' => 10,
-                'servings' => 6,
-                'prep_time' => 20,
-                'cook_time' => 0,
-                'personal' => 1,
-                'views' => 53,
-                'source' => 'Recipe Box',
-                'private_notes' => NULL,
-                'public_notes' => NULL,
-                'user_id' => 3,
-                'modified_by_id' => 3,
                 'last_viewed_by_id' => 3,
                 'last_viewed_on' => '2019-09-13 19:34:32',
+                'methodology' => '<p>Mix flour, baking powder and salt together in large bowl. In a smaller bowl mix eggs and milk together and add to large bowl mixture. Beat well, cool and add melted butter.</p>',
+                'modified_by_id' => 3,
+                'personal' => 1,
+                'prep_time_hours' => 20,
+                'prep_time_minutes' => NULL,
+                'private_notes' => NULL,
+                'public_notes' => NULL,
                 'published_at' => '2019-09-16 07:26:17',
-                'deleted_at' => NULL,
-                'created_at' => '2019-02-21 12:03:32',
+                'servings' => 6,
+                'source' => 'Recipe Box',
+                'title' => 'Pancakes',
                 'updated_at' => '2019-09-16 11:26:17',
+                'user_id' => 3,
+                'views' => 55,
             ),
             4 => 
             array (
+                'category_id' => 9,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => 0,
+                'created_at' => '2016-10-02 18:17:37',
+                'deleted_at' => NULL,
                 'id' => 6,
-                'title' => 'Shortbread Cookies',
+                'image' => '6.jpg',
                 'ingredients' => '<p>1 pound of butter</p>
 <p>1 cup of fruit sugar</p>
 <p>4 cups of flour</p>
 <p>2 tablespoons of corn starch</p>
 <p>1/2 teaspoon of vanilla</p>',
+                'last_viewed_by_id' => 3,
+                'last_viewed_on' => '2020-11-06 15:43:15',
                 'methodology' => '<p>Mix butter, sugar, corn starch and vanilla together. Once well blended mix in all flour. Roll dough until it\'\'s about 1/4" thick and shape cookies as desired.</p>
 <p>Preheat oven at 300 degrees and bake for approximately 16 minutes or until they are starting to brown.</p>',
-                'image' => '6.jpg',
-                'category_id' => 9,
-                'servings' => 0,
-                'prep_time' => 30,
-                'cook_time' => 0,
+                'modified_by_id' => 3,
                 'personal' => 0,
-                'views' => 49,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 0,
+                'prep_time_minutes' => 30,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 3,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2018-02-13 11:02:05',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:17:37',
-                'updated_at' => '2019-02-17 12:18:04',
+                'servings' => 0,
+                'source' => 'Recipe Box',
+                'title' => 'Shortbread Cookies',
+                'updated_at' => '2020-11-06 15:43:15',
+                'user_id' => 3,
+                'views' => 51,
             ),
             5 => 
             array (
+                'category_id' => 2,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:19:13',
+                'deleted_at' => NULL,
                 'id' => 7,
-                'title' => 'Spinach Dip',
+                'image' => '7.jpg',
             'ingredients' => '<p>1 package of frozen spinach (cook as indicated and cool)</p>
 <p>1 cup of sour cream</p>
 <p>1 cup of mayonnaise</p>
 <p>2 tablespoons of parmesan cheese</p>
 <p>1 envelope (45g) of KNORR vegetable soup</p>',
-                'methodology' => '<p>Mix well and pour in a pumpernickel bread or use as a vegetable dip.</p>',
-                'image' => '7.jpg',
-                'category_id' => 2,
-                'servings' => 0,
-                'prep_time' => 20,
-                'cook_time' => 0,
-                'personal' => 0,
-                'views' => 17,
-                'source' => 'Recipe Box',
-                'private_notes' => '',
-                'public_notes' => '',
-                'user_id' => 2,
-                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:19:13',
+                'methodology' => '<p>Mix well and pour in a pumpernickel bread or use as a vegetable dip.</p>',
+                'modified_by_id' => 2,
+                'personal' => 0,
+                'prep_time_hours' => 20,
+                'prep_time_minutes' => NULL,
+                'private_notes' => '',
+                'public_notes' => '',
                 'published_at' => '2016-10-02 11:19:13',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:19:13',
+                'servings' => 0,
+                'source' => 'Recipe Box',
+                'title' => 'Spinach Dip',
                 'updated_at' => '2019-05-29 16:01:29',
+                'user_id' => 2,
+                'views' => 19,
             ),
             6 => 
             array (
-                'id' => 8,
-                'title' => 'French Toast',
-                'ingredients' => '<p>Beat eggs well and add in all other ingredients. Mix well and soak bread until soft. Fry in a well greased frying pan.</p>',
-                'methodology' => '<p>Beat eggs well and add in all other ingredients. Mix well and soak bread until soft. Fry in a well greased frying pan.</p>',
-                'image' => '8.jpg',
                 'category_id' => 71,
-                'servings' => 6,
-                'prep_time' => 10,
-                'cook_time' => 0,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => 0,
+                'created_at' => '2016-10-02 18:20:36',
+                'deleted_at' => NULL,
+                'id' => 8,
+                'image' => '8.jpg',
+                'ingredients' => '<p>Beat eggs well and add in all other ingredients. Mix well and soak bread until soft. Fry in a well greased frying pan.</p>',
+                'last_viewed_by_id' => 3,
+                'last_viewed_on' => '2020-11-06 15:41:18',
+                'methodology' => '<p>Beat eggs well and add in all other ingredients. Mix well and soak bread until soft. Fry in a well greased frying pan.</p>',
+                'modified_by_id' => 3,
                 'personal' => 0,
-                'views' => 138,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 0,
+                'prep_time_minutes' => 10,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 3,
-                'modified_by_id' => 3,
-                'last_viewed_by_id' => 3,
-                'last_viewed_on' => '2020-06-15 15:12:47',
                 'published_at' => '2020-06-15 15:45:03',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:20:36',
-                'updated_at' => '2020-06-15 19:45:03',
+                'servings' => 6,
+                'source' => 'Recipe Box',
+                'title' => 'French Toast',
+                'updated_at' => '2020-11-06 15:41:18',
+                'user_id' => 3,
+                'views' => 140,
             ),
             7 => 
             array (
+                'category_id' => 9,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => 0,
+                'created_at' => '2016-10-02 18:22:46',
+                'deleted_at' => NULL,
                 'id' => 9,
-                'title' => 'Peanut Butter Cookies',
+                'image' => '9.jpeg',
                 'ingredients' => '<p>1 1/4 cups of Kraft Smooth Peanut Butter</p>
 <p>1/2 cup of margarine or butter</p>
 <p>3/4 cup of white sugar</p>
@@ -247,33 +268,35 @@ class RecipesTableSeeder extends Seeder
 <p>1 cup of flour</p>
 <p>1/2 teaspoon of salt</p>
 <p>1/2 teaspoon of baking soda</p>',
+                'last_viewed_by_id' => 3,
+                'last_viewed_on' => '2020-11-06 15:47:16',
                 'methodology' => '<p>In a large bowl, mix together the first six ingredients.</p>
 <p>In another bowl mix the remaining 3 ingredients.</p>
 <p>Stir flour mixture into peanut butter mixture. mix well.</p>
 <p>Drop onto a lightly greased sheet and then flatten slightly with a fork. Bake at 350 degrees for 10 to 12 minutes, or until the centers are still soft to the touch. Cool cookies on pan for 5 minutes.</p>',
-                'image' => '9.jpeg',
-                'category_id' => 9,
-                'servings' => 36,
-                'prep_time' => 30,
-                'cook_time' => 0,
+                'modified_by_id' => 3,
                 'personal' => 0,
-                'views' => 89,
-                'source' => 'Recipe Box',
-                'private_notes' => '',
-                'public_notes' => '',
-                'user_id' => 3,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2016-10-02 11:22:47',
+                'prep_time_hours' => 0,
+                'prep_time_minutes' => 30,
+                'private_notes' => NULL,
+                'public_notes' => NULL,
                 'published_at' => '2019-02-19 20:06:13',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:22:46',
-                'updated_at' => '2019-02-20 01:06:13',
+                'servings' => 36,
+                'source' => 'Recipe Box',
+                'title' => 'Peanut Butter Cookies',
+                'updated_at' => '2020-11-06 15:47:16',
+                'user_id' => 3,
+                'views' => 91,
             ),
             8 => 
             array (
+                'category_id' => 5,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:25:20',
+                'deleted_at' => NULL,
                 'id' => 10,
-                'title' => 'Beef And Vegetable Pie',
+                'image' => '10.jpg',
                 'ingredients' => '<p>2 teaspoons of cooking oil</p>
 <p>1 pound of lean ground beef</p>
 <p>2 cups of frozen mixed vegetables</p>
@@ -282,6 +305,8 @@ class RecipesTableSeeder extends Seeder
 <p>1/2 teaspoon of onion powder</p>
 <p>1/4 teaspoon of black pepper</p>
 <p>Pastry for 2 crust 9" pie</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2019-02-19 19:02:00',
                 'methodology' => '<p>Heat cooking oil in a large frying pan on medium heat.</p>
 <p>Add in ground beef.</p>
 <p>Scramble-fry for about 10 minutes until no longer pink. Drain. Transfer to medium bowl. Cool. Add in rest of ingredients and stir.</p>
@@ -294,29 +319,29 @@ class RecipesTableSeeder extends Seeder
 <p>Bake on bottom rack at 400 degrees for 15 minutes.</p>
 <p>Reduce heat to 350 degrees and bake for another 35 to 40 minutes until golden.</p>
 <p>Let stand on wire rack for 10 minutes before serving.</p>',
-                'image' => '10.jpg',
-                'category_id' => 5,
-                'servings' => 6,
-                'prep_time' => 25,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 179,
-                'source' => 'Company\'s Coming',
+                'prep_time_hours' => 25,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => '<p>436 calories per wedge</p>',
-                'user_id' => 5,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2019-02-19 19:02:00',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:25:20',
-                'updated_at' => '2019-02-22 03:08:12',
+                'servings' => 6,
+                'source' => 'Company\'s Coming',
+                'title' => 'Beef And Vegetable Pie',
+                'updated_at' => '2021-01-22 18:37:03',
+                'user_id' => 5,
+                'views' => 0,
             ),
             9 => 
             array (
+                'category_id' => 5,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:27:37',
+                'deleted_at' => NULL,
                 'id' => 11,
-                'title' => 'Classic Meatloaf',
+                'image' => '11.jpg',
                 'ingredients' => '<p>1 egg</p>
 <p>3/4 cup of quick-cooking rolled oats</p>
 <p>3/4 cup of milk</p>
@@ -328,6 +353,8 @@ class RecipesTableSeeder extends Seeder
 <p>1 1/2 pounds of ground beef</p>
 <p>1 cup of grated medium cheddar cheese</p>
 <p>1/4 cup of ketchup</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2019-05-16 13:02:06',
                 'methodology' => '<p>Combine first 8 ingredients in a large bowl.</p>
 <p>Add ground beef.</p>
 <p>Mix well.</p>
@@ -338,29 +365,29 @@ class RecipesTableSeeder extends Seeder
 <p>Bake, uncovered at 350 degrees for 1 1/4 hours to 1 1/2 hours until fully cooked and internal temperature of beef reaches 160 degrees Fahrenheit.</p>
 <p>Let stand for 10 minutes.</p>
 <p>Cuts into 12 slices.</p>',
-                'image' => '11.jpg',
-                'category_id' => 5,
-                'servings' => 6,
-                'prep_time' => 35,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 233,
-                'source' => 'Company\'s Coming',
+                'prep_time_hours' => 35,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2019-05-16 13:02:06',
                 'published_at' => '2016-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:27:37',
+                'servings' => 6,
+                'source' => 'Company\'s Coming',
+                'title' => 'Classic Meatloaf',
                 'updated_at' => '2019-05-16 17:02:06',
+                'user_id' => 2,
+                'views' => 235,
             ),
             10 => 
             array (
+                'category_id' => 36,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:31:35',
+                'deleted_at' => NULL,
                 'id' => 13,
-                'title' => 'Fruity Burritos',
+                'image' => '13.jpg',
                 'ingredients' => '<p>2/3 cup of fresh raspberries</p>
 <p>1/3 cup of fresh blueberries (or frozen, thawed)</p>
 <p>1/3 cup of sliced strawberries</p>
@@ -369,35 +396,37 @@ class RecipesTableSeeder extends Seeder
 <p>3/4 teaspoon of lemon juice</p>
 <p>1/2 teaspoon of liquid sweetener</p>
 <p>8 flour tortillas (6 inch) warmed</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2019-02-19 19:14:40',
                 'methodology' => '<p>Combine fruit in a shallow dish. Stir gently to mix.</p>
 <p>Measure cottage cheese, milk, lemon juice and sweetener into a blender. Process until smooth.</p>
 <p>Fold warm tortillas in half and then in half again.Lift 1 side to form a hollow.</p>
 <p>Spoon about 2 1/2 tablespoons or about 1/8 of fruit into hollow.</p>
 <p>Add about 1 teaspoon o f cottage cheese mixture.</p>
 <p>Hold tortilla upright so mixture will run down through fruit. Repeat.</p>',
-                'image' => '13.jpg',
-                'category_id' => 36,
-                'servings' => 8,
-                'prep_time' => 25,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 60,
-                'source' => 'Company\'s Coming',
+                'prep_time_hours' => 25,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2019-02-19 19:14:40',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:31:35',
+                'servings' => 8,
+                'source' => 'Company\'s Coming',
+                'title' => 'Fruity Burritos',
                 'updated_at' => '2019-02-20 00:14:40',
+                'user_id' => 2,
+                'views' => 63,
             ),
             11 => 
             array (
+                'category_id' => 5,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:33:30',
+                'deleted_at' => NULL,
                 'id' => 14,
-                'title' => 'Lasagna',
+                'image' => '14.jpg',
                 'ingredients' => '<p>1 tablespoon vegetable oil</p>
 <p>1 medium onion, chopped</p>
 <p>2 pounds ground beef</p>
@@ -411,33 +440,35 @@ class RecipesTableSeeder extends Seeder
 <p>1 tablespoon salt</p>
 <p>1 pack lasagna pasta</p>
 <p>Mozzarella cheese - sliced</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2016-10-02 11:33:31',
                 'methodology' => '<p>Cook pasta to liking</p>
 <p>Mix all ingredients, except cheese and cook</p>
 <p>Lay lasagna layer, meat layer, until none are left</p>
 <p>Spread Mozzarella cheese on top and cook</p>',
-                'image' => '14.jpg',
-                'category_id' => 5,
-                'servings' => 8,
-                'prep_time' => 35,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 75,
-                'source' => '',
+                'prep_time_hours' => 35,
+                'prep_time_minutes' => NULL,
                 'private_notes' => '',
                 'public_notes' => '',
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2016-10-02 11:33:31',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:33:30',
+                'servings' => 8,
+                'source' => '',
+                'title' => 'Lasagna',
                 'updated_at' => '2019-02-13 17:29:49',
+                'user_id' => 2,
+                'views' => 77,
             ),
             12 => 
             array (
+                'category_id' => 8,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:35:01',
+                'deleted_at' => NULL,
                 'id' => 15,
-                'title' => 'Carrot Muffins',
+                'image' => '15.jpg',
                 'ingredients' => '<p>4 cups of white sugar</p>
 <p>2 teaspoons of cinnamon</p>
 <p>2 teaspoons of baking soda</p>
@@ -447,33 +478,35 @@ class RecipesTableSeeder extends Seeder
 <p>2 1/2 cups of cooking oil</p>
 <p>6 cups of grated carrots</p>
 <p>8 eggs (whipped)</p>',
+                'last_viewed_by_id' => 1,
+                'last_viewed_on' => '2020-10-09 16:44:10',
                 'methodology' => '<p>Mix sugar, cinnamon, baking soda, baking powder, flour and salt together.</p>
 <p>Then add oil, carrots and eggs.</p>
 <p>Place mixture into muffin cups.</p>
 <p>Bake at 325 degrees for about 20-25 minutes or until golden brown.</p>',
-                'image' => '15.jpg',
-                'category_id' => 5,
-                'servings' => 90,
-                'prep_time' => 30,
-                'cook_time' => 0,
+                'modified_by_id' => 1,
                 'personal' => 0,
-                'views' => 51,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 30,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => NULL,
-                'user_id' => 2,
-                'modified_by_id' => 3,
-                'last_viewed_by_id' => 3,
-                'last_viewed_on' => '2020-07-07 22:36:19',
                 'published_at' => '2020-07-07 22:40:24',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:35:01',
-                'updated_at' => '2020-07-08 02:40:24',
+                'servings' => 90,
+                'source' => 'Recipe Box',
+                'title' => 'Carrot Muffins',
+                'updated_at' => '2021-01-22 18:37:03',
+                'user_id' => 2,
+                'views' => 0,
             ),
             13 => 
             array (
+                'category_id' => 34,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:36:29',
+                'deleted_at' => NULL,
                 'id' => 16,
-                'title' => 'Macaroni Salad',
+                'image' => '16.jpg',
                 'ingredients' => '<p>1 cup of real mayonnaise</p>
 <p>2 tablespoons of vinegar</p>
 <p>1 tablespoon of prepared mustard</p>
@@ -483,62 +516,66 @@ class RecipesTableSeeder extends Seeder
 <p>1 cup of sliced celery</p>
 <p>1 cup of chopped green pepper</p>
 <p>1/4 cup of onion</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2019-04-01 15:28:38',
                 'methodology' => '<p>In a large bowl, stir together mayonnaise, vinegar, mustard, sugar, salt, and pepper until smooth.</p>
 <p>Add remaining ingredients, toss to coat well.</p>
 <p>Cover and chill</p>',
-                'image' => '16.jpg',
-                'category_id' => 34,
-                'servings' => 0,
-                'prep_time' => 20,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 48,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 20,
+                'prep_time_minutes' => NULL,
                 'private_notes' => '<p>hghgfhgfhf</p>',
                 'public_notes' => NULL,
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2019-04-01 15:28:38',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:36:29',
+                'servings' => 0,
+                'source' => 'Recipe Box',
+                'title' => 'Macaroni Salad',
                 'updated_at' => '2019-04-01 19:28:38',
+                'user_id' => 2,
+                'views' => 50,
             ),
             14 => 
             array (
+                'category_id' => 1,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:38:17',
+                'deleted_at' => NULL,
                 'id' => 17,
-                'title' => 'Macaroni And Cheese',
+                'image' => '17.jpg',
                 'ingredients' => '<p>2 cups of macaroni</p>
 <p>2 tablespoons of butter</p>
 <p>2 tablespoons of flour</p>
 <p>salt and pepper to taste</p>
 <p>2 cups of milk</p>
 <p>2 cups of grated cheddar cheese (or cheddar &amp; colby - colby makes a smoother sauce)</p>',
-                'methodology' => '<p>Cook macaroni until tender. Make a roux of butter, flour, salt and pepper. Add milk and cook on stove top or microwave stirring regularily to make a smooth cream sauce. In a large buttered casserole dish combine: macaroni, sauce and cheese. Stir until mixed. Bake at 300 degrees for 20 minutes.</p>',
-                'image' => '17.jpg',
-                'category_id' => 1,
-                'servings' => 0,
-                'prep_time' => 30,
-                'cook_time' => 0,
-                'personal' => 0,
-                'views' => 40,
-                'source' => 'Recipe Box',
-                'private_notes' => '',
-            'public_notes' => '<p>Variations: add onions and peppers (sauteed), add sliced hot dog pieces topped with buttered bread crumbs.</p>',
-                'user_id' => 2,
-                'modified_by_id' => 2,
                 'last_viewed_by_id' => 2,
                 'last_viewed_on' => '2016-10-02 11:38:18',
+                'methodology' => '<p>Cook macaroni until tender. Make a roux of butter, flour, salt and pepper. Add milk and cook on stove top or microwave stirring regularily to make a smooth cream sauce. In a large buttered casserole dish combine: macaroni, sauce and cheese. Stir until mixed. Bake at 300 degrees for 20 minutes.</p>',
+                'modified_by_id' => 2,
+                'personal' => 0,
+                'prep_time_hours' => 30,
+                'prep_time_minutes' => NULL,
+                'private_notes' => '',
+            'public_notes' => '<p>Variations: add onions and peppers (sauteed), add sliced hot dog pieces topped with buttered bread crumbs.</p>',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:38:17',
+                'servings' => 0,
+                'source' => 'Recipe Box',
+                'title' => 'Macaroni And Cheese',
                 'updated_at' => '2019-02-13 19:09:45',
+                'user_id' => 2,
+                'views' => 42,
             ),
             15 => 
             array (
+                'category_id' => 6,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:40:15',
+                'deleted_at' => NULL,
                 'id' => 18,
-                'title' => 'Pork Chops A La Ruth',
+                'image' => '18.jpg',
                 'ingredients' => '<p>Salt</p>
 <p>Pepper</p>
 <p>Flour</p>
@@ -547,32 +584,34 @@ class RecipesTableSeeder extends Seeder
 <p>1/3 cup of water</p>
 <p>1/3 cup of ketchup</p>
 <p>3 tablespoons of brown sugar</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2016-10-02 11:40:16',
             'methodology' => '<p>Mix together salt, pepper and flour (the amounts are your own choice)</p>
 <p>Coat pork chops with the flour mixture and brown chops on both sides in a frying pan. Place chops on the bottom of a roasting pan. Slice onions and place them on top of pork chops. Mix water, ketchup and brown sugar together and pour over top of chops. Bake at 300 degrees for approximately an hour.</p>',
-                'image' => '18.jpg',
-                'category_id' => 6,
-                'servings' => 4,
-                'prep_time' => 20,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 42,
-                'source' => 'Recipe Box',
+                'prep_time_hours' => 20,
+                'prep_time_minutes' => NULL,
                 'private_notes' => '',
                 'public_notes' => '<p>You may increase the sauce depending on the number of chops. Each batch covers approximately 4 chops.</p>
 <p>From my experience the best type of chops to use for this recipe is boneless.</p>',
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2016-10-02 11:40:16',
                 'published_at' => '2019-02-13 14:13:21',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:40:15',
+                'servings' => 4,
+                'source' => 'Recipe Box',
+                'title' => 'Pork Chops A La Ruth',
                 'updated_at' => '2019-02-13 19:09:45',
+                'user_id' => 2,
+                'views' => 45,
             ),
             16 => 
             array (
+                'category_id' => 36,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:42:26',
+                'deleted_at' => NULL,
                 'id' => 19,
-                'title' => 'Spiced Fruit Salad',
+                'image' => '19.jpg',
                 'ingredients' => '<p>2 cups of halved seedless grapes</p>
 <p>2 cups of cubed honeydew</p>
 <p>1 can of drained pineapple chunks (14 oz.)</p>
@@ -581,38 +620,42 @@ class RecipesTableSeeder extends Seeder
 <p>1 teaspoon of vanilla extract</p>
 <p>1/2 teaspoon of ground ginger</p>
 <p>1/4 teaspoon of ground allspice</p>',
+                'last_viewed_by_id' => 2,
+                'last_viewed_on' => '2019-03-03 17:14:58',
                 'methodology' => '<p>Combine first four ingredients in large bowl.</p>
 <p>Combine remaining 4 ingredients in small bowl.</p>
 <p>Add to fruit. Stir until coated. Chill, covered, for at least 6 hours to blend flavours.</p>',
-                'image' => '19.jpg',
-                'category_id' => 36,
-                'servings' => 6,
-                'prep_time' => 20,
-                'cook_time' => 0,
+                'modified_by_id' => 2,
                 'personal' => 0,
-                'views' => 35,
-                'source' => 'Company\'s Coming',
+                'prep_time_hours' => 20,
+                'prep_time_minutes' => NULL,
                 'private_notes' => NULL,
                 'public_notes' => '<p>97 calories per serving</p>',
-                'user_id' => 2,
-                'modified_by_id' => 2,
-                'last_viewed_by_id' => 2,
-                'last_viewed_on' => '2019-03-03 17:14:58',
                 'published_at' => '2019-02-17 19:27:37',
-                'deleted_at' => NULL,
-                'created_at' => '2016-10-02 18:42:26',
+                'servings' => 6,
+                'source' => 'Company\'s Coming',
+                'title' => 'Spiced Fruit Salad',
                 'updated_at' => '2019-05-29 16:01:14',
+                'user_id' => 2,
+                'views' => 45,
             ),
             17 => 
             array (
+                'category_id' => 36,
+                'cook_time_hours' => 0,
+                'cook_time_minutes' => NULL,
+                'created_at' => '2016-10-02 18:44:42',
+                'deleted_at' => NULL,
                 'id' => 20,
-                'title' => 'Snow Angel Trifle',
+                'image' => '20.jpeg',
                 'ingredients' => '<p>4 cups of milk</p>
 <p>2 boxes of instant white chocolate (or vanilla) pudding powder (4 serving size, each)</p>
 <p>17 oz. angel food cake torn into 1 inch pieces</p>
 <p>1-8 oz package of cream-filled chocolate mini cookies (12 reserved for garnish</p>
 <p>3 cups of sliced strawberries</p>
 <p>2 cups of frozen whipped topping, thawed</p>',
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2016-10-02 12:32:00',
                     'methodology' => '<p>Beat milk and pudding powder on low in a medium bowl for about 2 minutes until thickened.</p>
 <p>Layer ingredients in a large glass serving bowl as follows:</p>
 <p>1/2 of cake pieces</p>
@@ -624,29 +667,29 @@ class RecipesTableSeeder extends Seeder
 <p>Remaining strawberry slices</p>
 <p>Remaining pudding, spread evenly</p>
 <p>Spread or pipe whipped topping in a decorative pattern on top of pudding. Garnish with reserved cookies. Chill for at least 4 hours to blend flavours.</p>',
-                    'image' => '20.jpeg',
-                    'category_id' => 36,
-                    'servings' => 12,
-                    'prep_time' => 45,
-                    'cook_time' => 0,
+                    'modified_by_id' => 2,
                     'personal' => 0,
-                    'views' => 44,
-                    'source' => 'Company\'s Coming',
+                    'prep_time_hours' => 45,
+                    'prep_time_minutes' => NULL,
                     'private_notes' => '',
                     'public_notes' => '',
-                    'user_id' => 2,
-                    'modified_by_id' => 2,
-                    'last_viewed_by_id' => 3,
-                    'last_viewed_on' => '2016-10-02 12:32:00',
                     'published_at' => '2019-02-13 14:13:21',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:44:42',
+                    'servings' => 12,
+                    'source' => 'Company\'s Coming',
+                    'title' => 'Snow Angel Trifle',
                     'updated_at' => '2019-03-01 03:53:57',
+                    'user_id' => 2,
+                    'views' => 49,
                 ),
                 18 => 
                 array (
+                    'category_id' => 5,
+                    'cook_time_hours' => 0,
+                    'cook_time_minutes' => NULL,
+                    'created_at' => '2016-10-02 18:46:42',
+                    'deleted_at' => NULL,
                     'id' => 21,
-                    'title' => 'Chocolate And Pear Muffins',
+                    'image' => '21.jpg',
                     'ingredients' => '<p>2 cups of all purpose flour</p>
 <p>1 1/3 chopped peeled fresh pear</p>
 <p>3/4 of packed brown sugar</p>
@@ -657,32 +700,34 @@ class RecipesTableSeeder extends Seeder
 <p>1 large egg</p>
 <p>3/4 cup of buttermilk</p>
 <p>1/2 cup of cooking oil</p>',
+                    'last_viewed_by_id' => 2,
+                    'last_viewed_on' => '2021-01-22 23:18:10',
                     'methodology' => '<p>Combine the first 7 ingredients in a large bowl. Make a well in centre.</p>
 <p>Beat remaining 3 ingredients with whisk in small bowl. Add to well in large bowl. Stir until just moistened. Fill 12 greased muffins cups 3/4 full.</p>
 <p>Bake in 375 degree oven for about 25 minutes until wooden pick inserted in centre of muffin comes out clean. Let stand in pan for 5 minutes before removing to wire rack to cool.</p>',
-                    'image' => '21.jpg',
-                    'category_id' => 1,
-                    'servings' => 12,
-                    'prep_time' => 30,
-                    'cook_time' => 0,
-                    'personal' => 0,
-                    'views' => 53,
-                    'source' => 'Company\'s Coming',
-                    'private_notes' => '',
-                    'public_notes' => '<p>Muffins may be stored in an airtight container for up to 3 months.</p>',
-                    'user_id' => 2,
                     'modified_by_id' => 2,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2016-10-02 11:46:42',
+                    'personal' => 0,
+                    'prep_time_hours' => 30,
+                    'prep_time_minutes' => NULL,
+                    'private_notes' => NULL,
+                    'public_notes' => '<p>Muffins may be stored in an airtight container for up to 3 months.</p>',
                     'published_at' => '2019-02-13 14:13:21',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:46:42',
-                    'updated_at' => '2019-02-17 23:39:27',
+                    'servings' => 12,
+                    'source' => 'Company\'s Coming',
+                    'title' => 'Chocolate And Pear Muffins',
+                    'updated_at' => '2021-01-22 23:18:10',
+                    'user_id' => 2,
+                    'views' => 59,
                 ),
                 19 => 
                 array (
+                    'category_id' => 1,
+                    'cook_time_hours' => 30,
+                    'cook_time_minutes' => NULL,
+                    'created_at' => '2016-10-02 18:49:30',
+                    'deleted_at' => NULL,
                     'id' => 22,
-                    'title' => 'Chocolate Peanut Butter Bars',
+                    'image' => '22.jpg',
                     'ingredients' => '<p>2 cups of quick-cooking oats</p>
 <p>1 3/4 cups of firmly packed light brown sugar</p>
 <p>1 1/2 cups of all purpose flour</p>
@@ -694,6 +739,8 @@ class RecipesTableSeeder extends Seeder
 <p>1 large egg, beaten</p>
 <p>1 (14 oz.) can of sweetened condensed milk</p>
 <p>1/2 cup of creamy peanut butter</p>',
+                    'last_viewed_by_id' => 2,
+                    'last_viewed_on' => '2016-10-02 11:49:30',
                     'methodology' => '<p>HEAT oven to 350Â°F.</p>
 <p>Combine oats, brown sugar, flour, baking powder and baking soda in large bowl. Cut in butter with pastry blender or 2 knives until mixture resembles fine crumbs. Stir in peanuts.</p>
 <p>RESERVE 1 1/2 cups crumb mixture. Stir egg into remaining crumb mixture.</p>
@@ -702,29 +749,29 @@ class RecipesTableSeeder extends Seeder
 <p>STIR together sweetened condensed milk and peanut butter in small bowl until well combined. Pour evenly over partially baked crust.</p>
 <p>STIR together reserved crumb mixture and chocolate chips. Sprinkle evenly over peanut butter layer.</p>
 <p>BAKE an additional 15 minutes. Cool. Cut into bars.</p>',
-                    'image' => '22.jpg',
-                    'category_id' => 1,
-                    'servings' => 12,
-                    'prep_time' => 30,
-                    'cook_time' => 30,
+                    'modified_by_id' => 2,
                     'personal' => 0,
-                    'views' => 113,
-                    'source' => 'Recipe Box',
+                    'prep_time_hours' => 30,
+                    'prep_time_minutes' => NULL,
                     'private_notes' => '',
                     'public_notes' => '',
-                    'user_id' => 2,
-                    'modified_by_id' => 2,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2016-10-02 11:49:30',
                     'published_at' => '2019-02-28 22:53:42',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:49:30',
+                    'servings' => 12,
+                    'source' => 'Recipe Box',
+                    'title' => 'Chocolate Peanut Butter Bars',
                     'updated_at' => '2019-03-01 03:53:42',
+                    'user_id' => 2,
+                    'views' => 118,
                 ),
                 20 => 
                 array (
+                    'category_id' => 39,
+                    'cook_time_hours' => 3,
+                    'cook_time_minutes' => 0,
+                    'created_at' => '2016-10-02 18:52:19',
+                    'deleted_at' => NULL,
                     'id' => 23,
-                    'title' => 'Baked Soup',
+                    'image' => '23.jpeg',
                     'ingredients' => '<p>2 pounds of sausage</p>
 <p>3 cups of chopped carrots</p>
 <p>3 cups of chopped celery</p>
@@ -735,35 +782,37 @@ class RecipesTableSeeder extends Seeder
 <p>1 tablespoon of basil</p>
 <p>8-10 cups of chicken or beef stock ( I use 1/2 and 1/2)</p>
 <p>Parmesan cheese to grate on top at serving</p>',
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2020-11-06 15:30:30',
                     'methodology' => '<p>Brown sausage and chop into chunks.</p>
 <p>Place in large roasting pan.</p>
 <p>Cook onion and garlic in the same pan as sausage until transparent and add to roasting pan.</p>
 <p>Add all other ingredients, cover and bake in oven at 350 degrees for 3-4 hours.</p>
 <p>About half hour before serving add 1 1/2 cups of el dente cooked pasta (I like fusilli).</p>
 <p>Top with cheese and enjoy!</p>',
-                    'image' => '23.jpeg',
-                    'category_id' => 39,
-                    'servings' => 10,
-                    'prep_time' => 30,
-                    'cook_time' => 180,
+                    'modified_by_id' => 3,
                     'personal' => 0,
-                    'views' => 116,
-                    'source' => 'Recipe Box',
+                    'prep_time_hours' => 0,
+                    'prep_time_minutes' => 30,
                     'private_notes' => NULL,
                     'public_notes' => NULL,
-                    'user_id' => 3,
-                    'modified_by_id' => 3,
-                    'last_viewed_by_id' => 3,
-                    'last_viewed_on' => '2020-07-07 22:34:12',
                     'published_at' => '2020-07-07 22:40:26',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:52:19',
-                    'updated_at' => '2020-07-08 02:40:26',
+                    'servings' => 10,
+                    'source' => 'Recipe Box',
+                    'title' => 'Baked Soup',
+                    'updated_at' => '2021-01-22 18:37:03',
+                    'user_id' => 3,
+                    'views' => 0,
                 ),
                 21 => 
                 array (
+                    'category_id' => 71,
+                    'cook_time_hours' => 0,
+                    'cook_time_minutes' => 3,
+                    'created_at' => '2016-10-02 18:55:51',
+                    'deleted_at' => NULL,
                     'id' => 24,
-                    'title' => 'Chocolate Banana Crepes',
+                    'image' => '24.jpg',
                     'ingredients' => '<p>1 cup of all-purpose flour</p>
 <p>3 tablespoon of unsweetened dutch cocoa powder</p>
 <p>1 tablespoon of powdered sugar</p>
@@ -775,6 +824,8 @@ class RecipesTableSeeder extends Seeder
 <p>Whipped cream (homemade or store-bought)</p>
 <p>Chocolate chips, for sprinkling (optional)</p>
 <p>Chocolate syrup, for drizzling</p>',
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2020-11-06 15:38:22',
                 'methodology' => '<p>In a large bowl, whisk together flour, milk, cocoa powder, powdered sugar, eggs and oil until smooth. (You can also do this with an electric mixer.)</p>
 <p>Heat a large nonstick pan on medium-low heat, and grease with cooking spray.</p>
 <p>Pour 1/4 cup crepe mixture into pan, immediately the pan so that the batter spreads out thin into a large circle.</p>
@@ -785,29 +836,29 @@ class RecipesTableSeeder extends Seeder
 <p>Top with sliced bananas and fold each edge of crepe over filling.</p>
 <p>Drizzle with chocolate syrup and any additional toppings.</p>
 <p>Serve warm.</p>',
-                    'image' => '24.jpg',
-                    'category_id' => 5,
-                    'servings' => 12,
-                    'prep_time' => 30,
-                    'cook_time' => 0,
+                    'modified_by_id' => 3,
                     'personal' => 0,
-                    'views' => 58,
-                    'source' => 'Recipe Box',
+                    'prep_time_hours' => 0,
+                    'prep_time_minutes' => 30,
                     'private_notes' => NULL,
                     'public_notes' => '<p>This batter will also keep in the refrigerator for up to a day.</p>',
-                    'user_id' => 3,
-                    'modified_by_id' => 3,
-                    'last_viewed_by_id' => 3,
-                    'last_viewed_on' => '2020-07-07 22:39:59',
                     'published_at' => '2020-07-07 22:40:28',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:55:51',
-                    'updated_at' => '2020-07-08 02:40:28',
+                    'servings' => 12,
+                    'source' => 'Recipe Box',
+                    'title' => 'Chocolate Banana Crepes',
+                    'updated_at' => '2020-11-06 15:38:22',
+                    'user_id' => 3,
+                    'views' => 64,
                 ),
                 22 => 
                 array (
+                    'category_id' => 5,
+                    'cook_time_hours' => 0,
+                    'cook_time_minutes' => 45,
+                    'created_at' => '2016-10-02 18:58:10',
+                    'deleted_at' => NULL,
                     'id' => 25,
-                    'title' => 'Strawberry Cream Cheese Cobbler',
+                    'image' => '25.jpg',
                 'ingredients' => '<p>1 stick (1/2 cup) of butter</p>
 <p>1 egg, lightly beaten</p>
 <p>1 cup of milk</p>
@@ -818,32 +869,34 @@ class RecipesTableSeeder extends Seeder
 <p>2 quarts of whole strawberries, capped and washed</p>
 <p>4 ounces of cream cheese, cut in small pieces</p>
 <p>Vanilla ice cream for serving, optional</p>',
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2020-11-06 15:46:04',
                     'methodology' => '<p>Preheat oven to 350 F. Melt butter and pour into a 9x13-inch glass baking dish. In a small bowl, mix together the egg, milk, flour, sugar, baking powder and salt. Pour directly over the butter in the baking dish, but do not stir.</p>
 <p>Add the strawberries, arranging in a single layer as much as possible. Sprinkle cream cheese pieces over strawberries. Place in preheated oven and bake for 45 minutes, or until top is golden brown and edges are bubbling. (Crust rises up and around the fruit, but fruit will still peek out of top.)</p>
 <p>Serve hot out of the oven with choice of topping, if desired.</p>',
-                    'image' => '25.jpg',
-                    'category_id' => 1,
-                    'servings' => 10,
-                    'prep_time' => 30,
-                    'cook_time' => 45,
+                    'modified_by_id' => 3,
                     'personal' => 0,
-                    'views' => 14,
-                    'source' => 'Company\'s Coming',
-                    'private_notes' => '',
-                    'public_notes' => '',
-                    'user_id' => 3,
-                    'modified_by_id' => 2,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2016-10-02 11:58:10',
+                    'prep_time_hours' => 0,
+                    'prep_time_minutes' => 30,
+                    'private_notes' => NULL,
+                    'public_notes' => NULL,
                     'published_at' => '2019-02-13 14:13:21',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:58:10',
-                    'updated_at' => '2019-03-01 03:53:51',
+                    'servings' => 10,
+                    'source' => 'Company\'s Coming',
+                    'title' => 'Strawberry Cream Cheese Cobbler',
+                    'updated_at' => '2020-11-06 15:46:04',
+                    'user_id' => 3,
+                    'views' => 15,
                 ),
                 23 => 
                 array (
+                    'category_id' => 8,
+                    'cook_time_hours' => 0,
+                    'cook_time_minutes' => 40,
+                    'created_at' => '2016-10-02 18:59:47',
+                    'deleted_at' => NULL,
                     'id' => 26,
-                    'title' => 'Molasses Cake',
+                    'image' => '26.jpg',
                     'ingredients' => '<p>2 cups of molasses</p>
 <p>2 tbsp of lard or shortening</p>
 <p>1/2 tsp of baking soda</p>
@@ -851,33 +904,35 @@ class RecipesTableSeeder extends Seeder
 <p>3 cups of all purpose flour</p>
 <p>1 cup of boiling water</p>
 <p>1/2 tsp of salt</p>',
+                    'last_viewed_by_id' => 1,
+                    'last_viewed_on' => '2020-10-16 14:06:39',
                     'methodology' => '<p>Mix baking soda and boiling water.</p>
 <p>Add the rest of the ingredients.</p>
 <p>Grease and flour pan.</p>
 <p>Bake at 350\'\'F for 40 minutes.</p>',
-                    'image' => '26.jpg',
-                    'category_id' => 8,
-                    'servings' => 10,
-                    'prep_time' => 50,
-                    'cook_time' => 40,
+                    'modified_by_id' => 1,
                     'personal' => 0,
-                    'views' => 73,
-                    'source' => 'Mom\'s recipe book',
-                    'private_notes' => '',
-                    'public_notes' => '',
-                    'user_id' => 3,
-                    'modified_by_id' => 2,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2016-10-02 11:59:47',
+                    'prep_time_hours' => 0,
+                    'prep_time_minutes' => 50,
+                    'private_notes' => NULL,
+                    'public_notes' => NULL,
                     'published_at' => '2019-02-13 14:13:21',
-                    'deleted_at' => NULL,
-                    'created_at' => '2016-10-02 18:59:47',
-                    'updated_at' => '2016-10-02 18:59:47',
+                    'servings' => 10,
+                    'source' => 'Mom\'s recipe book',
+                    'title' => 'Molasses Cake',
+                    'updated_at' => '2020-10-16 14:06:39',
+                    'user_id' => 3,
+                    'views' => 75,
                 ),
                 24 => 
                 array (
+                    'category_id' => 9,
+                    'cook_time_hours' => 20,
+                    'cook_time_minutes' => NULL,
+                    'created_at' => '2019-03-05 17:31:22',
+                    'deleted_at' => NULL,
                     'id' => 27,
-                    'title' => 'Butter Tarts',
+                    'image' => '27.jpg',
                     'ingredients' => '<p>2 eggs</p>
 <p>2 cups of brown sugar</p>
 <p>2 teaspoons of vinegar</p>
@@ -885,124 +940,132 @@ class RecipesTableSeeder extends Seeder
 <p>1/2 cup of melted butter</p>
 <p>2 cups of raisins</p>
 <p>1 cup of chopped walnuts</p>',
+                    'last_viewed_by_id' => 2,
+                    'last_viewed_on' => '2019-05-16 14:29:48',
                     'methodology' => '<p>Beat eggs until yolks and whites are well blended not frothy.</p>
 <p>Beat in brown sugar, vanilla and vinegar.</p>
 <p>Stir in melted butter, raisins and walnuts.</p>
 <p>Bake at 350 degrees about 15 minutes in unbaked pastry shells (about 1 tablespoon in each)</p>',
-                    'image' => '27.jpg',
-                    'category_id' => 9,
-                    'servings' => 36,
-                    'prep_time' => 30,
-                    'cook_time' => 20,
+                    'modified_by_id' => 2,
                     'personal' => 0,
-                    'views' => 317,
-                    'source' => 'Recipe Box',
+                    'prep_time_hours' => 30,
+                    'prep_time_minutes' => NULL,
                     'private_notes' => NULL,
                     'public_notes' => '<p>Old family recipe</p>',
-                    'user_id' => 2,
-                    'modified_by_id' => 2,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2019-05-16 14:29:48',
                     'published_at' => '2019-05-16 14:18:05',
-                    'deleted_at' => NULL,
-                    'created_at' => '2019-03-05 17:31:22',
-                    'updated_at' => '2019-05-16 18:29:48',
+                    'servings' => 36,
+                    'source' => 'Recipe Box',
+                    'title' => 'Butter Tarts',
+                    'updated_at' => '2021-01-22 18:37:03',
+                    'user_id' => 2,
+                    'views' => 0,
                 ),
                 25 => 
                 array (
+                    'category_id' => 8,
+                    'cook_time_hours' => 30,
+                    'cook_time_minutes' => NULL,
+                    'created_at' => '2019-03-05 17:33:14',
+                    'deleted_at' => NULL,
                     'id' => 28,
-                    'title' => 'Pate Chomeur',
+                    'image' => '28.jpg',
                     'ingredients' => '<p>1 cup of white sugar</p>
 <p>1 cup of milk</p>
 <p>2 cups of flour</p>
 <p>2 tsps of baking powder</p>
 <p>2 1/2 cups of brown sugar</p>
 <p>vanilla</p>',
+                    'last_viewed_by_id' => 2,
+                    'last_viewed_on' => '2019-03-05 12:33:14',
                     'methodology' => '<p>Mix white sugar, milk, flour and baking powder.</p>
 <p>Pour mixture in ungreased 6 x 9 pan.</p>
 <p>In sperate pot, boil brown sugar, water and vanilla.</p>
 <p>Pour over dough and bake at 350 degrees F for about 30 minutes</p>',
-                    'image' => '28.jpg',
-                    'category_id' => 8,
-                    'servings' => 10,
-                    'prep_time' => 20,
-                    'cook_time' => 30,
+                    'modified_by_id' => 2,
                     'personal' => 0,
-                    'views' => 39,
-                    'source' => 'My mom\'s recipe book',
+                    'prep_time_hours' => 20,
+                    'prep_time_minutes' => NULL,
                     'private_notes' => NULL,
                     'public_notes' => NULL,
-                    'user_id' => 2,
-                    'modified_by_id' => 2,
-                    'last_viewed_by_id' => 2,
-                    'last_viewed_on' => '2019-03-05 12:33:14',
                     'published_at' => '2019-03-01 12:32:00',
-                    'deleted_at' => NULL,
-                    'created_at' => '2019-03-05 17:33:14',
+                    'servings' => 10,
+                    'source' => 'My mom\'s recipe book',
+                    'title' => 'Pate Chomeur',
                     'updated_at' => '2019-03-05 17:33:14',
+                    'user_id' => 2,
+                    'views' => 42,
                 ),
                 26 => 
                 array (
-                    'id' => 29,
-                    'title' => 'French Toast Bake',
-                    'ingredients' => '<p>* 1/2 cup melted butter 1 stick<br />* 1 cup brown sugar<br />* 1 loaf Texas toast<br />* 4 eggs<br />* 1 1/2 cup milk<br />* 1 tsp vanilla<br />* Powdered sugar for sprinkling</p>',
-                'methodology' => '<p>1. Melt butter in microwave &amp; add brown sugar&hellip;.stir till mixed.<br />2. Pour butter/sugar mix into bottom of 9 x 13 pan&hellip;.spread around<br />3. Beat eggs, milk, &amp; vanilla<br />4. Lay single layer of Texas Toast in pan<br />5. Spoon 1/2 of egg mixture on bread layer<br />6. Add 2nd layer of Texas Toast<br />7. Spoon on remaining egg mixture<br />8. Cover &amp; chill in fridge overnight<br />9. Bake at 350 for 45 minutes (covered for the first 30 minutes)<br />10. Sprinkle with powdered sugar<br />11. Serve with warm maple syrup</p>',
-                    'image' => '1592248259.png',
                     'category_id' => 71,
-                    'servings' => 12,
-                    'prep_time' => 20,
-                    'cook_time' => 45,
+                    'cook_time_hours' => 0,
+                    'cook_time_minutes' => 45,
+                    'created_at' => '2020-06-15 19:08:57',
+                    'deleted_at' => NULL,
+                    'id' => 29,
+                    'image' => '1592248259.png',
+                    'ingredients' => '<p>* 1/2 cup melted butter 1 stick<br />* 1 cup brown sugar<br />* 1 loaf Texas toast<br />* 4 eggs<br />* 1 1/2 cup milk<br />* 1 tsp vanilla<br />* Powdered sugar for sprinkling</p>',
+                    'last_viewed_by_id' => 3,
+                    'last_viewed_on' => '2020-11-06 15:41:56',
+                'methodology' => '<p>1. Melt butter in microwave &amp; add brown sugar&hellip;.stir till mixed.<br />2. Pour butter/sugar mix into bottom of 9 x 13 pan&hellip;.spread around<br />3. Beat eggs, milk, &amp; vanilla<br />4. Lay single layer of Texas Toast in pan<br />5. Spoon 1/2 of egg mixture on bread layer<br />6. Add 2nd layer of Texas Toast<br />7. Spoon on remaining egg mixture<br />8. Cover &amp; chill in fridge overnight<br />9. Bake at 350 for 45 minutes (covered for the first 30 minutes)<br />10. Sprinkle with powdered sugar<br />11. Serve with warm maple syrup</p>',
+                    'modified_by_id' => 3,
                     'personal' => 0,
-                    'views' => 8,
-                    'source' => 'Facebook',
+                    'prep_time_hours' => 0,
+                    'prep_time_minutes' => 20,
                     'private_notes' => NULL,
                     'public_notes' => '<p>Servings are based one one piece of toast each</p>',
-                    'user_id' => 3,
-                    'modified_by_id' => 3,
-                    'last_viewed_by_id' => 3,
-                    'last_viewed_on' => '2020-06-15 15:54:46',
                     'published_at' => '2020-06-15 15:55:22',
-                    'deleted_at' => NULL,
-                    'created_at' => '2020-06-15 19:08:57',
-                    'updated_at' => '2020-06-15 19:55:22',
+                    'servings' => 12,
+                    'source' => 'Facebook',
+                    'title' => 'French Toast Bake',
+                    'updated_at' => '2020-11-06 15:41:56',
+                    'user_id' => 3,
+                    'views' => 10,
                 ),
                 27 => 
                 array (
+                    'category_id' => 73,
+                    'cook_time_hours' => 0,
+                    'cook_time_minutes' => 5,
+                    'created_at' => '2020-06-15 19:34:31',
+                    'deleted_at' => NULL,
                     'id' => 30,
-                    'title' => 'Five Minute Nacho Cheese Sauce',
+                    'image' => '1592254465.jpeg',
                     'ingredients' => '<p>2 Tbsp butter</p>
 <p>2 Tbsp flour</p>
 <p>1 cup whole milk</p>
 <p>6 oz. medium cheddar, shredded (about 1.5 cups</p>
 <p>1/4 tsp salt</p>
 <p>1/4 tsp chili powder</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-11-06 15:40:45',
                         'methodology' => '<p>Add the butter and flour to a small sauce pot. Heat and whisk the butter and flour together until they become bubbly and foamy. Continue to cook and whisk the bubbly mixture for about 60 seconds.</p>
 <p>Whisk the milk into the flour and butter mixture. Turn the heat up slightly and allow the milk to come to a simmer while whisking. When it reaches a simmer, the mixture will thicken. Once it\'s thick enough to coat a spoon, turn off the heat.</p>
 <p>Stir in the shredded cheddar, one handful at a time, until melted into the sauce. If needed, place the pot over a low flame to help the cheese melt. Do not over heat the cheese sauce.</p>
 <p>Once all the cheese is melted into the sauce, stir in the salt and chili powder. Taste and adjust the seasoning as needed. If the sauce becomes too thick, simply whisk in an additional splash of milk.</p>',
-                        'image' => '1592254465.jpeg',
-                        'category_id' => 73,
-                        'servings' => 0,
-                        'prep_time' => 5,
-                        'cook_time' => 5,
+                        'modified_by_id' => 3,
                         'personal' => 0,
-                        'views' => 9,
-                        'source' => NULL,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 0,
                         'private_notes' => NULL,
                         'public_notes' => '<p>The servings size is 1/4 cup</p>',
-                        'user_id' => 3,
-                        'modified_by_id' => 3,
-                        'last_viewed_by_id' => 3,
-                        'last_viewed_on' => '2020-06-15 16:54:25',
                         'published_at' => '2020-06-15 16:55:04',
-                        'deleted_at' => NULL,
-                        'created_at' => '2020-06-15 19:34:31',
-                        'updated_at' => '2020-06-15 20:55:04',
+                        'servings' => 0,
+                        'source' => NULL,
+                        'title' => 'Five Minute Nacho Cheese Sauce',
+                        'updated_at' => '2020-11-06 15:40:45',
+                        'user_id' => 3,
+                        'views' => 22,
                     ),
                     28 => 
                     array (
+                        'category_id' => 9,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 25,
+                        'created_at' => '2020-06-15 19:42:52',
+                        'deleted_at' => NULL,
                         'id' => 31,
-                        'title' => 'Chewy Peanut Butter Brownies',
+                        'image' => '1592250172.jpg',
                         'ingredients' => '<p>1/2 cup of peanut butter</p>
 <p>1/3 cup of margarine, softened</p>
 <p>2/3 cup of white sugar</p>
@@ -1013,6 +1076,8 @@ class RecipesTableSeeder extends Seeder
 <p>1 tsp of baking powder</p>
 <p>1/4 teaspoon salt</p>
 <p>&nbsp;</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-11-06 15:37:06',
                     'methodology' => '<p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Preheat oven to 350 degrees F (175 degrees C ). Grease a 9x9 inch baking pan.</span></span></p>
 <p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">In a medium bowl, cream together peanut butter and margarine. </span></span></p>
 <p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Gradually blend in the brown sugar, white sugar, eggs, and vanilla; mix until fluffy. </span></span></p>
@@ -1020,29 +1085,29 @@ class RecipesTableSeeder extends Seeder
 <p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Bake for 30 to 35 minutes in preheated oven, or until the top springs back when touched. </span></span></p>
 <p><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Cool, and cut into 16 squares.</span></span></p>
 <p>&nbsp;</p>',
-                        'image' => '1592250172.jpg',
-                        'category_id' => 9,
-                        'servings' => 16,
-                        'prep_time' => 15,
-                        'cook_time' => 25,
+                        'modified_by_id' => 3,
                         'personal' => 0,
-                        'views' => 8,
-                        'source' => NULL,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 15,
                         'private_notes' => NULL,
                         'public_notes' => '<p align="left"><span style="font-size: large;"><span style="font-family: Source Sans Pro, Times, serif;">Great with chocolate frosting!</span></span></p>',
-                        'user_id' => 3,
-                        'modified_by_id' => 3,
-                        'last_viewed_by_id' => 3,
-                        'last_viewed_on' => '2020-07-07 22:38:40',
                         'published_at' => '2020-07-07 22:40:30',
-                        'deleted_at' => NULL,
-                        'created_at' => '2020-06-15 19:42:52',
-                        'updated_at' => '2020-07-08 02:40:30',
+                        'servings' => 16,
+                        'source' => NULL,
+                        'title' => 'Chewy Peanut Butter Brownies',
+                        'updated_at' => '2021-01-22 18:37:03',
+                        'user_id' => 3,
+                        'views' => 0,
                     ),
                     29 => 
                     array (
+                        'category_id' => 8,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => NULL,
+                        'created_at' => '2020-06-15 20:43:13',
+                        'deleted_at' => '2020-10-16 22:07:19',
                         'id' => 32,
-                        'title' => 'Crispy Rice Cereal Chocolate Cheesecake',
+                        'image' => '1592253793.png',
                         'ingredients' => '<p>unsalted butter, 1/2 stick</p>
 <p>mini marshmallows (285 g)</p>
 <p>crispy rice cereal (180g)</p>
@@ -1053,60 +1118,64 @@ class RecipesTableSeeder extends Seeder
 <p>vanilla</p>
 <p>whipped cream, divided (150g)</p>
 <p>choclate bar for shaving (90g)</p>',
-                    'methodology' => '<p>1. In a large saucepan over medium heat, melt the butter.<br />2. Add the marshmallows and stir until melted. Add the crispy rice cereal and stir to coat.<br />3. While the crispy rice cereal mix is still warm, transfer them to a greased 10-inch (25 cm) springform pan.<br />4. Using a greased measuring cup, press down into the cereal to form to the pan. Press the edges against the springform pan to create walls. Set aside.<br />5. Place the chocolate in a small microwave-safe bowl and pour the heavy cream on top. Microwave in 30-second intervals, stirring until melted, about 1 minute.<br />6. In a large bowl, mix the cream cheese, sugar, and vanilla until smooth.<br />7. Pour in the melted chocolate and stir to incorporate.<br />8. Add 1&frac12; cups (90 g) of whipped cream to the chocolate mixture and fold with a spatula until combined.<br />9. Pour the cheesecake mixture into the crispy rice base and smooth the top with a spatula.<br />10. Refrigerate for 3-4 hours or overnight, until the cheesecake is set. Release the springform.<br />11. Put the remaining cup of whipped cream in a piping bag fitted with a star tip and decorate the top of the cheesecake.<br />12. Use a vegetable peeler to shave the chocolate into the middle of the cheesecake.<br />13. Slice and serve.<br />14. Enjoy!</p>',
-                        'image' => '1592253793.png',
-                        'category_id' => 8,
-                        'servings' => 10,
-                        'prep_time' => 180,
-                        'cook_time' => 0,
-                        'personal' => 0,
-                        'views' => 7,
-                        'source' => NULL,
-                        'private_notes' => NULL,
-                        'public_notes' => NULL,
-                        'user_id' => 3,
-                        'modified_by_id' => 3,
                         'last_viewed_by_id' => 3,
                         'last_viewed_on' => '2020-06-15 16:43:13',
+                    'methodology' => '<p>1. In a large saucepan over medium heat, melt the butter.<br />2. Add the marshmallows and stir until melted. Add the crispy rice cereal and stir to coat.<br />3. While the crispy rice cereal mix is still warm, transfer them to a greased 10-inch (25 cm) springform pan.<br />4. Using a greased measuring cup, press down into the cereal to form to the pan. Press the edges against the springform pan to create walls. Set aside.<br />5. Place the chocolate in a small microwave-safe bowl and pour the heavy cream on top. Microwave in 30-second intervals, stirring until melted, about 1 minute.<br />6. In a large bowl, mix the cream cheese, sugar, and vanilla until smooth.<br />7. Pour in the melted chocolate and stir to incorporate.<br />8. Add 1&frac12; cups (90 g) of whipped cream to the chocolate mixture and fold with a spatula until combined.<br />9. Pour the cheesecake mixture into the crispy rice base and smooth the top with a spatula.<br />10. Refrigerate for 3-4 hours or overnight, until the cheesecake is set. Release the springform.<br />11. Put the remaining cup of whipped cream in a piping bag fitted with a star tip and decorate the top of the cheesecake.<br />12. Use a vegetable peeler to shave the chocolate into the middle of the cheesecake.<br />13. Slice and serve.<br />14. Enjoy!</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 180,
+                        'prep_time_minutes' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
                         'published_at' => '2020-06-15 16:43:32',
-                        'deleted_at' => NULL,
-                        'created_at' => '2020-06-15 20:43:13',
-                        'updated_at' => '2020-06-15 20:43:32',
+                        'servings' => 10,
+                        'source' => NULL,
+                        'title' => 'Crispy Rice Cereal Chocolate Cheesecake',
+                        'updated_at' => '2020-10-16 22:07:19',
+                        'user_id' => 3,
+                        'views' => 11,
                     ),
                     30 => 
                     array (
+                        'category_id' => 8,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 30,
+                        'created_at' => '2020-06-15 20:50:17',
+                        'deleted_at' => NULL,
                         'id' => 33,
-                        'title' => 'Snickerdoodle Cheesecake',
+                        'image' => '1592254727.jpeg',
                         'ingredients' => '<p>1 log refrigerated sugar cookie dough<br />3 tbsp. cinnamon sugar, plus more for garnish<br />3 8-oz. blocks cream cheese, softened<br />1 c. granulated sugar<br />1/4 c. sour cream<br />3 large eggs<br />2 tsp. pure vanilla extract<br />1/4 tsp. ground cinnamon<br />pinch of kosher salt<br />vanilla frosting</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-11-06 15:54:57',
                         'methodology' => '<p>Preheat oven to 350&deg; and grease an 8&rdquo; springform pan with cooking spray.</p>
 <p>In a large bowl, combine cookie dough and cinnamon sugar and stir until<br />evenly incorporated. Press about half of the dough into the bottom of the<br />springform pan. (Reserve extra dough to bake as cookies.)</p>
-<p>In another large bowl, beat the cream cheese until smooth. Add sugar and sour<br />cream and beat until light and uffy. Add eggs one at a time, beating well<br />between each addition. Stir in vanilla, cinnamon and salt. Pour batter over the<br />cookie dough crust.</p>
+<p>In another large bowl, beat the cream cheese until smooth. Add sugar and sour<br />cream and beat until light and fluffy. Add eggs one at a time, beating well<br />between each addition. Stir in vanilla, cinnamon and salt. Pour batter over the<br />cookie dough crust.</p>
 <p>Bake until slightly jiggly in the center, about 1 hour. Turn off the oven and open<br />the door slightly to let the cheesecake cool for about 1 hour. Then refrigerate<br />until completely cool, at least 4 hours and up to overnight.</p>
-<p>Roll remaining dough into small balls (about a tablespoon) then atten slightly.<br />Place on baking sheet and bake until starting to turn golden around the edges,<br />about 10 minutes. Transfer to a cooling rack to cool completely.</p>
+<p>Roll remaining dough into small balls (about a tablespoon) then flatten slightly.<br />Place on baking sheet and bake until starting to turn golden around the edges,<br />about 10 minutes. Transfer to a cooling rack to cool completely.</p>
 <p>Before serving, sprinkle the top of the cheesecake with more cinnamon sugar.<br />Using a large star tip, pipe frosting around the edges of the cheesecake then<br />garnish with snickerdoodle cookies.</p>',
-                        'image' => '1592254727.jpeg',
-                        'category_id' => 8,
-                        'servings' => 10,
-                        'prep_time' => 20,
-                        'cook_time' => 30,
+                        'modified_by_id' => 3,
                         'personal' => 0,
-                        'views' => 7,
-                        'source' => NULL,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 20,
                         'private_notes' => NULL,
                         'public_notes' => NULL,
-                        'user_id' => 3,
-                        'modified_by_id' => 3,
-                        'last_viewed_by_id' => 3,
-                        'last_viewed_on' => '2020-06-15 16:58:47',
                         'published_at' => '2020-06-15 16:59:50',
-                        'deleted_at' => NULL,
-                        'created_at' => '2020-06-15 20:50:17',
-                        'updated_at' => '2020-06-15 20:59:50',
+                        'servings' => 10,
+                        'source' => NULL,
+                        'title' => 'Snickerdoodle Cheesecake',
+                        'updated_at' => '2020-11-06 15:54:57',
+                        'user_id' => 3,
+                        'views' => 8,
                     ),
                     31 => 
                     array (
+                        'category_id' => 8,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 35,
+                        'created_at' => '2020-06-15 21:38:55',
+                        'deleted_at' => NULL,
                         'id' => 34,
-                        'title' => 'Apple Caramel Cheesecake',
+                        'image' => '1592257388.jpeg',
                         'ingredients' => '<p><strong>Crust:</strong></p>
 <p>2 cups graham cracker crumbs</p>
 <p>⅛ cup brown sugar</p>
@@ -1127,6 +1196,8 @@ class RecipesTableSeeder extends Seeder
 <p>1 teaspoon cinnamon</p>
 <p>2 tablespoons butter, melted</p>
 <p>Caramel sauce</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-11-06 15:36:07',
                         'methodology' => '<p>1. Preheat oven to 350&deg;F/180&deg;C.</p>
 <p>2. In a bowl, mix the crust ingredients. Press into the bottom of a greased 8-inch springform pan. Bake for 5 minutes.</p>
 <p>3. In another bowl, mix all the filling ingredients except the apples. Spread over the graham cracker crust, then layer the apple slices on top.</p>
@@ -1134,24 +1205,387 @@ class RecipesTableSeeder extends Seeder
 <p>5. Drizzle on caramel sauce.</p>
 <p>6. Enjoy!</p>
 <p>&nbsp;</p>',
-                        'image' => '1592257388.jpeg',
-                        'category_id' => 8,
-                        'servings' => 12,
-                        'prep_time' => 0,
-                        'cook_time' => 35,
+                        'modified_by_id' => 3,
                         'personal' => 0,
-                        'views' => 9,
-                        'source' => NULL,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 0,
                         'private_notes' => NULL,
                         'public_notes' => '<p>I have made this cheesecake recently and it tastes amazing. The texture is nice and it was not too sweet. All flavors blended very well. It is super easy to make. I did mine in an 8" x 8" glass pan as I did not have a springform pan.</p>',
-                        'user_id' => 3,
-                        'modified_by_id' => 3,
-                        'last_viewed_by_id' => 3,
-                        'last_viewed_on' => '2020-07-07 22:31:27',
                         'published_at' => '2020-07-07 22:31:38',
+                        'servings' => NULL,
+                        'source' => NULL,
+                        'title' => 'Apple Caramel Cheesecake',
+                        'updated_at' => '2021-01-22 18:35:30',
+                        'user_id' => 3,
+                        'views' => 0,
+                    ),
+                    32 => 
+                    array (
+                        'category_id' => 5,
+                        'cook_time_hours' => 4,
+                        'cook_time_minutes' => 5,
+                        'created_at' => '2020-10-16 12:36:19',
                         'deleted_at' => NULL,
-                        'created_at' => '2020-06-15 21:38:55',
-                        'updated_at' => '2020-07-08 02:31:38',
+                        'id' => 35,
+                        'image' => '1602882531.jpg',
+                        'ingredients' => '<p>qqqq</p>',
+                        'last_viewed_by_id' => 1,
+                        'last_viewed_on' => '2020-10-16 17:08:51',
+                        'methodology' => '<p>wwww</p>',
+                        'modified_by_id' => 1,
+                        'personal' => 0,
+                        'prep_time_hours' => 2,
+                        'prep_time_minutes' => 3,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 12:35:00',
+                        'servings' => 1,
+                        'source' => NULL,
+                        'title' => 'qwertyaaaaaa',
+                        'updated_at' => '2020-11-06 15:42:21',
+                        'user_id' => 1,
+                        'views' => 1,
+                    ),
+                    33 => 
+                    array (
+                        'category_id' => 5,
+                        'cook_time_hours' => 3,
+                        'cook_time_minutes' => 3,
+                        'created_at' => '2020-10-16 14:03:56',
+                        'deleted_at' => NULL,
+                        'id' => 36,
+                        'image' => NULL,
+                        'ingredients' => '<p>dasdsad</p>',
+                        'last_viewed_by_id' => 1,
+                        'last_viewed_on' => '2020-10-16 14:03:56',
+                        'methodology' => '<p>sadsadsad</p>',
+                        'modified_by_id' => 1,
+                        'personal' => 0,
+                        'prep_time_hours' => 2,
+                        'prep_time_minutes' => 2,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => NULL,
+                        'servings' => 1,
+                        'source' => NULL,
+                        'title' => 'sdsadsd',
+                        'updated_at' => '2021-01-25 21:32:58',
+                        'user_id' => 1,
+                        'views' => 0,
+                    ),
+                    34 => 
+                    array (
+                        'category_id' => 5,
+                        'cook_time_hours' => 2,
+                        'cook_time_minutes' => 3,
+                        'created_at' => '2020-10-16 15:52:10',
+                        'deleted_at' => NULL,
+                        'id' => 37,
+                        'image' => NULL,
+                        'ingredients' => '<p>wqwq</p>',
+                        'last_viewed_by_id' => 1,
+                        'last_viewed_on' => '2020-10-16 15:52:10',
+                        'methodology' => '<p>wqwqwq</p>',
+                        'modified_by_id' => 1,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 1,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => NULL,
+                        'servings' => 0,
+                        'source' => '4',
+                        'title' => 'wqwqwq',
+                        'updated_at' => '2021-01-25 21:32:58',
+                        'user_id' => 1,
+                        'views' => 0,
+                    ),
+                    35 => 
+                    array (
+                        'category_id' => 8,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 55,
+                        'created_at' => '2020-10-16 21:45:44',
+                        'deleted_at' => NULL,
+                        'id' => 38,
+                        'image' => '1602899144.jpeg',
+                    'ingredients' => '<p>CRUST<br />2 cups (168g) graham crackers, crumbled fine<br />2 tablespoons butter, melted<br />FILLING<br />1 1/2 cups canned apple pie filling<br />2 (8-ounce) packages cream cheese, room temperature<br />1/2 cup (100g) sugar<br />1/4 teaspoon vanilla extract<br />2 eggs<br />TOPPING<br />1/4 cup caramel topping<br />1/2 cup canned apple pie filling</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-10-16 21:45:44',
+                        'methodology' => '<p>Preheat the oven to 350&deg; F.</p>
+<p>CRUST<br />In a medium bowl, mix together crushed graham crackers and melted butter until all of the<br />crackers are fully coated.<br />Pour cracker mixture into a prepared 7" springform pan.</p>
+<p>FILLING<br />Spoon apple pie filling into the crust and carefully spread.<br /><br />In a large bowl, whip the cream cheese until fluffy. Add the sugar, vanilla, and eggs and beat until smooth, a few seconds. Pour this over the pie filling.</p>
+<p>Bake until the center of the cake is set, about 50-55 minutes.<br />Cool to room temperature.</p>
+<p>TOPPING<br />In a small saucepan over medium heat add apple pie filling and caramel topping. Heat over low<br />heat about 1 minute.</p>
+<p>Spoon the apple-caramel mixture over the top of the cheesecake and spread evenly.</p>
+<p>Refrigerate the cake until ready to serve</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 10,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 21:45:00',
+                        'servings' => 8,
+                        'source' => 'i am baker',
+                        'title' => 'Caramel Apple Cheesecake',
+                        'updated_at' => '2021-01-22 18:37:03',
+                        'user_id' => 3,
+                        'views' => 0,
+                    ),
+                    36 => 
+                    array (
+                        'category_id' => 8,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 0,
+                        'created_at' => '2020-10-16 21:55:29',
+                        'deleted_at' => NULL,
+                        'id' => 39,
+                        'image' => '1602899729.png',
+                    'ingredients' => '<p>unsalted butter, 1/2 stick<br />mini marshmallows(285 g)<br />crispy rice cereal(180 g)<br />semisweet chocolate(225 g)<br />heavy cream(60 mL)<br />cream cheese, softened(455 g)<br />sugar(100 g)<br />vanilla<br />whipped cream, divided(150 g)<br />chocolate bar, for shaving(90 g)</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-10-16 21:55:29',
+                    'methodology' => '<p>1. In a large saucepan over medium heat, melt the butter.<br />2. Add the marshmallows and stir until melted. Add the crispy rice cereal and stir to coat.<br />3. While the crispy rice cereal mix is still warm, transfer them to a greased 10-inch (25 cm) springform pan.<br />4. Using a greased measuring cup, press down into the cereal to form to the pan. Press the edges against the springform pan to create walls. Set aside.<br />5. Place the chocolate in a small microwave-safe bowl and pour the heavy cream on top. Microwave in 30-second intervals, stirring until melted, about 1 minute.<br />6. In a large bowl, mix the cream cheese, sugar, and vanilla until smooth.<br />7. Pour in the melted chocolate and stir to incorporate.<br />8. Add 1&frac12; cups (90 g) of whipped cream to the chocolate mixture and fold with a spatula until combined.<br />9. Pour the cheesecake mixture into the crispy rice base and smooth the top with a spatula.<br />10. Refrigerate for 3-4 hours or overnight, until the cheesecake is set. Release the springform.<br />11. Put the remaining cup of whipped cream in a piping bag fitted with a star tip and decorate the top of the cheesecake.<br />12. Use a vegetable peeler to shave the chocolate into the middle of the cheesecake.<br />13. Slice and serve.<br />14. Enjoy!</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 0,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 21:47:00',
+                        'servings' => 10,
+                        'source' => NULL,
+                        'title' => 'Crispy Rice Cereal Chocolate Cheesecake',
+                        'updated_at' => '2020-10-16 21:55:29',
+                        'user_id' => 3,
+                        'views' => 2,
+                    ),
+                    37 => 
+                    array (
+                        'category_id' => 8,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 30,
+                        'created_at' => '2020-10-16 22:06:10',
+                        'deleted_at' => NULL,
+                        'id' => 40,
+                        'image' => '1602900370.jpg',
+                    'ingredients' => '<p>2 (8 ounce) packages cream cheese, softened</p>
+<p>1 cup white sugar<br /><br />2 large eggs eggs</p>
+<p>2 teaspoons vanilla extract</p>
+<p>2 (18 ounce) packages chocolate<br />chip cookie dough</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-10-16 22:06:10',
+                    'methodology' => '<p>Step 1<br />Preheat oven to 350 degrees F (175 degrees C).<br />Step 2<br />Mix cream cheese, sugar, eggs, and vanilla together in a bowl until<br />smooth and well blended.<br />Step 3<br />Spread 1 roll of cookie dough on the bottom of a 9x13-inch baking pan<br />to form the base. Spread cream cheese mixture evenly on top. Pinch<br />o small pieces of the remaining cookie dough and distribute them on<br />the cream cheese mixture.<br />Step 4<br />Bake in the preheated oven until cream cheese mixture is set and<br />cookies on top are golden brown, 30 to 45 minutes. Let cool before<br />serving, about 30 minutes.<br />Cook\'s Note:<br />Use your favorite kind of cookie dough to create customized<br />variations.</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 15,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 22:00:00',
+                        'servings' => 12,
+                        'source' => 'allrecipes',
+                        'title' => 'Easy Chocolate Chip Cookie Dough Cheesecake',
+                        'updated_at' => '2020-10-16 22:06:10',
+                        'user_id' => 3,
+                        'views' => 2,
+                    ),
+                    38 => 
+                    array (
+                        'category_id' => 9,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 8,
+                        'created_at' => '2020-10-16 22:23:49',
+                        'deleted_at' => NULL,
+                        'id' => 41,
+                        'image' => '1602901496.jpg',
+                    'ingredients' => '<p>1 cup (2 sticks) salted butter, softened</p>
+<p>3/4 cup granulated white sugar</p>
+<p>3/4 cup brown sugar</p>
+<p>2 large eggs</p>
+<p>2 teaspoon vanilla extract</p>
+<p>2 1/2 cups all purpose flour</p>
+<p>1 teaspoon baking soda</p>
+<p>1/2 teaspoon salt</p>
+<p>2 cups Rice Krispie cereal</p>
+<p>1 1/2 cups M&amp;Ms</p>',
+                        'last_viewed_by_id' => 1,
+                        'last_viewed_on' => '2020-11-10 15:26:22',
+                        'methodology' => '<p>Preheat oven to 375F and line a baking sheet with parchment paper.<br />In a bowl, cream butter and sugars until fluffy.<br />Add eggs and vanilla and mix until smooth.<br />Mix in baking soda and salt. Fold in flour, just until combined.<br />Gently fold in cereal and m&amp;m\'s.<br />Bake for 8 to 10 minutes.</p>
+<p>Cool slightly before transferring to a wire cooling rack.<br />ENJOY!</p>',
+                        'modified_by_id' => 1,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 0,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 22:16:00',
+                        'servings' => 0,
+                        'source' => 'myincrediblerecipes.com',
+                        'title' => 'Rice Krispie M and M Cookies',
+                        'updated_at' => '2020-11-10 15:26:22',
+                        'user_id' => 3,
+                        'views' => 2,
+                    ),
+                    39 => 
+                    array (
+                        'category_id' => 75,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 0,
+                        'created_at' => '2020-10-16 22:40:18',
+                        'deleted_at' => NULL,
+                        'id' => 42,
+                        'image' => '1602902418.jpg',
+                        'ingredients' => '<p>2 large baking potatoes</p>
+<p>1/2-pound lean bacon</p>
+<p>3/4 cup shredded mild Cheddar cheese</p>
+<p>1/2 cup sour cream</p>
+<p>1/4 cup milk</p>
+<p>2 tablespoons unsalted butter, melted</p>
+<p>1 teaspoon dried chives</p>
+<p>1/2 teaspoon salt</p>
+<p>1/2 teaspoon ground black pepper</p>
+<p>1/2 teaspoon garlic powder</p>
+<p>3/4 cup shredded mild Cheddar cheese</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-10-16 22:40:18',
+                        'methodology' => '<p>Step 1: Ready the oven and preheat to 200 degrees C or 400 degrees F.</p>
+<p>Step 2: Apply cooking spray in a 9&times;13-inch casserole dish.</p>
+<p>Step 3: Poke small holes on the potatoes. Use a toothpick or a fork.</p>
+<p>Step 4: Bake the potatoes inside the preheated oven for 1 hour or until soft and tender.</p>
+<p>Step 5: Remove the potatoes from the oven and let them sit at room temperature for 15 minutes to cool.</p>
+<p>Step 6: Place a large skillet on the stove and turn the heat to medium-high.</p>
+<p>Step 7: Add the bacon and cook for 10 minutes or until greasy and brown.</p>
+<p>Step 8: Place the cooked bacon on a clean plate lined with paper towels to drain the excess grease. Crumble and set aside.</p>
+<p>Step 9: Cut the potatoes into thin slices. Gently spoon the flesh and place them on a clean mixing bowl.</p>
+<p>Step 10: Add sour cream, 3/4 Cheddar cheese, butter, milk, chives, garlic powder, salt, and pepper into the potatoes. Stir until well mixed.</p>
+<p>Step 11: Transfer the mixture into the greased casserole dish. Spread it evenly on the bottom, then sprinkle 3/4 cup of Cheddar cheese and the crumbled bacon on top.</p>
+<p>Step 12: Bake inside the preheated oven for 10 to 15 minutes or until bubbly.</p>
+<p>Step 13: Remove from the oven and let it sit on a wire rack to cool for 5 minutes.</p>
+<p>Step 14: Bon Appetit!</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 0,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 22:38:00',
+                        'servings' => 0,
+                        'source' => 'skinnyandtasty.com',
+                        'title' => 'Twice Baked Potato Casserole With Bacon',
+                        'updated_at' => '2020-10-16 22:40:18',
+                        'user_id' => 3,
+                        'views' => 1,
+                    ),
+                    40 => 
+                    array (
+                        'category_id' => 74,
+                        'cook_time_hours' => 0,
+                        'cook_time_minutes' => 30,
+                        'created_at' => '2020-10-16 22:48:04',
+                        'deleted_at' => NULL,
+                        'id' => 43,
+                        'image' => '1602902884.jpg',
+                    'ingredients' => '<p>1/2 pound bacon strips, chopped<br />1 package (16 ounces) fettuccine<br />1 small onion, finely chopped<br />2 garlic cloves, minced<br />1 cup half-and-half cream<br />4 large eggs, lightly beaten<br />1/2 cup grated Romano cheese<br />1/2 teaspoon salt<br />1/4 teaspoon pepper<br />1 tablespoon minced fresh parsley<br />Additional grated Romano cheese, optional</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-10-16 22:48:04',
+                        'methodology' => '<p>In a large skillet, cook bacon over medium heat until crisp, stirring occasionally. <br />Remove with a slotted spoon; drain on paper towels. <br />Discard drippings, reserving 1 tablespoon in pan.</p>
+<p>Meanwhile, in a Dutch oven, cook fettuccine according to package directions. <br />Drain; return to pan.<br />Add onion to drippings in skillet; cook and stir over medium heat 2-3 minutes or until tender. <br />Add garlic; cook 1 minute longer. <br />Reduce heat to medium-low. <br />Stir in cream.</p>
+<p>In a small bowl, whisk a small amount of warm cream into eggs; return all to pan, whisking constantly. <br />Cook 8-10 minutes or until a thermometer reads 160&deg;, stirring constantly.<br />Stir cheese, salt, pepper and bacon into sauce. <br />Add to fettuccine and toss to combine. <br />Sprinkle with parsley and, if desired, additional cheese. Serve immediately.</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 0,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 22:45:00',
+                        'servings' => 6,
+                        'source' => 'tasteofhome.com',
+                        'title' => 'Fettuccine Carbonara',
+                        'updated_at' => '2020-10-16 22:48:04',
+                        'user_id' => 3,
+                        'views' => 2,
+                    ),
+                    41 => 
+                    array (
+                        'category_id' => 75,
+                        'cook_time_hours' => 1,
+                        'cook_time_minutes' => 5,
+                        'created_at' => '2020-10-16 22:54:34',
+                        'deleted_at' => NULL,
+                        'id' => 44,
+                        'image' => '1602903273.jpg',
+                        'ingredients' => '<p>V</p>
+<p>1 (16 ounces) package elbow macaroni</p>
+<p>6 slices bacon</p>
+<p>2 teaspoons butter</p>
+<p>1 head broccoli, cut into florets</p>
+<p>1 small onion, chopped</p>
+<p>3 large eggs eggs</p>
+<p>2 cups of milk</p>
+<p>salt and pepper to taste</p>
+<p>&frac14; teaspoon adobo seasoning</p>
+<p>2 cups shredded Cheddar cheese, divided&rsquo;</p>
+<p>2 cups shredded mozzarella cheese, divided</p>
+<p>20 eaches frozen bite-size potato nuggets (such as Tater Tots&reg;)</p>',
+                        'last_viewed_by_id' => 3,
+                        'last_viewed_on' => '2020-11-06 15:50:07',
+                        'methodology' => '<p>Step 1: Place a large pot on the stove and pour it in salted water. Turn the heat to high and bring to a boil.</p>
+<p>Step 2: Add in the macaroni and cook for 8 minutes or until al dente&rsquo;. Drain and rinse with cold water to stop the cooking process.</p>
+<p>Step 3: Ready the oven and preheat to 175 degrees C or 350 degrees F.</p>
+<p>Step 4: Apply cooking spray in a 9&times;13-inch baking dish.</p>
+<p>Step 5: Place a skillet on the stove and turn the heat to medium.</p>
+<p>Step 6: Add in the bacon and cook for 10 minutes or until the color turns brown and crispy.</p>
+<p>Step 7: Remove the bacon and place them on a clean plate lined with paper towels. Crumble and set aside.</p>
+<p>Step 8: Add in 1 teaspoon of butter in the skillet and allow it to melt.</p>
+<p>Step 9: Add in the onion and broccoli. Cook for 5 minutes or until the broccoli is soft and the onion is translucent.</p>
+<p>Step 10: In a large mixing bowl, add in the eggs, milk, and the rest of the butter. Season with adobo seasoning, salt, and pepper. Add in 1 cup Cheddar cheese, broccoli mixture, 1 cup mozzarella cheese, and 1/2 of the potato nuggets.</p>
+<p>Step 11: Place the macaroni into the baking dish and toss in the cheese mixture on top of the pasta. Stir until well mixed.</p>
+<p>Step 12: Top with the rest of the Cheddar cheese, mozzarella cheese, potato nuggets, and bacon. Cover with aluminum foil.</p>
+<p>Step 13: Place inside the preheated oven and bake for 40 to 45 minutes or until golden brown.</p>
+<p>Step 14: Remove from the oven and let it sit on a wire rack to cool at room temperature.</p>
+<p>Step 15: Serve and enjoy!</p>
+<p>&nbsp;</p>',
+                        'modified_by_id' => 3,
+                        'personal' => 0,
+                        'prep_time_hours' => 0,
+                        'prep_time_minutes' => 25,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => '2020-10-16 22:53:00',
+                        'servings' => 8,
+                        'source' => 'skinnyandtasty.com',
+                        'title' => 'Broccoli Mac and Cheese With Bacon Tater Tot Topping',
+                        'updated_at' => '2021-01-22 18:35:30',
+                        'user_id' => 3,
+                        'views' => 0,
+                    ),
+                    42 => 
+                    array (
+                        'category_id' => 5,
+                        'cook_time_hours' => NULL,
+                        'cook_time_minutes' => NULL,
+                        'created_at' => '2021-01-24 09:21:09',
+                        'deleted_at' => NULL,
+                        'id' => 45,
+                        'image' => NULL,
+                        'ingredients' => '<p>dsa s sd</p>',
+                        'last_viewed_by_id' => 2,
+                        'last_viewed_on' => '2021-01-24 09:21:09',
+                        'methodology' => '<p>d sd sad</p>',
+                        'modified_by_id' => 2,
+                        'personal' => 0,
+                        'prep_time_hours' => NULL,
+                        'prep_time_minutes' => NULL,
+                        'private_notes' => NULL,
+                        'public_notes' => NULL,
+                        'published_at' => NULL,
+                        'servings' => NULL,
+                        'source' => NULL,
+                        'title' => 'sdsddsdsd',
+                        'updated_at' => '2021-01-24 09:21:09',
+                        'user_id' => 2,
+                        'views' => 0,
                     ),
                 ));
         

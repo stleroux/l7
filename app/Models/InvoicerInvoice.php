@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 use Carbon\Carbon;
-// use Collective\Html\Eloquent\FormAccessible;
 use Config;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class InvoicerInvoice extends Model
+class InvoicerInvoice extends Model implements Auditable
 {
 	use Sortable;
-   // use FormAccessible;
+   use \OwenIt\Auditing\Auditable;
 
 	protected $table = 'invoicer__invoices';
 
@@ -104,11 +104,22 @@ class InvoicerInvoice extends Model
       // return 'N/A';
    }
 
-   public function formInvoicedAtAttribute($date)
+   // public function formInvoicedAtAttribute($date)
+   // {
+   //     // return Carbon::parse($date)->format(setting('dateFormat'));
+   //     // return Carbon::parse($date)->format('m/d/y');
+   //     return Carbon::parse($date)->format(Config::get('settings.dateFormat'));
+   // }
+
+   public function getLoggedAtAttribute($date)
    {
-       // return Carbon::parse($date)->format(setting('dateFormat'));
-       // return Carbon::parse($date)->format('m/d/y');
-       return Carbon::parse($date)->format(Config::get('settings.dateFormat'));
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
+      
+      // return 'N/A';
    }
 
    public function getInvoicedAtAttribute($date)

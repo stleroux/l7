@@ -1,4 +1,12 @@
-<form action="<?php echo e(route('admin.'.$modelName.'s.mass_destroy')); ?>" method="post" class="">
+<?php
+   if($modelName == 'finish'){
+      $routeName = 'admin.finishes.mass_destroy';
+   } else {
+      $routeName = 'admin.'.$modelName.'s.mass_destroy';
+   }
+?>
+
+<form action="<?php echo e(route($routeName)); ?>" method="post" class="">
    <?php echo csrf_field(); ?>
    <?php echo method_field('DELETE'); ?>
    <input type="hidden" name="mass_destroy_ids" id="mass_destroy_ids" value="" size="3" />

@@ -24,7 +24,7 @@
 
 	@include('admin.invoicer.invoices.show.topbar')
 
-	<div class="card pb-0 mb-0">
+	<div class="card pb-0 mb-3">
 
 		<div class="card-header">
 			@include('admin.invoicer.invoices.show.inc.header')
@@ -37,6 +37,8 @@
 		</div>
 
 	</div>
+
+	@include('common.audits')
 
 @endsection
 				

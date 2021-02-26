@@ -23,11 +23,12 @@
    </div>
 
    <div class="col mb-2 text-right">
-      <a href="#"
+
+{{--       <a href="#"
          class="btn btn-sm btn-dark">
          <i class="{{ config('icons.addToCart') }}"></i>
          Add to Cart
-      </a>
+      </a> --}}
 
       @if (url()->previous() == request()->root() . '/UI/search')
          <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>

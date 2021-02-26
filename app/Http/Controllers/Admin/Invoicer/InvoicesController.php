@@ -10,12 +10,17 @@ use App\Models\InvoicerClient;
 use App\Models\InvoicerInvoice;
 use App\Models\InvoicerInvoiceItem;
 use App\Models\InvoicerProduct;
-use Config;
+use App\Models\User;
+use App\Notifications\Invoicer\InvoiceCreatedNotification;
+// use Config;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use PDF;
 use Session;
 use Storage;
@@ -53,15 +58,10 @@ class InvoicesController extends Controller
 
 
 		$products = InvoicerProduct::all();
-		// $clients = InvoicerClient::orderBy('company_name','asc')->pluck('company_name','id');
-		// $clients = User::where('company_name', '!=', NULL)->orderBy('company_name','asc')->pluck('company_name','id');
 		$clients = InvoicerClient::orderBy('contact_name')->get();
-		// dd($clients);
 
 		if($id){
-			// $client = Client::where('id',$id)->pluck('company_name','id');
 			$client = InvoicerClient::findOrFail($id);
-			// dd($client);
 			return view('admin.invoicer.invoices.create.create', compact('products','clients','client'));
 		}
 
@@ -86,11 +86,8 @@ class InvoicesController extends Controller
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 		$invoice = InvoicerInvoice::find($id)->delete();
-		// dd($invoice);
 		$invoice_items = InvoicerInvoiceItem::where('invoice_id', $id)->delete();
 		$invoice_items = InvoicerActivity::where('invoice_id', $id)->delete();
-		// dd($invoice_items);
-		// $invoice->delete();
 
 		$notification = [
 			'message' => 'The invoice and related invoice items were deleted successfully.',
@@ -156,13 +153,7 @@ class InvoicesController extends Controller
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 		$invoice = InvoicerInvoice::with('InvoiceItems')->find($id);
-		// dd($invoice);
-		// $clients = Client::orderBy('company_name','asc')->pluck('company_name','id');
-		// $clients = User::orderBy('company_name','asc')->pluck('company_name','id');
-		$clients = InvoicerClient::where('company_name', '<>', '')->get();
-		//$invoiceitems = InvoiceItem::where('invoice_id', $invoice->id);
-		//dd($invoiceitems);
-		// dd($clients);
+		$clients = InvoicerClient::all();
 
 		return view('admin.invoicer.invoices.edit.edit', compact('invoice','clients'));
 	}
@@ -206,6 +197,28 @@ class InvoicesController extends Controller
 			->orderBy('id','desc')
 			->paginate(Config::get('settings.rowsPerPage'));
 
+		return view('admin.invoicer.invoices.index.index', compact('invoices'));
+	}
+
+
+##################################################################################################################
+#
+#
+#
+#
+#
+#Estimates
+##################################################################################################################
+	public function estimates()
+	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('invoicer-invoice'), 403);
+
+		$invoices = InvoicerInvoice::sortable()
+			->where('status','=','estimate')
+			->orderBy('id','desc')
+			->paginate(Config::get('settings.rowsPerPage'));
+			
 		return view('admin.invoicer.invoices.index.index', compact('invoices'));
 	}
 
@@ -291,10 +304,11 @@ class InvoicesController extends Controller
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 		$invoice = InvoicerInvoice::with('invoiceItems')->find($id);
-		// $invoice = InvoicerInvoice::findOrFail($id);
-		// dd($invoice);
 
-		return view('admin.invoicer.invoices.show.show', compact('invoice'));
+		// Get all associated Audits
+      $audits = $invoice->audits()->with('user')->orderBy('id','desc')->get();
+
+		return view('admin.invoicer.invoices.show.show', compact('invoice','audits'));
 	}
 
 
@@ -321,7 +335,6 @@ class InvoicesController extends Controller
 		$pdf->save(public_path().'/_invoices/'. $invoice->id . '.pdf');
 
       // Email PDF to client's email
-      // dd($invoice->client->email);
       Mail::to($invoice->client->email)->send(new InvoicedPDFMail($invoice));
 
 		// Set flash data with success message
@@ -453,38 +466,30 @@ class InvoicesController extends Controller
 ##################################################################################################################
 	public function store(Request $request)
 	{
+
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 		// validate the data
 		$this->validate($request, [
 			'client_id' => 'required',
-			// 'work_date' => 'required',
 			'status' => 'required'
 		]);
 
 		// save the data in the database
 		$invoice = new InvoicerInvoice;
-			// $invoice->work_date = $request->work_date;
-			// $invoice->client_id = $request->client_id;
 			$invoice->client_id = $request->client_id;
 			$invoice->notes = $request->notes;
-			$invoice->status = $request->status;
-			if($request->status == 'invoiced')
+			$invoice->status = Str::lower($request->status);
+			if($request->status == 'Logged')
 			{
-				$invoice->invoiced_at = Carbon::now();
+				$invoice->logged_at = Carbon::now();
 			}
 		$invoice->save();
 
-		// Add items to InvoiceItem table
-		if($request->invoiceItem) {
-			foreach($request->invoiceItem as $data)
-			{
-				$item = new InvoiceItem($data);
-					$item->invoice_id = $invoice->id;
-				$item->save();
-			}
-		}
+		// Notify admins
+   	$users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
+   	Notification::send($users, new InvoiceCreatedNotification($invoice));
 
 		// set a flash message to be displayed on screen
 		$notification = [
@@ -508,8 +513,6 @@ class InvoicesController extends Controller
 ##################################################################################################################
 	public function update(Request $request, $id)
 	{
-		// dd("You are here");
-		// dd($id);
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
@@ -518,8 +521,8 @@ class InvoicesController extends Controller
 			[
 				'client_id'		=> 'required',
 				'status'			=> 'required',
-				'paid_at'		=> 'required_if:status,==,paid',
-				'invoiced_at'	=> 'required_if:status,==,invoiced',
+				// 'paid_at'		=> 'required_if:status,==,paid',
+				// 'invoiced_at'	=> 'required_if:status,==,invoiced',
 			]);
 
 		$invoice = InvoicerInvoice::findOrFail($id);
@@ -538,25 +541,96 @@ class InvoicesController extends Controller
 				$invoice->paid_at = null;
 				$invoice->invoiced_at = null;
 
+			// If status is changed from Paid to Estimate
+			}elseif($ori_status == 'paid' && $request->status == 'estimate' ){
+				// Clear the value of the paid_at and invoiced_at fields
+				$invoice->paid_at = null;
+				$invoice->invoiced_at = null;
+				$invoice->logged_at = null;
+
 			// If status is changed from Invoiced to Logged
 			}elseif($ori_status == 'invoiced' && $request->status == 'logged' ){
 				// Clear the value of the invoiced_at field
 				$invoice->invoiced_at = null;
 
-			// If status is cahnged form Logged to Invoiced
-			}elseif($ori_status == 'logged' && $request->status == 'invoiced' ){
-				// Set the value of invoiced_at to the value passed from the form
-				$invoice->invoiced_at = $request->invoiced_at;
-
 			// If status is changed from Invoiced to Paid
 			}elseif($ori_status == 'invoiced' && $request->status == 'paid' ){
 				// Set the value of paid_at to the value passed from the form
-				$invoice->paid_at = $request->paid_at;
+				if($request->paid_at){
+					$invoice->paid_at = $request->paid_at;
+				} else {
+					$invoice->paid_at = Carbon::now();
+				}
+
+			// If status is changed from Invoiced to Estimate
+			}elseif($ori_status == 'invoiced' && $request->status == 'estimate' ){
+				// Set the value of paid_at to the value passed from the form
+				$invoice->paid_at = null;
+				$invoice->logged_at = null;
+
+			// If status is cahnged form Logged to Invoiced
+			}elseif($ori_status == 'logged' && $request->status == 'invoiced' ){
+				// Set the value of invoiced_at to the value passed from the form
+				if($request->invoiced_at) {
+					$invoice->invoiced_at = $request->invoiced_at;
+				} else {
+					$invoice->invoiced_at = Carbon::now();
+				}
+
+			// If status is cahnged form Logged to Estimate
+			}elseif($ori_status == 'logged' && $request->status == 'estimate' ){
+				// Set the value of invoiced_at to the value passed from the form
+				$invoice->logged_at = null;
+
+			// If status is cahnged form Estimate to Logged
+			}elseif($ori_status == 'estimate' && $request->status == 'logged' ){
+				// Set the value of invoiced_at to the value passed from the form
+				if($request->logged_at) {
+					$invoice->logged_at = $request->logged_at;
+				} else {
+					$invoice->logged_at = Carbon::now();
+				}
+
+			// If status is cahnged form Estimate to Invoiced
+			}elseif($ori_status == 'estimate' && $request->status == 'invoiced' ){
+				// Set the value of invoiced_at to the value passed from the form
+				if($request->logged_at) {
+					$invoice->logged_at = $request->logged_at;
+				} else {
+					$invoice->logged_at = Carbon::now();
+				}
+
+				if($request->invoiced_at) {
+					$invoice->invoiced_at = $request->invoiced_at;
+				} else {
+					$invoice->invoiced_at = Carbon::now();
+				}
+
+			// If status is cahnged form Estimate to Paid
+			}elseif($ori_status == 'estimate' && $request->status == 'paid' ){
+				// Set the value of invoiced_at to the value passed from the form
+				if($request->logged_at) {
+					$invoice->logged_at = $request->logged_at;
+				} else {
+					$invoice->logged_at = Carbon::now();
+				}
+
+				if($request->invoiced_at) {
+					$invoice->invoiced_at = $request->invoiced_at;
+				} else {
+					$invoice->invoiced_at = Carbon::now();
+				}
+
+				if($request->paid_at) {
+					$invoice->paid_at = $request->paid_at;
+				} else {
+					$invoice->paid_at = Carbon::now();
+				}
 			}
+
 
 			// Update the rest of the fields
 			$invoice->client_id = $request->client_id;
-			// $invoice->user_id = $request->user_id;
 			$invoice->notes = $request->notes;
 			$invoice->status = $request->status;
 
@@ -587,40 +661,32 @@ class InvoicesController extends Controller
 ##################################################################################################################
 	public function invUpdate($invID, $activity = null)
 	{
-		// dd("Inv ID:" . $invID);
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 		// update invoice with totals
 		$invoice = InvoicerInvoice::find($invID);
-		// dd($invoice);
 
 			 // Perform required calculations
 			$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
-			// dd($inv_amount_charged);
 
 			$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
-			// dd($inv_hst);
 
 			$inv_deposits = InvoicerActivity::where('invoice_id',$invID)->where('activity','deposit')->sum('amount');
-			// dd($inv_deposits);
+
 			$inv_discounts = InvoicerActivity::where('invoice_id',$invID)->where('activity','discount')->sum('amount');
-			// dd($inv_discounts);
+
 			$inv_payments = InvoicerActivity::where('invoice_id',$invID)->where('activity','payment')->sum('amount');
-			// dd($inv_payments);
 
 			$inv_sub_total = $inv_amount_charged + $inv_hst;
-			// dd($inv_sub_total);
 
 			$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
-			// dd($inv_wsib);
+
 			$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
-			// dd($inv_income_taxes);
+
 			$inv_total_deductions = $inv_wsib + $inv_income_taxes;
-			// dd($inv_total_deductions);
 
 			$inv_total = $inv_amount_charged - $inv_total_deductions - $inv_deposits - $inv_discounts - $inv_payments;
-			// dd($inv_total);
 			
 			// Set the values to be updated
 			$invoice->amount_charged = $inv_amount_charged;
@@ -636,15 +702,8 @@ class InvoicesController extends Controller
 			$invoice->total_deductions = $inv_total_deductions;
 
 			$invoice->total = $inv_total;
-		$invoice->save();
 
-		// if($activity == 'payment') {
-		// 	// Create PDF file and store it
-		// 	$pdf = PDF::loadView('admin.invoicer.invoices.invoicedPDF', ['invoice'=>$invoice]);
-		// 	$pdf->save(public_path().'/_invoices/'. $invoice->id . '.pdf');
-		// 	// send email based on activity
-  //     	Mail::to($invoice->client->email)->send(new ReceivedPaymentPDFMail($invoice));
-		// }
+		$invoice->save();
 	}
 
 	

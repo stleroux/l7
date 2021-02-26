@@ -61,30 +61,64 @@
 							<td>{{ $client->company_name }}</td>
 							<td>{{ $client->email }}</td>
 							<td>{{ $client->telephone }}</td>
-                     <td>
-                     	{{ $client->invoices->count() }}
-                     </td>
+                     <td>{{ $client->invoices->count() }}</td>
 							<td>
-								<div class="float-right">
-									@can('invoicer-invoice')
-										<a href="{{ route('admin.invoicer.invoices.create', $client->id) }}" class="btn btn-sm btn-outline-primary">
-											<i class="far fa-plus-square"></i>
-											New Invoice
-										</a>
-									@endcan
+								{{-- <div class="float-right"> --}}
+									<form action="{{ route('admin.invoicer.clients.destroy', $client) }}" method="POST" class="">
+                              {{csrf_field()}}
+                              {{ method_field('DELETE') }}
+                              <input type="hidden" value="{{ $client }}" name="id">
 
-									<!-- @can('invoicer-client') -->
-										<a href="{{ route('admin.invoicer.clients.show', $client->id) }}" class="btn btn-sm btn-outline-primary">
+										{{-- @can('invoicer-invoice') --}}
+											<a href="{{ route('admin.invoicer.invoices.create', [$client->id, 'type'=>'estimate']) }}"
+												class="btn btn-sm btn-outline-primary"
+												title="Create Estimate"
+											>
+												{{-- <i class="far fa-plus-square"></i> --}}
+												<i class="fas fa-calculator"></i>
+												{{-- Estimate --}}
+											</a>
+											<a href="{{ route('admin.invoicer.invoices.create', $client->id) }}"
+												class="btn btn-sm btn-outline-primary"
+												title="Create Invoice"
+											>
+												{{-- <i class="far fa-plus-square"></i> --}}
+												<i class="fas fa-file-invoice-dollar"></i>
+												{{-- Invoice --}}
+											</a>
+										{{-- @endcan --}}
+
+										<a href="{{ route('admin.invoicer.clients.show', $client->id) }}"
+											class="btn btn-sm btn-outline-primary"
+											title="View Client"
+										>
 											<i class="fa fa-eye" aria-hidden="true"></i>
-											View
+											{{-- View --}}
 										</a>
 
-										<a href="{{ route('admin.invoicer.clients.edit', $client->id) }}" class="btn btn-sm btn-outline-primary">
-											<i class="fa fa-eye" aria-hidden="true"></i>
-											Edit
+										<a href="{{ route('admin.invoicer.clients.edit', $client->id) }}"
+											class="btn btn-sm btn-outline-primary"
+											title="Edit Client"
+										>
+											<i class="fa fa-edit" aria-hidden="true"></i>
+											{{-- Edit --}}
 										</a>
-									<!-- @endcan -->
-								</div>
+
+                              {{-- @if($client->invoices->count() <= 0) --}}
+                              <button
+                              	type="submit"
+                              	class="btn btn-sm btn-outline-danger"
+                              	onclick="return confirm('Are you sure?')"
+                              	title="Delete Client"
+                              	{{ $client->invoices->count() > 0 ? 'disabled' : ''}}
+                              >
+                                 <i class="fa fa-trash"></i>
+                                 {{-- Trash --}}
+                              </button>
+                              {{-- @endif --}}
+
+                           </form>
+								{{-- </div> --}}
 							</td>
 						</tr>
 						@endforeach

@@ -38,8 +38,10 @@
                <td><a href="{{ route('admin.materials.show', $material->id) }}">{{ $material->name }}</a></td>
                <td>{{ $material->type }}</td>
                {{-- Add more columns here --}}
-               <td data-order="{{ $material->created_at}}">{{ $material->created_at }}</td>
-               <td data-order="{{ $material->updated_at}}">{{ $material->updated_at ? $material->updated_at->format('M d, Y') : 'no data found' }}</td>
+               <td data-order="{{ $material->created_at}}">
+                  {{ $material->created_at->format(config('settings.dateFormat')) }}
+               </td>
+               <td data-order="{{ $material->updated_at}}">{{ $material->updated_at->format(config('settings.dateFormat')) }}</td>
                <td class="text-right">
                   @include('admin.materials.index.actions')
                </td>

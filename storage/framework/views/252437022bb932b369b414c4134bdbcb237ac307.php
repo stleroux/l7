@@ -1,5 +1,6 @@
 <?php if(Route::currentRouteName('') == 'admin.users.create'): ?>
-   <div class="card card-primary collapsed-card">
+   
+   <div class="card card-primary">
 <?php else: ?>
    <?php if($errors->get('company_name')): ?>
       <div class="card <?php echo e(($user->account_status ? 'card-primary' : 'card-danger')); ?>">
@@ -12,7 +13,7 @@
       <div class="card-title">Other Information</div>
       <div class="card-tools">
          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-plus"></i>
+            <i class="fas fa-minus"></i>
          </button>
          <button type="button" class="btn btn-tool" data-card-widget="maximize">
             <i class="fas fa-expand"></i>

@@ -1,12 +1,19 @@
 <div class="row">
 
-   <div class="col-xl-9">
+   <div class="col-xl-8">
       <ul class="nav nav-tabs justify-content-start">
          <li class="nav-item">
             <a class="nav-link {{ (Request::is('admin/invoicer/invoices') ? 'active' : '') }}" href="{{ route('admin.invoicer.invoices') }}">
                <i class="fas fa-list"></i>
                All
                <span class="badge badge-info">{{ App\Models\InvoicerInvoice::all()->count() }}</span>
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link {{ (Request::is('admin/invoicer/invoices/estimates') ? 'active' : '') }}" href="{{ route('admin.invoicer.invoices.estimates') }}">
+               <i class="fas fa-sign-out-alt"></i>
+               Estimates
+               <span class="badge badge-info text-right">{{ App\Models\InvoicerInvoice::where('status', 'estimate')->count() }}</span>
             </a>
          </li>
          <li class="nav-item">
@@ -40,7 +47,7 @@
       </ul>
    </div>
 
-   <div class="col-xl-3">
+   <div class="col-xl-4">
       <span class="float-right">
          {{-- @if(checkPerm('invoicer_invoice_edit')) --}}
             @if(Request::is('admin/invoicer/invoices/logged'))
@@ -58,9 +65,17 @@
          {{-- @endif --}}
 
          {{-- @if(checkPerm('invoicer_invoice_create')) --}}
+            <a href="{{ route('admin.invoicer.invoices.create', ['type'=>'estimate']) }}" class="btn btn-sm btn-outline-secondary">
+               {{-- <i class="far fa-plus-square"></i> --}}
+               {{-- <i class="fas fa-calculator"></i> --}}
+               <i class="{{ config('icons.invoicer-estimates') }}"></i>
+               New Estimate
+            </a>
             <a href="{{ route('admin.invoicer.invoices.create') }}" class="btn btn-sm btn-secondary">
-               <i class="far fa-plus-square"></i>
-               Add New Invoice
+               {{-- <i class="far fa-plus-square"></i> --}}
+               {{-- <i class="fas fa-file-invoice-dollar"></i> --}}
+               <i class="{{ config('icons.invoicer-invoices') }}"></i>
+               New Invoice
             </a>
          {{-- @endif --}}
       </span>

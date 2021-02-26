@@ -103,6 +103,15 @@
    </li>
 <?php endif; ?>
 
+<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin-notifications')): ?>
+   <li class="nav-item">
+      <a href="<?php echo e(Route('admin.notifications.all')); ?>" class="nav-link <?php echo e(Request::is('admin/notifications*') ? 'active' : ''); ?>">
+         <i class="<?php echo e(config('icons.bell')); ?>"></i>
+         <p>Notifications</p>
+      </a>
+   </li>
+<?php endif; ?>
+
 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('permission-manage')): ?>
    <li class="nav-item">
       <a href="<?php echo e(Route('admin.permissions.index')); ?>" class="nav-link <?php echo e(Request::is('admin/permissions*') ? 'active' : ''); ?>">
@@ -184,11 +193,21 @@
    </li>
 <?php endif; ?>
 
-<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role-manage')): ?>
+<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('user-manage')): ?>
    <li class="nav-item">
       <a href="<?php echo e(Route('admin.users.index')); ?>" class="nav-link <?php echo e(Request::is('admin/users*') ? 'active' : ''); ?>">
          <i class="<?php echo e(config('icons.users')); ?>"></i>
          <p>Users</p>
+      </a>
+   </li>
+<?php endif; ?>
+
+
+<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin-audits')): ?>
+   <li class="nav-item">
+      <a href="/admin/user-activity" class="nav-link <?php echo e(Request::is('admin/user-activity*') ? 'active' : ''); ?>" target="_blank">
+         <i class="<?php echo e(config('icons.users')); ?>"></i>
+         <p>User Activity</p>
       </a>
    </li>
 <?php endif; ?>

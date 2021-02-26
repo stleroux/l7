@@ -42,6 +42,8 @@
       </div>
    </div>
 
+   @include('common.audits')
+
    @include('admin.faqs.help')
 
 @endsection

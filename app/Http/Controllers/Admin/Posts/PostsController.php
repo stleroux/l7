@@ -161,7 +161,7 @@ class PostsController extends Controller
       // Check if user has required permission
       abort_unless((Gate::allows('post-delete') || ($post->user_id == Auth::id())), 403);
 
-      // delete the permission
+      // delete the post
       $post->delete();
 
       $notification = [
@@ -169,7 +169,6 @@ class PostsController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.postss.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -194,7 +193,6 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		// $tags = Tag::all();
 		$tags = Tag::where('category',2)->get();
 
 		return view('admin.posts.edit', compact('post','categories','tags'));
@@ -218,7 +216,6 @@ class PostsController extends Controller
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-		//$alphas = range('A', 'Z');
 		$alphas = DB::table('posts')
 			->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
 			->where('published_at','<', Carbon::Now())
@@ -264,10 +261,6 @@ class PostsController extends Controller
 		$post = Post::find($id);
 
 		// Check if user has required permission
-      // abort_unless(Gate::allows('post-'), 403);
-		// abort_unless((Gate::allows('post-edit') || ($post->user_id == Auth::id())), 403);
-
-		// Check if user has required permission
 
 
 	  // Increase the view count if viewed from the frontend
@@ -279,7 +272,6 @@ class PostsController extends Controller
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
 
-		// $tags = Tag::all();
 		$tags = Tag::where('category',2)->get();
 
 		// get previous project
@@ -298,12 +290,16 @@ class PostsController extends Controller
          $next = $n[0]->id;
       }
 
+      // Get all associated Audits
+      $audits = $post->audits()->with('user')->orderBy('id','desc')->get();
+
 		return view('admin.posts.show')
 			->withPost($post)
 			->withTags($tags)
 			->withPrevious($previous)
 			->withNext($next)
-			->withCategories($cats);
+			->withCategories($cats)
+			->withAudits($audits);
 	}
 
 
@@ -325,7 +321,7 @@ class PostsController extends Controller
 		$post = new Post;
 
 			$post->title = $request->title;
-			// $post->slug = $request->slug; // slug is handled in the model
+			// slug is handled in the model
 			$post->category_id = $request->category_id;
 			$post->published_at = $request->published_at;
 			$post->body = $request->body;
@@ -374,8 +370,6 @@ class PostsController extends Controller
 	      }
 		}
 
-		// set a flash message to be displayed on screen
-		// Session::flash('success','The post was successfully saved!');
 		// redirect to another page
 		return redirect()->route('admin.posts.index');
 	}
@@ -397,7 +391,6 @@ class PostsController extends Controller
 
 		// Check if user has required permission
       abort_unless(Gate::allows('post-edit'), 403);
-
 
 			// Save the data to the database
 			$post->title = $request->input('title');

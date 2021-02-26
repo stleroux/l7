@@ -5,13 +5,16 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
-// use Collective\Html\Eloquent\FormAccessible;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Config;
+// use OwenIt\Auditing\Contracts\Auditable;
 
 class InvoicerActivity extends Model
+ // implements Auditable
 {
+   use SoftDeletes;
 	use Sortable;
-   // use FormAccessible;
+   // use \OwenIt\Auditing\Auditable;
 
 	protected $table = 'invoicer__activities';
 
@@ -47,9 +50,12 @@ class InvoicerActivity extends Model
          // 2 => 'Discount',
          // 3 => 'Deposit',
          0 => 'Select One',
-         'payment' => 'Payment',
-         'discount' => 'Discount',
-         'deposit' => 'Deposit',
+         'paymentAdd'      => 'Payment',
+         'discountAdd'     => 'Discount',
+         'depositAdd'      => 'Deposit',
+         'paymentRemove'   => 'Remove Payment',
+         'discountRemove'  => 'Remove Discount',
+         'depositRemove'   => 'Remove Deposit',
       ];
    }
 

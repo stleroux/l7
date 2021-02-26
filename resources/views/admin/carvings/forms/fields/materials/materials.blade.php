@@ -16,7 +16,7 @@
             <div class="card card-outline card-primary mb-2">
                <div class="card-header p-2">Add Material</div>
                <div class="card-body p-3">
-                  <form action="{{ route('carvings.material.store', $carving->id) }}" method="post">
+                  <form action="{{ route('admin.carvings.material.store', $carving->id) }}" method="post">
                      <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 
                      <div class="form-group pb-2 mb-0">
@@ -54,11 +54,14 @@
                            <td>{{$key+1}}</td>
                            <td>{{$value->name}}</td>
                            <td>
-                              <form action="{{ route('carvings.material.delete', $value->id) }}" method="POST" class="float-right m-0 p-0">
+                              <form action="{{ route('admin.carvings.material.delete', $value->id) }}" method="POST" class="float-right m-0 p-0">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <input type="hidden" value="{{ $carving->id }}" name="carving_id">
-                                 <button type="submit" class="btn btn-xs btn-danger">
+                                 <button
+                                    type="submit"
+                                    class="btn btn-xs btn-danger"
+                                    onclick="return confirm('Are you sure?')">
                                     <i class="fa fa-trash"></i>
                                  </button>
                               </form>

@@ -6,16 +6,26 @@
       {{ $label ?? 'Last Name' }}
    </label>
    
-   <input
-      type="text"
-      name="last_name"
-      id="last_name"
-      class="form-control @error('last_name') is-invalid @enderror"
-      value="{{ old('last_name') ?? $user->last_name }}"
-      placeholder="Last name"
-      data-inputmask=""
-      {{ $disabled ?? '' }}
-   />
+   @if(Route::currentRouteName('') == 'admin.users.show')
+
+      <div class="p-1 m-0 bg-gray-light">
+         {!! $user->last_name !!}
+      </div>
+
+   @else
+
+      <input
+         type="text"
+         name="last_name"
+         id="last_name"
+         class="form-control @error('last_name') is-invalid @enderror"
+         value="{{ old('last_name') ?? $user->last_name }}"
+         placeholder="Last name"
+         data-inputmask=""
+         {{ $disabled ?? '' }}
+      />
+
+   @endif
    
    @error('last_name')
       <span class="invalid-feedback d-inline" role="alert">

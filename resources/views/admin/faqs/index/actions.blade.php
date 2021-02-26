@@ -1,10 +1,10 @@
 @if(!$faq->deleted_at)
-   @include('admin.faqs.actions.grid.edit')
-   {{-- @include('admin.faqs.actions.grid.resetViews') --}}
-   @include('admin.faqs.actions.grid.destroy')
+   @include('admin.actions.grid.edit', ['modelName'=>'faq', 'model'=>$faq])
+   @include('admin.actions.grid.resetViews', ['modelName'=>'faq', 'model'=>$faq])
+   @include('admin.actions.grid.destroy', ['modelName'=>'faq', 'model'=>$faq])
 @endif
 
 @if($faq->deleted_at)
-   @include('admin.faqs.actions.grid.restore')
-   @include('admin.faqs.actions.grid.delete')
+   @include('admin.actions.grid.restore', ['modelName'=>'faq', 'model'=>$faq])
+   @include('admin.actions.grid.delete', ['modelName'=>'faq', 'model'=>$faq])
 @endif

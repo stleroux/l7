@@ -37,8 +37,14 @@
                <td class="d-none d-lg-table-cell"><?php echo e($tag->id); ?></td>
                <td nowrap="nowrap"><?php echo e($tag->name); ?></td>
                <td nowrap="nowrap"><?php echo e($tag->category); ?></td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($tag->created_at): ?><?php echo e($tag->created_at); ?><?php endif; ?>"><?php echo e($tag->created_at->toDateString()); ?></td>
-               <td class="d-none d-lg-table-cell" title="<?php if($tag->updated_at): ?><?php echo e($tag->updated_at); ?><?php endif; ?>"><?php echo e($tag->updated_at->toDateString()); ?></td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($tag->created_at): ?><?php echo e($tag->created_at); ?><?php endif; ?>">
+                  <?php echo e($tag->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
+               <td class="d-none d-lg-table-cell" title="<?php if($tag->updated_at): ?><?php echo e($tag->updated_at); ?><?php endif; ?>">
+                  <?php echo e($tag->updated_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
                <td class="text-right">
                   <?php echo $__env->make('admin.tags.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>

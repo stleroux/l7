@@ -9,14 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Kyslik\ColumnSortable\Sortable; //Required by Invoicer Clients
+use OwenIt\Auditing\Contracts\Auditable;
+use Haruncpi\LaravelUserActivity\Traits\Loggable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 // class User extends Authenticatable implements MustVerifyEmail
 {
    use Notifiable;
    use SoftDeletes;
    use Favoriteability;
    use Sortable; //Required by Invoicer Clients
+   use \OwenIt\Auditing\Auditable;
+   use Loggable;
 
    /**
    * The attributes that are mass assignable.

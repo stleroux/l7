@@ -26,7 +26,8 @@
 						</td>
 						<td>{!! $comment->comment !!}</td>
 						<td>
-							@include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'])
+							{{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
+							{{ $comment->created_at->format(config('settings.dateFormat')) }} 123
 						</td>
 						
 					</tr>

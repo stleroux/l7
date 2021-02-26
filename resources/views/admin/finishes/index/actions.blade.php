@@ -1,9 +1,9 @@
 @if(!$finish->deleted_at)
-   @include('admin.finishes.actions.grid.edit')
-   @include('admin.finishes.actions.grid.destroy')
+   @include('admin.actions.grid.edit', ['modelName'=>'finish', 'model'=>$finish])
+   @include('admin.actions.grid.destroy', ['modelName'=>'finish', 'model'=>$finish])
 @endif
 
 @if($finish->deleted_at)
-   @include('admin.finishes.actions.grid.restore')
-   @include('admin.finishes.actions.grid.delete')
+   @include('admin.actions.grid.restore', ['modelName'=>'finish', 'model'=>$finish])
+   @include('admin.actions.grid.delete', ['modelName'=>'finish', 'model'=>$finish])
 @endif

@@ -115,33 +115,6 @@ class FunctionsController extends Controller
                unlink($image);
             }
 
-            // if($images) {
-            //    foreach($images as $image) {
-                  // Delete the image(s) and thumbnail(s) from storage
-                  // $image_path = public_path().'/_posts/'.$post->image;
-                  // $thumbs_path = public_path().'/_projects/'.$project->id.'/thumbs/'.$image->name;
-                  // unlink($image_path);
-                  // unlink($thumbs_path);
-               // }
-            // }
-
-            // // Check if there are any files left in the thumbs folder, if not, delete the folder
-            // if (count(glob('_projects/' . $project->id . "/thumbs/*")) === 0 ) { // empty
-            //    // Delete the thumbs folder
-            //    File::deleteDirectory(public_path('_projects/'.$project->id.'/thumbs/'));
-            //    // Delete the main folder
-            //    File::deleteDirectory(public_path('_projects/' . $project->id));
-            // }
-
-            // // Delete related images from DB
-            // DB::table('projects__images')->where('project_id', '=', $project->id)->delete();
-
-            // // Delete related materials from DB
-            // DB::table('projects__material_project')->where('project_id', '=', $project->id)->delete();
-
-            // // Delete related finishes from DB
-            // DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
-
             // Delete related tags from DB
             DB::table('post_tag')->where('post_id', '=', $post->id)->delete();
 
@@ -178,7 +151,8 @@ class FunctionsController extends Controller
 
          // Delete the image from the system
          File::delete('_posts/' . $post->image);
-         // Update database
+         
+      // Update database
          $post->image = NULL;
       $post->save();
       
@@ -603,9 +577,7 @@ class FunctionsController extends Controller
       }
       
       return redirect()->back()->with($notification);
-
    }
-
 
 
 }

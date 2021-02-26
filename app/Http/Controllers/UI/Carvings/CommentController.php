@@ -60,18 +60,14 @@ class CommentController extends Controller
    {
       // Check if user has required module
 
-      $carving = Carving::find($id);
-      // dd($project);
 
-      // dd($request->comment);
+      $carving = Carving::find($id);
 
       $comment = new Comment();
          $comment->user_id = Auth::user()->id;
          $comment->comment = $request->comment;
       $carving->comments()->save($comment);
-      // $comment->save();
 
-      // Session::flash('success', 'Comment added succesfully.');
       $notification = [
          'message' => 'The comment has been added successfully!', 
          'alert-type' => 'success'

@@ -2,71 +2,56 @@
 	
 	<a class="nav-link" data-toggle="dropdown" href="#">
 		<i class="far fa-bell"></i>
-		<span class="badge badge-warning navbar-badge">
-			{{ $newNotificationsCount }}
-		</span>
-	</a>
-	
-	<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"> --}}
-	
-		{{-- <span class="dropdown-item dropdown-header">{{ $newNotificationsCount }} Notifications</span> --}}
-	
-		{{-- <div class="dropdown-divider"></div>
-		
-		<a href="{{ route('admin.bugs.index') }}" class="dropdown-item">
-			<i class="{{ config('icons.bugs') }} mr-2"></i> {{ $newBugsCount }} New Bugs Reported
-		</a>
-		
-		<div class="dropdown-divider"></div>
-		
-		<a href="{{ route('admin.features.index') }}" class="dropdown-item">
-			<i class="{{ config('icons.features') }} mr-2"></i> {{ $newFeaturesCount }} New Features Requests
-		</a> --}}
-		
-{{-- 		<div class="dropdown-divider"></div>
-		
-		<a href="#" class="dropdown-item">
-			<i class="fas fa-file mr-2"></i> 3 new reports
-			<span class="float-right text-muted text-sm">2 days</span>
-		</a>
-		
-		<div class="dropdown-divider"></div>
-		
-		<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> --}}
-
-	{{-- </div>
-
-</li>
- --}}
-
-{{-- <li class="border"> --}}
-	{{-- @if($newBugsCount) --}}
-	{{-- <a class="nav-link px-3" href="{{ route('admin.bugs.index') }}"> --}}
-	{{-- <a class="btn btn-sm btn-outline-warning py-0" href="{{ route('admin.bugs.index') }}">
-		<span class="text-dark p-0">
-		<i class="{{ config('icons.bugs') }} text-danger"></i> --}}
-		{{-- <span class="badge badge-warning navbar-badge"> --}}
-			{{-- {{ $newBugsCount }}
-		</span>
-	</a>
-	@endif --}}
-{{-- </li> --}}
-
-{{-- <li class="border"> --}}
-	{{-- @if($newFeaturesCount)
-		<a class="btn btn-sm btn-outline-warning py-0" href="{{ route('admin.features.index') }}">
-			<i class="{{ config('icons.features') }} text-dark"></i> --}}
-			{{-- <span class="badge badge-warning navbar-badge"> --}}
-			{{-- <span class="text-dark">
-				{{ $newFeaturesCount }}
+		@if(auth()->user()->unreadNotifications->count())
+			<span class="badge badge-warning navbar-badge">
+				{{ auth()->user()->unreadNotifications->count() }}
 			</span>
-		</a>
-	@endif --}}
-{{-- </li> --}}
+		@endif
+	</a>
+	
+	<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+	
+		<span class="dropdown-item dropdown-header">Notifications</span>
+			
+			@foreach(auth()->user()->unreadNotifications as $notification)
+				<a href="#" class="pl-2">
+					{{-- {{ $notification->data['invoice_no'] }} --}}
+{{-- @php
+$string = $notification->type;
+$contents = explode('\\', $string);
+echo end($contents); // displays 'it'
+@endphp --}}
+
+
+
+
+				{{-- </a>
+			@endforeach
+			
+		<div class="dropdown-divider"></div>
+		
+
+		<a href="#" class="btn btn-sm btn-block btn-outline-primary">See All Notifications</a>
+		<a href="{{ route('admin.markAllNotificationsAsRead') }}" class="btn btn-sm btn-block btn-outline-primary">Mark All as Read</a>
+	</div>
+
+</li> --}}
 
 
 <small class="">
-	<ul class="mr-3">
+	<ul class="p-0 m-0">
+
+		@can('admin-notifications')
+			@if(auth()->user()->unreadNotifications->count())
+				<li class="d-none d-sm-inline-block p-2">
+					<a class="text-warning" href="{{ route('admin.notifications.unread') }}">
+						<i class="{{ config('icons.bell') }} text-warning"></i>
+						{{ auth()->user()->unreadNotifications->count() }}
+					</a>
+				</li>
+			@endif
+		@endcan
+
 		@can('bug-manage')
 			@if($newBugsCount)
 				<li class="d-none d-sm-inline-block p-2">

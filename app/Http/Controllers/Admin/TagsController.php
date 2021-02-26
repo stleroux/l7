@@ -39,6 +39,7 @@ class TagsController extends Controller
 
       $tag = New Tag();
       $tags = Tag::all();
+      
       return view('admin.tags.index', compact('tag','tags'));
    }
 
@@ -120,6 +121,9 @@ class TagsController extends Controller
     // {
         //
     // }
+
+    // Get all associated Audits
+      // $audits = $tag->audits()->with('user')->orderBy('id','desc')->get();
 
 
 ##################################################################################################################

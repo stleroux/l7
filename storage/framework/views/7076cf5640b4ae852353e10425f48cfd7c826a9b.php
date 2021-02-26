@@ -61,10 +61,14 @@
 						<?php echo $__env->make('common.authorFormat', ['model'=>$recipe, 'field'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 					</td>
 					<td>
-						<?php echo $__env->make('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+						<?php echo e($recipe->created_at->format(config('settings.dateFormat'))); ?>
+
+						
 					</td>
 					<td>
-						<?php echo $__env->make('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+						<?php echo e($recipe->published_at ? $recipe->published_at->format(config('settings.dateFormat')) : 'N/A'); ?>
+
+						
 					</td>
 					
 					<td class="text-right">

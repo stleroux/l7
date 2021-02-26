@@ -821,6 +821,8 @@ public function myRecipesList(Request $request)
 ##################################################################################################################
    public function show(Request $request, $id, $previous=null, $next=null)
    {
+      
+      // dd($request);
       $byCatName = $request->byCatName;
       $recipe = Recipe::with('user', 'category', 'comments')->findOrFail($id);
       $categories = Category::where('parent_id',1)->get();

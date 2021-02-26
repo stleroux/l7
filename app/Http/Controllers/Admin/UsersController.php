@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\InvoicerClient;
 use App\Models\Role;
 use App\Models\User;
-use App\Notifications\UserApprovedNotification;
-use App\Notifications\UserDisabledNotification;
+use App\Notifications\User\AccountApprovedNotification;
+use App\Notifications\User\AccountDisabledNotification;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -80,11 +81,13 @@ class UsersController extends Controller
       $user->first_name = $request->first_name;
       $user->last_name = $request->last_name;
       $user->email = $request->email;
+
       if($request->password) {
          $user->password = Hash::make($request->password);
       } else {
          $user->password = Hash::make('password');
       }
+
       $user->account_status = 0;
       $user->public_email = 1;
       $user->telephone = $request->telephone;
@@ -100,7 +103,8 @@ class UsersController extends Controller
       $user->postal_code = $request->postal_code;
       $user->notes = $request->notes;
       $user->dart_doubleOut = $request->dart_doubleOut;
-      $user->invoicer_client = (!isset($request->invoicer_client)) ? 0 : 1 ;
+      $user->invoicer_client = (!isset($request->invoicer_client)) ? 0 : 1;
+
 
       // Save the data
       if($user->save())
@@ -111,6 +115,26 @@ class UsersController extends Controller
             'message' => 'The user has been created successfully!', 
             'alert-type' => 'success'
          );
+
+
+         if($user->invoicer_client){
+            // save the data in the Invoicer client database table
+            $client = new InvoicerClient;
+               $client->company_name = $request->company_name;
+               $client->contact_name = $request->first_name . ' ' . $request->last_name;
+               $client->address = $request->address;
+               $client->city = $request->city;
+               $client->state = $request->state;
+               $client->zip = $request->zip;
+               $client->notes = $request->notes;
+               $client->telephone = $request->telephone;
+               $client->cell = $request->cell;
+               $client->fax = $request->fax;
+               $client->email = $request->email;
+               $client->website = $request->website;
+            $client->save();
+
+         }
 
          if ($request->submit == 'new')
          {
@@ -143,9 +167,16 @@ class UsersController extends Controller
    ##################################################################################################################
    public function show(User $user)
    {
-      //
       // Check if user has required permission
-      // abort_unless(Gate::allows('user-manage'), 403);
+      abort_unless(Gate::allows('user-manage'), 403);
+
+      $roles = Role::all();
+
+      // Get all associated Audits
+      $audits = $user->audits()->with('user')->orderBy('id','desc')->get();
+
+      return view('admin.users.show', compact('user','roles','audits'));
+
    }
 
    ##################################################################################################################
@@ -181,7 +212,6 @@ class UsersController extends Controller
 
       // used to email user is accoutn status changes
       $account_status = $user->account_status;
-      // dd($user->account_status);
 
       // assign values from form fields
       $user->first_name = $request->first_name;
@@ -193,7 +223,6 @@ class UsersController extends Controller
       }
       
       $user->account_status = (isset($request->account_status)) ? 0 : 1 ;
-      // $user->account_status = $request->account_status;
 
       $user->public_email = (!isset($request->public_email)) ? 0 : 1 ;
       $user->telephone = $request->telephone;
@@ -228,18 +257,18 @@ class UsersController extends Controller
          );
       }
 
-      // account goes from active to disabled
+      // account goes from disabled to active
       if($account_status == 0 && $user->account_status == 1)
       {
          // notify user via email
-         $user->notify(new UserApprovedNotification($user));
+         $user->notify(new AccountApprovedNotification($user));
       }
 
-      // account goes from disabled to active
+      // account goes from active to disabled
       if($account_status == 1 && $user->account_status == 0)
       {
          // notify user via email
-         $user->notify(new UserDisabledNotification($user));
+         $user->notify(new AccountDisabledNotification($user));
       }
 
 
@@ -508,7 +537,7 @@ class UsersController extends Controller
    #
    #
    #
-   #
+   # Lists approved users
    ##################################################################################################################
    public function approved()
    {
@@ -526,7 +555,7 @@ class UsersController extends Controller
    #
    #
    #
-   #
+   # Lists disabled users
    ##################################################################################################################
    public function disabled()
    {
@@ -552,7 +581,6 @@ class UsersController extends Controller
       abort_unless(Gate::allows('user-manage'), 403);
 
       $users = explode(',', $request->input('mass_approve_pass_checkedvalue'));
-      // dd($users);
 
       if(!$request->input('mass_approve_pass_checkedvalue'))
       {
@@ -564,16 +592,12 @@ class UsersController extends Controller
          
          foreach ($users as $user_id) {
 
-            // $account_status = $user->account_status;
-
             $user = User::findOrFail($user_id);
                $user->account_status = 1;
             $user->save();
 
-            // if($account_status == 0 && $user->account_status == 1)
-            // {
-               $user->notify(new UserApprovedNotification($user));
-            // }
+            $user->notify(new AccountApprovedNotification($user));
+
          }
 
          $notification = array(
@@ -613,7 +637,7 @@ class UsersController extends Controller
                $user->account_status = 0;
             $user->save();
 
-            $user->notify(new UserDisabledNotification($user));
+            $user->notify(new AccountDisabledNotification($user));
          }
 
          $notification = array(
@@ -646,7 +670,7 @@ class UsersController extends Controller
 
       if($account_status == 0 && $user->account_status == 1)
       {
-         $user->notify(new UserApprovedNotification($user));
+         $user->notify(new AccountApprovedNotification($user));
       }
 
       $notification = array(
@@ -677,7 +701,7 @@ class UsersController extends Controller
 
       if($account_status == 1 && $user->account_status == 0)
       {
-         $user->notify(new UserDisabledNotification($user));
+         $user->notify(new AccountDisabledNotification($user));
       }
 
 

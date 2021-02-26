@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Notifications\AdminNewUserNotification;
+use App\Notifications\Admin\NewUserNotification;
 use App\Providers\RouteServiceProvider;
 use App\Models\Role;
 use App\Models\User;
@@ -87,7 +87,7 @@ class RegisterController extends Controller
 
         //
         foreach ($administrators as $adminitrator){
-            $adminitrator->notify(new AdminNewUserNotification($user));
+            $adminitrator->notify(new NewUserNotification($user));
         }
 
         return $user;

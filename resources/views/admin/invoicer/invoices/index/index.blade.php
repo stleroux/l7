@@ -5,7 +5,8 @@
 
 @section('pageHeader')
    <i class="{{ config('icons.invoicer-invoices') }}"></i>
-	<span class="h3">Invoicer :: Invoices
+	<span class="h3">Invoicer :: Invoices and Estimates
+		{{ (Request::is('admin/invoicer/invoices/estimates') ? '- Estimates':'') }}
 		{{ (Request::is('admin/invoicer/invoices/logged') ? '- Logged':'') }}
 		{{ (Request::is('admin/invoicer/invoices/invoiced') ? '- Invoiced':'') }}
 		{{ (Request::is('admin/invoicer/invoices/paid') ? '- Paid':'') }}
@@ -15,7 +16,7 @@
 
 @section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.invoicer') }}">Invoicer</a></li>
-   <li class="breadcrumb-item">Invoices</li>
+   <li class="breadcrumb-item">Invoices and Estimates</li>
 @endsection
 
 @section('rightSidebar')
@@ -29,37 +30,35 @@
 	@include('admin.invoicer.invoices.index.topbar')
 
 	<div class="card">
-{{-- 		<div class="card-header">
-			
-			<span class="h3">Invoices
-				{{ (Request::is('admin/invoicer/invoices/logged') ? '- Logged':'') }}
-				{{ (Request::is('admin/invoicer/invoices/invoiced') ? '- Invoiced':'') }}
-				{{ (Request::is('admin/invoicer/invoices/paid') ? '- Paid':'') }}
-				{{ (Request::is('admin/invoicer/invoices/unpaid') ? '- Unpaid':'') }}
-			</span>
-			
-		</div> --}}
-		{{-- <div class="card-body"> --}}
+
 			@if($invoices->count() > 0)
 				<table id="" class="table table-hover table-stripped table-sm">
 					<thead>
 						<tr>
-							<th>@sortablelink('id','Invoice #') </th>
-							@if(Request::is('admin/invoicer/invoices/logged'))
-								<th>@sortablelink('created_at','Logged Date')</th>
-							@endif
-							@if(Request::is('admin/invoicer/invoices/invoiced'))
-								<th>@sortablelink('invoiced_at','Invoiced Date')</th>
-							@endif
-							@if(Request::is('admin/invoicer/invoices/paid'))
-								<th>@sortablelink('paid_at','Paid Date')</th>
-							@endif
-							@if(Request::is('admin/invoicer/invoices'))
+							<th>@sortablelink('id','Invoice #')</th>
+							@if(Request::is('admin/invoicer/invoices') || Request::is('admin/invoicer/invoices/unpaid'))
 								<th>@sortablelink('status','Status')</th>
 							@endif
-							<th>@sortablelink('created_at','Created')</th>
-							<th>@sortablelink('invoiced_at','Invoiced')</th>
-							<th>@sortablelink('paid_at','Paid')</th>
+
+							@if(Request::is('admin/invoicer/invoices'))
+								<th>@sortablelink('created_at','Created')</th>
+								<th>@sortablelink('invoiced_at','Invoiced')</th>
+								<th>@sortablelink('paid_at','Paid')</th>
+							@endif
+							@if(Request::is('admin/invoicer/invoices/logged'))
+								<th>@sortablelink('created_at','Logged')</th>
+							@endif
+							@if(Request::is('admin/invoicer/invoices/invoiced'))
+								<th>@sortablelink('invoiced_at','Invoiced')</th>
+							@endif
+							@if(Request::is('admin/invoicer/invoices/paid'))
+								<th>@sortablelink('paid_at','Paid')</th>
+							@endif
+							@if(Request::is('admin/invoicer/invoices/unpaid'))
+								<th>@sortablelink('created_at','Created')</th>
+								<th>@sortablelink('invoiced_at','Invoiced')</th>
+							@endif
+
 							<th>@sortablelink('client.contact_name','Contact Name')</th>
 							{{-- <th>@sortablelink('client.company_name','Company Name')</th> --}}
 							<th class="text-right">@sortablelink('amount_charged','Charged')</th>
@@ -70,10 +69,30 @@
 							<th></th>
 						</tr>
 					</thead>
+
 					<tbody>
 						@foreach($invoices as $invoice)
 						<tr>
 							<td>{{ $invoice->id }}</td>
+							@if(Request::is('admin/invoicer/invoices') || Request::is('admin/invoicer/invoices/unpaid'))
+								<td>
+									@if($invoice->status === 'estimate')
+										<span class="badge badge-secondary" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@elseif($invoice->status === 'logged')
+										<span class="badge badge-info" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@elseif($invoice->status === 'invoiced')
+										<span class="badge badge-warning" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@else($invoice->status === 'paid')
+										<span class="badge badge-success" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@endif
+								</td>
+							@endif
+							@if(Request::is('admin/invoicer/invoices'))
+								<td>{{ $invoice->created_at }}</td>
+								<td>{{ $invoice->invoiced_at }}</td>
+								<td>{{ $invoice->paid_at }}</td>
+							@endif
+
 							@if(Request::is('admin/invoicer/invoices/logged'))
 								<td>{{ $invoice->created_at }}</td>
 							@endif
@@ -83,20 +102,15 @@
 							@if(Request::is('admin/invoicer/invoices/paid'))
 								<td>{{ $invoice->paid_at }}</td>
 							@endif
-							@if(Request::is('admin/invoicer/invoices'))
-								<td>
-									@if($invoice->status === 'logged')
-										<span class="badge badge-info" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
-									@elseif($invoice->status === 'invoiced')
-										<span class="badge badge-warning" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
-									@else($invoice->status === 'paid')
-										<span class="badge badge-success" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
-									@endif
-								</td>
+							@if(Request::is('admin/invoicer/invoices/unpaid'))
+								<td>{{ $invoice->created_at }}</td>
+								<td>{{ $invoice->invoiced_at }}</td>
 							@endif
+							{{-- @if(Request::is('admin/invoicer/invoices'))
 							<td>{{ $invoice->created_at }}</td>
-							<td>{{ $invoice->invoiced_at }}</td>
-							<td>{{ $invoice->paid_at }}</td>
+							@endif --}}
+							{{-- <td>{{ $invoice->invoiced_at }}</td> --}}
+							{{-- <td>{{ $invoice->paid_at }}</td> --}}
 							{{-- <td><a href="{{ route('admin.invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->company_name }}</a></td> --}}
 							<td>
 								@can('invoicer-client')
@@ -132,12 +146,14 @@
 											</a>
 										@endif
 
-										{{-- @if($invoice->status == 'invoiced' && $invoice->total == 0)
+										{{-- @if($invoice->status == 'invoiced' && $invoice->total == 0) --}}
+										@if($invoice->status == 'invoiced')
 											<a href="{{ route('admin.invoicer.invoices.status_paid', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="Paid">
 												<i class="far fa-fw fa-money-bill-alt"></i>
 												Paid
 											</a>
-										@endif --}}
+										@endif
+
 										@if($invoice->status == 'logged' && $invoice->invoiceItems->count() > 0)
 											<a href="{{ route('admin.invoicer.activities.create', $invoice) }}" class="btn btn-sm btn-primary" title="New Activity">
 												<i class="far fa-fw fa-plus-square"></i>

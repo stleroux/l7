@@ -4,11 +4,11 @@
 
    <div class="card-body p-1">
 
-		@include('admin.carvings.actions.common.back')
-      @include('admin.carvings.actions.common.saveAndClose')
-      @include('admin.carvings.actions.common.saveAndContinue')
-      @include('admin.carvings.actions.common.saveAndNew')
-      @include('admin.carvings.actions.common.reset')
+      @include('admin.actions.common.back', ['modelName'=>'carving'])
+      @include('admin.actions.common.saveAndClose')
+      @include('admin.actions.common.saveAndContinue')
+      @include('admin.actions.common.saveAndNew')
+      @include('admin.actions.common.reset')
 
    </div>
 

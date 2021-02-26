@@ -9,6 +9,9 @@
 <?php $__env->startSection('content'); ?>
 
    <?php echo $__env->make('admin.materials.forms.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+	<?php echo $__env->make('common.audits', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+	
    <?php echo $__env->make('admin.materials.help', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>

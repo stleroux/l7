@@ -37,8 +37,12 @@
                <td class="d-none d-lg-table-cell">{{ $tag->id }}</td>
                <td nowrap="nowrap">{{ $tag->name }}</td>
                <td nowrap="nowrap">{{ $tag->category }}</td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($tag->created_at){{ $tag->created_at }}@endif">{{ $tag->created_at->toDateString() }}</td>
-               <td class="d-none d-lg-table-cell" title="@if($tag->updated_at){{ $tag->updated_at }}@endif">{{ $tag->updated_at->toDateString() }}</td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($tag->created_at){{ $tag->created_at }}@endif">
+                  {{ $tag->created_at->format(config('settings.dateFormat')) }}
+               </td>
+               <td class="d-none d-lg-table-cell" title="@if($tag->updated_at){{ $tag->updated_at }}@endif">
+                  {{ $tag->updated_at->format(config('settings.dateFormat')) }}
+               </td>
                <td class="text-right">
                   @include('admin.tags.index.actions')
                </td>

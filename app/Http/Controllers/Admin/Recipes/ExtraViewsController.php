@@ -277,7 +277,6 @@ class ExtraViewsController extends RecipesController
       // Check if user has required permission
       abort_unless(Gate::allows('recipe-manage'), 403);
 
-
       // Set the session to the current page route
       Session::put('fromLocation', 'recipes.newRecipes'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
@@ -382,7 +381,6 @@ class ExtraViewsController extends RecipesController
       // Check if user has required permission
       abort_unless(Gate::allows('recipe-manage'), 403);
 
-
       // Set the session to the current page route
       Session::put('fromLocation', 'admin.recipes.trashed'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
@@ -423,7 +421,6 @@ class ExtraViewsController extends RecipesController
          }
       }
       
-      // return view('admin.recipes.pages.trashed.index', compact('recipes','letters','categories'));
       return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 
@@ -464,7 +461,6 @@ class ExtraViewsController extends RecipesController
       // Check if user has required permission
       abort_unless(Gate::allows('recipe-manage'), 403);
 
-
       // Set the session to the current page route
       Session::put('fromLocation', 'admin.recipes.unpublished'); // Required for Alphabet listing
       Session::put('fromPage', url()->full());
@@ -504,7 +500,6 @@ class ExtraViewsController extends RecipesController
          }
       }
 
-      // return view('admin.recipes.pages.unpublished.index', compact('recipes','letters','categories'));
       return view('admin.recipes.index', compact('recipes','letters','categories'));
    }
 

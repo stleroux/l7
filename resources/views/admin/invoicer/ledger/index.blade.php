@@ -6,6 +6,7 @@
 @section('pageHeader')
    <i class="{{ config('icons.invoicer-ledger') }}"></i>
 	<span class="h3">Invoicer :: Ledger
+		{{ (Request::is('admin/invoicer/ledger/estimates') ? '- Estimates':'') }}
 		{{ (Request::is('admin/invoicer/ledger/logged') ? '- Logged':'') }}
 		{{ (Request::is('admin/invoicer/ledger/invoiced') ? '- Invoiced':'') }}
 		{{ (Request::is('admin/invoicer/ledger/paid') ? '- Paid':'') }}
@@ -35,6 +36,9 @@
 					<thead>
 						<tr>
 							<th>@sortablelink('id','Inv #')</th>
+							@if(Request::is('admin/invoicer/ledger/estimates'))
+								<th>@sortablelink('created_at','Create Date')</th>
+							@endif
 							@if(Request::is('admin/invoicer/ledger/logged'))
 								<th>@sortablelink('created_at','Logged Date')</th>
 							@endif
@@ -74,15 +78,26 @@
 							{{-- <td class="d-none d-sm-table-cell text-right">{{ number_format($invoices->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
 							<td class="text-right">{{ number_format($invoices->sum('total'), 2, '.', ', ') }}$</td>
 						</tr>
+
+
+
+
+
+
 						<tr class="bg-info">
 							<td colspan="{{ (Request::is('admin/invoicer/ledger/unpaid') ? '2' : '3') }}" class="text-right"><b>Overall Totals :&nbsp;</b></td>
-							<td class="text-right">{{ number_format($totalAmountCharged, 2, '.', ', ') }}$</td>
-							<td class="d-none d-md-table-cell text-right">{{ number_format($totalHST, 2, '.', ', ') }}$</td>
-							<td class="d-none d-lg-table-cell text-right">{{ number_format($totalDeposits, 2, '.', ', ') }}$</td>
-							<td class="d-none d-lg-table-cell text-right">{{ number_format($totalDiscounts, 2, '.', ', ') }}$</td>
-							<td class="d-none d-sm-table-cell text-right">{{ number_format($totalPayments, 2, '.', ', ') }}$</td>
-							<td class="text-right">{{ number_format($totalTotal, 2, '.', ', ') }}$</td>
+							<td class="text-right">{{ number_format($amountCharged, 2, '.', ', ') }}$</td>
+							<td class="d-none d-md-table-cell text-right">{{ number_format($hst, 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($deposits, 2, '.', ', ') }}$</td>
+							<td class="d-none d-lg-table-cell text-right">{{ number_format($discounts, 2, '.', ', ') }}$</td>
+							<td class="d-none d-sm-table-cell text-right">{{ number_format($payments, 2, '.', ', ') }}$</td>
+							<td class="text-right">{{ number_format($total, 2, '.', ', ') }}$</td>
 						</tr>
+
+
+
+
+
 					</tfoot>
 					<tbody>
 						@foreach($invoices as $invoice)
@@ -91,6 +106,9 @@
 								<a href="{{ route('admin.invoicer.invoices.show', $invoice->id) }}">{{ $invoice->id }}
 							</td>
 							
+							@if(Request::is('admin/invoicer/ledger/estimates'))
+								<td>{{ $invoice->created_at }}</td>
+							@endif
 							@if(Request::is('admin/invoicer/ledger/logged'))
 								<td>{{ $invoice->created_at }}</td>
 							@endif
@@ -102,7 +120,9 @@
 							@endif
 							@if(Request::is('admin/invoicer/ledger'))
 								<td>
-									@if($invoice->status === 'logged')
+									@if($invoice->status === 'estimate')
+										<span class="badge badge-secondary" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@elseif($invoice->status === 'logged')
 										<span class="badge badge-info" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
 									@elseif($invoice->status === 'invoiced')
 										<span class="badge badge-warning" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
@@ -125,19 +145,72 @@
 							
 
 							<td class="d-none d-lg-table-cell text-right">
-								{{ DB::table('invoicer__activities')->where('activity', 'deposit')
+
+
+
+								@php
+									$depositAdd = DB::table('invoicer__activities')->where('activity', 'depositAdd')
 																				->where('invoice_id', $invoice->id)
-																				->sum(\DB::raw('invoicer__activities.amount')) }}
+																				->sum(\DB::raw('invoicer__activities.amount'));
+									$depositRemove = DB::table('invoicer__activities')->where('activity', 'depositRemove')
+																				->where('invoice_id', $invoice->id)
+																				->sum(\DB::raw('invoicer__activities.amount'));
+									$depositTotal = $depositAdd - $depositRemove;
+
+								@endphp
+								{{-- {{ DB::table('invoicer__activities')->where('activity', 'depositAdd')
+																				->where('invoice_id', $invoice->id)
+																				->sum(\DB::raw('invoicer__activities.amount')) }} --}}
+
+
+								{{-- {{ DB::table('invoicer__activities')->where('activity', 'depositRemove')
+																				->where('invoice_id', $invoice->id)
+																				->sum(\DB::raw('invoicer__activities.amount')) }} --}}
+																				{{ number_format($depositTotal, 2, '.' , ', ') }}$
+																				{{-- {{ $depositTotal }} --}}
+
+
+
 							</td>
 							<td class="d-none d-lg-table-cell text-right">
-								{{ DB::table('invoicer__activities')->where('activity', 'discount')
+								@php
+									$discountAdd = DB::table('invoicer__activities')->where('activity', 'discountAdd')
 																				->where('invoice_id', $invoice->id)
-																				->sum(\DB::raw('invoicer__activities.amount')) }}
+																				->sum(\DB::raw('invoicer__activities.amount'));
+									$discountRemove = DB::table('invoicer__activities')->where('activity', 'discountRemove')
+																				->where('invoice_id', $invoice->id)
+																				->sum(\DB::raw('invoicer__activities.amount'));
+									$discountTotal = $discountAdd - $discountRemove;
+								@endphp
+								{{-- {{ DB::table('invoicer__activities')->where('activity', 'discountAdd')
+																				->where('invoice_id', $invoice->id)
+																				->sum(\DB::raw('invoicer__activities.amount')) }} --}}
+								{{-- {{ DB::table('invoicer__activities')->where('activity', 'discountRemove')
+																				->where('invoice_id', $invoice->id)
+																				->sum(\DB::raw('invoicer__activities.amount')) }} --}}
+								{{ number_format($discountTotal, 2, '.' , ', ') }}$
+								{{-- {{ $discountTotal }} --}}
 							</td>
 							<td class="d-none d-lg-table-cell text-right">
-								{{ DB::table('invoicer__activities')->where('activity', 'payment')
+								@php
+									$paymentAdd = DB::table('invoicer__activities')->where('activity', 'paymentAdd')
 									   										->where('invoice_id', $invoice->id)
-								   											->sum(\DB::raw('invoicer__activities.amount')) }}
+								   											->sum(\DB::raw('invoicer__activities.amount'));
+									$paymentRemove = DB::table('invoicer__activities')->where('activity', 'paymentRemove')
+																				->where('invoice_id', $invoice->id)
+								   											->sum(\DB::raw('invoicer__activities.amount'));
+									$paymentTotal = $paymentAdd - $paymentRemove;
+								@endphp
+								{{-- {{ DB::table('invoicer__activities')->where('activity', 'paymentAdd')
+									   										->where('invoice_id', $invoice->id)
+								   											->sum(\DB::raw('invoicer__activities.amount')) }} -
+								{{ DB::table('invoicer__activities')->where('activity', 'paymentAdd')
+																				->where('invoice_id', $invoice->id)
+								   											->sum(\DB::raw('invoicer__activities.amount')) }} --}}
+								{{ number_format($paymentTotal, 2, '.' , ', ') }}$
+
+
+
 							</td>
 								{{-- <td class="d-none d-sm-table-cell text-right">{{ number_format($invoice->wsib, 2, '.' , ', ') }}$</td> --}}
 								{{-- <td class="d-none d-sm-table-cell text-right">{{ number_format($invoice->income_taxes, 2, '.' , ', ') }}$</td> --}}

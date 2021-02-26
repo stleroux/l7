@@ -9,24 +9,36 @@
    
    <br />
    
-	<input
-	   type="checkbox"
-	   name="invoicer_client"
-	   id="invoicer_client"
-	   class="form-check-input"
-	   data-bootstrap-switch
-	   data-off-color="danger"
-	   data-off-text="No"
-	   data-on-color="success"
-	   data-on-text="Yes"
-	   placeholder="Invoicer Client"
-	   data-inputmask=""
-	   <?php if($user->invoicer_client || old('invoicer_client')): ?> checked <?php endif; ?>
-	   <?php echo e($disabled ?? ''); ?>
+   <?php if(Route::currentRouteName('') == 'admin.users.show'): ?>
 
-	   <?php echo e($readonly ?? ''); ?>
+      <div class="p-1 m-0 bg-gray-light">
+         
+         <?php echo e(($user->invoicer_client) ? 'Yes' : 'No'); ?>
 
-	/>
+      </div>
+
+   <?php else: ?>
+
+		<input
+		   type="checkbox"
+		   name="invoicer_client"
+		   id="invoicer_client"
+		   class="form-check-input"
+		   data-bootstrap-switch
+		   data-off-color="danger"
+		   data-off-text="No"
+		   data-on-color="success"
+		   data-on-text="Yes"
+		   placeholder="Invoicer Client"
+		   data-inputmask=""
+		   <?php if($user->invoicer_client || old('invoicer_client')): ?> checked <?php endif; ?>
+		   <?php echo e($disabled ?? ''); ?>
+
+		   <?php echo e($readonly ?? ''); ?>
+
+		/>
+
+	<?php endif; ?>
 
 	<?php $__errorArgs = ['invoicer_client'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

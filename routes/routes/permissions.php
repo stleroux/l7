@@ -1,8 +1,9 @@
 <?php
 
 //////////////////////////////////////////////////////////////////////////////
-// PERMISSIONS ROUTES
+// BACKEND PERMISSIONS ROUTES
 //////////////////////////////////////////////////////////////////////////////
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    Route::get('permissions/restore/{permission}',  'PermissionsController@restore')          ->name('permissions.restore');
    Route::post('permissions/delete/{permission}',  'PermissionsController@delete')           ->name('permissions.delete');
@@ -13,5 +14,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    Route::get('permissions/noRoles',               'PermissionsController@noRoles')          ->name('permissions.noRoles');
    Route::post('permissions/storeSingle',          'PermissionsController@storeSingle')      ->name('permissions.storeSingle');
    Route::post('permissions/storeMultiple',        'PermissionsController@storeMultiple')    ->name('permissions.storeMultiple');
+   Route::post('permissions/storeCrud',            'PermissionsController@storeCrud')        ->name('permissions.storeCrud');
+   Route::post('permissions/storeBread',           'PermissionsController@storeBread')       ->name('permissions.storeBread');
    Route::resource('permissions',                  'PermissionsController')                  ->except('create','store');
 });

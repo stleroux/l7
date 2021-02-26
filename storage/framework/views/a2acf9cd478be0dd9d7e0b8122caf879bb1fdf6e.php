@@ -31,6 +31,9 @@
                         data-on-color="success"
                         data-on-text="Granted"
                         <?php if($user->roles->pluck('id')->contains($role->id)): ?> checked <?php endif; ?>
+                        <?php if(Route::currentRouteName('') == 'admin.users.show'): ?>
+                           disabled
+                        <?php endif; ?>
                      />
                   </div>
                   <div class="col text-right">

@@ -4,30 +4,46 @@
 			<div class="card-header">Invoice Information</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-5">
 						<div><strong>Billed To</strong></div>
-							<div>{{ $invoice->client->company_name }}</div>
+							<div>{{ $invoice->client->company_name ? $invoice->client->company_name : '' }}</div>
 							<div>{{ $invoice->client->contact_name }}</div>
-							<div>{{ $invoice->client->address }}</div>
-							<div>{{ $invoice->client->city }}, {{ $invoice->client->province }}</div>
-							<div>{{ $invoice->client->postal_code }}</div>
+							<div>{{ $invoice->client->telephone ? $invoice->client->telephone : '' }}</div>
+							<div>{{ $invoice->client->address ? $invoice->client->address : '' }}</div>
+							<div>
+								{{ $invoice->client->city ? $invoice->client->city : '' }}
+								{{ $invoice->client->province ? ', '.$invoice->client->province : '' }}
+							</div>
+							<div>{{ $invoice->client->postal_code ? $invoice->client->postal_code : '' }}</div>
 					</div>
-					<div class="col-sm-3">
-						<div><strong>Invoice N<sup>o</sup></strong></div>
-						<div>{{ $invoice->id }}</div>
-					</div>
-					<div class="col-sm-3">
-						@if($invoice->invoiced_at)
-							<div><strong>Invoiced</strong></div>
-							<div>{{ $invoice->invoiced_at }}</div>
-						@else
-							<div><strong>Logged</strong></div>
-							<div>{{ $invoice->created_at }}</div>
-						@endif
-					</div>
-					<div class="col-sm-2">
-						<div><strong>Paid</strong></div>
-							<div>{{ $invoice->paid_at }}</div>
+					<div class="col-sm-7">
+						<div class="row">
+
+						<div class="col text-center">
+							<div><strong>Invoice N<sup>o</sup></strong></div>
+							<div>{{ $invoice->id }}</div>
+						</div>
+						<div class="col text-center">
+								<div><strong>Estimate Date</strong></div>
+								<div>{{ $invoice->created_at }}</div>
+							{{-- @endif --}}
+						</div>
+						<div class="col text-center">
+							{{-- @else --}}
+								<div><strong>Logged Date</strong></div>
+								<div>{{ $invoice->logged_at }}</div>
+							</div>
+						<div class="col text-center">
+							{{-- @if($invoice->invoiced_at) --}}
+								<div><strong>Invoiced Date</strong></div>
+								<div>{{ $invoice->invoiced_at }}</div>
+							</div>
+
+						<div class="col text-center">
+							<div><strong>Paid Date</strong></div>
+								<div>{{ $invoice->paid_at }}</div>
+						</div>
+						</div>
 					</div>
 				</div>
 				@if($invoice->work_description)

@@ -26,7 +26,8 @@
 						</td>
 						<td><?php echo $comment->comment; ?></td>
 						<td>
-							<?php echo $__env->make('common.dateFormat', ['model'=>$comment, 'field'=>'created_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+							
+							<?php echo e($comment->created_at->format(config('settings.dateFormat'))); ?> 123
 						</td>
 						
 					</tr>

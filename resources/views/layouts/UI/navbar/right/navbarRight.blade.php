@@ -6,14 +6,14 @@
 
    @else
 
-	   {{-- @can('admin-dashboard') --}}
+	   @can('admin-dashboard')
 	   	<li class="nav-item {{ Route::is('admin.dashboard*') ? 'active' : '' }}">
 		      <a class="nav-link p-2" href="{{ route('admin.dashboard') }}">
 		         <i class="{{ config('icons.dashboard') }}"></i>
 		         Dashboard
 		      </a>
 	   	</li>
-	   {{-- @endcan --}}
+	   @endcan
 
       {{-- @include('layouts.UI.navbar.right.user') --}}
       @include('layouts.common.navbar.user')

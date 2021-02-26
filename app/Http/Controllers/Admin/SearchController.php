@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 // use App\Models\Post;
 use App\Models\Carving;
@@ -32,7 +32,6 @@ class SearchController extends Controller
 	{
 		$searchResults = (new Search())
 			->registerModel(Carving::class, 'name')
-			// ->registerModel(Category::class, 'name')
 			->perform($request->input('query'));
 
 		return view('search', compact('searchResults'));

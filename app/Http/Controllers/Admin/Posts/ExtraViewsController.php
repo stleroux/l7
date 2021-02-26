@@ -57,7 +57,6 @@ class ExtraViewsController extends Controller
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-      //$alphas = range('A', 'Z');
       $alphas = DB::table('posts')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at', '>=' , Carbon::now())
@@ -81,7 +80,6 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      // return view('admin.posts.pages.future.index', compact('posts','letters'));
       return view('admin.posts.index', compact('posts','letters'));
    }
 
@@ -103,7 +101,6 @@ class ExtraViewsController extends Controller
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-      //$alphas = range('A', 'Z');
       $alphas = DB::table('posts')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('created_at', '>=' , Auth::user()->last_login_date)
@@ -127,7 +124,6 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      // return view('admin.posts.pages.new.index', compact('posts','letters'));
       return view('admin.posts.index', compact('posts','letters'));
    }
 
@@ -186,7 +182,6 @@ class ExtraViewsController extends Controller
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-      //$alphas = range('A', 'Z');
       $alphas = DB::table('posts')
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('deleted_at','!=', Null)
@@ -207,7 +202,6 @@ class ExtraViewsController extends Controller
          $posts = Post::with('user','category')->onlyTrashed()->orderBy('id','desc')->get();
       }
       
-      // return view('admin.posts.pages.trashed.index', compact('posts','letters'));
       return view('admin.posts.index', compact('posts','letters'));
    }
 
@@ -257,10 +251,8 @@ class ExtraViewsController extends Controller
             ->get();
       }
 
-      // return view('admin.posts.pages.unpublished.index', compact('posts','letters'));
       return view('admin.posts.index', compact('posts','letters'));
    }
-
 
 
 }

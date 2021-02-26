@@ -1,6 +1,6 @@
 <!-- INCOME TAX RATE -->
 
-<div class="col-12 col-sm-6">
+{{-- <div class="col-12 col-sm-6">
 
    <div class="card">
       <div class="card-body p-2">
@@ -20,7 +20,7 @@
                placeholder="incomeTaxRate"
                data-inputmask=""
             />
-            <small>Income Tax Rate</small>
+            <small></small>
             
             @error('incomeTaxRate')
                <span class="invalid-feedback" role="alert">
@@ -33,4 +33,29 @@
       </div>
    </div>
    
-</div>
+</div> --}}
+
+
+<tr class="row">
+   
+   <th class="col-5 col-sm-3">
+      Income Tax Rate
+   </td>
+
+   <td class="col-7 col-sm-3">
+      <input
+         type="text"
+         name="incomeTaxRate"
+         id="incomeTaxRate"
+         class="form-control form-control-sm @error('incomeTaxRate') is-invalid @enderror"
+         value="{{ old('incomeTaxRate') ?? Config::get('invoicer.incomeTaxRate') }}"
+         placeholder="incomeTaxRate"
+         data-inputmask=""
+      />
+   </td>
+
+   <td class="col-sm-6 d-none d-md-table-cell">
+
+   </td>
+
+</tr>

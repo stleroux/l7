@@ -1,5 +1,10 @@
 <?php
 
+
+//////////////////////////////////////////////////////////////////////////////
+// FRONTEND BLOG ROUTES
+//////////////////////////////////////////////////////////////////////////////
+
 Route::prefix('blog')->namespace('UI')->name('blog.')->group(function() {
    Route::post('search',                'BlogController@search')                 ->name('search');
    Route::get('print/{id}',             'BlogController@print')                  ->name('print');

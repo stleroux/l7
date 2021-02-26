@@ -1,30 +1,27 @@
 
-	
-		
-	
-		
-		
-
-
-	
-
-
-	
-	
-	
-		
-			
 
 
 
-	
-			
-			
 
+
+				
 
 
 <small class="">
-	<ul class="mr-3">
+	<ul class="p-0 m-0">
+
+		<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin-notifications')): ?>
+			<?php if(auth()->user()->unreadNotifications->count()): ?>
+				<li class="d-none d-sm-inline-block p-2">
+					<a class="text-warning" href="<?php echo e(route('admin.notifications.unread')); ?>">
+						<i class="<?php echo e(config('icons.bell')); ?> text-warning"></i>
+						<?php echo e(auth()->user()->unreadNotifications->count()); ?>
+
+					</a>
+				</li>
+			<?php endif; ?>
+		<?php endif; ?>
+
 		<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('bug-manage')): ?>
 			<?php if($newBugsCount): ?>
 				<li class="d-none d-sm-inline-block p-2">

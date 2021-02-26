@@ -4,15 +4,15 @@
    
    <div class="card-body p-1">
 
-      @include('admin.roles.actions.common.create')
+      @include('admin.actions.common.create', ['modelName'=>'role'])
 
       @if(Route::currentRouteName() == 'admin.roles.index')
-         @include('admin.roles.actions.mass.destroy')         
+         @include('admin.actions.mass.destroy', ['modelName'=>'role'])
       @endif
 
       @if(Route::currentRouteName() == 'admin.roles.trashed')
-         @include('admin.roles.actions.mass.restore')
-         @include('admin.roles.actions.mass.delete')
+         @include('admin.actions.mass.restore', ['modelName'=>'role'])
+         @include('admin.actions.mass.delete', ['modelName'=>'role'])
       @endif
       
    </div>

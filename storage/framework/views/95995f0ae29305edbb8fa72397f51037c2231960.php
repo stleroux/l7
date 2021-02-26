@@ -12,8 +12,8 @@
    	
    	<div class="form-row">
          <div class="col-12 col-md-6"><?php echo $__env->make('admin.users.forms.fields.email', ['required'=>'required'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-   		<div class="col-12 col-md-3"><?php echo $__env->make('admin.users.forms.fields.first_name', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-      	<div class="col-12 col-md-3"><?php echo $__env->make('admin.users.forms.fields.last_name', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
+   		<div class="col-12 col-md-3"><?php echo $__env->make('admin.users.forms.fields.first_name', ['required'=>'required'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
+      	<div class="col-12 col-md-3"><?php echo $__env->make('admin.users.forms.fields.last_name', ['required'=>'required'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
       	<div class="col-12"><?php echo $__env->make('admin.users.forms.fields.notes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
       </div>
 

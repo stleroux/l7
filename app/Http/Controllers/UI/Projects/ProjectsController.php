@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Project;
-// use App\Models\Admin\Projects\Finish;
-// use App\Models\Admin\Projects\Material;
-// use App\Models\Admin\Projects\Image;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -98,10 +95,7 @@ class ProjectsController extends Controller
             $next = $n[0]->id;
         }
 
-        // Get the first image associated to this project
-        // $image = Image::where('project_id', '=', $project->id)->first();
-
-        // return view('UI.projects.show', compact('project','image','previous','next'));
         return view('UI.projects.show', compact('project','previous','next'));
     }
+
 }

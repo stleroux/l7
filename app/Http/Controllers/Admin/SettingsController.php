@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Auth;
 use Config;
 use Gate;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -36,7 +37,9 @@ class SettingsController extends Controller
 		// Check if user has required permission
 		abort_unless(Gate::allows('admin-settings'), 403);
 
-		return view('admin.settings.index');
+		$users = User::all()->pluck('username','id');
+
+		return view('admin.settings.index', compact('users'));
 	}
 
 
@@ -117,6 +120,12 @@ class SettingsController extends Controller
 			$file = str_replace(
 				"'popularCount' => '".Config::get('settings.popularCount')."'",
 				"'popularCount' => '".$request->popularCount."'",
+				$file);
+
+			// Views To Be Popular Count
+			$file = str_replace(
+				"'viewsToBePopularCount' => '".Config::get('settings.viewsToBePopularCount')."'",
+				"'viewsToBePopularCount' => '".$request->viewsToBePopularCount."'",
 				$file);
 
 			// Rows per table while paginating results
@@ -237,6 +246,11 @@ class SettingsController extends Controller
 				$file);
 
 			$file = str_replace(
+				"'usersToNotify' => '".Config::get('invoicer.usersToNotify')."'",
+				"'usersToNotify' => '".$request->usersToNotify."'",
+				$file);
+
+			$file = str_replace(
 				"'version' => '".Config::get('invoicer.version')."'",
 				"'version' => '".$request->version."'",
 				$file);
@@ -249,8 +263,8 @@ class SettingsController extends Controller
 			'alert-type' => 'success'
 		);
 
-   	// return redirect()->route('admin.settings.updated')->with($notification);
-   	return redirect()->route('admin.settings.updated');
+   	return redirect()->route('admin.settings.updated')->with($notification);
+   	// return redirect()->route('admin.settings.updated');
 
    }
 

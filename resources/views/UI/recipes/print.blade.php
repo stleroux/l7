@@ -54,7 +54,7 @@
                <tr class="text-center">
                   <td>{{ ucwords($recipe->category->name) }}</td>
                   <td>{{ $recipe->servings }}</td>
-                  <td>{{ $recipe->prep_time }} minutes</td>
+                  <td>{{ $recipe->prep_time_minutes }} minutes</td>
                   <td>{{ $recipe->cook_time }} minutes</td>
                   <td>{{ $recipe->user->first_name }} {{ $recipe->user->last_name }}</td>
                   <td>{{ $recipe->created_at }}</td>

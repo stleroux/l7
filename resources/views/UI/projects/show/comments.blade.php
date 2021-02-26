@@ -30,7 +30,8 @@
 						<td class="col-7">{!! $comment->comment !!}</td>
 						<td class="col-2">
 							{{-- @include('common.dateFormat', ['model'=>$comment, 'field'=>'created_at']) --}}
-							{{ ($comment->created_at) ? date(Config::get('settings.dateFormat'), strtotime($comment->created_at)) : 'N/A' }}
+							{{-- {{ ($comment->created_at) ? date(Config::get('settings.dateFormat'), strtotime($comment->created_at)) : 'N/A' }} --}}
+							{{ $comment->created_at->format(config('settings.dateFormat')) }}
 						</td>
 						
 					</tr>

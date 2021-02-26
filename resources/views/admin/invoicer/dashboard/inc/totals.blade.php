@@ -21,6 +21,39 @@
 		</thead>
 		<tbody>
 			<tr>
+				<th>Estimates</th>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-hover table-sm">
+		<thead>
+			<tr>
+				<th></th>
+				<th class="text-right">Charged</th>
+				<th class="text-right">HST</th>
+				<th class="text-right">SubTotal</th>
+				<th class="text-right">Deposits</th>
+				<th class="text-right">Discounts</th>
+				<th class="text-right">Payments</th>
+				{{-- <th class="text-right">WSIB</th> --}}
+				{{-- <th class="text-right">Income Taxes</th> --}}
+				{{-- <th class="text-right">Total Deductions</th> --}}
+				<th class="text-right">Total Owed</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
 				<th>Logged</th>
 				<td class="text-right">{{ number_format($invoicesLogged->sum('amount_charged'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesLogged->sum('hst'), 2, '.', ', ') }}$</td>

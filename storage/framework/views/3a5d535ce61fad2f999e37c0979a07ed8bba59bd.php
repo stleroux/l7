@@ -58,13 +58,19 @@
 
 					</td>
 					<td>
-						<?php echo $__env->make('common.authorFormat', ['model'=>$post, 'field'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+						
+						<?php echo e($post->created_at->format(config('settings.dateFormat'))); ?>
+
 					</td>
 					<td>
-						<?php echo $__env->make('common.dateFormat', ['model'=>$post, 'field'=>'created_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+						
+						<?php echo e($post->updated_at->format(config('settings.dateFormat'))); ?>
+
 					</td>
 					<td>
-						<?php echo $__env->make('common.dateFormat', ['model'=>$post, 'field'=>'published_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+						<?php echo e($post->published_at ? $post->published_at->format(config('settings.dateFormat')) : 'N/A'); ?>
+
+						
 					</td>
 					
 					<td class="text-right">

@@ -10,6 +10,8 @@
       
          <?php echo $__env->make('admin.permissions.create.single', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
          <?php echo $__env->make('admin.permissions.create.multiple', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.permissions.create.crud', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.permissions.create.bread', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       
    <?php endif; ?>
 <?php $__env->stopSection(); ?>

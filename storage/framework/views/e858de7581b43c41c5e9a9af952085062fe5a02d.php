@@ -31,7 +31,7 @@
                            <td><?php echo e($image->display_name); ?></td>
                            <td>
                               
-                              <form action="<?php echo e(route('carvings.image.delete', $image->id)); ?>" method="POST" class="float-right m-0 p-0">
+                              <form action="<?php echo e(route('admin.carvings.image.delete', $image->id)); ?>" method="POST" class="float-right m-0 p-0">
                                  <?php echo e(csrf_field()); ?>
 
                                  <?php echo e(method_field('DELETE')); ?>
@@ -50,8 +50,10 @@
                                       <i class="<?php echo e(config('icons.edit')); ?>"></i>
                                     </a>
 
-
-                                    <button type="submit" class="btn btn-xs btn-danger text-light">
+                                    <button
+                                       type="submit"
+                                       class="btn btn-xs btn-danger text-light"
+                                       onclick="return confirm('Are you sure?')">
                                        <i class="fa fa-trash"></i>
                                     </button>
                                  </div>

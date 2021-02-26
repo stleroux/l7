@@ -3,11 +3,11 @@
    <div class="card-header p-2">Actions</div>
 
    <div class="card-body p-1">
-      @include('admin.posts.actions.common.back')
-      @include('admin.posts.actions.common.saveAndClose')
-      @include('admin.posts.actions.common.saveAndContinue')
-      @include('admin.posts.actions.common.saveAndNew')
-      @include('admin.posts.actions.common.reset')
+      @include('admin.actions.common.back', ['modelName'=>'post'])
+      @include('admin.actions.common.saveAndClose')
+      @include('admin.actions.common.saveAndContinue')
+      @include('admin.actions.common.saveAndNew')
+      @include('admin.actions.common.reset')
    </div>
 
 </div>

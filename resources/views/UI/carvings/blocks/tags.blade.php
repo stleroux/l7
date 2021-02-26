@@ -9,7 +9,7 @@
 
       <a href="{{ route('carvings.index') }}"
          class="btn btn-xs btn-block btn-{{ !request('tag') ? 'dark' : 'secondary' }} mt-1">
-         All Carvings
+         All Tags
       </a>
 
       @foreach($tags as $t)

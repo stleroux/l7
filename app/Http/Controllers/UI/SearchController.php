@@ -7,6 +7,7 @@ use App\Models\Carving;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Recipe;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Searchable\ModelSearchAspect;
 use Spatie\Searchable\Search;
@@ -30,41 +31,11 @@ class SearchController extends Controller
 
 	public function search(Request $request)
 	{
+		// If nothing is entered in the search box and user clicks on the search button
 		if(!$request->input('query'))
 		{
 			return redirect()->route('homepage');
 		}
-
-
-// $searchResults = (new Search())
-// 	->registerModel(Carving::class, function(ModelSearchAspect $modelSearchAspect) {
-// 		$modelSearchAspect
-// 			->addSearchableAttribute('name') // return results for partial matches on usernames
-// 			// ->addExactSearchableAttribute('email') // only return results that exactly match the e-mail address
-// 			// ->active()
-// 			->has('tags')
-// 			// ->with('roles')
-// 			;
-// });
-
-// dd($searchResults);
-
-
-//  $searchResults = (new Search())
-//      ->registerModel(Carving::class, function(ModelSearchAspect $modelSearchAspect) {
-//          $modelSearchAspect
-//             ->addSearchableAttribute('name')
-//             ->addSearchableAttribute('description')
-//             ->where('views', '>', 200); // This won't work
-//      })->search($request->input('query'));
-
-// return view('search', compact('searchResults'));
-// // return view('user.search', compact('searchResults'));
-
-
-
-
-
 
 
 		if(\Config::get('settings.carvings') == 'visible')
@@ -78,16 +49,23 @@ class SearchController extends Controller
 				->perform('null');
 		}
 
+
 		if(\Config::get('settings.blog') == 'visible')
 		{
-			$postsSearchResults = (new Search())
-				->registerModel(Post::class, ['slug','body','public_notes'])
-				->perform($request->input('query'));
+			$postsSearchResults = (new Search())->registerModel(Post::class, function(ModelSearchAspect $modelSearchAspect) {
+				$modelSearchAspect
+					->addSearchableAttribute('slug')
+					->addSearchableAttribute('body')
+					->addSearchableAttribute('public_notes')
+					->where('published_at', '<=', Carbon::now())
+         		->where('deleted_at', '=', null);
+			})->search($request->input('query'));
 		} else {
 			$postsSearchResults = (new Search())
 				->registerModel(Post::class, 'slug')
 				->perform('null');
 		}
+
 
 		if(\Config::get('settings.projects') == 'visible')
 		{
@@ -100,24 +78,32 @@ class SearchController extends Controller
 				->perform('null');
 		}
 
+
 		if(\Config::get('settings.recipes') == 'visible')
 		{
-			$recipesSearchResults = (new Search())
-				->registerModel(Recipe::class, ['title','ingredients','methodology','public_notes'])
-				// ->published()
-				->perform($request->input('query'));
+			$recipesSearchResults = (new Search())->registerModel(Recipe::class, function(ModelSearchAspect $modelSearchAspect) {
+				$modelSearchAspect
+					->addSearchableAttribute('title')
+					->addSearchableAttribute('ingredients')
+					->addSearchableAttribute('methodology')
+					->addSearchableAttribute('public_notes')
+					->where('published_at', '<=', Carbon::now())
+         		->where('deleted_at', '=', null);
+			})->search($request->input('query'));
 		} else {
 			$recipesSearchResults = (new Search())
 				->registerModel(Recipe::class, 'title')
 				->perform('null');
 		}
 
-		$searchResults = $carvingsSearchResults
-			->merge($postsSearchResults)
-			->merge($projectsSearchResults)
-			->merge($recipesSearchResults);
 
-		return view('search', compact('searchResults'));
+		$searchResults = $carvingsSearchResults
+								->merge($postsSearchResults)
+								->merge($projectsSearchResults)
+								->merge($recipesSearchResults);
+
+
+		return view('UI.search', compact('searchResults'));
 	}
 
 

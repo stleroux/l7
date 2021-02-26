@@ -39,8 +39,15 @@
                <td nowrap="nowrap"><a href="<?php echo e(route('admin.bugs.show', $bug)); ?>"><?php echo e($bug->title); ?></a></td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap"><?php echo e($bug->creator->username); ?></td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap"><?php echo e($bug->status); ?></td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($bug->created_at): ?><?php echo e($bug->created_at); ?><?php endif; ?>"><?php echo e($bug->created_at->toDateString()); ?></td>
-               <td class="d-none d-lg-table-cell" title="<?php if($bug->updated_at): ?><?php echo e($bug->updated_at); ?><?php endif; ?>"><?php echo e($bug->updated_at->toDateString()); ?></td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($bug->created_at): ?><?php echo e($bug->created_at); ?><?php endif; ?>">
+                  
+                  <?php echo e($bug->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
+               <td class="d-none d-lg-table-cell" title="<?php if($bug->updated_at): ?><?php echo e($bug->updated_at); ?><?php endif; ?>">
+                  <?php echo e($bug->updated_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
                <td class="text-right">
                   <?php echo $__env->make('admin.bugs.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>

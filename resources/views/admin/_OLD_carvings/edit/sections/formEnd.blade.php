@@ -1,3 +1,0 @@
-@section('formEnd')
-	</form>
-@endsection

@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//use OwenIt\Auditing\Auditable;
-//use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+// use OwenIt\Auditing\Contracts\Auditable;
 
-//class Tag extends Model implements AuditableContract
 class Tag extends Model
+// implements Auditable
 {
-	//use Auditable;
 	use SoftDeletes;
+   // use \OwenIt\Auditing\Auditable;
 	
 	// protected $fillable = ['name','category'];
    protected $guarded = [];

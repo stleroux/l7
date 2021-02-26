@@ -22,6 +22,9 @@
 					<div class="col-xl-2">
 						@include('admin.dashboard.infoBoxes.features')							
 					</div>
+					<div class="col-xl-2">
+						@include('admin.dashboard.infoBoxes.audits')
+					</div>
 				</div>
 			</div>
 		</div>
@@ -29,19 +32,46 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
-         		<div class="col-xl-4">
+         		<div class="col-xl-3">
 	               <h3>{{ $usersPerMonthChart->options['chart_title'] }}</h3>
-	             	{!! $usersPerMonthChart->renderHtml() !!}            			
+	             	{!! $usersPerMonthChart->renderHtml() !!}
          		</div>
-         		<div class="col-xl-4">
+         		<div class="col-xl-3">
 	             	<h3>{{ $bugsByTypeChart->options['chart_title'] }}</h3>
-	             	{!! $bugsByTypeChart->renderHtml() !!}            			
+	             	{!! $bugsByTypeChart->renderHtml() !!}
          		</div>
-         		<div class="col-xl-4">
+         		<div class="col-xl-3">
 	             	<h3>{{ $featuresByTypeChart->options['chart_title'] }}</h3>
-	             	{!! $featuresByTypeChart->renderHtml() !!}            			
+	             	{!! $featuresByTypeChart->renderHtml() !!}
+         		</div>
+         		<div class="col-xl-3">
+	             	<h3>{{ $carvingsByCategoryChart->options['chart_title'] }}</h3>
+	             	{!! $carvingsByCategoryChart->renderHtml() !!}
          		</div>
          	</div>
+         	<div class="row">
+         		<div class="col-xl-6">
+         			<h3>{{ $recipesByCategoryChart->options['chart_title'] }}</h3>
+	             	{!! $recipesByCategoryChart->renderHtml() !!}
+         		</div>
+         		<div class="col-xl-6">
+         			<h3>{{ $projectsByCategoryChart->options['chart_title'] }}</h3>
+	             	{!! $projectsByCategoryChart->renderHtml() !!}
+         		</div>
+         	</div>
+
+				<div class="row">
+         		<div class="col-xl-6">
+         			<h3>{{ $billablesByItemChart->options['chart_title'] }}</h3>
+	             	{!! $billablesByItemChart->renderHtml() !!}
+         		</div>
+         	</div>
+         	{{-- <div class="row">
+         		<div class="col-xl-3">
+	               <h3>{{ $usersByRoleChart->options['chart_title'] }}</h3>
+	             	{!! $usersByRoleChart->renderHtml() !!}
+         		</div>
+         	</div> --}}
 			</div>
 		</div>
 
@@ -191,8 +221,12 @@
 
 @section('scripts')
 	{!! $usersPerMonthChart->renderChartJsLibrary() !!}
-	{{-- {!! $bugsByTypeChart->renderChartJsLibrary() !!} --}}
 	{!! $usersPerMonthChart->renderJs() !!}
 	{!! $bugsByTypeChart->renderJs() !!}
 	{!! $featuresByTypeChart->renderJs() !!}
+	{!! $carvingsByCategoryChart->renderJs() !!}
+	{!! $recipesByCategoryChart->renderJs() !!}
+	{!! $projectsByCategoryChart->renderJs() !!}
+	{!! $billablesByItemChart->renderJs() !!}
+	{{-- {!! $usersByRoleChart->renderJs() !!} --}}
 @endsection

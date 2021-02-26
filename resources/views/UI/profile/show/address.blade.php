@@ -15,12 +15,12 @@
       <div class="form-row">
          <div class="col-md-4">
             <div class="form-group">
-               @include('admin.users.form.fields.address_1', ['disabled'=>'disabled'])
+               @include('admin.users.forms.fields.address_1', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-4">
             <div class="form-group">
-               @include('admin.users.form.fields.address_2', ['disabled'=>'disabled'])
+               @include('admin.users.forms.fields.address_2', ['disabled'=>'disabled'])
             </div>
          </div>
       </div>
@@ -28,17 +28,17 @@
       <div class="form-row">
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.city', ['disabled'=>'disabled'])
+               @include('admin.users.forms.fields.city', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.province', ['disabled'=>'disabled'])
+               @include('admin.users.forms.fields.province', ['disabled'=>'disabled'])
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.postal_code', ['disabled'=>'disabled'])
+               @include('admin.users.forms.fields.postal_code', ['disabled'=>'disabled'])
             </div>
          </div>
       </div>

@@ -39,6 +39,7 @@ class RolesController extends Controller
       abort_unless(Gate::allows('role-manage'), 403);
 
       $roles = Role::All();
+
       return view('admin.roles.index', compact('roles'));
    }
 
@@ -57,7 +58,7 @@ class RolesController extends Controller
       abort_unless(Gate::allows('role-create'), 403);
 
       $role = New Role();
-      // $permissions = Permission::all()->groupBy('group')->orderBy('model.name', 'desc');
+
       $permissions = Permission::all()->sortBy("name")->groupBy('group');
 
       return view('admin.roles.create', compact('role','permissions'));
@@ -119,6 +120,10 @@ class RolesController extends Controller
    {
       // Check if user has required permission
       // abort_unless(Gate::allows('role-manage'), 403);
+
+      // Get all associated Audits
+      $audits = $role->audits()->with('user')->orderBy('id','desc')->get();
+
    }
 
 
@@ -137,7 +142,6 @@ class RolesController extends Controller
 
       // $permissions = Permission::groupBy('group')->orderBy('name', 'desc')->get();
       $permissions = Permission::all()->sortBy("name")->groupBy('group');
-      // dd($permissions);
 
       return view('admin.roles.edit', compact('role','permissions'));
    }
@@ -441,7 +445,6 @@ class RolesController extends Controller
             'alert-type' => 'success'
          ];
       
-      // return redirect()->route('admin.roles.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -466,7 +469,6 @@ class RolesController extends Controller
             'alert-type' => 'success'
          ];
       
-      // return redirect()->route('admin.roles.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 

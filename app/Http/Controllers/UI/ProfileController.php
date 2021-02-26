@@ -112,10 +112,14 @@ class ProfileController extends Controller
 # ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 // Display the specified resource
 ##################################################################################################################
-    public function show()
+    public function show($profile=null)
     {
       // Find the user
-      $user = User::findOrFail(Auth::user()->id);
+      if($profile){
+         $user = User::findOrFail($profile);
+      } else {
+         $user = User::findOrFail(Auth::user()->id);
+      }
 
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
@@ -136,32 +140,8 @@ class ProfileController extends Controller
    // public function update(ProfileRequest $request, User $user)
    public function update(ProfileRequest $request)
    {
-      // dd($user);
-      // dd($request->invoicer_client);
-      // dd("HERE");
-      // dd($request);
-
-      // $rules = [
-      //    'email' => 'required|email|unique:users,email,' . Auth::user()->id,
-      //    'first_name' => 'required|min:2',
-      //    'last_name' => 'required|min:2',
-      //    'company_name' => 'required_if:invoicer_client,==,on',
-      // ];
-
-      // $customMessages = [
-      //    'email.required' => 'The :attribute field can not be left blank.',
-      //    'email.unique' => 'This :attribute address is already taken.',
-      //    'email.email' => 'The email address is not valid.',
-      //    'first_name.required' => 'The first name field can not be left blank.',
-      //    'first_name.min' => 'The first name field must be at least 2 characters long.',
-      //    'last_name.min' => 'The last name field must be at least 2 characters long.',
-      //    'company_name.required_if' => 'The :attribute field is required when :other is Yes.',
-      // ];
-
-      // $this->validate($request, $rules, $customMessages);
       
       $user = User::findOrFail(Auth::user()->id);
-      // dd($user);
 
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');

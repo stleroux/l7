@@ -60,20 +60,14 @@ class CommentController extends Controller
    {
       // Check if user has required module
 
-      // dd($id);
 
       $project = project::find($id);
-      // dd($project);
-
-      // dd($request->comment);
 
       $comment = new Comment();
          $comment->user_id = Auth::user()->id;
          $comment->comment = $request->comment;
       $project->comments()->save($comment);
-      // $comment->save();
 
-      // Session::flash('success', 'Comment added succesfully.');
       $notification = [
          'message' => 'The comment has been added successfully!', 
          'alert-type' => 'success'

@@ -34,32 +34,32 @@
 				<div class="row">
 
 					<div class="col-md-3">
+
 						<div class="form-group">
-						   
 						   <label for="activity" class="required">
 						   	Activity Type
 						   </label>
-						   
 						   <select name="activity" id="activity" class="form-control @error('activity') is-invalid @enderror">
 						 		@foreach($activity->activitiesOptions() as $activityOptionKey => $activityOptionValue)
-						            <option value="{{ $activityOptionKey }}" {{ $activity->activity == $activityOptionValue ? 'selected' : '' }}>{{ $activityOptionValue }}</option>
-						         @endforeach
+{{-- <option value="{{ $activityOptionKey }}" {{ $activity->activity == $activityOptionValue ? 'selected' : '' }}>
+	{{ $activityOptionValue }}
+</option> --}}
+									<option value="{{ $activityOptionKey }}" {{ old('activity') == $activityOptionKey ? 'selected' : '' }}>
+										{{ $activityOptionValue }}
+									</option>
+						      @endforeach
 						   </select>
-						   
-						   @error('activity')
-						      <span class="invalid-feedback" role="alert">
-						         <strong>{{ $message }}</strong>
-						      </span>
-						   @enderror
-
+							<span class="text-danger">{{ $errors->first('activity') }}</span>
 						</div>
+						
 					</div>
 
 					<div class="col-md-3">
 						
 						<div class="form-group {{ $errors->has('amount') ? 'has-error' : '' }}">
 							<label for="amount" class="required">Amount</label>
-							<input type="text" name="amount" class="form-control">
+							<input type="text" name="amount" class="form-control" value="{{ old('amount') }}">
+							{{-- <input type="number" name="amount" class="form-control" value="0" step=".01"> --}}
 							<span class="text-danger">{{ $errors->first('amount') }}</span>
 						</div>
 
@@ -73,6 +73,20 @@
 					</div>
 
 				</div>
+
+				<div class="row">
+					<div class="col-md-9">
+						<div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+							<label for="comment">Comment</label>
+							<textarea name="comment" class="form-control">{{ old('comment') }}</textarea>
+							<span class="text-danger">{{ $errors->first('comment') }}</span>
+							<small id="passwordHelpBlock" class="form-text text-muted">
+							  Provide comment if substracting a value.
+							</small>
+						</div>
+					</div>
+				</div>
+
 			</div>
 
 			<div class="card-footer">

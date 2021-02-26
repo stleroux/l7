@@ -6,16 +6,26 @@
       {{ $label ?? 'Company Name' }}
    </label>
    
-   <input
-      type="text"
-      name="company_name"
-      id="company_name"
-      class="form-control @error('company_name') is-invalid @enderror"
-      value="{{ old('company_name') ?? $user->company_name }}"
-      placeholder="Company Name"
-      data-inputmask=""
-      {{ $disabled ?? '' }}
-   />
+   @if(Route::currentRouteName('') == 'admin.users.show')
+
+      <div class="p-1 m-0 bg-gray-light">
+         {!! $user->company_name !!}
+      </div>
+
+   @else
+
+      <input
+         type="text"
+         name="company_name"
+         id="company_name"
+         class="form-control @error('company_name') is-invalid @enderror"
+         value="{{ old('company_name') ?? $user->company_name }}"
+         placeholder="Company Name"
+         data-inputmask=""
+         {{ $disabled ?? '' }}
+      />
+
+   @endif
    
    @error('company_name')
       <span class="invalid-feedback d-inline" role="alert">

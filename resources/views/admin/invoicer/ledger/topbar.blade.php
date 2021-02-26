@@ -7,6 +7,13 @@
 		</a>
 	</li>
 	<li class="nav-item">
+		<a class="nav-link {{ (Request::is('admin/invoicer/ledger/estimates') ? 'active' : '') }}" href="{{ route('admin.invoicer.ledger.estimates') }}">
+			<i class="fas fa-sign-out-alt"></i>
+			Estimates
+			<span class="badge badge-info text-right">{{ App\Models\InvoicerInvoice::where('status', 'estimate')->count() }}</span>
+		</a>
+	</li>
+	<li class="nav-item">
 		<a class="nav-link {{ (Request::is('admin/invoicer/ledger/logged') ? 'active' : '') }}" href="{{ route('admin.invoicer.ledger.logged') }}">
 			<i class="fas fa-sign-out-alt"></i>
 			Logged

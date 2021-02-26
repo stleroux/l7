@@ -38,8 +38,11 @@
                <td><a href="<?php echo e(route('admin.materials.show', $material->id)); ?>"><?php echo e($material->name); ?></a></td>
                <td><?php echo e($material->type); ?></td>
                
-               <td data-order="<?php echo e($material->created_at); ?>"><?php echo e($material->created_at); ?></td>
-               <td data-order="<?php echo e($material->updated_at); ?>"><?php echo e($material->updated_at ? $material->updated_at->format('M d, Y') : 'no data found'); ?></td>
+               <td data-order="<?php echo e($material->created_at); ?>">
+                  <?php echo e($material->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
+               <td data-order="<?php echo e($material->updated_at); ?>"><?php echo e($material->updated_at->format(config('settings.dateFormat'))); ?></td>
                <td class="text-right">
                   <?php echo $__env->make('admin.materials.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>

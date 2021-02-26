@@ -8,6 +8,9 @@
    <div class="col-xl-3">
       <?php echo $__env->make('admin.users.forms.panels.image', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php echo $__env->make('admin.users.forms.panels.other', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php if(Route::currentRouteName('') == 'admin.users.show' || Route::currentRouteName('') == 'admin.users.edit'): ?>
+         <?php echo $__env->make('admin.users.forms.panels.login', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php endif; ?>
    </div>
 
    <div class="col-xl-3">

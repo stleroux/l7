@@ -42,8 +42,15 @@
                   <td><?php echo e($finish->color_name); ?></td>
                   <td><?php echo e($finish->sheen); ?></td>
                   
-                  <td data-order="<?php echo e($finish->created_at); ?>"><?php echo e($finish->created_at); ?></td>
-                  <td data-order="<?php echo e($finish->updated_at); ?>"><?php echo e($finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found'); ?></td>
+                  <td data-order="<?php echo e($finish->created_at); ?>">
+                     <?php echo e($finish->created_at->format(config('settings.dateFormat'))); ?>
+
+                  </td>
+                  <td data-order="<?php echo e($finish->updated_at); ?>">
+                     
+                     <?php echo e($finish->updated_at->format(config('settings.dateFormat'))); ?>
+
+                  </td>
                   <td class="text-right">
                      <?php echo $__env->make('admin.finishes.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                   </td>

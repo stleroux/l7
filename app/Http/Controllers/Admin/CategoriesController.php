@@ -39,7 +39,6 @@ class CategoriesController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      //Log::useFiles(storage_path().'/logs/audits.log');
    }
 
 
@@ -131,7 +130,7 @@ class CategoriesController extends Controller
 
       $subCategories = Category::where('parent_id',$category->id)->get();
 
-      // delete the permission
+      // delete the category
       if($category->delete())
       {
          foreach($subCategories as $subCat)
@@ -167,7 +166,6 @@ class CategoriesController extends Controller
       abort_unless(Gate::allows('category-delete'), 403);
 
       $categories = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
-      // dd($categories);
 
       foreach ($categories as $category_id) {
          if(Post::where('category_id', $category_id)->count() > 0)
@@ -347,44 +345,9 @@ class CategoriesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('category-manage'), 403);
 
-
-// if(Gate::denies('permission-manage'))
-// {
-//    return redirect()->route('home');
-// }
-
-// Check if user has required permission
-// if($this->enablePermissions) {
-//    if(!checkPerm('category_browse')) { abort(401, 'Unauthorized Access'); }
-// }
-
-// $alphas = DB::table('categories')
-//    ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
-//        ->where('deleted_at', '=', null)
-//    ->orderBy('letter')
-//    ->get();
-
-// $letters = [];
-// foreach($alphas as $alpha) {
-//    $letters[] = $alpha->letter;
-// }
-
-// If $key value is passed
-// if ($key) {
-//    $categories = Category::with('parent','children')->where('name', 'like', $key . '%')
-//       ->orderBy('name', 'asc')
-//       ->get();
-// } else {
-// No $key value is passed
       $categories = Category::with('parent','children')->orderBy('name', 'asc')->get();
-// $categories = Category::with('children')->where('parent_id','=',0)->orderBy('name')->get();
-// dd($categories);
 
       $parentCategories = Category::with('children')->where('parent_id', 0)->get();
-// $categoriesList = Category::with('children')->get();
-// dd($categoriesList);
-// }
-// $categories = Category::all()->sortBy('name');
 
       return view('admin.categories.index', compact('categories','parentCategories'));
    }
@@ -403,7 +366,6 @@ class CategoriesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('category-manage'), 403);      
 
-      //$alphas = range('A', 'Z');
       $alphas = DB::table('categories')
       ->select(DB::raw('DISTINCT LEFT(name, 1) as letter'))
       ->where('created_at', '>=' , Auth::user()->last_login_date)
@@ -602,7 +564,7 @@ class CategoriesController extends Controller
 
       $category = Category::withTrashed()->findOrFail($id);
 
-      // restore the user
+      // restore the category
       if($category->restore())
       {
          $notification = array(

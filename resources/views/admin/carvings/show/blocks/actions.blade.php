@@ -3,9 +3,9 @@
    <div class="card-header p-2">Actions</div>
 
    <div class="card-body p-1">
-		@include('admin.carvings.actions.common.back')
-		@include('admin.carvings.actions.common.previous')
-		@include('admin.carvings.actions.common.next')
-      @include('admin.carvings.actions.common.edit')
+      @include('admin.actions.common.back', ['modelName'=>'carving'])
+		@include('admin.actions.common.previous', ['modelName'=>'carving', 'model'=>$carving])
+		@include('admin.actions.common.next', ['modelName'=>'carving', 'model'=>$carving])
+      @include('admin.actions.common.edit', ['modelName'=>'carving', 'model'=>$carving])
    </div>
 </div>

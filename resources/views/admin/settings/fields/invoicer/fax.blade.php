@@ -1,6 +1,6 @@
 <!-- FAX -->
 
-<div class="col-12 col-sm-6">
+{{-- <div class="col-12 col-sm-6">
 
    <div class="card">
       <div class="card-body p-2">
@@ -20,7 +20,7 @@
                placeholder="fax"
                data-inputmask=""
             />
-            <small>Fax number</small>
+            <small></small>
             
             @error('fax')
                <span class="invalid-feedback" role="alert">
@@ -33,4 +33,28 @@
       </div>
    </div>
    
-</div>
+</div> --}}
+
+<tr class="row">
+   
+   <th class="col-5 col-sm-3">
+      Fax
+   </td>
+
+   <td class="col-7 col-sm-3">
+      <input
+         type="text"
+         name="fax"
+         id="fax"
+         class="form-control form-control-sm @error('fax') is-invalid @enderror"
+         value="{{ old('fax') ?? Config::get('invoicer.fax') }}"
+         placeholder="fax"
+         data-inputmask=""
+      />
+   </td>
+
+   <td class="col-sm-6 d-none d-md-table-cell">
+
+   </td>
+
+</tr>

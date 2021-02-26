@@ -1,144 +1,26 @@
-{{-- <div class="dropdown text-center">
-   <a class="dropdown-button"
-      id="dropdown-menu-{{ $user->id }}"
-      data-toggle="dropdown"
-      data-boundary="viewport"
-      aria-haspopup="true"
-      aria-expanded="false">
-      <i class="{{ config('icons.ellipsis') }}"></i>
-   </a>
-   <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdown-menu-{{ $user->id }}">
-      @if(!$user->deleted_at)
-
-         <a href="{{ route('profile.show', $user) }}" class="dropdown-item bg-light">
-            <i class="{{ config('icons.show') }} text-primary"></i>
-            Show Profile
-         </a>
-
-         @can('user-edit')
-            <a href="{{ route('admin.users.edit', $user) }}" class="dropdown-item bg-light">
-               <i class="{{ config('icons.edit') }} text-primary"></i>
-               Edit
-            </a>
-         @endcan
-
-         @can('user-edit')
-            @if($user->account_status)
-               <a href="{{ route('admin.users.disable', $user) }}" class="dropdown-item bg-light">
-                  <i class="{{ config('icons.disable') }} text-pink"></i>
-                  Disable
-               </a>
-            @else
-               <a href="{{ route('admin.users.approve', $user) }}" class="dropdown-item bg-light">
-                  <i class="{{ config('icons.approve') }} text-primary"></i>
-                  Approve
-               </a>
-            @endif
-         @endcan
-
-         @can('user-delete')
-            <button type="button"
-               class="dropdown-item destroy-model bg-light"
-               data-toggle="modal"
-               data-target="#destroyModal"
-               data-id="{{ $user->id }}"
-               data-url="{{ url('admin/users', $user->id) }}">
-               <i class="{{ config('icons.trash') }} text-pink"></i>
-               Trash
-            </button>
-         @endcan
-      @endif
-
-      @if($user->deleted_at)
-         @can('user-manage')
-            <h4 class="dropdown-header">Admin Functions</h4>
-            
-            <a href="{{ route('admin.users.restore', $user) }}" class="dropdown-item bg-light">
-               <i class="{{ config('icons.restore') }} text-primary"></i>
-               Restore
-            </a>
-
-            <button type="button"
-               class="dropdown-item delete-model bg-light"
-               data-toggle="modal"
-               data-target="#deleteModal"
-               data-id="{{ $user->id }}"
-               data-url="{{ url('admin/users/delete', $user->id) }}">
-               <i class="{{ config('icons.delete') }} text-danger"></i>
-               Delete Permanently
-            </button>
-         @endcan
-      @endif
-
-   </div>
-</div> --}}
-
-
 @if(!$user->deleted_at)
+   
+   @include('admin.actions.grid.showProfile', ['modelName'=>'user', 'model'=>$user])
+   @include('admin.actions.grid.showUser', ['modelName'=>'user', 'model'=>$user])
+   @include('admin.actions.grid.edit', ['modelName'=>'user', 'model'=>$user])
 
-   <a href="{{ route('profile.show', $user) }}" class="btn btn-sm btn-light border" title="Show Profile">
-      <i class="{{ config('icons.show') }} text-primary"></i>
-      {{-- Show Profile --}}
-   </a>
-
-   @can('user-edit')
-      <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-light border" title="Edit User">
-         <i class="{{ config('icons.edit') }} text-primary"></i>
-         {{-- Edit --}}
-      </a>
-   @endcan
-
-   @can('user-edit')
+   @if($user->username != 'admin')
       @if($user->account_status)
-         <a href="{{ route('admin.users.disable', $user) }}" class="btn btn-sm btn-light border" title="Disable User">
-            <i class="{{ config('icons.disable') }} text-pink"></i>
-            {{-- Disable --}}
-         </a>
+         @include('admin.actions.grid.disable', ['modelName'=>'user', 'model'=>$user])
       @else
-         <a href="{{ route('admin.users.approve', $user) }}" class="btn btn-sm btn-light border" title="Enable User">
-            <i class="{{ config('icons.approve') }} text-primary"></i>
-            {{-- Approve --}}
-         </a>
+         @include('admin.actions.grid.enable', ['modelName'=>'user', 'model'=>$user])
       @endif
-   @endcan
+      
+      @include('admin.actions.grid.destroy', ['modelName'=>'user', 'model'=>$user])
+   @endif
 
-   @can('user-delete')
-      <button type="button"
-         class="btn btn-sm btn-light border destroy-model"
-         data-toggle="modal"
-         data-target="#destroyModal"
-         data-id="{{ $user->id }}"
-         data-url="{{ url('admin/users', $user) }}"
-         title="Trash User">
-         <i class="{{ config('icons.trash') }} text-pink"></i>
-         {{-- Trash --}}
-      </button>
-   @endcan
 @endif
 
 @if($user->deleted_at)
-   @can('user-manage')
-      <button type="button"
-         class="restore-model btn btn-sm btn-default"
-         data-toggle="modal"
-         data-target="#restoreModal"
-         data-id="{{ $user->id }}"
-         data-url="{{ url('admin/users/restore', $user) }}"
-         title="Restore User"
-         >
-         <i class="{{ config('icons.restore') }}"></i>
-         {{-- Restore --}}
-      </button>
 
-      <button type="button"
-         class="delete-model btn btn-sm btn-default"
-         data-toggle="modal"
-         data-target="#deleteModal"
-         data-id="{{ $user->id }}"
-         data-url="{{ url('admin/users/delete', $user) }}"
-         title="Permanently Delete User">
-         <i class="{{ config('icons.delete') }} text-danger"></i>
-         {{-- Delete Permanently --}}
-      </button>
+   @can('user-manage')
+      @include('admin.actions.grid.restore', ['modelName'=>'user', 'model'=>$user])
+      @include('admin.actions.grid.delete', ['modelName'=>'user', 'model'=>$user])
    @endcan
+
 @endif

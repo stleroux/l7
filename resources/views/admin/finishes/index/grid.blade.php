@@ -42,8 +42,13 @@
                   <td>{{ $finish->color_name }}</td>
                   <td>{{ $finish->sheen }}</td>
                   {{-- Add more columns here --}}
-                  <td data-order="{{ $finish->created_at}}">{{ $finish->created_at }}</td>
-                  <td data-order="{{ $finish->updated_at}}">{{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }}</td>
+                  <td data-order="{{ $finish->created_at}}">
+                     {{ $finish->created_at->format(config('settings.dateFormat')) }}
+                  </td>
+                  <td data-order="{{ $finish->updated_at}}">
+                     {{-- {{ $finish->updated_at ? $finish->updated_at->format('M d, Y') : 'no data found' }} --}}
+                     {{ $finish->updated_at->format(config('settings.dateFormat')) }}
+                  </td>
                   <td class="text-right">
                      @include('admin.finishes.index.actions')
                   </td>

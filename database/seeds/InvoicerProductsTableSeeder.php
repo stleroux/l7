@@ -1,5 +1,7 @@
 <?php
 
+// namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class InvoicerProductsTableSeeder extends Seeder
@@ -19,35 +21,27 @@ class InvoicerProductsTableSeeder extends Seeder
         \DB::table('invoicer__products')->insert(array (
             0 => 
             array (
-                'id' => 1,
                 'code' => 'H/W',
-                'details' => 'Hardware',
                 'created_at' => '2018-10-30 16:40:56',
+                'details' => 'Hardware',
+                'id' => 1,
                 'updated_at' => '2018-10-30 16:40:56',
             ),
             1 => 
             array (
-                'id' => 2,
                 'code' => 'Labour',
-                'details' => 'Hourly labour rate',
                 'created_at' => '2018-10-30 16:41:39',
+                'details' => 'Hourly labour rate',
+                'id' => 2,
                 'updated_at' => '2018-10-30 16:41:39',
             ),
             2 => 
             array (
-                'id' => 3,
                 'code' => 'Trim',
-                'details' => 'Trim',
                 'created_at' => '2018-10-30 16:41:52',
+                'details' => 'Trim',
+                'id' => 3,
                 'updated_at' => '2018-10-30 16:41:52',
-            ),
-            3 => 
-            array (
-                'id' => 4,
-                'code' => 'sdsad',
-                'details' => 'sadasdasdasdasd',
-                'created_at' => '2019-07-16 09:54:01',
-                'updated_at' => '2019-07-16 09:54:01',
             ),
         ));
         

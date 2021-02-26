@@ -76,6 +76,8 @@
          </div>
       </div>
 
+      @include('common.audits')
+
       {{-- @include('modals.image', ['title'=>'Recipe Image', 'img_path'=>'_recipes', 'img_name'=>'image', 'model'=>$recipe]) --}}
       {{-- @include('modals.print', ['title'=>'Print','name'=>'recipes','model'=>$recipe]) --}}
    {{-- </form> --}}

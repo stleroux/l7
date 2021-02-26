@@ -64,7 +64,7 @@
 					</div>
 					<div class="col-sm-2">
 						<div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-							<label for="price" class="required">Price</label>
+							<label for="price" class="required">Unit Price</label>
 							<div class="input-group">
 								<input type="text" name="price" class="form-control text-right" value="{{ $item->price }}">
 								<div class="input-group-append">

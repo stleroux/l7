@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PermissionSingleRequest;
 use App\Http\Requests\PermissionMultipleRequest;
+use App\Http\Requests\PermissionSingleRequest;
 use App\Models\Permission;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PermissionsController extends Controller
 {
@@ -40,6 +41,7 @@ class PermissionsController extends Controller
 
       $permission = New Permission();
       $permissions = Permission::all();
+
       return view('admin.permissions.index', compact('permission','permissions'));
    }
 
@@ -87,7 +89,6 @@ class PermissionsController extends Controller
          'message' => 'The permission has been created successfully!', 
          'alert-type' => 'success'
       ];
-      
 
       return redirect()->route('admin.permissions.index')->with($notification);
    }
@@ -107,9 +108,6 @@ class PermissionsController extends Controller
       abort_unless(Gate::allows('permission-create'), 403);
 
       $count = count($request->permName);
-      // dd($count);
-
-      // $permission = new Permission;
 
       for ($i=0; $i<$count; $i++)
       {
@@ -131,6 +129,94 @@ class PermissionsController extends Controller
 
       return redirect()->route('admin.permissions.index')->with($notification);
    }
+
+
+##################################################################################################################
+# ███████ ████████  ██████  ██████  ███████ 
+# ██         ██    ██    ██ ██   ██ ██      
+# ███████    ██    ██    ██ ██████  █████   
+#      ██    ██    ██    ██ ██   ██ ██      
+# ███████    ██     ██████  ██   ██ ███████ CRUD
+// Store a newly created resource in storage
+##################################################################################################################
+public function storeCrud(Request $request, Permission $permission)
+{
+   // Check if user has required permission
+   abort_unless(Gate::allows('permission-create'), 403);
+   
+   $rules = [
+      'modelName' => 'required',
+   ];
+
+   $customMessages = [
+      'modelName.required' => 'The model field can not be left blank.',
+   ];
+
+   $this->validate($request, $rules, $customMessages);
+
+   // $bread = ['browse','read','edit','add','delete'];
+   $bread = ['create','read','update','delete'];
+
+   // save the data in the database
+   foreach($bread as $b){
+      $permission = new Permission;
+         $permission->name = str::singular($request->modelName) . "-" . $b;
+         $permission->group = str::singular($request->modelName);
+      $permission->save();
+   }
+
+   $notification = [
+      'message' => 'The permissions have been created successfully!', 
+      'alert-type' => 'success'
+   ];
+
+   return redirect()->route('admin.permissions.index')->with($notification);
+}
+
+
+##################################################################################################################
+# ███████ ████████  ██████  ██████  ███████ 
+# ██         ██    ██    ██ ██   ██ ██      
+# ███████    ██    ██    ██ ██████  █████   
+#      ██    ██    ██    ██ ██   ██ ██      
+# ███████    ██     ██████  ██   ██ ███████ BREAD
+// Store a newly created resource in storage
+##################################################################################################################
+public function storeBread(Request $request, Permission $permission)
+{
+   // Check if user has required permission
+   abort_unless(Gate::allows('permission-create'), 403);
+   
+   $rules = [
+      'modelName' => 'required',
+   ];
+
+   $customMessages = [
+      'modelName.required' => 'The model field can not be left blank.',
+   ];
+
+   $this->validate($request, $rules, $customMessages);
+
+   $bread = ['browse','read','edit','add','delete'];
+   // $bread = ['index','create','read','update','delete'];
+
+   // save the data in the database
+   foreach($bread as $b){
+      $permission = new Permission;
+         $permission->name = Str::singular($request->modelName) . "-" . $b;
+         // $permission->display_name = ucfirst($b);
+         $permission->group = str::singular($request->modelName);
+         // $permission->description = $b . " " . $request->model;
+      $permission->save();
+   }
+
+   $notification = [
+      'message' => 'The permissions have been created successfully!', 
+      'alert-type' => 'success'
+   ];
+
+   return redirect()->route('admin.permissions.index')->with($notification);
+}
 
 
 ##################################################################################################################

@@ -23,6 +23,7 @@
 
 	<form action="{{ route('admin.invoicer.activities.update', $activity) }}" method="POST">
 		@csrf
+		@method('PUT')
 		
 		{{-- <input type="text" name="invoice_id" value="{{ $invoice->id }}"> --}}
 		<input type="text" name="activity_id" value="{{ $activity->id }}">

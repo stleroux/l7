@@ -24,11 +24,11 @@
 
    <div class="col mb-2 text-right">
 
-      <a href="#"
+{{--       <a href="#"
          class="btn btn-sm btn-dark">
          <i class="{{ config('icons.addToCart') }}"></i>
          Add to Cart
-      </a>
+      </a> --}}
 
       <a href="{{ route('carvings.faq') }}"
          class="btn btn-sm btn-secondary">

@@ -28,7 +28,7 @@ class ProjectServiceProvider extends ServiceProvider
      //
      view()->composer('UI.projects.blocks.popular', function ($view) {
          $popular = Project::
-            where('views', '>=', 10)
+            where('views', '>=', Config::get('settings.viewsToBePopularCount'))
             ->orderBy('views', 'desc')
             ->take(config('settings.popularCount'))
             ->get();

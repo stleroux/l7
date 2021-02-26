@@ -36,11 +36,11 @@ class UserRequest extends FormRequest
 			case 'POST':
 			{
 				return [
-					// 'first_name' => 'required',
-					// 'last_name' => 'required',
+					'first_name' => 'required',
+					'last_name' => 'required',
 					'email'  => 'required|email|unique:users,email',
 					// 'company_name' => 'required_if:invoicer_client,==,on',
-					// 'telephone' => 'required_if:invoicer_client,==,on',
+					'telephone' => 'required_if:invoicer_client,==,on',
 					// 'address_1' => 'required_if:invoicer_client,==,on',
 					// 'city' => 'required_if:invoicer_client,==,on',
 					// 'province' => 'required_if:invoicer_client,==,on',
@@ -51,11 +51,11 @@ class UserRequest extends FormRequest
 			case 'PATCH':
 			{
 				return [
-					// 'first_name' => 'required',
-					// 'last_name' => 'required',
+					'first_name' => 'required',
+					'last_name' => 'required',
 					'email' => "required|unique:users,email,{$this->user->id}",
 					// 'company_name' => 'required_if:invoicer_client,==,on',
-					// 'telephone' => 'required_if:invoicer_client,==,on',
+					'telephone' => 'required_if:invoicer_client,==,on',
 					// 'address_1' => 'required_if:invoicer_client,==,on',
 					// 'city' => 'required_if:invoicer_client,==,on',
 					// 'province' => 'required_if:invoicer_client,==,on',
@@ -81,12 +81,12 @@ class UserRequest extends FormRequest
 					'first_name.required' => 'The first name cannot be blank',
 					'last_name.required' => 'The last name cannot be blank',
 					'email.required' => 'The email cannot be blank',
-					'company_name.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'company_name.required_if' => 'The :attribute field is required when :other is Yes.',
 					'telephone.required_if' => 'The :attribute field is required when :other is Yes.',
-					'address_1.required_if' => 'The :attribute field is required when :other is Yes.',
-					'city.required_if' => 'The :attribute field is required when :other is Yes.',
-					'province.required_if' => 'The :attribute field is required when :other is Yes.',
-					'postal_code.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'address_1.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'city.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'province.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'postal_code.required_if' => 'The :attribute field is required when :other is Yes.',
 				];
 			}
 			case 'PUT':
@@ -96,12 +96,12 @@ class UserRequest extends FormRequest
 					'first_name.required' => 'This first name cannot be blank',
 					'last_name.required' => 'This last name cannot be blank',
 					'email.required'  => 'The email cannot be blank',
-					'company_name.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'company_name.required_if' => 'The :attribute field is required when :other is Yes.',
 					'telephone.required_if' => 'The :attribute field is required when :other is Yes.',
-					'address_1.required_if' => 'The :attribute field is required when :other is Yes.',
-					'city.required_if' => 'The :attribute field is required when :other is Yes.',
-					'province.required_if' => 'The :attribute field is required when :other is Yes.',
-					'postal_code.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'address_1.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'city.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'province.required_if' => 'The :attribute field is required when :other is Yes.',
+					// 'postal_code.required_if' => 'The :attribute field is required when :other is Yes.',
 				];
 			}
 			default:break;

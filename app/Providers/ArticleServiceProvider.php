@@ -29,7 +29,7 @@ class ArticleServiceProvider extends ServiceProvider
       view()->composer('articles.blocks.popular', function ($view) {
          $popular = Article::published()
              // ->where('deleted_at', NULL)
-             ->where('views', '>=', 10)
+             ->where('views', '>=', Config::get('settings.viewsToBePopularCount'))
              ->orderBy('views', 'desc')
              ->take(Config::get('settings.popular_count'))
              ->get();

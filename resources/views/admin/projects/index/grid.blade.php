@@ -46,8 +46,12 @@
                <td>{{ $project->images()->count() }}</td>
                <td>{{ $project->finishes()->count() }}</td>
                <td>{{ $project->materials()->count() }}</td>
-               <td nowrap="nowrap" title="@if($project->created_at){{ $project->created_at }}@endif">{{ $project->created_at->toDateString() }}</td>
-               <td title="@if($project->updated_at){{ $project->updated_at }}@endif">{{ $project->updated_at->toDateString() }}</td>
+               <td nowrap="nowrap" title="@if($project->created_at){{ $project->created_at }}@endif">
+                  {{ $project->created_at->format(config('settings.dateFormat')) }}
+               </td>
+               <td title="@if($project->updated_at){{ $project->updated_at }}@endif">
+                  {{ $project->updated_at->format(config('settings.dateFormat')) }}
+               </td>
                <td class="text-right">
                   @include('admin.projects.index.actions')
                </td>

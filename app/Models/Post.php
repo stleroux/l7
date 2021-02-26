@@ -9,11 +9,13 @@ use Carbon\Carbon;
 use Str;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Post extends Model implements Searchable
+class Post extends Model implements Searchable, Auditable
 {
 
    use SoftDeletes;
+   use \OwenIt\Auditing\Auditable;
 
    protected $fillable = ['slug'];
 

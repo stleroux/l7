@@ -16,13 +16,16 @@ return [
 
 	// Settings
 	'wsibNo' => '',
-	'wsibRate' => '',
+	'wsibRate' => '0',
 	'hstNo' => '',
-	'hstRate' => '',
-	'incomeTaxRate' => '',
+	'hstRate' => '0',
+	'incomeTaxRate' => '0',
 
 	// Other
 	'version' => '2.0',
+
+	// Notifications
+	'usersToNotify' => '1,2,3',
 	
 	// For Terms and Conditions, please see termsAndConditions.blade.php in views\invoicer
 ];

@@ -61,8 +61,6 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('material-delete'), 403);
 
-      // $material = Material::find($id);
-
       $material->delete();
 
       // Set flash data with success message
@@ -103,8 +101,6 @@ class MaterialsController extends Controller
    {
       // Check if user has required permission
       abort_unless(Gate::allows('material-edit'), 403);
-
-      // $material = Material::find($id);
 
       return view('admin.materials.edit', compact('material'));
    }
@@ -171,7 +167,6 @@ class MaterialsController extends Controller
          return redirect()->route('admin.materials.index');
       }
 
-      // Session::flash('store','The material was added successfully.');
       return redirect()->route('admin.materials.index')->with($notification);
    }
 
@@ -190,9 +185,10 @@ class MaterialsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('material-manage'), 403);
 
-      $material = Material::find($material->id);
+      // Get all associated Audits
+      $audits = $material->audits()->with('user')->orderBy('id','desc')->get();
 
-      return view('admin.materials.show', compact('material'));
+      return view('admin.materials.show', compact('material','audits'));
    }
 
 
@@ -296,7 +292,6 @@ class MaterialsController extends Controller
       abort_unless(Gate::allows('material-delete'), 403);
 
       $material = Material::onlyTrashed()->findOrFail($id);
-      // dd($material);
       
       // delete the user
       $material->forceDelete();

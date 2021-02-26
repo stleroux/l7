@@ -39,6 +39,7 @@
 				
 				<div class="row justify-content-center">
 					@foreach ($recipes as $recipe)
+						{{-- <div id="card-hover" class="border-2 card card-trans-2 col-7 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-1 pt-2 pb-2 px-1"> --}}
 						<div id="card-hover" class="border-2 card card-trans-2 col-7 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-1 pt-2 pb-2 px-1">
 
 							{{-- <div class="position-relative p-0"> --}}

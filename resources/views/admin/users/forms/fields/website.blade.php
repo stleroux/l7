@@ -6,16 +6,26 @@
       {{ $label ?? 'Website Address' }}
    </label>
    
-   <input
-   	type="text"
-   	name="website"
-   	id="website"
-   	class="form-control @error('website') is-invalid @enderror"
-   	value="{{ old('website') ?? $user->website }}"
-      placeholder="Website Address"
-      data-inputmask=""
-      {{ $disabled ?? '' }}
-   />
+   @if(Route::currentRouteName('') == 'admin.users.show')
+
+      <div class="p-1 m-0 bg-gray-light">
+         {!! $user->website !!}
+      </div>
+
+   @else
+
+      <input
+      	type="text"
+      	name="website"
+      	id="website"
+      	class="form-control @error('website') is-invalid @enderror"
+      	value="{{ old('website') ?? $user->website }}"
+         placeholder="Website Address"
+         data-inputmask=""
+         {{ $disabled ?? '' }}
+      />
+
+   @endif
    
    @error('website')
       <span class="invalid-feedback" role="alert">

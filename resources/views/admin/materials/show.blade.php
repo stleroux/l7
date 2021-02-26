@@ -11,6 +11,9 @@
 @section('content')
 
    @include('admin.materials.forms.form')
+
+	@include('common.audits')
+	
    @include('admin.materials.help')
 
 @endsection

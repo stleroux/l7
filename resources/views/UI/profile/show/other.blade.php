@@ -15,7 +15,7 @@
          <div class="col-sm-12">
             <div class="form-group">
                <div class="form-group">
-                  @include('admin.users.form.fields.notes', ['disabled'=>'disabled'])
+                  @include('admin.users.forms.fields.notes', ['disabled'=>'disabled'])
                </div>
             </div>
          </div>

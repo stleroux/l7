@@ -36,7 +36,6 @@ class BugsController extends Controller
    public function index()
    {
       $bugs = Bug::where('user_id', '=', Auth::user()->id)->orderBy('id','desc')->get();
-      // $bugs = Bug::where('user_id', 20)->get();
 
       return view('UI.bugs.index', compact('bugs'));
    }
@@ -58,7 +57,6 @@ class BugsController extends Controller
       $bug = New Bug();
 
       return view('UI.bugs.create', compact('bug'));
-      // return view('admin.bugs.create');
    }
 
 ##################################################################################################################
@@ -71,8 +69,6 @@ class BugsController extends Controller
 ##################################################################################################################
    public function store(Request $request, Bug $bug)
    {
-      // dd($request);
-      // dd($bug->title);
       // Check if user has required permission
       // abort_unless(Gate::allows('role-create'), 403);
 
@@ -104,7 +100,6 @@ class BugsController extends Controller
          return redirect()->back()->with($notification);
       }
 
-      // return redirect()->route('admin.bugs.index')->with($notification);
       return redirect()->route('bugs.index')->with($notification);
    }
 
@@ -137,10 +132,7 @@ class BugsController extends Controller
 	public function edit(Bug $bug)
 	{
 		// Check if user has required permission
-      // abort_unless(Gate::allows('bug-edit'), 403);
       abort_unless((Gate::allows('bug-edit') || ($bug->user_id == Auth::id())), 403);
-      
-      // dd($bug);
 
       return view('UI.bugs.edit', compact('bug'));
 	}
@@ -198,10 +190,8 @@ class BugsController extends Controller
 	public function destroy(Bug $bug)
 	{
 		// Check if user has required permission
-      // abort_unless(Gate::allows('bug-delete'), 403);
       abort_unless((Gate::allows('bug-delete') || ($bug->user_id == Auth::id())), 403);
-	
-   
+	   
       // delete the bug
       $bug->delete();
 
@@ -210,9 +200,7 @@ class BugsController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.projects.index')->with($notification);
       return redirect()->back()->with($notification);
    }
-
 
 }

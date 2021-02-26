@@ -63,9 +63,8 @@ class FunctionsController extends RecipesController
       abort_unless((Gate::allows('recipe-delete') || ($recipe->user_id == Auth::id())), 403);
 
       $recipe = Recipe::onlyTrashed()->findOrFail($id);
-      // dd($recipe);
 
-      // delete the user
+      // delete the recipe
       if($recipe->forceDelete())
       {
 
@@ -211,17 +210,15 @@ class FunctionsController extends RecipesController
 # ██║     ██║  ██║██║██║ ╚████║   ██║   
 # ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   
 ##################################################################################################################
-   // public function print($id)
-   // {
-   //    // Check if user has required permission
-   //    if($this->enablePermissions) {
-   //       if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
-   //    }
+   public function print($id)
+   {
+      // Check if user has required permission
 
-   //    $recipe = Recipe::findorFail($id);
 
-   //    return view('recipes.print', compact('recipe'));
-   // }
+      $recipe = Recipe::findorFail($id);
+
+      return view('UI.recipes.print', compact('recipe'));
+   }
 
 
 ##################################################################################################################
@@ -232,28 +229,26 @@ class FunctionsController extends RecipesController
 # ██║     ██║  ██║██║██║ ╚████║   ██║       ██║  ██║███████╗███████╗
 # ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚══════╝
 ##################################################################################################################
-   // public function printAll($category)
-   // {
-   //    // Check if user has required permission
-   //    if($this->enablePermissions) {
-   //       if(!checkPerm('recipe_print')) { abort(401, 'Unauthorized Access'); }
-   //    }
+   public function printAll($category)
+   {
+      // Check if user has required permission
 
-   //    if($category == "all"){
-   //       $recipes = Recipe::orderBy('title', 'asc')->get();
-   //    } else {
-   //       $cCat = Category::where('name', $category)->pluck('id');
-   //       $sCats = Category::where('parent_id', $cCat)->pluck('id');
 
-   //       if($sCats->count() <= 0){
-   //          $recipes = Recipe::where('category_id', $cCat)->orderBy('title', 'asc')->get();
-   //       } else {
-   //          $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
-   //       }
-   //    }
+      if($category == "all"){
+         $recipes = Recipe::orderBy('title', 'asc')->get();
+      } else {
+         $cCat = Category::where('name', $category)->pluck('id');
+         $sCats = Category::where('parent_id', $cCat)->pluck('id');
 
-   //    return view('recipes.printAll', compact('recipes'));
-   // }
+         if($sCats->count() <= 0){
+            $recipes = Recipe::where('category_id', $cCat)->orderBy('title', 'asc')->get();
+         } else {
+            $recipes = Recipe::whereIn('category_id', $sCats)->orderBy('title', 'asc')->get();
+         }
+      }
+
+      return view('UI.recipes.printAll', compact('recipes'));
+   }
 
 
 ##################################################################################################################
@@ -261,46 +256,23 @@ class FunctionsController extends RecipesController
 # PRINT PDF
 ##################################################################################################################
 ##################################################################################################################
-//    public function printPDF($id)
-//     {
-//       // // This  $data array will be passed to our PDF blade
-//       // // $data = [
-//       // //    'title' => 'First PDF for Medium',
-//       // //    'heading' => 'Hello from 99Points.info',
-//       // //    'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'        
-//       // // ];
-//       // $recipe = Recipe::findOrFail($id);
-//       // // dd($recipe);
+   public function printPDF($id)
+   {
+      // Check if user has required permission
 
-//       // // Increase the view count since this is viewed from the frontend
-//       // // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      
+      // retreive recipe from db
+      $recipe = Recipe::findOrFail($id);
 
-//       // // $categories = Category::where('parent_id',1)->get();
+      // share data to view
+      view()->share('recipe', $recipe);
+      $pdf = PDF::loadView('UI.recipes.printPDF', $recipe);
+      // set the file name
+      $filename = $recipe->title . ".pdf";
 
-//       // // return view('recipes.show', compact('recipe','categories'));
-        
-//       // // $pdf = PDF::loadView('recipes.printPDF', $data);
-//       // $pdf = PDF::loadView('recipes.printPDF', $recipe);
-//       // // dd($pdf);
-//       // return $pdf->download('medium.pdf');
-
-
-
-// $recipe = Recipe::findOrFail($id);
-// // dd($recipe);
-// $recipedata = ['recipe'=>$recipe];
-// $pdf = PDF::loadView('recipes.print', array('recipedata'=>$recipedata));
-// $pdf->setOptions(['isPhpEnabled' => true,'isRemoteEnabled' => true]);
-// $filename = "generatepdf.pdf";
-// // Save file to the directory
-// // $pdf->save('generatepdf/'.$filename);
-// //Download Pdf
-// return $pdf->download('generatepdf.pdf');
-// // Or return to view pdf
-// //return view('pdfview');
-
-//     }
-
+      // download PDF file with download method
+      return $pdf->download($filename);
+   }
 
 
 ##################################################################################################################
@@ -317,7 +289,6 @@ class FunctionsController extends RecipesController
       
       // Check if user has required permission
       abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
-
 
       $recipe->personal = 1;
       $recipe->save();
@@ -348,7 +319,6 @@ class FunctionsController extends RecipesController
       // Check if user has required permission
       abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
 
-
       $recipe->personal = 0;
       $recipe->save();
 
@@ -374,7 +344,6 @@ class FunctionsController extends RecipesController
 
       // Check if user has required permission
       abort_unless(Gate::allows('recipe-manage'), 403);
-
 
          $recipe->published_at = Carbon::now();
          $recipe->deleted_at = Null;
@@ -428,8 +397,8 @@ class FunctionsController extends RecipesController
       }
       
       return redirect()->back()->with($notification);
-
    }
+
 
 ##################################################################################################################
 # ██████╗ ███████╗███████╗███████╗████████╗    ██╗   ██╗██╗███████╗██╗    ██╗███████╗
@@ -453,6 +422,7 @@ class FunctionsController extends RecipesController
          'message' => 'The recipe\'s views count was reset to 0.', 
          'alert-type' => 'success'
       ];
+
       return redirect()->back()->with($notification);
    }
 
@@ -516,6 +486,7 @@ class FunctionsController extends RecipesController
          'message' => 'The recipe was successfully restored.', 
          'alert-type' => 'success'
       ];
+
       return redirect()->route('admin.recipes.trashed')->with($notification);
    }
 
@@ -781,7 +752,6 @@ class FunctionsController extends RecipesController
       }
       
       return redirect()->back()->with($notification);
-
    }
 
 

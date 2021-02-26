@@ -3,7 +3,7 @@
 	<div class="card-header">
 		<span class="h3">Billable Items</span>
 		{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
-			@if($invoice->status == 'logged')
+			@if($invoice->status == 'logged' || $invoice->status == 'estimate')
 				<span class="float-right">
 					<a href="{{ route('admin.invoicer.invoiceItems.create', $invoice->id) }}" class="btn btn-sm btn-primary">
 						<i class="far fa-plus-square"></i>
@@ -23,7 +23,7 @@
 						{{-- <th>Work Date</th> --}}
 						<th>Notes</th>
 						<th class="text-center">Quantity</th>
-						<th class="text-right">Price</th>
+						<th class="text-right">Unit Price</th>
 						<th class="text-right">Total</th>
 						@if($invoice->status == 'logged')
 							<th></th>
@@ -43,7 +43,7 @@
 							<td class="text-center">{{ $item->quantity }}</td>
 							<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>
 							<td class="text-right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
-							@if($invoice->status == 'logged')
+							@if($invoice->status == 'estimate' || $invoice->status == 'logged')
 								<td class="text-right" nowrap="nowrap">
 									<form action="{{ route('admin.invoicer.invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
 										class="pull-right">

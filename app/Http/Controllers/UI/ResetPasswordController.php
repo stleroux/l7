@@ -60,29 +60,8 @@ class ResetPasswordController extends Controller
       // Check if user has required permission
 
 
-         // $rules = [
-         //    'current-password' => 
-         //    [
-         //       'required',
-         //       'string',
-         //       'min:10',             // must be at least 10 characters in length
-         //       'regex:/[a-z]/',      // must contain at least one lowercase letter
-         //       'regex:/[A-Z]/',      // must contain at least one uppercase letter
-         //       'regex:/[0-9]/',      // must contain at least one digit
-         //       'regex:/[@$!%*#?&]/', // must contain a special character,
-         //    ]
-         // ];
-
-         // $customMessages = [
-         //    'current-password' => 'Required',
-         // ];
-
-         // $this->validate($request, $rules, $customMessages);
-
-
       // The current password does not match the one provided
       if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-         // dd('HERE');
          Session::flash ('danger', 'Your current password does not match the password you provided. Please try again.');
          // $notification = [
          //    'message' => 'Your current password does not match the password you provided. Please try again.', 

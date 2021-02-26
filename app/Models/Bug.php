@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Haruncpi\LaravelUserActivity\Traits\Loggable;
 
-class Bug extends Model
+class Bug extends Model implements Auditable
 {
    use SoftDeletes;
+   use \OwenIt\Auditing\Auditable;
+   use Loggable;
 
    protected $guarded = [];
    

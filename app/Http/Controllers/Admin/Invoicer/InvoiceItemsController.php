@@ -8,11 +8,16 @@ use App\Models\Carving;
 use App\Models\InvoicerInvoice;
 use App\Models\InvoicerInvoiceItem;
 use App\Models\InvoicerProduct;
+use App\Models\User;
+use App\Notifications\Invoicer\BillableAddNotification;
+use App\Notifications\Invoicer\BillableRemoveNotification;
+use App\Notifications\Invoicer\BillableUpdateNotification;
 use Config;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 use Session;
 
@@ -49,9 +54,6 @@ class InvoiceItemsController extends Controller
 		$invoice = InvoicerInvoice::findOrFail($inv_id);
 		$products = InvoicerProduct::orderBy('code', 'asc')->get();
 		$carvings = Carving::all();
-		// ->pluck('code','id');
-		// dd($products);
-		// $products = Product::orderBy('code', 'asc')->get()->toArray();
 
 		return view('admin.invoicer.invoiceItems.create.create', compact('invoice', 'products','carvings'));
 	}
@@ -67,17 +69,25 @@ class InvoiceItemsController extends Controller
 // Remove the specified resource from storage
 // Used in the index page and trashAll action to soft delete multiple records
 ##################################################################################################################
-	public function destroy($id)
+	public function destroy(Request $request, $id)
 	{
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 		$item = InvoicerInvoiceItem::find($id);
+		// dd($item);
 		$invoice_id = $item->invoice_id;
 		$item->delete();
 
 		// update invoice with totals
 		$this::invUpdate($invoice_id);
+
+		// Need to requery the invoice to get the updated total
+		$invoice = InvoicerInvoice::with('client')->findOrFail($item->invoice_id);
+
+		// Notify admins
+		$users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
+		Notification::send($users, new BillableRemoveNotification($item, $invoice));
 
 		// set a flash message to be displayed on screen
 		$notification = [
@@ -86,7 +96,7 @@ class InvoiceItemsController extends Controller
 		];
 
 		// redirect to another page
-		return redirect()->route('admin.invoicer.invoices.edit.edit', $item->invoice_id )->with($notification);
+		return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id )->with($notification);
 	}
 
 
@@ -106,9 +116,110 @@ class InvoiceItemsController extends Controller
 
 		$item = InvoicerInvoiceItem::find($id);
 		$products = InvoicerProduct::orderBy('code', 'asc')->get();
-		// ->pluck('code','id');
 		
 		return view('admin.invoicer.invoiceItems.edit.edit', compact('item','products'));
+	}
+
+
+##################################################################################################################
+# ███████╗████████╗ ██████╗ ██████╗ ███████╗
+# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
+# ███████╗   ██║   ██║   ██║██████╔╝█████╗  
+# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
+# ███████║   ██║   ╚██████╔╝██║  ██║███████╗
+# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
+// Store a newly created resource in storage
+##################################################################################################################
+	public function store(InvoiceItemRequest $request)
+	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('invoicer-invoice'), 403);
+
+		if($request->carving)
+		{
+			$product = $request->carving;
+		}
+		if($request->product)
+		{
+			$product = $request->product;
+		}
+		if($request->item)
+		{
+			$product = $request->item;
+		}
+
+		$item = new InvoicerInvoiceItem;
+			$item->invoice_id = $request->invoice_id;
+			$item->product = $product;
+			$item->notes = $request->notes;
+			$item->work_date = $request->work_date;
+			$item->quantity = $request->quantity;
+			$item->price = $request->price;
+			$item->total = $request->quantity * $request->price;
+		$item->save();
+
+		// // update invoice with totals
+		$this::invUpdate($request->invoice_id);
+
+		// Need to requery the invoice to get the updated total
+		$invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
+
+		// Notify admins
+		$users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
+		Notification::send($users, new BillableAddNotification($item, $invoice));
+
+		$notification = [
+			'message' => 'The billable item was successfully added!',
+			'alert-type' => 'success'
+		];
+
+		// redirect to another page
+	   return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+	}
+
+
+##################################################################################################################
+# ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
+# ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+# ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  
+# ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
+# ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
+#  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+// UPDATE :: Update the specified resource in storage
+##################################################################################################################
+	public function update(InvoiceItemRequest $request, $id)
+	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('invoicer-invoice'), 403);
+		
+		$item = InvoicerInvoiceItem::find($id);
+			$item->invoice_id = $request->invoice_id;
+			$item->product = $request->product;
+			$item->notes = $request->notes;
+			$item->work_date = $request->work_date;
+			$item->quantity = $request->quantity;
+			$item->price = $request->price;
+			$item->total = $request->quantity * $request->price;
+		$item->save();
+
+		// update invoice with totals
+		$this::invUpdate($request->invoice_id);
+
+		// Need to requery the invoice to get the updated total
+		$invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
+		
+		// Notify admins
+		$users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
+		Notification::send($users, new BillableUpdateNotification($item, $invoice));
+
+		// set a flash message to be displayed on screen
+		$notification = [
+			'message' => 'The billable item was updated successfully!',
+			'alert-type' => 'success'
+		];
+
+	   // redirect to another page
+	   return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
 	}
 
 
@@ -145,102 +256,6 @@ class InvoiceItemsController extends Controller
 			$invoice->total_deductions = $inv_total_deductions;
 			$invoice->total = $inv_total;
 		$invoice->save();
-	}
-
-
-##################################################################################################################
-# ███████╗████████╗ ██████╗ ██████╗ ███████╗
-# ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝
-# ███████╗   ██║   ██║   ██║██████╔╝█████╗  
-# ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  
-# ███████║   ██║   ╚██████╔╝██║  ██║███████╗
-# ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
-// Store a newly created resource in storage
-##################################################################################################################
-	public function store(InvoiceItemRequest $request)
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-invoice'), 403);
-
-		if($request->carving)
-		{
-			$product = $request->carving ;
-			// dd($product);
-		}
-		if($request->product)
-		{
-			$product = $request->product;
-			// dd($product);
-		}
-		if($request->item)
-		{
-			$product = $request->item;
-			// dd($product);
-		}
-
-		$item = new InvoicerInvoiceItem;
-			$item->invoice_id = $request->invoice_id;
-			// $item->product_id = $request->product_id;
-			$item->product = $product;
-			$item->notes = $request->notes;
-			$item->work_date = $request->work_date;
-			$item->quantity = $request->quantity;
-			$item->price = $request->price;
-			$item->total = $request->quantity * $request->price;
-		$item->save();
-
-		// // update invoice with totals
-		$this::invUpdate($request->invoice_id);
-		// \App\Invoice::update($request->invoice_id);
-
-		// set a flash message to be displayed on screen
-		// Session::flash('success','');
-		$notification = [
-			'message' => 'The billable item was successfully added!',
-			'alert-type' => 'success'
-		];
-
-		// redirect to another page
-	   return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
-	}
-
-
-##################################################################################################################
-# ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
-# ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
-# ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  
-# ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
-# ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
-#  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
-// UPDATE :: Update the specified resource in storage
-##################################################################################################################
-	public function update(InvoiceItemRequest $request, $id)
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-invoice'), 403);
-		
-		$item = InvoicerInvoiceItem::find($id);
-			$item->invoice_id = $request->invoice_id;
-			// $item->product_id = $request->product_id;
-			$item->product = $request->product;
-			$item->notes = $request->notes;
-			$item->work_date = $request->work_date;
-			$item->quantity = $request->quantity;
-			$item->price = $request->price;
-			$item->total = $request->quantity * $request->price;
-		$item->save();
-
-		// update invoice with totals
-		$this::invUpdate($request->invoice_id);
-
-		// set a flash message to be displayed on screen
-		$notification = [
-			'message' => 'The billable item was updated successfully!',
-			'alert-type' => 'success'
-		];
-
-	   // redirect to another page
-	   return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
 	}
 
 

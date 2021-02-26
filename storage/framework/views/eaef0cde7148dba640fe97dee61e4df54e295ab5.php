@@ -9,22 +9,33 @@
 
 	<br />
 	
-	<input
-	   type="checkbox"
-	   name="public_email"
-	   id="public_email"
-	   class="form-control"
-	   data-bootstrap-switch
-	   data-off-color="danger"
-	   data-off-text="Private"
-	   data-on-color="success"
-	   data-on-text="Public"
-	   placeholder="public"
-	   data-inputmask=""
-	   <?php if($user->public_email || old('public_email')): ?> checked <?php endif; ?>
-	   <?php echo e($disabled ?? ''); ?>
+	<?php if(Route::currentRouteName('') == 'admin.users.show'): ?>
 
-	/>
+      <div class="p-1 m-0 bg-gray-light">
+         <?php echo e(($user->public_email) ? 'Yes' : 'No'); ?>
+
+      </div>
+
+   <?php else: ?>
+
+		<input
+		   type="checkbox"
+		   name="public_email"
+		   id="public_email"
+		   class="form-control"
+		   data-bootstrap-switch
+		   data-off-color="danger"
+		   data-off-text="Private"
+		   data-on-color="success"
+		   data-on-text="Public"
+		   placeholder="public"
+		   data-inputmask=""
+		   <?php if($user->public_email || old('public_email')): ?> checked <?php endif; ?>
+		   <?php echo e($disabled ?? ''); ?>
+
+		/>
+
+	<?php endif; ?>
 
 	<?php $__errorArgs = ['public_email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

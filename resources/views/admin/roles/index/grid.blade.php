@@ -37,8 +37,12 @@
                <td class="d-none d-lg-table-cell">{{ $role->id }}</td>
                <td nowrap="nowrap">{{ $role->name }}</td>
                <td class="d-none d-lg-table-cell">{{ implode(', ', $role->permissions()->get()->pluck('name')->toArray()) }}</td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($role->created_at){{ $role->created_at }}@endif">{{ $role->created_at->toDateString() }}</td>
-               <td class="d-none d-lg-table-cell" title="@if($role->updated_at){{ $role->updated_at }}@endif">{{ $role->updated_at->toDateString() }}</td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($role->created_at){{ $role->created_at }}@endif">
+                  {{ $role->created_at->format(config('settings.dateFormat')) }}
+               </td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($role->updated_at){{ $role->updated_at }}@endif">
+                  {{ $role->updated_at->format(config('settings.dateFormat')) }}
+               </td>
                <td class="text-right">
                   @include('admin.roles.index.actions')
                </td>

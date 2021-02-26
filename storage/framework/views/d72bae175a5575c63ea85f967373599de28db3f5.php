@@ -46,8 +46,14 @@
                <td><?php echo e($project->images()->count()); ?></td>
                <td><?php echo e($project->finishes()->count()); ?></td>
                <td><?php echo e($project->materials()->count()); ?></td>
-               <td nowrap="nowrap" title="<?php if($project->created_at): ?><?php echo e($project->created_at); ?><?php endif; ?>"><?php echo e($project->created_at->toDateString()); ?></td>
-               <td title="<?php if($project->updated_at): ?><?php echo e($project->updated_at); ?><?php endif; ?>"><?php echo e($project->updated_at->toDateString()); ?></td>
+               <td nowrap="nowrap" title="<?php if($project->created_at): ?><?php echo e($project->created_at); ?><?php endif; ?>">
+                  <?php echo e($project->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
+               <td title="<?php if($project->updated_at): ?><?php echo e($project->updated_at); ?><?php endif; ?>">
+                  <?php echo e($project->updated_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
                <td class="text-right">
                   <?php echo $__env->make('admin.projects.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>

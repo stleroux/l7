@@ -1,11 +1,10 @@
 <?php
 
-
 //////////////////////////////////////////////////////////////////////////////
 // FINISHES ROUTES
 //////////////////////////////////////////////////////////////////////////////
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
-   // Route::get('{finish}/delete',          'FinishesController@delete')           ->name('delete');
    Route::post('/finishes/restore/{finish}',  'FinishesController@restore')             ->name('finishes.restore');
    Route::post('/finishes/mass_restore',      'FinishesController@massRestore')         ->name('finishes.mass_restore');
    Route::post('/finishes/delete/{finish}',   'FinishesController@delete')              ->name('finishes.delete');

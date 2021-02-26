@@ -47,11 +47,8 @@ class SiteController extends Controller
       $projects   = DB::table('general')->where('name', '=', 'projects')->first();
       $recipes    = DB::table('general')->where('name', '=', 'recipes')->first();
       $blogs      = DB::table('general')->where('name', '=', 'blog')->first();
-		// dd($greeting);
 
 		return view('UI.homepage', compact('posts','greeting','newUser','carvings','projects','recipes','blogs'));
-		// return view('UI.homepage', compact('posts'));
-		// return view('UI.homepage');
 	}
 
 

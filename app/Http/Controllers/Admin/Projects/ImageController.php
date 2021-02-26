@@ -106,16 +106,12 @@ class ImageController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $project = Project::find($id);
-        // dd($project);
-        // dd($request);
-        // dd($id);
 
         // Check if a new image was submitted
         if ($request->hasFile('image')) {
             //Add new photo
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-// $resize_image = Image::make($filename->getRealPath());
             
             $image_location = public_path('_projects/' . $id . '/' . $filename);
             $fs_image_location = public_path('_projects/' . $id . '/full_size/' . $filename);
@@ -134,10 +130,6 @@ class ImageController extends Controller
             if (!file_exists('_projects/' . $id . '/thumbs/')) {
                mkdir('_projects/' . $id . '/thumbs/', 0777, true);
             }
-
-// $resize_image->resize(150, 150, function($constraint){
-//       $constraint->aspectRatio();
-//      })->save($thumb_location . '/' . $filename);
 
             Img::make($image)
                 ->resize(800, 600, function($constraint)
@@ -199,9 +191,6 @@ class ImageController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $image = ProjectImage::findOrFail($id);
-        // dd($image);
-        // dd($request);
-        // dd($id);
             $image->display_name = $request->display_name; 
             $image->description = $request->image_description;
         $image->save();
@@ -209,4 +198,5 @@ class ImageController extends Controller
         Session::flash('success', 'Image added succesfully.');
         return redirect()->back();
     }
+    
 }

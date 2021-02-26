@@ -6,16 +6,26 @@
       {{ $label ?? 'City' }}
    </label>
    
-   <input
-      type="text"
-      name="city"
-      id="city"
-      class="form-control @error('city') is-invalid @enderror"
-      value="{{ old('city') ?? $user->city }}"
-      placeholder="City"
-      data-inputmask=""
-      {{ $disabled ?? '' }}
-   />
+   @if(Route::currentRouteName('') == 'admin.users.show')
+
+      <div class="p-1 m-0 bg-gray-light">
+         {!! $user->city !!}
+      </div>
+
+   @else
+
+      <input
+         type="text"
+         name="city"
+         id="city"
+         class="form-control @error('city') is-invalid @enderror"
+         value="{{ old('city') ?? $user->city }}"
+         placeholder="City"
+         data-inputmask=""
+         {{ $disabled ?? '' }}
+      />
+
+   @endif
    
    @error('city')
       <span class="invalid-feedback" role="alert">

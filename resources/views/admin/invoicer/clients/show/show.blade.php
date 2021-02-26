@@ -198,5 +198,7 @@
 			</div>
 		@endif
 	</div>
+
+	@include('common.audits')
 	
 @endsection

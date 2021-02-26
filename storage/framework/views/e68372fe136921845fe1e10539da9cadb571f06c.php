@@ -2,7 +2,7 @@
    <div class="card card-outline card-primary mb-2">
       <div class="card-header p-2">Add Image</div>
       <div class="card-body p-3">
-         <form action="<?php echo e(route('carvings.image.store', $carving->id)); ?>" method="post" enctype="multipart/form-data" >
+         <form action="<?php echo e(route('admin.carvings.image.store', $carving->id)); ?>" method="post" enctype="multipart/form-data" >
             <?php echo csrf_field(); ?>
 
             <!-- IMAGE -->

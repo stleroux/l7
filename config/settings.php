@@ -31,7 +31,10 @@ return [
    'homepageBlogCount' => '5',
 
    // The number of popular items to display in each block
-   'popularCount' => '5',
+   'popularCount' => '15',
+
+   // The number of views an item must have to be considered popular
+   'viewsToBePopularCount' => '50',
 
    // The number of rows to return by default in Livewire tables
    'perPage' => '15',

@@ -10,6 +10,16 @@
 		<tr>
 			<td>
 				@can('invoicer-invoice')
+					<a href="{{ route('admin.invoicer.invoices.estimates') }}">Estimates</a>
+				@else
+					Estimates
+				@endcan
+			</td>
+			<td class="text-right">{{ $invoicesEstimates->count() }}</td>
+		</tr>
+		<tr>
+			<td>
+				@can('invoicer-invoice')
 					<a href="{{ route('admin.invoicer.invoices.logged') }}">Logged</a>
 				@else
 					Logged

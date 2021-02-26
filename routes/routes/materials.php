@@ -1,10 +1,10 @@
 <?php
 
 //////////////////////////////////////////////////////////////////////////////
-// MATERIALS ROUTES
+// BACKEND MATERIALS ROUTES
 //////////////////////////////////////////////////////////////////////////////
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
-   // Route::get('{material}/delete',        'MaterialsController@delete')           ->name('delete');
    Route::post('/materials/restore/{material}',  'MaterialsController@restore')             ->name('materials.restore');
    Route::post('/materials/mass_restore',        'MaterialsController@massRestore')         ->name('materials.mass_restore');
    Route::post('/materials/delete/{material}',   'MaterialsController@delete')              ->name('materials.delete');

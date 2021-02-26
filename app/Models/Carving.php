@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Carving extends Model implements Searchable
+class Carving extends Model implements Searchable, Auditable
 {
    use SoftDeletes;
+   use \OwenIt\Auditing\Auditable;
    
    protected $guarded = [];
 

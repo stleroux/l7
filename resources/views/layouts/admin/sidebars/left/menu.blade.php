@@ -103,6 +103,15 @@
    </li>
 @endcan
 
+@can('admin-notifications')
+   <li class="nav-item">
+      <a href="{{ Route('admin.notifications.all') }}" class="nav-link {{ Request::is('admin/notifications*') ? 'active' : '' }}">
+         <i class="{{ config('icons.bell') }}"></i>
+         <p>Notifications</p>
+      </a>
+   </li>
+@endcan
+
 @can('permission-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.permissions.index') }}" class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
@@ -184,11 +193,21 @@
    </li>
 @endcan
 
-@can('role-manage')
+@can('user-manage')
    <li class="nav-item">
       <a href="{{ Route('admin.users.index') }}" class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}">
          <i class="{{ config('icons.users') }}"></i>
          <p>Users</p>
+      </a>
+   </li>
+@endcan
+
+
+@can('admin-audits')
+   <li class="nav-item">
+      <a href="/admin/user-activity" class="nav-link {{ Request::is('admin/user-activity*') ? 'active' : '' }}" target="_blank">
+         <i class="{{ config('icons.users') }}"></i>
+         <p>User Activity</p>
       </a>
    </li>
 @endcan

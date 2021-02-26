@@ -23,7 +23,7 @@
 
 	@include('admin.invoicer.products.show.topbar')
 
-		<div class="card">
+		<div class="card mb-3">
 			
 {{-- 			<div class="card-header">
 				<span class="h3">Product Information</span>
@@ -47,11 +47,13 @@
 							{{-- {{ Form::label ('details', 'Details:')}} --}}
 							<label for="details">Details:</label>
 							{{-- {{ Form::text ('details', $product->details, ['class'=>'form-control', 'readonly']) }} --}}
-							<input type="text" name="details" value="$product->details" class="form-control" readonly="">
+							<input type="text" name="details" value="{{ $product->details }}" class="form-control" readonly="">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
+	@include('common.audits')
+	
 @endsection

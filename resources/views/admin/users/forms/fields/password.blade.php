@@ -14,7 +14,9 @@
    	value="{{ old('password') }}"
       placeholder="Password"
       data-inputmask=""
-      {{ $disabled ?? '' }}
+      @if(Route::currentRouteName('') == 'admin.users.show')
+         disabled
+      @endif
    />
 
    @if(Route::currentRouteName('') == 'admin.users.create')

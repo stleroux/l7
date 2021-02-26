@@ -12,6 +12,8 @@
       {{-- <div class="col-xl-4"> --}}
          @include('admin.permissions.create.single')
          @include('admin.permissions.create.multiple')
+         @include('admin.permissions.create.crud')
+         @include('admin.permissions.create.bread')
       {{-- </div> --}}
    @endif
 @endsection

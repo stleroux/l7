@@ -5,13 +5,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
-// use Collective\Html\Eloquent\FormAccessible;
 use Config;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class InvoicerInvoiceItem extends Model
+class InvoicerInvoiceItem extends Model implements Auditable
 {
 	use Sortable;
-   // use FormAccessible;
+   use \OwenIt\Auditing\Auditable;
 
 	protected $table = 'invoicer__invoice_items';
 	protected $dates = ['work_date'];

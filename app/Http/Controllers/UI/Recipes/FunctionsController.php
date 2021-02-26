@@ -120,6 +120,7 @@ class FunctionsController extends RecipesController
       $recipe->addFavorite();
 
       Session::flash ('success','The recipe was successfully added to your Favorites list!');
+
       return redirect()->back();
    }
 
@@ -140,7 +141,8 @@ class FunctionsController extends RecipesController
       $recipe = Recipe::find($id);
       $recipe->removeFavorite();
 
-      Session::flash ('success','The recipe was successfully removed to your Favorites list!');
+      Session::flash ('success','The recipe was successfully removed from your Favorites list!');
+
       return redirect()->back();
    }
 
@@ -239,10 +241,7 @@ class FunctionsController extends RecipesController
 ##################################################################################################################
    public function privatize($id)
    {
-      // dd($id);
       $recipe = Recipe::find($id);
-      // dd('Privatize '. $recipe);
-      // dd('Privatize');
       
       // Check if user has required permission
 
@@ -254,6 +253,7 @@ class FunctionsController extends RecipesController
       DB::table('favorites')->where('favoriteable_id', '=', $id)->delete();
 
       Session::flash('success','The recipe was successfully made private');
+
       return redirect()->back();
    }
 
@@ -268,7 +268,6 @@ class FunctionsController extends RecipesController
 ##################################################################################################################
    public function publicize($id)
    {
-      // dd($id);
       $recipe = Recipe::find($id);
 
       // Check if user has required permission
@@ -278,6 +277,7 @@ class FunctionsController extends RecipesController
       $recipe->save();
 
       Session::flash('success','The recipe was successfully made public');
+
       return redirect()->back();
    }
 
@@ -424,8 +424,6 @@ class FunctionsController extends RecipesController
          $comment->comment = $request->comment;
       $recipe->comments()->save($comment);
 
-      // Session::flash('success','Comment added succesfully.');
-      // return redirect()->route('recipes.show', $recipe->id);
       $notification = [
          'message' => 'The comment has been added successfully!', 
          'alert-type' => 'success'

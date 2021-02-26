@@ -11,11 +11,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Recipe extends Model implements Searchable
+class Recipe extends Model implements Searchable, Auditable
 {
    use SoftDeletes;
    use Favoriteable;
+   use \OwenIt\Auditing\Auditable;
 
    protected $dates = ['deleted_at', 'published_at'];
 
@@ -163,27 +165,27 @@ class Recipe extends Model implements Searchable
 //////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
-   public function getCreatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(Config::get('settings.dateFormat'));
-         return $date;
-      }
+   // public function getCreatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(Config::get('settings.dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
-   public function getUpdatedAtAttribute($date)
-   {
-      if($date){
-         $date = new \Carbon\Carbon($date);
-         $date = $date->format(Config::get('settings.dateFormat'));
-         return $date;
-      }
+   // public function getUpdatedAtAttribute($date)
+   // {
+   //    if($date){
+   //       $date = new \Carbon\Carbon($date);
+   //       $date = $date->format(Config::get('settings.dateFormat'));
+   //       return $date;
+   //    }
       
-      // return 'N/A';
-   }
+   //    // return 'N/A';
+   // }
 
 
    public function getSearchResult(): SearchResult

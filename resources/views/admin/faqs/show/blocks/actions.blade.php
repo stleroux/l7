@@ -3,10 +3,10 @@
    <div class="card-header p-2">Actions</div>
    
    <div class="card-body p-1">
-      @include('admin.faqs.actions.common.back')
-      @include('admin.faqs.actions.common.previous')
-      @include('admin.faqs.actions.common.next')
-      @include('admin.faqs.actions.common.edit')
+      @include('admin.actions.common.back', ['modelName'=>'faq'])
+		@include('admin.actions.common.previous', ['modelName'=>'faq', 'model'=>$faq])
+		@include('admin.actions.common.next', ['modelName'=>'faq', 'model'=>$faq])
+      @include('admin.actions.common.edit', ['modelName'=>'faq', 'model'=>$faq])
    </div>
    
 </div>

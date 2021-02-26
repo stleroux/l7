@@ -15,7 +15,7 @@
          <div class="col-sm-12">
             <div class="form-group">
                <div class="form-group">
-                  <?php echo $__env->make('admin.users.form.fields.notes', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                  <?php echo $__env->make('admin.users.forms.fields.notes', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </div>
             </div>
          </div>

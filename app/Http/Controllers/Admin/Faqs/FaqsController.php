@@ -73,7 +73,6 @@ class FaqsController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.Carvings.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -90,51 +89,15 @@ class FaqsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('faq-delete'), 403);
 
-      // Delete images from file system
-      // $images = DB::table('carvings_images')->where('carving_id', '=', $id)->get();
-
-      // if($images) {
-      //    foreach($images as $image) {
-      //       // Delete the image(s) and thumbnail(s) from storage
-      //       $image_path = public_path().'/_carvings/'.$id.'/'.$image->name;
-      //       $thumbs_path = public_path().'/_carvings/'.$id.'/thumbs/'.$image->name;
-      //       unlink($image_path);
-      //       unlink($thumbs_path);
-      //    }
-      // }
-
-      // Check if there are any files left in the thumbs folder, if not, delete the folder
-      // if (count(glob('_carvings/' . $id . "/thumbs/*")) === 0 ) { // empty
-      //    // Delete the thumbs folder
-      //    File::deleteDirectory(public_path('_carvings/'.$id.'/thumbs/'));
-      //    // Delete the main folder
-      //    File::deleteDirectory(public_path('_carvings/' . $id));
-      // }
-
-      // Delete related images from DB
-      // DB::table('carvings_images')->where('carving_id', '=', $id)->delete();
-
-      // Delete related materials from DB
-      // DB::table('carving_material')->where('carving_id', '=', $id)->delete();
-
-      // Delete related finishes from DB
-      // DB::table('carving_finish')->where('carving_id', '=', $id)->delete();
-
-      // Delete related tags from DB
-      // DB::table('carving_tag')->where('carving_id', '=', $id)->delete();
-
-      // Delete the Carving from the database
+      // Delete the FAQ from the database
       $faq = Faq::onlyTrashed()->findOrFail($id);
       $faq->forceDelete();
 
-      // Set flash data with success message
-      // Session::flash('delete','The Carving, related files and DB entries were deleted successfully.');
       $notification = [
          'message' => 'The question was deleted successfully.', 
          'alert-type' => 'success'
       ];
-      // Redirect
-      // return redirect()->route('admin.Carvings.index')->with($notification);
+
       return redirect()->back()->with($notification);
    }
 
@@ -153,10 +116,6 @@ class FaqsController extends Controller
       abort_unless(Gate::allows('faq-edit'), 403);
 
       $faq = Faq::findOrFail($faq->id);
-
-      // $materials = Material::all();
-      // $finishes = Finish::all();
-      // $tags = Tag::where('category',1)->orderBy('name')->get();
 
       return view('admin.faqs.edit', compact('faq'));
    }
@@ -178,15 +137,8 @@ class FaqsController extends Controller
       // Set the session to the current page route
       // Session::put('fromPage', url()->full());
 
-      // if(request('tag')){
-         // dd(request('tag'));
-         // $carvings = Tag::where('name', request('tag'))->firstOrFail()->carvings->sortBy('name');
-      // } else {
-         $faqs = Faq::orderBy('question','asc')->get();
-      // }
-
-      // $tags = Tag::where('category',1)->orderBy('name')->get();
-
+      $faqs = Faq::orderBy('question','asc')->get();
+      
       return view('admin.faqs.index', compact('faqs'));
    }
 
@@ -217,15 +169,6 @@ class FaqsController extends Controller
             'alert-type' => 'success'
          ];
 
-         // save the tags in the post_tag table
-         // false required as default (otherwise override existing association)
-         // if (isset($request->tags))
-         // {
-         //     $carving->tags()->sync($request->tags, false);
-         // } else {
-         //     $carving->tags()->sync(array());
-         // }
-
          if ($request->submit == 'new')
          {
             return redirect()->back()->with($notification);
@@ -237,7 +180,6 @@ class FaqsController extends Controller
          }
 
       }
-
 
       return redirect()->route('admin.faqs.index')->with($notification);
    }
@@ -256,11 +198,6 @@ class FaqsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('faq-manage'), 403);
 
-      // Increase the view count if viewed from the frontend
-      // if (url()->previous() != url('/Carvings/list')) {
-      //     DB::table('Carvings__carvings')->where('id','=',$Carving->id)->increment('views',1);
-      // }
-
       // get previous Carving
       $previous = Faq::where('question', '<', $faq->question)->orderBy('question','asc')->max('question');
       
@@ -277,10 +214,10 @@ class FaqsController extends Controller
          $next = $n[0]->id;
       }
 
-      // Get the first image associated to this Carving
-      // $image = CarvingImage::where('carving_id', '=', $carving->id)->first();
+      // Get all associated Audits
+      $audits = $faq->audits()->with('user')->orderBy('id','desc')->get();
 
-      return view('admin.faqs.show', compact('faq','previous','next'));
+      return view('admin.faqs.show', compact('faq','previous','next','audits'));
    }
 
 
@@ -310,19 +247,8 @@ class FaqsController extends Controller
             'alert-type' => 'success'
          ];
 
-         //save the tags in the databse
-         // not adding 2nd param will delete all entries in array and replace them with new ones
-         // check that there is something in the array and then save it else pass an empty array
-         // if (isset($request->tags))
-         // {
-         //     $carving->tags()->sync($request->tags);
-         // } else {
-         //     $carving->tags()->sync(array());
-         // }
-
          if ($request->submit == 'update')
          {
-            // return redirect()->back()->with($notification);
             return redirect()->route('admin.faqs.index')->with($notification);
          }
 
@@ -436,43 +362,7 @@ class FaqsController extends Controller
          
          foreach ($faqs as $faq_id) {
             $faq = Faq::onlyTrashed()->findOrFail($faq_id);
-
-            // Delete images from file system
-            // $images = DB::table('carvings_images')->where('carving_id', '=', $carving->id)->get();
-
-            // if($images) {
-            //    foreach($images as $image) {
-            //       // Delete the image(s) and thumbnail(s) from storage
-            //       $image_path = public_path().'/_carvings/'.$carving->id.'/'.$image->name;
-            //       $thumbs_path = public_path().'/_carvings/'.$carving->id.'/thumbs/'.$image->name;
-            //       unlink($image_path);
-            //       unlink($thumbs_path);
-            //    }
-            // }
-
-            // Check if there are any files left in the thumbs folder, if not, delete the folder
-            // if (count(glob('_carvings/' . $carving->id . "/thumbs/*")) === 0 ) { // empty
-            //    // Delete the thumbs folder
-            //    File::deleteDirectory(public_path('_carvings/'.$carving->id.'/thumbs/'));
-            //    // Delete the main folder
-            //    File::deleteDirectory(public_path('_carvings/' . $carving->id));
-            // }
-
-            // Delete related images from DB
-            // DB::table('carvings_images')->where('carving_id', '=', $carving->id)->delete();
-
-            // // Delete related materials from DB
-            // DB::table('carving_material')->where('carving_id', '=', $carving->id)->delete();
-
-            // // Delete related finishes from DB
-            // DB::table('carving_finish')->where('carving_id', '=', $carving->id)->delete();
-
-            // // Delete related tags from DB
-            // DB::table('carving_tag')->where('carving_id', '=', $carving->id)->delete();
-
-
             $faq->forceDelete();
-            // $project->permissions()->detach();
          }
 
          $notification = [
@@ -499,7 +389,6 @@ class FaqsController extends Controller
    {
       // Check if user has required permission
       abort_unless(Gate::allows('faq-manage'), 403);
-
 
       $faq = Faq::find($id);
          $faq->views = 0;

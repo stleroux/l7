@@ -27,7 +27,7 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-sm-12 col-md-8">
-						<div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
+						<div class="form-group {{ $errors->has('contact_name') ? 'has-error' : '' }}">
 							<label for="contact_name" class="required">Contact Name</label>
 							{{-- {{ Form::label ('contact_name', 'Contact Name:', ['class'=>'required']) }} --}}
 							<input type="text" name="contact_name" class="form-control">
@@ -82,7 +82,7 @@
 					</div>
 
 					<div class="col-sm-12 col-md-4">
-						<div class="form-group {{ $errors->has('contact_name') ? 'has-error' : '' }}">
+						<div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
 							<label for="company_name">Company Name</label>
 							{{-- {{ Form::label ('company_name', 'Company Name:', ['class'=>'required']) }} --}}
 							<input type="text" name="company_name" class="form-control" autofocus>

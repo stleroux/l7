@@ -81,7 +81,7 @@ class RecipesController extends Controller
       // Check if user has required permission
       abort_unless((Gate::allows('recipe-delete') || ($recipe->user_id == Auth::id())), 403);
 
-      // delete the permission
+      // delete the recipe
       $recipe->delete();
 
       $notification = [
@@ -89,7 +89,6 @@ class RecipesController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.projects.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -244,7 +243,6 @@ class RecipesController extends Controller
       Session::put('fromPage', url()->full());
 
       // Get all categories related to Recipe Category (id=>1)
-      // $categories = Category::where('parent_id',1)->get();
       $categories = [];
 
       $alphas = DB::table('recipes')
@@ -307,9 +305,6 @@ class RecipesController extends Controller
       // Check if user has required permission
       abort_unless((Gate::allows('recipe-manage') || ($recipe->user_id == Auth::id())), 403);
 
-      // Increase the view count since this is viewed from the frontend
-      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
-
       $categories = Category::where('parent_id',1)->get();
 
       // get previous project
@@ -326,7 +321,10 @@ class RecipesController extends Controller
          $next = $n[0]->id;
       }
 
-      return view('admin.recipes.show', compact('recipe','categories','previous','next'));
+      // Get all associated Audits
+      $audits = $recipe->audits()->with('user')->orderBy('id','desc')->get();
+
+      return view('admin.recipes.show', compact('recipe','categories','previous','next','audits'));
    }
 
 
@@ -393,7 +391,6 @@ class RecipesController extends Controller
          }
       }
 
-
       return redirect()->route('admin.recipes.index')->with($notification);
    }
 
@@ -409,10 +406,8 @@ class RecipesController extends Controller
 ##################################################################################################################
    public function update(RecipeRequest $request, $id)
    {
-      // dd($request->submit);
       // Get the recipe values from the database
       $recipe = Recipe::find($id);
-      // dd($recipe);
 
       // Check if user has required permission
       abort_unless((Gate::allows('recipe-edit') || ($recipe->user_id == Auth::id())), 403);
@@ -453,7 +448,6 @@ class RecipesController extends Controller
             $recipe->image = $filename;
 
             // Delete old photo
-            //Storage::delete($oldImageName);
             File::delete('_recipes/'.$oldImageName);
          }
 
@@ -464,13 +458,6 @@ class RecipesController extends Controller
          'message' => 'The recipe has been updated successfully!', 
          'alert-type' => 'success'
       ];
-
-      // if(Session::get('fromPage') === 'recipes.index') {
-      //    return redirect()->route('recipes.index', 'all')->with($notification);
-      // } else {
-      //    // return redirect()->route(Session::get('fromPage'));
-      //    return redirect(Session::get('fromPage'))->with($notification);
-      // }
 
       if ($request->submit == 'continue')
       {

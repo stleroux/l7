@@ -8,6 +8,9 @@
    <div class="col-xl-3">
       @include('admin.users.forms.panels.image')
       @include('admin.users.forms.panels.other')
+      @if(Route::currentRouteName('') == 'admin.users.show' || Route::currentRouteName('') == 'admin.users.edit')
+         @include('admin.users.forms.panels.login')
+      @endif
    </div>
 
    <div class="col-xl-3">

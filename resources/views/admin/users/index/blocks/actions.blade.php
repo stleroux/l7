@@ -4,31 +4,31 @@
    
    <div class="card-body p-1">
 
-      @include('admin.users.actions.common.create')
+      @include('admin.actions.common.create', ['modelName'=>'user'])
 
       {{-- //////////////// --}}
       @if(Route::currentRouteName() == 'admin.users.approved')
-         @include('admin.users.actions.mass.disable')
+         @include('admin.actions.mass.disable')
       @endif
       {{-- //////////////// --}}
 
       {{-- //////////////// --}}
       @if(Route::currentRouteName() == 'admin.users.disabled')
-         @include('admin.users.actions.mass.approve')
+         @include('admin.actions.mass.approve')
       @endif
       {{-- //////////////// --}}
 
       {{-- //////////////// --}}
       @if(Route::currentRouteName() != 'admin.users.trashed')
-         @include('admin.users.actions.mass.destroy')
+         @include('admin.actions.mass.destroy', ['modelName'=>'user'])
       @endif
       {{-- //////////////// --}}
 
 
       {{-- //////////////// --}}
       @if(Route::currentRouteName() == 'admin.users.trashed')         
-         @include('admin.users.actions.mass.restore')
-         @include('admin.users.actions.mass.delete')
+         @include('admin.actions.mass.restore', ['modelName'=>'user'])
+         @include('admin.actions.mass.delete', ['modelName'=>'user'])
       @endif
       {{-- //////////////// --}}
 

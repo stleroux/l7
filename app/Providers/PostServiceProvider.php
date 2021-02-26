@@ -30,7 +30,7 @@ class PostServiceProvider extends ServiceProvider
       //
       view()->composer('UI.blog.blocks.popular', function ($view) {
          $popular = Post::published()
-             ->where('views', '>=', 10)
+             ->where('views', '>=', Config::get('settings.viewsToBePopularCount'))
              ->orderBy('views', 'desc')
              ->take(config('settings.popularCount'))
              ->get();

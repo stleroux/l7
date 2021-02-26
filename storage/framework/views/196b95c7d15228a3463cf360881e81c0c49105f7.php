@@ -37,8 +37,14 @@
                <td class="d-none d-lg-table-cell"><?php echo e($role->id); ?></td>
                <td nowrap="nowrap"><?php echo e($role->name); ?></td>
                <td class="d-none d-lg-table-cell"><?php echo e(implode(', ', $role->permissions()->get()->pluck('name')->toArray())); ?></td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($role->created_at): ?><?php echo e($role->created_at); ?><?php endif; ?>"><?php echo e($role->created_at->toDateString()); ?></td>
-               <td class="d-none d-lg-table-cell" title="<?php if($role->updated_at): ?><?php echo e($role->updated_at); ?><?php endif; ?>"><?php echo e($role->updated_at->toDateString()); ?></td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($role->created_at): ?><?php echo e($role->created_at); ?><?php endif; ?>">
+                  <?php echo e($role->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($role->updated_at): ?><?php echo e($role->updated_at); ?><?php endif; ?>">
+                  <?php echo e($role->updated_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
                <td class="text-right">
                   <?php echo $__env->make('admin.roles.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>

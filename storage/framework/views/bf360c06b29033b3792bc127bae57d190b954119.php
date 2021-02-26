@@ -7,15 +7,26 @@
 
    </label>
    
-   <textarea
-   	name="notes"
-   	id="notes"
-   	class="form-control"
-   	rows="2"
-   	data-autosize
-   	placeholder="Notes"
-      data-inputmask=""
-      <?php echo e($disabled ?? ''); ?>><?php echo e(old('notes') ?? $user->notes); ?></textarea>
+   <?php if(Route::currentRouteName('') == 'admin.users.show'): ?>
+
+      <div class="p-1 m-0 bg-gray-light">
+         <?php echo $user->notes; ?>
+
+      </div>
+
+   <?php else: ?>
+
+      <textarea
+      	name="notes"
+      	id="notes"
+      	class="form-control"
+      	rows="2"
+      	data-autosize
+      	placeholder="Notes"
+         data-inputmask=""
+         <?php echo e($disabled ?? ''); ?>><?php echo e(old('notes') ?? $user->notes); ?></textarea>
+
+   <?php endif; ?>
 
    <?php $__errorArgs = ['notes'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

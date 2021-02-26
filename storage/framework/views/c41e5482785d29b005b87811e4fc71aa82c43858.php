@@ -20,6 +20,9 @@
 					<div class="col-xl-2">
 						<?php echo $__env->make('admin.dashboard.infoBoxes.features', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>							
 					</div>
+					<div class="col-xl-2">
+						<?php echo $__env->make('admin.dashboard.infoBoxes.audits', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -27,19 +30,48 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
-         		<div class="col-xl-4">
+         		<div class="col-xl-3">
 	               <h3><?php echo e($usersPerMonthChart->options['chart_title']); ?></h3>
-	             	<?php echo $usersPerMonthChart->renderHtml(); ?>            			
+	             	<?php echo $usersPerMonthChart->renderHtml(); ?>
+
          		</div>
-         		<div class="col-xl-4">
+         		<div class="col-xl-3">
 	             	<h3><?php echo e($bugsByTypeChart->options['chart_title']); ?></h3>
-	             	<?php echo $bugsByTypeChart->renderHtml(); ?>            			
+	             	<?php echo $bugsByTypeChart->renderHtml(); ?>
+
          		</div>
-         		<div class="col-xl-4">
+         		<div class="col-xl-3">
 	             	<h3><?php echo e($featuresByTypeChart->options['chart_title']); ?></h3>
-	             	<?php echo $featuresByTypeChart->renderHtml(); ?>            			
+	             	<?php echo $featuresByTypeChart->renderHtml(); ?>
+
+         		</div>
+         		<div class="col-xl-3">
+	             	<h3><?php echo e($carvingsByCategoryChart->options['chart_title']); ?></h3>
+	             	<?php echo $carvingsByCategoryChart->renderHtml(); ?>
+
          		</div>
          	</div>
+         	<div class="row">
+         		<div class="col-xl-6">
+         			<h3><?php echo e($recipesByCategoryChart->options['chart_title']); ?></h3>
+	             	<?php echo $recipesByCategoryChart->renderHtml(); ?>
+
+         		</div>
+         		<div class="col-xl-6">
+         			<h3><?php echo e($projectsByCategoryChart->options['chart_title']); ?></h3>
+	             	<?php echo $projectsByCategoryChart->renderHtml(); ?>
+
+         		</div>
+         	</div>
+
+				<div class="row">
+         		<div class="col-xl-6">
+         			<h3><?php echo e($billablesByItemChart->options['chart_title']); ?></h3>
+	             	<?php echo $billablesByItemChart->renderHtml(); ?>
+
+         		</div>
+         	</div>
+         	
 			</div>
 		</div>
 
@@ -170,13 +202,21 @@
 <?php $__env->startSection('scripts'); ?>
 	<?php echo $usersPerMonthChart->renderChartJsLibrary(); ?>
 
-	
 	<?php echo $usersPerMonthChart->renderJs(); ?>
 
 	<?php echo $bugsByTypeChart->renderJs(); ?>
 
 	<?php echo $featuresByTypeChart->renderJs(); ?>
 
+	<?php echo $carvingsByCategoryChart->renderJs(); ?>
+
+	<?php echo $recipesByCategoryChart->renderJs(); ?>
+
+	<?php echo $projectsByCategoryChart->renderJs(); ?>
+
+	<?php echo $billablesByItemChart->renderJs(); ?>
+
+	
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.admin.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/lerouxs/sites/l7/resources/views/admin/dashboard/index.blade.php ENDPATH**/ ?>

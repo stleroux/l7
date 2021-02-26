@@ -4,15 +4,15 @@
    
    <div class="card-body p-1">
 
-      @include('admin.tags.actions.common.create')
+      @include('admin.actions.common.create', ['modelName'=>'tag'])
 
       @if(Route::currentRouteName() == 'admin.tags.index')
-         @include('admin.tags.actions.mass.destroy')
+         @include('admin.actions.mass.destroy', ['modelName'=>'tag'])
       @endif
 
       @if(Route::currentRouteName() == 'admin.tags.trashed')
-         @include('admin.tags.actions.mass.restore')
-         @include('admin.tags.actions.mass.delete')         
+         @include('admin.actions.mass.restore', ['modelName'=>'tag'])
+         @include('admin.actions.mass.delete', ['modelName'=>'tag'])
       @endif
       
    </div>

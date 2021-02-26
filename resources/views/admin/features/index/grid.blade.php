@@ -39,8 +39,12 @@
                <td nowrap="nowrap"><a href="{{ route('admin.features.show', $feature) }}">{{ $feature->title }}</a></td>
                <td nowrap="nowrap">{{ $feature->user->username }}</td>
                <td nowrap="nowrap">{{ $feature->status }}</td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($feature->created_at){{ $feature->created_at }}@endif">{{ $feature->created_at->toDateString() }}</td>
-               <td class="d-none d-lg-table-cell" title="@if($feature->updated_at){{ $feature->updated_at }}@endif">{{ $feature->updated_at->toDateString() }}</td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($feature->created_at){{ $feature->created_at }}@endif">
+                  {{ $feature->created_at->format(config('settings.dateFormat')) }}
+               </td>
+               <td class="d-none d-lg-table-cell" title="@if($feature->updated_at){{ $feature->updated_at }}@endif">
+                  {{ $feature->updated_at->format(config('settings.dateFormat')) }}
+               </td>
                <td class="text-right">
                   @include('admin.features.index.actions')
                </td>

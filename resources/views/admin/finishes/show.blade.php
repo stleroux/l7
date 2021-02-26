@@ -11,6 +11,9 @@
 @section('content')
 
    @include('admin.finishes.forms.form')
+
+	@include('common.audits')
+	
    @include('admin.finishes.help')
 
 @endsection

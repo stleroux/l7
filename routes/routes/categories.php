@@ -1,8 +1,9 @@
 <?php
 
 //////////////////////////////////////////////////////////////////////////////
-// CATEGORIES ROUTES
+// BACKEND CATEGORIES ROUTES
 //////////////////////////////////////////////////////////////////////////////
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    Route::post('categories/restore/{category}','CategoriesController@restore')        ->name('categories.restore');
    Route::post('categories/delete/{category}', 'CategoriesController@delete')         ->name('categories.delete');

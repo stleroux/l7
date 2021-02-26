@@ -56,7 +56,10 @@ class FeaturesController extends Controller
 		// Check if user has required permission
       abort_unless(Gate::allows('feature-show'), 403);
 
-		return view('admin.features.show', compact('feature'));
+      // Get all associated Audits
+      $audits = $feature->audits()->with('user')->orderBy('id','desc')->get();
+
+		return view('admin.features.show', compact('feature','audits'));
 	}
 
 
@@ -76,7 +79,6 @@ class FeaturesController extends Controller
       $feature = New Feature();
 
       return view('admin.features.create', compact('feature'));
-      // return view('admin.features.create');
    }
 
 ##################################################################################################################
@@ -124,8 +126,6 @@ class FeaturesController extends Controller
 
       }
 
-
-      // return redirect()->route('admin.features.index')->with($notification);
       return redirect()->route('admin.features.index')->with($notification);
    }
 
@@ -143,9 +143,6 @@ class FeaturesController extends Controller
 		// Check if user has required permission
       abort_unless(Gate::allows('feature-edit'), 403);
       
-      // $feature = feature::find($feature->id);
-      // dd($feature);
-
       return view('admin.features.edit', compact('feature'));
 	}
 
@@ -163,9 +160,6 @@ class FeaturesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('feature-edit'), 403);
 
-      // $feature = feature::findOrFail($feature->id);
-      // dd($feature);
-
       // validate the data
       $this->validate($request, [
          'title' => 'required|min:5',
@@ -177,7 +171,7 @@ class FeaturesController extends Controller
       $feature->status = $request->status;
       $feature->description = $request->description;
       $feature->resolution = $request->resolution;
-      // dd($feature);
+
       // Save the data
       $feature->save();
 
@@ -230,34 +224,34 @@ class FeaturesController extends Controller
    public function massDestroy(Request $request)
    {
 	
-	// Check if user has required permission
-	abort_unless(Gate::allows('feature-delete'), 403);
+   	// Check if user has required permission
+   	abort_unless(Gate::allows('feature-delete'), 403);
 
-	$features = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
+   	$features = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
-	if(!$request->input('mass_destroy_pass_checkedvalue'))
-	{
+   	if(!$request->input('mass_destroy_pass_checkedvalue'))
+   	{
 
-	$notification = array(
-		'message' => 'Please select entries to be deleted.', 
-		'alert-type' => 'error'
-	);
+   	$notification = array(
+   		'message' => 'Please select entries to be deleted.', 
+   		'alert-type' => 'error'
+   	);
 
-	} else {
-	 
-	foreach ($features as $feature_id) {
-		$feature = Feature::findOrFail($feature_id);
-		$feature->delete();
-	}
+   	} else {
+   	 
+      	foreach ($features as $feature_id) {
+      		$feature = Feature::findOrFail($feature_id);
+      		$feature->delete();
+      	}
 
-	$notification = array(
-		'message' => 'The selected feature requests have been deleted successfully!', 
-		'alert-type' => 'success'
-	);
+      	$notification = array(
+      		'message' => 'The selected feature requests have been deleted successfully!', 
+      		'alert-type' => 'success'
+      	);
 
-	}
+      }
 
-	return redirect()->back()->with($notification);
+   	return redirect()->back()->with($notification);
    }
 
 

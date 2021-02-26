@@ -79,7 +79,6 @@ class CarvingsController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.Carvings.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -134,13 +133,11 @@ class CarvingsController extends Controller
       $carving->forceDelete();
 
       // Set flash data with success message
-      // Session::flash('delete','The Carving, related files and DB entries were deleted successfully.');
       $notification = [
          'message' => 'The carving, related files and DB entries were deleted successfully.', 
          'alert-type' => 'success'
       ];
-      // Redirect
-      // return redirect()->route('admin.Carvings.index')->with($notification);
+
       return redirect()->back()->with($notification);
    }
 
@@ -206,7 +203,6 @@ class CarvingsController extends Controller
 // Store a newly created resource in storage
 ##################################################################################################################
    public function store(CarvingRequest $request, Carving $carving)
-   // public function store(Carving $Carving)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('carving-create'), 403);
@@ -254,7 +250,6 @@ class CarvingsController extends Controller
 
       }
 
-
       return redirect()->route('admin.carvings.index')->with($notification);
    }
 
@@ -271,11 +266,6 @@ class CarvingsController extends Controller
    {
       // Check if user has required permission
       abort_unless(Gate::allows('carving-manage'), 403);
-
-      // Increase the view count if viewed from the frontend
-      // if (url()->previous() != url('/Carvings/list')) {
-      //     DB::table('Carvings__carvings')->where('id','=',$Carving->id)->increment('views',1);
-      // }
 
       // get previous Carving
       $previous = Carving::where('name', '<', $carving->name)->orderBy('name','asc')->max('name');
@@ -296,7 +286,11 @@ class CarvingsController extends Controller
       // Get the first image associated to this Carving
       $image = CarvingImage::where('carving_id', '=', $carving->id)->first();
 
-      return view('admin.carvings.show', compact('carving','image','previous','next'));
+      // Get all associated Audits
+      $audits = $carving->audits()->with('user')->orderBy('id','desc')->get();
+      // dd($audits);
+
+      return view('admin.carvings.show', compact('carving','image','previous','next','audits'));
    }
 
 
@@ -348,7 +342,6 @@ class CarvingsController extends Controller
 
          if ($request->submit == 'update')
          {
-            // return redirect()->back()->with($notification);
             return redirect()->route('admin.carvings.index')->with($notification);
          }
 

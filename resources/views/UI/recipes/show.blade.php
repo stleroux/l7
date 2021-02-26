@@ -24,7 +24,6 @@
 @endsection
 
 @section ('content')
-
 	<div class="row pb-2">
 		<div class="col">
 			<div class="text-center">
@@ -41,15 +40,16 @@
 			<div class="text-right">
 				<div class="btn-group">
 					{{-- @include('UI.recipes.buttons.back', ['size'=>'sm', 'btn_label'=>'Back']) --}}
-		<a href="{{ route('recipes.indexGrid') }}"
-         class="btn btn-sm btn-maroon">
-         <i class="{{ config('icons.back') }}"></i>
-         Recipes
-      </a>
 
-      @if (url()->previous() == request()->root() . '/UI/search')
-         <a href="#" class="btn btn-sm btn-maroon" onclick="history.back()">Search Results</a>
-      @endif
+					<a href="{{ Session::get('fromPage') }}" class="btn btn-sm btn-maroon">
+						<i class="{{ config('icons.back') }}"></i>
+						Recipes
+					</a>
+
+			      @if (url()->previous() == request()->root() . '/UI/search')
+			         <a href="#" class="btn btn-sm btn-maroon" onclick="history.back()">Search Results</a>
+			      @endif
+
 					@auth
 						@include('UI.recipes.buttons.print', ['size'=>'sm', 'btn_label'=>'Print'])
 						@include('UI.recipes.buttons.printPDF', ['size'=>'sm', 'btn_label'=>'Print PDF'])

@@ -66,13 +66,13 @@ class ClientsController extends Controller
       abort_unless(Gate::allows('invoicer-client'), 403);
 
 		$client = InvoicerClient::find($id);
+		
 		$client->delete();
 
 		// Set flash data with success message
 		Session::flash('danger','The client was deleted successfully.');
 
-		// Redirect
-		return redirect()->route('invoicer.clients');
+		return redirect()->back();
 	}
 
 
@@ -88,7 +88,6 @@ class ClientsController extends Controller
 	public function edit($id)
 	{
 		// Check if user has required permission
-	  // if(!checkPerm('invoicer_client_edit')) { abort(401, 'Unauthorized Access'); }
 		abort_unless(Gate::allows('invoicer-client'), 403);
 
 		$client = InvoicerClient::findOrFail($id);
@@ -111,11 +110,7 @@ class ClientsController extends Controller
 		// Check if user has required permission
 	  	abort_unless(Gate::allows('invoicer-client'), 403);
 
-	  // $clients = User::where('invoicer_client', 1)->paginate(Config::get('settings.rowsPerPage'));
-	  // $clients = User::sortable()->with('invoices')->where('company_name', '!=', '')->paginate(Config::get('settings.rowsPerPage'));
-	  	// $clients = InvoicerClient::with('invoices')->sortable()->paginate(Config::get('settings.rowsPerPage'));
 	  	$clients = InvoicerClient::sortable()->paginate(Config::get('settings.rowsPerPage'));
-	  	// dd($clients);
 
 		return view('admin.invoicer.clients.index.index', compact('clients'));
 	}
@@ -139,11 +134,6 @@ class ClientsController extends Controller
 		}
 
 		if($request->selection == 'contact') {
-			// $clients = InvoicerClient::
-			// 	where('username', 'like', '%' . $request->searchWord . '%')
-			// 	->Orwhere('first_name', 'like', '%' . $request->searchWord . '%')
-			// 	->Orwhere('last_name', 'like', '%' . $request->searchWord . '%')
-			// 	->paginate(10);
 			$clients = InvoicerClient::where('contact_name', 'like', '%' . $request->searchWord . '%')->paginate(10);
 		}
 		
@@ -165,11 +155,12 @@ class ClientsController extends Controller
 		// Check if user has required permission
 	  	abort_unless(Gate::allows('invoicer-client'), 403);	  
 
-		// $client = InvoicerClient::findOrFail($id);
 		$client = InvoicerClient::with('invoices')->findOrFail($id);
-		// dd($client);
 
-		return view('admin.invoicer.clients.show.show', compact('client'));
+		// Get all associated Audits
+      $audits = $client->audits()->with('user')->orderBy('id','desc')->get();
+
+		return view('admin.invoicer.clients.show.show', compact('client','audits'));
 	}
 
 
@@ -191,7 +182,7 @@ class ClientsController extends Controller
 		$this->validate($request, array(
 			'contact_name' => 'required',
 			'telephone' => 'required',
-			'email' => 'required|email'
+			'email' => 'required|email|unique:invoicer__clients'
 		));
 
 		// save the data in the database
@@ -208,7 +199,6 @@ class ClientsController extends Controller
 			$client->fax = $request->fax;
 			$client->email = $request->email;
 			$client->website = $request->website;
-			// $client->user_id = 1;
 		$client->save();
 
 		// set a flash message to be displayed on screen
@@ -221,7 +211,6 @@ class ClientsController extends Controller
 		}
 		
 	   return redirect()->route('admin.invoicer.clients');
-	   // return redirect()->route('invoicer.clients')->with('success','The client was successfully saved!');
 	}
 
 
@@ -243,7 +232,8 @@ class ClientsController extends Controller
 		$this->validate($request, array(
 			'contact_name' => 'required',
 			'telephone' => 'required',
-			'email' => 'required|email'
+			// 'email' => 'required|email'
+			'email' => "required|email|unique:invoicer__clients,{$this->invoicer__clients->id}"
 		));
 
 		$client = InvoicerClient::find($id);

@@ -37,9 +37,9 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-        $bugs = Bug::all();
+      $bugs = Bug::all();
 
-        return view('admin.bugs.index', compact('bugs'));
+      return view('admin.bugs.index', compact('bugs'));
     }
 
 
@@ -56,7 +56,10 @@ class BugsController extends Controller
         // Check if user has required permission
       abort_unless(Gate::allows('bug-show'), 403);
 
-      return view('admin.bugs.show', compact('bug'));
+      // Get all associated Audits
+      $audits = $bug->audits()->with('user')->orderBy('id','desc')->get();
+
+      return view('admin.bugs.show', compact('bug','audits'));
     }
 
 
@@ -76,7 +79,6 @@ class BugsController extends Controller
       $bug = New Bug();
 
       return view('admin.bugs.create', compact('bug'));
-      // return view('admin.bugs.create');
    }
 
 ##################################################################################################################
@@ -115,7 +117,6 @@ class BugsController extends Controller
 
         if ($request->submit == 'new')
         {
-          // return view('admin.bugs.create')->with($notification);
           return redirect()->back()->with($notification);
         }
 
@@ -125,7 +126,6 @@ class BugsController extends Controller
         }
 
       }
-
 
       return redirect()->route('admin.bugs.index')->with($notification);
    }
@@ -144,8 +144,7 @@ class BugsController extends Controller
         // Check if user has required permission
       abort_unless(Gate::allows('bug-edit'), 403);
       
-      $bug = Bug::find($bug->id);
-      // dd($bug);
+      // $bug = Bug::find($bug->id);
 
       return view('admin.bugs.edit', compact('bug'));
     }
@@ -164,9 +163,6 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-edit'), 403);
 
-      // $bug = Bug::findOrFail($bug->id);
-      // dd($bug);
-
       // validate the data
       $this->validate($request, [
          'title' => 'required|min:5',
@@ -179,7 +175,7 @@ class BugsController extends Controller
       $bug->status = $request->status;
       $bug->description = $request->description;
       $bug->resolution = $request->resolution;
-      // dd($bug);
+
       // Save the data
       $bug->save();
 
@@ -246,15 +242,15 @@ class BugsController extends Controller
 
     } else {
      
-    foreach ($bugs as $bug_id) {
-        $bug = Bug::findOrFail($bug_id);
-        $bug->delete();
-    }
+      foreach ($bugs as $bug_id) {
+          $bug = Bug::findOrFail($bug_id);
+          $bug->delete();
+      }
 
-    $notification = array(
-        'message' => 'The selected bugs have been deleted successfully!', 
-        'alert-type' => 'success'
-    );
+      $notification = array(
+          'message' => 'The selected bugs have been deleted successfully!', 
+          'alert-type' => 'success'
+        );
 
     }
 

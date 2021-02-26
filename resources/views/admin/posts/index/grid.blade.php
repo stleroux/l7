@@ -54,13 +54,16 @@
 						{{ $post->favoritesCount }}
 					</td>
 					<td>
-						@include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
+						{{-- @include('common.authorFormat', ['model'=>$post, 'field'=>'user']) --}}
+						{{ $post->created_at->format(config('settings.dateFormat')) }}
 					</td>
 					<td>
-						@include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
+						{{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at']) --}}
+						{{ $post->updated_at->format(config('settings.dateFormat')) }}
 					</td>
 					<td>
-						@include('common.dateFormat', ['model'=>$post, 'field'=>'published_at'])
+						{{ $post->published_at ? $post->published_at->format(config('settings.dateFormat')) : 'N/A' }}
+						{{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'published_at']) --}}
 					</td>
 					{{-- <td class="text-right">
 						<div class="btn-group">

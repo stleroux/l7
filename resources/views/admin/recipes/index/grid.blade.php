@@ -57,10 +57,12 @@
 						@include('common.authorFormat', ['model'=>$recipe, 'field'=>'user'])
 					</td>
 					<td>
-						@include('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'])
+						{{ $recipe->created_at->format(config('settings.dateFormat')) }}
+						{{-- {{ $recipe->created_at }} --}}
 					</td>
 					<td>
-						@include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'])
+						{{ $recipe->published_at ? $recipe->published_at->format(config('settings.dateFormat')) : 'N/A' }}
+						{{-- @include('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at']) --}}
 					</td>
 					{{-- <td class="text-right">
 						<div class="btn-group">

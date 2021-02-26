@@ -35,6 +35,8 @@
       </div>
    </div>
 
+   @include('common.audits')
+
    @include('admin.carvings.help')
 
 @endsection

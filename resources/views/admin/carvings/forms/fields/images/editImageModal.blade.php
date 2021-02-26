@@ -9,7 +9,7 @@
             </button>
          </div>
          <div class="modal-body">
-            <form action="{{ route('carvings.image.update', $image->id) }}" method="post" >
+            <form action="{{ route('admin.carvings.image.update', $image->id) }}" method="post" >
                @csrf
                @method('put')
 

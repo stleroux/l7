@@ -1,5 +1,9 @@
 <?php
 
+//////////////////////////////////////////////////////////////////////////////
+// BACKEND BUGS ROUTES
+//////////////////////////////////////////////////////////////////////////////
+
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
 
 	// Generate routes based on options in Model
@@ -19,5 +23,10 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
    Route::delete('bugs/mass_delete',        'BugsController@massDelete')       ->name('bugs.mass_delete');
    Route::resource('bugs', 'BugsController');
 });
+
+
+//////////////////////////////////////////////////////////////////////////////
+// FRONTEND BUGS ROUTES
+//////////////////////////////////////////////////////////////////////////////
 
 Route::resource('bugs', 'UI\BugsController');

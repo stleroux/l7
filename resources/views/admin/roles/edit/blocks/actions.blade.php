@@ -3,10 +3,10 @@
    <div class="card-header p-2">Actions</div>
    
    <div class="card-body p-1">
-      @include('admin.roles.actions.common.back')
-      @include('admin.roles.actions.common.updateAndClose')
-      @include('admin.roles.actions.common.updateAndContinue')
-      @include('admin.roles.actions.common.reset')
+      @include('admin.actions.common.back', ['modelName'=>'role'])
+      @include('admin.actions.common.updateAndClose')
+      @include('admin.actions.common.updateAndContinue')
+      @include('admin.actions.common.reset')
    </div>
 
 </div>

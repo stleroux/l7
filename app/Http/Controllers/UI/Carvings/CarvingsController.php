@@ -47,7 +47,6 @@ class CarvingsController extends Controller
     // public function index($filter = null, $tag = null)
     public function index($filter = null, $tag = null)
     {
-
         // Check if user has required permission
         
 
@@ -62,7 +61,6 @@ class CarvingsController extends Controller
 
         // Filter and Tag
         } elseif($filter && $tag) {
-            // $carvings = Carving::with('images')->where('category', '=', $filter)->orderBy('name')->paginate(8);
             $carvings = Carving::where('category', '=', $filter)->whereHas('tags', function ($query) {
                 $query->where('name', request('tag'));
             })->get();
@@ -86,7 +84,6 @@ class CarvingsController extends Controller
     // public function index($filter = null, $tag = null)
     public function faq()
     {
-
         // Check if user has required permission
         
 
@@ -133,10 +130,7 @@ class CarvingsController extends Controller
             $next = $n[0]->id;
         }
 
-        // Get the first image associated to this project
-        // $image = Image::where('project_id', '=', $project->id)->first();
-
-        // return view('UI.projects.show', compact('project','image','previous','next'));
         return view('UI.carvings.show', compact('carving','previous','next'));
     }
+
 }

@@ -19,8 +19,8 @@
             <th class="d-none d-sm-table-cell">Email</th>
             {{-- <th class="d-none d-table-cell">Account Status</th> --}}
             <th class="d-none d-md-table-cell">Roles</th>
-            <th class="d-none d-sm-table-cell">Company Name</th>
-            <th class="d-none d-sm-table-cell" title="Dart DoubleOut">DDO</th>
+            {{-- <th class="d-none d-sm-table-cell">Company Name</th> --}}
+            {{-- <th class="d-none d-sm-table-cell" title="Dart DoubleOut">DDO</th> --}}
             <th class="d-none d-lg-table-cell">Created</th>
             {{-- <th class="d-none d-lg-table-cell">Updated</th> --}}
             @if(Route::currentRouteName() == 'admin.users.trashed')
@@ -60,14 +60,18 @@
                   @endif
                </td> --}}
                <td class="d-none d-md-table-cell">{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
-               <td class="d-none d-sm-table-cell">{{ $user->company_name }}</td>
-               <td class="d-none d-sm-table-cell">{{ $user->dart_doubleOut }}</td>
-               <td class="d-none d-md-table-cell" title="@if($user->created_at){{ $user->created_at }}@endif">{{ $user->created_at->toDateString() }}</td>
+               {{-- <td class="d-none d-sm-table-cell">{{ $user->company_name }}</td> --}}
+               {{-- <td class="d-none d-sm-table-cell">{{ $user->dart_doubleOut }}</td> --}}
+               <td class="d-none d-md-table-cell" title="@if($user->created_at){{ $user->created_at }}@endif">
+                  {{ $user->created_at->format(config('settings.dateFormat')) }}
+               </td>
                {{-- <td class="d-none d-md-table-cell" title="@if($user->updated_at){{ $user->updated_at }}@endif">{{ $user->updated_at->toDateString() }}</td> --}}
                @if(Route::currentRouteName() == 'admin.users.trashed')
-                  <td title="@if($user->deleted_at){{ $user->deleted_at }}@endif">@if($user->deleted_at){{ $user->deleted_at->toDateString() }}@endif</td>
+                  <td title="@if($user->deleted_at){{ $user->deleted_at }}@endif">
+                     @if($user->deleted_at){{ $user->deleted_at->format(config('settings.dateFormat')) }}@endif
+                  </td>
                @endif
-               <td class="text-right">
+               <td class="text-right" nowrap="nowrap">
                   @include('admin.users.index.actions')
                </td>
             </tr>

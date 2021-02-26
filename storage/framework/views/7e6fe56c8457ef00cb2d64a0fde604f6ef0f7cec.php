@@ -19,8 +19,8 @@
             <th class="d-none d-sm-table-cell">Email</th>
             
             <th class="d-none d-md-table-cell">Roles</th>
-            <th class="d-none d-sm-table-cell">Company Name</th>
-            <th class="d-none d-sm-table-cell" title="Dart DoubleOut">DDO</th>
+            
+            
             <th class="d-none d-lg-table-cell">Created</th>
             
             <?php if(Route::currentRouteName() == 'admin.users.trashed'): ?>
@@ -54,14 +54,19 @@
                <td class="d-none d-sm-table-cell"><?php echo e($user->email); ?></td>
                
                <td class="d-none d-md-table-cell"><?php echo e(implode(', ', $user->roles()->get()->pluck('name')->toArray())); ?></td>
-               <td class="d-none d-sm-table-cell"><?php echo e($user->company_name); ?></td>
-               <td class="d-none d-sm-table-cell"><?php echo e($user->dart_doubleOut); ?></td>
-               <td class="d-none d-md-table-cell" title="<?php if($user->created_at): ?><?php echo e($user->created_at); ?><?php endif; ?>"><?php echo e($user->created_at->toDateString()); ?></td>
+               
+               
+               <td class="d-none d-md-table-cell" title="<?php if($user->created_at): ?><?php echo e($user->created_at); ?><?php endif; ?>">
+                  <?php echo e($user->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
                
                <?php if(Route::currentRouteName() == 'admin.users.trashed'): ?>
-                  <td title="<?php if($user->deleted_at): ?><?php echo e($user->deleted_at); ?><?php endif; ?>"><?php if($user->deleted_at): ?><?php echo e($user->deleted_at->toDateString()); ?><?php endif; ?></td>
+                  <td title="<?php if($user->deleted_at): ?><?php echo e($user->deleted_at); ?><?php endif; ?>">
+                     <?php if($user->deleted_at): ?><?php echo e($user->deleted_at->format(config('settings.dateFormat'))); ?><?php endif; ?>
+                  </td>
                <?php endif; ?>
-               <td class="text-right">
+               <td class="text-right" nowrap="nowrap">
                   <?php echo $__env->make('admin.users.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>
             </tr>

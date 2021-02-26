@@ -43,6 +43,8 @@
       </div>
    </div>
 
+   @include('common.audits')
+
    @include('admin.projects.help')
 
 @endsection

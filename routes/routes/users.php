@@ -1,10 +1,11 @@
 <?php
 
 //////////////////////////////////////////////////////////////////////////////
-// USER ROUTES
+// BACKEND USER ROUTES
 //////////////////////////////////////////////////////////////////////////////
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
-   Route::get('users/approve/{user}',		'UsersController@approve')			->name('users.approve');
+   Route::get('users/enable/{user}',		'UsersController@approve')			->name('users.enable');
    Route::get('users/disable/{user}',		'UsersController@disable')			->name('users.disable');
    Route::post('users/restore/{user}',		'UsersController@restore')			->name('users.restore');
    Route::post('users/delete/{user}',		'UsersController@delete')			->name('users.delete');

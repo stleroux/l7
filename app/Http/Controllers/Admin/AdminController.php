@@ -22,6 +22,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+use OwenIt\Auditing\Audit;
 
 class AdminController extends Controller
 {
@@ -76,6 +77,9 @@ class AdminController extends Controller
 		$userPostsUnpublishedCount = Post::where('user_id', Auth::id())->unpublished()->count();
 		$userPostsFutureCount = Post::where('user_id', Auth::id())->futurePosts()->count();
 		$userPostsTrashedCount = Post::where('user_id', Auth::id())->trashed()->count();
+		
+		// $auditsCount = Audit::count();
+		$auditsCount = \DB::table('audits')->count();
 
 		$newBugs = Bug::where('status', 1)->count();
 		$pendingBugs = Bug::where('status', 2)->count();
@@ -85,8 +89,8 @@ class AdminController extends Controller
 
 		$usersPerMonthChart_options = [
 			'chart_title' => 'Users By Months',
-			'report_type' => 'group_by_date',
 			'model' => 'App\Models\User',
+			'report_type' => 'group_by_date',
 			'group_by_field' => 'created_at',
 			'group_by_period' => 'month',
 			'chart_type' => 'bar',
@@ -96,8 +100,8 @@ class AdminController extends Controller
 
 		$bugsByTypeChart_options = [
 			'chart_title' => 'Bugs By Type',
-			'report_type' => 'group_by_string',
 			'model' => 'App\Models\Bug',
+			'report_type' => 'group_by_string',
 			'group_by_field' => 'status',
 			'chart_type' => 'bar',
 		];
@@ -105,12 +109,50 @@ class AdminController extends Controller
 
 		$featuresByTypeChart_options = [
 			'chart_title' => 'Features By Type',
-			'report_type' => 'group_by_string',
 			'model' => 'App\Models\Feature',
+			'report_type' => 'group_by_string',
 			'group_by_field' => 'status',
 			'chart_type' => 'bar',
 		];
 		$featuresByTypeChart = new LaravelChart($featuresByTypeChart_options);
+
+		$carvingsByCategoryChart_options = [
+			'chart_title' => 'Carvings By Category',
+			'model' => 'App\Models\Carving',
+			'report_type' => 'group_by_string',
+			'group_by_field' => 'category',
+			'chart_type' => 'bar',
+		];
+		$carvingsByCategoryChart = new LaravelChart($carvingsByCategoryChart_options);
+
+		$recipesByCategoryChart_options = [
+			'chart_title' => 'Recipes By Category',
+			'model' => 'App\Models\Recipe',
+			'report_type' => 'group_by_relationship',
+			'relationship_name'  => 'category',
+			'group_by_field' => 'name',
+			'chart_type' => 'bar',
+		];
+		$recipesByCategoryChart = new LaravelChart($recipesByCategoryChart_options);
+
+		$projectsByCategoryChart_options = [
+			'chart_title' => 'Projects By Category',
+			'model' => 'App\Models\Project',
+			'report_type' => 'group_by_string',
+			'relationship_name'  => 'category',
+			'group_by_field' => 'category',
+			'chart_type' => 'bar',
+		];
+		$projectsByCategoryChart = new LaravelChart($projectsByCategoryChart_options);
+
+		$billablesByItemChart_options = [
+			'chart_title' => 'Best Selling Items',
+			'model' => 'App\Models\InvoicerInvoiceItem',
+			'report_type' => 'group_by_string',
+			'group_by_field' => 'product',
+			'chart_type' => 'bar',
+		];
+		$billablesByItemChart = new LaravelChart($billablesByItemChart_options);
 
 		$totalSales = InvoicerInvoice::sum('sub_total');
 		$totalPayments = DB::table('invoicer__invoices')->sum(DB::raw('payments + deposits'));
@@ -122,15 +164,13 @@ class AdminController extends Controller
 		$productsCount = InvoicerProduct::count();
 		
 		$products = InvoicerProduct::all()->pluck('details','id');
-		// dd($products);
+
 		$carvings = Carving::all()->pluck('name','id');
-		// dd($carvings);
+
 		$otherItemsCount = DB::table('invoicer__invoice_items')
                     ->whereNotIn('product', $products)
                     ->whereNotIn('product', $carvings)
                     ->count();
-      // dd($otherItemsCount);
-
 
 		return view('admin.dashboard.index',
 			compact(
@@ -153,9 +193,17 @@ class AdminController extends Controller
 				'userPostsPublishedCount',
 				'userPostsFutureCount',
 				'userPostsTrashedCount',
+				'auditsCount',
+				// Charts
 				'usersPerMonthChart',
 				'bugsByTypeChart',
 				'featuresByTypeChart',
+				'carvingsByCategoryChart',
+				'recipesByCategoryChart',
+				'projectsByCategoryChart',
+				'billablesByItemChart',
+				// 'usersByRoleChart',
+				// Invoicer
 				'totalSales',
 				'totalPayments',
 				'totalDiscounts',

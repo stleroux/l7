@@ -3,11 +3,11 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pageHeader'); ?>
-   <i class="<?php echo e(config('icons.tree')); ?> col-2 text-green pr-2"></i>
+   <i class="<?php echo e(config('icons.projects')); ?> col-2 text-green pr-2"></i>
    <div class="col-8">
       Welcome to TheWoodBarn.ca
    </div>
-   <i class="<?php echo e(config('icons.tree')); ?> col-2 text-green pl-2"></i>
+   <i class="<?php echo e(config('icons.projects')); ?> col-2 text-green pl-2"></i>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>

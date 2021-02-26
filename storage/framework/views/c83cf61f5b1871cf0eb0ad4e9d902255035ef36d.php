@@ -1,4 +1,12 @@
-<a href="<?php echo e(route('admin.'.$modelName.'s.index')); ?>" class="btn btn-block btn-default">
+<?php
+   if($modelName == 'finish'){
+      $routeName = 'admin.finishes.index';
+   } else {
+      $routeName = 'admin.'.$modelName.'s.index';
+   }
+?>
+
+<a href="<?php echo e(route($routeName)); ?>" class="btn btn-block btn-default">
    <i class="<?php echo e(config('icons.back')); ?>"></i>
    Back
 </a>

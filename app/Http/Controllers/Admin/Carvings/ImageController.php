@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Carving;
 use App\Models\CarvingImage;
+use Gate;
 use Session;
 use Image as Img;
 use File;
@@ -105,16 +106,12 @@ class ImageController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $carving = Carving::find($id);
-        // dd($carving);
-        // dd($request);
-        // dd($id);
 
         // Check if a new image was submitted
         if ($request->hasFile('image')) {
             //Add new photo
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-// $resize_image = Image::make($filename->getRealPath());
             
             $image_location = public_path('_carvings/' . $id . '/' . $filename);
             $fs_image_location = public_path('_carvings/' . $id . '/full_size/' . $filename);
@@ -133,10 +130,6 @@ class ImageController extends Controller
             if (!file_exists('_carvings/' . $id . '/thumbs/')) {
                mkdir('_carvings/' . $id . '/thumbs/', 0777, true);
             }
-
-// $resize_image->resize(150, 150, function($constraint){
-//       $constraint->aspectRatio();
-//      })->save($thumb_location . '/' . $filename);
 
             Img::make($image)
                 ->resize(800, 600, function($constraint)
@@ -185,7 +178,6 @@ class ImageController extends Controller
         // Check if user has required permission
         abort_unless(Gate::allows('carving-edit'), 403);
 
-        // dd('update controller');
         $rules = [
             'display_name' => 'required',
             'image_description' => 'required',
@@ -199,9 +191,6 @@ class ImageController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $image = Image::findOrFail($id);
-        // dd($image);
-        // dd($request);
-        // dd($id);
             $image->display_name = $request->display_name; 
             $image->description = $request->image_description;
         $image->save();

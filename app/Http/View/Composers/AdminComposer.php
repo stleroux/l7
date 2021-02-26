@@ -17,7 +17,7 @@ class AdminComposer
 		$newFeaturesCount = Feature::where('status', 1)->count();
 		$view->with('newFeaturesCount', $newFeaturesCount);
 
-		$view->with('newNotificationsCount', $newBugsCount + $newFeaturesCount);
+		// $view->with('newNotificationsCount', $newBugsCount + $newFeaturesCount);
 	}
 
 }

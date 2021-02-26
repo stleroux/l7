@@ -65,6 +65,8 @@
 
    </div>
 
+   @include('common.audits')
+
    @include('admin.posts.help')
 
 @endsection

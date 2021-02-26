@@ -2,7 +2,7 @@
    <div class="card card-outline card-primary mb-2">
       <div class="card-header p-2">Add Image</div>
       <div class="card-body p-3">
-         <form action="{{ route('carvings.image.store', $carving->id) }}" method="post" enctype="multipart/form-data" >
+         <form action="{{ route('admin.carvings.image.store', $carving->id) }}" method="post" enctype="multipart/form-data" >
             @csrf
 
             <!-- IMAGE -->

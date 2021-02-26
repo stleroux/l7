@@ -21,41 +21,37 @@
 
 @section('content')
 
-<div class="card">
+	<div class="card">
 
-{{-- 	<div class="card-header">
-		<span class="h3">Dashboard</span>
-	</div>
- --}}
-	<div class="card-body">
-		<div class="row">
-			<div class="col-12">
-				@include('admin.invoicer.dashboard.inc.totals')
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12">
+					@include('admin.invoicer.dashboard.inc.totals')
+				</div>
+			</div>
+			
+			<div class="row mt-2">
+				<div class="col-xs-12 col-sm-3">
+					@include('admin.invoicer.dashboard.inc.invoices')
+				</div>
+
+				<div class="col-xs-12 col-sm-6">
+					@include('admin.invoicer.dashboard.inc.owingClients')
+					@include('admin.invoicer.dashboard.inc.bestClients')
+				</div>
+
+				<div class="col-xs-12 col-sm-3">
+					@include('admin.invoicer.dashboard.inc.products')
+				</div>
 			</div>
 		</div>
-		
-		<div class="row mt-2">
-			<div class="col-xs-12 col-sm-3">
-				@include('admin.invoicer.dashboard.inc.invoices')
-			</div>
 
-			<div class="col-xs-12 col-sm-6">
-				@include('admin.invoicer.dashboard.inc.owingClients')
-				@include('admin.invoicer.dashboard.inc.bestClients')
-			</div>
-
-			<div class="col-xs-12 col-sm-3">
-				@include('admin.invoicer.dashboard.inc.products')
-			</div>
+		<div class="card-footer p-2">
+			<span class="float-right">
+				<small>V {{ config('invoicer.version') }}</small>
+			</span>		
 		</div>
-	</div>
 
-	<div class="card-footer p-2">
-		<span class="float-right">
-			<small>V {{ config('invoicer.version') }}</small>
-		</span>		
 	</div>
-
-</div>
 
 @endsection

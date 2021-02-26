@@ -1,63 +1,20 @@
 <div class="card card-primary">
+
    <div class="card-header p-2">Actions</div>
+
    <div class="card-body p-1">
 
-      
-         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('material-create')): ?>
-            <a href="<?php echo e(route('admin.materials.create')); ?>" class="btn btn-block btn-outline-success" title="Create Material">
-               <i class="<?php echo e(config('icons.add')); ?>"></i>
-               <div class="d-none d-lg-inline">
-                  Create Material
-               </div>
-            </a>
-         <?php endif; ?>
-      
+      <?php echo $__env->make('admin.actions.common.create', ['modelName'=>'material'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-      <?php if(Route::currentRouteName() == 'admin.materials.index'): ?>
-         <form action="<?php echo e(route('admin.materials.mass_destroy')); ?>" method="post" class="">
-            <?php echo csrf_field(); ?>
-            <?php echo method_field('DELETE'); ?>
-            <input type="hidden" name="mass_destroy_ids" id="mass_destroy_ids" value="" class="bg-danger" size="3" />
-            <a data-toggle="modal"
-               class="btn btn-block btn-outline-pink mt-2"
-               id="btn_multidestroy"
-               style="display:none"
-               data-target="#massDestroy-modal">
-               <i class="<?php echo e(config('icons.trash')); ?>"></i>
-               Trash Selected
-            </a>
-         </form>
+      <?php if(Route::currentRouteName() != 'admin.materials.trashed'): ?>
+         <?php echo $__env->make('admin.actions.mass.destroy', ['modelName'=>'material'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
 
       <?php if(Route::currentRouteName() == 'admin.materials.trashed'): ?>
-         <form action="" method="POST" class="">
-            <?php echo csrf_field(); ?>
-            <input type="hidden" name="mass_restore_ids" id="mass_restore_ids" value="" class="bg-primary" size="3" />
-            <a data-toggle="modal"
-               class="btn btn-block btn-outline-primary mt-2"
-               id="btn_multirestore"
-               style="display:none"
-               data-target="#massRestore-modal">
-               <i class="<?php echo e(config('icons.restore')); ?>"></i>
-               Restore Selected
-            </a>
-         </form>
-
-         <form action="<?php echo e(route('admin.materials.mass_delete')); ?>" method="post" class="">
-            <?php echo csrf_field(); ?>
-            <?php echo method_field('DELETE'); ?>
-            <input type="hidden" name="mass_delete_ids" id="mass_delete_ids" value="" class="bg-warning" size="3" />
-            <a data-toggle="modal"
-               class="btn btn-block btn-outline-danger mt-2"
-               id="btn_multidelete"
-               style="display:none"
-               data-target="#massDelete-modal">
-               <i class="<?php echo e(config('icons.delete')); ?>"></i>
-               Delete Selected
-            </a>
-         </form>
+         <?php echo $__env->make('admin.actions.mass.restore', ['modelName'=>'material'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.delete', ['modelName'=>'material'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
-      
+
    </div>
 </div>
 <?php /**PATH /home/lerouxs/sites/l7/resources/views/admin/materials/index/blocks/actions.blade.php ENDPATH**/ ?>

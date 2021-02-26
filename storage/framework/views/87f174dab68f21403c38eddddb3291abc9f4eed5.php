@@ -4,31 +4,31 @@
    
    <div class="card-body p-1">
 
-      <?php echo $__env->make('admin.users.actions.common.create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('admin.actions.common.create', ['modelName'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
       
       <?php if(Route::currentRouteName() == 'admin.users.approved'): ?>
-         <?php echo $__env->make('admin.users.actions.mass.disable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.disable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
       
 
       
       <?php if(Route::currentRouteName() == 'admin.users.disabled'): ?>
-         <?php echo $__env->make('admin.users.actions.mass.approve', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.approve', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
       
 
       
       <?php if(Route::currentRouteName() != 'admin.users.trashed'): ?>
-         <?php echo $__env->make('admin.users.actions.mass.destroy', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.destroy', ['modelName'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
       
 
 
       
       <?php if(Route::currentRouteName() == 'admin.users.trashed'): ?>         
-         <?php echo $__env->make('admin.users.actions.mass.restore', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-         <?php echo $__env->make('admin.users.actions.mass.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.restore', ['modelName'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.delete', ['modelName'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
       
 

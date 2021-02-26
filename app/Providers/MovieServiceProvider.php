@@ -30,7 +30,7 @@ class MovieServiceProvider extends ServiceProvider
          $popular = Movie::
             // published()
              // ->where('deleted_at', NULL)
-             where('views', '>=', 10)
+             where('views', '>=', Config::get('settings.viewsToBePopularCount'))
              ->orderBy('views', 'desc')
              ->take(config('popularCount'))
              ->get();

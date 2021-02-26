@@ -39,8 +39,14 @@
                <td nowrap="nowrap"><a href="<?php echo e(route('admin.features.show', $feature)); ?>"><?php echo e($feature->title); ?></a></td>
                <td nowrap="nowrap"><?php echo e($feature->user->username); ?></td>
                <td nowrap="nowrap"><?php echo e($feature->status); ?></td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($feature->created_at): ?><?php echo e($feature->created_at); ?><?php endif; ?>"><?php echo e($feature->created_at->toDateString()); ?></td>
-               <td class="d-none d-lg-table-cell" title="<?php if($feature->updated_at): ?><?php echo e($feature->updated_at); ?><?php endif; ?>"><?php echo e($feature->updated_at->toDateString()); ?></td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($feature->created_at): ?><?php echo e($feature->created_at); ?><?php endif; ?>">
+                  <?php echo e($feature->created_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
+               <td class="d-none d-lg-table-cell" title="<?php if($feature->updated_at): ?><?php echo e($feature->updated_at); ?><?php endif; ?>">
+                  <?php echo e($feature->updated_at->format(config('settings.dateFormat'))); ?>
+
+               </td>
                <td class="text-right">
                   <?php echo $__env->make('admin.features.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                </td>

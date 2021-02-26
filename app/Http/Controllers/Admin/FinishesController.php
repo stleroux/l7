@@ -121,9 +121,10 @@ class FinishesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('finish-manage'), 403);
 
-      // $finish = Finish::find($id);
+      // Get all associated Audits
+      $audits = $finish->audits()->with('user')->orderBy('id','desc')->get();
 
-      return view('admin.finishes.show', compact('finish'));
+      return view('admin.finishes.show', compact('finish','audits'));
    }
 
 
@@ -175,7 +176,6 @@ class FinishesController extends Controller
 
          if ($request->submit == 'update')
          {
-            // return redirect()->back()->with($notification);
             return redirect()->route('admin.finishes.index')->with($notification);
          }
 
@@ -268,7 +268,6 @@ class FinishesController extends Controller
       abort_unless(Gate::allows('finish-delete'), 403);
 
       $finish = Finish::onlyTrashed()->findOrFail($id);
-      // dd($finish);
       
       // delete the user
       $finish->forceDelete();
@@ -278,7 +277,6 @@ class FinishesController extends Controller
          'alert-type' => 'success'
       );
 
-      // return view('admin.finishes.delete', compact('finish'));
       return redirect()->back()->with($notification);
    }
 
@@ -310,7 +308,6 @@ class FinishesController extends Controller
          foreach ($finishes as $finish_id) {
             $finish = Finish::onlyTrashed()->findOrFail($finish_id);
             $finish->forceDelete();
-            // $finish->permissions()->detach();
          }
 
          $notification = [
@@ -338,7 +335,6 @@ class FinishesController extends Controller
 
       // Check if user has required permission
       abort_unless(Gate::allows('finish-manage'), 403);
-
       
       // Restore the user
       $finish->restore();

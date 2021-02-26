@@ -31,7 +31,7 @@
                            <td>{{ $image->display_name }}</td>
                            <td>
                               
-                              <form action="{{ route('carvings.image.delete', $image->id) }}" method="POST" class="float-right m-0 p-0">
+                              <form action="{{ route('admin.carvings.image.delete', $image->id) }}" method="POST" class="float-right m-0 p-0">
                                  {{csrf_field()}}
                                  {{ method_field('DELETE') }}
                                  <input type="hidden" value="{{ $carving->id }}" name="carving_id">
@@ -48,8 +48,10 @@
                                       <i class="{{ config('icons.edit') }}"></i>
                                     </a>
 
-
-                                    <button type="submit" class="btn btn-xs btn-danger text-light">
+                                    <button
+                                       type="submit"
+                                       class="btn btn-xs btn-danger text-light"
+                                       onclick="return confirm('Are you sure?')">
                                        <i class="fa fa-trash"></i>
                                     </button>
                                  </div>

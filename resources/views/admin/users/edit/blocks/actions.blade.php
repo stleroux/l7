@@ -4,17 +4,18 @@
 
    <div class="card-body p-1">
    
-      @include('admin.users.actions.common.back')
-      @include('admin.users.actions.common.updateAndClose')
-      @include('admin.users.actions.common.updateAndContinue')
-      @include('admin.users.actions.common.reset')
-      
-      <hr />
+      @include('admin.actions.common.back', ['modelName'=>'user'])
+      @include('admin.actions.common.updateAndClose')
+      @include('admin.actions.common.updateAndContinue')
+      @include('admin.actions.common.reset')
 
-      @if($user->account_status)
-         @include('admin.users.actions.common.disable')
-      @else
-         @include('admin.users.actions.common.enable')         
+      @if($user->username != 'admin')
+         <hr />
+         @if($user->account_status)
+            @include('admin.actions.common.disable')
+         @else
+            @include('admin.actions.common.enable')         
+         @endif
       @endif
    
    </div>

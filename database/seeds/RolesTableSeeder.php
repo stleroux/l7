@@ -1,5 +1,7 @@
 <?php
 
+// // namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
@@ -19,39 +21,48 @@ class RolesTableSeeder extends Seeder
         \DB::table('roles')->insert(array (
             0 => 
             array (
+                'created_at' => '2020-09-22 09:41:06',
+                'deleted_at' => NULL,
+                'description' => NULL,
                 'id' => 1,
                 'name' => 'admin',
-                'description' => NULL,
-                'created_at' => '2020-09-22 09:41:06',
                 'updated_at' => '2020-09-22 09:41:06',
-                'deleted_at' => NULL,
             ),
             1 => 
             array (
+                'created_at' => '2020-09-22 09:41:06',
+                'deleted_at' => NULL,
+                'description' => NULL,
                 'id' => 2,
                 'name' => 'author',
-                'description' => NULL,
-                'created_at' => '2020-09-22 09:41:06',
-                'updated_at' => '2020-09-22 09:41:06',
-                'deleted_at' => NULL,
+                'updated_at' => '2021-01-25 21:55:28',
             ),
             2 => 
             array (
+                'created_at' => '2020-09-22 09:41:06',
+                'deleted_at' => NULL,
+                'description' => NULL,
                 'id' => 3,
                 'name' => 'user',
-                'description' => NULL,
-                'created_at' => '2020-09-22 09:41:06',
-                'updated_at' => '2020-09-22 09:41:06',
-                'deleted_at' => NULL,
+                'updated_at' => '2021-01-25 21:55:28',
             ),
             3 => 
             array (
+                'created_at' => '2020-09-22 09:41:06',
+                'deleted_at' => NULL,
+                'description' => NULL,
                 'id' => 4,
                 'name' => 'registered',
-                'description' => NULL,
-                'created_at' => '2020-09-22 09:41:06',
-                'updated_at' => '2020-09-22 09:41:06',
+                'updated_at' => '2020-10-19 08:12:07',
+            ),
+            4 => 
+            array (
+                'created_at' => '2020-09-28 14:34:38',
                 'deleted_at' => NULL,
+                'description' => NULL,
+                'id' => 5,
+                'name' => 'hayness',
+                'updated_at' => '2020-10-09 23:40:34',
             ),
         ));
         

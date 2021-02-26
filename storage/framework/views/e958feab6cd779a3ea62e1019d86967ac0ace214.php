@@ -9,7 +9,7 @@
 
       <a href="<?php echo e(route('carvings.index')); ?>"
          class="btn btn-xs btn-block btn-<?php echo e(!request('tag') ? 'dark' : 'secondary'); ?> mt-1">
-         All Carvings
+         All Tags
       </a>
 
       <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

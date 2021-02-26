@@ -157,7 +157,10 @@ class ProductsController extends Controller
 
 		$product = InvoicerProduct::findOrFail($id);
 
-		return view('admin.invoicer.products.show.show', compact('product'));
+		// Get all associated Audits
+      $audits = $product->audits()->with('user')->orderBy('id','desc')->get();
+
+		return view('admin.invoicer.products.show.show', compact('product','audits'));
 	}
 
 

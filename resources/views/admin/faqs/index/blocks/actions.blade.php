@@ -4,18 +4,15 @@
 
    <div class="card-body p-1">
 
-      {{-- @if(Route::currentRouteName() == 'admin.carvings.index') --}}
-      @include('admin.faqs.actions.common.create')
-      {{-- @endif --}}
+      @include('admin.actions.common.create', ['modelName'=>'faq'])
 
       @if(Route::currentRouteName() == 'admin.faqs.index')
-         {{-- @include('admin.faqs.actions.mass.resetViews') --}}
-         @include('admin.faqs.actions.mass.destroy')
+         @include('admin.actions.mass.destroy', ['modelName'=>'faq'])
       @endif
 
       @if(Route::currentRouteName() == 'admin.faqs.trashed')
-         @include('admin.faqs.actions.mass.restore')
-         @include('admin.faqs.actions.mass.delete')
+         @include('admin.actions.mass.restore', ['modelName'=>'faq'])
+         @include('admin.actions.mass.delete', ['modelName'=>'faq'])
       @endif
       
    </div>

@@ -4,19 +4,15 @@
 
    <div class="card-body p-1">
 
-      <?php echo $__env->make('admin.bugs.actions.common.create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-      
+      <?php echo $__env->make('admin.actions.common.create', ['modelName'=>'bug'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
       <?php if(Route::currentRouteName() != 'admin.bugs.trashed'): ?>
-         <?php echo $__env->make('admin.bugs.actions.mass.destroy', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-         
+         <?php echo $__env->make('admin.actions.mass.destroy', ['modelName'=>'bug'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
 
       <?php if(Route::currentRouteName() == 'admin.bugs.trashed'): ?>
-         <?php echo $__env->make('admin.bugs.actions.mass.restore', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-         <?php echo $__env->make('admin.bugs.actions.mass.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-         
-         
+         <?php echo $__env->make('admin.actions.mass.restore', ['modelName'=>'bug'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.actions.mass.delete', ['modelName'=>'bug'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
 
    </div>

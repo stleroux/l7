@@ -36,7 +36,6 @@ class FeaturesController extends Controller
    public function index()
    {
       $features = Feature::where('user_id', '=', Auth::user()->id)->get();
-      // $features = Bug::where('user_id', 20)->get();
 
       return view('UI.features.index', compact('features'));
    }
@@ -58,7 +57,6 @@ class FeaturesController extends Controller
       $feature = New Feature();
 
       return view('UI.features.create', compact('feature'));
-      // return view('admin.bugs.create');
    }
 
 ##################################################################################################################
@@ -71,8 +69,6 @@ class FeaturesController extends Controller
 ##################################################################################################################
    public function store(FeatureRequest $request, Feature $feature)
    {
-      // dd($request);
-      // dd($bug->title);
       // Check if user has required permission
       // abort_unless(Gate::allows('role-create'), 403);
 
@@ -103,7 +99,6 @@ class FeaturesController extends Controller
          return redirect()->back()->with($notification);
       }
 
-      // return redirect()->route('admin.bugs.index')->with($notification);
       return redirect()->route('features.index')->with($notification);
    }
 
@@ -119,7 +114,6 @@ class FeaturesController extends Controller
 	public function show(Feature $feature)
 	{
 		// Check if user has required permission
-      // abort_unless(Gate::allows('bug-show'), 403);
       abort_unless((Gate::allows('feature-show') || $feature->user_id == Auth::id()), 403);
 
 		return view('UI.features.show', compact('feature'));
@@ -136,16 +130,9 @@ class FeaturesController extends Controller
 ##################################################################################################################
 	public function edit(Feature $feature)
 	{
-      // dump(Gate::allows('feature-edit'));
-      // dump($this->checkIfOwner($feature));
-      // dump($this->checkIfStatusNew($feature));
 		// Check if user has required permission
-      // abort_unless((Gate::allows('feature-edit') || $this->checkIfOwner($feature) || $this->checkIfStatusNew($feature)), 403);
-      // abort_unless((Gate::allows('feature-edit') || $feature->user_id == Auth::id() || $feature->status == 4 ), 403);
       abort_unless((Gate::allows('feature-edit') || $feature->user_id == Auth::id()), 403);
       
-      // dd($bug);
-
       return view('UI.features.edit', compact('feature'));
 	}
 
@@ -201,8 +188,6 @@ class FeaturesController extends Controller
 	public function destroy(Feature $feature)
 	{
 		// Check if user has required permission
-      // abort_unless((Gate::allows('feature-delete') || $feature->user_id == Auth::id() || $feature->status != 1), 403);
-      // abort_unless((Gate::allows('feature-delete') || $feature->user_id == Auth::id() || checkStatus()), 403);
       abort_unless((Gate::allows('feature-delete') || checkIfOwner() || checkIfStatusNew()), 403);
 	   
       // delete the bug
@@ -213,7 +198,6 @@ class FeaturesController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.projects.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 

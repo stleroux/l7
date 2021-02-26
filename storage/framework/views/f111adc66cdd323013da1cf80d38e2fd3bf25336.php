@@ -15,12 +15,12 @@
       <div class="form-row">
          <div class="col-md-4">
             <div class="form-group">
-               <?php echo $__env->make('admin.users.form.fields.address_1', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+               <?php echo $__env->make('admin.users.forms.fields.address_1', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
          </div>
          <div class="col-md-4">
             <div class="form-group">
-               <?php echo $__env->make('admin.users.form.fields.address_2', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+               <?php echo $__env->make('admin.users.forms.fields.address_2', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
          </div>
       </div>
@@ -28,17 +28,17 @@
       <div class="form-row">
          <div class="col-md-2">
             <div class="form-group">
-               <?php echo $__env->make('admin.users.form.fields.city', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+               <?php echo $__env->make('admin.users.forms.fields.city', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               <?php echo $__env->make('admin.users.form.fields.province', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+               <?php echo $__env->make('admin.users.forms.fields.province', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               <?php echo $__env->make('admin.users.form.fields.postal_code', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+               <?php echo $__env->make('admin.users.forms.fields.postal_code', ['disabled'=>'disabled'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
          </div>
       </div>

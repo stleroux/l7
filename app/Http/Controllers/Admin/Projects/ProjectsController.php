@@ -78,7 +78,6 @@ class ProjectsController extends Controller
          'alert-type' => 'success'
       ];
 
-      // return redirect()->route('admin.projects.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -96,7 +95,7 @@ class ProjectsController extends Controller
       abort_unless(Gate::allows('project-delete'), 403);
 
       // Delete images from file system
-      $images = DB::table('projects__images')->where('project_id', '=', $id)->get();
+      $images = DB::table('projects_images')->where('project_id', '=', $id)->get();
 
       if($images) {
          foreach($images as $image) {
@@ -117,13 +116,13 @@ class ProjectsController extends Controller
       }
 
       // Delete related images from DB
-      DB::table('projects__images')->where('project_id', '=', $id)->delete();
+      DB::table('projects_images')->where('project_id', '=', $id)->delete();
 
       // Delete related materials from DB
-      DB::table('projects__material_project')->where('project_id', '=', $id)->delete();
+      DB::table('material_project')->where('project_id', '=', $id)->delete();
 
       // Delete related finishes from DB
-      DB::table('projects__finish_project')->where('project_id', '=', $id)->delete();
+      DB::table('finish_project')->where('project_id', '=', $id)->delete();
 
       // Delete related tags from DB
       DB::table('project_tag')->where('project_id', '=', $id)->delete();
@@ -132,14 +131,12 @@ class ProjectsController extends Controller
       $project = Project::onlyTrashed()->findOrFail($id);
       $project->forceDelete();
 
-      // Set flash data with success message
-      // Session::flash('delete','The project, related files and DB entries were deleted successfully.');
       $notification = [
          'message' => 'The project, related files and DB entries were deleted successfully.', 
          'alert-type' => 'success'
       ];
+
       // Redirect
-      // return redirect()->route('admin.projects.index')->with($notification);
       return redirect()->back()->with($notification);
    }
 
@@ -262,11 +259,6 @@ class ProjectsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('project-manage'), 403);
 
-      // Increase the view count if viewed from the frontend
-      // if (url()->previous() != url('/projects/list')) {
-      //     DB::table('projects__projects')->where('id','=',$project->id)->increment('views',1);
-      // }
-
       // get previous project
       $previous = Project::where('name', '<', $project->name)->orderBy('name','asc')->max('name');
       
@@ -287,7 +279,10 @@ class ProjectsController extends Controller
       $image = ProjectImage::where('project_id', '=', $project->id)->first();
       $tags = Tag::where('category',2)->get();
 
-      return view('admin.projects.show', compact('project','image','previous','next','tags'));
+      // Get all associated Audits
+      $audits = $project->audits()->with('user')->orderBy('id','desc')->get();
+
+      return view('admin.projects.show', compact('project','image','previous','next','tags','audits'));
    }
 
 
@@ -315,15 +310,6 @@ class ProjectsController extends Controller
       $project->price         = $request->price;
       $project->time_invested = $request->time_invested;
 
-      // // Save the data
-      // $project->save();
-
-      // $notification = [
-      //    'message' => 'The project has been created successfully!',
-      //    'alert-type' => 'success'
-      // ];
-
-      // return redirect()->route('admin.projects.index')->with($notification);
       // Save the data
       if($project->save())
       {
@@ -344,7 +330,6 @@ class ProjectsController extends Controller
 
          if ($request->submit == 'update')
          {
-            // return redirect()->back()->with($notification);
             return redirect()->route('admin.projects.index')->with($notification);
          }
 
@@ -354,7 +339,6 @@ class ProjectsController extends Controller
          }
 
       }
-
 
       return redirect()->route('admin.projects.index')->with($notification);
    }
@@ -461,7 +445,7 @@ class ProjectsController extends Controller
             $project = Project::onlyTrashed()->findOrFail($project_id);
 
             // Delete images from file system
-            $images = DB::table('projects__images')->where('project_id', '=', $project->id)->get();
+            $images = DB::table('projects_images')->where('project_id', '=', $project->id)->get();
 
             if($images) {
                foreach($images as $image) {
@@ -482,21 +466,18 @@ class ProjectsController extends Controller
             }
 
             // Delete related images from DB
-            DB::table('projects__images')->where('project_id', '=', $project->id)->delete();
+            DB::table('projects_images')->where('project_id', '=', $project->id)->delete();
 
             // Delete related materials from DB
-            DB::table('projects__material_project')->where('project_id', '=', $project->id)->delete();
+            DB::table('material_project')->where('project_id', '=', $project->id)->delete();
 
             // Delete related finishes from DB
-            DB::table('projects__finish_project')->where('project_id', '=', $project->id)->delete();
+            DB::table('finish_project')->where('project_id', '=', $project->id)->delete();
 
             // Delete related tags from DB
             DB::table('project_tag')->where('project_id', '=', $project->id)->delete();
 
-
-
             $project->forceDelete();
-            // $project->permissions()->detach();
          }
 
          $notification = [

@@ -22,8 +22,9 @@ unset($__errorArgs, $__bag); ?>"
    	value="<?php echo e(old('password')); ?>"
       placeholder="Password"
       data-inputmask=""
-      <?php echo e($disabled ?? ''); ?>
-
+      <?php if(Route::currentRouteName('') == 'admin.users.show'): ?>
+         disabled
+      <?php endif; ?>
    />
 
    <?php if(Route::currentRouteName('') == 'admin.users.create'): ?>

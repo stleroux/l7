@@ -6,14 +6,14 @@
 
    <?php else: ?>
 
-	   
+	   <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin-dashboard')): ?>
 	   	<li class="nav-item <?php echo e(Route::is('admin.dashboard*') ? 'active' : ''); ?>">
 		      <a class="nav-link p-2" href="<?php echo e(route('admin.dashboard')); ?>">
 		         <i class="<?php echo e(config('icons.dashboard')); ?>"></i>
 		         Dashboard
 		      </a>
 	   	</li>
-	   
+	   <?php endif; ?>
 
       
       <?php echo $__env->make('layouts.common.navbar.user', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
