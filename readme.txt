@@ -21,5 +21,3 @@ Whichever way you set it up, then you need to give read and write permissions to
 sudo chgrp -R www-data storage bootstrap/cache
 sudo chmod -R ug+rwx storage bootstrap/cache
 Now, you're secure and your website works, AND you can work with the files fairly easily
-
-Testing
