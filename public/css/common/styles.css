@@ -1,0 +1,154 @@
+/*************************************************************************************
+BEGIN : change background color on all pages
+**************************************************************************************/
+body {
+	/*background-image: linear-gradient(to right, purple, lime);*/
+	/*background-image: linear-gradient(red, yellow);*/
+	/*background-image: linear-gradient(to bottom right, red, yellow);*/
+	font-size: 12pt;
+	padding-bottom: 65px;
+	color: black;
+}
+/**************************************************************************************
+END : change background color on all pages
+**************************************************************************************/
+
+/**************************************************************************************
+BEGIN : show an asterix after a field to mark it as required
+**************************************************************************************/
+.required:after {
+	display: inline-block;
+	font: normal normal normal 24px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+	font-family: "Font Awesome 5 Free";
+	content: "\f005";
+	color: #FF0000;
+	padding-left: 3px;
+	vertical-align: top;
+	font-weight: 900;
+	font-size: 9px;
+}
+/**************************************************************************************
+END : show an asterix after a field to mark it as required
+**************************************************************************************/
+
+/**************************************************************************************
+   BEGIN : make a modal full screen
+**************************************************************************************/
+.modal-dialog-full {
+   width: 100%;
+   min-width: 100%;
+   height: 100%;
+   padding: 0;
+   margin: 0;
+}
+
+.modal-content-full {
+   height: 100%;
+   min-height: 100%;
+   height: auto;
+   border-radius: 0;
+}
+/**************************************************************************************
+   END : make a modal full screen
+**************************************************************************************/
+
+.card-trans-0 {
+	background-color: rgba(245, 245, 245, 0);
+}
+
+.card-trans-2 {
+	background-color: rgba(245, 245, 245, 0.2);
+}
+
+.card-trans-4 {
+	background-color: rgba(245, 245, 245, 0.4);
+}
+
+.card-trans-6 {
+	background-color: rgba(245, 245, 245, 0.6);
+}
+
+.card-trans-7 {
+	background-color: rgba(245, 245, 245, 0.7);
+}
+
+.card-trans-8 {
+	background-color: rgba(245, 245, 245, 0.8);
+}
+
+/*.card {
+	background-color: rgba(245, 245, 245, 0.2);
+	color: white;*/
+	/*background-color: #1e0033;*/
+	/*border: 2px #c0c0c0 solid;*/
+	/*border: 12px #1e0033 solid;*/
+/*}*/
+
+/* SECTIONS */
+/*.section_header {
+	background-image: url("/images/16.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	color: white;
+	font-weight: bold;
+}*/
+
+/* CARDS */
+/*.card_header {
+	background-image: url("/images/14.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	color: blue;
+	font-weight: bold;
+}*/
+
+/* Block Headers */
+/*.block_header {
+	background-image: url("/images/birch.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	color: black;
+}*/
+
+.border-black-2 {
+   border: 2px #000 solid;
+}
+
+.border-red-2 {
+   border: 2px maroon solid;
+}
+
+.border-red-3 {
+   border: 3px red solid;
+}
+
+/**************************************************************************************
+   Open dropdown menu on hover
+**************************************************************************************/
+/* ============ desktop view ============ */
+/*@media all and (min-width: 992px) {
+	.navbar .nav-item .dropdown-menu{ display: none; }
+	.navbar .nav-item:hover .nav-link{   }
+	.navbar .nav-item:hover .dropdown-menu{ display: block; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0; }
+}*/
+/* ============ desktop view .end// ============  */
+
+/*************************************************************************************
+Used for highligthing entries in Debugbar
+**************************************************************************************/
+    .hidden {
+        display: none !important;
+    }
+    
+    div.phpdebugbar-widgets-sqlqueries li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-sql-duplicate {
+        background-color: yellow !important;
+    }

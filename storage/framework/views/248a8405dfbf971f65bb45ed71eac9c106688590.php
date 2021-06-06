@@ -1,0 +1,34 @@
+<div class="card card-trans-4 card-outline card-info mb-2">
+
+   <div class="card-header bg-primary">
+      <div class="card-title font-weight-bold">
+         <i class="<?php echo e(config('icons.materials')); ?>"></i>
+         Material(s) Used In This Carving
+      </div>
+   </div>
+
+   <?php if($carving->materials->count() > 0): ?>
+      <table class="table table-hover table-striped mb-0">
+         <thead>
+            <tr class="text-dark">
+               <th>Name</th>
+               <th>Type</th>
+               <th>Manufacturer</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php $__currentLoopData = $carving->materials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $m): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+               <tr>
+                  <td><?php echo e($m->name); ?></td>
+                  <td><?php echo e($m->type ?? "N/A"); ?></td>
+                  <td><?php echo e($m->manufacturer ?? "N/A"); ?></td>
+               </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+         </tbody>
+      </table>
+   <?php else: ?>
+      <div class="card-body">N/A</div>
+   <?php endif; ?>
+
+</div>
+<?php /**PATH C:\sites\l7\resources\views/UI/carvings/show/materials.blade.php ENDPATH**/ ?>

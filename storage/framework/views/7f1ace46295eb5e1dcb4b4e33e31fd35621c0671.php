@@ -1,0 +1,1 @@
+<?php /**PATH C:\sites\l7\resources\views/UI/blog/topbar.blade.php ENDPATH**/ ?>
