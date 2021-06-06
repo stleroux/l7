@@ -39,6 +39,7 @@ class NotificationsController extends Controller
     // abort_unless(Gate::allows('bug-manage'), 403);
 
     $notifications = Auth()->user()->notifications->sortByDesc('created_at');
+    // dd($notifications);
 
     return view('admin.notifications.index', compact('notifications'));
   }

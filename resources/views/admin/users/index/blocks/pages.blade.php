@@ -13,7 +13,7 @@
 
       <a href="{{ route('admin.users.approved') }}"
          class="btn btn-block btn-default text-left {{ request()->routeIs('admin.users.approved') ? 'buttonActive' : '' }}">
-         <i class="{{ config('icons.approved') }} text-primary"></i>
+         <i class="{{ config('icons.enable') }} text-primary"></i>
          Approved Users
          <div class="badge badge-dark badge-pill float-right mt-1">
             {{ App\Models\User::approved()->count() }}

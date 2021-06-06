@@ -35,7 +35,7 @@ class Movie extends Model
    public function categoriesOptions()
    {
       return [
-         0 => '',
+         0 => 'Select',
          1 => 'Action',
          2 => 'Adult',
          3 => 'Adventure',

@@ -1,6 +1,9 @@
 @php
    if($modelName == 'finish'){
       $routeName = 'admin.finishes.mass_publish';
+   }
+   elseif($modelName == 'category'){
+      $routeName = 'admin.categories.mass_publish';
    } else {
       $routeName = 'admin.'.$modelName.'s.mass_publish';
    }

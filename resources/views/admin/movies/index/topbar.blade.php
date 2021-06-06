@@ -1,16 +1,16 @@
-<div class="row mb-2">
+<div class="row mb-2 float-right">
 
-   <div class="col">
+   {{-- <div class="col"> --}}
       @can('recipe-create')
          @include('admin.movies.buttons.add', ['size'=>'sm'])
       @endcan
-   </div>
+   {{-- </div> --}}
 
-   <div class="col">
+   {{-- <div class="col"> --}}
 
-      <div class="float-right">
-         <div class="dropdown text-center float-right">
-            <a class="dropdown-button border"
+      {{-- <div class=""> --}}
+         <div class="dropdown text-center p-1">
+            <a class="dropdown-button border p-1"
                id="dropdown-menu"
                data-toggle="dropdown"
                data-boundary="viewport"
@@ -31,9 +31,9 @@
                {{-- @endcan --}}
             </div>
          </div>
-      </div>
+      {{-- </div> --}}
 
-      <div class="float-right px-1">         
+      <div class=" px-1">         
          <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
             <i class="{{ config('icons.help') }}"></i>
             <div class="d-none d-lg-inline">
@@ -43,7 +43,7 @@
       </div>
 
       {{-- @if(Route::currentRouteName() == 'admin.recipes.index') --}}
-         <form action="{{ route('admin.movies.mass_destroy') }}" method="post" class="float-right p-0 pl-1">
+         <form action="{{ route('admin.movies.mass_destroy') }}" method="post" class=" p-0 pl-1">
             @csrf
             @method('DELETE')
             <input type="hidden" name="mass_destroy_ids" id="mass_destroy_ids" value="" size="3" />
@@ -57,7 +57,7 @@
             </a>
          </form>
          
-         <form action="{{ route('admin.recipes.mass_resetViews') }}" method="post" class="float-right p-0 pl-1">
+         <form action="{{ route('admin.recipes.mass_resetViews') }}" method="post" class=" p-0 pl-1">
             @csrf
             <input type="hidden" name="mass_resetViews_ids" id="mass_resetViews_ids" value="" size="3" />
             <a data-toggle="modal"
@@ -73,7 +73,7 @@
 
       {{-- @endif --}}
 
-{{--          <form action="{{ route('admin.recipes.mass_publish') }}" method="post" class="float-right p-0 pl-1">
+{{--          <form action="{{ route('admin.recipes.mass_publish') }}" method="post" class=" p-0 pl-1">
             @csrf
             <input type="text" name="mass_publish_ids" id="mass_publish_ids" value="" size="3" />
             <a data-toggle="modal"
@@ -88,7 +88,7 @@
 
 
 
-{{--          <form action="" method="POST" class="float-right p-0 pl-1">
+{{--          <form action="" method="POST" class=" p-0 pl-1">
             @csrf
             <input type="hidden" name="mass_publish_ids" id="mass_publish_ids" value="" size="3" />
             <a 
@@ -103,7 +103,7 @@
          </form> --}}
 
 
-{{--          <form action="" method="POST" class="float-right p-0 pl-1">
+{{--          <form action="" method="POST" class=" p-0 pl-1">
             @csrf
             <input type="hidden" name="mass_unpublish_ids" id="mass_unpublish_ids" value="" size="3" />
             <a 
@@ -120,7 +120,7 @@
 
 
 {{--       @if(Route::currentRouteName() == 'admin.recipes.trashed')
-         <form action="{{ route('admin.recipes.mass_delete') }}" method="post" class="float-right p-0 pl-1">
+         <form action="{{ route('admin.recipes.mass_delete') }}" method="post" class=" p-0 pl-1">
             @csrf
             @method('DELETE')
             <input type="hidden" name="mass_delete_ids" id="mass_delete_ids" value="" size="3" />
@@ -134,7 +134,7 @@
             </a>
          </form>
 
-         <form action="" method="POST" class="float-right p-0 pl-1">
+         <form action="" method="POST" class=" p-0 pl-1">
             @csrf
             <input type="hidden" name="mass_restore_ids" id="mass_restore_ids" value="" size="3" />
             <a 
@@ -149,5 +149,5 @@
          </form>
       @endif --}}
       
-   </div>
+   {{-- </div> --}}
 </div>

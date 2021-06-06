@@ -14,8 +14,10 @@
 
       <div class="col">
 
+         @include('common.form_submission_error')
+
          <div class="card card-primary">
-            <div class="card-header">
+            <div class="card-header p-2">
                <div class="card-title">Permission Information</div>
             </div>
             <div class="card-body">

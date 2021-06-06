@@ -1,6 +1,9 @@
 @php
    if($modelName == 'finish'){
       $routeName = 'admin.finishes.mass_destroy';
+   }
+   elseif($modelName == 'category'){
+      $routeName = 'admin.categories.mass_destroy';
    } else {
       $routeName = 'admin.'.$modelName.'s.mass_destroy';
    }

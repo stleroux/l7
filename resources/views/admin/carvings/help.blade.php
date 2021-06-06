@@ -19,6 +19,7 @@
                   @can('carving-manage')
                      <p>Carving(s) related help content will go here</p>
                   @endcan
+                  To delete the JobSheet associated with this record, please contact the site administrator.
                </div>
             </div>
 

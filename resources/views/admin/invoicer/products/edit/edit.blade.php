@@ -22,6 +22,8 @@
 
 @section('content')
 
+	@include('common.form_submission_error')
+
 	{{-- {!! Form::model($product, ['route'=>['invoicer.products.update', $product->id], 'method' => 'PUT']) !!} --}}
 	<form action="{{ route('admin.invoicer.products.update', $product->id) }}" method="POST">
 		@csrf
@@ -50,7 +52,7 @@
 					<div class="col-xs-12 col-sm-8">
 						<div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
 							{{-- {{ Form::label ('code', 'Code:')}} --}}
-							<label for="code">Code</label>
+							<label for="code" class="required">Code</label>
 							{{-- {{ Form::text ('code', null, array('class'=>'form-control', 'autofocus')) }} --}}
 							<input type="text" name="code" class="form-control" value="{{ $product->code }}" autofocus="">
 							<span class="text-danger">{{ $errors->first('code') }}</span>

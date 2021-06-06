@@ -49,7 +49,7 @@
 							<th>@sortablelink('company_name','Company Name')</th>
 							<th>@sortablelink('email','Contact Email')</th>
 							<th>Phone N<supp>o</supp></th>
-                     <th>Invoices</th>
+                     		<th>Invoices</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -61,17 +61,18 @@
 							<td>{{ $client->company_name }}</td>
 							<td>{{ $client->email }}</td>
 							<td>{{ $client->telephone }}</td>
-                     <td>{{ $client->invoices->count() }}</td>
+                     		<td>{{ $client->invoices->count() }}</td>
 							<td>
 								{{-- <div class="float-right"> --}}
 									<form action="{{ route('admin.invoicer.clients.destroy', $client) }}" method="POST" class="">
-                              {{csrf_field()}}
-                              {{ method_field('DELETE') }}
-                              <input type="hidden" value="{{ $client }}" name="id">
+		                            	{{csrf_field()}}
+		                              	{{ method_field('DELETE') }}
+		                              	<input type="hidden" value="{{ $client }}" name="id">
 
 										{{-- @can('invoicer-invoice') --}}
 											<a href="{{ route('admin.invoicer.invoices.create', [$client->id, 'type'=>'estimate']) }}"
 												class="btn btn-sm btn-outline-primary"
+												data-toggle="tooltip"
 												title="Create Estimate"
 											>
 												{{-- <i class="far fa-plus-square"></i> --}}
@@ -80,6 +81,7 @@
 											</a>
 											<a href="{{ route('admin.invoicer.invoices.create', $client->id) }}"
 												class="btn btn-sm btn-outline-primary"
+												data-toggle="tooltip"
 												title="Create Invoice"
 											>
 												{{-- <i class="far fa-plus-square"></i> --}}
@@ -90,6 +92,7 @@
 
 										<a href="{{ route('admin.invoicer.clients.show', $client->id) }}"
 											class="btn btn-sm btn-outline-primary"
+											data-toggle="tooltip"
 											title="View Client"
 										>
 											<i class="fa fa-eye" aria-hidden="true"></i>
@@ -98,6 +101,7 @@
 
 										<a href="{{ route('admin.invoicer.clients.edit', $client->id) }}"
 											class="btn btn-sm btn-outline-primary"
+											data-toggle="tooltip"
 											title="Edit Client"
 										>
 											<i class="fa fa-edit" aria-hidden="true"></i>
@@ -109,6 +113,7 @@
                               	type="submit"
                               	class="btn btn-sm btn-outline-danger"
                               	onclick="return confirm('Are you sure?')"
+                              	data-toggle="tooltip"
                               	title="Delete Client"
                               	{{ $client->invoices->count() > 0 ? 'disabled' : ''}}
                               >

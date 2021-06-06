@@ -81,11 +81,13 @@ class AdminController extends Controller
 		// $auditsCount = Audit::count();
 		$auditsCount = \DB::table('audits')->count();
 
-		$newBugs = Bug::where('status', 1)->count();
-		$pendingBugs = Bug::where('status', 2)->count();
-		$notReproduceableBugs = Bug::where('status', 3)->count();
-		$nonIssueBugs = Bug::where('status', 4)->count();
-		$resolvedBugs = Bug::where('status', 10)->count();
+		$newBugsCount = Bug::where('status', 1)->count();
+		$newFeaturesCount = Feature::where('status', 1)->count();
+
+		//$pendingBugs = Bug::where('status', 2)->count();
+		//$notReproduceableBugs = Bug::where('status', 3)->count();
+		//$nonIssueBugs = Bug::where('status', 4)->count();
+		//$resolvedBugs = Bug::where('status', 10)->count();
 
 		$usersPerMonthChart_options = [
 			'chart_title' => 'Users By Months',
@@ -154,11 +156,20 @@ class AdminController extends Controller
 		];
 		$billablesByItemChart = new LaravelChart($billablesByItemChart_options);
 
-		$totalSales = InvoicerInvoice::sum('sub_total');
-		$totalPayments = DB::table('invoicer__invoices')->sum(DB::raw('payments + deposits'));
+		$totalEntries = InvoicerInvoice::sum('sub_total');
+		$totalEstimates = InvoicerInvoice::where('status' , 'estimate')->sum('sub_total');
+		$totalLogged = InvoicerInvoice::where('status' , 'logged')->sum('sub_total');
+		$totalInvoiced = InvoicerInvoice::where('status', 'invoiced')->sum('sub_total');
+		$totalPaid = InvoicerInvoice::where('status', 'paid')->sum('sub_total');
+
+		$totalDeposits = InvoicerInvoice::sum('deposits');
 		$totalDiscounts = InvoicerInvoice::sum('discounts');
-		$totalOwed = InvoicerInvoice::sum('total');
-		$invoicesCount = InvoicerInvoice::count();
+		$totalPayments = DB::table('invoicer__invoices')->sum(DB::raw('payments'));
+		
+		$totalOwed = InvoicerInvoice::where('status', '!=', 'estimate')->sum('total');
+		
+		$estimatesCount = InvoicerInvoice::where('status','estimate')->count();
+		$invoicesCount = InvoicerInvoice::where('status','!=','estimate')->count();
 		$billableItemsCount = InvoicerInvoiceItem::count();
 		$clientsCount = InvoicerClient::count();
 		$productsCount = InvoicerProduct::count();
@@ -174,6 +185,8 @@ class AdminController extends Controller
 
 		return view('admin.dashboard.index',
 			compact(
+				'newBugsCount',
+				'newFeaturesCount',
 				'usersTotalCount',
 				'usersActiveCount',
 				'usersInactiveCount',
@@ -204,10 +217,16 @@ class AdminController extends Controller
 				'billablesByItemChart',
 				// 'usersByRoleChart',
 				// Invoicer
-				'totalSales',
+				'totalEntries',
+				'totalEstimates',
+				'totalLogged',
+				'totalInvoiced',
+				'totalPaid',
 				'totalPayments',
 				'totalDiscounts',
+				'totalDeposits',
 				'totalOwed',
+				'estimatesCount',
 				'invoicesCount',
 				'billableItemsCount',
 				'clientsCount',

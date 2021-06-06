@@ -2,7 +2,7 @@
 
 @if(Auth::user()->can('permission-manage') || Auth::user()->hasRole('admin'))
 
-	<div class="col">
+	<div class="col col-md-6 col-xl-12">
 	   <a href="{{ route('admin.permissions.index') }}">
 	      <div class="info-box mb-3">
 	         <span class="info-box-icon bg-warning elevation-1">

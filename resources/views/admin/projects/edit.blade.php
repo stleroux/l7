@@ -9,10 +9,8 @@
 @include('admin.projects.edit.sections.formEnd')
 
 @section ('content')
-
    @include('admin.projects.forms.form')
    @include('admin.projects.help')
-
 @endsection
 
 @section('secondary')
@@ -62,8 +60,6 @@
          $("#imagemodal").modal("show");
       });
    </script>
-
-
 
    <script>
       $(document).ready(function(){

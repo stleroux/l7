@@ -419,6 +419,7 @@ class CategoriesController extends Controller
 ##################################################################################################################
    public function store(Request $request)
    {
+      // dd($request->part);
       // Check if user has required permission
       abort_unless(Gate::allows('category-create'), 403);
 
@@ -444,7 +445,8 @@ class CategoriesController extends Controller
          $category->save();
 
          Session::flash('success','The new parent category has been created.');
-         return redirect()->route('admin.categories.index');
+         dd($request->part);
+         return redirect()->route('admin.categories.index', ['part1', $request->part]);
       } 
 
       if($request->part === 'sub')
@@ -471,7 +473,8 @@ class CategoriesController extends Controller
          $category->save();
 
          Session::flash('success','The new sub-category has been created.');
-         return redirect()->route('admin.categories.index');
+         dd($request->part);
+         return redirect()->route('admin.categories.index', ['part1', $request->part]);
       }
 
       if($request->part === 'category')
@@ -490,6 +493,7 @@ class CategoriesController extends Controller
             'cName.max' => 'Maximum 50 characters',
          ];
 
+         // dd($request->part);
          $this->validate($request, $rules, $customMessages);
 
          $cSubCategory = Category::where('name', '=', $request->cSubcategory)->where('parent_id', '=', $request->cCategory)->pluck('id');
@@ -502,7 +506,7 @@ class CategoriesController extends Controller
          $category->save();
 
          Session::flash('success','The new category has been created.');
-         return redirect()->route('admin.categories.index');
+         return redirect()->route('admin.categories.index')->with(['title' => 'Data From Controller']);
       }
 
    }

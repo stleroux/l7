@@ -1,33 +1,33 @@
 {{-- Score = 121 to 179 --}}
 <script>
    var titles = [
-      "t4-1",
-      "t4-2",
-      "t4-3",
-      "t4-4",
-      "t4-5",
-      "t4-6",
-      "t4-7"
+      "Really Good!",
+      "Is someone else playing for you?",
+      "You are becoming a pro.",
+      "Was that just luck?",
+      "Practice makes perfect.",
+      "On your way to perfection.",
+      "Did you just cheat?",
+      "Don't let this score go to your head."
    ];
 
    var messages = [
-      "m4-1",
-      "m4-2",
-      "m4-3",
-      "m4-4",
-      "m4-5",
-      "m4-6",
-      "m4-7"
    ];   
 
-   var dart_success_4 = {{ Session('dart_success_4') ? 'true' : 'false' }};
+   var dart_success_121_179 = {{ Session('dart_success_121_179') ? 'true' : 'false' }};
+   // var one = titles[Math.floor(Math.random()*titles.length)];
+   // document.write(one);
+   // var oneIndex = titles.indexOf(one);
+   // document.write(oneIndex);
 
-   if(dart_success_4){
+   if(dart_success_121_179){
       Swal.fire({
          timer: 4000,
          title: titles[Math.floor(Math.random()*titles.length)],
+         // title: titles[oneIndex],
          icon: 'warning',
-         html: messages[Math.floor(Math.random()*messages.length)],       
+         // html: messages[Math.floor(Math.random()*messages.length)],
+         // html: messages[oneIndex],
          showCloseButton: false,
          showConfirmButton: false
       }).then(function() {

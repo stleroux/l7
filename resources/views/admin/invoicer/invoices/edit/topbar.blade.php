@@ -7,29 +7,44 @@
 
       <div class="float-right">
          
+         <a href="{{ route('admin.invoicer.invoiceItems.create', $invoice) }}" class="btn btn-sm btn-outline-secondary">
+            {{-- <i class="far fa-plus-square"></i> --}}
+            <i class="{{ config('icons.invoicer-newBillable') }}"></i>
+            Add Billable
+         </a>
+
          @if($invoice->status != 'paid' && $invoice->invoiceItems->count() > 0)
-            <a href="{{ route('admin.invoicer.activities.create', $invoice) }}" class="btn btn-sm btn-outline-primary">
-               <i class="far fa-plus-square"></i>
-               New Activity
+            <a href="{{ route('admin.invoicer.activities.create', $invoice) }}" class="btn btn-sm btn-outline-secondary">
+               {{-- <i class="far fa-plus-square"></i> --}}
+               <i class="{{ config('icons.invoicer-newActivity') }}"></i>
+               Add Activity
             </a>
          @endif
 
          @if($invoice->status == 'logged' && $invoice->invoiceItems->count() > 0)
-            <a href="{{ route('admin.invoicer.invoices.status_invoiced', $invoice->id) }}" class="btn btn-sm btn-outline-primary" title="Invoice">
-               <i class="far fa-fw fa-file-alt"></i>
-               Invoice
+            <a href="{{ route('admin.invoicer.invoices.status_invoiced', $invoice->id) }}" class="btn btn-sm btn-outline-secondary" title="Invoice">
+               {{-- <i class="far fa-fw fa-file-alt"></i> --}}
+               <i class="{{ config('icons.invoicer-markAsInvoiced') }}"></i>
+               Mark as Invoiced
             </a>
          @endif
 
-	      <a href="{{ route('admin.invoicer.invoices') }}" class="btn btn-sm btn-outline-secondary">
-            <i class="fa fa-backward"></i>
-            Cancel
-         </a>
+         @if(Str::lower($invoice->status == "estimate"))
+            <a href="{{ route('admin.invoicer.invoices.estimates') }}" class="btn btn-sm btn-warning">
+               <i class="{{ config('icons.cancel') }}"></i>
+               Cancel
+            </a>
+         @else
+   	      <a href="{{ route('admin.invoicer.invoices') }}" class="btn btn-sm btn-warning">
+               <i class="{{ config('icons.cancel') }}"></i>
+               Cancel
+            </a>
+         @endif
 
          @if($invoice->status != 'paid')
             <button type="submit" class="btn btn-sm btn-primary">
                <i class="{{ config('icons.save') }}"></i>
-               Update Invoice
+               Update {{ (Str::lower($invoice->status) == "estimate" ? "Estimate" : "Invoice") }}
             </button>
          @endif
       </div>

@@ -59,7 +59,7 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		$tags = Tag::where('category',2)->get();
+		$tags = Tag::where('category', Tag::IS_POST)->get();
 
 		return view('admin.posts.create', compact('categories','tags', 'post'));
 	}
@@ -193,7 +193,7 @@ class PostsController extends Controller
 		// Get all categories related to Posts Category
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
-		$tags = Tag::where('category',2)->get();
+		$tags = Tag::where('category', Tag::IS_POST)->get();
 
 		return view('admin.posts.edit', compact('post','categories','tags'));
 	}
@@ -272,7 +272,7 @@ class PostsController extends Controller
 		$cats = Category::where('name','posts')->first();
 		$categories = Category::where('parent_id', $cats->id)->get();
 
-		$tags = Tag::where('category',2)->get();
+		$tags = Tag::where('category', Tag::IS_POST)->get();
 
 		// get previous project
       $previous = Post::where('title', '<', $post->title)->published()->orderBy('title','asc')->max('title');

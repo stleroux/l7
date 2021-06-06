@@ -1,13 +1,18 @@
+         @include('common.form_submission_error')
 <div class="row">
 
    <div class="col-md-3">
 
       <div class="card card-primary">
 
-         <div class="card-header">
-            <div class="card-title">Role Information</div>
+         <div class="card-header p-2">
+            {{-- <div class="card-title"> --}}
+            Role Information
+            {{-- </div> --}}
          </div>
-         <div class="card-body">
+
+
+         <div class="card-body p-2">
             <div class="row">
                @include('admin.roles.forms.fields.name')
                @include('admin.roles.forms.fields.description')

@@ -1,3 +1,5 @@
+@include('common.form_submission_error')
+
 <div class="row">
    <div class="col-xl-6">
       @include('admin.users.forms.panels.user')

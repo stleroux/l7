@@ -30,6 +30,7 @@
         "spatie/laravel-searchable": "^1.9"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "bfinlay/laravel-excel-seeder": "^2.1",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",

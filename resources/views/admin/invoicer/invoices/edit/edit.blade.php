@@ -4,14 +4,20 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ config('icons.edit') }}"></i>
-   Invoicer :: Edit Invoice #{{ $invoice->id }}
+	<i class="{{ config('icons.edit') }}"></i>
+	Invoicer :: Edit 
+	@if(Str::lower($invoice->status == "estimate"))
+		Estimate
+	@else
+		Invoice 
+	@endif
+	#{{ $invoice->id }}
 @endsection
 
 @section('breadcrumb')
-   <li class="breadcrumb-item"><a href="{{ route('admin.invoicer') }}">Invoicer</a></li>
-   <li class="breadcrumb-item"><a href="{{ route('admin.invoicer.invoices') }}">Invoices</a></li>
-   <li class="breadcrumb-item">Edit Invoice</li>
+	<li class="breadcrumb-item"><a href="{{ route('admin.invoicer') }}">Invoicer</a></li>
+	<li class="breadcrumb-item"><a href="{{ route('admin.invoicer.invoices') }}">Invoices</a></li>
+	<li class="breadcrumb-item">Edit Invoice</li>
 @endsection
 
 @section('rightSidebar')

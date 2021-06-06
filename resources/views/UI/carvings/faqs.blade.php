@@ -25,55 +25,46 @@
 
 @section('content')
 
-   <div class="accordion" id="carvingsFAQ">
-      <div class="card text-dark">
+   <div class="card mb-2 card-trans-0">
+   
+      <div class="card-header text-light p-2 m-0 bg-primary">
+         <i class="{{ config('icons.faq') }}"></i>
+         Click the question to reveal the answer.
+      </div>
+      
+      <div class="card-body p-0 m-0">
 
-         @forelse($faqs as $faq)
-{{--       <div class="card text-dark">
 
-         <div
-            class="card-header bg-primary text-dark"
-            data-toggle="collapse"
-            data-target="#collapse{{ $faq->id }}"
-            aria-expanded="true"
-            aria-controls="collapse{{ $faq->id }}"
-         >
-            {{ ucwords($faq->question) }}            
-         </div>
-         <div
-            class="card-body collapse"
-            id="collapse{{ $faq->id }}"
-            aria-labelledby="heading{{ $faq->id }}"
-            data-parent="#carvingsFAQ"
-         >
-            {!! ucfirst($faq->answer) !!}            
-         </div>
-      </div> --}}
+         <div id="accordion">
+            @forelse($faqs as $faq)
+               <div class="card mb-2 mt-2 card-trans-8">
+                  <div class="card-header p-0 m-0 bg-primary" id="heading{{ $faq->id }}">
+                     <h6 class="mb-0 p-0">
+                        <a href="#"
+                           class="list-group-item{{--  list-group-item-action --}} p-1 m-0 card-trans-4 text-dark"
+                           data-toggle="collapse"
+                           data-target="#collapse{{ $faq->id }}"
+                           aria-expanded="true"
+                           aria-controls="collapse{{ $faq->id }}">
+                           {{ ucwords($faq->question) }}
+                        </a>
+                     </h6>
+                  </div>
 
-            <a href="#"
-               class="bg-primary list-group-item list-group-item-action p-1 mb-2"
-               data-toggle="collapse"
-               data-target="#collapse{{ $faq->id }}"
-               aria-expanded="true"
-               aria-controls="collapse{{ $faq->id }}">
-               {{ ucwords($faq->question) }}
-            </a>
-            
-            <div
-               id="collapse{{ $faq->id }}"
-               class="collapse bg-light p-0 m-0"
-               aria-labelledby="heading{{ $faq->id }}"
-               data-parent="#carvingsFAQ">
-               <div class="card-body text-dark p-2 m-2 border">
-                 {!! ucfirst($faq->answer) !!}
+                  <div id="collapse{{ $faq->id }}" class="collapse bg-primary" aria-labelledby="heading{{ $faq->id }}" data-parent="#accordion">
+                     <div class="card-body p-2 m-0 card-trans-8 text-dark">
+                        {!! ucfirst($faq->answer) !!}
+                     </div>
+                  </div>
                </div>
-            </div>
-
-        @empty
-        @endforelse
+            @empty
+               <div class="col-row p-2 card-trans-4">
+                  {{ config('settings.noRecordsFound') }}
+               </div>
+            @endforelse
+         </div>
 
       </div>
-
    </div>
 
 @endsection

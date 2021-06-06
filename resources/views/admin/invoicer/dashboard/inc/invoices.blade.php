@@ -2,11 +2,21 @@
 <div class="card">
 
 	<div class="card-header">
-		Invoices
-		<span class="float-right"><small><b>Total :</b> {{ $invoicesTotal->count() }}</small></span>
+		Invoices and Estimates
+		<span class="float-right"><small><b>Total :</b> {{ $invoicesTotal->count() + $invoicesEstimates->count() }}</small></span>
 	</div>
 	
 	<table class="table table-hover table-sm">
+{{-- 		<tr>
+			<td>
+				@can('invoicer-invoice')
+					<a href="{{ route('admin.invoicer.invoices.estimates') }}">Estimates</a>
+				@else
+					Estimates
+				@endcan
+			</td>
+			<td class="text-right">{{ $invoicesEstimates->count() }}</td>
+		</tr> --}}
 		<tr>
 			<td>
 				@can('invoicer-invoice')

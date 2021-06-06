@@ -13,6 +13,12 @@ class Feature extends Model implements Auditable
 
    protected $guarded = [];
 
+   public const IS_NEW = 1;
+   public const IS_UNDER_REVIEW = 2;
+   public const IS_PENDING = 3;
+   public const IS_IMPLEMENTED = 4;
+   public const IS_REJECTED = 5;
+
    // Set the default value for the status field to 0
    protected $attributes = [
       'status' => 1,

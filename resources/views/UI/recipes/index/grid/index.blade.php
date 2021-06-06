@@ -20,6 +20,7 @@
 	@include('UI.recipes.blocks.sidebar')
 	@include('UI.recipes.blocks.popular')
 	@include('UI.recipes.blocks.archives')
+	@include('UI.recipes.blocks.faqs')
 @endsection
 
 @section('topbar')

@@ -2,33 +2,36 @@
 
 <script>
    var titles = [
-      "t3-1",
-      "t3-2",
-      "t3-3",
-      "t3-4",
-      "t3-5",
-      "t3-6",
-      "t3-7"
+      "Above Average!",
+      "Better than the norm.",
+      "Great job.",
+      "Great effort.",
+      "Keep up the good work.",
+      "See what a little practice can do.",
+      "Paying attention pays off in the end.",
+      "Did you step over the line?",
+      "Did you just cheat?",
+      "I see we will need bigger doors for when you leave!",
+      "Have you been practising in secret?"
    ];
 
    var messages = [
-      "m3-1",
-      "m3-2",
-      "m3-3",
-      "m3-4",
-      "m3-5",
-      "m3-6",
-      "m3-7"
    ];   
 
-   var dart_success_3 = {{ Session('dart_success_3') ? 'true' : 'false' }};
+   var dart_success_61_120 = {{ Session('dart_success_61_120') ? 'true' : 'false' }};
+   // var one = titles[Math.floor(Math.random()*titles.length)];
+   // document.write(one);
+   // var oneIndex = titles.indexOf(one);
+   // document.write(oneIndex);
 
-   if(dart_success_3){
+   if(dart_success_61_120){
       Swal.fire({
          timer: 4000,
          title: titles[Math.floor(Math.random()*titles.length)],
+         // title: titles[oneIndex],
          icon: 'warning',
-         html: messages[Math.floor(Math.random()*messages.length)],       
+         // html: messages[Math.floor(Math.random()*messages.length)],
+         // html: messages[oneIndex],
          showCloseButton: false,
          showConfirmButton: false
       }).then(function() {

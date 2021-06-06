@@ -27,6 +27,8 @@ Route::prefix('admin/invoicer')->namespace('Admin\Invoicer')->name('admin.invoic
    Route::get('invoices/{inv_id}/status_paid',        'InvoicesController@status_paid')         ->name('invoices.status_paid');
    Route::get('invoices/status_invoiced_all',         'InvoicesController@status_invoiced_all') ->name('invoices.status_invoiced_all');
    Route::get('invoices/status_paid_all',             'InvoicesController@status_paid_all')     ->name('invoices.status_paid_all');
+   Route::get('invoices/status_logged_all',           'InvoicesController@status_logged_all')   ->name('invoices.status_logged_all');
+   Route::get('invoices/status_logged/{id}',          'InvoicesController@status_logged')       ->name('invoices.status_logged');
    Route::get('invoices/paid',                        'InvoicesController@paid')                ->name('invoices.paid');
    Route::get('invoices/unpaid',                      'InvoicesController@unpaid')              ->name('invoices.unpaid');
    Route::get('invoices/invoiced',                    'InvoicesController@invoiced')            ->name('invoices.invoiced');

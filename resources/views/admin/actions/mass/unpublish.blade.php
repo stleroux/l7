@@ -1,6 +1,9 @@
 @php
    if($modelName == 'finish'){
       $routeName = 'admin.finishes.mass_unpublish';
+   }
+   elseif($modelName == 'category'){
+      $routeName = 'admin.categories.mass_unpublish';
    } else {
       $routeName = 'admin.'.$modelName.'s.mass_unpublish';
    }

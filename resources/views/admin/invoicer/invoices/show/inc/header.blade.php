@@ -1,7 +1,11 @@
 
 <div class="row">
 	<div class="col-sm-4">
-		<h1 class="text-center">INVOICE</h1>
+		@if($invoice->status == "estimate")
+			<h1 class="text-center">ESTIMATE</h1>
+		@else
+			<h1 class="text-center">INVOICE</h1>
+		@endif
 	</div>
 	<div class="col-sm-8">
 		<div class="col-sm-12">

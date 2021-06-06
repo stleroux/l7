@@ -8,8 +8,10 @@
    @endif
 @endif
 
-   <div class="card-header">
-      <div class="card-title">Login Information</div>
+   <div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
+      Login Information
+      {{-- </div> --}}
       <div class="card-tools">
          <button type="button" class="btn btn-tool" data-card-widget="collapse">
             <i class="fas fa-plus"></i>
@@ -20,7 +22,7 @@
       </div>
    </div>
 
-   <div class="card-body p-3">
+   <div class="card-body p-2">
    	
    	<div class="form-row">
          <div class="col-12">@include('admin.users.forms.fields.last_login_date')</div>

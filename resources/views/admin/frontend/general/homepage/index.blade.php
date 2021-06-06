@@ -1,6 +1,5 @@
-{{-- GENERAL --}}
+{{-- INDEX --}}
 
-{{-- {{ $greeting }} --}}
 <div class="tab-pane fade active show" id="homepage" role="tabpanel" aria-labelledby="homepage-tab">
 
 	<div class="container-fluid">
@@ -12,5 +11,7 @@
 		@include('admin.frontend.general.homepage.fields.projects')
 		@include('admin.frontend.general.homepage.fields.recipes')
 		@include('admin.frontend.general.homepage.fields.blogs')
+
+	</div>
 
 </div>

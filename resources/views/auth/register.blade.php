@@ -153,7 +153,7 @@
 					</div>
 
 					<div class="card-footer">
-						All fields are required.
+						{{ __('All fields are required') }}.
 					</div>
 				</div>
 			</div>

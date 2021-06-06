@@ -16,11 +16,11 @@
          @foreach ($tags as $tag)
 
             @if(last(request()->segments()) === 'create')
-               <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+               <option value="{{ $tag->id }}">{{ ucfirst($tag->name) }}</option>
             @endif
 
             @if(last(request()->segments()) === 'edit')
-               <option value="{{ $tag->id }}" {{ $carving->tags->contains($tag->id) ? "selected='selected" : "" }}>{{ $tag->name }}</option>               
+               <option value="{{ $tag->id }}" {{ $carving->tags->contains($tag->id) ? "selected='selected" : "" }}>{{ ucfirst($tag->name) }}</option>               
             @endif
 
          @endforeach

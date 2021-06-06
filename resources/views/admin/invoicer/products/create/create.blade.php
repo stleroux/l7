@@ -22,6 +22,8 @@
 
 @section('content')
 
+	@include('common.form_submission_error')
+
 	{{-- {!! Form::open(array('route'=>'invoicer.products.store')) !!} --}}
 	<form action="{{ route('admin.invoicer.products.store') }}" method="POST">
 		@csrf

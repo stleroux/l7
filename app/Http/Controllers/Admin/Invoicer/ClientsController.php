@@ -44,9 +44,9 @@ class ClientsController extends Controller
 	public function create()
 	{
 		// Check if user has required permission
-      abort_unless(Gate::allows('invoicer-client'), 403);
+    	abort_unless(Gate::allows('invoicer-client'), 403);
 
-		return view('admin.invoicer.clients.create');
+		return view('admin.invoicer.clients.create.create');
 	}
 
 
@@ -92,7 +92,7 @@ class ClientsController extends Controller
 
 		$client = InvoicerClient::findOrFail($id);
 		
-		return view('admin.invoicer.clients.edit', compact('client'));
+		return view('admin.invoicer.clients.edit.edit', compact('client'));
 	}
 
 
@@ -178,6 +178,40 @@ class ClientsController extends Controller
 		// Check if user has required permission
       abort_unless(Gate::allows('invoicer-client'), 403);
 
+		// Client create modal
+		if($request->popup)
+		{
+			$validator = \Validator::make($request->all(), [
+	            'contact_name' => 'required|unique:invoicer__clients',
+				'telephone' => 'required',
+				'email' => 'required|email|unique:invoicer__clients'
+	        ]);
+
+	        if ($validator->fails()) {
+	            return redirect()
+	            			->route('admin.invoicer.invoices.create')
+	                        ->withErrors($validator, 'clientErrors')
+	                        ->withInput();
+	        }
+
+	        // set a flash message to be displayed on screen
+			$notification = [
+				'message' => 'The client was successfully added!',
+				'alert-type' => 'success'
+			];
+			// return redirect('register')->withErrors($validator, 'login');
+					// save the data in the database
+			$client = new InvoicerClient;
+				$client->company_name = $request->company_name;
+				$client->contact_name = $request->contact_name;
+				$client->address = $request->address;
+				$client->telephone = $request->telephone;
+			$client->save();
+
+		   	return redirect()->route('admin.invoicer.invoices.create')->with($notification);
+		}
+
+		// Regular client create
 		// validate the data
 		$this->validate($request, array(
 			'contact_name' => 'required',
@@ -204,11 +238,6 @@ class ClientsController extends Controller
 		// set a flash message to be displayed on screen
 		Session::flash('success','The client was successfully saved!');
 
-		// redirect to another page
-		if($request->popup)
-		{
-	   	return redirect()->route('admin.invoicer.invoices.create');
-		}
 		
 	   return redirect()->route('admin.invoicer.clients');
 	}
@@ -233,7 +262,9 @@ class ClientsController extends Controller
 			'contact_name' => 'required',
 			'telephone' => 'required',
 			// 'email' => 'required|email'
-			'email' => "required|email|unique:invoicer__clients,{$this->invoicer__clients->id}"
+			// 'email' => "required|email|unique:invoicer__clients,email,{$this->invoicerClient->id}"
+			// 'email' => 'unique:invoicer__clients,email,' . $this->id
+			'email' => 'required|email|unique:invoicer__clients,email,'.$id.',id'
 		));
 
 		$client = InvoicerClient::find($id);

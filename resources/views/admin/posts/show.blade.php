@@ -12,9 +12,9 @@
 
    {{-- @include('admin.posts.show.topbar') --}}
    
-   <div class="card card-trans-4">
+   <div class="card card-primary card-trans-4">
       
-      <div class="card-header">
+      <div class="card-header p-2">
          <div class="row">
             <div class="col">
                <div>

@@ -6,12 +6,12 @@
    <div class="col">
 
       <div class="float-right">
-			<a href="{{ route('admin.invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-outline-secondary">
-				<i class="fa fa-backward"></i>
+			<a href="{{ route('admin.invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-warning">
+				<i class="{{ config('icons.cancel') }}"></i>
 				Cancel
 			</a>
 			<button type="submit" name="submit" class="btn btn-sm btn-primary">
-				<i class="{{ config('icons.save') }}"></i>
+				<i class="{{ config('icons.invoicer-newBillable') }}"></i>
 				Add Billable
 			</button>
 		</div>

@@ -1,11 +1,14 @@
-<div class="card mb-2">
+@include('common.form_submission_error')
+
+<div class="card card-primary mb-2">
    <!-- CARD HEADER -->
-   <div class="card-header py-1">
+   <div class="card-header p-2">
       General Information
       <div class="card-tools">
          <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
       </div>
    </div>
+   
    <!-- CARD BODY -->
    <div class="card-body p-3">
       <div class="form-row">

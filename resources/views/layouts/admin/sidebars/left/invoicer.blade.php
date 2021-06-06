@@ -32,7 +32,31 @@
 
 			@can('invoicer-invoice')
 				<li class="nav-item ml-2">
-					<a href="{{ route('admin.invoicer.invoices') }}" class="nav-link {{ Request::is('admin/invoicer/invoices*') ? 'active' : '' }}">
+					<a href="{{ route('admin.invoicer.invoices.estimates') }}"
+						class="nav-link
+						{{ Request::is('admin/invoicer/invoices/estimates') ? 'active' : '' }}
+						{{ (Request::is('admin/invoicer/invoices/create') &&  Request::exists('type')) ? 'active' : '' }}
+						{{ (Request::is('admin/invoicer/invoices/*/edit') &&  Request::exists('type')) ? 'active' : '' }}
+					">
+						{{-- {{ Request::exists('type') }} --}}
+						<i class="{{ config('icons.invoicer-invoices') }}"></i>
+						<p>Estimates</p>
+					</a>
+				</li>
+			@endcan
+
+			@can('invoicer-invoice')
+				<li class="nav-item ml-2">
+					<a href="{{ route('admin.invoicer.invoices') }}"
+						class="nav-link
+							{{ Request::is('admin/invoicer/invoices') ? 'active' : '' }}
+							{{ Request::is('admin/invoicer/invoices/logged') ? 'active' : '' }}
+							{{ Request::is('admin/invoicer/invoices/invoiced') ? 'active' : '' }}
+							{{ Request::is('admin/invoicer/invoices/paid') ? 'active' : '' }}
+							{{ Request::is('admin/invoicer/invoices/unpaid') ? 'active' : '' }}
+							{{ (Request::is('admin/invoicer/invoices/*/edit') && !Request::exists('type')) ? 'active' : '' }}
+							{{ (Request::is('admin/invoicer/invoices/create') && !Request::exists('type')) ? 'active' : '' }}
+						">
 						<i class="{{ config('icons.invoicer-invoices') }}"></i>
 						<p>Invoices</p>
 					</a>

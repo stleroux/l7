@@ -4,13 +4,23 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ config('icons.edit') }}"></i>
-   Invoicer :: Show Invoice
+	<i class="{{ config('icons.edit') }}"></i>
+	Invoicer :: Show 
+	@if($invoice->status == "estimate")
+		Estimate
+	@else
+		Invoice
+	@endif
+   # {{ $invoice->id }}
 @endsection
 
 @section('breadcrumb')
    <li class="breadcrumb-item"><a href="{{ route('admin.invoicer') }}">Invoicer</a></li>
-   <li class="breadcrumb-item"><a href="{{ route('admin.invoicer.invoices') }}">Invoices</a></li>
+	@if($invoice->status == "estimate")
+		<li class="breadcrumb-item"><a href="{{ route('admin.invoicer.invoices.estimates') }}">Estimates</a></li>
+	@else
+		<li class="breadcrumb-item"><a href="{{ route('admin.invoicer.invoices') }}">Invoices</a></li>
+	@endif
    <li class="breadcrumb-item">Show</li>
 @endsection
 

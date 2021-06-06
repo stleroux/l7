@@ -1,4 +1,4 @@
-<div class="row-col mb-2">
+<div class="row-col mb-2 float-right">
 
    <button type="submit" class="btn btn-sm btn-success" name="submit" value="update">
       <i class="{{ config('icons.update') }}"></i>
@@ -29,7 +29,7 @@
       </div>
    </a>
 
-   <a href="#" class="btn btn-sm btn-light border float-right mx-2" data-toggle="modal" data-target="#helpModal">
+   <a href="#" class="btn btn-sm btn-light border float-right ml-1" data-toggle="modal" data-target="#helpModal">
       <i class="{{ config('icons.help') }}"></i>
       <div class="d-none d-lg-inline">
          Help

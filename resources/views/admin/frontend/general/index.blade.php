@@ -41,7 +41,7 @@
          <div class="card-body p-2">
             <div class="tab-content" id="general-tabContent">
                @include('admin.frontend.general.homepage.index')
-               {{-- @include('admin.frontend.general.notes') --}}
+               @include('admin.frontend.general.notes.index')
                {{-- @include('admin.frontend.general.image') --}}
                {{-- @include('admin.frontend.general.information') --}}
                {{-- @include('admin.frontend.general.settings') --}}

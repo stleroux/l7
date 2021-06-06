@@ -6,7 +6,8 @@
       {{ $label ?? 'Category' }}
    </label>
    
-   <select name="category_id" id="catSelect" class="form-control form-control-sm">
+   <select name="category_id" id="category_id" class="form-control form-control-sm @error('category_id') is-invalid @enderror">
+      <option value="0">Select</option>
       @foreach ($categories as $category)
          <option disabled>{{ ucfirst($category->name) }}</option>
          @foreach ($category->children as $children)

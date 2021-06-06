@@ -29,6 +29,7 @@ class CreateCarvingsTable extends Migration {
 			$table->string('depth', 10)->nullable();
 			$table->string('height', 10)->nullable();
 			$table->string('weight', 10)->nullable();
+			$table->string('jobSheet')->nullable();
 			$table->dateTime('completed_at')->nullable();
 			$table->timestamps();
 			$table->softDeletes();

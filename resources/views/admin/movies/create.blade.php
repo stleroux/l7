@@ -22,24 +22,35 @@
 @endsection
 
 @section('topbar')
+   @include('admin.movies.create.topbar')
 @endsection
 
 @section('content')
 
+{{-- <div class="card bg-info">
+   <div class="card-header">Header</div>
+   <div class="card-body">Body</div>
+   <div class="card-footer">Footer</div>
+</div> --}}
+
+
+
+      <div class="card mb-3">
+
    <form action="{{ route('admin.movies.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
 
-      @include('admin.movies.create.topbar')
    
-      <div class="card mb-3">
+      @include('common.form_submission_error')
+
 
          <div class="card-body section_body p-2">
             @include('admin.movies.form')            
          </div>
 
-      </div>
    
    </form>
+      </div>
 
    @include('admin.movies.help')
 

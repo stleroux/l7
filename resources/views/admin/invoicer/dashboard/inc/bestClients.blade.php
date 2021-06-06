@@ -16,6 +16,7 @@
 				<th class="text-right">Owed</th>
 			</tr>
 		</thead>
+
 		@foreach($bestClients as $client)
 			<tr>
 				<td>

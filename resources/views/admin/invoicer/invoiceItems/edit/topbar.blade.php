@@ -7,8 +7,8 @@
 
       <div class="float-right">
 			
-			<a href="{{ route('admin.invoicer.invoices.edit', $item->invoice->id) }}" class="btn btn-sm btn-outline-secondary">
-				<i class="fa fa-backward"></i>
+			<a href="{{ route('admin.invoicer.invoices.edit', $item->invoice->id) }}" class="btn btn-sm btn-warning">
+				<i class="{{ config('icons.cancel') }}"></i>
 				Cancel
 			</a>
 

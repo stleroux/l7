@@ -9,6 +9,7 @@ use Session;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller; // Required for validation
 use App\Models\Category;
+use App\Models\Faq;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 // use App\Models\Comment;
@@ -27,7 +28,7 @@ class RecipesController extends Controller
    public function __construct()
    {
       // Only allow authenticated users access to these functions
-      $this->middleware('auth')->except('indexGrid','indexList','show');
+      $this->middleware('auth')->except('indexGrid','indexList','show','faq');
    }
 
 
@@ -64,6 +65,27 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
+# FAQ
+// Display a list of resources
+##################################################################################################################
+    // public function index($filter = null, $tag = null)
+    public function faq()
+    {
+        // Check if user has required permission
+        
+
+        // Set the session to the current page route
+        Session::put('fromPage', url()->full());
+
+        $faqs = FAQ::where('category', 'recipes')->orderBy('question')->get();
+        // dd($faqs);
+
+        return view('UI.recipes.faqs', compact('faqs'));
+
+    }
+
+
+##################################################################################################################
 # ██ ███    ██ ██████  ███████ ██   ██      ██████  ██████  ██ ██████  
 # ██ ████   ██ ██   ██ ██       ██ ██      ██       ██   ██ ██ ██   ██ 
 # ██ ██ ██  ██ ██   ██ █████     ███       ██   ███ ██████  ██ ██   ██ 
@@ -90,7 +112,7 @@ class RecipesController extends Controller
             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
             ->where('published_at', '<=', Carbon::now())
             ->where('deleted_at', '=', null)
-            ->where('personal', '=', 0)
+            ->where('personal', '=', Recipe::IS_PERSONAL_NO)
             ->orderBy('letter')
             ->get();
 
@@ -116,7 +138,7 @@ class RecipesController extends Controller
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('published_at', '<=', Carbon::now())
                ->where('deleted_at', '=', null)
-               ->where('personal', '=', 0)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
                ->where('category_id', '=', $byCatName->id)
                ->orderBy('letter')
                ->get();
@@ -146,7 +168,7 @@ class RecipesController extends Controller
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('published_at', '<=', Carbon::now())
                ->where('deleted_at', '=', null)
-               ->where('personal', '=', 0)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
                ->whereIn('category_id', $allc)
                ->orderBy('letter')
                ->get();
@@ -176,7 +198,7 @@ class RecipesController extends Controller
       }
 
       $privateRecipesCount = Recipe::myRecipes()->private()->count();
-
+      // dd($recipes);
       return view('UI.recipes.index.grid.index', compact('recipes','categories','letters','byCatName','privateRecipesCount'));
    }
 
@@ -208,7 +230,7 @@ class RecipesController extends Controller
             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
             ->where('published_at', '<=', Carbon::now())
             ->where('deleted_at', '=', null)
-            ->where('personal', '=', 0)
+            ->where('personal', '=', Recipe::IS_PERSONAL_NO)
             ->orderBy('letter')
             ->get();
 
@@ -234,7 +256,7 @@ class RecipesController extends Controller
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('published_at', '<=', Carbon::now())
                ->where('deleted_at', '=', null)
-               ->where('personal', '=', 0)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
                ->where('category_id', '=', $byCatName->id)
                ->orderBy('letter')
                ->get();
@@ -265,7 +287,7 @@ class RecipesController extends Controller
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('published_at', '<=', Carbon::now())
                ->where('deleted_at', '=', null)
-               ->where('personal', '=', 0)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
                ->whereIn('category_id', $allc)
                ->orderBy('letter')
                ->get();
@@ -379,7 +401,7 @@ class RecipesController extends Controller
          $alphas = DB::table('recipes')
             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
             ->where('user_id','=', Auth::user()->id)
-            ->where('personal', '=', 1)
+            ->where('personal', '=', Recipe::IS_PERSONAL_YES)
             ->where('deleted_at','=',Null)
             ->orderBy('letter')
             ->get();
@@ -387,14 +409,14 @@ class RecipesController extends Controller
          if($request->key) {
             $recipes = Recipe::with('user','category')
                ->where('user_id','=', Auth::user()->id)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
                ->paginate(10);
          } else {
             $recipes = Recipe::with('user','category')
                ->where('user_id','=', Auth::user()->id)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->orderBy('title', 'asc')
                ->paginate(10);
          }
@@ -405,7 +427,7 @@ class RecipesController extends Controller
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('user_id','=', Auth::user()->id)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->where('deleted_at', '=', null)
                ->where('category_id', '=', $byCatName->id)
                ->orderBy('letter')
@@ -414,7 +436,7 @@ class RecipesController extends Controller
             if($request->key) {
                $recipes = Recipe::with('user','category')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->where('category_id', '=', $byCatName->id)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
@@ -423,7 +445,7 @@ class RecipesController extends Controller
             } else {
                $recipes = Recipe::with('user','category')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->where('category_id', '=', $byCatName->id)
                   ->orderBy('title', 'asc')
                   ->paginate(10);
@@ -436,7 +458,7 @@ class RecipesController extends Controller
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('deleted_at', '=', null)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->where('user_id','=', Auth::user()->id)
                ->whereIn('category_id', $allc)
                ->orderBy('letter')
@@ -445,7 +467,7 @@ class RecipesController extends Controller
             if($request->key) {
                $recipes = Recipe::with('user','category','comments')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->whereIn('category_id', $allc)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
@@ -453,7 +475,7 @@ class RecipesController extends Controller
             } else {
                $recipes = Recipe::with('user','category')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->whereIn('category_id', $allc)
                   ->orderBy('title', 'asc')
                   ->paginate(10);
@@ -499,7 +521,7 @@ class RecipesController extends Controller
          $alphas = DB::table('recipes')
             ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
             ->where('user_id','=', Auth::user()->id)
-            ->where('personal', '=', 1)
+            ->where('personal', '=', Recipe::IS_PERSONAL_YES)
             ->where('deleted_at','=',Null)
             ->orderBy('letter')
             ->get();
@@ -507,14 +529,14 @@ class RecipesController extends Controller
          if($request->key) {
             $recipes = Recipe::with('user','category')
                ->where('user_id','=', Auth::user()->id)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
                ->paginate(10);
          } else {
             $recipes = Recipe::with('user','category')
                ->where('user_id','=', Auth::user()->id)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->orderBy('title', 'asc')
                ->paginate(10);
          }
@@ -525,7 +547,7 @@ class RecipesController extends Controller
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('user_id','=', Auth::user()->id)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->where('deleted_at', '=', null)
                ->where('category_id', '=', $byCatName->id)
                ->orderBy('letter')
@@ -534,7 +556,7 @@ class RecipesController extends Controller
             if($request->key) {
                $recipes = Recipe::with('user','category')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->where('category_id', '=', $byCatName->id)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
@@ -543,7 +565,7 @@ class RecipesController extends Controller
             } else {
                $recipes = Recipe::with('user','category')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->where('category_id', '=', $byCatName->id)
                   ->orderBy('title', 'asc')
                   ->paginate(10);
@@ -556,7 +578,7 @@ class RecipesController extends Controller
             $alphas = DB::table('recipes')
                ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
                ->where('deleted_at', '=', null)
-               ->where('personal', '=', 1)
+               ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                ->where('user_id','=', Auth::user()->id)
                ->whereIn('category_id', $allc)
                ->orderBy('letter')
@@ -565,7 +587,7 @@ class RecipesController extends Controller
             if($request->key) {
                $recipes = Recipe::with('user','category','comments')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->whereIn('category_id', $allc)
                   ->where('title', 'like', $request->key . '%')
                   ->orderBy('title', 'asc')
@@ -573,7 +595,7 @@ class RecipesController extends Controller
             } else {
                $recipes = Recipe::with('user','category')
                   ->where('user_id','=', Auth::user()->id)
-                  ->where('personal', '=', 1)
+                  ->where('personal', '=', Recipe::IS_PERSONAL_YES)
                   ->whereIn('category_id', $allc)
                   ->orderBy('title', 'asc')
                   ->paginate(10);

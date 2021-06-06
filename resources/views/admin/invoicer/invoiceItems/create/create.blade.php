@@ -5,7 +5,7 @@
 
 @section('pageHeader')
    <i class="{{ config('icons.add') }}"></i>
-   Invoicer :: Add Billable Item to Invoice : {{ $invoice->id }}
+   Invoicer :: Add Billable Item to {{ ($invoice->status == 'estimate' ? 'Estimate' : 'Invoice') }} : {{ $invoice->id }}
 @endsection
 
 @section('breadcrumb')
@@ -99,6 +99,7 @@
 					</div>
 
 					<div class="col-4">
+						
 						<div class="row">
 							<div class="col-6">
 								<div class="form-group {{ $errors->has('quantity') ? 'has-error' : '' }}">
@@ -120,7 +121,30 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="row">
+							
+							{{-- <div class="col-6">
+								<div class="form-group">
+									<label for="taxable" class="">Taxable?</label>
+									<div class="input-group">
+										<input
+					                        class="form-check-input"
+					                        id="taxable"
+					                        type="checkbox"
+					                        name="taxable"
+					                        value="np"
+					                        data-bootstrap-switch
+					                        data-off-color="danger"
+					                        data-off-text="Non Taxable"
+					                        data-on-color="success"
+					                        data-on-text="Taxable"
+					                        @if($invoice->hst) checked @endif
+					                    />
+					                </div>
+				                </div>
+							</div> --}}
+							
 							<div class="col-6">
 								<div class="form-group {{ $errors->has('work_date') ? 'has-error' : '' }}">
 									<label for="work_date" class="">Work Date</label>
@@ -135,7 +159,9 @@
 									<span class="text-danger">{{ $errors->first('work_date') }}</span>
 								</div>
 							</div>
+
 						</div>
+
 					</div>
 
 				</div>

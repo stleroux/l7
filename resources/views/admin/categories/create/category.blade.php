@@ -9,7 +9,9 @@
             <div class="card-title">Add Category</div>
             <div class="float-right">
                @include('admin.categories.actions.common.reset')
+               {{-- @include('admin.actions.common.reset') --}}
                @include('admin.categories.actions.common.save')
+               {{-- @include('admin.actions.common.saveAndClose') --}}
             </div>
          </div>
 

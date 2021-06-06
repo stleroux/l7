@@ -69,8 +69,6 @@
       });
    </script>
 
-
-
    <script>
       $(document).ready(function(){
          $("div#showEditImage").click(function(){

@@ -57,6 +57,8 @@ class BillableRemoveNotification extends Notification
             'id' => $this->item->id,
             'invoiceNo' => $this->invoice->id,
             'client' => $this->invoice->client->id,
+            'client_name' => $this->invoice->client->contact_name,
+            'company_name' => $this->invoice->client->company_name,
             'product' => $this->item->product,
             'quantity' => $this->item->quantity,
             'price' => $this->item->price,

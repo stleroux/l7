@@ -13,7 +13,10 @@
 @endphp
 
 @can($modelName.'-manage')
-   <a href="{{ route($routeName, $model->id) }}" class="btn btn-sm btn-default" title="Disable {{ ucfirst($modelName) }}">
+   <a href="{{ route($routeName, $model->id) }}"
+      class="btn btn-sm btn-default"
+      data-toggle="tooltip"
+      title="Disable {{ ucfirst($modelName) }}">
       <i class="{{ config('icons.disable') }} text-pink"></i>
    </a>
 @endcan

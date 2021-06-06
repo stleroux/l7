@@ -66,21 +66,30 @@
 													<form action="{{ route('admin.invoicer.products.destroy', [$product->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this product?');" class="float-right">
 														@csrf
 
-														<a href="{{ route('admin.invoicer.products.show', $product->id) }}" class="btn btn-sm btn-outline-primary">
+														<a href="{{ route('admin.invoicer.products.show', $product->id) }}"
+															class="btn btn-sm btn-outline-primary"
+															data-toggle="tooltip"
+															title="View Product">
 															<i class="fa fa-eye"></i>
-															View
+															{{-- View --}}
 														</a>
 
-														<a href="{{ route('admin.invoicer.products.edit', $product->id) }}" class="btn btn-sm btn-primary">
+														<a href="{{ route('admin.invoicer.products.edit', $product->id) }}"
+															class="btn btn-sm btn-primary"
+															data-toggle="tooltip"
+															title="Edit Product">
 															<i class="fa fa-edit"></i>
-															Edit
+															{{-- Edit --}}
 														</a>
 
 														<input type="hidden" name="_method" value="DELETE" />
 
-														<button type="submit" class="btn btn-sm btn-danger">
+														<button type="submit"
+															class="btn btn-sm btn-danger"
+															data-toggle="tooltip"
+															title="Delete Product Permanently">
 															<i class="fa fa-trash-alt"></i>
-															Delete
+															{{-- Delete --}}
 														</button>
 													</form>
 												</td>

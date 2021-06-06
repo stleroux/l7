@@ -2,7 +2,7 @@
 <html>
    <head>
       @include('layouts.common.head')
-      @yield('stylesheet')
+      {{-- @yield('stylesheet') --}}
    </head>
 
    <body>

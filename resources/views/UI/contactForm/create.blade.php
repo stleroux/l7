@@ -15,7 +15,11 @@
 
 @section ('content')
 
+
 <div class="col-xl-8 offset-xl-2">
+   
+   @include('common.form_submission_error')
+
    <div class="card card-trans-4 mb-2">
 
       {{-- <div class="card-header section_header p-2">

@@ -18,6 +18,8 @@
 						@include('admin.settings.fields.settings.perPage')
 						@include('admin.settings.fields.settings.popularCount')
 						@include('admin.settings.fields.settings.viewsToBePopularCount')
+						@include('admin.settings.fields.settings.formSubmissionError')
+						@include('admin.settings.fields.settings.viewMore')
 					</tbody>
     			</table>
  			</div>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\BugRequest;
 use App\Models\Bug;
-use Illuminate\Http\Request;
 use Auth;
-use Gate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class BugsController extends Controller
 {
@@ -418,7 +418,8 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status',1)->get();
+      // $bugs = Bug::where('status',1)->get();
+      $bugs = Bug::where('status', Bug::IS_NEW)->get();
       return view('admin.bugs.index', compact('bugs'));
    }
 
@@ -427,7 +428,7 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status',2)->get();
+      $bugs = Bug::where('status', Bug::IS_PENDING)->get();
       return view('admin.bugs.index', compact('bugs'));
    }
 
@@ -436,7 +437,7 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status',3)->get();
+      $bugs = Bug::where('status', Bug::IS_NOT_REPRODUCIBLE)->get();
       return view('admin.bugs.index', compact('bugs'));
    }
 
@@ -445,7 +446,7 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status',4)->get();
+      $bugs = Bug::where('status', Bug::IS_NON_ISSUE)->get();
       return view('admin.bugs.index', compact('bugs'));
    }
 
@@ -454,7 +455,7 @@ class BugsController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status',10)->get();
+      $bugs = Bug::where('status', Bug::IS_RESOLVED)->get();
       return view('admin.bugs.index', compact('bugs'));
    }
 

@@ -51,7 +51,7 @@ class CarvingsController extends Controller
       abort_unless(Gate::allows('carving-create'), 403);
 
       $carving = New Carving();
-      $tags = Tag::where('category',1)->orderBy('name')->get();
+      $tags = Tag::where('category', Tag::IS_CARVING)->orderBy('name')->get();
 
       return view('admin.carvings.create', compact('carving','tags'));
    }
@@ -143,6 +143,41 @@ class CarvingsController extends Controller
 
 
 ##################################################################################################################
+# ██████  ███████ ██      ███████ ████████ ███████ 
+# ██   ██ ██      ██      ██         ██    ██      
+# ██   ██ █████   ██      █████      ██    █████   
+# ██   ██ ██      ██      ██         ██    ██      
+# ██████  ███████ ███████ ███████    ██    ███████ 
+// Mass Delete selected rows - all selected records
+##################################################################################################################
+   public function deleteJobSheet($id)
+   {
+      // dd($id);
+      // Find the user
+      $carving = Carving::find($id);
+      // dd($carving);
+
+      $jobSheet = public_path('\_carvings\\'.$carving->id.'\\'.$carving->jobSheet);
+      // dd($jobSheet);
+
+      // Delete the job sheet from the system
+      File::delete($jobSheet);
+
+      // Update database
+      $carving->jobSheet = NULL;
+      $carving->save();
+
+      // Set flash data with success message and return user to same tab
+      $notification = array(
+         'message' => 'The job sheet was successfully removed!',
+         'alert-type' => 'success'
+      );
+
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
 # ███████ ██████  ██ ████████ 
 # ██      ██   ██ ██    ██    
 # █████   ██   ██ ██    ██    
@@ -159,7 +194,7 @@ class CarvingsController extends Controller
 
       $materials = Material::all();
       $finishes = Finish::all();
-      $tags = Tag::where('category',1)->orderBy('name')->get();
+      $tags = Tag::where('category', Tag::IS_CARVING)->orderBy('name')->get();
 
       return view('admin.carvings.edit', compact('carving','finishes','materials','tags'));
    }
@@ -188,7 +223,7 @@ class CarvingsController extends Controller
          $carvings = Carving::with('images')->orderBy('name','asc')->get();
       }
 
-      $tags = Tag::where('category',1)->orderBy('name')->get();
+      $tags = Tag::where('category', Tag::IS_CARVING)->orderBy('name')->get();
 
       return view('admin.carvings.index', compact('carvings','tags'));
    }
@@ -214,6 +249,7 @@ class CarvingsController extends Controller
       $carving->depth         = $request->depth;
       $carving->height        = $request->height;
       $carving->weight        = $request->weight;
+      $carving->jobSheet      = $request->jobSheet;
       $carving->completed_at  = $request->completed_at;
       $carving->price         = $request->price;
       $carving->design_time_hrs   = $request->design_time_hrs;
@@ -294,6 +330,17 @@ class CarvingsController extends Controller
    }
 
 
+// SHOW JOB SHEET
+   // public function showJobSheet(Carving $carving)
+   // {
+   //    // return File::get(public_path() . '\_carvings\\'.$carving->id.'\\'.$carving->jobSheet);
+   //    $file = File::get(public_path() . '\_carvings\\'.$carving->id.'\\'.$carving->jobSheet);
+
+   //    return view('admin.carvings.showJobSheet', compact('file', 'carving'));
+   //    // dd($carving);
+   //    // dd($carving->jobSheet);
+   // }
+
 ##################################################################################################################
 # ██    ██ ██████  ██████   █████  ████████ ███████ 
 # ██    ██ ██   ██ ██   ██ ██   ██    ██    ██      
@@ -315,6 +362,7 @@ class CarvingsController extends Controller
       $carving->depth         = $request->depth;
       $carving->height        = $request->height;
       $carving->weight        = $request->weight;
+      // $carving->jobSheet      = $request->jobSheet;
       $carving->completed_at  = $request->completed_at;
       $carving->price         = $request->price;
       $carving->design_time_hrs   = $request->design_time_hrs;
@@ -338,6 +386,30 @@ class CarvingsController extends Controller
              $carving->tags()->sync($request->tags);
          } else {
              $carving->tags()->sync(array());
+         }
+
+         // Check if a new file was submitted
+         if ($request->hasFile('jobSheet')) {
+
+            // Check for existing job sheet file and delete if necessary
+            if($carving->jobSheet)
+            {
+               $jobSheet = public_path('\_carvings\\'.$carving->id.'\\'.$carving->jobSheet);
+
+               // Delete the job sheet from the system
+               File::delete($jobSheet);
+
+               // Update database
+               $carving->jobSheet = NULL;
+               $carving->save();
+            }
+
+            $destinationPath = public_path('_carvings/' . $carving->id); // upload path
+            $filename = time() . '.' . $request->jobSheet->getClientOriginalExtension();
+            $request->jobSheet->move($destinationPath, $filename);
+
+            $carving->jobSheet = $filename;
+            $carving->save();
          }
 
          if ($request->submit == 'update')

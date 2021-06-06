@@ -12,7 +12,10 @@
 @endphp
 
 @can($modelName.'-manage')
-   <a href="{{ route($routeName, $model->id) }}" class="btn btn-sm btn-default" title="Enable {{ ucfirst($modelName) }}">
+   <a href="{{ route($routeName, $model->id) }}"
+      class="btn btn-sm btn-default"
+      data-toggle="tooltip"
+      title="Enable {{ ucfirst($modelName) }}">
       <i class="{{ config('icons.enable') }} text-primary"></i>
    </a>
 @endcan

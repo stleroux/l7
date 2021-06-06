@@ -249,7 +249,7 @@ class RecipesController extends Controller
          ->select(DB::raw('DISTINCT LEFT(title, 1) as letter'))
          ->where('published_at','<', Carbon::Now())
          ->where('deleted_at','=', Null)
-         ->where('personal', '!=', 1)
+         ->where('personal', '!=', Recipe::IS_PERSONAL_YES)
          ->orderBy('letter')
          ->get();
 

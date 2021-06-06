@@ -13,11 +13,17 @@
    @endif
 @endif
 
-   <div class="card-header">
-      <div class="card-title">Address Information</div>
+   <div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
+      Address Information
+      {{-- </div> --}}
       <div class="card-tools">
          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
+            @if(Route::currentRouteName('') == 'admin.users.create')
+               <i class="fas fa-minus"></i>
+            @else
+               <i class="fas fa-plus"></i>
+            @endif
          </button>
          <button type="button" class="btn btn-tool" data-card-widget="maximize">
             <i class="fas fa-expand"></i>
@@ -25,7 +31,7 @@
       </div>
    </div>
 
-   <div class="card-body p-3">
+   <div class="card-body p-2">
    	
    	<div class="form-row">
          <div class="col-12 col-md-6">@include('admin.users.forms.fields.address_1')</div>

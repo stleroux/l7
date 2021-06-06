@@ -11,7 +11,9 @@
                @include('admin.categories.actions.common.save')
             </div>
          </div>
-         
+
+         {{-- @include('common.form_submission_error') --}}
+
          <div class="card-body pb-0">
 
             <div class="row">

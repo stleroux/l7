@@ -15,12 +15,12 @@
       <div class="form-row">
          <div class="col-md-4">
             <div class="form-group">
-               @include('admin.users.form.fields.address_1')
+               @include('admin.users.forms.fields.address_1')
             </div>
          </div>
          <div class="col-md-4">
             <div class="form-group">
-               @include('admin.users.form.fields.address_2')
+               @include('admin.users.forms.fields.address_2')
             </div>
          </div>
       </div>
@@ -28,17 +28,17 @@
       <div class="form-row">
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.city')
+               @include('admin.users.forms.fields.city')
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.province')
+               @include('admin.users.forms.fields.province')
             </div>
          </div>
          <div class="col-md-2">
             <div class="form-group">
-               @include('admin.users.form.fields.postal_code')
+               @include('admin.users.forms.fields.postal_code')
             </div>
          </div>
       </div>

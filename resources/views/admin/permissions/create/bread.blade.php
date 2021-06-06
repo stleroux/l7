@@ -13,11 +13,33 @@
             </div>
          </div>
          
+         {{-- @include('common.form_submission_error') --}}
          
          <div class="card-body pt-2">
 
             <div class="row">
-               @include('admin.permissions.forms.fields.modelName')
+               {{-- @include('admin.permissions.forms.fields.modelName') --}}
+               <div class="col-6">
+
+   <div class="form-group">
+
+      <label for="modelNameBread" class="required">Model Name</label>
+
+      <input
+         type="text"
+         name="modelNameBread"
+         class="form-control form-control-sm @error('modelNameBread') is-invalid @enderror"
+         placeholder="Model Name">
+
+      @error('modelNameBread')
+         <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+         </span>
+      @enderror
+
+   </div>
+
+</div>
             </div>
 
             {{-- <div class="row">

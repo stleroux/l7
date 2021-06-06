@@ -5,7 +5,7 @@
          <div class="modal-header bg-primary p-2 m-0">
             <h5 class="modal-title" id="exampleModalLongTitle">
                <i class="{{ config('icons.finishes') }}"></i>
-               Projects Finishes Help
+               Finishes Help
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
@@ -16,7 +16,7 @@
 
             <div class="card m-0 p-0 text-dark">
                <div class="card-body p-2 m-0">
-                  <p>Projects FINISHES  related help content will go here</p>
+                  <p>FINISHES  related help content will go here</p>
                </div>
             </div>
 

@@ -200,27 +200,32 @@ class TeamsController extends Controller
       // // dd($tID);
       // // return redirect()->route('darts.01.teams.index', compact('gID', 'tID'));
       //  return redirect()->back()->with($gID, $tID);
+      // dd($score->score);
       $score = $score->score;
       // Session::flash('dart_success','The scoresheet has been updated.');
       if($score > 0 && $score <= 20 && $game->status != 'Completed')
       {
-         Session::flash('dart_success_1');
+         Session::flash('dart_success_0_20');
       }
-      else if($score >= 21 && $score <= 60 && $game->status != 'Completed')
+      else if($score >= 21 && $score <= 40 && $game->status != 'Completed')
       {
-         Session::flash('dart_success_2');
+         Session::flash('dart_success_21_40');
+      }
+      else if($score >= 41 && $score <= 60 && $game->status != 'Completed')
+      {
+         Session::flash('dart_success_41_60');
       }
       else if($score >= 61 && $score <= 120 && $game->status != 'Completed')
       {
-         Session::flash('dart_success_3');
+         Session::flash('dart_success_61_120');
       }
       else if($score >= 121 && $score <= 179 && $game->status != 'Completed')
       {
-         Session::flash('dart_success_4');
+         Session::flash('dart_success_121_179');
       }
       else if($score == 180 && $game->status != 'Completed')
       {
-         Session::flash('dart_success_5');
+         Session::flash('dart_success_180');
       }
 
       // return redirect()->back();

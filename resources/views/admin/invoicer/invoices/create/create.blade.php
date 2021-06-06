@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 
 @section('stylesheet')
-	<style>
+{{-- 	<style>
 /* .invalid class prevents CSS from automatically applying */
 .invalid input:required:invalid {
   background: #BE4C54;
@@ -11,7 +11,7 @@
 .invalid input:required:valid {
   background: #17D654;
 }
-	</style>
+	</style> --}}
 @endsection
 
 @section('pageHeader')
@@ -34,8 +34,10 @@
 
 @section('rightColumn')
 @endsection
+	
 
 @section('content')
+	@include('admin.invoicer.clients.createModal')
 
 	{{-- {!! Form::open(array('route'=>'invoicer.invoices.store')) !!} --}}
 	<form action="{{ route('admin.invoicer.invoices.store') }}" method="POST">
@@ -43,32 +45,40 @@
 		
 		@include('admin.invoicer.invoices.create.topbar')
 
+		@include('common.form_submission_error')
+
+
 		<div class="card">
 			
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-9">
 						
-						<div class="form-group {{ $errors->has('client_id') ? 'has-error' : '' }}">
+						<div class="form-group">
 							<label for="client_id" class="required">Client</label>
-							<select name="client_id" class="form-control">
-									@if(!empty($client))
-										<option value="{{ $client->id }}" >
-											{{ $client->contact_name }} :: {{ $client->email }} :: {{ $client->company_name }}
-										</option>
-									@else
-										<option value="">Select One</option>
-									@endif
+							<select name="client_id" class="form-control @error('client_id') is-invalid @enderror">
+								@if(!empty($client))
+									<option value="{{ $client->id }}" >
+										{{ $client->contact_name }} :: {{ $client->email }} :: {{ $client->company_name }}
+									</option>
+								@else
+									<option value="">Select One</option>
+								@endif
 								@foreach($clients as $c)
 									<option value="{{ $c->id }}" >
 										{{ $c->contact_name }} :: {{ $c->email }} {{ $c->company_name ? ' :: ' . $c->company_name . '' : '' }}
 									</option>
 								@endforeach
 							</select>
-							<span class="text-danger">{{ $errors->first('client_id') }}</span>
+							{{-- <span class="invalid-feedback">{{ $errors->first('client_id') }}</span> --}}
+							@error('client_id')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
 						</div>
 
-						<div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">
+						<div class="form-group">
 							<label for="notes">Notes</label>
 							<textarea name="notes" rows="4" class="form-control"></textarea>
 							<span class="text-danger">{{ $errors->first('notes') }}</span>
@@ -79,7 +89,7 @@
 					</div>
 
 					<div class="col-md-3">
-						<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
+						<div class="form-group">
 							<label for="status" class="required">Status</label>
 							
 							@if(request()->has('type'))
@@ -102,6 +112,5 @@
 
 	</form>
 
-	@include('admin.invoicer.clients.createModal')
 
 @endsection

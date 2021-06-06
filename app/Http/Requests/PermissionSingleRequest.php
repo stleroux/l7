@@ -46,7 +46,10 @@ class PermissionSingleRequest extends FormRequest
          case 'PATCH':
          {
             return [
-               'name'    => 'required',
+               'name'   => [
+                  'required',
+                  new MustContainDash,
+               ],
             ];
          }
          default:break;

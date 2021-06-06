@@ -1,4 +1,4 @@
-<form action="{{ route('admin.homepage.update', $greeting->id) }}" method="POST">
+<form action="{{ route('admin.homepage.update') }}" method="POST">
    @csrf
    @method("PUT")
 

@@ -28,7 +28,7 @@
       <div class="form-group">
          {{-- {!! Form::label('category_id', 'Category', ['class'=>'required']) !!} --}}
          <label for="category_id" class="required">Category</label>
-         <select name="category_id" id="category_id" class="form-control form-control-sm">
+         <select name="category_id" id="category_id" class="form-control form-control-sm @error('category_id') is-invalid @enderror">
             @if(last(request()->segments()) === 'create')
                <option value="" selected>Select One</option>
             @endif
@@ -46,6 +46,13 @@
                @endforeach
             @endforeach
          </select>
-         <div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div>
+         {{-- <div class="pl-1 bg-danger">{{ $errors->first('category_id') }}</div> --}}
+
+   @error('category_id')
+      <span class="invalid-feedback" role="alert">
+         <strong>{{ $message }}</strong>
+      </span>
+   @enderror
+
       </div>
    {{-- </div> --}}

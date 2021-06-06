@@ -5,11 +5,11 @@
 		{{-- @if(checkPerm('invoicer_invoice_edit')) --}}
 			{{-- @if($invoice->status == 'invoiced') --}}
 			{{-- @if($invoice->status == 'logged') --}}
-@if($invoice->status != 'paid' && $invoice->invoiceItems->count() > 0)
+			@if($invoice->status != 'paid' && $invoice->invoiceItems->count() > 0)
 				<span class="float-right">
 					<a href="{{ route('admin.invoicer.activities.create', $invoice) }}" class="btn btn-sm btn-primary">
-						<i class="far fa-plus-square"></i>
-						New Activity
+						<i class="{{ config('icons.invoicer-newActivity') }}"></i>
+						Add Activity
 					</a>
 				</span>
 			@endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Invoicer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InvoiceItemRequest;
 use App\Models\Carving;
+use App\Models\InvoicerActivity;
 use App\Models\InvoicerInvoice;
 use App\Models\InvoicerInvoiceItem;
 use App\Models\InvoicerProduct;
@@ -155,11 +156,15 @@ class InvoiceItemsController extends Controller
 			$item->work_date = $request->work_date;
 			$item->quantity = $request->quantity;
 			$item->price = $request->price;
-			$item->total = $request->quantity * $request->price;
+			// $item->hst = $request->quantity * $request->price * 0.07;
+			// $item->total = ($request->quantity * $request->price) + ($request->quantity * $request->price * 0.07);
+			$item->total = ($request->quantity * $request->price);
 		$item->save();
 
 		// // update invoice with totals
-		$this::invUpdate($request->invoice_id);
+		// $this::invUpdate($request->invoice_id);
+		calculateInvoiceAmounts($request->invoice_id);
+
 
 		// Need to requery the invoice to get the updated total
 		$invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
@@ -199,11 +204,14 @@ class InvoiceItemsController extends Controller
 			$item->work_date = $request->work_date;
 			$item->quantity = $request->quantity;
 			$item->price = $request->price;
-			$item->total = $request->quantity * $request->price;
+			// $item->hst = $request->quantity * $request->price * 0.07;
+			// $item->total = ($request->quantity * $request->price) + ($request->quantity * $request->price * 0.07);
+			$item->total = ($request->quantity * $request->price);
 		$item->save();
 
 		// update invoice with totals
-		$this::invUpdate($request->invoice_id);
+		// $this::invUpdate($request->invoice_id);
+		calculateInvoiceAmounts($request->invoice_id);
 
 		// Need to requery the invoice to get the updated total
 		$invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
@@ -231,32 +239,97 @@ class InvoiceItemsController extends Controller
 # ██║██║ ╚████║ ╚████╔╝ ╚██████╔╝██║╚██████╗███████╗    ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
 # ╚═╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚═╝ ╚═════╝╚══════╝     ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 ##################################################################################################################
-	public function invUpdate($invID)
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-invoice'), 403);
+	// public function invUpdate($invID, $activity = null)
+	// {
+	// 	// Check if user has required permission
+	// 	abort_unless(Gate::allows('invoicer-invoice'), 403);
 
-		// update invoice with totals
-		$invoice = InvoicerInvoice::find($invID);
-			 // Perform required calculations
-			$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
-			$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
-			$inv_sub_total = $inv_amount_charged + $inv_hst;
-			$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
-			$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
-			$inv_total_deductions = $inv_wsib + $inv_income_taxes;
-			$inv_total = $inv_amount_charged - $inv_total_deductions;
+	// 	// // update invoice with totals
+	// 	// $invoice = InvoicerInvoice::find($invID);
+	// 	// 	 // Perform required calculations
+	// 	// 	$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
+	// 	// 	$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
+	// 	// 	$inv_sub_total = $inv_amount_charged + $inv_hst;
+	// 	// 	$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
+	// 	// 	$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
+	// 	// 	$inv_total_deductions = $inv_wsib + $inv_income_taxes;
+	// 	// 	$inv_total = $inv_amount_charged - $inv_total_deductions;
 			
-			// Set the values to be updated
-			$invoice->amount_charged = $inv_amount_charged;
-			$invoice->hst = $inv_hst;
-			$invoice->sub_total = $inv_sub_total;
-			$invoice->wsib = $inv_wsib;
-			$invoice->income_taxes = $inv_income_taxes;
-			$invoice->total_deductions = $inv_total_deductions;
-			$invoice->total = $inv_total;
-		$invoice->save();
-	}
+	// 	// 	// Set the values to be updated
+	// 	// 	$invoice->amount_charged = $inv_amount_charged;
+	// 	// 	$invoice->hst = $inv_hst;
+	// 	// 	$invoice->sub_total = $inv_sub_total;
+	// 	// 	$invoice->wsib = $inv_wsib;
+	// 	// 	$invoice->income_taxes = $inv_income_taxes;
+	// 	// 	$invoice->total_deductions = $inv_total_deductions;
+	// 	// 	$invoice->total = $inv_total;
+	// 	// $invoice->save();
+
+
+	// 	// update invoice with totals
+	// 	$invoice = InvoicerInvoice::find($invID);
+
+	// 		 // Perform required calculations
+	// 		$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
+	// 		// dd($inv_amount_charged);
+	// 		$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
+	// 		// dd($inv_hst);
+	// 		$inv_depositsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositAdd')->sum('amount');
+	// 		$inv_depositsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositRemove')->sum('amount');
+	// 		$inv_deposits = $inv_depositsAdd - $inv_depositsRemove;
+	// 		// dd($inv_deposits);
+	// 		$inv_discountsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountAdd')->sum('amount');
+	// 		$inv_discountsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountRemove')->sum('amount');
+	// 		$inv_discounts = $inv_discountsAdd - $inv_discountsRemove;
+	// 		// dd($inv_discounts);
+	// 		$inv_paymentsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentAdd')->sum('amount');
+	// 		$inv_paymentsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentRemove')->sum('amount');
+	// 		$inv_payments = $inv_paymentsAdd - $inv_paymentsRemove;
+	// 		// dd($inv_payments);
+
+	// 		$inv_sub_total = $inv_amount_charged + $inv_hst;
+	// 		// dd($inv_sub_total);
+
+	// 		$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
+	// 		// dd($inv_wsib);
+	// 		$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
+	// 		// dd($inv_income_taxes);
+	// 		$inv_total_deductions = $inv_wsib + $inv_income_taxes;
+	// 		// dd("Total deductions : " . $inv_total_deductions);
+
+	// 		$inv_total = $inv_sub_total - $inv_total_deductions - $inv_deposits - $inv_discounts - $inv_payments;
+	// 		// dd("Invoice Total : " . $inv_total);
+			
+	// 		// dd(
+	// 		// 	"Amount Charged : " . $inv_amount_charged . " == " .
+	// 		// 	"HST : " . $inv_hst . " == " .
+	// 		// 	"Deposits : " . $inv_deposits . " == " .
+	// 		// 	"Discounts : " . $inv_discounts . " == " .
+	// 		// 	"Payments : " . $inv_payments . " == " .
+	// 		// 	"Sub Total : " . $inv_sub_total . " == " .
+	// 		// 	"WSIB : " . $inv_wsib . " == " .
+	// 		// 	"Income Tax : " . $inv_income_taxes . " == " .
+	// 		// 	"Total Deductions : " . $inv_total_deductions . " == " .
+	// 		// 	"Invoice Total : " . $inv_total
+	// 		// );
+			
+	// 		// Set the values to be updated
+	// 		$invoice->amount_charged = $inv_amount_charged;
+	// 		$invoice->hst = $inv_hst;
+	// 		$invoice->sub_total = $inv_sub_total;
+
+	// 		$invoice->deposits = $inv_deposits;
+	// 		$invoice->discounts = $inv_discounts;
+	// 		$invoice->payments = $inv_payments;
+
+	// 		$invoice->wsib = $inv_wsib;
+	// 		$invoice->income_taxes = $inv_income_taxes;
+	// 		$invoice->total_deductions = $inv_total_deductions;
+
+	// 		$invoice->total = $inv_total;
+
+	// 	$invoice->save();
+	// }
 
 
 }

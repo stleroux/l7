@@ -30,9 +30,12 @@
 
             <div class="card card-trans-4">
 
-               {{-- <div class="card-header">
+               <div class="card-header section_header">
                   <div class="card-title">Bug Information</div>
-               </div> --}}
+               </div>
+
+               @include('common.form_submission_error')
+
                <div class="card-body p-2">
                   <div class="row">
                      <div class="col">

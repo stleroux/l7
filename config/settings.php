@@ -31,13 +31,19 @@ return [
    'homepageBlogCount' => '5',
 
    // The number of popular items to display in each block
-   'popularCount' => '15',
+   'popularCount' => '10',
 
    // The number of views an item must have to be considered popular
-   'viewsToBePopularCount' => '50',
+   'viewsToBePopularCount' => '100',
 
    // The number of rows to return by default in Livewire tables
    'perPage' => '15',
+
+   // Generic message to display at top of form when validation error(s) occur
+   'formSubmissionError' => 'Errors occurred while submitting the form. Please correct the errors before proceeding.',
+
+   // Message to display when user is not logged in and they view a details page
+   'viewMore' => 'To view more details, please <a href="\login"  class="text text-info">LOGIN</a> if you are already a member or <a href="\register" class="text text-info">REGISTER</a> an account if you are not.',
 
    // Visibity settings for frontend modules
    'carvings' => 'visible',

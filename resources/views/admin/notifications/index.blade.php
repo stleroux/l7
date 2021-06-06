@@ -29,10 +29,6 @@
 				<tbody>
 
 					@foreach($notifications as $notification)
-						@php
-							$client = \App\Models\InvoicerClient::findOrFail($notification->data['client']);
-						@endphp
-
 						<tr>
 							@include('admin.notifications.type.invoiceCreated')
 							@include('admin.notifications.type.paymentAdd')
@@ -54,5 +50,7 @@
 		</div>
 
 	</div>
+
+@include('admin.notifications.help')
 
 @endsection

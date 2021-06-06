@@ -7,15 +7,18 @@
 @endphp
 
 @can($modelName.'-manage')
-   <button type="button"
-      class="resetViews-model btn btn-sm btn-default"
-      data-toggle="modal"
-      data-target="#resetViewsModal"
-      data-id="{{ $model->id }}"
-      data-url="{{ url($routeName, $model) }}"
-      title="Reset {{ ucfirst($modelName) }} Views"
-      >
-      <i class="{{ config('icons.resetViews') }} text-secondary"></i>
-      {{-- Reset Views --}}
-   </button>
+   <span data-toggle="modal" data-target="#resetViewsModal">
+      <button type="button"
+         class="resetViews-model btn btn-sm btn-default"
+         {{-- data-toggle="modal" --}}
+         {{-- data-target="#resetViewsModal" --}}
+         data-toggle="tooltip"
+         data-id="{{ $model->id }}"
+         data-url="{{ url($routeName, $model) }}"
+         title="Reset {{ ucfirst($modelName) }} Views"
+         >
+         <i class="{{ config('icons.resetViews') }} text-secondary"></i>
+         {{-- Reset Views --}}
+      </button>
+   </span>
 @endcan

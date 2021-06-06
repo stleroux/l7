@@ -7,7 +7,10 @@
 @endphp
 
 @can($modelName.'-manage')
-   <a href="{{ route($routeName, $model) }}" class="btn btn-sm btn-default" title="Add All Permissions">
+   	<a href="{{ route($routeName, $model) }}"
+		class="btn btn-sm btn-default"
+   		title="Add All Permissions"
+   		data-toggle="tooltip">
       <i class="{{ config('icons.permissions') }} text-primary"></i>
    </a>
 @endcan

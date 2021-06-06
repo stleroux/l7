@@ -76,8 +76,6 @@
 
 	</form>
 
-	@include('UI.darts.01.teams.help')
-
 @endsection
 
 @section('scripts')

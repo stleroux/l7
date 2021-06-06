@@ -7,7 +7,13 @@
 @endphp
 
 @can($modelName.'-create')
-   <a href="{{ route($routeName) }}" class="btn btn-block btn-outline-success" title="Create {{ ucfirst($modelName) }}">
+
+   <a 
+      href="{{ route($routeName) }}"
+      class="btn btn-block btn-outline-success"
+      {{-- data-toggle="tooltip" --}}
+      title="Create {{ ucfirst($modelName) }}"
+   >
       <i class="{{ config('icons.add') }}"></i>
       
       @if($modelName == 'bug')

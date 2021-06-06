@@ -173,6 +173,7 @@ return [
         App\Providers\ProjectServiceProvider::class,
         App\Providers\PostServiceProvider::class,
         App\Providers\CarvingServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -236,6 +237,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+    ],
+
+    'languages' => [
+        'en' => 'English',
+        'fr' => 'Français',
     ],
 
 ];

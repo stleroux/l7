@@ -4,7 +4,7 @@
       Trashed Carvings
    @else
    	@if(request('tag'))
-   		{{ request('tag') }}
+   		{{ ucwords(request('tag')) }}
    	@endif
       Carvings
    @endif

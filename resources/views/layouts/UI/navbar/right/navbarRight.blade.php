@@ -1,22 +1,23 @@
 <ul class="navbar-nav ml-auto">
 
-   @guest
+	@guest
 
-      @include('layouts.UI.navbar.right.authLinks')
+		@include('layouts.UI.navbar.right.authLinks')
 
-   @else
+	@else
 
-	   @can('admin-dashboard')
-	   	<li class="nav-item {{ Route::is('admin.dashboard*') ? 'active' : '' }}">
-		      <a class="nav-link p-2" href="{{ route('admin.dashboard') }}">
-		         <i class="{{ config('icons.dashboard') }}"></i>
-		         Dashboard
-		      </a>
-	   	</li>
-	   @endcan
+		@can('admin-dashboard')
+			<li class="nav-item {{ Route::is('admin.dashboard*') ? 'active' : '' }}">
+				<a class="nav-link p-2" href="{{ route('admin.dashboard') }}">
+					<i class="{{ config('icons.dashboard') }}"></i>
+					Dashboard
+				</a>
+			</li>
+		@endcan
 
-      {{-- @include('layouts.UI.navbar.right.user') --}}
-      @include('layouts.common.navbar.user')
+		@include('layouts.common.navbar.mylinks')
+		@include('layouts.common.navbar.languages')
+		@include('layouts.common.navbar.user')
 
    @endguest
 

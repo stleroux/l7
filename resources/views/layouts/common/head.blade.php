@@ -33,7 +33,7 @@
    {{-- <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}"> --}}
    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
    {{-- <link rel="stylesheet" href="{{ asset('css/UI/__bootstrap.css') }}"> --}}
-   {{-- <link rel="stylesheet" href="{{ asset('css/UI/__slate_b431.css') }}"> --}}
+   {{-- <link rel="stylesheet" href="{{ asset('css/old/__slate_b431.css') }}"> --}}
 
    <!-- Google Font: Source Sans Pro -->
    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -46,8 +46,10 @@
    
    <!-- Custom stylesheets -->
    <link rel="stylesheet" href="{{ asset('css/common/bootstrap-colors.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/UI/styles.css') }}">
-   {{-- @yield('stylesheet') --}}
+   <link rel="stylesheet" href="{{ asset('css/common/styles.css') }}">
+   <link rel="stylesheet" href="{{ asset('css/common/print.css') }}">
+
+   @yield('stylesheet')
 
    {{-- @livewireStyles --}}
    <livewire:styles>

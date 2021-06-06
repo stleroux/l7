@@ -1,4 +1,5 @@
 @if(!$carving->deleted_at)
+   @include('admin.actions.grid.showJobSheet', ['modelName'=>'carving', 'model'=>$carving])
    @include('admin.actions.grid.edit', ['modelName'=>'carving', 'model'=>$carving])
    @include('admin.actions.grid.resetViews', ['modelName'=>'carving', 'model'=>$carving])
    @include('admin.actions.grid.destroy', ['modelName'=>'carving', 'model'=>$carving])

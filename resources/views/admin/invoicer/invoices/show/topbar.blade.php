@@ -7,18 +7,15 @@
 
       <div class="float-right">
 	     @if($invoice->status != 'paid')
-            {{-- @if(checkPerm('invoicer_invoice_edit')) --}}
-               <a href="{{ route('admin.invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
-                  <i class="fa fa-edit"></i>
+            <a href="{{ route('admin.invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
+               <i class="fa fa-edit"></i>
+               @if($invoice->status == "estimate")
+                  Edit Estimate
+               @else
                   Edit Invoice
-               </a>
-            @endif
-         {{-- @endif --}}
-
-{{--        <a href="{{ route('admin.invoicer.invoices.downloadPDFInvoice', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
-            <i class="fa fa-list"></i>
-            Download as PDF
-         </a> --}}
+               @endif
+            </a>
+         @endif
 
          <a href="{{ route('admin.invoicer.invoices.PDF', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
             <i class="fa fa-list"></i>
@@ -30,10 +27,17 @@
             Print this page
          </a>
 
-         <a href="{{ route('admin.invoicer.invoices') }}" class="btn btn-sm btn-primary d-print-none">
-            <i class="fa fa-list"></i>
-            Invoices List
-         </a>
+         @if($invoice->status == "estimate")
+            <a href="{{ route('admin.invoicer.invoices.estimates') }}" class="btn btn-sm btn-primary d-print-none">
+               <i class="fa fa-list"></i>
+               Estimates List
+            </a>
+         @else
+            <a href="{{ route('admin.invoicer.invoices') }}" class="btn btn-sm btn-primary d-print-none">
+               <i class="fa fa-list"></i>
+               Invoices List
+            </a>
+         @endif
       </div>
 
    </div>

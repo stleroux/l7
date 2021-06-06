@@ -2,7 +2,7 @@
 
 @if(Auth::user()->can('project-manage') || Auth::user()->hasRole('admin'))
 
-   <div class="col">
+   <div class="col col-md-6 col-xl-12">
       <a href="{{ route('admin.projects.index') }}">
          <div class="info-box mb-3">
             <span class="info-box-icon bg-danger elevation-1">

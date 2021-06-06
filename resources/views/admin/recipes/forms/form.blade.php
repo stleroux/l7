@@ -1,25 +1,19 @@
+@include('common.form_submission_error')
 
-   {{-- {!! Form::open(['route' => 'admin.recipes.store', 'files'=>'true']) !!} --}}
+<div class="card card-primary card-outline card-outline-tabs">
+   
+   <div class="card-header p-0 border-bottom-0">
+      @include('admin.recipes.forms.tabs')
+   </div>
 
-
-      {{-- @include('admin.recipes.forms.topbar') --}}
-         
-      <div class="card card-primary card-outline card-outline-tabs">
-         
-         <div class="card-header p-0 border-bottom-0">
-            @include('admin.recipes.forms.tabs')
-         </div>
-
-         <div class="card-body">
-            <div class="tab-content" id="recipe-tabContent">
-               @include('admin.recipes.forms.tabs.general')
-               @include('admin.recipes.forms.tabs.notes')
-               @include('admin.recipes.forms.tabs.image')
-               @include('admin.recipes.forms.tabs.information')
-               @include('admin.recipes.forms.tabs.settings')
-            </div>
-         </div>
-         <!-- /.card -->
+   <div class="card-body">
+      <div class="tab-content" id="recipe-tabContent">
+         @include('admin.recipes.forms.tabs.general')
+         @include('admin.recipes.forms.tabs.notes')
+         @include('admin.recipes.forms.tabs.image')
+         @include('admin.recipes.forms.tabs.information')
+         @include('admin.recipes.forms.tabs.settings')
       </div>
-
-   {{-- </form> --}}
+   </div>
+   <!-- /.card -->
+</div>

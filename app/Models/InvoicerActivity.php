@@ -56,6 +56,7 @@ class InvoicerActivity extends Model
          'paymentRemove'   => 'Remove Payment',
          'discountRemove'  => 'Remove Discount',
          'depositRemove'   => 'Remove Deposit',
+         // 'taxRebate'       => 'Tax Rebate'
       ];
    }
 

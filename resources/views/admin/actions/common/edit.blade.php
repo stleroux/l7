@@ -7,7 +7,8 @@
 @endphp
 
 @can($modelName.'-edit')
-   <a href="{{ route($routeName, $model->id) }}" class="btn btn-block btn-outline-primary">
+   <a href="{{ route($routeName, $model->id) }}" class="btn btn-block btn-outline-primary"
+      title="Edit {{ $modelName }}">
       <i class="{{ config('icons.edit') }}"></i>
       Edit
    </a>

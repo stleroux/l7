@@ -19,12 +19,15 @@
    @include('UI.carvings.blocks.faqs')
 @endsection
 
+@section('notice')
+   @include('UI.carvings.index.notice')
+@endsection
+
 @section('topbar')
    @include('UI.carvings.index.topbar')
 @endsection
 
 @section('content')
-
    {{-- <div class="card card-trans-0 w-100 pt-2 px-2"> --}}
    @if(count($carvings) > 0)
       
@@ -113,3 +116,11 @@
 
 
 @endsection
+
+{{-- @section('scripts')
+   <script>
+      $(document).ready(function () {
+         $('#memberModal').modal('show');
+      });
+   </script>
+@endsection --}}

@@ -1,3 +1,5 @@
+@include('common.form_submission_error')
+
 <div class="card card-primary card-outline card-outline-tabs">
    
    <div class="card-header p-0 border-bottom-0">

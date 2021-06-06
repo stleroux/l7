@@ -4,14 +4,16 @@
    <div class="card {{ ($user->account_status ? 'card-info' : 'card-danger') }}">
 @endif
 
-   <div class="card-header">
-      <div class="card-title">Roles</div>
+   <div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
+      Roles
+      {{-- </div> --}}
    </div>
 
-   <div class="card-body">
+   <div class="card-body p-2">
       <!-- ROLES -->
       <div class="form-group">
-         <dl class="pl-3">
+         <dl class="pl-1">
             @foreach($roles as $role)
                <div class="row">
                   <div class="col-6">

@@ -37,6 +37,7 @@
       <div class="form-row pb-2">
          @include('admin.carvings.forms.fields.others.completed')
          @include('admin.carvings.forms.fields.others.price')
+         @include('admin.carvings.forms.fields.others.jobSheet')
       </div>
 
    </div>

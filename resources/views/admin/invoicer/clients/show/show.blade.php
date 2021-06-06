@@ -134,14 +134,14 @@
 			<table class="table table-sm table-hover">
 				<thead>
 					<tr>
-						<th>Invoice N<sup>o</sup></th>
+						<th>Status</th>
+						<th>N<sup>o</sup></th>
 						<th>Create Date</th>
 						<th>Amount</th>
 						<th>Discounts</th>
 						<th>Deposits</th>
 						<th>Payments</th>
 						<th>Owing</th>
-						<th>Status</th>
 						@can('invoicer-invoice')
 							<th colspan="4"></th>
 						@endcan
@@ -153,6 +153,7 @@
 								{{ ($invoice->total != 0) ? 'text-danger' : '' }}
 								{{ ($invoice->total == 0) ? 'text-success' : '' }}
 						">
+							<td>{{ ucfirst($invoice->status) }}</td>
 							<td>{{ $invoice->id }}</td>
 							<td>{{ $invoice->created_at }}</td>
 							<td>{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>
@@ -160,7 +161,6 @@
 							<td>{{ number_format($invoice->deposits, 2, '.', ', ') }}$</td>
 							<td>{{ number_format($invoice->payments, 2, '.', ', ') }}$</td>
 							<td>{{ number_format($invoice->total, 2, '.', ', ') }}$</td>
-							<td>{{ ucfirst($invoice->status) }}</td>							
 							@can('invoicer-invoice')
 								<form action="{{ route('admin.invoicer.invoices.destroy',[$invoice->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this invoice?');">
 									<input type="hidden" name="_method" value="DELETE" />

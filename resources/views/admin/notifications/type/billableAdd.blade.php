@@ -8,13 +8,10 @@
 			invoice # {{ $notification->data['invoiceNo'] }}
 		</a>
 		for
-		<a href="{{ route('admin.invoicer.clients.show', $client->id) }}">
-			{{ ucwords($client->contact_name) }} {{ ($client->company_name ? '[' . ucwords($client->company_name) . ']' : '') }}
+		<a href="{{ route('admin.invoicer.clients.show', $notification->data['client']) }}">
+			{{ ucwords($notification->data['client_name']) }}
+			{{ ($notification->data['company_name'] ? '[' . ucwords($notification->data['company_name']) . ']' : '') }}
 		</a>
-		{{-- <br />
-		Quantity : {{ $notification->data['quantity'] }}<br />
-		Price : {{ $notification->data['price'] }}<br />
-		Total : {{ $notification->data['total'] }} --}}
 	</td>
 
 	<td>
@@ -26,15 +23,3 @@
 	</td>
 
 @endif
-{{-- 
-{{ $notification->data['title'] }}
-{{ $notification->data['invoiceNo'] }}
-{{ $notification->data['client'] }}
-{{ $notification->data['product'] }}
-{{ $notification->data['quantity'] }}
-{{ $notification->data['price'] }}
-{{ $notification->data['total'] }}
-
-New billable item with a quantity of ## and a unit price of ## for a total of ## was added to invoice ## for client ##
-New billable item added to invoice ## for client##. Quantity: ## Price: ## Total: ##
- invoice ## for client##. Quantity: ## Price: ## Total: ## --}}

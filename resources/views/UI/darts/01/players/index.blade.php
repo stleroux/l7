@@ -1,4 +1,4 @@
-{{-- @extends ('layouts.UI.app-10-2') --}}
+
 @extends(''.($gameDone == 0) ? 'layouts.UI.app-10-2' : 'layouts.UI.app-10')
 
 
@@ -87,8 +87,6 @@
          </div>
       </div>
    </div>
-
-   @include('UI.darts.01.players.help')
 
 @endsection
 

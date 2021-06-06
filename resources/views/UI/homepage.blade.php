@@ -18,15 +18,15 @@
 
 @section('rightColumn')
    @include('UI.blocks.popularItems')
+   @include('UI.blocks.faqs')
 @endsection
 
 @section('content')
-   {{-- <div class="container-fluid pt-2"> --}}
-      {{-- <example-component></example-component> --}}
-      @include('UI.homepage.greeting')
-      @include('UI.homepage.warning')
-      @include('UI.homepage.newUser')
-      @include('UI.homepage.interests')
-      @include('UI.homepage.blog')
-   {{-- </div> --}}
+
+   @include('UI.homepage.greeting')
+   @include('UI.homepage.warning')
+   @include('UI.homepage.newUser')
+   @include('UI.homepage.interests')
+   @include('UI.homepage.blog')
+
 @endsection

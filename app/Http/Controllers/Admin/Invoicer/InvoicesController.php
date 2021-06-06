@@ -56,7 +56,6 @@ class InvoicesController extends Controller
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
-
 		$products = InvoicerProduct::all();
 		$clients = InvoicerClient::orderBy('contact_name')->get();
 
@@ -173,7 +172,11 @@ class InvoicesController extends Controller
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
-		$invoices = InvoicerInvoice::sortable()->with('client')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+		$invoices = InvoicerInvoice::sortable()
+			->with('client')
+			->where('status', '!=', 'estimate')
+			->orderBy('id','desc')
+			->paginate(Config::get('settings.rowsPerPage'));
 
 		return view('admin.invoicer.invoices.index.index', compact('invoices'));
 	}
@@ -282,6 +285,7 @@ class InvoicesController extends Controller
 
       $invoices = InvoicerInvoice::sortable()
          ->where('status','!=','paid')
+         ->where('status','!=','estimate')
          ->orderBy('id','desc')
          ->paginate(Config::get('settings.rowsPerPage'));
 
@@ -388,6 +392,75 @@ class InvoicesController extends Controller
 
 
 ##################################################################################################################
+# ███████╗████████╗ █████╗ ████████╗██╗   ██╗███████╗
+# ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██║   ██║██╔════╝
+# ███████╗   ██║   ███████║   ██║   ██║   ██║███████╗
+# ╚════██║   ██║   ██╔══██║   ██║   ██║   ██║╚════██║
+# ███████║   ██║   ██║  ██║   ██║   ╚██████╔╝███████║
+# ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
+##################################################################################################################
+	public function status_logged($id)
+	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('invoicer-invoice'), 403);
+
+		// $invoices = InvoicerInvoice::where('status', '=', 'estimate')->get();
+			
+		// 	foreach($invoices as $invoice) {
+		// 		$invoice->status = 'logged';
+		// 		$invoice->paid_at = Carbon::now();
+		// 		$invoice->save();
+		// 	}
+
+		$invoice = InvoicerInvoice::findOrFail($id);
+			$invoice->status = 'logged';
+			$invoice->logged_at = Carbon::now();
+		$invoice->save();
+
+		// Set flash data with success message
+		$notification = [
+			'message' => 'All estimates have successfully been marked as logged!', 
+			'alert-type' => 'success'
+		];
+
+		// Redirect to posts.show
+		return redirect()->route('admin.invoicer.invoices.estimates')->with($notification);
+	}
+
+
+##################################################################################################################
+# ███████╗████████╗ █████╗ ████████╗██╗   ██╗███████╗
+# ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██║   ██║██╔════╝
+# ███████╗   ██║   ███████║   ██║   ██║   ██║███████╗
+# ╚════██║   ██║   ██╔══██║   ██║   ██║   ██║╚════██║
+# ███████║   ██║   ██║  ██║   ██║   ╚██████╔╝███████║
+# ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
+##################################################################################################################
+	public function status_logged_all()
+	{
+		// Check if user has required permission
+		abort_unless(Gate::allows('invoicer-invoice'), 403);
+
+		$invoices = InvoicerInvoice::where('status', '=', 'estimate')->get();
+			
+			foreach($invoices as $invoice) {
+				$invoice->status = 'logged';
+				$invoice->paid_at = Carbon::now();
+				$invoice->save();
+			}
+
+		// Set flash data with success message
+		$notification = [
+			'message' => 'All estimates have successfully been marked as logged!', 
+			'alert-type' => 'success'
+		];
+
+		// Redirect to posts.show
+		return redirect()->route('admin.invoicer.invoices.estimates')->with($notification);
+	}
+
+
+##################################################################################################################
 # ███████╗████████╗ █████╗ ████████╗██╗   ██╗███████╗    ██████╗  █████╗ ██╗██████╗ 
 # ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██║   ██║██╔════╝    ██╔══██╗██╔══██╗██║██╔══██╗
 # ███████╗   ██║   ███████║   ██║   ██║   ██║███████╗    ██████╔╝███████║██║██║  ██║
@@ -466,7 +539,6 @@ class InvoicesController extends Controller
 ##################################################################################################################
 	public function store(Request $request)
 	{
-
 		// Check if user has required permission
 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
@@ -488,8 +560,21 @@ class InvoicesController extends Controller
 		$invoice->save();
 
 		// Notify admins
-   	$users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
-   	Notification::send($users, new InvoiceCreatedNotification($invoice));
+   		$users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
+   		Notification::send($users, new InvoiceCreatedNotification($invoice));
+
+
+		// redirect to another page
+		if(Str::lower($request->status) == "estimate")
+		{
+			// set a flash message to be displayed on screen
+			$notification = [
+				'message' => 'The estimate was successfully saved!', 
+				'alert-type' => 'success'
+			];
+
+	   		return redirect()->route('admin.invoicer.invoices.estimates')->with($notification);
+		}
 
 		// set a flash message to be displayed on screen
 		$notification = [
@@ -497,8 +582,7 @@ class InvoicesController extends Controller
 			'alert-type' => 'success'
 		];
 
-		// redirect to another page
-	   return redirect()->route('admin.invoicer.invoices')->with($notification);
+		return redirect()->route('admin.invoicer.invoices')->with($notification);
 	}
 
 
@@ -638,13 +722,20 @@ class InvoicesController extends Controller
 		$invoice->save();
 
 		// update invoice with totals
-		$this::invUpdate($invoice->id);
+		// $this::invUpdate($invoice->id);
+		calculateInvoiceAmounts($invoice->id);
 
 		// Set flash data with success message
 		$notification = [
 			'message' => 'This invoice was successfully updated!', 
 			'alert-type' => 'success'
 		];
+
+		if(Str::lower($request->status) == "estimate")
+		{
+			// Redirect to invoices.index
+			return redirect()->route('admin.invoicer.invoices.estimates')->with($notification);	
+		}
 
 		// Redirect to invoices.index
 		return redirect()->route('admin.invoicer.invoices')->with($notification);
@@ -659,52 +750,60 @@ class InvoicesController extends Controller
 # ██║██║ ╚████║ ╚████╔╝ ╚██████╔╝██║╚██████╗███████╗    ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
 # ╚═╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚═╝ ╚═════╝╚══════╝     ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 ##################################################################################################################
-	public function invUpdate($invID, $activity = null)
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-invoice'), 403);
+	// public function invUpdate($invID, $activity = null)
+	// {
+	// 	// Check if user has required permission
+	// 	abort_unless(Gate::allows('invoicer-invoice'), 403);
 
-		// update invoice with totals
-		$invoice = InvoicerInvoice::find($invID);
+	// 	// update invoice with totals
+	// 	$invoice = InvoicerInvoice::find($invID);
 
-			 // Perform required calculations
-			$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
+	// 		 // Perform required calculations
+	// 		$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
 
-			$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
+	// 		$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
 
-			$inv_deposits = InvoicerActivity::where('invoice_id',$invID)->where('activity','deposit')->sum('amount');
+	// 		// $inv_deposits = InvoicerActivity::where('invoice_id',$invID)->where('activity','deposit')->sum('amount');
+	// 		// $inv_discounts = InvoicerActivity::where('invoice_id',$invID)->where('activity','discount')->sum('amount');
+	// 		// $inv_payments = InvoicerActivity::where('invoice_id',$invID)->where('activity','payment')->sum('amount');
+	// 		$inv_depositsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositAdd')->sum('amount');
+	// 		$inv_depositsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositRemove')->sum('amount');
+	// 		$inv_deposits = $inv_depositsAdd - $inv_depositsRemove;
+	// 		// dd($inv_deposits);
+	// 		$inv_discountsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountAdd')->sum('amount');
+	// 		$inv_discountsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountRemove')->sum('amount');
+	// 		$inv_discounts = $inv_discountsAdd - $inv_discountsRemove;
+	// 		// dd($inv_discounts);
+	// 		$inv_paymentsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentAdd')->sum('amount');
+	// 		$inv_paymentsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentRemove')->sum('amount');
+	// 		$inv_payments = $inv_paymentsAdd - $inv_paymentsRemove;
+	// 		// dd($inv_payments);			
 
-			$inv_discounts = InvoicerActivity::where('invoice_id',$invID)->where('activity','discount')->sum('amount');
+	// 		$inv_sub_total = $inv_amount_charged + $inv_hst;
 
-			$inv_payments = InvoicerActivity::where('invoice_id',$invID)->where('activity','payment')->sum('amount');
+	// 		$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
+	// 		$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
+	// 		$inv_total_deductions = $inv_wsib + $inv_income_taxes;
 
-			$inv_sub_total = $inv_amount_charged + $inv_hst;
-
-			$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
-
-			$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
-
-			$inv_total_deductions = $inv_wsib + $inv_income_taxes;
-
-			$inv_total = $inv_amount_charged - $inv_total_deductions - $inv_deposits - $inv_discounts - $inv_payments;
+	// 		$inv_total = $inv_sub_total - $inv_total_deductions - $inv_deposits - $inv_discounts - $inv_payments;
 			
-			// Set the values to be updated
-			$invoice->amount_charged = $inv_amount_charged;
-			$invoice->hst = $inv_hst;
-			$invoice->sub_total = $inv_sub_total;
+	// 		// Set the values to be updated
+	// 		$invoice->amount_charged = $inv_amount_charged;
+	// 		$invoice->hst = $inv_hst;
+	// 		$invoice->sub_total = $inv_sub_total;
 
-			$invoice->deposits = $inv_deposits;
-			$invoice->discounts = $inv_discounts;
-			$invoice->payments = $inv_payments;
+	// 		$invoice->deposits = $inv_deposits;
+	// 		$invoice->discounts = $inv_discounts;
+	// 		$invoice->payments = $inv_payments;
 
-			$invoice->wsib = $inv_wsib;
-			$invoice->income_taxes = $inv_income_taxes;
-			$invoice->total_deductions = $inv_total_deductions;
+	// 		$invoice->wsib = $inv_wsib;
+	// 		$invoice->income_taxes = $inv_income_taxes;
+	// 		$invoice->total_deductions = $inv_total_deductions;
 
-			$invoice->total = $inv_total;
+	// 		$invoice->total = $inv_total;
 
-		$invoice->save();
-	}
+	// 	$invoice->save();
+	// }
 
 	
 }

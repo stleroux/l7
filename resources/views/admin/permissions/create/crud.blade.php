@@ -12,11 +12,30 @@
                @include('admin.permissions.actions.common.save')
             </div>
          </div>
+
+         {{-- @include('common.form_submission_error') --}}
          
          <div class="card-body pt-2">
 
             <div class="row">
-               @include('admin.permissions.forms.fields.modelName')
+               {{-- @include('admin.permissions.forms.fields.modelName') --}}
+                  <div class="form-group">
+
+      <label for="modelNameCrud" class="required">Model Name</label>
+
+      <input
+         type="text"
+         name="modelNameCrud"
+         class="form-control form-control-sm @error('modelNameCrud') is-invalid @enderror"
+         placeholder="Model Name">
+
+      @error('modelNameCrud')
+         <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+         </span>
+      @enderror
+
+   </div>
             </div>
 
             {{-- <div class="row">

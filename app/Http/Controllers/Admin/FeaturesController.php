@@ -412,7 +412,7 @@ class FeaturesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('feature-manage'), 403);
 
-      $features = Feature::where('status', 1)->get();
+      $features = Feature::where('status', Feature::IS_NEW)->get();
       return view('admin.features.index', compact('features'));
    }
 
@@ -421,7 +421,7 @@ class FeaturesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('feature-manage'), 403);
 
-      $features = Feature::where('status', 2)->get();
+      $features = Feature::where('status',  Feature::IS_UNDER_REVIEW)->get();
       return view('admin.features.index', compact('features'));
    }
 
@@ -430,7 +430,7 @@ class FeaturesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('feature-manage'), 403);
 
-      $features = Feature::where('status', 3)->get();
+      $features = Feature::where('status',  Feature::IS_PENDING)->get();
       return view('admin.features.index', compact('features'));
    }
 
@@ -439,7 +439,7 @@ class FeaturesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('feature-manage'), 403);
 
-      $features = Feature::where('status', 4)->get();
+      $features = Feature::where('status',  Feature::IS_IMPLEMENTED)->get();
       return view('admin.features.index', compact('features'));
    }
 
@@ -448,7 +448,7 @@ class FeaturesController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('feature-manage'), 403);
 
-      $features = Feature::where('status', 5)->get();
+      $features = Feature::where('status',  Feature::IS_REJECTED)->get();
       return view('admin.features.index', compact('features'));
    }
 

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\AdminComposer;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,8 +36,24 @@ class AppServiceProvider extends ServiceProvider
         // });
 
         // Share using a COMPOSER View
-        View::composer('admin.*', AdminComposer::class);
+        // View::composer('admin.*', AdminComposer::class);
+        View::composer('layouts.admin.navbar.notifications', AdminComposer::class);
 
+        // View::composer('*', function($view)
+        //     {
+        //         if(Auth::check())
+        //         {
+        //             $view->with('mylinks',
+        //                 DB::table('mylinks')
+        //                 ->select('*')
+        //                 ->where('user_id', '=', auth()->user()->id)
+        //                 ->orderBy('name','asc')
+        //                 ->get()
+        //             );
+        //         }
+        //     }
+        // );
 
     }
+
 }

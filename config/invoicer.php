@@ -18,7 +18,7 @@ return [
 	'wsibNo' => '',
 	'wsibRate' => '0',
 	'hstNo' => '',
-	'hstRate' => '0',
+	'hstRate' => '.07',
 	'incomeTaxRate' => '0',
 
 	// Other

@@ -78,12 +78,6 @@
 							{{-- <td class="d-none d-sm-table-cell text-right">{{ number_format($invoices->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
 							<td class="text-right">{{ number_format($invoices->sum('total'), 2, '.', ', ') }}$</td>
 						</tr>
-
-
-
-
-
-
 						<tr class="bg-info">
 							<td colspan="{{ (Request::is('admin/invoicer/ledger/unpaid') ? '2' : '3') }}" class="text-right"><b>Overall Totals :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($amountCharged, 2, '.', ', ') }}$</td>
@@ -93,11 +87,6 @@
 							<td class="d-none d-sm-table-cell text-right">{{ number_format($payments, 2, '.', ', ') }}$</td>
 							<td class="text-right">{{ number_format($total, 2, '.', ', ') }}$</td>
 						</tr>
-
-
-
-
-
 					</tfoot>
 					<tbody>
 						@foreach($invoices as $invoice)
@@ -140,14 +129,9 @@
 							</td>
 							<td class="text-right">{{ number_format($invoice->amount_charged, 2, '.' , ', ') }}$</td>
 							
-
-<td class="d-none d-md-table-cell text-right">{{ number_format($invoice->hst, 2, '.' , ', ') }}$</td>
+							<td class="d-none d-md-table-cell text-right">{{ number_format($invoice->hst, 2, '.' , ', ') }}$</td>
 							
-
 							<td class="d-none d-lg-table-cell text-right">
-
-
-
 								@php
 									$depositAdd = DB::table('invoicer__activities')->where('activity', 'depositAdd')
 																				->where('invoice_id', $invoice->id)

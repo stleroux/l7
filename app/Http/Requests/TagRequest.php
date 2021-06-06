@@ -36,6 +36,7 @@ class TagRequest extends FormRequest
          {
             return [
                'name'   => 'required',
+               'category'   => 'required|min:0|not_in:0',
             ];
          }
          case 'PUT':
@@ -43,6 +44,7 @@ class TagRequest extends FormRequest
          {
             return [
                'name'    => 'required',
+               'category'   => 'required|min:0|not_in:0',
             ];
          }
          default:break;
@@ -62,6 +64,7 @@ class TagRequest extends FormRequest
          {
             return [
                'name.required' => 'The name cannot be blank',
+               'name.required' => 'The category cannot be blank',
             ];
          }
          case 'PUT':
@@ -69,6 +72,7 @@ class TagRequest extends FormRequest
          {
             return [
               'name.required' => 'This field cannot be blank',
+              'name.required' => 'The category cannot be blank',
             ];
          }
          default:break;

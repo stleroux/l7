@@ -54,7 +54,6 @@ class DashboardController extends Controller
       $bestClients = InvoicerClient::whereHas('invoices', function ($query) {
          $query->where('payments', '>', 0);
       })->with('invoices')->get();
-      // dd($bestClients);
 
       $invoicesTotal = InvoicerInvoice::where('status','!=','estimate')->get();
       $invoicesEstimates = InvoicerInvoice::where('status','estimate')->get();

@@ -134,6 +134,18 @@ class SettingsController extends Controller
 				"'perPage' => '".$request->perPage."'",
 				$file);
 
+			// Generic message to display at top of form when validation error(s) occur
+			$file = str_replace(
+				"'formSubmissionError' => '".Config::get('settings.formSubmissionError')."'",
+				"'formSubmissionError' => '".$request->formSubmissionError."'",
+				$file);
+
+			// // Message to display when user is not logged in and they view a details page
+			$file = str_replace(
+				"'viewMore' => '".Config::get('settings.viewMore')."'",
+				"'viewMore' => '".$request->viewMore."'",
+				$file);
+
 			//
 			$file = str_replace(
 				"'carvings' => '".Config::get('settings.carvings')."'",

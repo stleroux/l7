@@ -5,6 +5,7 @@ namespace App\Http\Controllers\UI\Projects;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Faq;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Auth;
@@ -27,7 +28,7 @@ class ProjectsController extends Controller
 ##################################################################################################################
    public function __construct()
    {
-      $this->middleware('auth')->except('index','show');
+      $this->middleware('auth')->except('index','show','faq');
    }
 
 ##################################################################################################################
@@ -62,6 +63,28 @@ class ProjectsController extends Controller
         
         return view('UI.projects.index', compact('projects','project','filter'));
     }
+
+
+##################################################################################################################
+# FAQ
+// Display a list of resources
+##################################################################################################################
+    // public function index($filter = null, $tag = null)
+    public function faq()
+    {
+        // Check if user has required permission
+        
+
+        // Set the session to the current page route
+        Session::put('fromPage', url()->full());
+
+        $faqs = FAQ::where('category', 'projects')->orderBy('question')->get();
+        // dd($faqs);
+
+        return view('UI.projects.faqs', compact('faqs'));
+
+    }
+
 
 ##################################################################################################################
 # ███████╗██╗  ██╗ ██████╗ ██╗    ██╗

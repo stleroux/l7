@@ -2,8 +2,8 @@
 <html>
    <head>
       @include('layouts.common.head')
-      <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-      @yield('stylesheet')
+      {{-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> --}}
+      {{-- @yield('stylesheet') --}}
    </head>
 
    {{-- <body class="hold-transition sidebar-mini sidebar-collapse layout-navbar-fixed layout-footer-fixed"> --}}
@@ -13,28 +13,8 @@
       <div class="wrapper">
 
          <!-- Navbar -->
-         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            @include('layouts.admin.navbar.left')
-            <!-- SEARCH FORM -->
-            @include('layouts.admin.navbar.search')
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-               <!-- Messages Dropdown Menu -->
-               @include('layouts.admin.navbar.messages')
-               <!-- Notifications Dropdown Menu -->
-               @include('layouts.admin.navbar.notifications')
-               <!-- User Dropdown Menu -->               
-               @include('layouts.common.navbar.user')
-               <!-- Button to show right sidebar -->
-               <li class="nav-item">
-                  <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                     <i class="fas fa-th-large"></i>
-                  </a>
-               </li>
-            </ul>
-         </nav>
-         <!-- /.navbar -->
+         @include('layouts.admin.navbar.topNavbar')
+         <!-- ./navbar -->
 
          <!-- Main Sidebar Container -->
          <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -99,13 +79,13 @@
 
                <!-- Secondary content -->
                <section class="subcontent">
-                  <div class="container-fluid">
+                  {{-- <div class="container-fluid"> --}}
                      <div class="row">
                         <div class="col-xl-10">
                            @yield('secondary')
                         </div>
                      </div>
-                  </div>
+                  {{-- </div> --}}
                </section>
 
                </div>

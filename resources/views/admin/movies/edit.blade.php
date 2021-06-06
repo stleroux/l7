@@ -22,18 +22,20 @@
 @endsection
 
 @section('topbar')
+   @include('admin.movies.edit.topbar')
 @endsection
 
 @section('content')
    
+      <div class="card mb-3">
    {{-- {!! Form::model($movie, ['route'=>['admin.movies.update', $movie->id], 'method' => 'PUT', 'files' => true]) !!} --}}
    <form action="{{ route('admin.movies.update', $movie) }}" method="POST" enctype="multipart/formdata">
       @csrf
       @method('PUT')
       
-      @include('admin.movies.edit.topbar')
+      
+      @include('common.form_submission_error')
 
-      <div class="card mb-3">
          
          {{-- <div class="card-header section_header p-2">
             <i class="fa fa-edit"></i>
@@ -50,9 +52,11 @@
          <div class="card-body section_body p-2">
             @include('admin.movies.form')
          </div>
+   </form>
 
       </div>
 
+   @include('admin.movies.help')
    {{-- {!! Form::Close() !!} --}}
 
 @endsection

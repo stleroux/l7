@@ -38,11 +38,6 @@
 @endsection
 
 
-
-
-
-
-
 @section('content1')
 {{-- <form style="display:inline;">
    {!! csrf_field() !!} --}}

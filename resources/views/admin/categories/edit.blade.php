@@ -10,6 +10,8 @@
 
 @section('content')
 
+   @include('common.form_submission_error')
+
    <div class="card card-primary">
 
       <div class="card-header p-2">
@@ -20,7 +22,7 @@
          
          <div class="row">
             <div class="col-xl-3">
-               @include('admin.categories.edit.fields.name')                        
+               @include('admin.categories.edit.fields.name', ['required'=>'required'])                        
             </div>
             <div class="col-xl-9">
                @include('admin.categories.edit.fields.description')                        

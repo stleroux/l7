@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+@if(!env('APP_ENV') == 'local')
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+@else
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+@endif
    
    <a class="navbar-brand" href="/">TheWoodBarn.ca</a>
    

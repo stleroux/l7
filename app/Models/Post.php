@@ -20,7 +20,6 @@ class Post extends Model implements Searchable, Auditable
    protected $fillable = ['slug'];
 
    protected $dates = ['deleted_at', 'published_at'];
-
    
    protected static function boot()
    {

@@ -1,6 +1,6 @@
 <!-- RECIPES -->
 
-<div class="col">
+<div class="col col-md-6 col-xl-12">
    <a href="{{ route('admin.recipes.index') }}">
       <div class="info-box">
          <span class="info-box-icon bg-info elevation-1">

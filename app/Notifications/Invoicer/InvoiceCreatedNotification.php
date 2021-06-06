@@ -54,6 +54,8 @@ class InvoiceCreatedNotification extends Notification
         return [
             'title' => 'created',
             'client' => $this->invoice->client->id,
+            'client_name' => $this->invoice->client->contact_name,
+            'company_name' => $this->invoice->client->company_name,
             'invoiceNo' => $this->invoice->id,
         ];
     }

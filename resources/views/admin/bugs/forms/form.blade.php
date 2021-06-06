@@ -1,12 +1,16 @@
+@include('common.form_submission_error')
+
 <div class="card card-primary">
 
-   <div class="card-header">
-      <div class="card-title">Bug Information</div>
+   <div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
+      Bug Information
+      {{-- </div> --}}
    </div>
 
-   <div class="card-body">
+   <div class="card-body p-2">
       
-      <div class="row">
+      <div class="form-row">
          <div class="col-12 col-xl-5">
             @include('admin.bugs.forms.fields.title', ['required'=>'required'])
          </div>
@@ -18,13 +22,13 @@
          </div>
       </div>
       
-      <div class="row">
+      <div class="form-row">
          <div class="col-12">
             @include('admin.bugs.forms.fields.description', ['required'=>'required'])
          </div>
       </div>
       
-      <div class="row">
+      <div class="form-row">
          <div class="col-12">
             @include('admin.bugs.forms.fields.resolution')
          </div>

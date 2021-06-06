@@ -41,12 +41,12 @@
                   </div>
                </td>
                <td>{{ $carving->id }}</td>
-               <td><a href="{{ route('admin.carvings.show', $carving->id) }}">{{ $carving->name }}</a></td>
+               <td><a href="{{ route('admin.carvings.show', $carving->id) }}">{{ ucwords($carving->name) }}</a></td>
                <td>{{ $carving->category }}</td>
                <td>
                   @foreach($carving->tags as $tag)
                      <div class="badge badge-secondary">
-                        {{ $tag->name }}                        
+                        {{ ucwords($tag->name) }}                        
                      </div>
                   @endforeach
                </td>

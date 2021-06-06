@@ -10,6 +10,7 @@
 @section('addition')
    @if(Route::currentRouteName() == 'admin.permissions.index')
       {{-- <div class="col-xl-4"> --}}
+         @include('common.form_submission_error')
          @include('admin.permissions.create.single')
          @include('admin.permissions.create.multiple')
          @include('admin.permissions.create.crud')

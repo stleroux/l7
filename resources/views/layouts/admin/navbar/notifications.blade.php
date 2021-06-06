@@ -43,7 +43,7 @@ echo end($contents); // displays 'it'
 
 		@can('admin-notifications')
 			@if(auth()->user()->unreadNotifications->count())
-				<li class="d-none d-sm-inline-block p-2">
+				<li class="d-none d-md-inline-block p-2">
 					<a class="text-warning" href="{{ route('admin.notifications.unread') }}">
 						<i class="{{ config('icons.bell') }} text-warning"></i>
 						{{ auth()->user()->unreadNotifications->count() }}
@@ -54,7 +54,7 @@ echo end($contents); // displays 'it'
 
 		@can('bug-manage')
 			@if($newBugsCount)
-				<li class="d-none d-sm-inline-block p-2">
+				<li class="d-none d-md-inline-block p-2">
 					<a class="text-danger" href="{{ route('admin.bugs.new') }}">
 						<i class="{{ config('icons.bugs') }} text-danger"></i>
 						{{ $newBugsCount }}
@@ -65,7 +65,7 @@ echo end($contents); // displays 'it'
 
 		@can('feature-manage')
 			@if($newFeaturesCount)
-				<li class="d-none d-sm-inline-block p-2">
+				<li class="d-none d-md-inline-block p-2">
 					<a class="text-success" href="{{ route('admin.features.new') }}">
 						<i class="{{ config('icons.features') }} text-success"></i>
 						{{ $newFeaturesCount }}

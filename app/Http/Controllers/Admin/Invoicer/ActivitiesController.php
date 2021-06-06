@@ -62,7 +62,19 @@ class ActivitiesController extends Controller
 		$activity = New invoicerActivity();
 		$invoice = InvoicerInvoice::findOrFail($inv_id);
 
-		return view('admin.invoicer.activities.create.create', compact('invoice', 'activity'));
+		$current_deposits_add = InvoicerActivity::where('invoice_id',$inv_id)->where('activity','depositAdd')->sum('amount');
+		$current_discounts_add = InvoicerActivity::where('invoice_id',$inv_id)->where('activity','discountAdd')->sum('amount');
+		$current_payments_add = InvoicerActivity::where('invoice_id',$inv_id)->where('activity','paymentAdd')->sum('amount');
+
+		$current_deposits_remove = InvoicerActivity::where('invoice_id',$inv_id)->where('activity','depositRemove')->sum('amount');
+		$current_discounts_remove = InvoicerActivity::where('invoice_id',$inv_id)->where('activity','discountRemove')->sum('amount');
+		$current_payments_remove = InvoicerActivity::where('invoice_id',$inv_id)->where('activity','paymentRemove')->sum('amount');
+
+		$current_deposits = $current_deposits_add - $current_deposits_remove;
+		$current_discounts = $current_discounts_add - $current_discounts_remove;
+		$current_payments = $current_payments_add - $current_payments_remove;
+
+		return view('admin.invoicer.activities.create.create', compact('invoice', 'activity','current_deposits','current_discounts','current_payments'));
 	}
 
 
@@ -154,7 +166,8 @@ class ActivitiesController extends Controller
 		$this->validate($request, [
 			'activity' => 'required|min:0|not_in:0',
 			'amount' => 'required',
-			'comment' => 'required_if:activity,paymentRetraction,discountRetraction,depositRetraction'
+			'comment' => 'required_if:activity,paymentRemove,discountRemove,depositRemove'
+			// 'comment' => 'required'
 		]);
 
 		$activity = new InvoicerActivity;
@@ -167,7 +180,8 @@ class ActivitiesController extends Controller
 		$invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
 
 		// Update invoice with totals
-		$this::invUpdate($request->invoice_id);
+		// $this::invUpdate($request->invoice_id);
+		calculateInvoiceAmounts($request->invoice_id);
 
 		// Need to requery the invoice to get the updated total
 		$invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
@@ -250,7 +264,7 @@ class ActivitiesController extends Controller
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////
-		if($request->activity == 'discount')
+		if($request->activity == 'discountAdd')
 		{
 			// Create PDF file and store it
 			$pdf = PDF::loadView('admin.invoicer.invoices.invoicedPDF', ['invoice'=>$invoice]);
@@ -262,7 +276,7 @@ class ActivitiesController extends Controller
 
 		}
 
-		if($request->activity == 'discountRetract')
+		if($request->activity == 'discountRemove')
 		{
 			// Create PDF file and store it
 			$pdf = PDF::loadView('admin.invoicer.invoices.invoicedPDF', ['invoice'=>$invoice]);
@@ -383,53 +397,71 @@ class ActivitiesController extends Controller
 # ██║██║ ╚████║ ╚████╔╝ ╚██████╔╝██║╚██████╗███████╗    ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
 # ╚═╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚═╝ ╚═════╝╚══════╝     ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 ##################################################################################################################
-	public function invUpdate($invID, $activity = null)
-	{
-		// dd($invID);
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-invoice'), 403);
+// 	public function invUpdate($invID, $activity = null)
+// 	{
+// 		// dd($invID);
+// 		// Check if user has required permission
+// 		abort_unless(Gate::allows('invoicer-invoice'), 403);
 
-		// update invoice with totals
-		$invoice = InvoicerInvoice::find($invID);
-			 // Perform required calculations
-			$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
-			$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
+// 		// update invoice with totals
+// 		$invoice = InvoicerInvoice::find($invID);
+// 			 // Perform required calculations
+// 			$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
+// 			$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
 			
-			$inv_depositsPlus = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositAdd')->sum('amount');
-			$inv_depositsMinus = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositRemove')->sum('amount');
+// 			$inv_depositsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositAdd')->sum('amount');
+// 			$inv_depositsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','depositRemove')->sum('amount');
 			
-			$inv_discountsPlus = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountAdd')->sum('amount');
-			$inv_discountsMinus = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountRemove')->sum('amount');
-			$inv_paymentsPlus = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentAdd')->sum('amount');
-			$inv_paymentsMinus = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentRemove')->sum('amount');
+// 			$inv_discountsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountAdd')->sum('amount');
+// 			$inv_discountsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','discountRemove')->sum('amount');
 
-			$inv_sub_total = $inv_amount_charged + $inv_hst;
+// 			$inv_paymentsAdd = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentAdd')->sum('amount');
+// 			$inv_paymentsRemove = InvoicerActivity::where('invoice_id',$invID)->where('activity','paymentRemove')->sum('amount');
 
-			$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
-			$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
-			$inv_total_deductions = $inv_wsib + $inv_income_taxes;
+// 			$inv_sub_total = $inv_amount_charged + $inv_hst;
 
-			$inv_total = $inv_amount_charged - $inv_total_deductions - $inv_depositsPlus + $inv_depositsMinus - $inv_discountsPlus + $inv_discountsMinus - $inv_paymentsPlus + $inv_paymentsMinus;
+// 			$inv_wsib = $inv_amount_charged * Config::get('invoicer.wsibRate');
+// 			$inv_income_taxes = $inv_amount_charged * Config::get('invoicer.incomeTaxRate');
+// 			$inv_total_deductions = $inv_wsib + $inv_income_taxes;
+
+// 			$inv_total = $inv_sub_total - $inv_total_deductions - $inv_depositsAdd + $inv_depositsRemove - $inv_discountsAdd + $inv_discountsRemove - $inv_paymentsAdd + $inv_paymentsRemove;
 			
-			// Set the values to be updated
-			$invoice->amount_charged = $inv_amount_charged;
-			$invoice->hst = $inv_hst;
-			$invoice->sub_total = $inv_sub_total;
+// // dd(
+// // 	"Amount Charged : " . $inv_amount_charged . " == " .
+// // 	"HST : " . $inv_hst . " == " .
+// // 	"Deposits Plus :" . $inv_depositsAdd . " == " .
+// // 	"Deposits Minus : " . $inv_depositsRemove . " == " .
+// // 	"Discounts Plus : " . $inv_discountsAdd . " == " .
+// // 	"Discounts Minus : " . $inv_discountsRemove . " == " .
+// // 	"Payments Plus : " . $inv_paymentsAdd . " == " .
+// // 	"Payments Minus : " . $inv_paymentsRemove . " == " .
+// // 	"Sub Total : " . $inv_sub_total . " == " .
+// // 	"WSIB : " . $inv_wsib . " == " .
+// // 	"Income Tax : " . $inv_income_taxes . " == " .
+// // 	"Total Deductions : " . $inv_total_deductions . " == " .
+// // 	"Total : " . $inv_total
+// // );
 
-			$invoice->deposits = $inv_depositsPlus - $inv_depositsMinus;
-			$invoice->discounts = $inv_discountsPlus - $inv_discountsMinus;
-			$invoice->payments = $inv_paymentsPlus - $inv_paymentsMinus;
 
-			$invoice->wsib = $inv_wsib;
-			$invoice->income_taxes = $inv_income_taxes;
-			$invoice->total_deductions = $inv_total_deductions;
+// 			// Set the values to be updated
+// 			$invoice->amount_charged = $inv_amount_charged;
+// 			$invoice->hst = $inv_hst;
+// 			$invoice->sub_total = $inv_sub_total;
 
-			$invoice->total = $inv_total;
+// 			$invoice->deposits = $inv_depositsAdd - $inv_depositsRemove;
+// 			$invoice->discounts = $inv_discountsAdd - $inv_discountsRemove;
+// 			$invoice->payments = $inv_paymentsAdd - $inv_paymentsRemove;
+
+// 			$invoice->wsib = $inv_wsib;
+// 			$invoice->income_taxes = $inv_income_taxes;
+// 			$invoice->total_deductions = $inv_total_deductions;
+
+// 			$invoice->total = $inv_total;
 			
-		$invoice->save();
+// 		$invoice->save();
 
-		return $invoice;
-	}
+// 		return $invoice;
+// 	}
 
 
 }

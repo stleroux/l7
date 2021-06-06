@@ -20,6 +20,12 @@ class Bug extends Model implements Auditable
       'status' => 1,
    ];
 
+   public const IS_NEW = 1;
+   public const IS_PENDING = 2;
+   public const IS_NOT_REPRODUCIBLE = 3;
+   public const IS_NON_ISSUE = 4;
+   public const IS_RESOLVED = 10;
+
    public function getStatusAttribute($attribute)
    {
       return $this->statusOptions()[$attribute];

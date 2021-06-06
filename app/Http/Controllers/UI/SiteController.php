@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UI;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use App\Models\Post;
 use Config;
 use Illuminate\Http\Request;
@@ -25,6 +26,28 @@ class SiteController extends Controller
 	{
 		// $this->middleware('auth');
 	}
+
+
+##################################################################################################################
+# FAQ
+// Display a list of resources
+##################################################################################################################
+    // public function index($filter = null, $tag = null)
+    public function faq()
+    {
+        // Check if user has required permission
+        
+
+        // Set the session to the current page route
+        Session::put('fromPage', url()->full());
+
+        $faqs = FAQ::orderBy('question')->get();
+
+        // dd($faqs);
+
+        return view('UI.faqs', compact('faqs'));
+
+    }
 
 
 ##################################################################################################################

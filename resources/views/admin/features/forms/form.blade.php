@@ -1,12 +1,17 @@
+@include('common.form_submission_error')
+
 <div class="row">
 
    <div class="col">
 
       <div class="card card-primary">
 
-         <div class="card-header">
-            <div class="card-title">Feature Information</div>
+         <div class="card-header p-2">
+            {{-- <div class="card-title"> --}}
+            Feature Information
+            {{-- </div> --}}
          </div>
+         
          <div class="card-body">
             <div class="row">
                <div class="col">

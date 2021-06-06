@@ -1,9 +1,9 @@
-<div class="card mb-2">
-	<div class="card-header">
-      <div class="card-title">
+<div class="card card-primary mb-2">
+	<div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
 		   <i class="far fa-image"></i>
 		   Project Image(s)
-      </div>
+      {{-- </div> --}}
 	</div>
 
 	<div class="card-body p-0 m-0 w-75 mx-auto">

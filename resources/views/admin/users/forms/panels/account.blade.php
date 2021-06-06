@@ -4,8 +4,10 @@
    <div class="card {{ ($user->account_status ? 'card-primary' : 'card-danger') }}">
 @endif
 
-   <div class="card-header">
-      <div class="card-title">Account Information</div>
+   <div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
+      Account Information
+      {{-- </div> --}}
    </div>
 
    <div class="card-body p-3">

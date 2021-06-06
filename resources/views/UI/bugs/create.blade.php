@@ -27,11 +27,14 @@
 
 			<div class="col">
 
-				<div class="card card-primary">
+				<div class="card card-trans-4">
 
-					<div class="card-header">
+					<div class="card-header section_header">
 						<div class="card-title">Bug Information</div>
 					</div>
+
+					@include('common.form_submission_error')
+					
 					<div class="card-body">
 						<div class="row">
 							<div class="col">

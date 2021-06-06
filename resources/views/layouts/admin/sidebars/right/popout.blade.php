@@ -23,6 +23,13 @@
 
 
 @can('invoicer-invoice')
+   <a href="{{ route('admin.invoicer.invoices.create', ['type'=>'estimate']) }}" class="btn btn-sm btn-block btn-link border mt-2" title="Create Estimate">
+      {{-- <i class="{{ config('icons.add') }}"></i> --}}
+      Create Estimate
+   </a>
+@endcan
+
+@can('invoicer-invoice')
    <a href="{{ route('admin.invoicer.invoices.create') }}" class="btn btn-sm btn-block btn-link border mt-2" title="Create Invoice">
       {{-- <i class="{{ config('icons.add') }}"></i> --}}
       Create Invoice

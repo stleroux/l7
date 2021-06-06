@@ -8,6 +8,7 @@
 @include('admin.categories.index.sections.formEnd')
 
 @section('addition')
+   @include('common.form_submission_error')
    @include('admin.categories.create.category')
    @include('admin.categories.create.subcategory')
    @include('admin.categories.create.parent')

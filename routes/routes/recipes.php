@@ -38,6 +38,7 @@ Route::namespace('Admin\Recipes')->prefix('admin')->name('admin.')->group(functi
 
 Route::namespace('UI\Recipes')->prefix('recipes')->name('recipes.')->group(function() {
    Route::get('{recipe}/show',                     'RecipesController@show')                    ->name('show');
+   Route::get('faq',                               'RecipesController@faq')                     ->name('faq');
    Route::get('indexGrid/{cat?}/{key?}',           'RecipesController@indexGrid')               ->name('indexGrid');
    Route::get('indexList/{cat?}/{key?}',           'RecipesController@indexList')               ->name('indexList');
    Route::get('myRecipesGrid/{cat?}/{key?}',       'RecipesController@myRecipesGrid')           ->name('myRecipesGrid');

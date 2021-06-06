@@ -1,4 +1,4 @@
-<form action="{{ route('admin.homepage.update', $newUser->id) }}" method="POST">
+<form action="{{ route('admin.homepage.update') }}" method="POST">
    @csrf
    @method("PUT")
    

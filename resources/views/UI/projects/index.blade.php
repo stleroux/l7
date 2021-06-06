@@ -15,6 +15,11 @@
 
 @section('rightColumn')
    @include('UI.projects.blocks.popular')
+   @include('UI.projects.blocks.faqs')
+@endsection
+
+@section('notice')
+   @include('UI.projects.index.notice')
 @endsection
 
 @section('topbar')

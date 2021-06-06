@@ -6,7 +6,7 @@
 			@if($invoice->status == 'logged' || $invoice->status == 'estimate')
 				<span class="float-right">
 					<a href="{{ route('admin.invoicer.invoiceItems.create', $invoice->id) }}" class="btn btn-sm btn-primary">
-						<i class="far fa-plus-square"></i>
+						<i class="{{ config('icons.invoicer-newBillable') }}"></i>
 						Add Billable
 					</a>
 				</span>
@@ -24,6 +24,7 @@
 						<th>Notes</th>
 						<th class="text-center">Quantity</th>
 						<th class="text-right">Unit Price</th>
+						{{-- <th class="text-right">HST</th> --}}
 						<th class="text-right">Total</th>
 						@if($invoice->status == 'logged')
 							<th></th>
@@ -42,6 +43,7 @@
 							<td>{!! nl2br(e($item->notes)) !!}</td>
 							<td class="text-center">{{ $item->quantity }}</td>
 							<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>
+							{{-- <td class="text-right" nowrap="nowrap">{{ number_format($item->hst, 2, '.', ' ') }}$</td> --}}
 							<td class="text-right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
 							@if($invoice->status == 'estimate' || $invoice->status == 'logged')
 								<td class="text-right" nowrap="nowrap">

@@ -50,14 +50,14 @@
    <li class="nav-item {{ Route::is('about*') ? 'bg-black border-red-2' : '' }}">
       <a class="nav-link" href="{{ route('about') }}">
          <i class="{{ config('icons.about-us') }}"></i>
-         About us
+         {{ __('About us') }}
       </a>
    </li>
    
    <li class="nav-item {{ Route::is('contact*') ? 'bg-black border-red-2' : '' }}">
       <a class="nav-link" href="{{ route('contact') }}">
          <i class="{{ config('icons.contact-us') }}"></i>
-         Contact us
+         {{ __('Contact us') }}
       </a>
    </li>
 

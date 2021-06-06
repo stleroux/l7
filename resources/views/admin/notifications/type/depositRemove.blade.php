@@ -9,8 +9,9 @@
 			invoice # {{ $notification->data['invoiceNo'] }}
 		</a>
 		for
-		<a href="{{ route('admin.invoicer.clients.show', $client->id) }}">
-			{{ ucwords($client->contact_name) }} {{ ($client->company_name ? '[' . ucwords($client->company_name) . ']' : '') }}
+		<a href="{{ route('admin.invoicer.clients.show', $notification->data['client']) }}">
+			{{ $notification->data['client_name'] }}
+			{{ ($notification->data['company_name'] ? '[' . ucwords($notification->data['company_name']) . ']' : '') }}
 		</a>
 	</td>
 

@@ -3,6 +3,7 @@
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
 <!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- SweetAlert2 -->
@@ -61,6 +62,7 @@
 @include('scripts.tinyMCE')
 @include('scripts.showHideMassButtons')
 @include('scripts.massModals')
+@include('scripts.tooltipPopper')
 
 <script>
    @if(Session::has('message'))

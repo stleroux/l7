@@ -42,6 +42,9 @@ class Recipe extends Model implements Searchable, Auditable
    //    'last_viewd_on'      
    // ];
 
+   public const IS_PERSONAL_NO = 0;
+   public const IS_PERSONAL_YES = 1;
+
    // Set the default value for the status field to 0
    protected $attributes = [
       'personal' => 0,
@@ -104,13 +107,15 @@ class Recipe extends Model implements Searchable, Auditable
    public function scopePublic($query)
    {
       return $query
-         ->where('personal', '=', 0);
+         // ->where('personal', '=', 0);
+         ->where('personal', '=', self::IS_PERSONAL_NO);
    }
 
    public function scopePrivate($query)
    {
       return $query
-         ->where('personal', '=', 1);
+         // ->where('personal', '=', 1);
+         ->where('personal', '=', self::IS_PERSONAL_YES);
    }
 
    public function scopePublished($query)

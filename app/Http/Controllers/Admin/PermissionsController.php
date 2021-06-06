@@ -145,11 +145,11 @@ public function storeCrud(Request $request, Permission $permission)
    abort_unless(Gate::allows('permission-create'), 403);
    
    $rules = [
-      'modelName' => 'required',
+      'modelNameCrud' => 'required',
    ];
 
    $customMessages = [
-      'modelName.required' => 'The model field can not be left blank.',
+      'modelNameCrud.required' => 'The model field can not be left blank.',
    ];
 
    $this->validate($request, $rules, $customMessages);
@@ -160,8 +160,8 @@ public function storeCrud(Request $request, Permission $permission)
    // save the data in the database
    foreach($bread as $b){
       $permission = new Permission;
-         $permission->name = str::singular($request->modelName) . "-" . $b;
-         $permission->group = str::singular($request->modelName);
+         $permission->name = str::singular($request->modelNameCrud) . "-" . $b;
+         $permission->group = str::singular($request->modelNameCrud);
       $permission->save();
    }
 
@@ -188,11 +188,11 @@ public function storeBread(Request $request, Permission $permission)
    abort_unless(Gate::allows('permission-create'), 403);
    
    $rules = [
-      'modelName' => 'required',
+      'modelNameBread' => 'required',
    ];
 
    $customMessages = [
-      'modelName.required' => 'The model field can not be left blank.',
+      'modelNameBread.required' => 'The model field can not be left blank.',
    ];
 
    $this->validate($request, $rules, $customMessages);
@@ -203,9 +203,9 @@ public function storeBread(Request $request, Permission $permission)
    // save the data in the database
    foreach($bread as $b){
       $permission = new Permission;
-         $permission->name = Str::singular($request->modelName) . "-" . $b;
+         $permission->name = Str::singular($request->modelNameBread) . "-" . $b;
          // $permission->display_name = ucfirst($b);
-         $permission->group = str::singular($request->modelName);
+         $permission->group = str::singular($request->modelNameBread);
          // $permission->description = $b . " " . $request->model;
       $permission->save();
    }

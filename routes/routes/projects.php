@@ -35,8 +35,9 @@ Route::namespace('Admin\Projects')->prefix('admin')->name('admin.')->group(funct
 //////////////////////////////////////////////////////////////////////////////
 
 Route::namespace('UI\Projects')->prefix('projects')->name('projects.')->group(function() {
-   Route::get('{project}/show',    'ProjectsController@show')                   ->name('show');
-   Route::get('{filter?}',         'ProjectsController@index')                  ->name('index');
-   Route::post('{project}/comment',             'CommentController@store')            ->name('comment.store');
+   Route::get('{project}/show',        'ProjectsController@show')           ->name('show');
+   Route::get('faq',                   'ProjectsController@faq')            ->name('faq');
+   Route::get('{filter?}',             'ProjectsController@index')          ->name('index');
+   Route::post('{project}/comment',    'CommentController@store')           ->name('comment.store');
 });
 

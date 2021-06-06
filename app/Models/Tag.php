@@ -15,6 +15,11 @@ class Tag extends Model
 	// protected $fillable = ['name','category'];
    protected $guarded = [];
 
+   public const IS_CARVING = 1;
+   public const IS_POST = 2;
+   public const IS_PROJECT = 3;
+   // public const IS_OTHER = 4;
+
    // Set the default value for the status field to 0
    protected $attributes = [
       'category' => 0,

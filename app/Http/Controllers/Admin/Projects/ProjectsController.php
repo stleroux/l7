@@ -50,7 +50,7 @@ class ProjectsController extends Controller
       abort_unless(Gate::allows('project-create'), 403);
 
       $project = New Project();
-      $tags = Tag::where('category',3)->get();
+      $tags = Tag::where('category', Tag::IS_PROJECT)->get();
 
       return view('admin.projects.create', compact('project','tags'));
    }
@@ -158,7 +158,7 @@ class ProjectsController extends Controller
 
       $materials = Material::all();
       $finishes = Finish::all();
-      $tags = Tag::where('category',2)->get();
+      $tags = Tag::where('category', Tag::IS_PROJECT)->get();
 
       return view('admin.projects.edit', compact('project','finishes','materials','tags'));
    }
@@ -277,7 +277,7 @@ class ProjectsController extends Controller
 
       // Get the first image associated to this project
       $image = ProjectImage::where('project_id', '=', $project->id)->first();
-      $tags = Tag::where('category',2)->get();
+      $tags = Tag::where('category', Tag::IS_PROJECT)->get();
 
       // Get all associated Audits
       $audits = $project->audits()->with('user')->orderBy('id','desc')->get();

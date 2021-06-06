@@ -23,9 +23,11 @@
 
             </div>
             <div class="col-12 col-xl-5">
-               <div class="card card-outline card-primary">
-                  <div class="card-header">
-                     <div class="card-title">Information</div>
+               <div class="card card-primary">
+                  <div class="card-header p-2">
+                     {{-- <div class="card-title"> --}}
+                     Information
+                     {{-- </div> --}}
                   </div>
                   <div class="card-body p-0">
                      @include('admin.projects.show.fields.information')

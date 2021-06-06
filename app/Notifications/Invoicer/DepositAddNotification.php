@@ -55,6 +55,8 @@ class DepositAddNotification extends Notification
         return [
             'title' => 'deposit',
             'client' => $this->invoice->client->id,
+            'client_name' => $this->invoice->client->contact_name,
+            'company_name' => $this->invoice->client->company_name,
             'invoiceNo' => $this->activity->invoice_id,
             'amount' => $this->activity->amount,
         ];

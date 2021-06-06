@@ -1,4 +1,6 @@
-<div class="form-row">
+@include('common.form_submission_error')
+
+<div class="form-row">	
 
    <div class="col-md-6">
       @include('admin.carvings.forms.fields.general')

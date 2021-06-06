@@ -7,5 +7,8 @@
 		@include('admin.actions.common.previous', ['modelName'=>'carving', 'model'=>$carving])
 		@include('admin.actions.common.next', ['modelName'=>'carving', 'model'=>$carving])
       @include('admin.actions.common.edit', ['modelName'=>'carving', 'model'=>$carving])
+      @include('admin.actions.common.showJobSheet', ['modelName'=>'carving', 'model'=>$carving])
+      {{-- @include('admin.actions.common.editInVCarve', ['modelName'=>'carving', 'model'=>$carving]) --}}
    </div>
+
 </div>

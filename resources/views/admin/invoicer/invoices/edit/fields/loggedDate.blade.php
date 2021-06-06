@@ -9,7 +9,7 @@
 		<div class="input-group">
 
 			@if($invoice->logged_at || $invoice->status == 'paid')
-				<input type="text" name="created_at" value="{{ $invoice->logged_at }}" class="form-control" readonly />
+				<input type="text" name="logged_at" value="{{ $invoice->logged_at }}" class="form-control" readonly />
 			@else
 				<input type="text" name="logged_at" id="datePicker" value="{{ $invoice->logged_at }}" class="form-control" />
 			@endif

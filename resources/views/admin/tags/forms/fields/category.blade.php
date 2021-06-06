@@ -4,7 +4,7 @@
    
    <div class="form-group">
       
-      <label for="category" class="">Model Name</label>
+      <label for="category" class="required">Model Name</label>
       
       <select name="category" id="category" class="form-control form-control-sm @error('category') is-invalid @enderror">
          @foreach($tag->categoryOptions() as $categoryOptionKey => $categoryOptionValue)

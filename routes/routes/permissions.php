@@ -5,7 +5,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
-   Route::get('permissions/restore/{permission}',  'PermissionsController@restore')          ->name('permissions.restore');
+   Route::post('permissions/restore/{permission}', 'PermissionsController@restore')          ->name('permissions.restore');
    Route::post('permissions/delete/{permission}',  'PermissionsController@delete')           ->name('permissions.delete');
    Route::delete('permissions/mass_destroy',       'PermissionsController@massDestroy')      ->name('permissions.mass_destroy');
    Route::post('permissions/mass_restore',         'PermissionsController@massRestore')      ->name('permissions.mass_restore');

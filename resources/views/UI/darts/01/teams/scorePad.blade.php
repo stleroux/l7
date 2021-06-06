@@ -89,9 +89,10 @@
    @include('UI.darts.01.inc.messages.error.tooHigh')
 
    @include('UI.darts.01.inc.messages.success.0-20')
-   @include('UI.darts.01.inc.messages.success.21-60')
+   @include('UI.darts.01.inc.messages.success.21-40')
+   @include('UI.darts.01.inc.messages.success.41-60')
    @include('UI.darts.01.inc.messages.success.61-120')
    @include('UI.darts.01.inc.messages.success.121-179')
-   @include('UI.darts.01.inc.messages.success.perfect')
+   @include('UI.darts.01.inc.messages.success.180')
    
 @endsection

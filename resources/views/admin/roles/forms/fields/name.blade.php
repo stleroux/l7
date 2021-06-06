@@ -1,7 +1,7 @@
 <!-- NAME -->
 <div class="form-group col-12">
 
-   <label for="name" class="col-form-label">Name</label>
+   <label for="name" class="col-form-label required">Name</label>
 
    <input
    	type="text"

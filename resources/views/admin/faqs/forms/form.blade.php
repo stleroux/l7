@@ -1,3 +1,5 @@
+@include('common.form_submission_error')
+
 {{-- GENERAL INFORMATION --}}
 <div class="card mb-2 card-primary">
    <div class="card-header p-2">
@@ -6,6 +8,7 @@
          <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
       </div>
    </div>
+
    <div class="card-body p-2">
 
       <div class="form-row pt-2">

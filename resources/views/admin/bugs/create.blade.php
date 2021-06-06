@@ -10,7 +10,13 @@
 
 @section('content')
 
-   @include('admin.bugs.forms.form')
-   @include('admin.bugs.help')
+	@include('admin.bugs.forms.form')
+
+	<!-- CARD FOOTER -->
+	<div class="card-footer pt-1 pb-1 pl-2">
+		Fields marked with an <span class="required"></span> are required
+	</div>
+
+	@include('admin.bugs.help')
 
 @endsection

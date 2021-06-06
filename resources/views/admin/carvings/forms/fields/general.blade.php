@@ -8,7 +8,7 @@
    </div>
    <div class="card-body p-2">
 
-      <div class="form-row pt-2">
+      <div class="form-row">
          @include('admin.carvings.forms.fields.general.name')
          @include('admin.carvings.forms.fields.general.category')
       </div>

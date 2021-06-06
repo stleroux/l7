@@ -52,8 +52,11 @@ class User extends Authenticatable implements Auditable
 
    protected $dates = ['created_at','updated_at','deleted_at'];
 
+   public const IS_ENABLED = 1;
+   public const IS_DISABLED = 0;
+
    /////////////////////////////////////////////////////////////////////
-   // Set the default value for the status field to 0
+   // Set the default value for the dart_doubleOut field to 0
    protected $attributes = [
       'dart_doubleOut' => 0,
    ];
@@ -106,10 +109,10 @@ class User extends Authenticatable implements Auditable
       return $this->belongsToMany('App\Models\Role');
    }
 
-   // // A client has many invoices
-   // public function invoices() {
-   //    return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
-   // }
+   // A user has many links
+   public function mylinks() {
+      return $this->hasMany('App\Models\Mylink')->orderBy('name','desc');
+   }
 
    /////////////////////////////////////////////////////////////////////
    // 
@@ -144,13 +147,13 @@ class User extends Authenticatable implements Auditable
    public function scopeApproved($query)
    {
       return $query
-         ->where('account_status', '=', 1);
+         ->where('account_status', '=', $this->IS_ENABLED);
    }
 
    public function scopeDisabled($query)
    {
       return $query
-         ->where('account_status', '=', 0);
+         ->where('account_status', '=', $this->IS_DISABLED);
    }
 
    // public function scopeNoRoles($query)

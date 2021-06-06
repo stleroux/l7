@@ -2,7 +2,7 @@
 <html>
    <head>
       @include('layouts.common.head')
-      @yield('stylesheet')
+      {{-- @yield('stylesheet') --}}
    </head>
 
    <body>
@@ -23,7 +23,13 @@
          </div>
 
          <div class="row">
-            <div class="col-xl-10 offset-xl-1 text-right">
+            <div class="col-xl-10 offset-xl-1">
+               @yield('notice')
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-xl-10 offset-xl-1 text-center">
                @yield('topbar')
             </div>
          </div>

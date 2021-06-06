@@ -1,6 +1,6 @@
 <!-- PERMISSIONS -->
-<div class="card bg-danger">
-   <div class="card-header">
+<div class="card card-warning">
+   <div class="card-header p-2">
       User will automatically receive all abilities on their own records.
       <br />
       Only select the permissions to allow non owners the abilities on ALL records.
@@ -10,8 +10,10 @@
 
 <div class="card card-info">
 
-   <div class="card-header">
-      <div class="card-title">Permissions</div>
+   <div class="card-header p-2">
+      {{-- <div class="card-title"> --}}
+      Permissions
+      {{-- </div> --}}
    </div>
 
    <div class="card-body py-0">
@@ -32,11 +34,13 @@
                   
             <div class="card card-outline card-primary col-lg-3 col-md-4">
                       
-               <div class="card-header">
-                  <div class="card-title">{{ strtoupper($permission) }}</div>
+               <div class="card-header p-2">
+                  {{-- <div class="card-title"> --}}
+                  {{ strtoupper($permission) }}
+                  {{-- </div> --}}
                </div>
                       
-               <div class="card-body">
+               <div class="card-body p-2">
                       
                   @foreach($bulk as $perm)
                                

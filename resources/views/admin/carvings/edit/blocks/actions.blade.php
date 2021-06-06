@@ -11,6 +11,7 @@
       @include('admin.actions.common.updateAndClose')
       @include('admin.actions.common.updateAndContinue')
       @include('admin.actions.common.reset')
+      @include('admin.actions.common.deleteJobSheet')
    </div>
 
 </div>

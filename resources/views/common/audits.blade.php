@@ -13,7 +13,8 @@
       }
       </style>
 
-      <div class="card card-default collapsed-card">
+      {{-- <div class="card card-default collapsed-card" id="auditTrail"> --}}
+      <div class="card card-default collapsed-card no-print">
          
          <div class="card-header">
             <div class="card-title">Audits</div>

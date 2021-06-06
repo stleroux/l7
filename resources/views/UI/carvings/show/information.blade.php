@@ -38,7 +38,14 @@
             <tr>
                <th>Price</th>
                   @auth
-                     <td>{{ ($carving->price ? '$ ' . $carving->price . '.00' : 'N/A') }}</td>
+                     <td>
+                        {{-- {{ ($carving->price ? '$ ' . $carving->price . '.00' : 'Contact us for details') }} --}}
+                        @if($carving->price)
+                           $ {{ $carving->price }}
+                        @else
+                           <a href="{{ Route('contact') }}">Contact us for details</a>
+                        @endif
+                     </td>
                   @else
                      <td>Login for details</td>
                   @endauth

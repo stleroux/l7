@@ -88,7 +88,7 @@ class UsersController extends Controller
          $user->password = Hash::make('password');
       }
 
-      $user->account_status = 0;
+      $user->account_status = User::IS_DISABLED;
       $user->public_email = 1;
       $user->telephone = $request->telephone;
       $user->cell = $request->cell;
@@ -222,7 +222,7 @@ class UsersController extends Controller
          $user->password = Hash::make($request->password);
       }
       
-      $user->account_status = (isset($request->account_status)) ? 0 : 1 ;
+      $user->account_status = (isset($request->account_status)) ? User::IS_DISABLED : User::IS_ENABLED ;
 
       $user->public_email = (!isset($request->public_email)) ? 0 : 1 ;
       $user->telephone = $request->telephone;
@@ -258,14 +258,14 @@ class UsersController extends Controller
       }
 
       // account goes from disabled to active
-      if($account_status == 0 && $user->account_status == 1)
+      if($account_status == User::IS_DISABLED && $user->account_status == User::IS_ENABLED)
       {
          // notify user via email
          $user->notify(new AccountApprovedNotification($user));
       }
 
       // account goes from active to disabled
-      if($account_status == 1 && $user->account_status == 0)
+      if($account_status == User::IS_ENABLED && $user->account_status == User::IS_DISABLED)
       {
          // notify user via email
          $user->notify(new AccountDisabledNotification($user));
@@ -593,7 +593,7 @@ class UsersController extends Controller
          foreach ($users as $user_id) {
 
             $user = User::findOrFail($user_id);
-               $user->account_status = 1;
+               $user->account_status = User::IS_ENABLED;
             $user->save();
 
             $user->notify(new AccountApprovedNotification($user));
@@ -634,7 +634,7 @@ class UsersController extends Controller
          
          foreach ($users as $user_id) {
             $user = User::findOrFail($user_id);
-               $user->account_status = 0;
+               $user->account_status = User::IS_DISABLED;
             $user->save();
 
             $user->notify(new AccountDisabledNotification($user));
@@ -665,10 +665,11 @@ class UsersController extends Controller
       $account_status = $user->account_status;
 
       $user = User::findOrFail($user->id);
-         $user->account_status = 1;
+         $user->account_status = User::IS_ENABLED;
       $user->save();
 
-      if($account_status == 0 && $user->account_status == 1)
+      // if($account_status == 0 && $user->account_status == 1)
+      if($account_status == User::IS_DISABLED && $user->account_status == User::IS_ENABLED)
       {
          $user->notify(new AccountApprovedNotification($user));
       }
@@ -696,10 +697,11 @@ class UsersController extends Controller
       $account_status = $user->account_status;
 
       $user = User::findOrFail($user->id);
-         $user->account_status = 0;
+         $user->account_status = User::IS_DISABLED;
       $user->save();
 
-      if($account_status == 1 && $user->account_status == 0)
+      // if($account_status == 1 && $user->account_status == 0)
+      if($account_status == User::IS_ENABLED && $user->account_status == User::IS_DISABLED)
       {
          $user->notify(new AccountDisabledNotification($user));
       }
