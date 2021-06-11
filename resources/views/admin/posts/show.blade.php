@@ -12,7 +12,7 @@
 
    {{-- @include('admin.posts.show.topbar') --}}
    
-   <div class="card card-primary card-trans-4">
+   {{-- <div class="card card-primary card-trans-4">
       
       <div class="card-header p-2">
          <div class="row">
@@ -20,7 +20,8 @@
                <div>
                   {{ ucfirst($post->title) }}
                </div>
-            </div>
+            </div> --}}
+
             {{-- <div class="col text-right">
                Status: 
                <div class="badge badge-danger">
@@ -31,7 +32,7 @@
                   @endif
                </div>
             </div> --}}
-         </div>
+         {{-- </div>
       </div>
       
       <div class="card-body p-2">
@@ -63,10 +64,21 @@
 
       </div>
 
-   </div>
+   </div> --}}
 
+   @include('admin.posts.forms.form')
+
+   @include('admin.posts.comments')
    @include('common.audits')
 
    @include('admin.posts.help')
 
+@endsection
+
+@section('scripts')
+   <script>
+      $(document).ready(function() {
+         $("#tags").select2();
+      });
+   </script>
 @endsection

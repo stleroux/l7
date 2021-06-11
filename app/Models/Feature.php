@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Contracts\Likeable;
+use App\Models\Concerns\Likes;
 
-class Feature extends Model implements Auditable
+class Feature extends Model implements Auditable, Likeable
 {
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
+   use Likes;
 
    protected $guarded = [];
 

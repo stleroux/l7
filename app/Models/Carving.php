@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Contracts\Likeable;
+use App\Models\Concerns\Likes;
 
-class Carving extends Model implements Searchable, Auditable
+class Carving extends Model implements Searchable, Auditable, Likeable
 {
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
+   use Likes;
    
    protected $guarded = [];
 

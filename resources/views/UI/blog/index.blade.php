@@ -65,6 +65,9 @@
                   <div class="card-footer card_footer p-1 card-trans-2">
                      Created by @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                      on @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
+
+                     @include('common.likeTopbar', ['model' => $post])
+
                   </div>
 
                </div>

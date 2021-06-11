@@ -5,7 +5,8 @@
 @endsection
 
 @section('pageHeader')
-      My Bug Reports
+   <i class="{{ config('icons.bugs') }}"></i>
+   My Bug Reports
 @endsection
 
 @section('breadcrumb')

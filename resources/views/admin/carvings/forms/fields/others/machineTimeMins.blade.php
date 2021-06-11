@@ -10,7 +10,17 @@
          </span>
       </div>
 
-      <input type="number" name="machine_time_mins" value="{{ old('machine_time_mins') ?? $carving->machine_time_mins }}" class="form-control form-control-sm">
+      @if(Route::currentRouteName('') == 'admin.carvings.show')
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            {!! $carving->machine_time_mins ?? 'N/A' !!}
+         </div>
+
+      @else
+
+         <input type="number" name="machine_time_mins" value="{{ old('machine_time_mins') ?? $carving->machine_time_mins }}" class="form-control form-control-sm">
+
+      @endif
 
    </div>
 

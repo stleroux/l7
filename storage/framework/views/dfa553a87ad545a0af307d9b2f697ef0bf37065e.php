@@ -10,7 +10,7 @@
    <?php if(Route::currentRouteName('') == 'admin.features.show'): ?>
 
       <div class="p-1 m-0 bg-gray-light">
-         <?php echo $feature->title; ?>
+         <?php echo $feature->title ?? 'N/A'; ?>
 
       </div>
    

@@ -98,6 +98,60 @@
 									</div>
 								@endauth
 
+{{-- @include('common.likeCard', ['model' => $recipe]) --}}
+{{-- @can('like', $recipe)
+    <form class="" action="{{ route('like') }}" method="POST">
+        @csrf
+        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
+        <button class="btn btn-block btn-xs btn-outline-success text-light font-weight-bold">@lang('Like')</button>
+    </form>
+@endcan
+
+@can('unlike', $recipe)
+    <form class="" action="{{ route('unlike') }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
+        <button class="btn btn-block btn-xs btn-outline-danger text-light"><strong>@lang('Unlike')</strong></button>
+    </form>
+@endcan --}}
+<div class="row-col text-center pt-2">
+                                    @if($recipe->likes()->count() > 0)
+                                       @if($recipe->likes()->count() == 1)
+                                          Liked {{ $recipe->likes()->count() }} time by others
+                                       @else
+                                          Liked {{ $recipe->likes()->count() }} times by others
+                                       @endif
+                                    @else
+                                       Not liked by anyone yet
+                                    @endif
+                                    {{-- @include('common.likeCard', ['model'=>$recipe]) --}}
+                                    @can('like', $recipe)
+    <form class="" action="{{ route('like') }}" method="POST">
+        @csrf
+        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
+        <button class="btn btn-block btn-xs btn-outline-success text-light">@lang('Like')</button>
+    </form>
+@endcan
+
+@can('unlike', $recipe)
+    <form class="" action="{{ route('unlike') }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
+        <button class="btn btn-block btn-xs btn-outline-danger text-light">@lang('Unlike')</button>
+    </form>
+@endcan
+                                 </div>
+
+
+
+
+
 								<div class="card-footer px-1 py-0 mb-0">
 									<div class="text-center">
 										By {{ $recipe->user->username }}

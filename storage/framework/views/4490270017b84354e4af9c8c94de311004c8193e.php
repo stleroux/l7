@@ -100,6 +100,43 @@
 									</div>
 								<?php endif; ?>
 
+
+
+<div class="row-col text-center pt-2">
+                                    <?php if($recipe->likes()->count() > 0): ?>
+                                       <?php if($recipe->likes()->count() == 1): ?>
+                                          Liked <?php echo e($recipe->likes()->count()); ?> time by others
+                                       <?php else: ?>
+                                          Liked <?php echo e($recipe->likes()->count()); ?> times by others
+                                       <?php endif; ?>
+                                    <?php else: ?>
+                                       Not liked by anyone yet
+                                    <?php endif; ?>
+                                    
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $recipe)): ?>
+    <form class="" action="<?php echo e(route('like')); ?>" method="POST">
+        <?php echo csrf_field(); ?>
+        <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+        <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+        <button class="btn btn-block btn-xs btn-outline-success text-light"><?php echo app('translator')->get('Like'); ?></button>
+    </form>
+<?php endif; ?>
+
+<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $recipe)): ?>
+    <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+        <?php echo csrf_field(); ?>
+        <?php echo method_field('DELETE'); ?>
+        <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+        <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+        <button class="btn btn-block btn-xs btn-outline-danger text-light"><?php echo app('translator')->get('Unlike'); ?></button>
+    </form>
+<?php endif; ?>
+                                 </div>
+
+
+
+
+
 								<div class="card-footer px-1 py-0 mb-0">
 									<div class="text-center">
 										By <?php echo e($recipe->user->username); ?>

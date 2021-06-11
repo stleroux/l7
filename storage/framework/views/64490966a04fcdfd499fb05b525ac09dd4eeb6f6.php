@@ -5,7 +5,8 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pageHeader'); ?>
-      My Bug Reports
+   <i class="<?php echo e(config('icons.bugs')); ?>"></i>
+   My Bug Reports
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>

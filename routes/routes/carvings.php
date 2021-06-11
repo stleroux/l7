@@ -45,3 +45,9 @@ Route::namespace('UI\Carvings')->prefix('carvings')->name('carvings.')->group(fu
    Route::get('{filter?}/{tag?}',               'CarvingsController@index')                  ->name('index');
    Route::post('{carving}/comment',             'CommentController@store')                   ->name('comment.store');
 });
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('like', 'UI\LikeController@like')->name('like');
+    Route::delete('like', 'UI\LikeController@unlike')->name('unlike');
+});

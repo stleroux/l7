@@ -5,7 +5,8 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pageHeader'); ?>
-      My Requested Features
+   <i class="<?php echo e(config('icons.features')); ?>"></i>
+   My Requested Features
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
@@ -37,9 +38,10 @@
                            
                            <th>Title</th>
                            <th>Status</th>
+                           <th>Likes</th>
                            <th class="d-none d-lg-table-cell">Created</th>
                            <th class="d-none d-lg-table-cell">Updated</th>
-                           <th class="no-sort text-right" width="200px">Actions</th>
+                           <th class="no-sort text-right">Actions</th>
                         </tr>
                      </thead>
 
@@ -54,9 +56,10 @@
 
                               </td>
                               <td><?php echo e($feature->status); ?></td>
+                              <td><?php echo e($feature->likes()->count()); ?></td>
                               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($feature->created_at): ?><?php echo e($feature->created_at); ?><?php endif; ?>"><?php echo e($feature->created_at->toDateString()); ?></td>
                               <td class="d-none d-lg-table-cell" title="<?php if($feature->updated_at): ?><?php echo e($feature->updated_at); ?><?php endif; ?>"><?php echo e($feature->updated_at->toDateString()); ?></td>
-                              <td class="text-right">
+                              <td>
                                  <?php echo $__env->make('UI.features.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                               </td>
                            </tr>

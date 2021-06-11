@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Contracts\Likeable;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,19 +28,30 @@ class AuthServiceProvider extends ServiceProvider
    {
       $this->registerPolicies();
 
-      // Gate::define('user-manage', function($user)
-      // {
-      //    return $user->hasAnyRoles(['admin','author']);
-      // });
+     // $user->can('like', $post)
+     Gate::define('like', function (User $user, Likeable $likeable) {
+         if (! $likeable->exists) {
+             return Response::deny("Cannot like an object that doesn't exists");
+         }
 
-      // Gate::define('user-edit', function($user)
-      // {
-      //    return $user->hasRole('admin');
-      // });
+         if ($user->hasLiked($likeable)) {
+             return Response::deny("Cannot like the same thing twice");
+         }
 
-      // Gate::define('user-delete', function($user)
-      // {
-      //    return $user->hasRole('admin');
-      // });
+         return Response::allow();
+     });
+
+     // $user->can('unlike', $post)
+     Gate::define('unlike', function (User $user, Likeable $likeable) {
+         if (! $likeable->exists) {
+             return Response::deny("Cannot unlike an object that doesn't exists");
+         }
+
+         if (! $user->hasLiked($likeable)) {
+             return Response::deny("Cannot unlike without liking first");
+         }
+
+         return Response::allow();
+     });
    }
 }

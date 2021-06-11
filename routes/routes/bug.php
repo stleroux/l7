@@ -17,11 +17,12 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
 	Route::get('bugs/trashed',		   		  'BugsController@trashed')   		 ->name('bugs.trashed');
 	Route::get('bugs/trashedShow',		     'BugsController@trashedShow')      ->name('bugs.trashedShow');
 	Route::post('bugs/restore/{bug}',        'BugsController@restore')          ->name('bugs.restore');
-   Route::post('bugs/delete/{bug}',         'BugsController@delete')           ->name('bugs.delete');
-   Route::delete('bugs/mass_destroy',       'BugsController@massDestroy')      ->name('bugs.mass_destroy');
-   Route::post('bugs/mass_restore',         'BugsController@massRestore')      ->name('bugs.mass_restore');
-   Route::delete('bugs/mass_delete',        'BugsController@massDelete')       ->name('bugs.mass_delete');
-   Route::resource('bugs', 'BugsController');
+	Route::post('bugs/delete/{bug}',         'BugsController@delete')           ->name('bugs.delete');
+	Route::delete('bugs/mass_destroy',       'BugsController@massDestroy')      ->name('bugs.mass_destroy');
+	Route::post('bugs/mass_restore',         'BugsController@massRestore')      ->name('bugs.mass_restore');
+	Route::delete('bugs/mass_delete',        'BugsController@massDelete')       ->name('bugs.mass_delete');
+	Route::put('bugs/updateStatus/{bug}',	  'BugsController@updateStatus')     ->name('bugs.updateStatus');
+	Route::resource('bugs', 'BugsController');
 });
 
 

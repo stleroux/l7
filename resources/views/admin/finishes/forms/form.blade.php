@@ -10,7 +10,7 @@
    </div>
    
    <!-- CARD BODY -->
-   <div class="card-body p-3">
+   <div class="card-body pb-0">
       <div class="form-row">
          @include('admin.finishes.forms.fields.name')
          @include('admin.finishes.forms.fields.colorName')
@@ -22,9 +22,12 @@
          @include('admin.finishes.forms.fields.notes')
       </div>
    </div>
+
    <!-- CARD FOOTER -->
-   <div class="card-footer card_footer p-1">
-      Fields marked with an <span class="required"></span> are required
-   </div>
+   @if(Route::currentRouteName('') != 'admin.finishes.show')
+      <div class="card-footer p-1">
+         {!! Config::get('settings.formFieldsRequired') !!}
+      </div>
+   @endif
 
 </div>

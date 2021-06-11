@@ -8,7 +8,7 @@
       
    </div>
 
-   <div class="card-body p-2">
+   <div class="card-body pb-0">
       
       <div class="form-row">
          <div class="col-12 col-xl-5">
@@ -35,6 +35,13 @@
       </div>
 
    </div> <!-- Card body -->
+
+   <?php if(Route::currentRouteName('') != 'admin.bugs.show'): ?>
+      <div class="card-footer p-1">
+         <?php echo Config::get('settings.formFieldsRequired'); ?>
+
+      </div>
+   <?php endif; ?>
    
 </div><!-- Card -->
 <?php /**PATH C:\sites\l7\resources\views/admin/bugs/forms/form.blade.php ENDPATH**/ ?>

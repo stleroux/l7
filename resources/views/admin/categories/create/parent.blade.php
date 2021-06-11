@@ -42,7 +42,7 @@
          </div>
          
          <div class="card-footer bg-secondary px-1 py-1">
-            <div>Fields with <span class="required"></span> are required</div>
+            {!! Config::get('settings.formFieldsRequired') !!}
          </div>
       </div>
    </form>

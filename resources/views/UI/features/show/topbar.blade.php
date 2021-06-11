@@ -25,7 +25,7 @@
       class="btn btn-sm btn-light border">
       <i class="{{ config('icons.back') }}"></i>
       <div class="d-none d-lg-inline">
-         Back
+         Cancel
       </div>
    </a>
 

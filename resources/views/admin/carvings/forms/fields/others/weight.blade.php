@@ -13,8 +13,18 @@
             <i class="fas fa-balance-scale"></i>
          </span>
       </div>
+
+      @if(Route::currentRouteName('') == 'admin.carvings.show')
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            {!! $carving->weight ?? 'N/A' !!}
+         </div>
+
+      @else
    
-      <input type="text" name="weight" value="{{ old('weight') ?? $carving->weight }}" class="form-control form-control-sm">
+         <input type="text" name="weight" value="{{ old('weight') ?? $carving->weight }}" class="form-control form-control-sm">
+
+      @endif
    
    </div>
    

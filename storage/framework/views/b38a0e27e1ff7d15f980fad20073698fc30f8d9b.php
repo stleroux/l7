@@ -16,6 +16,7 @@
 					<th>Title</th>
 					<th>Category</th>
 					<th>Views</th>
+					<th>Likes</th>
 					<th>Favorited</th>
 					<th>Author</th>
 					<th>Created On</th>
@@ -51,6 +52,10 @@
 					</td>
 					<td>
 						<?php echo e($post->views); ?>
+
+					</td>
+					<td>
+						<?php echo e($post->likes()->count()); ?>
 
 					</td>
 					<td>

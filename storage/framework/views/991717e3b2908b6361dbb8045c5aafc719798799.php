@@ -13,8 +13,19 @@
             <i class="fas fa-ruler"></i>
          </span>
       </div>
+
+      <?php if(Route::currentRouteName('') == 'admin.carvings.show'): ?>
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            <?php echo $carving->depth ?? 'N/A'; ?>
+
+         </div>
+
+      <?php else: ?>
       
-      <input type="text" name="depth" value="<?php echo e(old('depth') ?? $carving->depth); ?>" class="form-control form-control-sm">
+         <input type="text" name="depth" value="<?php echo e(old('depth') ?? $carving->depth); ?>" class="form-control form-control-sm">
+
+      <?php endif; ?>
    
    </div>
    

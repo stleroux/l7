@@ -50,6 +50,10 @@
                      <td>Login for details</td>
                   @endauth
             </tr>
+            <tr>
+               <th>Likes</th>
+               <td>{{ $carving->likes()->count() }}</td>
+            </tr>
          </tbody>
       </table>
    </div>

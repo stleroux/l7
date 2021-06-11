@@ -9,7 +9,7 @@
       <?php if(Route::currentRouteName('') == 'admin.finishes.show'): ?>
 
          <div class="p-1 m-0 bg-gray-light">
-            <?php echo $finish->sheen; ?>
+            <?php echo $finish->sheen ?? 'N/A'; ?>
 
          </div>
 

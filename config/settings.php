@@ -39,6 +39,9 @@ return [
    // The number of rows to return by default in Livewire tables
    'perPage' => '15',
 
+   // Message to display when fields are required in a form
+   'formFieldsRequired' => 'DUH!! Fields marked with an <span class="required"></span> are required.',
+
    // Generic message to display at top of form when validation error(s) occur
    'formSubmissionError' => 'Errors occurred while submitting the form. Please correct the errors before proceeding.',
 

@@ -9,7 +9,7 @@
    @if(Route::currentRouteName('') == 'admin.bugs.show')
 
       <div class="p-1 m-0 bg-gray-light">
-         {!! $bug->resolution !!}
+         {!! $bug->resolution ?? 'N/A' !!}
       </div>
 
    @else

@@ -10,7 +10,7 @@
 
 @section('content')
 
-   <div class="row">
+{{--    <div class="row">
       <div class="col-12 col-xl-4">@include('admin.carvings.blocks.imageSlider')</div>
       
       <div class="col-12 col-xl-8">
@@ -27,11 +27,14 @@
          </div>
       </div>
       
-   </div>
+   </div> --}}
+
+   @include('admin.carvings.forms.form')
 
    <div class="row">
       <div class="col">
-         @include('common.comments', ['model'=>$carving])
+         {{-- @include('common.comments', ['model'=>$carving, 'headerColor'=>'bg-primary']) --}}
+         @include('admin.carvings.comments')
       </div>
    </div>
 

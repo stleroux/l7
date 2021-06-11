@@ -16,8 +16,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
-   <!-- Bootstrap Switch -->
-
    <script>
       window.onload = function() {
           document.getElementById("name").focus();

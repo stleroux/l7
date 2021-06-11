@@ -6,7 +6,7 @@
       <?php echo $__env->make('admin.posts.forms.tabs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    </div>
 
-   <div class="card-body">
+   <div class="card-body pb-0">
       <div class="tab-content" id="recipe-tabContent">
          <?php echo $__env->make('admin.posts.forms.tabs.general', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
          <?php echo $__env->make('admin.posts.forms.tabs.notes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -15,6 +15,13 @@
          <?php echo $__env->make('admin.posts.forms.tabs.settings', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       </div>
    </div>
-   <!-- /.card -->
+
+   <?php if(Route::currentRouteName('') != 'admin.posts.show'): ?>
+      <div class="card-footer p-1">
+         <?php echo Config::get('settings.formFieldsRequired'); ?>
+
+      </div>
+   <?php endif; ?>
+   
 </div>
 <?php /**PATH C:\sites\l7\resources\views/admin/posts/forms/form.blade.php ENDPATH**/ ?>

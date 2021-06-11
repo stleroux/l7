@@ -68,13 +68,13 @@ class RecipesController extends Controller
 
 
 ##################################################################################################################
-# ██████  ███████ ███████ ████████ ██████   ██████  ██    ██ 
-# ██   ██ ██      ██         ██    ██   ██ ██    ██  ██  ██  
-# ██   ██ █████   ███████    ██    ██████  ██    ██   ████   
-# ██   ██ ██           ██    ██    ██   ██ ██    ██    ██    
-# ██████  ███████ ███████    ██    ██   ██  ██████     ██    
-// Remove the specified resource from storage
-// Used in the index page and trashAll action to soft delete multiple records
+#  ██████╗ ███████╗███████╗████████╗██████╗  ██████╗ ██╗   ██╗
+#  ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚██╗ ██╔╝
+#  ██║  ██║█████╗  ███████╗   ██║   ██████╔╝██║   ██║ ╚████╔╝ 
+#  ██║  ██║██╔══╝  ╚════██║   ██║   ██╔══██╗██║   ██║  ╚██╔╝  
+#  ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
+#  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
+# Remove the specified resource from storage
 ##################################################################################################################
    public function destroy(Recipe $recipe)
    {
@@ -349,7 +349,7 @@ class RecipesController extends Controller
          $recipe->ingredients = $request->ingredients;
          // $recipe->methodology = Purifier::clean($request->methodology);
          $recipe->methodology = $request->methodology;
-         $recipe->category_id = $request->category_id;
+         $recipe->category_id = ucwords($request->category_id);
          $recipe->published_at = $request->published_at;
          $recipe->servings = $request->servings;
          $recipe->prep_time_hours = $request->prep_time_hours;
@@ -418,7 +418,7 @@ class RecipesController extends Controller
          $recipe->ingredients = $request->ingredients;
          // $recipe->methodology = Purifier::clean($request->methodology);
          $recipe->methodology = $request->methodology;
-         $recipe->category_id = $request->category_id;
+         $recipe->category_id = ucwords($request->category_id);
          $recipe->published_at = $request->published_at;
          $recipe->servings = $request->servings;
          $recipe->prep_time_hours = $request->prep_time_hours;

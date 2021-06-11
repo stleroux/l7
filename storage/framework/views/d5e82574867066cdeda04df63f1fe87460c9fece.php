@@ -5,12 +5,13 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pageHeader'); ?>
-      Edit Feature Request
+   <i class="<?php echo e(config('icons.features')); ?>"></i>
+   Edit Requested Feature
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
-   <li class="breadcrumb-item"><a href="<?php echo e(route('features.index')); ?>">Feature Requests</a></li>
-   <li class="breadcrumb-item">Edit Feature Request</li>
+   <li class="breadcrumb-item"><a href="<?php echo e(route('features.index')); ?>">Requested Features</a></li>
+   <li class="breadcrumb-item">Edit Requested Feature</li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('rightColumn'); ?>
@@ -23,38 +24,8 @@
       <?php echo method_field('PUT'); ?>
 
       <?php echo $__env->make('UI.features.edit.topbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-      <div class="row">
-
-         <div class="col">
-
-            <div class="card card-trans-4">
-
-               <div class="card-header section_header">
-                  <div class="card-title">Feature Information</div>
-               </div>
-
-               <?php echo $__env->make('common.form_submission_error', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-               <div class="card-body p-2">
-
-                  <div class="row">
-                     <div class="col">
-                        <?php echo $__env->make('UI.features.edit.title', ['required'=>'required'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                     </div>
-                  </div>
-
-                  <div class="row">
-                     <div class="col">
-                        <?php echo $__env->make('UI.features.edit.description', ['required'=>'required'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                     </div>
-                  </div>
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         </div><!-- Col -->
-
-      </div><!-- Row -->
+      <?php echo $__env->make('common.form_submission_error', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('UI.features.forms.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
    </form>
    

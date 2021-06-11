@@ -16,6 +16,7 @@
 					<th>Title</th>
 					<th>Category</th>
 					<th>Views</th>
+					<th>Likes</th>
 					<th>Favorited</th>
 					<th>Author</th>
 					<th>Created On</th>
@@ -49,6 +50,9 @@
 					</td>
 					<td>
 						{{ $post->views }}
+					</td>
+					<td>
+						{{ $post->likes()->count() }}
 					</td>
 					<td>
 						{{ $post->favoritesCount }}

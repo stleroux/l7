@@ -15,6 +15,7 @@
 						<?php echo $__env->make('admin.settings.fields.settings.homepageBlogCount', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						<?php echo $__env->make('admin.settings.fields.settings.loginCountWarning', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						<?php echo $__env->make('admin.settings.fields.settings.noRecordsFound', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+						<?php echo $__env->make('admin.settings.fields.settings.formFieldsRequired', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						<?php echo $__env->make('admin.settings.fields.settings.perPage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						<?php echo $__env->make('admin.settings.fields.settings.popularCount', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						<?php echo $__env->make('admin.settings.fields.settings.viewsToBePopularCount', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

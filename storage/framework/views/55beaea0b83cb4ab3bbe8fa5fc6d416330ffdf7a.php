@@ -61,7 +61,7 @@
          
             <div class="col">
                <a href="<?php echo e(route('features.index')); ?>" class="btn btn-outline-secondary btn-xs btn-block mt-1">
-                  My Requests
+                  My Requested Features
                </a>
             </div>
          </div>

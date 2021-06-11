@@ -22,7 +22,12 @@
 
    </div>
 
-   <div class="col mb-2 text-right">
+   <div class="col mb-2 float-right px-1">
+      @include('common.likeTopbar', ['model' => $project])
+   </div>
+
+   <div class="d-flex mb-2">
+      <div class="float-right">
 
 {{--       <a href="#"
          class="btn btn-sm btn-dark">
@@ -30,15 +35,17 @@
          Add to Cart
       </a> --}}
 
-      @if (url()->previous() == request()->root() . '/UI/search')
-         <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
-      @endif
+         @if (url()->previous() == request()->root() . '/UI/search')
+            <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
+         @endif
 
-      <a href="{{ route('projects.index') }}"
-         class="btn btn-sm btn-secondary">
-         <i class="{{ config('icons.back') }}"></i>
-         Projects
-      </a>
+         <a href="{{ route('projects.index') }}"
+            class="btn btn-sm btn-secondary">
+            <i class="{{ config('icons.back') }}"></i>
+            Projects
+         </a>
+      </div>
+
    </div>
    
 </div>

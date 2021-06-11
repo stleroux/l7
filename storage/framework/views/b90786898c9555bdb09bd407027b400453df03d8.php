@@ -1,18 +1,22 @@
-<div class="row d-flex pb-2">
+<div class="row">
    
-   <div class="col-xl-9">
+   <div class="col mb-2 text-center">
       <?php echo $__env->make('UI.blog.buttons.previous', ['size'=>'sm'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php echo $__env->make('UI.blog.buttons.next', ['size'=>'sm'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    </div>
-   <div class="col-xl-3 text text-right">
-      
+
+   <div class="col mb-2 float-right px-1">
+      <?php echo $__env->make('common.likeTopbar', ['model' => $post], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+   </div>
+
+   <div class="d-flex mb-2">
+      <div class="float-right">
 
          <?php if(auth()->guard()->check()): ?>
             <a href="" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#printModal" data-link="<?php echo e($post->slug); ?>">
                <i class="fa fa-print"></i> Print
             </a>
          <?php endif; ?>
-
 
 
          <!-- Only show if coming from the homepage -->
@@ -64,5 +68,6 @@
          <?php endif; ?>
       
    </div>
+</div>
 </div>
 <?php /**PATH C:\sites\l7\resources\views/UI/blog/show/topbar.blade.php ENDPATH**/ ?>

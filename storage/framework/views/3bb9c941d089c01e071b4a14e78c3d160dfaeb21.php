@@ -3,6 +3,6 @@
    <?php if(Route::currentRouteName('') == 'admin.posts.trashed'): ?>
       Trashed Posts
    <?php else: ?>
-      Posts
+      View Post
    <?php endif; ?>
 <?php $__env->stopSection(); ?><?php /**PATH C:\sites\l7\resources\views/admin/posts/show/sections/pageHeader.blade.php ENDPATH**/ ?>

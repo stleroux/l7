@@ -9,7 +9,7 @@
       @if(Route::currentRouteName('') == 'admin.materials.show')
 
 	      <div class="p-1 m-0 bg-gray-light">
-	         {!! $material->notes !!}
+	         {!! $material->notes ?? 'N/A' !!}
 	      </div>
 
 	   @else

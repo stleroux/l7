@@ -15,6 +15,7 @@
             <th>Name</th>
             <th>Category</th>
             <th>Views</th>
+            <th>Likes</th>
             <th>Images</th>
             <th>Finish(es)</th>
             <th>Material(s)</th>
@@ -43,6 +44,7 @@
                <td><a href="{{ route('admin.projects.show', $project->id) }}">{{ ucwords($project->name) }}</a></td>
                <td>{{ $project->category }}</td>
                <td>{{ $project->views }}</td>
+               <td>{{ $project->likes()->count() }}</td>
                <td>{{ $project->images()->count() }}</td>
                <td>{{ $project->finishes()->count() }}</td>
                <td>{{ $project->materials()->count() }}</td>

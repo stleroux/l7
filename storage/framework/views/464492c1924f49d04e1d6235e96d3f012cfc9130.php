@@ -10,7 +10,18 @@
          </span>
       </div>
 
-      <input type="number" name="machine_time_hrs" value="<?php echo e(old('machine_time_hrs') ?? $carving->machine_time_hrs); ?>" class="form-control form-control-sm">
+      <?php if(Route::currentRouteName('') == 'admin.carvings.show'): ?>
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            <?php echo $carving->machine_time_hrs ?? 'N/A'; ?>
+
+         </div>
+
+      <?php else: ?>
+
+         <input type="number" name="machine_time_hrs" value="<?php echo e(old('machine_time_hrs') ?? $carving->machine_time_hrs); ?>" class="form-control form-control-sm">
+
+      <?php endif; ?>
 
    </div>
 

@@ -43,6 +43,10 @@
                      <td>Login for details</td>
                   <?php endif; ?>
             </tr>
+            <tr>
+               <th>Likes</th>
+               <td><?php echo e($project->likes()->count()); ?></td>
+            </tr>
          </tbody>
       </table>
    </div>

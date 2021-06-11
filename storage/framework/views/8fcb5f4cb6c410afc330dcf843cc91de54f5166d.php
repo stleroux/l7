@@ -93,4 +93,8 @@
 <script src="<?php echo e(asset('/js/app.js')); ?>"></script>
 
 
-<?php echo \Livewire\Livewire::scripts(); ?><?php /**PATH C:\sites\l7\resources\views/layouts/common/scripts.blade.php ENDPATH**/ ?>
+<?php echo \Livewire\Livewire::scripts(); ?>
+
+
+
+<?php /**PATH C:\sites\l7\resources\views/layouts/common/scripts.blade.php ENDPATH**/ ?>

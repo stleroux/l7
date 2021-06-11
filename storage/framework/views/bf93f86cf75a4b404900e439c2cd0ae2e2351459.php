@@ -1,5 +1,5 @@
-<div class="row mb-2 text-right">
-   <div class="col">
+<div class="row-col mb-2 text-right">
+   
 
    <button type="submit" class="btn btn-sm btn-success" name="submit" value="update">
       <i class="<?php echo e(config('icons.update')); ?>"></i>
@@ -21,7 +21,7 @@
       class="btn btn-sm btn-light border">
       <i class="<?php echo e(config('icons.back')); ?>"></i>
       <div class="d-none d-lg-inline">
-         Back
+         Cancel
       </div>
    </a>
 
@@ -31,7 +31,6 @@
          Help
       </div>
    </a>
-</div>
 
 </div>
 <?php /**PATH C:\sites\l7\resources\views/UI/bugs/edit/topbar.blade.php ENDPATH**/ ?>

@@ -43,6 +43,10 @@
                      <td>Login for details</td>
                   @endauth
             </tr>
+            <tr>
+               <th>Likes</th>
+               <td>{{ $project->likes()->count() }}</td>
+            </tr>
          </tbody>
       </table>
    </div>

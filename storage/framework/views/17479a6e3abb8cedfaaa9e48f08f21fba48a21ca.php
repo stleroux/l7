@@ -22,19 +22,26 @@
 
    </div>
 
-   <div class="col mb-2 text-right">
+   <div class="col mb-2 float-right px-1">
+      <?php echo $__env->make('common.likeTopbar', ['model' => $project], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+   </div>
+
+   <div class="d-flex mb-2">
+      <div class="float-right">
 
 
 
-      <?php if(url()->previous() == request()->root() . '/UI/search'): ?>
-         <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
-      <?php endif; ?>
+         <?php if(url()->previous() == request()->root() . '/UI/search'): ?>
+            <a href="#" class="btn btn-sm btn-secondary" onclick="history.back()">Search Results</a>
+         <?php endif; ?>
 
-      <a href="<?php echo e(route('projects.index')); ?>"
-         class="btn btn-sm btn-secondary">
-         <i class="<?php echo e(config('icons.back')); ?>"></i>
-         Projects
-      </a>
+         <a href="<?php echo e(route('projects.index')); ?>"
+            class="btn btn-sm btn-secondary">
+            <i class="<?php echo e(config('icons.back')); ?>"></i>
+            Projects
+         </a>
+      </div>
+
    </div>
    
 </div>

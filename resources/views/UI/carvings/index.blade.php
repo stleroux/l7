@@ -62,20 +62,62 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  @endif
                                  <h4 class="badge-dark p-1 m-1">{{ ucwords($carving->name) }}</h4>
-                                 <div class=""><strong>Category</strong> : {{ $carving->category }}</div>
-                                 <div class=""><strong>Views</strong> : {{ $carving->views }}</div>
-                                 <div class=""><strong>Comments</strong> : {{ $carving->comments->count() }}</div>
-                                 <div class="">
-                                    <span>
-                                       <strong>
-                                       @if(count($carving->images) > 0)
-                                          {{ count($carving->images) > 1 ? 'Images' : 'Image' }} : 
-                                          {{ count($carving->images) }} 
+                                 <div class="row">
+                                    <div class="col">
+                                       <div class="">
+                                          <strong>Category</strong>
+                                       </div>
+                                       <div>
+                                          {{ $carving->category }}
+                                       </div>
+                                    </div>
+                                    <div class="col">
+                                       <div class="">
+                                          <strong>Views</strong>
+                                       </div>
+                                       <div>
+                                          {{ $carving->views }}
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col"><strong>Comments</strong> <br /> {{ $carving->comments->count() }}</div>
+                                    <div class="col">
+                                       <span>
+                                          @if(count($carving->images) > 0)
+                                             <div class="">
+                                                <strong>
+                                                   {{ count($carving->images) > 1 ? 'Images' : 'Image' }}
+                                                </strong>
+                                             </div>
+                                             <div>
+                                                {{ count($carving->images) }}
+                                             </div>
+                                          @else
+                                             <div>
+                                                <strong>
+                                                   Images <br />
+                                                </strong>
+                                             </div>
+                                             <div>
+                                                None                                                
+                                             </div>
+                                          @endif
+                                       </span>
+                                    </div>                                    
+                                 </div>
+
+                                 <div class="row-col pt-2 pb-2">
+                                    @if($carving->likes()->count() > 0)
+                                       @if($carving->likes()->count() == 1)
+                                          Liked {{ $carving->likes()->count() }} time by others
                                        @else
-                                          No Images
+                                          Liked {{ $carving->likes()->count() }} times by others
                                        @endif
-                                       </strong>
-                                    </span>
+                                    @else
+                                       Not liked by anyone yet
+                                    @endif
+                                    @include('common.likeCard', ['model'=>$carving])
                                  </div>
                               </a>
                            </div>

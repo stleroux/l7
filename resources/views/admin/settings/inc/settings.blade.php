@@ -15,6 +15,7 @@
 						@include('admin.settings.fields.settings.homepageBlogCount')
 						@include('admin.settings.fields.settings.loginCountWarning')
 						@include('admin.settings.fields.settings.noRecordsFound')
+						@include('admin.settings.fields.settings.formFieldsRequired')
 						@include('admin.settings.fields.settings.perPage')
 						@include('admin.settings.fields.settings.popularCount')
 						@include('admin.settings.fields.settings.viewsToBePopularCount')

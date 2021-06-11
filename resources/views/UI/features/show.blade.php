@@ -5,11 +5,13 @@
 @endsection
 
 @section('pageHeader')
-      My Requested Feature
+   <i class="{{ config('icons.features') }}"></i>
+   View Requested Feature
 @endsection
 
 @section('breadcrumb')
-   <li class="breadcrumb-item">Requested Feature</li>
+   <li class="breadcrumb-item"><a href="{{ route('features.index') }}">Requested Features</a></li>
+   <li class="breadcrumb-item">View Requested Feature</li>
 @endsection
 
 @section('rightColumn')

@@ -62,20 +62,66 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  <?php endif; ?>
                                  <h4 class="badge-dark p-1 m-1"><?php echo e(ucwords($carving->name)); ?></h4>
-                                 <div class=""><strong>Category</strong> : <?php echo e($carving->category); ?></div>
-                                 <div class=""><strong>Views</strong> : <?php echo e($carving->views); ?></div>
-                                 <div class=""><strong>Comments</strong> : <?php echo e($carving->comments->count()); ?></div>
-                                 <div class="">
-                                    <span>
-                                       <strong>
-                                       <?php if(count($carving->images) > 0): ?>
-                                          <?php echo e(count($carving->images) > 1 ? 'Images' : 'Image'); ?> : 
-                                          <?php echo e(count($carving->images)); ?> 
+                                 <div class="row">
+                                    <div class="col">
+                                       <div class="">
+                                          <strong>Category</strong>
+                                       </div>
+                                       <div>
+                                          <?php echo e($carving->category); ?>
+
+                                       </div>
+                                    </div>
+                                    <div class="col">
+                                       <div class="">
+                                          <strong>Views</strong>
+                                       </div>
+                                       <div>
+                                          <?php echo e($carving->views); ?>
+
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col"><strong>Comments</strong> <br /> <?php echo e($carving->comments->count()); ?></div>
+                                    <div class="col">
+                                       <span>
+                                          <?php if(count($carving->images) > 0): ?>
+                                             <div class="">
+                                                <strong>
+                                                   <?php echo e(count($carving->images) > 1 ? 'Images' : 'Image'); ?>
+
+                                                </strong>
+                                             </div>
+                                             <div>
+                                                <?php echo e(count($carving->images)); ?>
+
+                                             </div>
+                                          <?php else: ?>
+                                             <div>
+                                                <strong>
+                                                   Images <br />
+                                                </strong>
+                                             </div>
+                                             <div>
+                                                None                                                
+                                             </div>
+                                          <?php endif; ?>
+                                       </span>
+                                    </div>                                    
+                                 </div>
+
+                                 <div class="row-col pt-2 pb-2">
+                                    <?php if($carving->likes()->count() > 0): ?>
+                                       <?php if($carving->likes()->count() == 1): ?>
+                                          Liked <?php echo e($carving->likes()->count()); ?> time by others
                                        <?php else: ?>
-                                          No Images
+                                          Liked <?php echo e($carving->likes()->count()); ?> times by others
                                        <?php endif; ?>
-                                       </strong>
-                                    </span>
+                                    <?php else: ?>
+                                       Not liked by anyone yet
+                                    <?php endif; ?>
+                                    <?php echo $__env->make('common.likeCard', ['model'=>$carving], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                  </div>
                               </a>
                            </div>

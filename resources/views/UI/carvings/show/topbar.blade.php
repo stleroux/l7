@@ -22,7 +22,13 @@
 
    </div>
 
-   <div class="col mb-2 text-right">
+   <div class="col mb-2 float-right px-1">
+      @include('common.likeTopbar', ['model' => $carving])
+   </div>
+
+   <div class="d-flex mb-2">
+      <div class="float-right">
+         
 
 {{--       <a href="#"
          class="btn btn-sm btn-dark">
@@ -57,6 +63,10 @@
             Carvings
          </a>
       @endif
+
+
+      </div>
+
    </div>
 
    

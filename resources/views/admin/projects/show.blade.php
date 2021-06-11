@@ -41,7 +41,8 @@
 
    <div class="row">
       <div class="col">
-         @include('common.comments', ['model'=>$project])
+         {{-- @include('common.comments', ['model'=>$project, 'headerColor'=>'bg-primary']) --}}
+         @include('admin.projects.comments')
       </div>
    </div>
 

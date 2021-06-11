@@ -12,6 +12,7 @@
             </th>
             <th class="d-none d-lg-table-cell">#</th>
             <th>Title</th>
+            <th>Likes</th>
             <th class="d-none d-lg-table-cell">Creator</th>
             <th class="d-none d-lg-table-cell">Status</th>
             <th class="d-none d-lg-table-cell">Created</th>
@@ -37,8 +38,34 @@
                </td>
                <td class="d-none d-lg-table-cell"><?php echo e($feature->id); ?></td>
                <td nowrap="nowrap"><a href="<?php echo e(route('admin.features.show', $feature)); ?>"><?php echo e($feature->title); ?></a></td>
+               <td nowrap="nowrap"><?php echo e($feature->likes()->count()); ?></td>
                <td nowrap="nowrap"><?php echo e($feature->user->username); ?></td>
-               <td nowrap="nowrap"><?php echo e($feature->status); ?></td>
+               
+               <td nowrap="nowrap">
+                  <form action="<?php echo e(route('admin.features.updateStatus', $feature)); ?>" method="POST">
+                     <?php echo csrf_field(); ?>
+                     <?php echo method_field("PUT"); ?>
+
+                     <select
+                        name="status"
+                        id="status"
+                        class="form-control form-control-sm <?php $__errorArgs = ['status'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                        onchange="this.form.submit()"
+                     >
+                        <?php $__currentLoopData = $feature->statusOptions(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statusOptionKey => $statusOptionValue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                           <option value="<?php echo e($statusOptionKey); ?>" <?php echo e($feature->status == $statusOptionValue ? 'selected' : ''); ?>><?php echo e($statusOptionValue); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                     </select>
+                  </form>
+               </td>
+
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($feature->created_at): ?><?php echo e($feature->created_at); ?><?php endif; ?>">
                   <?php echo e($feature->created_at->format(config('settings.dateFormat'))); ?>
 

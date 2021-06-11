@@ -12,11 +12,6 @@
 
    <?php echo $__env->make('admin.carvings.forms.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-   <!-- CARD FOOTER -->
-   <div class="card-footer pt-1 pb-1 pl-2">
-      Fields marked with an <span class="required"></span> are required
-   </div>
-
    <?php echo $__env->make('admin.carvings.help', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>

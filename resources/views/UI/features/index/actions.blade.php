@@ -40,28 +40,40 @@
 
 @endif --}}
 
-<a href="{{ route('features.show', $feature) }}" class="btn btn-sm btn-default">
-               <i class="{{ config('icons.view') }} text-primary"></i>
-               View
-            </a>
-            
-@if($feature->status == 'New')
-   
-            <a href="{{ route('features.edit', $feature) }}" class="btn btn-sm btn-default">
-               <i class="{{ config('icons.edit') }} text-primary"></i>
-               Edit
-            </a>
-         
-            <a href="#"
-               class="destroy-model btn btn-sm btn-default"
-               data-toggle="modal"
-               data-target="#destroyModal"
-               data-id="{{ $feature->id }}"
-               data-url="{{ url('features', $feature->id) }}">
-               <i class="{{ config('icons.trash') }} text-pink"></i>
-               Trash
-            </a>
+{{-- <div class="form-inline float-right"> --}}
+<div class="row float-right">
 
-           
+   @if($feature->status != "Rejected" && $feature->status != "Implemented")
+      @include('common.likeGrid', ['model'=>$feature])
+   @endif
 
-@endif
+   <div class="pr-1">
+      <a href="{{ route('features.show', $feature) }}" class="btn btn-sm btn-default">
+         <i class="{{ config('icons.view') }} text-primary"></i>
+         View
+      </a>      
+   </div>
+               
+   @if($feature->status == 'New')
+      <div class="pr-1">
+         <a href="{{ route('features.edit', $feature) }}" class="btn btn-sm btn-default pl-2">
+            <i class="{{ config('icons.edit') }} text-primary"></i>
+            Edit
+         </a>
+      </div>
+
+      <div class="pr-1">
+         <a href="#"
+            class="destroy-model btn btn-sm btn-default pl-2"
+            data-toggle="modal"
+            data-target="#destroyModal"
+            data-id="{{ $feature->id }}"
+            data-url="{{ url('features', $feature->id) }}">
+            <i class="{{ config('icons.trash') }} text-pink"></i>
+            Trash
+         </a>
+      </div>
+   @endif
+</div>
+
+{{-- </div> --}}

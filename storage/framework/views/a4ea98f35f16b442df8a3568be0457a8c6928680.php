@@ -10,7 +10,7 @@
    </div>
    
    <!-- CARD BODY -->
-   <div class="card-body p-3">
+   <div class="card-body pb-0">
       <div class="form-row">
          <?php echo $__env->make('admin.finishes.forms.fields.name', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
          <?php echo $__env->make('admin.finishes.forms.fields.colorName', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -22,10 +22,14 @@
          <?php echo $__env->make('admin.finishes.forms.fields.notes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       </div>
    </div>
+
    <!-- CARD FOOTER -->
-   <div class="card-footer card_footer p-1">
-      Fields marked with an <span class="required"></span> are required
-   </div>
+   <?php if(Route::currentRouteName('') != 'admin.finishes.show'): ?>
+      <div class="card-footer p-1">
+         <?php echo Config::get('settings.formFieldsRequired'); ?>
+
+      </div>
+   <?php endif; ?>
 
 </div>
 <?php /**PATH C:\sites\l7\resources\views/admin/finishes/forms/form.blade.php ENDPATH**/ ?>

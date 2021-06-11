@@ -14,7 +14,7 @@
             
             <div class="form-group">
                
-               <textarea name="comment" id="" rows="2" class="form-control form-control-sm @error('comment') is-invalid @enderror">{{ old('comment') ?? $project->comment }}</textarea>
+               <textarea name="comment" id="" rows="3" class="form-control form-control-sm @error('comment') is-invalid @enderror">{{ old('comment') ?? $project->comment }}</textarea>
                
                @error('comment')
                   <span class="invalid-feedback" role="alert">
@@ -24,7 +24,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-sm btn-success">
+            <button type="submit" class="btn btn-block btn-sm btn-success">
                <i class="{{ config('icons.add') }}"></i>
                Add Comment
             </button>

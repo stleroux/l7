@@ -36,7 +36,14 @@
                </td>
                <td class="d-none d-lg-table-cell">{{ $role->id }}</td>
                <td nowrap="nowrap">{{ $role->name }}</td>
-               <td class="d-none d-lg-table-cell">{{ implode(', ', $role->permissions()->get()->pluck('name')->toArray()) }}</td>
+               <td class="d-none d-lg-table-cell">
+                  {{-- {{ implode(', ', $role->permissions()->get()->pluck('name')->toArray()) }} --}}
+                  @foreach($role->permissions as $p)
+                     <span class="badge badge-dark">
+                        {{ $p->name }}
+                     </span>
+                  @endforeach
+               </td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($role->created_at){{ $role->created_at }}@endif">
                   {{ $role->created_at->format(config('settings.dateFormat')) }}
                </td>

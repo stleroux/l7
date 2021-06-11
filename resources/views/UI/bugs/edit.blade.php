@@ -5,7 +5,8 @@
 @endsection
 
 @section('pageHeader')
-      Edit Bug Report
+   <i class="{{ config('icons.bugs') }}"></i>
+   Edit Bug Report
 @endsection
 
 @section('breadcrumb')
@@ -23,65 +24,11 @@
       @method('PUT')
 
       @include('UI.bugs.edit.topbar')
-
-      <div class="row">
-
-         <div class="col">
-
-            <div class="card card-trans-4">
-
-               <div class="card-header section_header">
-                  <div class="card-title">Bug Information</div>
-               </div>
-
-               @include('common.form_submission_error')
-
-               <div class="card-body p-2">
-                  <div class="row">
-                     <div class="col">
-                        @include('UI.bugs.edit.title', ['required'=>'required'])
-                     </div>
-                     <div class="col">
-                        @include('UI.bugs.edit.page_url')
-                     </div>
-                     {{-- <div class="col-xl-2">
-                        @include('UI.bugs.edit.status')
-                     </div> --}}
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        @include('UI.bugs.edit.description', ['required'=>'required'])
-                     </div>
-                  </div>
-                  {{-- <div class="row">
-                     <div class="col">
-                        @include('UI.bugs.edit.resolution')
-                     </div>
-                  </div> --}}
-
-               </div> <!-- Card body -->
-            </div><!-- Card -->
-         </div><!-- Col -->
-
-      </div><!-- Row -->
+      @include('common.form_submission_error')
+      @include('UI.bugs.forms.form')
 
    </form>
 
    @include('help.index', ['title'=>'Edit Bug Report', 'icon'=>'bugs', 'path'=>'UI.bugs.edit'])
 
-@endsection
-
-@section('scripts')
-   <!-- Bootstrap Switch -->
-{{--    <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
-   <script>
-      $("input[data-bootstrap-switch]").each(function(){
-         $(this).bootstrapSwitch('state', $(this).prop('checked'));
-      });
-   </script> --}}
-{{--    <script>
-      window.onload = function() {
-          document.getElementById("name").focus();
-      }
-   </script> --}}
 @endsection

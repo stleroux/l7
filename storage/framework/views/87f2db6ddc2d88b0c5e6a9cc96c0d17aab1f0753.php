@@ -51,6 +51,10 @@
                      <td>Login for details</td>
                   <?php endif; ?>
             </tr>
+            <tr>
+               <th>Likes</th>
+               <td><?php echo e($carving->likes()->count()); ?></td>
+            </tr>
          </tbody>
       </table>
    </div>

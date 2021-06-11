@@ -10,12 +10,15 @@ use Str;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Contracts\Likeable;
+use App\Models\Concerns\Likes;
 
-class Post extends Model implements Searchable, Auditable
+class Post extends Model implements Searchable, Auditable, Likeable
 {
 
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
+   use Likes;
 
    protected $fillable = ['slug'];
 

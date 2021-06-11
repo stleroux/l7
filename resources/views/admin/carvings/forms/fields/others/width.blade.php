@@ -13,8 +13,18 @@
             <i class="fas fa-ruler-horizontal"></i>
          </span>
       </div>
+
+      @if(Route::currentRouteName('') == 'admin.carvings.show')
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            {!! $carving->width ?? 'N/A' !!}
+         </div>
+
+      @else
    
-      <input type="text" name="width" value="{{ old('width') ?? $carving->width }}" class="form-control form-control-sm">
+         <input type="text" name="width" value="{{ old('width') ?? $carving->width }}" class="form-control form-control-sm">
+
+      @endif
    
    </div>
    

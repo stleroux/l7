@@ -18,10 +18,6 @@
 <?php $__env->startSection('secondary'); ?>
 
    <?php echo $__env->make('admin.carvings.forms.extras', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
-   
-   <div class="card-footer pt-1 pb-1 pl-2">
-      Fields marked with an <span class="required"></span> are required
-   </div>
 
 <?php $__env->stopSection(); ?>
 

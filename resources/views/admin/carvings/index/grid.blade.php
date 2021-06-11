@@ -16,6 +16,7 @@
             <th>Category</th>
             <th>Tags</th>
             <th>Views</th>
+            <th>Likes</th>
             <th>Images</th>
             <th>Finish(es)</th>
             <th>Material(s)</th>
@@ -51,6 +52,7 @@
                   @endforeach
                </td>
                <td>{{ $carving->views }}</td>
+               <td>{{ $carving->likes()->count() }}</td>
                <td>{{ $carving->images()->count() }}</td>
                <td>{{ $carving->finishes()->count() }}</td>
                <td>{{ $carving->materials()->count() }}</td>

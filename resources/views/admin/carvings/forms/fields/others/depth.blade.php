@@ -13,8 +13,18 @@
             <i class="fas fa-ruler"></i>
          </span>
       </div>
+
+      @if(Route::currentRouteName('') == 'admin.carvings.show')
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            {!! $carving->depth ?? 'N/A' !!}
+         </div>
+
+      @else
       
-      <input type="text" name="depth" value="{{ old('depth') ?? $carving->depth }}" class="form-control form-control-sm">
+         <input type="text" name="depth" value="{{ old('depth') ?? $carving->depth }}" class="form-control form-control-sm">
+
+      @endif
    
    </div>
    

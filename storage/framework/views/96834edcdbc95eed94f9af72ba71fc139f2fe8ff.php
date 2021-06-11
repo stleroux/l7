@@ -41,7 +41,8 @@
 
    <div class="row">
       <div class="col">
-         <?php echo $__env->make('common.comments', ['model'=>$project], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         
+         <?php echo $__env->make('admin.projects.comments', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       </div>
    </div>
 

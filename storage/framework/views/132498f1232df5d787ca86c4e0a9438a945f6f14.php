@@ -1,6 +1,12 @@
+
+
 <div class="card card-trans-0 mb-3">
 
-	<div class="card-header text-light font-weight-bold" style="background-color: #800000">
+	<div class="card-header p-2 text-light font-weight-bold <?php echo e(($headerColor) ? $headerColor : ''); ?>"
+		<?php if(!$headerColor): ?>
+			style="background-color: #800000"
+		<?php endif; ?>
+		>
 		
 			<i class="<?php echo e(config('icons.comments')); ?>"></i>
 			Comments <small>(<?php echo e($model->comments()->count()); ?> total)</small>
@@ -29,7 +35,6 @@
 							
 							<?php echo e($comment->created_at->format(config('settings.dateFormat'))); ?> 123
 						</td>
-						
 					</tr>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</tbody>

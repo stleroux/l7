@@ -9,7 +9,7 @@
     @if(Route::currentRouteName('') == 'admin.features.show')
 
       <div class="p-1 m-0 bg-gray-light">
-         {!! $feature->resolution !!}
+         {!! $feature->resolution ?? 'N/A' !!}
       </div>
 
    @else

@@ -16,13 +16,6 @@
 @endsection
 
 @section('scripts')
-   <!-- Bootstrap Switch -->
-{{--    <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
-   <script>
-      $("input[data-bootstrap-switch]").each(function(){
-         $(this).bootstrapSwitch('state', $(this).prop('checked'));
-      });
-   </script> --}}
    <script>
       window.onload = function() {
           document.getElementById("name").focus();

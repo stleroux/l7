@@ -5,7 +5,8 @@
 @endsection
 
 @section('pageHeader')
-      My Requested Features
+   <i class="{{ config('icons.features') }}"></i>
+   My Requested Features
 @endsection
 
 @section('breadcrumb')
@@ -37,9 +38,10 @@
                            {{-- <th class="d-none d-lg-table-cell">#</th> --}}
                            <th>Title</th>
                            <th>Status</th>
+                           <th>Likes</th>
                            <th class="d-none d-lg-table-cell">Created</th>
                            <th class="d-none d-lg-table-cell">Updated</th>
-                           <th class="no-sort text-right" width="200px">Actions</th>
+                           <th class="no-sort text-right">Actions</th>
                         </tr>
                      </thead>
 
@@ -55,9 +57,10 @@
                                  {{ $feature->title }}
                               </td>
                               <td>{{ $feature->status }}</td>
+                              <td>{{ $feature->likes()->count() }}</td>
                               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($feature->created_at){{ $feature->created_at }}@endif">{{ $feature->created_at->toDateString() }}</td>
                               <td class="d-none d-lg-table-cell" title="@if($feature->updated_at){{ $feature->updated_at }}@endif">{{ $feature->updated_at->toDateString() }}</td>
-                              <td class="text-right">
+                              <td>
                                  @include('UI.features.index.actions')
                               </td>
                            </tr>

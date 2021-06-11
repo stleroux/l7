@@ -41,6 +41,8 @@
 				<div class="btn-group">
 					{{-- @include('UI.recipes.buttons.back', ['size'=>'sm', 'btn_label'=>'Back']) --}}
 
+					@include('common.likeTopbar', ['model' => $recipe])
+
 					<a href="{{ Session::get('fromPage') }}" class="btn btn-sm btn-maroon">
 						<i class="{{ config('icons.back') }}"></i>
 						Recipes

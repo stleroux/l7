@@ -14,7 +14,7 @@
             
             <div class="form-group">
                
-               <textarea name="comment" id="" rows="2" class="form-control form-control-sm <?php $__errorArgs = ['comment'];
+               <textarea name="comment" id="" rows="3" class="form-control form-control-sm <?php $__errorArgs = ['comment'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -38,7 +38,7 @@ unset($__errorArgs, $__bag); ?>
 
             </div>
 
-            <button type="submit" class="btn btn-sm btn-success">
+            <button type="submit" class="btn btn-block btn-sm btn-success">
                <i class="<?php echo e(config('icons.add')); ?>"></i>
                Add Comment
             </button>

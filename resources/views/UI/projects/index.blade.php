@@ -57,7 +57,7 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  @endif
                                  <h4 class="badge-dark p-1 m-1">{{ ucwords($project->name) }}</h4>
-                                 <div class=""><strong>Category</strong> : {{ $project->category }}</div>
+                                 {{-- <div class=""><strong>Category</strong> : {{ $project->category }}</div>
                                  <div class=""><strong>Views</strong> : {{ $project->views }}</div>
                                  <div class=""><strong>Comments</strong> : {{ $project->comments->count() }}</div>
                                  <div class="">
@@ -71,6 +71,63 @@
                                        @endif
                                        </strong>
                                     </span>
+                                 </div> --}}
+                                 <div class="row">
+                                    <div class="col">
+                                       <div class="">
+                                          <strong>Category</strong>
+                                       </div>
+                                       <div>
+                                          {{ $project->category }}
+                                       </div>
+                                    </div>
+                                    <div class="col">
+                                       <div class="">
+                                          <strong>Views</strong>
+                                       </div>
+                                       <div>
+                                          {{ $project->views }}
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col"><strong>Comments</strong> <br /> {{ $project->comments->count() }}</div>
+                                    <div class="col">
+                                       <span>
+                                          @if(count($project->images) > 0)
+                                             <div class="">
+                                                <strong>
+                                                   {{ count($project->images) > 1 ? 'Images' : 'Image' }}
+                                                </strong>
+                                             </div>
+                                             <div>
+                                                {{ count($project->images) }}
+                                             </div>
+                                          @else
+                                             <div>
+                                                <strong>
+                                                   Images <br />
+                                                </strong>
+                                             </div>
+                                             <div>
+                                                None                                                
+                                             </div>
+                                          @endif
+                                       </span>
+                                    </div>                                    
+                                 </div>
+
+                                 <div class="row-col pt-2 pb-2">
+                                    @if($project->likes()->count() > 0)
+                                       @if($project->likes()->count() == 1)
+                                          Liked {{ $project->likes()->count() }} time by others
+                                       @else
+                                          Liked {{ $project->likes()->count() }} times by others
+                                       @endif
+                                    @else
+                                       Not liked by anyone yet
+                                    @endif
+                                    @include('common.likeCard', ['model'=>$project])
                                  </div>
                               </a>
                            </div>

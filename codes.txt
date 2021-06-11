@@ -1,0 +1,3 @@
+// Check current route
+@if(Route::currentRouteName('') == 'admin.bugs.show')
+

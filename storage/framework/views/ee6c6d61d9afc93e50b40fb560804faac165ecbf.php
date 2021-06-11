@@ -10,7 +10,7 @@
    <?php if(Route::currentRouteName('') == 'admin.bugs.show'): ?>
 
       <div class="p-1 m-0 bg-gray-light">
-         <?php echo $bug->description; ?>
+         <?php echo $bug->description ?? 'N/A'; ?>
 
       </div>
 

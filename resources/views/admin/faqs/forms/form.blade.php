@@ -1,7 +1,8 @@
 @include('common.form_submission_error')
 
 {{-- GENERAL INFORMATION --}}
-<div class="card mb-2 card-primary">
+<div class="card card-primary">
+
    <div class="card-header p-2">
       General Information
       <div class="card-tools">
@@ -9,9 +10,9 @@
       </div>
    </div>
 
-   <div class="card-body p-2">
+   <div class="card-body pb-0">
 
-      <div class="form-row pt-2">
+      <div class="form-row">
          @include('admin.faqs.forms.fields.general.question')
          @include('admin.faqs.forms.fields.general.category')
       </div>
@@ -25,4 +26,12 @@
       </div> --}}
       
    </div>
+
+   @if(Route::currentRouteName('') != 'admin.faqs.show')
+      <div class="card-footer p-1">
+         {!! Config::get('settings.formFieldsRequired') !!}
+      </div>
+   @endif
+
+
 </div>

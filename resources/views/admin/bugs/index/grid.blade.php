@@ -38,7 +38,26 @@
                <td class="d-none d-lg-table-cell">{{ $bug->id }}</td>
                <td nowrap="nowrap"><a href="{{ route('admin.bugs.show', $bug) }}">{{ $bug->title }}</a></td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap">{{ $bug->creator->username }}</td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap">{{ $bug->status }}</td>
+               {{-- <td class="d-none d-lg-table-cell" nowrap="nowrap">{{ $bug->status }}</td> --}}
+
+               <td nowrap="nowrap">
+                  <form action="{{ route('admin.bugs.updateStatus', $bug) }}" method="POST">
+                     @csrf
+                     @method("PUT")
+
+                     <select
+                        name="status"
+                        id="status"
+                        class="form-control form-control-sm @error('status') is-invalid @enderror"
+                        onchange="this.form.submit()"
+                     >
+                        @foreach($bug->statusOptions() as $statusOptionKey => $statusOptionValue)
+                           <option value="{{$statusOptionKey}}" {{ $bug->status == $statusOptionValue ? 'selected' : '' }}>{{ $statusOptionValue }}</option>
+                        @endforeach
+                     </select>
+                  </form>
+               </td>
+
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($bug->created_at){{ $bug->created_at }}@endif">
                   {{-- {{ $bug->created_at->toDateString() }} --}}
                   {{ $bug->created_at->format(config('settings.dateFormat')) }}

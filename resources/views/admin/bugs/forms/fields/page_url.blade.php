@@ -9,7 +9,7 @@
    @if(Route::currentRouteName('') == 'admin.bugs.show')
 
       <div class="p-1 m-0 bg-gray-light">
-         {{ $bug->page_url }}
+         {{ $bug->page_url ?? 'N/A' }}
       </div>
 
    @else

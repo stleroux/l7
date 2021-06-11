@@ -8,7 +8,7 @@
       {{-- </div> --}}
    </div>
 
-   <div class="card-body p-2">
+   <div class="card-body pb-0">
       
       <div class="form-row">
          <div class="col-12 col-xl-5">
@@ -35,5 +35,11 @@
       </div>
 
    </div> <!-- Card body -->
+
+   @if(Route::currentRouteName('') != 'admin.bugs.show')
+      <div class="card-footer p-1">
+         {!! Config::get('settings.formFieldsRequired') !!}
+      </div>
+   @endif
    
 </div><!-- Card -->

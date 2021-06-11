@@ -9,7 +9,7 @@
 	   <?php if(Route::currentRouteName('') == 'admin.materials.show'): ?>
 
 	      <div class="p-1 m-0 bg-gray-light">
-	         <?php echo $material->name; ?>
+	         <?php echo $material->name ?? 'N/A'; ?>
 
 	      </div>
 

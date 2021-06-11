@@ -19,6 +19,8 @@ Route::namespace('Admin\Posts')->prefix('admin')->name('admin.')->group(function
    Route::post('/posts/resetViews/{post}',        'FunctionsController@resetViews')            ->name('posts.resetViews');
    Route::post('/posts/mass_resetViews',          'FunctionsController@massResetViews')        ->name('posts.mass_resetViews');
 
+   Route::get('posts/deleteImage/{id}',            'FunctionsController@deleteImage')      ->name('posts.deleteImage');
+
    Route::get('/posts/trashed',                  'ExtraViewsController@trashed')              ->name('posts.trashed');
    Route::get('/posts/unpublished/{key?}',       'ExtraViewsController@unpublished')          ->name('posts.unpublished');
    Route::get('/posts/future/{key?}',            'ExtraViewsController@future')               ->name('posts.future');

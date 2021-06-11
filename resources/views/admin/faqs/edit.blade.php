@@ -10,15 +10,7 @@
 
 @section ('content')
 
-   <div class="form-row">
-      <div class="col-12">
-         @include('admin.faqs.forms.form')
-      </div>
-   </div>
-
-   <div class="card-footer pt-1 pb-1 pl-2">
-      Fields marked with an <span class="required"></span> are required
-   </div>
+   @include('admin.faqs.forms.form')
 
    @include('admin.faqs.help')
 

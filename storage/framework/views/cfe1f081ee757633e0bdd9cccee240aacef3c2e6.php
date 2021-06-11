@@ -38,7 +38,33 @@
                <td class="d-none d-lg-table-cell"><?php echo e($bug->id); ?></td>
                <td nowrap="nowrap"><a href="<?php echo e(route('admin.bugs.show', $bug)); ?>"><?php echo e($bug->title); ?></a></td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap"><?php echo e($bug->creator->username); ?></td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap"><?php echo e($bug->status); ?></td>
+               
+
+               <td nowrap="nowrap">
+                  <form action="<?php echo e(route('admin.bugs.updateStatus', $bug)); ?>" method="POST">
+                     <?php echo csrf_field(); ?>
+                     <?php echo method_field("PUT"); ?>
+
+                     <select
+                        name="status"
+                        id="status"
+                        class="form-control form-control-sm <?php $__errorArgs = ['status'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                        onchange="this.form.submit()"
+                     >
+                        <?php $__currentLoopData = $bug->statusOptions(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statusOptionKey => $statusOptionValue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                           <option value="<?php echo e($statusOptionKey); ?>" <?php echo e($bug->status == $statusOptionValue ? 'selected' : ''); ?>><?php echo e($statusOptionValue); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                     </select>
+                  </form>
+               </td>
+
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($bug->created_at): ?><?php echo e($bug->created_at); ?><?php endif; ?>">
                   
                   <?php echo e($bug->created_at->format(config('settings.dateFormat'))); ?>

@@ -21,6 +21,19 @@ FIELDS EXPLAINED
       <div class="row">
          <div class="col">
             <div class="card mb-2">
+               <div class="card-header p-1 font-weight-bold">
+                  Page URL
+               </div>
+               <div class="card-body p-1">
+                  Enter the actual URL of the page where the bug appears. This will help us in identifying the problem.
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="col">
+            <div class="card mb-2">
                <div class="card-header p-1 font-weight-bold">Status</div>
                <div class="card-body p-0">
                   <table class="table table-sm table-hover table-bordered pl-0 ml-0">
@@ -28,22 +41,7 @@ FIELDS EXPLAINED
                         <td class="pl-1 pr-5 ml-0" nowrap><i>New</i></td>
                         <td class="pl-1 ml-0">Original status of the bug report. This cannot be changed when creating a new report or while the user is editing the report. Only an administrator can modify this setting.</td>
                      </tr>
-                     <tr>
-                        <td class="pl-1 pr-5 ml-0" nowrap><i></i></td>
-                        <td class="pl-1 ml-0"></td>
-                     </tr>
-                     <tr>
-                        <td class="pl-1 pr-5 ml-0" nowrap><i></i></td>
-                        <td class="pl-1 ml-0"></td>
-                     </tr>
-                     <tr>
-                        <td class="pl-1 pr-5 ml-0" nowrap><i></i></td>
-                        <td class="pl-1 ml-0"></td>
-                     </tr>
-                     <tr>
-                        <td class="pl-1 pr-5 ml-0" nowrap><i></i></td>
-                        <td class="pl-1 ml-0"></td>
-                     </tr>
+                    
                   </table>
                </div>
             </div>

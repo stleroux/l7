@@ -6,7 +6,7 @@
       @include('admin.posts.forms.tabs')
    </div>
 
-   <div class="card-body">
+   <div class="card-body pb-0">
       <div class="tab-content" id="recipe-tabContent">
          @include('admin.posts.forms.tabs.general')
          @include('admin.posts.forms.tabs.notes')
@@ -15,5 +15,11 @@
          @include('admin.posts.forms.tabs.settings')
       </div>
    </div>
-   <!-- /.card -->
+
+   @if(Route::currentRouteName('') != 'admin.posts.show')
+      <div class="card-footer p-1">
+         {!! Config::get('settings.formFieldsRequired') !!}
+      </div>
+   @endif
+   
 </div>

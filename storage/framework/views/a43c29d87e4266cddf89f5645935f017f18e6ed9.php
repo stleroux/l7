@@ -22,7 +22,13 @@
 
    </div>
 
-   <div class="col mb-2 text-right">
+   <div class="col mb-2 float-right px-1">
+      <?php echo $__env->make('common.likeTopbar', ['model' => $carving], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+   </div>
+
+   <div class="d-flex mb-2">
+      <div class="float-right">
+         
 
 
 
@@ -53,6 +59,10 @@
             Carvings
          </a>
       <?php endif; ?>
+
+
+      </div>
+
    </div>
 
    

@@ -10,7 +10,7 @@
    </div>
    
    <!-- CARD BODY -->
-   <div class="card-body p-3">
+   <div class="card-body pb-0">
       <div class="form-row">
          @include('admin.materials.forms.fields.name')
          @include('admin.materials.forms.fields.type')
@@ -19,9 +19,12 @@
          @include('admin.materials.forms.fields.notes')
       </div>
    </div>
+   
    <!-- CARD FOOTER -->
-   <div class="card-footer card_footer p-1">
-      Fields marked with an <span class="required"></span> are required
-   </div>
+   @if(Route::currentRouteName('') != 'admin.materials.show')
+      <div class="card-footer p-1">
+         {!! Config::get('settings.formFieldsRequired') !!}
+      </div>
+   @endif
 
 </div>

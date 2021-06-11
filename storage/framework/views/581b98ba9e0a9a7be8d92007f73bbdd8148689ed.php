@@ -36,7 +36,15 @@
                </td>
                <td class="d-none d-lg-table-cell"><?php echo e($role->id); ?></td>
                <td nowrap="nowrap"><?php echo e($role->name); ?></td>
-               <td class="d-none d-lg-table-cell"><?php echo e(implode(', ', $role->permissions()->get()->pluck('name')->toArray())); ?></td>
+               <td class="d-none d-lg-table-cell">
+                  
+                  <?php $__currentLoopData = $role->permissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     <span class="badge badge-dark">
+                        <?php echo e($p->name); ?>
+
+                     </span>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+               </td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($role->created_at): ?><?php echo e($role->created_at); ?><?php endif; ?>">
                   <?php echo e($role->created_at->format(config('settings.dateFormat'))); ?>
 

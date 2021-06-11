@@ -3,6 +3,6 @@
    @if(Route::currentRouteName('') == 'admin.posts.trashed')
       Trashed Posts
    @else
-      Posts
+      View Post
    @endif
 @endsection

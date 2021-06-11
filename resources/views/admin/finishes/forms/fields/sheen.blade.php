@@ -9,7 +9,7 @@
       @if(Route::currentRouteName('') == 'admin.finishes.show')
 
          <div class="p-1 m-0 bg-gray-light">
-            {!! $finish->sheen !!}
+            {!! $finish->sheen ?? 'N/A' !!}
          </div>
 
       @else

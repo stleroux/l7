@@ -20,19 +20,19 @@
    
    @include('common.form_submission_error')
 
-   <div class="card card-trans-4 mb-2">
+   <div class="card card-trans-4">
 
       {{-- <div class="card-header section_header p-2">
             <i class="{{ config('icons.contact-us') }}"></i>
             Contact Us
       </div> --}}
       
-      <div class="card-body p-2">
-         <form action="/contact" method="POST" class="px-0 py-2">   
+      <div class="card-body">
+         <form action="/contact" method="POST">   
             @csrf
             @honeypot
 
-            <div class="form-group py-0">
+            <div class="form-group">
                <label for="subject" class="required">Subjet</label>
                <input
                   id="subject"
@@ -48,7 +48,7 @@
             </div>
 
             @if(Auth::user())
-               <div class="form-group py-0">
+               <div class="form-group">
                   <label for="email" class="required">Email</label>
                   <input
                      id="email"
@@ -63,7 +63,7 @@
                   @enderror
                </div>
             @else
-               <div class="form-group py-0">
+               <div class="form-group">
                   <label for="email" class="required">Email</label>
                   <input
                      id="email"
@@ -78,7 +78,7 @@
                </div>
             @endif
             
-            <div class="form-group py-0">
+            <div class="form-group">
                <label for="message" class="required">Message</label>
                <textarea
                   id="message"
@@ -102,8 +102,8 @@
          </form>
       </div>
 
-      <div class="card-footer pt-1 pb-1 pl-2">
-         Fields marked with an <span class="required"></span> are required
+      <div class="card-footer p-1">
+         {!! Config::get('settings.formFieldsRequired') !!}
       </div>
 
    </div>

@@ -5,11 +5,13 @@
 @endsection
 
 @section('pageHeader')
-      View Bug Report
+   <i class="{{ config('icons.bugs') }}"></i>
+   View Bug Report
 @endsection
 
 @section('breadcrumb')
-   <li class="breadcrumb-item">Bug Reports</li>
+   <li class="breadcrumb-item"><a href="{{ route('bugs.index') }}">Bug Reports</a></li>
+   <li class="breadcrumb-item">View Bug Report</li>
 @endsection
 
 @section('rightColumn')

@@ -13,8 +13,19 @@
             <i class="fas fa-balance-scale"></i>
          </span>
       </div>
+
+      <?php if(Route::currentRouteName('') == 'admin.carvings.show'): ?>
+
+         <div class="col p-1 m-0 bg-gray-light border">
+            <?php echo $carving->weight ?? 'N/A'; ?>
+
+         </div>
+
+      <?php else: ?>
    
-      <input type="text" name="weight" value="<?php echo e(old('weight') ?? $carving->weight); ?>" class="form-control form-control-sm">
+         <input type="text" name="weight" value="<?php echo e(old('weight') ?? $carving->weight); ?>" class="form-control form-control-sm">
+
+      <?php endif; ?>
    
    </div>
    

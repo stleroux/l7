@@ -16,6 +16,7 @@
 					<th>Name</th>
 					<th>Category</th>
 					<th>Views</th>
+					<th>Likes</th>
 					<th>Favorited</th>
 					<th>Author</th>
 					<th>Created On</th>
@@ -49,6 +50,9 @@
 					</td>
 					<td>
 						{{ $recipe->views }}
+					</td>
+					<td>
+						{{ $recipe->likes()->count() }}
 					</td>
 					<td>
 						{{ $recipe->favoritesCount }}

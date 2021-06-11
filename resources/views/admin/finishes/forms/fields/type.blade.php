@@ -8,7 +8,7 @@
       @if(Route::currentRouteName('') == 'admin.finishes.show')
 
          <div class="p-1 m-0 bg-gray-light">
-            {!! $finish->type !!}
+            {!! $finish->type ?? 'N/A' !!}
          </div>
 
       @else

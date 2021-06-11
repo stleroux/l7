@@ -8,7 +8,7 @@
       <?php if(Route::currentRouteName('') == 'admin.finishes.show'): ?>
 
          <div class="p-1 m-0 bg-gray-light">
-            <?php echo $finish->color_name; ?>
+            <?php echo $finish->color_name ?? 'N/A'; ?>
 
          </div>
 

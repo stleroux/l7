@@ -10,28 +10,14 @@
 
 <?php $__env->startSection('content'); ?>
 
-   <div class="row">
-      <div class="col-12 col-xl-4"><?php echo $__env->make('admin.carvings.blocks.imageSlider', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-      
-      <div class="col-12 col-xl-8">
-         <div class="row">
-            <div class="col-12 col-lg-7 p-0 m-0">
-               <div class="col-12 col-xl-12"><?php echo $__env->make('admin.carvings.show.fields.description', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-               <div class="col-12 col-xl-12"><?php echo $__env->make('admin.carvings.show.fields.materials', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-               <div class="col-12 col-xl-12"><?php echo $__env->make('admin.carvings.show.fields.finishes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-               <div class="col-12 col-xl-12"><?php echo $__env->make('admin.carvings.show.fields.tags', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></div>
-            </div>
-            <div class="col-12 col-xl-5">
-               <?php echo $__env->make('admin.carvings.show.fields.information', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            </div>
-         </div>
-      </div>
-      
-   </div>
+
+
+   <?php echo $__env->make('admin.carvings.forms.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
    <div class="row">
       <div class="col">
-         <?php echo $__env->make('common.comments', ['model'=>$carving], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         
+         <?php echo $__env->make('admin.carvings.comments', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       </div>
    </div>
 

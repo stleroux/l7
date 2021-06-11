@@ -15,6 +15,7 @@
             <th>Name</th>
             <th>Category</th>
             <th>Views</th>
+            <th>Likes</th>
             <th>Images</th>
             <th>Finish(es)</th>
             <th>Material(s)</th>
@@ -43,6 +44,7 @@
                <td><a href="<?php echo e(route('admin.projects.show', $project->id)); ?>"><?php echo e(ucwords($project->name)); ?></a></td>
                <td><?php echo e($project->category); ?></td>
                <td><?php echo e($project->views); ?></td>
+               <td><?php echo e($project->likes()->count()); ?></td>
                <td><?php echo e($project->images()->count()); ?></td>
                <td><?php echo e($project->finishes()->count()); ?></td>
                <td><?php echo e($project->materials()->count()); ?></td>
