@@ -1,39 +1,35 @@
-<div class="row-col mb-2 text-right">
+<div class="row">
 
-{{--    <button type="submit" class="btn btn-sm btn-success" name="submit" value="update">
-      <i class="{{ config('icons.update') }}"></i>
-      <div class="d-none d-lg-inline">
-         Update
-      </div>
-   </button>
- --}}   
-   {{-- <button type="submit" class="btn btn-sm btn-info" name="submit"value="continue">
-      <i class="{{ config('icons.update_continue') }}"></i>
-      <div class="d-none d-lg-inline">
-         Update and Continue
-      </div>
-   </button> --}}
+   <div class="col mb-2 text-center">
+   </div>
 
-{{--    <button type="reset" class="btn btn-sm btn-light border">
-      <i class="{{ config('icons.reset') }}"></i>
-      <div class="d-none d-lg-inline">
-         Reset Form
+   @if($feature->status != "Rejected" && $feature->status != "Implemented")
+      <div class="col mb-2 float-right px-1">
+         @include('common.likeTopbar', ['model' => $feature])
       </div>
-   </button> --}}
+   @endif
 
-   <a href="{{ route('features.index') }}"
-      class="btn btn-sm btn-light border">
-      <i class="{{ config('icons.back') }}"></i>
-      <div class="d-none d-lg-inline">
-         Cancel
-      </div>
-   </a>
+   <div class="d-flex mb-2">
 
-   <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
-      <i class="{{ config('icons.help') }}"></i>
-      <div class="d-none d-lg-inline">
-         Help
+      <div class="float-right">
+
+         <a href="{{ route('features.index') }}"
+            class="btn btn-sm btn-light border">
+            <i class="{{ config('icons.back') }}"></i>
+            <div class="d-none d-lg-inline">
+               Cancel
+            </div>
+         </a>
+
+         <a href="#" class="btn btn-sm btn-light border" data-toggle="modal" data-target="#helpModal">
+            <i class="{{ config('icons.help') }}"></i>
+            <div class="d-none d-lg-inline">
+               Help
+            </div>
+         </a>
+
       </div>
-   </a>
+
+   </div>
 
 </div>

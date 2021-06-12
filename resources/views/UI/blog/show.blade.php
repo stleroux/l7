@@ -63,12 +63,12 @@
                            <td>{{ ucfirst($post->category->name) }}</td>
                         </tr>
                         <tr>
-                           <th>Published On</th>
-                           <td>{{ $post->published_at->format(Config::get('settings.dateFormat')) }}</td>
-                        </tr>
-                        <tr>
                            <th>Views</th>
                            <td>{{ $post->views }}</td>
+                        </tr>
+                        <tr>
+                           <th>Likes</th>
+                           <td>{{ $post->likes()->count() }}</td>
                         </tr>
                         <tr>
                            <th>Created By</th>
@@ -87,8 +87,8 @@
                            <td>{{ $post->updated_at->format(Config::get('settings.dateFormat')) }}</td>
                         </tr>
                         <tr>
-                           <td></td>
-                           <td></td>
+                           <th>Published On</th>
+                           <td>{{ $post->published_at->format(Config::get('settings.dateFormat')) }}</td>
                         </tr>
                      </tbody>
                   </table>

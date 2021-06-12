@@ -62,62 +62,67 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  @endif
                                  <h4 class="badge-dark p-1 m-1">{{ ucwords($carving->name) }}</h4>
+                                 
                                  <div class="row">
-                                    <div class="col">
-                                       <div class="">
-                                          <strong>Category</strong>
-                                       </div>
-                                       <div>
-                                          {{ $carving->category }}
-                                       </div>
+                                    <div class="col text-right pr-0">
+                                       <strong>Category :</strong>
                                     </div>
-                                    <div class="col">
-                                       <div class="">
-                                          <strong>Views</strong>
-                                       </div>
-                                       <div>
-                                          {{ $carving->views }}
-                                       </div>
+                                    <div class="col text-left pl-1">
+                                       {{ $carving->category }}
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col"><strong>Comments</strong> <br /> {{ $carving->comments->count() }}</div>
-                                    <div class="col">
-                                       <span>
-                                          @if(count($carving->images) > 0)
-                                             <div class="">
-                                                <strong>
-                                                   {{ count($carving->images) > 1 ? 'Images' : 'Image' }}
-                                                </strong>
-                                             </div>
-                                             <div>
-                                                {{ count($carving->images) }}
-                                             </div>
-                                          @else
-                                             <div>
-                                                <strong>
-                                                   Images <br />
-                                                </strong>
-                                             </div>
-                                             <div>
-                                                None                                                
-                                             </div>
-                                          @endif
-                                       </span>
-                                    </div>                                    
+                                    <div class="col text-right pr-0">
+                                       <strong>Views :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                       {{ $carving->views }}
+                                    </div>
                                  </div>
-
+                                 <div class="row">
+                                    <div class="col text-right pr-0">
+                                       <strong>Comments :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                       {{ $carving->comments->count() }}
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col text-right pr-0">
+                                       <strong>Images :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                        {{ count($carving->images) }}
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col text-right pr-0">
+                                       <strong>Likes :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                       {{ $carving->likes()->count() }}
+                                    </div>
+                                 </div>
                                  <div class="row-col pt-2 pb-2">
-                                    @if($carving->likes()->count() > 0)
-                                       @if($carving->likes()->count() == 1)
-                                          Liked {{ $carving->likes()->count() }} time by others
-                                       @else
-                                          Liked {{ $carving->likes()->count() }} times by others
-                                       @endif
-                                    @else
-                                       Not liked by anyone yet
-                                    @endif
-                                    @include('common.likeCard', ['model'=>$carving])
+                                    {{-- @include('common.likeCard', ['model'=>$carving]) --}}
+                                    @can('like', $carving)
+                                       <form class="" action="{{ route('like') }}" method="POST">
+                                          @csrf
+                                          <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                                          <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                                          <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold">@lang('Like')</button>
+                                       </form>
+                                    @endcan
+
+                                    @can('unlike', $carving)
+                                       <form class="" action="{{ route('unlike') }}" method="POST">
+                                          @csrf
+                                          @method('DELETE')
+                                          <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                                          <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                                          <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong>@lang('Unlike')</strong></button>
+                                       </form>
+                                    @endcan
                                  </div>
                               </a>
                            </div>

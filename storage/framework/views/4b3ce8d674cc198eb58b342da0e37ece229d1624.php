@@ -6,7 +6,7 @@
 
 <?php $__env->startSection('pageHeader'); ?>
    <i class="<?php echo e(config('icons.features')); ?>"></i>
-   My Requested Features
+   Requested Features
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>

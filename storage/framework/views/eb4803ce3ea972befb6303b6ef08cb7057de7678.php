@@ -62,66 +62,72 @@
                                     <img src="/images/no_image.jpg" alt="No Image" height="150px" width="95%" />
                                  <?php endif; ?>
                                  <h4 class="badge-dark p-1 m-1"><?php echo e(ucwords($carving->name)); ?></h4>
+                                 
                                  <div class="row">
-                                    <div class="col">
-                                       <div class="">
-                                          <strong>Category</strong>
-                                       </div>
-                                       <div>
-                                          <?php echo e($carving->category); ?>
-
-                                       </div>
+                                    <div class="col text-right pr-0">
+                                       <strong>Category :</strong>
                                     </div>
-                                    <div class="col">
-                                       <div class="">
-                                          <strong>Views</strong>
-                                       </div>
-                                       <div>
-                                          <?php echo e($carving->views); ?>
+                                    <div class="col text-left pl-1">
+                                       <?php echo e($carving->category); ?>
 
-                                       </div>
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col"><strong>Comments</strong> <br /> <?php echo e($carving->comments->count()); ?></div>
-                                    <div class="col">
-                                       <span>
-                                          <?php if(count($carving->images) > 0): ?>
-                                             <div class="">
-                                                <strong>
-                                                   <?php echo e(count($carving->images) > 1 ? 'Images' : 'Image'); ?>
+                                    <div class="col text-right pr-0">
+                                       <strong>Views :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                       <?php echo e($carving->views); ?>
 
-                                                </strong>
-                                             </div>
-                                             <div>
-                                                <?php echo e(count($carving->images)); ?>
-
-                                             </div>
-                                          <?php else: ?>
-                                             <div>
-                                                <strong>
-                                                   Images <br />
-                                                </strong>
-                                             </div>
-                                             <div>
-                                                None                                                
-                                             </div>
-                                          <?php endif; ?>
-                                       </span>
-                                    </div>                                    
+                                    </div>
                                  </div>
+                                 <div class="row">
+                                    <div class="col text-right pr-0">
+                                       <strong>Comments :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                       <?php echo e($carving->comments->count()); ?>
 
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col text-right pr-0">
+                                       <strong>Images :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                        <?php echo e(count($carving->images)); ?>
+
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col text-right pr-0">
+                                       <strong>Likes :</strong>
+                                    </div>
+                                    <div class="col text-left pl-1">
+                                       <?php echo e($carving->likes()->count()); ?>
+
+                                    </div>
+                                 </div>
                                  <div class="row-col pt-2 pb-2">
-                                    <?php if($carving->likes()->count() > 0): ?>
-                                       <?php if($carving->likes()->count() == 1): ?>
-                                          Liked <?php echo e($carving->likes()->count()); ?> time by others
-                                       <?php else: ?>
-                                          Liked <?php echo e($carving->likes()->count()); ?> times by others
-                                       <?php endif; ?>
-                                    <?php else: ?>
-                                       Not liked by anyone yet
+                                    
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
+                                       <form class="" action="<?php echo e(route('like')); ?>" method="POST">
+                                          <?php echo csrf_field(); ?>
+                                          <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                          <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                          <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
+                                       </form>
                                     <?php endif; ?>
-                                    <?php echo $__env->make('common.likeCard', ['model'=>$carving], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $carving)): ?>
+                                       <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+                                          <?php echo csrf_field(); ?>
+                                          <?php echo method_field('DELETE'); ?>
+                                          <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                          <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                          <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
+                                       </form>
+                                    <?php endif; ?>
                                  </div>
                               </a>
                            </div>

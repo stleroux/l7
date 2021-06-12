@@ -35,116 +35,103 @@
 		<div class="card card-trans-2 mb-3">
 
 			<div class="card-body section_body p-1">
+
 				<div class="my-1">
 					<?php echo $__env->make('UI.recipes.index.grid.alphabet', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 				</div>
 				
 				<div class="row justify-content-center">
+
 					<?php $__currentLoopData = $recipes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recipe): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						
 						<div id="card-hover" class="border-2 card card-trans-2 col-7 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-1 pt-2 pb-2 px-1">
 
-							
-                           
-                        <?php if($recipe->published_at > \Carbon\Carbon::now()->subMonth()): ?>
-                           <div class="ribbon-wrapper">
-                              
-                              <div class="ribbon bg-lime m-0">New</div>
-                           </div>
-                        <?php endif; ?>
+							<?php if($recipe->published_at > \Carbon\Carbon::now()->subMonth()): ?>
+								<div class="ribbon-wrapper">
+									<div class="ribbon bg-lime m-0">New</div>
+								</div>
+							<?php endif; ?>
 
-								<?php if($recipe->image): ?>
-									<a href="<?php echo e(route('recipes.show', [$recipe->id, $byCatName])); ?>" class="" style="text-decoration: none;">
-										<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\<?php echo e($recipe->image); ?>" height="120px" width="auto">
-									</a>
-								<?php else: ?>
-									<a href="<?php echo e(route('recipes.show', [$recipe->id, $byCatName])); ?>" class="" style="text-decoration: none">
-										<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\image_not_available.jpg" height="120px" width="auto">
-									</a>
-								<?php endif; ?>
+							<?php if($recipe->image): ?>
+								<a href="<?php echo e(route('recipes.show', [$recipe->id, $byCatName])); ?>" class="" style="text-decoration: none;">
+									<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\<?php echo e($recipe->image); ?>" height="120px" width="auto">
+								</a>
+							<?php else: ?>
+								<a href="<?php echo e(route('recipes.show', [$recipe->id, $byCatName])); ?>" class="" style="text-decoration: none">
+									<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\image_not_available.jpg" height="120px" width="auto">
+								</a>
+							<?php endif; ?>
 
-								<div class="card-body pt-1 pb-0">
-									<div class="row justify-content-center text-center">
-										<span class="card-title pb-2 m-0 font-weight-bold">
-											<?php echo e(ucwords($recipe->title)); ?>
+							<div class="card-body pt-1 pb-0">
+								<div class="row justify-content-center text-center">
+									<span class="card-title pb-2 m-0 font-weight-bold">
+										<?php echo e(ucwords($recipe->title)); ?>
 
+									</span>
+								</div>
+							</div>
+
+							<div class="card-text p-0 m-0 text-center">
+								<div class="align-self-end">
+									<p>
+										<span class="badge badge-light text-dark" title="Times Viewed">
+											<?php echo e($recipe->views); ?> Views
 										</span>
-									</div>
+										<span class="badge badge-light text-dark" title="Comments">
+											<?php echo e($recipe->comments->count()); ?> Comments
+										</span>
+										<br />
+										<span class="badge badge-light text-dark" title="Times Favorited">
+											<?php echo e($recipe->favoritesCount); ?> Favorited
+										</span>
+										<span class="badge badge-light text-dark" title="Times Viewed">
+											<?php echo e($recipe->likes()->count()); ?> Likes
+										</span>
+									</p>
 								</div>
+							</div>
 
-								<div class="card-text p-0 m-0 text-center">
-									<div class="align-self-end">
-										<p>
-											<span class="badge badge-light text-dark" title="Times Viewed"><?php echo e($recipe->views); ?> Views</span>
-											<span class="badge badge-light text-dark" title="Comments"><?php echo e($recipe->comments->count()); ?> Comments</span>
-											<br />
-											<span class="badge badge-light text-dark" title="Times Favorited">
-	                                 <?php echo e($recipe->favoritesCount); ?> Favorited
-	                              </span>
-										</p>
-									</div>
-								</div>
-
-								<?php if(auth()->guard()->check()): ?>
-									<div class="card-text pb-1 m-0">
-										<div class="align-self-end text-center">
-											<div class="col">
-												<?php echo $__env->make('UI.recipes.index.grid.buttons.favorite', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>											
-												<?php if(auth::user()->hasRole('admin')): ?>
-													<a href="<?php echo e(route('admin.recipes.edit', $recipe)); ?>" class="btn btn-sm btn-maroon text-light">
-														<i class="<?php echo e(config('icons.edit')); ?>"></i>
-													</a>
-												<?php endif; ?>
-											</div>
+							<?php if(auth()->guard()->check()): ?>
+								<div class="card-text pb-1 m-0">
+									<div class="align-self-end text-center">
+										<div class="col">
+											<?php echo $__env->make('UI.recipes.index.grid.buttons.favorite', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>											
+											<?php if(auth::user()->hasRole('admin')): ?>
+												<a href="<?php echo e(route('admin.recipes.edit', $recipe)); ?>" class="btn btn-sm btn-maroon text-light">
+													<i class="<?php echo e(config('icons.edit')); ?>"></i>
+												</a>
+											<?php endif; ?>
 										</div>
 									</div>
+								</div>
+							<?php endif; ?>
+
+							<div class="row-col text-center pt-2">
+								<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $recipe)): ?>
+									<form class="" action="<?php echo e(route('like')); ?>" method="POST">
+										<?php echo csrf_field(); ?>
+										<input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+										<input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+										<button class="btn btn-block btn-xs btn-outline-success text-light"><?php echo app('translator')->get('Like'); ?></button>
+									</form>
 								<?php endif; ?>
 
+								<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $recipe)): ?>
+									<form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+										<?php echo csrf_field(); ?>
+										<?php echo method_field('DELETE'); ?>
+										<input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+										<input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+										<button class="btn btn-block btn-xs btn-outline-danger text-light"><?php echo app('translator')->get('Unlike'); ?></button>
+									</form>
+								<?php endif; ?>
+							</div>
 
+							<div class="card-footer px-1 py-0 mb-0">
+								<div class="text-center">
+									By <?php echo e($recipe->user->username); ?>
 
-<div class="row-col text-center pt-2">
-                                    <?php if($recipe->likes()->count() > 0): ?>
-                                       <?php if($recipe->likes()->count() == 1): ?>
-                                          Liked <?php echo e($recipe->likes()->count()); ?> time by others
-                                       <?php else: ?>
-                                          Liked <?php echo e($recipe->likes()->count()); ?> times by others
-                                       <?php endif; ?>
-                                    <?php else: ?>
-                                       Not liked by anyone yet
-                                    <?php endif; ?>
-                                    
-                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $recipe)): ?>
-    <form class="" action="<?php echo e(route('like')); ?>" method="POST">
-        <?php echo csrf_field(); ?>
-        <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
-        <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
-        <button class="btn btn-block btn-xs btn-outline-success text-light"><?php echo app('translator')->get('Like'); ?></button>
-    </form>
-<?php endif; ?>
-
-<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $recipe)): ?>
-    <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
-        <?php echo csrf_field(); ?>
-        <?php echo method_field('DELETE'); ?>
-        <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
-        <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
-        <button class="btn btn-block btn-xs btn-outline-danger text-light"><?php echo app('translator')->get('Unlike'); ?></button>
-    </form>
-<?php endif; ?>
-                                 </div>
-
-
-
-
-
-								<div class="card-footer px-1 py-0 mb-0">
-									<div class="text-center">
-										By <?php echo e($recipe->user->username); ?>
-
-									</div>
 								</div>
-
-							
+							</div>
 
 						</div>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

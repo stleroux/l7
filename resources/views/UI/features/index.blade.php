@@ -6,7 +6,7 @@
 
 @section('pageHeader')
    <i class="{{ config('icons.features') }}"></i>
-   My Requested Features
+   Requested Features
 @endsection
 
 @section('breadcrumb')

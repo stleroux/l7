@@ -34,131 +34,101 @@
 		<div class="card card-trans-2 mb-3">
 
 			<div class="card-body section_body p-1">
+
 				<div class="my-1">
 					@include('UI.recipes.index.grid.alphabet')
 				</div>
 				
 				<div class="row justify-content-center">
+
 					@foreach ($recipes as $recipe)
-						{{-- <div id="card-hover" class="border-2 card card-trans-2 col-7 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-1 pt-2 pb-2 px-1"> --}}
 						<div id="card-hover" class="border-2 card card-trans-2 col-7 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-1 pt-2 pb-2 px-1">
 
-							{{-- <div class="position-relative p-0"> --}}
-                           
-                        @if($recipe->published_at > \Carbon\Carbon::now()->subMonth())
-                           <div class="ribbon-wrapper">
-                              {{-- <div class="ribbon btn-maroon m-0">New</div> --}}
-                              <div class="ribbon bg-lime m-0">New</div>
-                           </div>
-                        @endif
+							@if($recipe->published_at > \Carbon\Carbon::now()->subMonth())
+								<div class="ribbon-wrapper">
+									<div class="ribbon bg-lime m-0">New</div>
+								</div>
+							@endif
 
-								@if($recipe->image)
-									<a href="{{ route('recipes.show', [$recipe->id, $byCatName]) }}" class="" style="text-decoration: none;">
-										<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\{{ $recipe->image }}" height="120px" width="auto">
-									</a>
-								@else
-									<a href="{{ route('recipes.show', [$recipe->id, $byCatName]) }}" class="" style="text-decoration: none">
-										<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\image_not_available.jpg" height="120px" width="auto">
-									</a>
-								@endif
+							@if($recipe->image)
+								<a href="{{ route('recipes.show', [$recipe->id, $byCatName]) }}" class="" style="text-decoration: none;">
+									<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\{{ $recipe->image }}" height="120px" width="auto">
+								</a>
+							@else
+								<a href="{{ route('recipes.show', [$recipe->id, $byCatName]) }}" class="" style="text-decoration: none">
+									<img class="card-img-top col-10 offset-1 col-sm-12 offset-sm-0" src="\_recipes\image_not_available.jpg" height="120px" width="auto">
+								</a>
+							@endif
 
-								<div class="card-body pt-1 pb-0">
-									<div class="row justify-content-center text-center">
-										<span class="card-title pb-2 m-0 font-weight-bold">
-											{{ ucwords($recipe->title) }}
+							<div class="card-body pt-1 pb-0">
+								<div class="row justify-content-center text-center">
+									<span class="card-title pb-2 m-0 font-weight-bold">
+										{{ ucwords($recipe->title) }}
+									</span>
+								</div>
+							</div>
+
+							<div class="card-text p-0 m-0 text-center">
+								<div class="align-self-end">
+									<p>
+										<span class="badge badge-light text-dark" title="Times Viewed">
+											{{ $recipe->views }} Views
 										</span>
-									</div>
+										<span class="badge badge-light text-dark" title="Comments">
+											{{ $recipe->comments->count() }} Comments
+										</span>
+										<br />
+										<span class="badge badge-light text-dark" title="Times Favorited">
+											{{ $recipe->favoritesCount }} Favorited
+										</span>
+										<span class="badge badge-light text-dark" title="Times Viewed">
+											{{ $recipe->likes()->count() }} Likes
+										</span>
+									</p>
 								</div>
+							</div>
 
-								<div class="card-text p-0 m-0 text-center">
-									<div class="align-self-end">
-										<p>
-											<span class="badge badge-light text-dark" title="Times Viewed">{{ $recipe->views }} Views</span>
-											<span class="badge badge-light text-dark" title="Comments">{{ $recipe->comments->count() }} Comments</span>
-											<br />
-											<span class="badge badge-light text-dark" title="Times Favorited">
-	                                 {{ $recipe->favoritesCount }} Favorited
-	                              </span>
-										</p>
-									</div>
-								</div>
-
-								@auth
-									<div class="card-text pb-1 m-0">
-										<div class="align-self-end text-center">
-											<div class="col">
-												@include('UI.recipes.index.grid.buttons.favorite')											
-												@if(auth::user()->hasRole('admin'))
-													<a href="{{ route('admin.recipes.edit', $recipe) }}" class="btn btn-sm btn-maroon text-light">
-														<i class="{{ config('icons.edit') }}"></i>
-													</a>
-												@endif
-											</div>
+							@auth
+								<div class="card-text pb-1 m-0">
+									<div class="align-self-end text-center">
+										<div class="col">
+											@include('UI.recipes.index.grid.buttons.favorite')											
+											@if(auth::user()->hasRole('admin'))
+												<a href="{{ route('admin.recipes.edit', $recipe) }}" class="btn btn-sm btn-maroon text-light">
+													<i class="{{ config('icons.edit') }}"></i>
+												</a>
+											@endif
 										</div>
 									</div>
-								@endauth
-
-{{-- @include('common.likeCard', ['model' => $recipe]) --}}
-{{-- @can('like', $recipe)
-    <form class="" action="{{ route('like') }}" method="POST">
-        @csrf
-        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
-        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
-        <button class="btn btn-block btn-xs btn-outline-success text-light font-weight-bold">@lang('Like')</button>
-    </form>
-@endcan
-
-@can('unlike', $recipe)
-    <form class="" action="{{ route('unlike') }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
-        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
-        <button class="btn btn-block btn-xs btn-outline-danger text-light"><strong>@lang('Unlike')</strong></button>
-    </form>
-@endcan --}}
-<div class="row-col text-center pt-2">
-                                    @if($recipe->likes()->count() > 0)
-                                       @if($recipe->likes()->count() == 1)
-                                          Liked {{ $recipe->likes()->count() }} time by others
-                                       @else
-                                          Liked {{ $recipe->likes()->count() }} times by others
-                                       @endif
-                                    @else
-                                       Not liked by anyone yet
-                                    @endif
-                                    {{-- @include('common.likeCard', ['model'=>$recipe]) --}}
-                                    @can('like', $recipe)
-    <form class="" action="{{ route('like') }}" method="POST">
-        @csrf
-        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
-        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
-        <button class="btn btn-block btn-xs btn-outline-success text-light">@lang('Like')</button>
-    </form>
-@endcan
-
-@can('unlike', $recipe)
-    <form class="" action="{{ route('unlike') }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
-        <input type="hidden" name="id" value="{{ $recipe->id }}"/>
-        <button class="btn btn-block btn-xs btn-outline-danger text-light">@lang('Unlike')</button>
-    </form>
-@endcan
-                                 </div>
-
-
-
-
-
-								<div class="card-footer px-1 py-0 mb-0">
-									<div class="text-center">
-										By {{ $recipe->user->username }}
-									</div>
 								</div>
+							@endauth
 
-							{{-- </div> --}}
+							<div class="row-col text-center pt-2">
+								@can('like', $recipe)
+									<form class="" action="{{ route('like') }}" method="POST">
+										@csrf
+										<input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+										<input type="hidden" name="id" value="{{ $recipe->id }}"/>
+										<button class="btn btn-block btn-xs btn-outline-success text-light">@lang('Like')</button>
+									</form>
+								@endcan
+
+								@can('unlike', $recipe)
+									<form class="" action="{{ route('unlike') }}" method="POST">
+										@csrf
+										@method('DELETE')
+										<input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+										<input type="hidden" name="id" value="{{ $recipe->id }}"/>
+										<button class="btn btn-block btn-xs btn-outline-danger text-light">@lang('Unlike')</button>
+									</form>
+								@endcan
+							</div>
+
+							<div class="card-footer px-1 py-0 mb-0">
+								<div class="text-center">
+									By {{ $recipe->user->username }}
+								</div>
+							</div>
 
 						</div>
 					@endforeach

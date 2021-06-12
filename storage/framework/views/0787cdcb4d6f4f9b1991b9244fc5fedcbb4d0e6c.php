@@ -21,84 +21,105 @@
 	<?php echo $__env->make('UI.recipes.blocks.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	<?php echo $__env->make('UI.recipes.blocks.popular', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	<?php echo $__env->make('UI.recipes.blocks.archives', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-   <?php echo $__env->make('UI.recipes.blocks.faqs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+	<?php echo $__env->make('UI.recipes.blocks.faqs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('topbar'); ?>
-   <?php echo $__env->make('UI.recipes.index.list.topbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+	<?php echo $__env->make('UI.recipes.index.list.topbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 
 	<?php if($recipes->count() > 0): ?>
-	  
-     <div class="card card-trans-2 mb-3">
 
-         <div class="card-body card-trans-2 p-2 text-light">
+		<div class="card card-trans-2 mb-3">
 
-            <?php echo $__env->make('UI.recipes.index.list.alphabet', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+			<div class="card-body card-trans-2 p-2 text-light">
 
-            <table id="datatable" class="table table-sm table-hover">
-               <thead>
-                  <tr>
-                     <th>Name</th>
-                     <th>Category</th>
-                     <th class="d-none d-lg-table-cell">Views</th>
-                     <th class="d-none d-lg-table-cell">Created By</th>
-                     <th class="d-none d-lg-table-cell">Created On</th>
-                     <th class="d-none d-lg-table-cell">Publish(ed) On</th>
-                     <th data-orderable="false"></th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <?php $__currentLoopData = $recipes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recipe): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                     <tr>
-                        <td>
-                           <?php echo e(ucwords($recipe->title)); ?>
+				<?php echo $__env->make('UI.recipes.index.list.alphabet', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                        </td>
-                        <td>
-                           <?php echo e(ucwords($recipe->category->name)); ?>
+				<table id="datatable" class="table table-sm table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Category</th>
+							<th class="d-none d-lg-table-cell">Views</th>
+							<th class="d-none d-lg-table-cell">Likes</th>
+							<th class="d-none d-lg-table-cell">Created By</th>
+							<th class="d-none d-lg-table-cell">Created On</th>
+							<th class="d-none d-lg-table-cell">Publish(ed) On</th>
+							<th data-orderable="false"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $__currentLoopData = $recipes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recipe): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<tr>
+								<td>
+									<?php echo e(ucwords($recipe->title)); ?>
 
-                        </td>
-                        <td class="d-none d-lg-table-cell">
-                           <?php echo e($recipe->views); ?>
+								</td>
+								<td>
+									<?php echo e(ucwords($recipe->category->name)); ?>
 
-                        </td>
-                        <td class="d-none d-lg-table-cell">
-                           <?php echo $__env->make('common.authorFormat', ['model'=>$recipe, 'field'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        </td>
-                        <td class="d-none d-lg-table-cell">
-                           <?php echo $__env->make('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        </td>
-                        <td class="d-none d-lg-table-cell">
-                           <?php echo $__env->make('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        </td>
-                        <td class="text-right">
-                           <div class="btn-group">
-                              <?php if(auth()->guard()->check()): ?>
-                                 <?php echo $__env->make('UI.recipes.index.list.buttons.favorite', ['size'=>'sm'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                              <?php endif; ?>
-                              <?php echo $__env->make('UI.recipes.index.list.buttons.show', ['size'=>'sm'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                           </div>
-                        </td>
-                     </tr>
-                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-               </tbody>
-            </table>
-         </div>
-	  </div>
+								</td>
+								<td class="d-none d-lg-table-cell">
+									<?php echo e($recipe->views); ?>
 
-   <?php else: ?>
+								</td>
+								<td class="d-none d-lg-table-cell">
+									<?php echo e($recipe->likes()->count()); ?>
 
-      <div class="col-row p-3 card-trans-4 text-light">
-         <?php echo e(config('settings.noRecordsFound')); ?>
+								</td>
+								<td class="d-none d-lg-table-cell">
+									<?php echo $__env->make('common.authorFormat', ['model'=>$recipe, 'field'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+								</td>
+								<td class="d-none d-lg-table-cell">
+									<?php echo $__env->make('common.dateFormat', ['model'=>$recipe, 'field'=>'created_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+								</td>
+								<td class="d-none d-lg-table-cell">
+									<?php echo $__env->make('common.dateFormat', ['model'=>$recipe, 'field'=>'published_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+								</td>
+								<td class="text-right">
+									<div class="btn-group">
+										<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $recipe)): ?>
+											<form class="" action="<?php echo e(route('like')); ?>" method="POST">
+												<?php echo csrf_field(); ?>
+												<input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+												<input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+												<button class="btn btn-block btn-sm btn-success text-light"><?php echo app('translator')->get('Like'); ?></button>
+											</form>
+										<?php endif; ?>
 
-      </div>
+										<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $recipe)): ?>
+											<form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+												<?php echo csrf_field(); ?>
+												<?php echo method_field('DELETE'); ?>
+												<input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+												<input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+												<button class="btn btn-block btn-sm btn-danger text-light"><?php echo app('translator')->get('Unlike'); ?></button>
+											</form>
+										<?php endif; ?>
+										<?php if(auth()->guard()->check()): ?>
+											<?php echo $__env->make('UI.recipes.index.list.buttons.favorite', ['size'=>'sm'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+										<?php endif; ?>
+										<?php echo $__env->make('UI.recipes.index.list.buttons.show', ['size'=>'sm'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+									</div>
+								</td>
+							</tr>
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
-   <?php endif; ?>
+	<?php else: ?>
 
+		<div class="col-row p-3 card-trans-4 text-light">
+			<?php echo e(config('settings.noRecordsFound')); ?>
 
+		</div>
+
+	<?php endif; ?>
 
 <?php $__env->stopSection(); ?>
 
