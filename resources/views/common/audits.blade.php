@@ -107,6 +107,7 @@
 
       </div>
 
+
       <script type="text/javascript">
          // $('.accordian-body').on('show.bs.collapse', function () {
          // $(this).closest("row.col")

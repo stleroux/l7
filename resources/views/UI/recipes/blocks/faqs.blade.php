@@ -2,7 +2,7 @@
    
    <div class="card-header text-light p-2">
       <i class="{{ Config::get('icons.faq') }}"></i>
-      Carvings FAQs
+      Recipes FAQs
    </div>
    
    <div class="card-body card-trans-6 p-0 m-0">

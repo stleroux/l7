@@ -1,14 +1,14 @@
 <div class="card-header d-none d-xl-block pt-0 pb-2 text-center">
    <div class="btn-group" role="group">
    @foreach($project->categoriesOptions() as $categoryOptionKey => $categoryOptionValue)
-      @if($categoryOptionKey == 0)
+      @if($categoryOptionKey == 'select')
          <a href="{{ route('projects.index') }}"
-            class="btn btn-sm btn-{{ request()->is('projects') ? 'default' : 'alphabet' }}">
+            class="btn btn-sm btn-{{ (request()->is('projects/all/*') || request()->is('projects')) ? 'dark' : 'alphabet' }}">
             All Projects
          </a>
       @else
          <a href="{{ route('projects.index', $categoryOptionKey) }}"
-            class="btn btn-sm btn-{{ request()->is('projects/'.$categoryOptionKey) ? 'default' : 'alphabet' }} p-1">
+            class="btn btn-sm btn-{{ request()->is('projects/'.$categoryOptionKey.'*') ? 'dark' : 'alphabet' }} p-1">
             {{ $categoryOptionValue }}
          </a>
       @endif

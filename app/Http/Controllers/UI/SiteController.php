@@ -22,10 +22,10 @@ class SiteController extends Controller
 # ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
-	public function __construct()
-	{
-		// $this->middleware('auth');
-	}
+   public function __construct()
+   {
+      // $this->middleware('auth');
+   }
 
 
 ##################################################################################################################
@@ -37,22 +37,22 @@ class SiteController extends Controller
 #  ╚═╝     ╚═╝  ╚═╝ ╚══▀▀═╝ 
 // Display a list of resources
 ##################################################################################################################
-    // public function index($filter = null, $tag = null)
-    public function faq()
-    {
-        // Check if user has required permission
-        
+   // public function index($filter = null, $tag = null)
+   public function faq()
+   {
+      // Check if user has required permission
 
-        // Set the session to the current page route
-        Session::put('fromPage', url()->full());
 
-        $faqs = FAQ::orderBy('question')->get();
+      // Set the session to the current page route
+      Session::put('fromPage', url()->full());
 
-        // dd($faqs);
+      $faqs = FAQ::orderBy('question')->get();
 
-        return view('UI.faqs', compact('faqs'));
+      // dd($faqs);
 
-    }
+      return view('UI.faqs', compact('faqs'));
+
+   }
 
 
 ##################################################################################################################
@@ -63,21 +63,22 @@ class SiteController extends Controller
 # ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗██║     ██║  ██║╚██████╔╝███████╗
 # ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 ##################################################################################################################
-	public function index()
-	{
+   public function index()
+   {
       // Set the session to the current page route
       Session::put('fromPage', url()->full());
 
-		$posts = Post::published()->with('user')->orderBy('id','desc')->take(Config::get('settings.homepage_blog_count'))->get();
-		$greeting   = DB::table('general')->where('name', '=', 'greeting')->first();
-      $newUser    = DB::table('general')->where('name', '=', 'newUser')->first();
-      $carvings   = DB::table('general')->where('name', '=', 'carvings')->first();
-      $projects   = DB::table('general')->where('name', '=', 'projects')->first();
-      $recipes    = DB::table('general')->where('name', '=', 'recipes')->first();
-      $blogs      = DB::table('general')->where('name', '=', 'blog')->first();
+      // Homepage blocks
+      $posts      = Post::published()->with('user')->orderBy('id','desc')->take(Config::get('settings.homepage_blog_count'))->get();
+      $greeting   = DB::table('blocks')->where('name', '=', 'greeting')->first();
+      $newUser    = DB::table('blocks')->where('name', '=', 'newUser')->first();
+      $carvings   = DB::table('blocks')->where('name', '=', 'carvings')->first();
+      $projects   = DB::table('blocks')->where('name', '=', 'projects')->first();
+      $recipes    = DB::table('blocks')->where('name', '=', 'recipes')->first();
+      $blog       = DB::table('blocks')->where('name', '=', 'blog')->first();
 
-		return view('UI.homepage', compact('posts','greeting','newUser','carvings','projects','recipes','blogs'));
-	}
+      return view('UI.homepage', compact('posts','greeting','newUser','carvings','projects','recipes','blog'));
+   }
 
 
 ##################################################################################################################
@@ -88,10 +89,15 @@ class SiteController extends Controller
 # ██║  ██║██████╔╝╚██████╔╝╚██████╔╝   ██║   
 # ╚═╝  ╚═╝╚═════╝  ╚═════╝  ╚═════╝    ╚═╝  
 ##################################################################################################################
-	public function about()
-	{
-		return view('UI.about');
-	}
+   public function about()
+   {
+      // About page blocks
+      $aboutUs    = DB::table('blocks')->where('name', '=', 'aboutUs')->first();
+      $stephane   = DB::table('blocks')->where('name', '=', 'stephane')->first();
+      $stacie     = DB::table('blocks')->where('name', '=', 'stacie')->first();
+
+      return view('UI.about', compact('aboutUs','stephane','stacie'));
+   }
 
 
 ##################################################################################################################
@@ -102,10 +108,10 @@ class SiteController extends Controller
 #    ██║   ███████╗██║  ██║██║ ╚═╝ ██║███████║
 #    ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
 ##################################################################################################################
-	public function terms()
-	{
-		return view('UI.termsAndConditions');
-	}
+   public function terms()
+   {
+      return view('UI.termsAndConditions');
+   }
 
 
 ##################################################################################################################
@@ -116,10 +122,10 @@ class SiteController extends Controller
 # ██║     ██║  ██║██║ ╚████╔╝ ██║  ██║╚██████╗   ██║   
 # ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝   ╚═╝   
 ##################################################################################################################
-	public function privacy()
-	{
-		return view('UI.privacyPolicy');
-	}
+   public function privacy()
+   {
+      return view('UI.privacyPolicy');
+   }
 
 
 }

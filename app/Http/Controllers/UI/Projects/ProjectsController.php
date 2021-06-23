@@ -7,7 +7,9 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Faq;
 use App\Models\Project;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Auth;
 use DB;
 use File;
@@ -40,7 +42,7 @@ class ProjectsController extends Controller
 # ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 // Display a list of resources
 ##################################################################################################################
-    public function index($filter = null)
+    public function index($filter = null, $tag = null)
     {
         // Check if user has required permission
 
@@ -48,20 +50,38 @@ class ProjectsController extends Controller
         Session::put('fromPage', url()->full());
 
         $project = New Project();
+        $tags = Tag::where('category',3)->orderBy('name')->get();
 
-        if($filter) {
-            if($filter == 1000) {
-                $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
-                return view('UI.projects.index', compact('projects','project'));
-            }
+        // if($filter) {
+        //     if($filter == 1000) {
+        //         $projects = Project::with('images')->orderBy('id','desc')->take(4)->get();
+        //         return view('UI.projects.index', compact('projects','project'));
+        //     }
 
-            $projects = Project::with('images')->where('category', '=', $filter)->paginate(8);
+        //     $projects = Project::with('images')->where('category', '=', $filter)->paginate(8);
 
-        } else {
-            $projects = Project::with('images')->orderBy('name','asc')->paginate(8);
+        // } else {
+        //     $projects = Project::with('images')->orderBy('name','asc')->paginate(8);
+        // }
+
+        if($filter == "all" && $tag){
+            $projects = Tag::where('name', request('tag'))->firstOrFail()->projects()->orderBy('name')->paginate(8);
+
+        // Filter and Tag
+        } elseif($filter && $tag) {
+            $projects = Project::with('images')->where('category', '=', $filter)->whereHas('tags', function ($query) {
+                $query->where('name', request('tag'));
+            })->paginate(8);
+
+        // Filter and NO Tag
+        } elseif($filter && !$tag) {
+            $projects = Project::with('images')->where('category', '=', $filter)->orderBy('name')->paginate(8);
+        }else{
+            $projects = Project::with('images')->orderBy('name')->paginate(8);
         }
         
-        return view('UI.projects.index', compact('projects','project','filter'));
+        // return view('UI.projects.index', compact('projects','project','filter'));
+        return view('UI.projects.index', compact('project','tags','projects'));
     }
 
 
@@ -105,9 +125,19 @@ class ProjectsController extends Controller
         // Check if user has required permission
 
         // Increase the view count if viewed from the frontend
-        if (url()->previous() != url('/projects/list')) {
-            DB::table('projects')->where('id','=',$project->id)->increment('views',1);
-        }
+        // if(Auth::check()){
+        //     $userlist = new Collection([1,2,3]);
+        //     // dd($userlist);
+        //     $id = Auth::user()->id;
+        //     // dd($id);
+        //     if (!$userlist->contains($id)) {
+        //         if (url()->previous() != url('/projects/list')) {
+        //             DB::table('projects')->where('id','=',$project->id)->increment('views',1);
+        //         }
+        //     }
+        // }
+        $expiresAt = now()->addHours(3);
+        views($project)->cooldown($expiresAt)->record();
 
         // get previous project
         $previous = Project::where('name', '<', $project->name)->orderBy('name','asc')->max('name');

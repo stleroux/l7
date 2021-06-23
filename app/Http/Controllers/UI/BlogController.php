@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Faq;
 use Carbon\Carbon;
 use Auth;
 use DB;
@@ -52,6 +53,32 @@ class BlogController extends Controller
       Session::flash('backUrl', \Request::fullUrl());
 
       return view('UI.blog.archive', compact('archives'))->withYear($year)->withMonth($month);
+   }
+
+
+##################################################################################################################
+#  ███████╗ █████╗  ██████╗ 
+#  ██╔════╝██╔══██╗██╔═══██╗
+#  █████╗  ███████║██║   ██║
+#  ██╔══╝  ██╔══██║██║▄▄ ██║
+#  ██║     ██║  ██║╚██████╔╝
+#  ╚═╝     ╚═╝  ╚═╝ ╚══▀▀═╝ 
+// Display a list of resources
+##################################################################################################################
+   // public function index($filter = null, $tag = null)
+   public function faq()
+   {
+      // Check if user has required permission
+     
+
+      // Set the session to the current page route
+      // Session::put('fromPage', url()->full());
+
+      $faqs = FAQ::where('category', 'blog')->orderBy('question')->get();
+      // dd($faqs);
+
+      return view('UI.blog.faqs', compact('faqs'));
+
    }
 
 
@@ -143,7 +170,9 @@ class BlogController extends Controller
       }
 
       // Add 1 to views column
-      DB::table('posts')->where('slug', '=', $slug)->increment('views', 1);
+      // DB::table('posts')->where('slug', '=', $slug)->increment('views', 1);
+      $expiresAt = now()->addHours(3);
+      views($post)->cooldown($expiresAt)->record();
 
       // return the view and pass in the post object
       return view('UI.blog.show', compact('post','next','previous'));

@@ -10,10 +10,12 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th class="d-none d-lg-table-cell">#</th>
+            
             <th>Title</th>
             <th class="d-none d-lg-table-cell">Creator</th>
             <th class="d-none d-lg-table-cell">Status</th>
+            <th class="d-none d-lg-table-cell">Views</th>
+            <th class="d-none d-lg-table-cell">Likes</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
             <th class="no-sort text-center" width="140px">Actions</th>
@@ -35,9 +37,9 @@
                      <label for="<?php echo e($bug->id); ?>"></label>
                   </div>
                </td>
-               <td class="d-none d-lg-table-cell"><?php echo e($bug->id); ?></td>
+               
                <td nowrap="nowrap"><a href="<?php echo e(route('admin.bugs.show', $bug)); ?>"><?php echo e($bug->title); ?></a></td>
-               <td class="d-none d-lg-table-cell" nowrap="nowrap"><?php echo e($bug->creator->username); ?></td>
+               <td class="d-none d-lg-table-cell" nowrap="nowrap"><?php echo e($bug->user->username); ?></td>
                
 
                <td nowrap="nowrap">
@@ -64,6 +66,8 @@ unset($__errorArgs, $__bag); ?>"
                      </select>
                   </form>
                </td>
+               <td><?php echo e(views($bug)->count()); ?></td>
+               <td><?php echo e($bug->likes()->count()); ?></td>
 
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($bug->created_at): ?><?php echo e($bug->created_at); ?><?php endif; ?>">
                   

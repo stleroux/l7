@@ -54,10 +54,10 @@
             <div class="card card-trans-4 mb-2 border-black-2">
                <div class="card-header card_header p-2">
                   <i class="{{ config('icons.blog') }}"></i>
-                  {{ $blogs->title }}
+                  {{ $blog->title }}
                </div>
                <div class="card-body p-2 border-red-1">
-                  {!! $blogs->body !!}
+                  {!! $blog->body !!}
                </div>
             </div>
          @endif

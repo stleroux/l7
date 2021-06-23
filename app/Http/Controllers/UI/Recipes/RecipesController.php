@@ -127,14 +127,14 @@ class RecipesController extends Controller
             ->get();
 
          if($request->key) {
-            $recipes = Recipe::with('user','category')
+            $recipes = Recipe::with('user','category','likes','views')
                ->published()
                ->public()
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
                ->paginate(10);
          } else {
-            $recipes = Recipe::with('user','category')
+            $recipes = Recipe::with('user','category','likes','views')
                ->published()
                ->public()
                ->orderBy('title', 'asc')
@@ -154,7 +154,7 @@ class RecipesController extends Controller
                ->get();
 
             if($request->key) {
-               $recipes = Recipe::with('user','category')
+               $recipes = Recipe::with('user','category','likes','views')
                   ->published()
                   ->public()
                   ->where('category_id', '=', $byCatName->id)
@@ -162,7 +162,7 @@ class RecipesController extends Controller
                   ->orderBy('title', 'asc')
                   ->paginate(10);
             } else {
-               $recipes = Recipe::with('user','category')
+               $recipes = Recipe::with('user','category','likes','views')
                   ->published()
                   ->public()
                   ->where('category_id', '=', $byCatName->id)
@@ -184,7 +184,7 @@ class RecipesController extends Controller
                ->get();
 
             if($request->key) {
-               $recipes = Recipe::with('user','category','comments')
+               $recipes = Recipe::with('user','category','comments','likes','views')
                   ->published()
                   ->public()
                   ->whereIn('category_id', $allc)
@@ -192,7 +192,7 @@ class RecipesController extends Controller
                   ->orderBy('title', 'asc')
                   ->paginate(10);
             } else {
-               $recipes = Recipe::with('user','category')
+               $recipes = Recipe::with('user','category','likes','views')
                   ->published()
                   ->public()
                   ->whereIn('category_id', $allc)
@@ -246,14 +246,14 @@ class RecipesController extends Controller
             ->get();
 
          if($request->key) {
-            $recipes = Recipe::with('user','category')
+            $recipes = Recipe::with('user','category','likes','views')
                ->published()
                ->public()
                ->where('title', 'like', $request->key . '%')
                ->orderBy('title', 'asc')
                ->get();
          } else {
-            $recipes = Recipe::with('user','category')
+            $recipes = Recipe::with('user','category','likes','views')
                ->published()
                ->public()
                ->orderBy('title', 'asc')
@@ -273,7 +273,7 @@ class RecipesController extends Controller
                ->get();
 
             if($request->key) {
-               $recipes = Recipe::with('user','category')
+               $recipes = Recipe::with('user','category','likes','views')
                   ->published()
                   ->public()
                   ->where('category_id', '=', $byCatName->id)
@@ -281,7 +281,7 @@ class RecipesController extends Controller
                   ->orderBy('title', 'asc')
                   ->get();
             } else {
-               $recipes = Recipe::with('user','category')
+               $recipes = Recipe::with('user','category','likes','views')
                   ->published()
                   ->public()
                   ->where('category_id', '=', $byCatName->id)
@@ -304,7 +304,7 @@ class RecipesController extends Controller
                ->get();
 
             if($request->key) {
-               $recipes = Recipe::with('user','category','comments')
+               $recipes = Recipe::with('user','category','comments','likes','views')
                   ->published()
                   ->public()
                   ->whereIn('category_id', $allc)
@@ -312,7 +312,7 @@ class RecipesController extends Controller
                   ->orderBy('title', 'asc')
                   ->get();
             } else {
-               $recipes = Recipe::with('user','category')
+               $recipes = Recipe::with('user','category','likes','views')
                   ->published()
                   ->public()
                   ->whereIn('category_id', $allc)
@@ -867,7 +867,9 @@ public function myRecipesList(Request $request)
       $categories = Category::where('parent_id',1)->get();
 
       // Increase the view count since this is viewed from the frontend
-      DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      // DB::table('recipes')->where('id','=',$recipe->id)->increment('views',1);
+      $expiresAt = now()->addHours(3);
+      views($recipe)->cooldown($expiresAt)->record();
 
       // GET PREVIOUS RECIPE //
       // If a sub category has been selected

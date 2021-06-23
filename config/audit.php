@@ -30,6 +30,7 @@ return [
             'web',
             'api',
         ],
+        'model'        => App\Models\User::class,
     ],
 
     /*

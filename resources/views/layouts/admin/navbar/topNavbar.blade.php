@@ -10,7 +10,7 @@
             <!-- Left navbar links -->
             @include('layouts.admin.navbar.left')
             <!-- SEARCH FORM -->
-            @include('layouts.admin.navbar.search')
+            @include('admin.search.quickSearch')
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                <!-- Messages Dropdown Menu -->

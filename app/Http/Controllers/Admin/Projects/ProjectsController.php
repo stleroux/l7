@@ -186,7 +186,7 @@ class ProjectsController extends Controller
       // Set the session to the current page route
       // Session::put('fromPage', url()->full());
 
-      $projects = Project::with('images')->orderBy('name','asc')->get();
+      $projects = Project::with('images','likes','views')->orderBy('name','asc')->get();
 
       return view('admin.projects.index', compact('projects'));
    }

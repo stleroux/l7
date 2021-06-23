@@ -38,7 +38,8 @@ class FeaturesController extends Controller
    public function index()
    {
       // $features = Feature::where('user_id', '=', Auth::user()->id)->get();
-      $features = Feature::all();
+      // $features = Feature::all();
+      $features = Feature::with('user','likes')->orderBy('id','desc')->get();
 
       return view('UI.features.index', compact('features'));
    }
@@ -87,7 +88,7 @@ class FeaturesController extends Controller
 
          // assign values from form fields
          $feature->title = $request->title;
-         $feature->status = 1;
+         $feature->status = Feature::IS_NEW;
          $feature->description = $request->description;
          $feature->user_id = Auth::user()->id;
 
@@ -117,13 +118,17 @@ class FeaturesController extends Controller
 #  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 # Display the specified resource
 ##################################################################################################################
-	public function show(Feature $feature)
-	{
-		// Check if user has required permission
+   public function show(Feature $feature)
+   {
+      // Check if user has required permission
       abort_unless((Gate::allows('feature-show') || $feature->user_id == Auth::id()), 403);
 
-		return view('UI.features.show', compact('feature'));
-	}
+      // Increase the view count since this is viewed from the frontend
+      $expiresAt = now()->addHours(3);
+      views($feature)->cooldown($expiresAt)->record();
+
+      return view('UI.features.show', compact('feature'));
+   }
 
 
 ##################################################################################################################
@@ -135,13 +140,13 @@ class FeaturesController extends Controller
 #  ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 # Show the form for editing the specified resource
 ##################################################################################################################
-	public function edit(Feature $feature)
-	{
-		// Check if user has required permission
+   public function edit(Feature $feature)
+   {
+      // Check if user has required permission
       abort_unless((Gate::allows('feature-edit') || $feature->user_id == Auth::id()), 403);
       
       return view('UI.features.edit', compact('feature'));
-	}
+   }
 
 
 ##################################################################################################################
@@ -153,7 +158,7 @@ class FeaturesController extends Controller
 #   ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 # Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, Feature $feature)
+   public function update(Request $request, Feature $feature)
    {
       // Check if user has required permission
       abort_unless((Gate::allows('feature-edit') || ($feature->user_id == Auth::id())), 403);
@@ -193,11 +198,11 @@ class FeaturesController extends Controller
 #  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
 # Remove the specified resource from storage
 ##################################################################################################################
-	public function destroy(Feature $feature)
-	{
-		// Check if user has required permission
+   public function destroy(Feature $feature)
+   {
+      // Check if user has required permission
       abort_unless((Gate::allows('feature-delete') || checkIfOwner() || checkIfStatusNew()), 403);
-	   
+      
       // delete the bug
       $feature->delete();
 

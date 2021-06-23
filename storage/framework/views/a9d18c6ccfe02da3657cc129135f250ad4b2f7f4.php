@@ -15,6 +15,7 @@
 
 <?php $__env->startSection('rightColumn'); ?>
 	<?php echo $__env->make('UI.projects.blocks.popular', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+	<?php echo $__env->make('UI.projects.blocks.tags', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	<?php echo $__env->make('UI.projects.blocks.faqs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
@@ -77,7 +78,7 @@
 													<strong>Views :</strong>
 												</div>
 												<div class="col text-left pl-1">
-													<?php echo e($project->views); ?>
+													 <?php echo e(views($project)->count()); ?>
 
 												</div>
 											</div>
@@ -121,9 +122,7 @@
 														<input type="hidden" name="id" value="<?php echo e($project->id); ?>"/>
 														<button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
 													</form>
-												<?php endif; ?>
-
-												<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $project)): ?>
+												<?php else: ?>
 													<form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
 														<?php echo csrf_field(); ?>
 														<?php echo method_field('DELETE'); ?>

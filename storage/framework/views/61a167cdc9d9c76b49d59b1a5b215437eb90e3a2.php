@@ -1,18 +1,31 @@
 <div class="row">
 
    <div class="col mb-2 text-center">
-
-   
-   
-
-
    </div>
 
-<?php if($feature->status != "Rejected" && $feature->status != "Implemented"): ?>
-   <div class="col mb-2 float-right px-1">
-      <?php echo $__env->make('common.likeTopbar', ['model' => $feature], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-   </div>
-<?php endif; ?>
+   <?php if($feature->status != "Rejected" && $feature->status != "Implemented"): ?>
+      <div class="col mb-2 float-right px-1">
+         
+         <div class="form-inline float-right p-0 m-0">
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $feature)): ?>
+               <form class="p-0 m-0" action="<?php echo e(route('like')); ?>" method="POST">
+                  <?php echo csrf_field(); ?>
+                  <input type="hidden" name="likeable_type" value="<?php echo e(get_class($feature)); ?>"/>
+                  <input type="hidden" name="id" value="<?php echo e($feature->id); ?>"/>
+                  <button class="btn btn-sm btn-success"><?php echo app('translator')->get('Like'); ?></button>
+               </form>
+            <?php else: ?>
+               <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+                  <?php echo csrf_field(); ?>
+                  <?php echo method_field('DELETE'); ?>
+                  <input type="hidden" name="likeable_type" value="<?php echo e(get_class($feature)); ?>"/>
+                  <input type="hidden" name="id" value="<?php echo e($feature->id); ?>"/>
+                  <button class="btn btn-sm btn-danger"><?php echo app('translator')->get('Unlike'); ?></button>
+               </form>
+            <?php endif; ?>
+         </div>
+      </div>
+   <?php endif; ?>
 
    <div class="d-flex mb-2">
 

@@ -38,23 +38,23 @@
          <div id="accordion">
             @forelse($faqs as $faq)
 
-@if($faq->category == 'Carvings')
-   @php
-      $bgColor = 'bg-primary';
-      $style1 = '';
-   @endphp
-@elseif($faq->category == 'Projects')
-   @php
-      $bgColor = 'bg-info';
-      $style1 = '';
-   @endphp
-@else {{-- Recipes --}}
-   @php
-      $bgColor = '';
-      $style1 = "style=\"background-color: #800000\"";
-   @endphp
-   {{-- {{ $style1 }} --}}
-@endif
+               @if($faq->category == 'Carvings')
+                  @php
+                     $bgColor = 'bg-primary';
+                     $style1 = '';
+                  @endphp
+               @elseif($faq->category == 'Projects')
+                  @php
+                     $bgColor = 'bg-info';
+                     $style1 = '';
+                  @endphp
+               @else {{-- Recipes --}}
+                  @php
+                     $bgColor = '';
+                     $style1 = "style=\"background-color: #800000\"";
+                  @endphp
+                  {{-- {{ $style1 }} --}}
+               @endif
 
 
                <div class="card mb-2 mt-2 card-trans-8">

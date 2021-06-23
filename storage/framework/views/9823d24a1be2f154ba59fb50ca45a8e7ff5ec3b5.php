@@ -10,9 +10,6 @@
          <div class="col-md-8">
             <div class="card card-trans-2">
 
-
-
-
                <div class="card-header bg-info">
                   <i class="<?php echo e(config('icons.login')); ?>"></i>
                   <?php echo e(__('Login')); ?>
@@ -23,35 +20,32 @@
                   <form method="POST" action="<?php echo e(route('login')); ?>">
                      <?php echo csrf_field(); ?>
 
-<!-- Display message if account has not been approved by an administrator yet -->
-<?php if(session()->has('message')): ?>
-   <p class="alert alert-info">
-      <?php echo e(session()->get('message')); ?>
+                     <!-- Display message if account has not been approved by an administrator yet -->
+                     <?php if(session()->has('message')): ?>
+                        <p class="alert alert-info">
+                           <?php echo e(session()->get('message')); ?>
 
-   </p>
-<?php endif; ?>
+                        </p>
+                     <?php endif; ?>
 
+                     <div class="form-group row">
+                         <label for="login" class="col-sm-4 col-form-label text-md-right">
+                             <?php echo e(__('Username or Email')); ?>
 
-
-
-<div class="form-group row">
-    <label for="login" class="col-sm-4 col-form-label text-md-right">
-        <?php echo e(__('Username or Email')); ?>
-
-    </label>
- 
-    <div class="col-md-6">
-        <input id="login" type="text"
-               class="form-control<?php echo e($errors->has('username') || $errors->has('email') ? ' is-invalid' : ''); ?>"
-               name="login" value="<?php echo e(old('username') ?: old('email')); ?>" required autofocus>
- 
-        <?php if($errors->has('username') || $errors->has('email')): ?>
-            <span class="invalid-feedback">
-                <strong><?php echo e($errors->first('username') ?: $errors->first('email')); ?></strong>
-            </span>
-        <?php endif; ?>
-    </div>
-</div>
+                         </label>
+                      
+                         <div class="col-md-6">
+                             <input id="login" type="text"
+                                    class="form-control<?php echo e($errors->has('username') || $errors->has('email') ? ' is-invalid' : ''); ?>"
+                                    name="login" value="<?php echo e(old('username') ?: old('email')); ?>" required autofocus>
+                      
+                             <?php if($errors->has('username') || $errors->has('email')): ?>
+                                 <span class="invalid-feedback">
+                                     <strong><?php echo e($errors->first('username') ?: $errors->first('email')); ?></strong>
+                                 </span>
+                             <?php endif; ?>
+                         </div>
+                     </div>
 
                      <div class="form-group row">
                         <label for="password" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Password')); ?></label>
@@ -121,8 +115,45 @@ unset($__errorArgs, $__bag); ?>
                            <?php endif; ?>
                         </div>
                      </div>
+
                   </form>
                </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="container pt-2">
+      <div class="row justify-content-center">
+         <div class="col-md-8">
+            <div class="card card-trans-2">
+               
+               <div class="card-header bg-secondary p-1">
+                  <i class="<?php echo e(config('icons.login')); ?>"></i>
+                  <?php echo e(__('Login with different provider')); ?>
+
+               </div>
+               
+               <div class="card-body">
+                  <div class="form-group row mb-0">
+                     <div class="col text-center">
+                        <a href="/login/facebook" class="btn btn-sm btn-secondary">
+                           <i class="fab fa-fw fa-facebook-square" style="font-size:30px; vertical-align: middle;"></i>
+                           Login with Facebook
+                        </a>
+                        <a href="/login/github" class="btn btn-sm btn-secondary">
+                           <i class="fab fa-2x fa-github-square" style="font-size:30px; vertical-align: middle;"></i>
+                           Login with GitHub
+                        </a>
+                        <a href="/login/google" class="btn btn-sm btn-secondary">
+                           <i class="fab fa-2x fa-google-plus-square" style="font-size:30px; vertical-align: middle;"></i>
+                           Login with Google
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               
             </div>
          </div>
       </div>

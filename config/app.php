@@ -174,6 +174,7 @@ return [
         App\Providers\PostServiceProvider::class,
         App\Providers\CarvingServiceProvider::class,
         App\Providers\UserServiceProvider::class,
+        App\Providers\AdminServiceProvider::class,
 
         /*
          * Application Service Providers...

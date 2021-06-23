@@ -66,7 +66,11 @@
                         </tr>
                         <tr>
                            <th>Views</th>
-                           <td><?php echo e($post->views); ?></td>
+                           <td>
+                              
+                              <?php echo e(views($post)->count()); ?>
+
+                           </td>
                         </tr>
                         <tr>
                            <th>Likes</th>

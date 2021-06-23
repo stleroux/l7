@@ -28,7 +28,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-   
+
    <?php if(count($carvings) > 0): ?>
       
       <div class="card card-trans-2 mb-3">
@@ -77,7 +77,7 @@
                                        <strong>Views :</strong>
                                     </div>
                                     <div class="col text-left pl-1">
-                                       <?php echo e($carving->views); ?>
+                                        <?php echo e(views($carving)->count()); ?>
 
                                     </div>
                                  </div>
@@ -110,23 +110,26 @@
                                  </div>
                                  <div class="row-col pt-2 pb-2">
                                     
-                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
-                                       <form class="" action="<?php echo e(route('like')); ?>" method="POST">
-                                          <?php echo csrf_field(); ?>
-                                          <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
-                                          <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
-                                          <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
-                                       </form>
-                                    <?php endif; ?>
+                                    <?php if(auth()->guard()->check()): ?>
+                                       <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
+                                          <form class="" action="<?php echo e(route('like')); ?>" method="POST">
+                                             <?php echo csrf_field(); ?>
+                                             <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                             <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                             <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
+                                          </form>
+                                       
 
-                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('unlike', $carving)): ?>
-                                       <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
-                                          <?php echo csrf_field(); ?>
-                                          <?php echo method_field('DELETE'); ?>
-                                          <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
-                                          <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
-                                          <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
-                                       </form>
+                                       
+                                       <?php else: ?>
+                                          <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+                                             <?php echo csrf_field(); ?>
+                                             <?php echo method_field('DELETE'); ?>
+                                             <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                             <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                             <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
+                                          </form>
+                                       <?php endif; ?>
                                     <?php endif; ?>
                                  </div>
                               </a>
@@ -142,11 +145,17 @@
             </div>
 
             
-                  
-                  
+            <?php if(strpos($_SERVER['REQUEST_URI'], "1000") === false): ?>
+               <div class="row mb-2">
+                  <div class="col ml-2 text-light">
+                     Showing <?php echo e($carvings->firstItem()); ?> to <?php echo e($carvings->lastItem()); ?> of <?php echo e($carvings->total()); ?> entries
+                  </div>
+                  <div class="col text-right p-0 m-0">
+                     <?php echo e($carvings->links('UI.carvings.pagination.custom')); ?>
 
-            
-            
+                  </div>
+               </div>
+            <?php endif; ?>
          </div>
       </div>
    <?php else: ?>
@@ -159,6 +168,5 @@
 
 
 <?php $__env->stopSection(); ?>
-
 
 <?php echo $__env->make('layouts.UI.app-10-2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\sites\l7\resources\views/UI/carvings/index.blade.php ENDPATH**/ ?>

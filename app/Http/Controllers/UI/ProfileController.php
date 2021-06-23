@@ -143,6 +143,7 @@ class ProfileController extends Controller
       
       $user = User::findOrFail(Auth::user()->id);
 
+         $user->username = $request->input('username');
          $user->first_name = $request->input('first_name');
          $user->last_name = $request->input('last_name');
          $user->email = $request->input('email');
@@ -159,6 +160,7 @@ class ProfileController extends Controller
          $user->postal_code = $request->input('postal_code');
          $user->notes = $request->input('notes');
          $user->dart_doubleOut = $request->input('dart_doubleOut');
+         $user->redirectAfterLogin = $request->input('redirectAfterLogin');
 
          // Check if a new image was submitted
          if ($request->hasFile('image')) {

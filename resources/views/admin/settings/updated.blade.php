@@ -11,20 +11,20 @@
 @section('content')
 
 <div class="card">
-	{{-- <div class="card-header">
-		<div class="card-title">Title</div>
-	</div> --}}
-	<div class="card-body">
-		Please wait while settings are being updated...<br />
-		Page will auto-refresh.
-	</div>
+   {{-- <div class="card-header">
+      <div class="card-title">Title</div>
+   </div> --}}
+   <div class="card-body">
+      Please wait while settings are being updated...<br />
+      Page will auto-refresh.
+   </div>
 </div>
 <br />
 
 {{-- <a href="{{ route('admin.settings.index') }}"
-	id="proceed"
-	style="display: none;"
-	class="btn btn-sm btn-default">
+   id="proceed"
+   style="display: none;"
+   class="btn btn-sm btn-default">
    <i class="{{ config('icons.reload') }}"></i>
    Reload Settings
 </a> --}}
@@ -32,9 +32,9 @@
 @endsection
 
 @section('scripts')
-{{-- 	<script type="text/javascript">
-  		$('#proceed').delay(3000).show(0);
-	</script> --}}
+{{--  <script type="text/javascript">
+      $('#proceed').delay(3000).show(0);
+   </script> --}}
 
-	<script> setTimeout(function(){window.location='/admin/settings'}, 4000); </script> 
+   <script> setTimeout(function(){window.location='/admin/settings'}, 4000); </script> 
 @endsection

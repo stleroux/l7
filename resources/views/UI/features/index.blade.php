@@ -39,6 +39,7 @@
                            <th>Title</th>
                            <th>Status</th>
                            <th>Likes</th>
+                           <th>Owner</th>
                            <th class="d-none d-lg-table-cell">Created</th>
                            <th class="d-none d-lg-table-cell">Updated</th>
                            <th class="no-sort text-right">Actions</th>
@@ -58,6 +59,7 @@
                               </td>
                               <td>{{ $feature->status }}</td>
                               <td>{{ $feature->likes()->count() }}</td>
+                              <td>{{ $feature->user->username }}</td>
                               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($feature->created_at){{ $feature->created_at }}@endif">{{ $feature->created_at->toDateString() }}</td>
                               <td class="d-none d-lg-table-cell" title="@if($feature->updated_at){{ $feature->updated_at }}@endif">{{ $feature->updated_at->toDateString() }}</td>
                               <td>

@@ -10,7 +10,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th class="d-none d-lg-table-cell">#</th>
+            
             <th>Name</th>
             <th>Category</th>
             <th class="d-none d-lg-table-cell">Created</th>
@@ -34,7 +34,7 @@
                      <label for="<?php echo e($tag->id); ?>"></label>
                   </div>
                </td>
-               <td class="d-none d-lg-table-cell"><?php echo e($tag->id); ?></td>
+               
                <td nowrap="nowrap"><?php echo e($tag->name); ?></td>
                <td nowrap="nowrap"><?php echo e($tag->category); ?></td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($tag->created_at): ?><?php echo e($tag->created_at); ?><?php endif; ?>">

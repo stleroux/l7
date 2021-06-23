@@ -26,7 +26,7 @@
                
                <!-- Sidebar Menu -->
                <nav class="mt-2">
-                  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                      <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                      <?php echo $__env->make('layouts.admin.sidebars.left.menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                   </ul>

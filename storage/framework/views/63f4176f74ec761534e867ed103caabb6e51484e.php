@@ -12,7 +12,7 @@
                   </div>
                </th>
             
-            <th>#</th>
+            
             <th>Username</th>
             
             
@@ -47,7 +47,7 @@
                      </div>
                   </td>
                
-               <td><?php echo e($user->id); ?></td>
+               
                <td><?php echo e($user->username); ?></td>
                
                

@@ -11,7 +11,7 @@
             @if(count($posts) > 0)
                @foreach ($posts as $post)
                   <div class="card card-trans-4 mb-2 border-black-2">
-                     <div class="card_header p-2">{{ $post->title }}</div>
+                     <div class="card_header p-2">{{ ucwords($post->title) }}</div>
                      <div class="card_body p-2">
                         <div class="row">
                         <div class="col-sm-10">

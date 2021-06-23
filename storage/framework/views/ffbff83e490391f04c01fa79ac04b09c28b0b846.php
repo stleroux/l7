@@ -11,7 +11,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>#</th>
+            
             <th>Name</th>
             <th>Category</th>
             <th>Tags</th>
@@ -41,7 +41,7 @@
                      <label for="<?php echo e($carving->id); ?>"></label>
                   </div>
                </td>
-               <td><?php echo e($carving->id); ?></td>
+               
                <td><a href="<?php echo e(route('admin.carvings.show', $carving->id)); ?>"><?php echo e(ucwords($carving->name)); ?></a></td>
                <td><?php echo e($carving->category); ?></td>
                <td>

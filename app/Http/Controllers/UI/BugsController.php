@@ -37,7 +37,8 @@ class BugsController extends Controller
 ##################################################################################################################
    public function index()
    {
-      $bugs = Bug::where('user_id', '=', Auth::user()->id)->orderBy('id','desc')->get();
+      // $bugs = Bug::where('user_id', '=', Auth::user()->id)->orderBy('id','desc')->get();
+      $bugs = Bug::with('user','likes')->orderBy('id','desc')->get();
 
       return view('UI.bugs.index', compact('bugs'));
    }
@@ -61,6 +62,7 @@ class BugsController extends Controller
 
       return view('UI.bugs.create', compact('bug'));
    }
+
 
 ##################################################################################################################
 #  ███████╗████████╗ ██████╗ ██████╗ ███████╗
@@ -87,7 +89,7 @@ class BugsController extends Controller
          // assign values from form fields
          $bug->title = $request->title;
          $bug->page_url = $request->page_url;
-         $bug->status = IS_NEW;
+         $bug->status = Bug::IS_NEW;
          $bug->description = $request->description;
          $bug->user_id = Auth::user()->id;
 
@@ -117,13 +119,17 @@ class BugsController extends Controller
 #  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 # Display the specified resource
 ##################################################################################################################
-	public function show(Bug $bug)
-	{
-		// Check if user has required permission
+   public function show(Bug $bug)
+   {
+      // Check if user has required permission
       // abort_unless(Gate::allows('bug-show'), 403);
 
-		return view('UI.bugs.show', compact('bug'));
-	}
+      // Increase the view count since this is viewed from the frontend
+      $expiresAt = now()->addHours(3);
+      views($bug)->cooldown($expiresAt)->record();
+
+      return view('UI.bugs.show', compact('bug'));
+   }
 
 
 ##################################################################################################################
@@ -135,13 +141,13 @@ class BugsController extends Controller
 #  ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 # Show the form for editing the specified resource
 ##################################################################################################################
-	public function edit(Bug $bug)
-	{
-		// Check if user has required permission
+   public function edit(Bug $bug)
+   {
+      // Check if user has required permission
       abort_unless((Gate::allows('bug-edit') || ($bug->user_id == Auth::id())), 403);
 
       return view('UI.bugs.edit', compact('bug'));
-	}
+   }
 
 
 ##################################################################################################################
@@ -153,7 +159,7 @@ class BugsController extends Controller
 #   ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 # Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, Bug $bug)
+   public function update(Request $request, Bug $bug)
    {
       // Check if user has required permission
       abort_unless((Gate::allows('bug-edit') || ($bug->user_id == Auth::id())), 403);
@@ -194,11 +200,11 @@ class BugsController extends Controller
 #  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
 # Remove the specified resource from storage
 ##################################################################################################################
-	public function destroy(Bug $bug)
-	{
-		// Check if user has required permission
+   public function destroy(Bug $bug)
+   {
+      // Check if user has required permission
       abort_unless((Gate::allows('bug-delete') || ($bug->user_id == Auth::id())), 403);
-	   
+      
       // delete the bug
       $bug->delete();
 

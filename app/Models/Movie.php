@@ -9,8 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Kyslik\ColumnSortable\Sortable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use Route;
 
-class Movie extends Model
+class Movie extends Model implements Searchable
 {
    use SoftDeletes;
    use Favoriteable;
@@ -114,6 +117,22 @@ class Movie extends Model
          $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
+   }
+
+   public function getSearchResult(): SearchResult
+   {
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.movies.show', $this->id);
+      } else {
+         $url = route('movies.show', $this->id);
+      }
+
+      return new SearchResult(
+         $this,
+         $this->title,
+         $url
+      );
    }
 
 }

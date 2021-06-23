@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\featureRequest;
 use App\Models\Feature;
 use Illuminate\Http\Request;
 use Auth;
@@ -36,14 +35,14 @@ class FeaturesController extends Controller
 # Display a list of resources
 ##################################################################################################################
    public function index()
-	{
-		// Check if user has required permission
+   {
+      // Check if user has required permission
       abort_unless(Gate::allows('feature-manage'), 403);
 
-		$features = Feature::all();
+      $features = Feature::with('user','likes','views')->get();
 
-		return view('admin.features.index', compact('features'));
-	}
+      return view('admin.features.index', compact('features'));
+   }
 
 
 ##################################################################################################################
@@ -55,16 +54,16 @@ class FeaturesController extends Controller
 #  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 # Display the specified resource
 ##################################################################################################################
-	public function show(Feature $feature)
-	{
-		// Check if user has required permission
+   public function show(Feature $feature)
+   {
+      // Check if user has required permission
       abort_unless(Gate::allows('feature-show'), 403);
 
       // Get all associated Audits
       $audits = $feature->audits()->with('user')->orderBy('id','desc')->get();
 
-		return view('admin.features.show', compact('feature','audits'));
-	}
+      return view('admin.features.show', compact('feature','audits'));
+   }
 
 
 ##################################################################################################################
@@ -145,13 +144,13 @@ class FeaturesController extends Controller
 #  ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 # Show the form for editing the specified resource
 ##################################################################################################################
-	public function edit(Feature $feature)
-	{
-		// Check if user has required permission
+   public function edit(Feature $feature)
+   {
+      // Check if user has required permission
       abort_unless(Gate::allows('feature-edit'), 403);
       
       return view('admin.features.edit', compact('feature'));
-	}
+   }
 
 
 ##################################################################################################################
@@ -163,7 +162,7 @@ class FeaturesController extends Controller
 #   ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 # Update the specified resource in storage
 ##################################################################################################################
-	public function update(Request $request, Feature $feature)
+   public function update(Request $request, Feature $feature)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('feature-edit'), 403);
@@ -247,9 +246,9 @@ class FeaturesController extends Controller
 #  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
 # Remove the specified resource from storage
 ##################################################################################################################
-	public function destroy(Feature $feature)
-	{
-		// Check if user has required permission
+   public function destroy(Feature $feature)
+   {
+      // Check if user has required permission
       abort_unless(Gate::allows('feature-delete'), 403);
 
       // delete the feature
@@ -261,7 +260,7 @@ class FeaturesController extends Controller
       ];
 
       return redirect()->back()->with($notification);
-	}
+   }
 
 
 ##################################################################################################################
@@ -274,35 +273,35 @@ class FeaturesController extends Controller
 ##################################################################################################################
    public function massDestroy(Request $request)
    {
-	
-   	// Check if user has required permission
-   	abort_unless(Gate::allows('feature-delete'), 403);
+   
+      // Check if user has required permission
+      abort_unless(Gate::allows('feature-delete'), 403);
 
-   	$features = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
+      $features = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
-   	if(!$request->input('mass_destroy_pass_checkedvalue'))
-   	{
+      if(!$request->input('mass_destroy_pass_checkedvalue'))
+      {
 
-   	$notification = array(
-   		'message' => 'Please select entries to be deleted.', 
-   		'alert-type' => 'error'
-   	);
+      $notification = array(
+         'message' => 'Please select entries to be deleted.', 
+         'alert-type' => 'error'
+      );
 
-   	} else {
-   	 
-      	foreach ($features as $feature_id) {
-      		$feature = Feature::findOrFail($feature_id);
-      		$feature->delete();
-      	}
+      } else {
+       
+         foreach ($features as $feature_id) {
+            $feature = Feature::findOrFail($feature_id);
+            $feature->delete();
+         }
 
-      	$notification = array(
-      		'message' => 'The selected feature requests have been deleted successfully!', 
-      		'alert-type' => 'success'
-      	);
+         $notification = array(
+            'message' => 'The selected feature requests have been deleted successfully!', 
+            'alert-type' => 'success'
+         );
 
       }
 
-   	return redirect()->back()->with($notification);
+      return redirect()->back()->with($notification);
    }
 
 

@@ -10,7 +10,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th class="d-none d-lg-table-cell">#</th>
+            
             <th>Name</th>
             <th class="d-none d-lg-table-cell">Permissions</th>
             <th class="d-none d-lg-table-cell">Created</th>
@@ -34,7 +34,7 @@
                      <label for="<?php echo e($role->id); ?>"></label>
                   </div>
                </td>
-               <td class="d-none d-lg-table-cell"><?php echo e($role->id); ?></td>
+               
                <td nowrap="nowrap"><?php echo e($role->name); ?></td>
                <td class="d-none d-lg-table-cell">
                   

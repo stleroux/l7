@@ -63,7 +63,7 @@
 
 								</td>
 								<td class="d-none d-lg-table-cell">
-									<?php echo e($recipe->views); ?>
+									 <?php echo e(views($recipe)->count()); ?>
 
 								</td>
 								<td class="d-none d-lg-table-cell">

@@ -3,26 +3,32 @@
 namespace App\Models;
 
 use Auth;
+use App\Contracts\Likeable;
 use App\Models\Category;
+use App\Models\Concerns\Likes;
 use Carbon\Carbon;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use OwenIt\Auditing\Contracts\Auditable;
-use App\Contracts\Likeable;
-use App\Models\Concerns\Likes;
+use Route;
 
-class Recipe extends Model implements Searchable, Auditable, Likeable
+class Recipe extends Model implements Searchable, Auditable, Likeable, Viewable
 {
    use SoftDeletes;
    use Favoriteable;
    use \OwenIt\Auditing\Auditable;
    use Likes;
+   use InteractsWithViews;
 
    protected $dates = ['deleted_at', 'published_at'];
+
+   protected $removeViewsOnDelete = true;
 
    // protected $fillable = [
    //    'title',
@@ -74,7 +80,7 @@ class Recipe extends Model implements Searchable, Auditable, Likeable
       return $this->morphMany('\App\Models\Comment', 'commentable')->orderBy('id','desc');
    }
    
-	public function user()
+   public function user()
    {
       return $this->belongsTo('App\Models\User');
    }
@@ -199,7 +205,12 @@ class Recipe extends Model implements Searchable, Auditable, Likeable
    public function getSearchResult(): SearchResult
    {
       
-      $url = route('recipes.show', $this->id);
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.recipes.show', $this->id);
+      } else {
+         $url = route('recipes.show', $this->id);
+      }
 
       return new SearchResult(
          $this,

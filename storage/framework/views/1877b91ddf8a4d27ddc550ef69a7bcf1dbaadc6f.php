@@ -21,4 +21,5 @@
       </a>
    </div><!-- /.col -->
 
-<?php endif; ?><?php /**PATH C:\sites\l7\resources\views/admin/dashboard/infoBoxes/projects.blade.php ENDPATH**/ ?>
+<?php endif; ?>
+<?php /**PATH C:\sites\l7\resources\views/admin/dashboard/infoBoxes/projects.blade.php ENDPATH**/ ?>

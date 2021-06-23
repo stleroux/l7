@@ -15,6 +15,7 @@
 
 @section('rightColumn')
 	@include('UI.projects.blocks.popular')
+	@include('UI.projects.blocks.tags')
 	@include('UI.projects.blocks.faqs')
 @endsection
 
@@ -76,7 +77,7 @@
 													<strong>Views :</strong>
 												</div>
 												<div class="col text-left pl-1">
-													{{ $project->views }}
+													{{-- {{ $project->views }} --}} {{ views($project)->count() }}
 												</div>
 											</div>
 										
@@ -116,9 +117,7 @@
 														<input type="hidden" name="id" value="{{ $project->id }}"/>
 														<button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold">@lang('Like')</button>
 													</form>
-												@endcan
-
-												@can('unlike', $project)
+												@else
 													<form class="" action="{{ route('unlike') }}" method="POST">
 														@csrf
 														@method('DELETE')

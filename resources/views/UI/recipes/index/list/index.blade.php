@@ -60,7 +60,7 @@
 									{{ ucwords($recipe->category->name) }}
 								</td>
 								<td class="d-none d-lg-table-cell">
-									{{ $recipe->views }}
+									{{-- {{ $recipe->views }} --}} {{ views($recipe)->count() }}
 								</td>
 								<td class="d-none d-lg-table-cell">
 									{{ $recipe->likes()->count() }}

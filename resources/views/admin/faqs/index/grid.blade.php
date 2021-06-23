@@ -11,7 +11,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>#</th>
+            {{-- <th>#</th> --}}
             <th>Question</th>
             <th>Category</th>
             <th class="no-sort text-center" width="140px">Actions</th>
@@ -33,7 +33,7 @@
                      <label for="{{ $faq->id }}"></label>
                   </div>
                </td>
-               <td>{{ $faq->id }}</td>
+               {{-- <td>{{ $faq->id }}</td> --}}
                <td><a href="{{ route('admin.faqs.show', $faq->id) }}">{{ ucfirst($faq->question) }}</a></td>
                <td>{{ $faq->category }}</td>
                <td class="text-right">

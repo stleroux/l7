@@ -1,3 +1,7 @@
+@php
+// use CyrildeWit\EloquentViewable\Support\Period;
+@endphp
+
 <div class="card card-outline card-info">
 
    <div class="card-header bg-primary">
@@ -15,8 +19,16 @@
                <td>{{ $carving->category }}</td>
             </tr>
             <tr>
-               <th>Frontend Views</th>
-               <td>{{ $carving->views ?? "N/A" }}</td>
+               <th>Total Views</th>
+               <td>
+                  {{ views($carving)->count() }}
+               </td>
+            </tr>
+            <tr>
+               <th>Views Last Month</th>
+               <td>
+                  {{ views($carving)->period(CyrildeWit\EloquentViewable\Support\Period::pastMonths(1))->count() }}
+               </td>
             </tr>
             <tr>
                <th>Width <small>(inches)</small></th>

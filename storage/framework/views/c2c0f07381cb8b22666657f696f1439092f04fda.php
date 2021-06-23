@@ -17,13 +17,13 @@
       <i class="<?php echo e(config('icons.add')); ?>"></i>
       
       <?php if($modelName == 'bug'): ?>
-      	Report <?php echo e(ucfirst($modelName)); ?>
+         Report <?php echo e(ucfirst($modelName)); ?>
 
       <?php elseif($modelName == 'feature'): ?>
-      	Request <?php echo e(ucfirst($modelName)); ?>
+         Request <?php echo e(ucfirst($modelName)); ?>
 
       <?php else: ?>
-      	Create <?php echo e(ucfirst($modelName)); ?>
+         Create <?php echo e(ucfirst($modelName)); ?>
 
       <?php endif; ?>
       

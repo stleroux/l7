@@ -38,7 +38,7 @@
 
    <div class="row">
       <div class="col">
-         @include('common.comments', ['model'=>$faq])
+         @include('admin.faqs.show.comments', ['model'=>$faq])
       </div>
    </div>
 

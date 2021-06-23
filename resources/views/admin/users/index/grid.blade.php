@@ -12,7 +12,7 @@
                   </div>
                </th>
             {{-- @endif --}}
-            <th>#</th>
+            {{-- <th>#</th> --}}
             <th>Username</th>
             {{-- <th class="d-none d-sm-table-cell">First Name</th> --}}
             {{-- <th class="d-none d-sm-table-cell">Last Name</th> --}}
@@ -47,7 +47,7 @@
                      </div>
                   </td>
                {{-- @endif --}}
-               <td>{{ $user->id }}</td>
+               {{-- <td>{{ $user->id }}</td> --}}
                <td>{{ $user->username }}</td>
                {{-- <td class="d-none d-sm-table-cell">{{ $user->first_name }}</td> --}}
                {{-- <td class="d-none d-sm-table-cell">{{ $user->last_name }}</td> --}}

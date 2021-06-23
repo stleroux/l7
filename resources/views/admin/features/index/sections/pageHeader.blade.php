@@ -1,7 +1,7 @@
 @section('pageHeader')
    <i class="{{ config('icons.features') }}"></i>
    @if(Route::currentRouteName('') == 'admin.features.new')
-      Newly Reported Features
+      Newly Requested Features
    @elseif(Route::currentRouteName('') == 'admin.features.underreview')
       Under Review Features
    @elseif(Route::currentRouteName('') == 'admin.features.pending')

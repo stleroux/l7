@@ -10,7 +10,7 @@
                      <label for="checkbox_all"></label>
                   </div>
                </th>
-               <th>ID</th>
+               {{-- <th>ID</th> --}}
                <th>Name</th>
                <th>Type</th>
                <th>Color Name</th>
@@ -36,7 +36,7 @@
                         <label for="{{ $finish->id }}"></label>
                      </div>
                   </td>
-                  <td>{{ $finish->id }}</td>
+                  {{-- <td>{{ $finish->id }}</td> --}}
                   <td><a href="{{ route('admin.finishes.show', $finish->id) }}">{{ $finish->name }}</a></td>
                   <td>{{ $finish->type }}</td>
                   <td>{{ $finish->color_name }}</td>

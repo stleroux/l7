@@ -13,8 +13,11 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Haruncpi\LaravelUserActivity\Traits\Loggable;
 use App\Contracts\Likeable;
 use App\Models\Like;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use Route;
 
-class User extends Authenticatable implements Auditable
+class User extends Authenticatable implements Searchable, Auditable
 // class User extends Authenticatable implements MustVerifyEmail
 {
    use Notifiable;
@@ -54,8 +57,8 @@ class User extends Authenticatable implements Auditable
 
    protected $dates = ['created_at','updated_at','deleted_at'];
 
-   public const IS_ENABLED = 1;
-   public const IS_DISABLED = 0;
+   // public const IS_ENABLED = 1;
+   // public const IS_DISABLED = 0;
 
    /////////////////////////////////////////////////////////////////////
    // Set the default value for the dart_doubleOut field to 0
@@ -149,13 +152,15 @@ class User extends Authenticatable implements Auditable
    public function scopeApproved($query)
    {
       return $query
-         ->where('account_status', '=', $this->IS_ENABLED);
+         // ->where('account_status', '=', $this->IS_ENABLED);
+         ->where('account_status', '=', 1);
    }
 
    public function scopeDisabled($query)
    {
       return $query
-         ->where('account_status', '=', $this->IS_DISABLED);
+         // ->where('account_status', '=', $this->IS_DISABLED);
+         ->where('account_status', '=', 0);
    }
 
    // public function scopeNoRoles($query)
@@ -216,4 +221,19 @@ class User extends Authenticatable implements Auditable
          ->exists();
    }
 
+   public function getSearchResult(): SearchResult
+   {
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.users.show', $this->id);
+      } else {
+         $url = route('users.show', $this->id);
+      }
+
+      return new SearchResult(
+         $this,
+         $this->email,
+         $url
+      );
+   }
 }

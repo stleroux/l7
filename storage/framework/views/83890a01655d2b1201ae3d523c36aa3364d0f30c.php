@@ -14,6 +14,7 @@
 
       <!-- Generate links based on options in Model -->
       <?php $__currentLoopData = App\Models\Feature::statusOptions(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statusOptionKey => $statusOptionValue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+         
          <a href="<?php echo e(route('admin.features.'.strtolower(str_replace(" ", "", $statusOptionValue)))); ?>"
             class="btn btn-block btn-default text-left <?php echo e(request()->routeIs('admin.features.'.strtolower(str_replace(" ", "", $statusOptionValue))) ? 'buttonActive' : ''); ?>">
             <i class="<?php echo e(config('icons.features')); ?>"></i>

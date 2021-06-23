@@ -145,10 +145,15 @@ END : show an asterix after a field to mark it as required
 /*************************************************************************************
 Used for highligthing entries in Debugbar
 **************************************************************************************/
-    .hidden {
-        display: none !important;
-    }
-    
-    div.phpdebugbar-widgets-sqlqueries li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-sql-duplicate {
-        background-color: yellow !important;
-    }
+.hidden {
+	display: none !important;
+}
+
+div.phpdebugbar-widgets-sqlqueries li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-sql-duplicate {
+	background-color: yellow !important;
+}
+
+
+.buttonActive {
+   background-color: lightblue;
+}

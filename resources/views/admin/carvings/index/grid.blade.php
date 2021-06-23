@@ -11,7 +11,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>#</th>
+            {{-- <th>#</th> --}}
             <th>Name</th>
             <th>Category</th>
             <th>Tags</th>
@@ -41,7 +41,7 @@
                      <label for="{{ $carving->id }}"></label>
                   </div>
                </td>
-               <td>{{ $carving->id }}</td>
+               {{-- <td>{{ $carving->id }}</td> --}}
                <td><a href="{{ route('admin.carvings.show', $carving->id) }}">{{ ucwords($carving->name) }}</a></td>
                <td>{{ $carving->category }}</td>
                <td>

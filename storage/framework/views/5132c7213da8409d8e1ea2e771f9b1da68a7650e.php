@@ -12,8 +12,8 @@
    <?php if(Config::get('settings.projects') == 'visible'): ?>
       <li class="nav-item <?php echo e(Route::is('projects*') ? 'bg-black border-red-2' : ''); ?>">
          <a class="nav-link" href="<?php echo e(route('projects.index')); ?>">
-         	<i class="<?php echo e(config('icons.projects')); ?>"></i>
-         	<?php echo e(__('Projects')); ?>
+            <i class="<?php echo e(config('icons.projects')); ?>"></i>
+            <?php echo e(__('Projects')); ?>
 
          </a>
       </li>
@@ -22,8 +22,8 @@
    <?php if(Config::get('settings.recipes') == 'visible'): ?>
       <li class="nav-item <?php echo e(Route::is('recipes*') ? 'bg-black border-red-2' : ''); ?>">
          <a class="nav-link" href="<?php echo e(route('recipes.indexGrid', 'all')); ?>">
-         	<i class="<?php echo e(config('icons.recipes')); ?>"></i>
-         	<?php echo e(__('Recipes')); ?>
+            <i class="<?php echo e(config('icons.recipes')); ?>"></i>
+            <?php echo e(__('Recipes')); ?>
 
          </a>
       </li>

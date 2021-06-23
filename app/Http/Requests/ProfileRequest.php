@@ -54,6 +54,8 @@ class ProfileRequest extends FormRequest
 			case 'PATCH':
 			{
 				return [
+					'username' => 'nullable|sometimes|unique:users,username,'. Auth::user()->id,
+					// 'username' => 'sometimes|required',
 					'first_name' => 'required',
 					'last_name' => 'required',
 					'email' => 'required|unique:users,email,'. Auth::user()->id,

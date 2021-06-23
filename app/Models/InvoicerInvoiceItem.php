@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
 use Config;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -12,6 +13,7 @@ class InvoicerInvoiceItem extends Model implements Auditable
 {
 	use Sortable;
    use \OwenIt\Auditing\Auditable;
+   use SoftDeletes;
 
 	protected $table = 'invoicer__invoice_items';
 	protected $dates = ['work_date'];

@@ -19,6 +19,7 @@ class CreateInvoicerProductsTable extends Migration {
 			$table->string('code');
 			$table->text('details');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

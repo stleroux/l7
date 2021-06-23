@@ -1,6 +1,6 @@
 {{-- <div class="row p-0 pb-2">
    <div class="col-sm-6 pr-1"> --}}
-      <div class="card card-trans-4 card-outline card-info">
+      <div class="card card-trans-4 card-outline card-info mb-2">
          <div class="card-header bg-primary">
             <div class="card-title font-weight-bold">
                <i class="{{ config('icons.finishes') }}"></i>

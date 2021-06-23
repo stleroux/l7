@@ -22,45 +22,49 @@
    @include('errors.construction')
 
    {{-- ABOUT US  --}}
-   <div class="card card-trans-4 mb-2">
-      <div class="card-header section_header">
-         <i class="{{ config('icons.about-us') }}"></i>
-         About Us
-      </div>
+   @if($aboutUs)
+      <div class="card card-trans-4">
+         <div class="card-header section_header p-2">
+            <i class="{{ config('icons.about-us') }}"></i>
+            {{ ucwords($aboutUs->title) }}
+         </div>
 
-      <div class="card-body text-light">
-         <p>Just some text about us</p>
+         <div class="card-body text-light p-2">
+            {!! $aboutUs->body !!}
+         </div>
       </div>
-   </div>
+   @endif
 
    <div class="row">
-      {{-- ABOUT STEPHANE --}}
-      <div class="col-sm-6 pr-1">
-         <div class="card card-trans-4 mb-2">
-            <div class="card-header section_header">
-               <i class="{{ config('icons.male') }}"></i>
-               About Stephane
-            </div>
-            <div class="card-body text-light">
-               <p>Just some text about me</p>
-               <p>Just some text about me</p>
+      @if($stephane)
+         {{-- ABOUT STEPHANE --}}
+         <div class="col-sm-6 pr-1">
+            <div class="card card-trans-4">
+               <div class="card-header section_header p-2">
+                  <i class="{{ config('icons.male') }}"></i>
+                  {{ ucwords($stephane->title) }}
+               </div>
+               <div class="card-body text-light p-2">
+                  {!! $stephane->body !!}
+               </div>
             </div>
          </div>
-      </div>
+      @endif
 
-      {{-- ABOUT STACIE --}}
-      <div class="col-sm-6 pl-1">
-         <div class="card card-trans-4 mb-2">
-            <div class="card-header section_header">
-               <i class="{{ config('icons.female') }}"></i>
-               About Stacie
-            </div>
-            <div class="card-body text-light">
-               <p>Just some text about her</p>
-               <p>Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her Just some text about her</p>
+      @if($stacie)
+         {{-- ABOUT STACIE --}}
+         <div class="col-sm-6 pl-1">
+            <div class="card card-trans-4 pb-0 mb-0">
+               <div class="card-header section_header p-2">
+                  <i class="{{ config('icons.female') }}"></i>
+                  {{ ucwords($stacie->title) }}
+               </div>
+               <div class="card-body text-light p-2">
+                  {!! $stacie->body !!}
+               </div>
             </div>
          </div>
-      </div>
+      @endif
 
    </div>
 

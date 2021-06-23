@@ -1,14 +1,14 @@
 <div class="card-header d-none d-xl-block pt-0 pb-2 text-center">
    <div class="btn-group" role="group">
    <?php $__currentLoopData = $project->categoriesOptions(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categoryOptionKey => $categoryOptionValue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <?php if($categoryOptionKey == 0): ?>
+      <?php if($categoryOptionKey == 'select'): ?>
          <a href="<?php echo e(route('projects.index')); ?>"
-            class="btn btn-sm btn-<?php echo e(request()->is('projects') ? 'default' : 'alphabet'); ?>">
+            class="btn btn-sm btn-<?php echo e((request()->is('projects/all/*') || request()->is('projects')) ? 'dark' : 'alphabet'); ?>">
             All Projects
          </a>
       <?php else: ?>
          <a href="<?php echo e(route('projects.index', $categoryOptionKey)); ?>"
-            class="btn btn-sm btn-<?php echo e(request()->is('projects/'.$categoryOptionKey) ? 'default' : 'alphabet'); ?> p-1">
+            class="btn btn-sm btn-<?php echo e(request()->is('projects/'.$categoryOptionKey.'*') ? 'dark' : 'alphabet'); ?> p-1">
             <?php echo e($categoryOptionValue); ?>
 
          </a>

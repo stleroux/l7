@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use Route;
 // use OwenIt\Auditing\Contracts\Auditable;
 
-class Tag extends Model
+class Tag extends Model implements Searchable
 // implements Auditable
 {
-	use SoftDeletes;
+   use SoftDeletes;
    // use \OwenIt\Auditing\Auditable;
-	
-	// protected $fillable = ['name','category'];
+   
+   // protected $fillable = ['name','category'];
    protected $guarded = [];
 
    public const IS_CARVING = 1;
@@ -43,10 +46,10 @@ class Tag extends Model
    //////////////////////////////////////////////////////////////////////////////////////
    // RELATIONSHIPS
    //////////////////////////////////////////////////////////////////////////////////////
-	public function posts()
-	{
-		return $this->belongsToMany('App\Models\Post');
-	}
+   public function posts()
+   {
+      return $this->belongsToMany('App\Models\Post');
+   }
 
    public function projects()
    {
@@ -77,4 +80,23 @@ class Tag extends Model
          ->whereNotNull('deleted_at')
          ->withTrashed();
    }
+
+   public function getSearchResult(): SearchResult
+   {
+      
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.tags.show', $this->id);
+      } else {
+         $url = route('tags.show', $this->id);
+      }
+
+      return new SearchResult(
+         $this,
+         $this->name,
+         $url
+      );
+   }
+
+
 }

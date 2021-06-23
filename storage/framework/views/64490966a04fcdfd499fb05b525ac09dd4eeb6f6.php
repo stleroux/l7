@@ -6,7 +6,7 @@
 
 <?php $__env->startSection('pageHeader'); ?>
    <i class="<?php echo e(config('icons.bugs')); ?>"></i>
-   My Bug Reports
+   Bug Reports
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
@@ -39,9 +39,11 @@
                            
                            <th>Title</th>
                            <th>Status</th>
+                           <th>Likes</th>
+                           <th>Owner</th>
                            <th class="d-none d-lg-table-cell">Created</th>
                            <th class="d-none d-lg-table-cell">Updated</th>
-                           <th class="no-sort text-right" width="200px">Actions</th>
+                           <th class="no-sort text-right">Actions</th>
                         </tr>
                      </thead>
 
@@ -56,6 +58,8 @@
 
                               </td>
                               <td><?php echo e($bug->status); ?></td>
+                              <td><?php echo e($bug->likes()->count()); ?></td>
+                              <td><?php echo e($bug->user->username); ?></td>
                               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($bug->created_at): ?><?php echo e($bug->created_at); ?><?php endif; ?>"><?php echo e($bug->created_at->toDateString()); ?></td>
                               <td class="d-none d-lg-table-cell" title="<?php if($bug->updated_at): ?><?php echo e($bug->updated_at); ?><?php endif; ?>"><?php echo e($bug->updated_at->toDateString()); ?></td>
                               <td class="text-right">

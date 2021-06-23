@@ -60,11 +60,11 @@
             <div class="card card-trans-4 mb-2 border-black-2">
                <div class="card-header card_header p-2">
                   <i class="<?php echo e(config('icons.blog')); ?>"></i>
-                  <?php echo e($blogs->title); ?>
+                  <?php echo e($blog->title); ?>
 
                </div>
                <div class="card-body p-2 border-red-1">
-                  <?php echo $blogs->body; ?>
+                  <?php echo $blog->body; ?>
 
                </div>
             </div>

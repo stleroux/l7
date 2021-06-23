@@ -11,7 +11,7 @@
 
 <?php $__env->startSection('breadcrumb'); ?>
    <li class="breadcrumb-item"><a href="<?php echo e(route('bugs.index')); ?>">Bug Reports</a></li>
-   <li class="breadcrumb-item">Show Bug Report</li>
+   <li class="breadcrumb-item">View Bug Report</li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('rightColumn'); ?>

@@ -1,7 +1,7 @@
 <?php $__env->startSection('pageHeader'); ?>
    <i class="<?php echo e(config('icons.features')); ?>"></i>
    <?php if(Route::currentRouteName('') == 'admin.features.new'): ?>
-      Newly Reported Features
+      Newly Requested Features
    <?php elseif(Route::currentRouteName('') == 'admin.features.underreview'): ?>
       Under Review Features
    <?php elseif(Route::currentRouteName('') == 'admin.features.pending'): ?>

@@ -5,8 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use Route;
 
-class Material extends Model implements Auditable
+class Material extends Model implements Searchable, Auditable
 {
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
@@ -44,6 +47,21 @@ class Material extends Model implements Auditable
          ->withTrashed();
    }
 
+   public function getSearchResult(): SearchResult
+   {
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.materials.show', $this->id);
+      } else {
+         $url = route('materials.show', $this->id);
+      }
+
+      return new SearchResult(
+         $this,
+         $this->name,
+         $url
+      );
+   }
 
    //////////////////////////////////////////////////////////////////////////////////////
    // ACCESSORS

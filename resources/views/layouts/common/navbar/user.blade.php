@@ -59,7 +59,7 @@
          
             <div class="col">
                <a href="{{ route('features.index') }}" class="btn btn-outline-secondary btn-xs btn-block mt-1">
-                  My Requested Features
+                  Requested Features
                </a>
             </div>
          </div>
@@ -73,7 +73,7 @@
             </div>
             <div class="col">
                <a href="{{ route('bugs.index') }}" class="btn btn-outline-secondary btn-xs btn-block mt-1">
-                  My Bug Reports
+                  Bug Reports
                </a>
             </div>
          </div>

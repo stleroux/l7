@@ -10,11 +10,12 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th class="d-none d-lg-table-cell">#</th>
+            
             <th>Title</th>
-            <th>Likes</th>
             <th class="d-none d-lg-table-cell">Creator</th>
             <th class="d-none d-lg-table-cell">Status</th>
+            <th class="d-none d-lg-table-cell">Views</th>
+            <th class="d-none d-lg-table-cell">Likes</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
             <th class="no-sort text-center" width="140px">Actions</th>
@@ -36,9 +37,9 @@
                      <label for="<?php echo e($feature->id); ?>"></label>
                   </div>
                </td>
-               <td class="d-none d-lg-table-cell"><?php echo e($feature->id); ?></td>
+               
                <td nowrap="nowrap"><a href="<?php echo e(route('admin.features.show', $feature)); ?>"><?php echo e($feature->title); ?></a></td>
-               <td nowrap="nowrap"><?php echo e($feature->likes()->count()); ?></td>
+               
                <td nowrap="nowrap"><?php echo e($feature->user->username); ?></td>
                
                <td nowrap="nowrap">
@@ -65,6 +66,8 @@ unset($__errorArgs, $__bag); ?>"
                      </select>
                   </form>
                </td>
+               <td><?php echo e(views($feature)->count()); ?></td>
+               <td><?php echo e($feature->likes()->count()); ?></td>
 
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($feature->created_at): ?><?php echo e($feature->created_at); ?><?php endif; ?>">
                   <?php echo e($feature->created_at->format(config('settings.dateFormat'))); ?>

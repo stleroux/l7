@@ -32,6 +32,7 @@ class CreateInvoicerInvoicesTable extends Migration {
 			$table->dateTime('invoiced_at')->nullable();
 			$table->dateTime('paid_at')->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

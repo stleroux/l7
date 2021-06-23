@@ -37,7 +37,11 @@ Route::namespace('Admin\Projects')->prefix('admin')->name('admin.')->group(funct
 Route::namespace('UI\Projects')->prefix('projects')->name('projects.')->group(function() {
    Route::get('{project}/show',        'ProjectsController@show')           ->name('show');
    Route::get('faq',                   'ProjectsController@faq')            ->name('faq');
-   Route::get('{filter?}',             'ProjectsController@index')          ->name('index');
+   Route::get('{filter?}/{tag?}',             'ProjectsController@index')          ->name('index');
    Route::post('{project}/comment',    'CommentController@store')           ->name('comment.store');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('like', 'UI\LikeController@like')->name('like');
+    Route::delete('like', 'UI\LikeController@unlike')->name('unlike');
+});

@@ -11,7 +11,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>#</th>
+            
             <th>Name</th>
             <th>Category</th>
             <th>Views</th>
@@ -40,14 +40,14 @@
                      <label for="<?php echo e($project->id); ?>"></label>
                   </div>
                </td>
-               <td><?php echo e($project->id); ?></td>
+               
                <td><a href="<?php echo e(route('admin.projects.show', $project->id)); ?>"><?php echo e(ucwords($project->name)); ?></a></td>
                <td><?php echo e($project->category); ?></td>
-               <td><?php echo e($project->views); ?></td>
-               <td><?php echo e($project->likes()->count()); ?></td>
-               <td><?php echo e($project->images()->count()); ?></td>
-               <td><?php echo e($project->finishes()->count()); ?></td>
-               <td><?php echo e($project->materials()->count()); ?></td>
+               <td class="text-center"><?php echo e($project->views); ?></td>
+               <td class="text-center"><?php echo e($project->likes()->count()); ?></td>
+               <td class="text-center"><?php echo e($project->images()->count()); ?></td>
+               <td class="text-center"><?php echo e($project->finishes()->count()); ?></td>
+               <td class="text-center"><?php echo e($project->materials()->count()); ?></td>
                <td nowrap="nowrap" title="<?php if($project->created_at): ?><?php echo e($project->created_at); ?><?php endif; ?>">
                   <?php echo e($project->created_at->format(config('settings.dateFormat'))); ?>
 

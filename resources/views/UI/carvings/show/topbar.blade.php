@@ -22,9 +22,28 @@
 
    </div>
 
-   <div class="col mb-2 float-right px-1">
-      @include('common.likeTopbar', ['model' => $carving])
-   </div>
+   @auth
+      <div class="col mb-2 float-right px-1">
+         <div class="form-inline float-right p-0 m-0">
+            @can('like', $carving)
+               <form class="p-0 m-0" action="{{ route('like') }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                  <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                  <button class="btn btn-sm btn-success">@lang('Like')</button>
+               </form>
+            @else
+               <form class="" action="{{ route('unlike') }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                  <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                  <button class="btn btn-sm btn-danger">@lang('Unlike')</button>
+               </form>
+            @endcan
+         </div>
+      </div>
+   @endauth
 
    <div class="d-flex mb-2">
       <div class="float-right">

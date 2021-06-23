@@ -15,11 +15,12 @@
 	            </th>
 					<th>Title</th>
 					<th>Category</th>
+					<th>Author</th>
 					<th>Views</th>
 					<th>Likes</th>
 					<th>Favorited</th>
-					<th>Author</th>
 					<th>Created On</th>
+					<th>Updated On</th>
 					<th>Publish(ed) On</th>
 					<th data-orderable="false"></th>
 				</tr>
@@ -45,22 +46,12 @@
 							{{ ucwords($post->title) }}
 						</a>
 					</td>
-					<td>
-						{{ ucwords($post->category->name) }}
-					</td>
-					<td>
-						{{ $post->views }}
-					</td>
-					<td>
-						{{ $post->likes()->count() }}
-					</td>
-					<td>
-						{{ $post->favoritesCount }}
-					</td>
-					<td>
-						{{-- @include('common.authorFormat', ['model'=>$post, 'field'=>'user']) --}}
-						{{ $post->created_at->format(config('settings.dateFormat')) }}
-					</td>
+					<td>{{ ucwords($post->category->name) }}</td>
+					<td>@include('common.authorFormat', ['model'=>$post, 'field'=>'user'])</td>
+					<td>{{ $post->views }}</td>
+					<td>{{ $post->likes()->count() }}</td>
+					<td>{{ $post->favoritesCount }}</td>
+					<td>{{ $post->created_at->format(config('settings.dateFormat')) }}</td>
 					<td>
 						{{-- @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at']) --}}
 						{{ $post->updated_at->format(config('settings.dateFormat')) }}

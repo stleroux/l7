@@ -11,7 +11,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>#</th>
+            
             <th>Question</th>
             <th>Category</th>
             <th class="no-sort text-center" width="140px">Actions</th>
@@ -33,7 +33,7 @@
                      <label for="<?php echo e($faq->id); ?>"></label>
                   </div>
                </td>
-               <td><?php echo e($faq->id); ?></td>
+               
                <td><a href="<?php echo e(route('admin.faqs.show', $faq->id)); ?>"><?php echo e(ucfirst($faq->question)); ?></a></td>
                <td><?php echo e($faq->category); ?></td>
                <td class="text-right">

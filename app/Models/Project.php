@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Searchable\Searchable;
@@ -9,18 +11,22 @@ use Spatie\Searchable\SearchResult;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Contracts\Likeable;
 use App\Models\Concerns\Likes;
+use Route;
 
-class Project extends Model implements Searchable, Auditable, Likeable
+class Project extends Model implements Searchable, Auditable, Likeable, Viewable
 {
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
    use Likes;
+   use InteractsWithViews;
    
    protected $guarded = [];
 
    // protected $table = 'projects__projects';
 
    protected $dates = ['created_at','updated_at','deleted_at','completed_at'];
+
+   protected $removeViewsOnDelete = true;
 
    // Set the default value for the status field to 0
    protected $attributes = [
@@ -36,12 +42,11 @@ class Project extends Model implements Searchable, Auditable, Likeable
    {
       return [
          0 => 'Select One',
-         1 => 'Decoration',
-         2 => 'Furniture',
-         3 => 'General',
-         4 => 'Storage',
-         5 => 'Wall Hanging',
-         1000 => 'Lastest 4',
+         'decoration' => 'Decoration',
+         'furniture' => 'Furniture',
+         'general' => 'General',
+         'storage' => 'Storage',
+         'wall_hanging' => 'Wall Hanging',
       ];
    }
 
@@ -119,7 +124,12 @@ class Project extends Model implements Searchable, Auditable, Likeable
    public function getSearchResult(): SearchResult
    {
       
-      $url = route('projects.show', $this->id);
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.projects.show', $this->id);
+      } else {
+         $url = route('projects.show', $this->id);
+      }
 
       return new SearchResult(
          $this,

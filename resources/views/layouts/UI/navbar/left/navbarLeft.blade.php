@@ -12,8 +12,8 @@
    @if(Config::get('settings.projects') == 'visible')
       <li class="nav-item {{ Route::is('projects*') ? 'bg-black border-red-2' : '' }}">
          <a class="nav-link" href="{{ route('projects.index') }}">
-         	<i class="{{ config('icons.projects') }}"></i>
-         	{{ __('Projects') }}
+            <i class="{{ config('icons.projects') }}"></i>
+            {{ __('Projects') }}
          </a>
       </li>
    @endif
@@ -21,8 +21,8 @@
    @if(Config::get('settings.recipes') == 'visible')
       <li class="nav-item {{ Route::is('recipes*') ? 'bg-black border-red-2' : '' }}">
          <a class="nav-link" href="{{ route('recipes.indexGrid', 'all') }}">
-         	<i class="{{ config('icons.recipes') }}"></i>
-         	{{ __('Recipes') }}
+            <i class="{{ config('icons.recipes') }}"></i>
+            {{ __('Recipes') }}
          </a>
       </li>
    @endif

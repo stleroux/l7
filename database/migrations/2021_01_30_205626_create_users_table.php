@@ -45,6 +45,7 @@ class CreateUsersTable extends Migration {
 			$table->dateTime('last_login_date')->nullable();
 			$table->integer('login_count')->unsigned()->nullable()->default(0);
 			$table->string('reasonToRegister');
+			$table->string('redirectAfterLogin')->nullable();
 		});
 	}
 

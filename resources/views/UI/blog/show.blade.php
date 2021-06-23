@@ -64,7 +64,10 @@
                         </tr>
                         <tr>
                            <th>Views</th>
-                           <td>{{ $post->views }}</td>
+                           <td>
+                              {{-- {{ $post->views }} --}}
+                              {{ views($post)->count() }}
+                           </td>
                         </tr>
                         <tr>
                            <th>Likes</th>

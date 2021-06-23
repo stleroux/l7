@@ -16,7 +16,18 @@
             </tr>
             <tr>
                <th>Frontend Views</th>
-               <td><?php echo e($project->views ?? "N/A"); ?></td>
+               <td>
+                  
+                  <?php echo e(views($project)->count()); ?>
+
+               </td>
+            </tr>
+            <tr>
+               <th>Views Last Month</th>
+               <td>
+                  <?php echo e(views($project)->period(CyrildeWit\EloquentViewable\Support\Period::pastMonths(1))->count()); ?>
+
+               </td>
             </tr>
             <tr>
                <th>Width <small>(inches)</small></th>

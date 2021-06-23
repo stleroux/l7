@@ -21,7 +21,7 @@ Route::namespace('Admin\Faqs')->prefix('admin')->name('admin.')->group(function(
 // FRONTEND FAQS ROUTES
 //////////////////////////////////////////////////////////////////////////////
 
-Route::namespace('UI\Faqs')->prefix('faqs')->name('faqs.')->group(function() {
+Route::namespace('UI')->prefix('faqs')->name('faqs.')->group(function() {
    Route::get('{faq}/show',                     'FaqsController@show')                ->name('show');
    Route::get('faq',                            'FaqsController@faq')                 ->name('faq');
    Route::get('{filter?}/{tag?}',               'FaqsController@index')               ->name('index');

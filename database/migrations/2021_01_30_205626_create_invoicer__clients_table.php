@@ -29,6 +29,7 @@ class CreateInvoicerClientsTable extends Migration {
 			$table->string('website')->nullable();
 			$table->text('notes')->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

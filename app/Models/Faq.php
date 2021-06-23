@@ -2,18 +2,29 @@
 
 namespace App\Models;
 
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use App\Contracts\Likeable;
+use App\Models\Concerns\Likes;
+use Route;
 
-class Faq extends Model implements Auditable
+class Faq extends Model implements Searchable, Auditable, Likeable, Viewable
 {
-	use SoftDeletes;
+   use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
-	
+   use Likes;
+   use InteractsWithViews;
+
    protected $guarded = [];
 
    protected $dates = ['created_at','updated_at','deleted_at'];
+
+   protected $removeViewsOnDelete = true;
 
    // Set the default value for the status field to 0
    protected $attributes = [
@@ -29,15 +40,16 @@ class Faq extends Model implements Auditable
    {
       return [
          0 => 'Select One',
+         'blog'      => 'Blog',
          'carvings'  => 'Carvings',
          'projects'  => 'Projects',
          'recipes'   => 'Recipes',
       ];
    }
 
-	//////////////////////////////////////////////////////////////////////////////////////
-	// RELATIONSHIPS
-	//////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////
+   // RELATIONSHIPS
+   //////////////////////////////////////////////////////////////////////////////////////
    public function carvings()
    {
       // return $this->belongsTo(\App\Models\Carving::class, 'projects__projects');
@@ -59,4 +71,20 @@ class Faq extends Model implements Auditable
          ->withTrashed();
    }
    
+   public function getSearchResult(): SearchResult
+   {
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.faqs.show', $this->id);
+      } else {
+         $url = route('faqs.show', $this->id);
+      }
+
+      return new SearchResult(
+         $this,
+         $this->question,
+         $url
+      );
+   }
+
 }

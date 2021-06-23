@@ -36,14 +36,14 @@ class BugsController extends Controller
 # Display a list of resources
 ##################################################################################################################
    public function index()
-    {
+   {
       // Check if user has required permission
       abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::all();
+      $bugs = Bug::with('user','likes','views')->get();
 
       return view('admin.bugs.index', compact('bugs'));
-    }
+   }
 
 
 ##################################################################################################################
@@ -55,16 +55,16 @@ class BugsController extends Controller
 #  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
 # Display the specified resource
 ##################################################################################################################
-    public function show(Bug $bug)
-    {
-        // Check if user has required permission
+   public function show(Bug $bug)
+   {
+      // Check if user has required permission
       abort_unless(Gate::allows('bug-show'), 403);
 
       // Get all associated Audits
       $audits = $bug->audits()->with('user')->orderBy('id','desc')->get();
 
       return view('admin.bugs.show', compact('bug','audits'));
-    }
+   }
 
 
 ##################################################################################################################
@@ -107,29 +107,29 @@ class BugsController extends Controller
       ]);
 
          // assign values from form fields
-         $bug->title = $request->title;
-         $bug->page_url = $request->page_url;
-         $bug->status = 1;
-         $bug->description = $request->description;
-         $bug->user_id = Auth::user()->id;
+      $bug->title = $request->title;
+      $bug->page_url = $request->page_url;
+      $bug->status = 1;
+      $bug->description = $request->description;
+      $bug->user_id = Auth::user()->id;
 
       // Save the data
       if($bug->save())
       {
-        $notification = [
-           'message' => 'The bug has been created successfully!', 
-           'alert-type' => 'success'
-        ];
+         $notification = [
+            'message' => 'The bug has been created successfully!', 
+            'alert-type' => 'success'
+         ];
 
-        if ($request->submit == 'new')
-        {
-          return redirect()->back()->with($notification);
-        }
+         if ($request->submit == 'new')
+         {
+            return redirect()->back()->with($notification);
+         }
 
-        if ($request->submit == 'continue')
-        {
-          return view('admin.bugs.edit', compact('bug'))->with($notification);
-        }
+         if ($request->submit == 'continue')
+         {
+            return view('admin.bugs.edit', compact('bug'))->with($notification);
+         }
 
       }
 
@@ -146,15 +146,15 @@ class BugsController extends Controller
 #  ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 # Show the form for editing the specified resource
 ##################################################################################################################
-    public function edit(Bug $bug)
-    {
-        // Check if user has required permission
+   public function edit(Bug $bug)
+   {
+      // Check if user has required permission
       abort_unless(Gate::allows('bug-edit'), 403);
       
       // $bug = Bug::find($bug->id);
 
       return view('admin.bugs.edit', compact('bug'));
-    }
+   }
 
 
 ##################################################################################################################
@@ -166,7 +166,7 @@ class BugsController extends Controller
 #   ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 # Update the specified resource in storage
 ##################################################################################################################
-    public function update(Request $request, Bug $bug)
+   public function update(Request $request, Bug $bug)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('bug-edit'), 403);
@@ -251,20 +251,20 @@ class BugsController extends Controller
 #  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
 # Remove the specified resource from storage
 ##################################################################################################################
-  public function destroy(Bug $bug)
-  {
+   public function destroy(Bug $bug)
+   {
       // Check if user has required permission
-    abort_unless(Gate::allows('bug-delete'), 403);
+     abort_unless(Gate::allows('bug-delete'), 403);
 
     // delete the bug
-    $bug->delete();
+     $bug->delete();
 
-    $notification = [
-       'message' => 'The bug has been deleted successfully!', 
-       'alert-type' => 'success'
-    ];
+     $notification = [
+        'message' => 'The bug has been deleted successfully!', 
+        'alert-type' => 'success'
+     ];
 
-    return redirect()->back()->with($notification);
+     return redirect()->back()->with($notification);
   }
 
 
@@ -276,37 +276,37 @@ class BugsController extends Controller
 #  ██║ ╚═╝ ██║██║  ██║███████║███████║    ██████╔╝███████╗███████║   ██║   ██║  ██║╚██████╔╝   ██║   
 #  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
 ##################################################################################################################
-   public function massDestroy(Request $request)
-   {    
+  public function massDestroy(Request $request)
+  {    
     // Check if user has required permission
-    abort_unless(Gate::allows('bug-delete'), 403);
+     abort_unless(Gate::allows('bug-delete'), 403);
 
-    $bugs = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
+     $bugs = explode(',', $request->input('mass_destroy_pass_checkedvalue'));
 
-    if(!$request->input('mass_destroy_pass_checkedvalue'))
-    {
+     if(!$request->input('mass_destroy_pass_checkedvalue'))
+     {
 
-    $notification = array(
-        'message' => 'Please select entries to be deleted.', 
-        'alert-type' => 'error'
-    );
+        $notification = array(
+          'message' => 'Please select entries to be deleted.', 
+          'alert-type' => 'error'
+       );
 
-    } else {
-     
+     } else {
+       
       foreach ($bugs as $bug_id) {
-          $bug = Bug::findOrFail($bug_id);
-          $bug->delete();
-      }
+        $bug = Bug::findOrFail($bug_id);
+        $bug->delete();
+     }
 
-      $notification = array(
-          'message' => 'The selected bugs have been deleted successfully!', 
-          'alert-type' => 'success'
-        );
+     $notification = array(
+        'message' => 'The selected bugs have been deleted successfully!', 
+        'alert-type' => 'success'
+     );
 
-    }
+  }
 
-    return redirect()->back()->with($notification);
-   }
+  return redirect()->back()->with($notification);
+}
 
 
 ##################################################################################################################
@@ -318,23 +318,23 @@ class BugsController extends Controller
 #  ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 # Mass Delete selected rows - all selected records
 ##################################################################################################################
-   public function delete($id)
-   {
+public function delete($id)
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-delete'), 403);
+   abort_unless(Gate::allows('bug-delete'), 403);
 
-      $bug = Bug::onlyTrashed()->findOrFail($id);
-      
+   $bug = Bug::onlyTrashed()->findOrFail($id);
+   
       // delete the user
-      $bug->forceDelete();
+   $bug->forceDelete();
 
-      $notification = [
-         'message' => 'The bug was deleted successfully!', 
-         'alert-type' => 'success'
-      ];
+   $notification = [
+      'message' => 'The bug was deleted successfully!', 
+      'alert-type' => 'success'
+   ];
 
-      return redirect()->back()->with($notification);
-   }
+   return redirect()->back()->with($notification);
+}
 
 
 ##################################################################################################################
@@ -346,37 +346,37 @@ class BugsController extends Controller
 #  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 # Mass Delete selected rows - all selected records
 ##################################################################################################################
-   public function massDelete(Request $request)
-   {
+public function massDelete(Request $request)
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-delete'), 403);
+   abort_unless(Gate::allows('bug-delete'), 403);
 
-      $bugs = explode(',', $request->input('mass_delete_pass_checkedvalue'));
+   $bugs = explode(',', $request->input('mass_delete_pass_checkedvalue'));
+   
+   if(!$request->input('mass_delete_pass_checkedvalue'))
+   {
+
+      $notification = [
+         'message' => 'Please select entries to be deleted.', 
+         'alert-type' => 'error'
+      ];
+
+   } else {
       
-      if(!$request->input('mass_delete_pass_checkedvalue'))
-      {
-
-         $notification = [
-            'message' => 'Please select entries to be deleted.', 
-            'alert-type' => 'error'
-         ];
-
-      } else {
-         
-         foreach ($bugs as $bug_id) {
-            $bug = Bug::onlyTrashed()->findOrFail($bug_id);
-            $bug->forceDelete();
-         }
-
-         $notification = [
-            'message' => 'The selected bugs have been permanently deleted!',
-            'alert-type' => 'success'
-         ];
-
+      foreach ($bugs as $bug_id) {
+         $bug = Bug::onlyTrashed()->findOrFail($bug_id);
+         $bug->forceDelete();
       }
-      
-      return redirect()->back()->with($notification);
+
+      $notification = [
+         'message' => 'The selected bugs have been permanently deleted!',
+         'alert-type' => 'success'
+      ];
+
    }
+   
+   return redirect()->back()->with($notification);
+}
 
 
 ##################################################################################################################
@@ -388,23 +388,23 @@ class BugsController extends Controller
 #  ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 # Restore trashed file
 ##################################################################################################################
-   public function restore($id)
-   {
+public function restore($id)
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bug = Bug::onlyTrashed()->findOrFail($id);
-      
+   $bug = Bug::onlyTrashed()->findOrFail($id);
+   
       // Restore the user
-      $bug->restore();
+   $bug->restore();
 
-      $notification = [
-         'message' => 'The bug was restored successfully!', 
-         'alert-type' => 'success'
-      ];
+   $notification = [
+      'message' => 'The bug was restored successfully!', 
+      'alert-type' => 'success'
+   ];
 
-      return redirect()->back()->with($notification);
-   }
+   return redirect()->back()->with($notification);
+}
 
 
 ##################################################################################################################
@@ -415,37 +415,37 @@ class BugsController extends Controller
 #  ██║ ╚═╝ ██║██║  ██║███████║███████║    ██║  ██║███████╗███████║   ██║   ╚██████╔╝██║  ██║███████╗
 #  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 ##################################################################################################################
-   public function massRestore(Request $request)
-   {
+public function massRestore(Request $request)
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = explode(',', $request->input('mass_restore_pass_checkedvalue'));
+   $bugs = explode(',', $request->input('mass_restore_pass_checkedvalue'));
 
-      if(!$request->input('mass_restore_pass_checkedvalue'))
-      {
+   if(!$request->input('mass_restore_pass_checkedvalue'))
+   {
 
-         $notification = [
-            'message' => 'Please select entries to be restore.', 
-            'alert-type' => 'error'
-         ];
+      $notification = [
+         'message' => 'Please select entries to be restore.', 
+         'alert-type' => 'error'
+      ];
 
-      } else {
-         
-         foreach ($bugs as $bug_id) {
-            $bug = Bug::onlyTrashed()->findOrFail($bug_id);
-            $bug->restore();
-         }
-
-         $notification = [
-            'message' => 'The selected bugs have been restored successfully!', 
-            'alert-type' => 'success'
-         ];
-
-      }
+   } else {
       
-      return redirect()->back()->with($notification);
+      foreach ($bugs as $bug_id) {
+         $bug = Bug::onlyTrashed()->findOrFail($bug_id);
+         $bug->restore();
+      }
+
+      $notification = [
+         'message' => 'The selected bugs have been restored successfully!', 
+         'alert-type' => 'success'
+      ];
+
    }
+   
+   return redirect()->back()->with($notification);
+}
 
 
 ##################################################################################################################
@@ -457,14 +457,14 @@ class BugsController extends Controller
 #     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 # Display a list of resources that have been trashed (Soft Deleted)
 ##################################################################################################################
-   public function trashed()
-   {
+public function trashed()
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::onlyTrashed()->get();
-      return view('admin.bugs.index', compact('bugs'));
-   }
+   $bugs = Bug::onlyTrashed()->get();
+   return view('admin.bugs.index', compact('bugs'));
+}
 
 
 ##################################################################################################################
@@ -475,15 +475,15 @@ class BugsController extends Controller
 #  ██║ ╚████║███████╗╚███╔███╔╝
 #  ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ 
 ##################################################################################################################
-   public function new()
-   {
+public function new()
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
       // $bugs = Bug::where('status',1)->get();
-      $bugs = Bug::where('status', Bug::IS_NEW)->get();
-      return view('admin.bugs.index', compact('bugs'));
-   }
+   $bugs = Bug::where('status', Bug::IS_NEW)->get();
+   return view('admin.bugs.index', compact('bugs'));
+}
 
 
 ##################################################################################################################
@@ -494,14 +494,14 @@ class BugsController extends Controller
 #  ██║     ███████╗██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝
 #  ╚═╝     ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ 
 ##################################################################################################################
-   public function pending()
-   {
+public function pending()
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status', Bug::IS_PENDING)->get();
-      return view('admin.bugs.index', compact('bugs'));
-   }
+   $bugs = Bug::where('status', Bug::IS_PENDING)->get();
+   return view('admin.bugs.index', compact('bugs'));
+}
 
 
 ##################################################################################################################
@@ -512,14 +512,14 @@ class BugsController extends Controller
 #  ██║ ╚████║╚██████╔╝   ██║       ██║  ██║███████╗██║     ██║  ██║╚██████╔╝██████╔╝╚██████╔╝╚██████╗██║██████╔╝███████╗███████╗
 #  ╚═╝  ╚═══╝ ╚═════╝    ╚═╝       ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝╚═╝╚═════╝ ╚══════╝╚══════╝
 ##################################################################################################################
-   public function notreproducible()
-   {
+public function notreproducible()
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status', Bug::IS_NOT_REPRODUCIBLE)->get();
-      return view('admin.bugs.index', compact('bugs'));
-   }
+   $bugs = Bug::where('status', Bug::IS_NOT_REPRODUCIBLE)->get();
+   return view('admin.bugs.index', compact('bugs'));
+}
 
 
 ##################################################################################################################
@@ -530,14 +530,14 @@ class BugsController extends Controller
 #  ██║ ╚████║╚██████╔╝██║ ╚████║    ██║███████║███████║╚██████╔╝███████╗
 #  ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝╚══════╝╚══════╝ ╚═════╝ ╚══════╝
 ##################################################################################################################
-   public function nonissue()
-   {
+public function nonissue()
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status', Bug::IS_NON_ISSUE)->get();
-      return view('admin.bugs.index', compact('bugs'));
-   }
+   $bugs = Bug::where('status', Bug::IS_NON_ISSUE)->get();
+   return view('admin.bugs.index', compact('bugs'));
+}
 
 
 ##################################################################################################################
@@ -548,13 +548,13 @@ class BugsController extends Controller
 #  ██║  ██║███████╗███████║╚██████╔╝███████╗╚████╔╝ ███████╗██████╔╝
 #  ╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═════╝
 ##################################################################################################################
-   public function resolved()
-   {
+public function resolved()
+{
       // Check if user has required permission
-      abort_unless(Gate::allows('bug-manage'), 403);
+   abort_unless(Gate::allows('bug-manage'), 403);
 
-      $bugs = Bug::where('status', Bug::IS_RESOLVED)->get();
-      return view('admin.bugs.index', compact('bugs'));
-   }
+   $bugs = Bug::where('status', Bug::IS_RESOLVED)->get();
+   return view('admin.bugs.index', compact('bugs'));
+}
 
 }

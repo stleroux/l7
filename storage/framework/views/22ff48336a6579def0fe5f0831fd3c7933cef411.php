@@ -1,4 +1,4 @@
-<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-access')): ?>
+<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['invoicer-dashboard','invoicer-ledger','invoicer-invoice','invoicer-client','invoicer-product'])): ?>
 	
 	<li class="nav-item has-treeview <?php echo e((Request::is('admin/invoicer*')) ? 'menu-open' : ''); ?>">
 		
@@ -13,7 +13,7 @@
 		<ul class="nav nav-treeview">
 		
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-dashboard')): ?>
-				<li class="nav-item ml-2">
+				<li class="nav-item ml-3">
 					<a href="<?php echo e(route('admin.invoicer')); ?>" class="nav-link <?php echo e(Request::is('admin/invoicer') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.invoicer-dashboard')); ?>"></i>
 						<p>Dashboard</p>
@@ -22,7 +22,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-ledger')): ?>
-				<li class="nav-item ml-2">
+				<li class="nav-item ml-3">
 					<a href="<?php echo e(route('admin.invoicer.ledger')); ?>" class="nav-link <?php echo e(Request::is('admin/invoicer/ledger*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.invoicer-ledger')); ?>"></i>
 						<p>Ledger</p>
@@ -31,7 +31,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-invoice')): ?>
-				<li class="nav-item ml-2">
+				<li class="nav-item ml-3">
 					<a href="<?php echo e(route('admin.invoicer.invoices.estimates')); ?>"
 						class="nav-link
 						<?php echo e(Request::is('admin/invoicer/invoices/estimates') ? 'active' : ''); ?>
@@ -49,7 +49,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-invoice')): ?>
-				<li class="nav-item ml-2">
+				<li class="nav-item ml-3">
 					<a href="<?php echo e(route('admin.invoicer.invoices')); ?>"
 						class="nav-link
 							<?php echo e(Request::is('admin/invoicer/invoices') ? 'active' : ''); ?>
@@ -74,7 +74,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-client')): ?>
-				<li class="nav-item ml-2">
+				<li class="nav-item ml-3">
 					<a href="<?php echo e(route('admin.invoicer.clients')); ?>" class="nav-link <?php echo e(Request::is('admin/invoicer/clients*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.invoicer-clients')); ?>"></i>
 						<p>Clients</p>
@@ -83,7 +83,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-product')): ?>
-				<li class="nav-item ml-2">
+				<li class="nav-item ml-3">
 					<a href="<?php echo e(route('admin.invoicer.products')); ?>" class="nav-link <?php echo e(Request::is('admin/invoicer/products*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.invoicer-products')); ?>"></i>
 						<p>Products</p>

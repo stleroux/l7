@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
 use Carbon\Carbon;
 use Config;
@@ -12,6 +13,7 @@ class InvoicerInvoice extends Model implements Auditable
 {
 	use Sortable;
    use \OwenIt\Auditing\Auditable;
+   use SoftDeletes;
 
 	protected $table = 'invoicer__invoices';
 
@@ -76,6 +78,10 @@ class InvoicerInvoice extends Model implements Auditable
    // An invoice has many activities
    public function activities() {
       return $this->hasMany('App\Models\InvoicerActivity', 'invoice_id')->orderBy('id','desc');
+   }
+
+   public function items(){
+      return $this->hasManyThrough(InvoicerInvoiceItem::class, InvoicerInvoice::class);
    }
 
 //////////////////////////////////////////////////////////////////////////////////////

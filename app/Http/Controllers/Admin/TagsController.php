@@ -117,10 +117,10 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-        //
-    // }
+    public function show($id)
+    {
+        dd($id);
+    }
 
     // Get all associated Audits
       // $audits = $tag->audits()->with('user')->orderBy('id','desc')->get();

@@ -21,9 +21,9 @@ class LedgerController extends Controller
 #  ╚██████╗╚██████╔╝██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   
 #   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   
 ##################################################################################################################
-	public function __construct()
+   public function __construct()
    {
-		$this->middleware('auth');
+      $this->middleware('auth');
    }
 
 
@@ -36,48 +36,48 @@ class LedgerController extends Controller
 #  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 # Display a list of resources
 ##################################################################################################################
-	public function index()
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-ledger'), 403);	  
+   public function index()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-		$invoices = InvoicerInvoice::sortable()
-			->with('client')
-			->with('activities')
-			->where('status', '!=', 'estimate')
-			->orderBy('id','desc')
-			->paginate(Config::get('settings.rowsPerPage'));
+      $invoices = InvoicerInvoice::sortable()
+         ->with('client')
+         ->with('activities')
+         ->where('status', '!=', 'estimate')
+         ->orderBy('id','desc')
+         ->paginate(Config::get('settings.rowsPerPage'));
 
-		$estimates = InvoicerInvoice::sortable()
-			->with('client')
-			->with('activities')
-			->where('status', 'estimate')
-			->orderBy('id','desc')
-			->paginate(Config::get('settings.rowsPerPage'));
+      $estimates = InvoicerInvoice::sortable()
+         ->with('client')
+         ->with('activities')
+         ->where('status', 'estimate')
+         ->orderBy('id','desc')
+         ->paginate(Config::get('settings.rowsPerPage'));
 
-		$amountCharged = DB::table('invoicer__invoices')->sum('amount_charged');
-		$hst = DB::table('invoicer__invoices')->sum('hst');
-		$subTotal = DB::table('invoicer__invoices')->sum('sub_total');
-		$wsib = DB::table('invoicer__invoices')->sum('wsib');
-		$incomeTaxes = DB::table('invoicer__invoices')->sum('income_taxes');
-		$deductions = DB::table('invoicer__invoices')->sum('total_deductions');
-		
-		$depositsAdd = DB::table('invoicer__activities')->where('activity','depositAdd')->sum('amount');
-		$depositsRemove = DB::table('invoicer__activities')->where('activity','depositRemove')->sum('amount');
-		$deposits = $depositsAdd - $depositsRemove;
+      $amountCharged = DB::table('invoicer__invoices')->sum('amount_charged');
+      $hst = DB::table('invoicer__invoices')->sum('hst');
+      $subTotal = DB::table('invoicer__invoices')->sum('sub_total');
+      $wsib = DB::table('invoicer__invoices')->sum('wsib');
+      $incomeTaxes = DB::table('invoicer__invoices')->sum('income_taxes');
+      $deductions = DB::table('invoicer__invoices')->sum('total_deductions');
+      
+      $depositsAdd = DB::table('invoicer__activities')->where('activity','depositAdd')->sum('amount');
+      $depositsRemove = DB::table('invoicer__activities')->where('activity','depositRemove')->sum('amount');
+      $deposits = $depositsAdd - $depositsRemove;
 
-		$discountsAdd = DB::table('invoicer__activities')->where('activity','discountAdd')->sum('amount');
-		$discountsRemove = DB::table('invoicer__activities')->where('activity','discountRemove')->sum('amount');
-		$discounts = $discountsAdd - $discountsRemove;
+      $discountsAdd = DB::table('invoicer__activities')->where('activity','discountAdd')->sum('amount');
+      $discountsRemove = DB::table('invoicer__activities')->where('activity','discountRemove')->sum('amount');
+      $discounts = $discountsAdd - $discountsRemove;
 
-		$paymentsAdd = DB::table('invoicer__activities')->where('activity','paymentAdd')->sum('amount');
-		$paymentsRemove = DB::table('invoicer__activities')->where('activity','paymentRemove')->sum('amount');
-		$payments = $paymentsAdd - $paymentsRemove;
+      $paymentsAdd = DB::table('invoicer__activities')->where('activity','paymentAdd')->sum('amount');
+      $paymentsRemove = DB::table('invoicer__activities')->where('activity','paymentRemove')->sum('amount');
+      $payments = $paymentsAdd - $paymentsRemove;
 
-		$total = DB::table('invoicer__invoices')->sum('total');
+      $total = DB::table('invoicer__invoices')->sum('total');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','estimates','amountCharged','hst','subTotal', 'wsib', 'incomeTaxes','deductions', 'deposits', 'discounts', 'payments', 'total'));
-	}
+      return view('admin.invoicer.ledger.index', compact('invoices','estimates','amountCharged','hst','subTotal', 'wsib', 'incomeTaxes','deductions', 'deposits', 'discounts', 'payments', 'total'));
+   }
 
 
 ##################################################################################################################
@@ -88,30 +88,30 @@ class LedgerController extends Controller
 #  ███████╗███████║   ██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗███████║
 #  ╚══════╝╚══════╝   ╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝
 ##################################################################################################################
-	public function estimates()
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-ledger'), 403);
-	  
-		$invoices = InvoicerInvoice::sortable()
-			->where('status','=','estimate')
-			->orderBy('id','desc')
-			->paginate(Config::get('settings.rowsPerPage'));
+   public function estimates()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('invoicer-ledger'), 403);
+     
+      $invoices = InvoicerInvoice::sortable()
+         ->where('status','=','estimate')
+         ->orderBy('id','desc')
+         ->paginate(Config::get('settings.rowsPerPage'));
 
-		$amountCharged = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('amount_charged');
-		$hst = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('hst');
-		$subTotal = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('sub_total');
-		$wsib = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('wsib');
-		$incomeTaxes = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('income_taxes');
-		$deductions = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('total_deductions');
-		$total = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('total');
+      $amountCharged = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('amount_charged');
+      $hst = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('hst');
+      $subTotal = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('sub_total');
+      $wsib = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('wsib');
+      $incomeTaxes = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('income_taxes');
+      $deductions = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('total_deductions');
+      $total = DB::table('invoicer__invoices')->where('status','=','estimate')->sum('total');
 
-		$deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
-		$discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
-		$payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
+      $deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
+      $discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
+      $payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
-	}
+      return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
+   }
 
 
 ##################################################################################################################
@@ -122,26 +122,26 @@ class LedgerController extends Controller
 #  ██║██║ ╚████║ ╚████╔╝ ╚██████╔╝██║╚██████╗███████╗██████╔╝
 #  ╚═╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚═╝ ╚═════╝╚══════╝╚═════╝ 
 ##################################################################################################################
-	public function invoiced()
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-ledger'), 403);	  
+   public function invoiced()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-		$invoices = InvoicerInvoice::sortable()->where('status','=','invoiced')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
-		$amountCharged = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('amount_charged');
-		$hst = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('hst');
-		$subTotal = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('sub_total');
-		$wsib = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('wsib');
-		$incomeTaxes = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('income_taxes');
-		$deductions = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('total_deductions');
-		$total = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('total');
+      $invoices = InvoicerInvoice::sortable()->where('status','=','invoiced')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+      $amountCharged = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('amount_charged');
+      $hst = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('hst');
+      $subTotal = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('sub_total');
+      $wsib = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('wsib');
+      $incomeTaxes = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('income_taxes');
+      $deductions = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('total_deductions');
+      $total = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('total');
 
-		$deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
-		$discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
-		$payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
+      $deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
+      $discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
+      $payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
-	}
+      return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
+   }
 
 
 ##################################################################################################################
@@ -152,30 +152,30 @@ class LedgerController extends Controller
 #  ███████╗╚██████╔╝╚██████╔╝╚██████╔╝███████╗██████╔╝
 #  ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚═════╝ 
 ##################################################################################################################
-	public function logged()
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-ledger'), 403);	  
-	  
-		$invoices = InvoicerInvoice::sortable()
-			->where('status','=','logged')
-			->orderBy('id','desc')
-			->paginate(Config::get('settings.rowsPerPage'));
+   public function logged()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('invoicer-ledger'), 403);     
+     
+      $invoices = InvoicerInvoice::sortable()
+         ->where('status','=','logged')
+         ->orderBy('id','desc')
+         ->paginate(Config::get('settings.rowsPerPage'));
 
-		$amountCharged = DB::table('invoicer__invoices')->where('status','=','logged')->sum('amount_charged');
-		$hst = DB::table('invoicer__invoices')->where('status','=','logged')->sum('hst');
-		$subTotal = DB::table('invoicer__invoices')->where('status','=','logged')->sum('sub_total');
-		$wsib = DB::table('invoicer__invoices')->where('status','=','logged')->sum('wsib');
-		$incomeTaxes = DB::table('invoicer__invoices')->where('status','=','logged')->sum('income_taxes');
-		$deductions = DB::table('invoicer__invoices')->where('status','=','logged')->sum('total_deductions');
-		$total = DB::table('invoicer__invoices')->where('status','=','logged')->sum('total');
+      $amountCharged = DB::table('invoicer__invoices')->where('status','=','logged')->sum('amount_charged');
+      $hst = DB::table('invoicer__invoices')->where('status','=','logged')->sum('hst');
+      $subTotal = DB::table('invoicer__invoices')->where('status','=','logged')->sum('sub_total');
+      $wsib = DB::table('invoicer__invoices')->where('status','=','logged')->sum('wsib');
+      $incomeTaxes = DB::table('invoicer__invoices')->where('status','=','logged')->sum('income_taxes');
+      $deductions = DB::table('invoicer__invoices')->where('status','=','logged')->sum('total_deductions');
+      $total = DB::table('invoicer__invoices')->where('status','=','logged')->sum('total');
 
-		$deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
-		$discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
-		$payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
+      $deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
+      $discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
+      $payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
-	}
+      return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
+   }
 
 
 ##################################################################################################################
@@ -186,26 +186,26 @@ class LedgerController extends Controller
 #  ██║     ██║  ██║██║██████╔╝
 #  ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ 
 ##################################################################################################################
-	public function paid()
-	{
-		// Check if user has required permission
-		abort_unless(Gate::allows('invoicer-ledger'), 403);	  
+   public function paid()
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-		$invoices = InvoicerInvoice::sortable()->where('status','=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
-		$amountCharged = DB::table('invoicer__invoices')->where('status','=','paid')->sum('amount_charged');
-		$hst = DB::table('invoicer__invoices')->where('status','=','paid')->sum('hst');
-		$subTotal = DB::table('invoicer__invoices')->where('status','=','paid')->sum('sub_total');
-		$wsib = DB::table('invoicer__invoices')->where('status','=','paid')->sum('wsib');
-		$incomeTaxes = DB::table('invoicer__invoices')->where('status','=','paid')->sum('income_taxes');
-		$deductions = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total_deductions');
-		$total = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total');
+      $invoices = InvoicerInvoice::sortable()->where('status','=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+      $amountCharged = DB::table('invoicer__invoices')->where('status','=','paid')->sum('amount_charged');
+      $hst = DB::table('invoicer__invoices')->where('status','=','paid')->sum('hst');
+      $subTotal = DB::table('invoicer__invoices')->where('status','=','paid')->sum('sub_total');
+      $wsib = DB::table('invoicer__invoices')->where('status','=','paid')->sum('wsib');
+      $incomeTaxes = DB::table('invoicer__invoices')->where('status','=','paid')->sum('income_taxes');
+      $deductions = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total_deductions');
+      $total = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total');
 
-		$deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
-		$discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
-		$payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
+      $deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
+      $discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
+      $payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
-	}
+      return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
+   }
 
 
 ##################################################################################################################
@@ -219,7 +219,7 @@ class LedgerController extends Controller
    public function unpaid()
    {
       // Check if user has required permission
-		abort_unless(Gate::allows('invoicer-ledger'), 403);     
+      abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
       $invoices = InvoicerInvoice::sortable()->where('status','!=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
       $amountCharged = DB::table('invoicer__invoices')->where('status','=','paid')->sum('amount_charged');
@@ -230,11 +230,11 @@ class LedgerController extends Controller
       $deductions = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total_deductions');
       $total = DB::table('invoicer__invoices')->where('status','=','paid')->sum('total');
 
-		$deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
-		$discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
-		$payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
+      $deposits = DB::table('invoicer__activities')->where('activity','deposit')->sum('amount');
+      $discounts = DB::table('invoicer__activities')->where('activity','discount')->sum('amount');
+      $payments = DB::table('invoicer__activities')->where('activity','payment')->sum('amount');
 
-		return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
+      return view('admin.invoicer.ledger.index', compact('invoices','amountCharged','hst','subTotal','wsib','incomeTaxes','deductions','deposits','discounts','payments','total'));
    }
 
 

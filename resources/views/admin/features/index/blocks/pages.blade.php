@@ -13,6 +13,7 @@
 
       <!-- Generate links based on options in Model -->
       @foreach(App\Models\Feature::statusOptions() as $statusOptionKey => $statusOptionValue)
+         {{-- {{ $statusOptionKey }} --}}
          <a href="{{ route('admin.features.'.strtolower(str_replace(" ", "", $statusOptionValue))) }}"
             class="btn btn-block btn-default text-left {{ request()->routeIs('admin.features.'.strtolower(str_replace(" ", "", $statusOptionValue))) ? 'buttonActive' : '' }}">
             <i class="{{ config('icons.features') }}"></i>

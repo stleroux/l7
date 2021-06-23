@@ -16,7 +16,16 @@
             </tr>
             <tr>
                <th>Frontend Views</th>
-               <td>{{ $project->views ?? "N/A" }}</td>
+               <td>
+                  {{-- {{ $project->views ?? "N/A" }} --}}
+                  {{ views($project)->count() }}
+               </td>
+            </tr>
+            <tr>
+               <th>Views Last Month</th>
+               <td>
+                  {{ views($project)->period(CyrildeWit\EloquentViewable\Support\Period::pastMonths(1))->count() }}
+               </td>
             </tr>
             <tr>
                <th>Width <small>(inches)</small></th>

@@ -6,7 +6,7 @@
 
 @section('pageHeader')
    <i class="{{ config('icons.bugs') }}"></i>
-   My Bug Reports
+   Bug Reports
 @endsection
 
 @section('breadcrumb')
@@ -39,9 +39,11 @@
                            {{-- <th class="d-none d-lg-table-cell">#</th> --}}
                            <th>Title</th>
                            <th>Status</th>
+                           <th>Likes</th>
+                           <th>Owner</th>
                            <th class="d-none d-lg-table-cell">Created</th>
                            <th class="d-none d-lg-table-cell">Updated</th>
-                           <th class="no-sort text-right" width="200px">Actions</th>
+                           <th class="no-sort text-right">Actions</th>
                         </tr>
                      </thead>
 
@@ -57,6 +59,8 @@
                                  {{ $bug->title }}
                               </td>
                               <td>{{ $bug->status }}</td>
+                              <td>{{ $bug->likes()->count() }}</td>
+                              <td>{{ $bug->user->username }}</td>
                               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($bug->created_at){{ $bug->created_at }}@endif">{{ $bug->created_at->toDateString() }}</td>
                               <td class="d-none d-lg-table-cell" title="@if($bug->updated_at){{ $bug->updated_at }}@endif">{{ $bug->updated_at->toDateString() }}</td>
                               <td class="text-right">

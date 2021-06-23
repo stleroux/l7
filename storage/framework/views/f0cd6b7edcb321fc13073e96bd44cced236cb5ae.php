@@ -1,5 +1,5 @@
 
-      <div class="card card-trans-4 card-outline card-primary">
+      <div class="card card-trans-4 card-outline card-primary mb-2">
          <div class="card-header bg-info">
             <div class="card-title font-weight-bold">
                <i class="<?php echo e(config('icons.finishes')); ?>"></i>

@@ -34,6 +34,7 @@
                   @include('UI.profile.edit.general')
                   @include('UI.profile.edit.address')
                   @include('UI.profile.edit.other')                  
+                  @include('UI.profile.edit.preferences')
                </div>
 
                <div class="col-xl-3">

@@ -10,7 +10,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>ID</th>
+            {{-- <th>ID</th> --}}
             <th>Name</th>
             <th>Type</th>
             <th>Created On</th>
@@ -34,7 +34,7 @@
                      <label for="{{ $material->id }}"></label>
                   </div>
                </td>
-               <td>{{ $material->id }}</td>
+               {{-- <td>{{ $material->id }}</td> --}}
                <td><a href="{{ route('admin.materials.show', $material->id) }}">{{ $material->name }}</a></td>
                <td>{{ $material->type }}</td>
                {{-- Add more columns here --}}

@@ -10,7 +10,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th class="d-none d-lg-table-cell">#</th>
+            {{-- <th class="d-none d-lg-table-cell">#</th> --}}
             <th>Name</th>
             <th>Category</th>
             <th class="d-none d-lg-table-cell">Created</th>
@@ -34,7 +34,7 @@
                      <label for="{{ $tag->id }}"></label>
                   </div>
                </td>
-               <td class="d-none d-lg-table-cell">{{ $tag->id }}</td>
+               {{-- <td class="d-none d-lg-table-cell">{{ $tag->id }}</td> --}}
                <td nowrap="nowrap">{{ $tag->name }}</td>
                <td nowrap="nowrap">{{ $tag->category }}</td>
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($tag->created_at){{ $tag->created_at }}@endif">

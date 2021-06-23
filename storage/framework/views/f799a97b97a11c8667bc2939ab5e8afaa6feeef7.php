@@ -50,15 +50,15 @@
 						<?php echo e(ucwords($recipe->category->name)); ?>
 
 					</td>
-					<td>
+					<td class="text-center">
 						<?php echo e($recipe->views); ?>
 
 					</td>
-					<td>
+					<td class="text-center">
 						<?php echo e($recipe->likes()->count()); ?>
 
 					</td>
-					<td>
+					<td class="text-center">
 						<?php echo e($recipe->favoritesCount); ?>
 
 					</td>

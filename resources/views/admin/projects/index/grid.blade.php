@@ -11,7 +11,7 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th>#</th>
+            {{-- <th>#</th> --}}
             <th>Name</th>
             <th>Category</th>
             <th>Views</th>
@@ -40,14 +40,14 @@
                      <label for="{{ $project->id }}"></label>
                   </div>
                </td>
-               <td>{{ $project->id }}</td>
+               {{-- <td>{{ $project->id }}</td> --}}
                <td><a href="{{ route('admin.projects.show', $project->id) }}">{{ ucwords($project->name) }}</a></td>
                <td>{{ $project->category }}</td>
-               <td>{{ $project->views }}</td>
-               <td>{{ $project->likes()->count() }}</td>
-               <td>{{ $project->images()->count() }}</td>
-               <td>{{ $project->finishes()->count() }}</td>
-               <td>{{ $project->materials()->count() }}</td>
+               <td class="text-center">{{ $project->views }}</td>
+               <td class="text-center">{{ $project->likes()->count() }}</td>
+               <td class="text-center">{{ $project->images()->count() }}</td>
+               <td class="text-center">{{ $project->finishes()->count() }}</td>
+               <td class="text-center">{{ $project->materials()->count() }}</td>
                <td nowrap="nowrap" title="@if($project->created_at){{ $project->created_at }}@endif">
                   {{ $project->created_at->format(config('settings.dateFormat')) }}
                </td>

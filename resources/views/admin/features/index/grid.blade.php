@@ -10,11 +10,12 @@
                   <label for="checkbox_all"></label>
                </div>
             </th>
-            <th class="d-none d-lg-table-cell">#</th>
+            {{-- <th class="d-none d-lg-table-cell">#</th> --}}
             <th>Title</th>
-            <th>Likes</th>
             <th class="d-none d-lg-table-cell">Creator</th>
             <th class="d-none d-lg-table-cell">Status</th>
+            <th class="d-none d-lg-table-cell">Views</th>
+            <th class="d-none d-lg-table-cell">Likes</th>
             <th class="d-none d-lg-table-cell">Created</th>
             <th class="d-none d-lg-table-cell">Updated</th>
             <th class="no-sort text-center" width="140px">Actions</th>
@@ -36,9 +37,9 @@
                      <label for="{{ $feature->id }}"></label>
                   </div>
                </td>
-               <td class="d-none d-lg-table-cell">{{ $feature->id }}</td>
+               {{-- <td class="d-none d-lg-table-cell">{{ $feature->id }}</td> --}}
                <td nowrap="nowrap"><a href="{{ route('admin.features.show', $feature) }}">{{ $feature->title }}</a></td>
-               <td nowrap="nowrap">{{ $feature->likes()->count() }}</td>
+               {{-- <td nowrap="nowrap">{{ $feature->likes()->count() }}</td> --}}
                <td nowrap="nowrap">{{ $feature->user->username }}</td>
                
                <td nowrap="nowrap">
@@ -58,6 +59,8 @@
                      </select>
                   </form>
                </td>
+               <td>{{ views($feature)->count() }}</td>
+               <td>{{ $feature->likes()->count() }}</td>
 
                <td class="d-none d-lg-table-cell" nowrap="nowrap" title="@if($feature->created_at){{ $feature->created_at }}@endif">
                   {{ $feature->created_at->format(config('settings.dateFormat')) }}

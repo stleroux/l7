@@ -17,11 +17,11 @@
       <i class="{{ config('icons.add') }}"></i>
       
       @if($modelName == 'bug')
-      	Report {{ ucfirst($modelName) }}
+         Report {{ ucfirst($modelName) }}
       @elseif($modelName == 'feature')
-      	Request {{ ucfirst($modelName) }}
+         Request {{ ucfirst($modelName) }}
       @else
-      	Create {{ ucfirst($modelName) }}
+         Create {{ ucfirst($modelName) }}
       @endif
       
    </a>

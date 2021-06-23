@@ -48,13 +48,13 @@
 					<td>
 						{{ ucwords($recipe->category->name) }}
 					</td>
-					<td>
+					<td class="text-center">
 						{{ $recipe->views }}
 					</td>
-					<td>
+					<td class="text-center">
 						{{ $recipe->likes()->count() }}
 					</td>
-					<td>
+					<td class="text-center">
 						{{ $recipe->favoritesCount }}
 					</td>
 					<td>

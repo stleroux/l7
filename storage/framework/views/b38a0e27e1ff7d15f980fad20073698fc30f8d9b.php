@@ -15,11 +15,12 @@
 	            </th>
 					<th>Title</th>
 					<th>Category</th>
+					<th>Author</th>
 					<th>Views</th>
 					<th>Likes</th>
 					<th>Favorited</th>
-					<th>Author</th>
 					<th>Created On</th>
+					<th>Updated On</th>
 					<th>Publish(ed) On</th>
 					<th data-orderable="false"></th>
 				</tr>
@@ -46,27 +47,12 @@
 
 						</a>
 					</td>
-					<td>
-						<?php echo e(ucwords($post->category->name)); ?>
-
-					</td>
-					<td>
-						<?php echo e($post->views); ?>
-
-					</td>
-					<td>
-						<?php echo e($post->likes()->count()); ?>
-
-					</td>
-					<td>
-						<?php echo e($post->favoritesCount); ?>
-
-					</td>
-					<td>
-						
-						<?php echo e($post->created_at->format(config('settings.dateFormat'))); ?>
-
-					</td>
+					<td><?php echo e(ucwords($post->category->name)); ?></td>
+					<td><?php echo $__env->make('common.authorFormat', ['model'=>$post, 'field'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></td>
+					<td><?php echo e($post->views); ?></td>
+					<td><?php echo e($post->likes()->count()); ?></td>
+					<td><?php echo e($post->favoritesCount); ?></td>
+					<td><?php echo e($post->created_at->format(config('settings.dateFormat'))); ?></td>
 					<td>
 						
 						<?php echo e($post->updated_at->format(config('settings.dateFormat'))); ?>

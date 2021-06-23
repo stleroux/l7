@@ -12,7 +12,7 @@
                      <label for="checkbox_all"></label>
                   </div>
                </th>
-               <th>ID</th>
+               {{-- <th>ID</th> --}}
                <th>Category Name</th>
                <th>Parent Category</th>
                {{-- <th>Created</th> --}}
@@ -39,7 +39,7 @@
                         <label for="{{ $category->id }}"></label>
                      </div>
                   </td>
-                  <td>{{ $category->id }}</td>
+                  {{-- <td>{{ $category->id }}</td> --}}
                   <td>{{ ucfirst($category->name) }}</td>
                   <td>
                      {{ $category->parent_id ? ucfirst($category->parent->name) : '' }} <small>(Parent:{{ $category->parent_id }})</small>

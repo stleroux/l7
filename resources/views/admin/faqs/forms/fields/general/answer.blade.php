@@ -8,13 +8,13 @@
 
       @if(Route::currentRouteName('') == 'admin.faqs.show')
 
-	      <div class="p-1 m-0 bg-gray-light">
-	         {!! $faq->answer !!}
-	      </div>
+         <div class="p-1 m-0 bg-gray-light">
+            {!! $faq->answer !!}
+         </div>
 
-   	@else
+      @else
       
-      	<textarea name="answer" id="answer" rows="3" class="wysiwyg form-control form-control-sm @error('answer') is-invalid @enderror">{{ old('answer') ?? $faq->answer }}</textarea>
+         <textarea name="answer" id="answer" rows="3" class="wysiwyg form-control form-control-sm @error('answer') is-invalid @enderror">{{ old('answer') ?? $faq->answer }}</textarea>
 
       @endif
       

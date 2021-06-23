@@ -270,13 +270,13 @@ class RecipesController extends Controller
       } else {
          // No $key value is passed
          if(Auth::user()->can('recipe-list')) {
-            $recipes = Recipe::with('user','category')
+            $recipes = Recipe::with('user','category','likes','views')
                ->published()
                ->public()
                ->orderBy('title', 'asc')
                ->get();
          }else{
-            $recipes = Recipe::with('user','category')
+            $recipes = Recipe::with('user','category','likes','views')
                ->published()
                ->public()
                ->myRecipes()

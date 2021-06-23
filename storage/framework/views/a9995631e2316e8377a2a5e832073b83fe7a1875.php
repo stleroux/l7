@@ -11,7 +11,7 @@
             <?php if(count($posts) > 0): ?>
                <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <div class="card card-trans-4 mb-2 border-black-2">
-                     <div class="card_header p-2"><?php echo e($post->title); ?></div>
+                     <div class="card_header p-2"><?php echo e(ucwords($post->title)); ?></div>
                      <div class="card_body p-2">
                         <div class="row">
                         <div class="col-sm-10">

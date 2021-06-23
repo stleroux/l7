@@ -25,6 +25,7 @@ class CreateInvoicerInvoiceItemsTable extends Migration {
 			$table->decimal('total')->unsigned();
 			$table->timestamp('work_date')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

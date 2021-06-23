@@ -39,6 +39,7 @@
                            <th>Title</th>
                            <th>Status</th>
                            <th>Likes</th>
+                           <th>Owner</th>
                            <th class="d-none d-lg-table-cell">Created</th>
                            <th class="d-none d-lg-table-cell">Updated</th>
                            <th class="no-sort text-right">Actions</th>
@@ -57,6 +58,7 @@
                               </td>
                               <td><?php echo e($feature->status); ?></td>
                               <td><?php echo e($feature->likes()->count()); ?></td>
+                              <td><?php echo e($feature->user->username); ?></td>
                               <td class="d-none d-lg-table-cell" nowrap="nowrap" title="<?php if($feature->created_at): ?><?php echo e($feature->created_at); ?><?php endif; ?>"><?php echo e($feature->created_at->toDateString()); ?></td>
                               <td class="d-none d-lg-table-cell" title="<?php if($feature->updated_at): ?><?php echo e($feature->updated_at); ?><?php endif; ?>"><?php echo e($feature->updated_at->toDateString()); ?></td>
                               <td>

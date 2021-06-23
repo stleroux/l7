@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\UI\Carvings;
 
 use App\Http\Controllers\Controller;
+use CyrildeWit\EloquentViewable\Support\Period;
 use App\Models\Category;
 use App\Models\Carving;
 use App\Models\Faq;
 use App\Models\Comment;
 use App\Models\Tag;
+// use CyrildeWit\EloquentViewable\Support\Period;
 // use App\Models\Admin\Projects\Finish;
 // use App\Models\Admin\Projects\Material;
 // use App\Models\Admin\Projects\Image;
@@ -19,6 +21,7 @@ use Image as Img;
 use Route;
 use Session;
 use URL;
+use Carbon\Carbon;
 
 class CarvingsController extends Controller
 {
@@ -57,13 +60,13 @@ class CarvingsController extends Controller
         $tags = Tag::where('category',1)->orderBy('name')->get();
 
         if($filter == "all" && $tag){
-            $carvings = Tag::where('name', request('tag'))->firstOrFail()->carvings->sortBy('name');
+            $carvings = Tag::where('name', request('tag'))->firstOrFail()->carvings()->orderBy('name')->paginate(8);
 
         // Filter and Tag
         } elseif($filter && $tag) {
-            $carvings = Carving::where('category', '=', $filter)->whereHas('tags', function ($query) {
+            $carvings = Carving::with('images')->where('category', '=', $filter)->whereHas('tags', function ($query) {
                 $query->where('name', request('tag'));
-            })->get();
+            })->paginate(8);
 
         // Filter and NO Tag
         } elseif($filter && !$tag) {
@@ -98,6 +101,10 @@ class CarvingsController extends Controller
         $faqs = FAQ::where('category', 'carvings')->orderBy('question')->get();
         // dd($faqs);
 
+        // Increase the view count since this is viewed from the frontend
+        // $expiresAt = now()->addHours(3);
+        // views($faq)->cooldown($expiresAt)->record();
+
         return view('UI.carvings.faqs', compact('faqs'));
 
     }
@@ -117,9 +124,12 @@ class CarvingsController extends Controller
         // Check if user has required permission
 
         // Increase the view count if viewed from the frontend
-        if (url()->previous() != url('/carvings/list')) {
-            DB::table('carvings')->where('id','=',$carving->id)->increment('views',1);
-        }
+        // if (url()->previous() != url('/carvings/list')) {
+        //     DB::table('carvings')->where('id','=',$carving->id)->increment('views',1);
+        // }
+        $expiresAt = now()->addHours(3);
+        views($carving)->cooldown($expiresAt)->record();
+        // views($carving)->record();
 
         // get previous project
         $previous = Carving::where('name', '<', $carving->name)->orderBy('name','asc')->max('name');

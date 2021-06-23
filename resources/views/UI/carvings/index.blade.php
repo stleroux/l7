@@ -28,7 +28,7 @@
 @endsection
 
 @section('content')
-   {{-- <div class="card card-trans-0 w-100 pt-2 px-2"> --}}
+
    @if(count($carvings) > 0)
       
       <div class="card card-trans-2 mb-3">
@@ -76,7 +76,7 @@
                                        <strong>Views :</strong>
                                     </div>
                                     <div class="col text-left pl-1">
-                                       {{ $carving->views }}
+                                       {{-- {{ $carving->views }} --}} {{ views($carving)->count() }}
                                     </div>
                                  </div>
                                  <div class="row">
@@ -105,24 +105,27 @@
                                  </div>
                                  <div class="row-col pt-2 pb-2">
                                     {{-- @include('common.likeCard', ['model'=>$carving]) --}}
-                                    @can('like', $carving)
-                                       <form class="" action="{{ route('like') }}" method="POST">
-                                          @csrf
-                                          <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
-                                          <input type="hidden" name="id" value="{{ $carving->id }}"/>
-                                          <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold">@lang('Like')</button>
-                                       </form>
-                                    @endcan
+                                    @auth
+                                       @can('like', $carving)
+                                          <form class="" action="{{ route('like') }}" method="POST">
+                                             @csrf
+                                             <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                                             <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                                             <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold">@lang('Like')</button>
+                                          </form>
+                                       {{-- @endcan --}}
 
-                                    @can('unlike', $carving)
-                                       <form class="" action="{{ route('unlike') }}" method="POST">
-                                          @csrf
-                                          @method('DELETE')
-                                          <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
-                                          <input type="hidden" name="id" value="{{ $carving->id }}"/>
-                                          <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong>@lang('Unlike')</strong></button>
-                                       </form>
-                                    @endcan
+                                       {{-- @can('unlike', $carving) --}}
+                                       @else
+                                          <form class="" action="{{ route('unlike') }}" method="POST">
+                                             @csrf
+                                             @method('DELETE')
+                                             <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                                             <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                                             <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong>@lang('Unlike')</strong></button>
+                                          </form>
+                                       @endcan
+                                    @endauth
                                  </div>
                               </a>
                            </div>
@@ -136,13 +139,8 @@
 
             </div>
 
-            {{-- <div class="row justify-content-center p-0 m-0"> --}}
-                  {{-- {{ $carvings->links() }} --}}
-                  {{-- {{ $carvings->links('UI.carvings.pagination.custom') }}            
-            </div> --}}
-
             {{-- SHOW PAGINATION --}}
-            {{-- @if (strpos($_SERVER['REQUEST_URI'], "1000") === false)
+            @if (strpos($_SERVER['REQUEST_URI'], "1000") === false)
                <div class="row mb-2">
                   <div class="col ml-2 text-light">
                      Showing {{ $carvings->firstItem() }} to {{ $carvings->lastItem() }} of {{$carvings->total()}} entries
@@ -151,7 +149,7 @@
                      {{ $carvings->links('UI.carvings.pagination.custom') }}
                   </div>
                </div>
-            @endif --}}
+            @endif
          </div>
       </div>
    @else
@@ -163,11 +161,3 @@
 
 
 @endsection
-
-{{-- @section('scripts')
-   <script>
-      $(document).ready(function () {
-         $('#memberModal').modal('show');
-      });
-   </script>
-@endsection --}}

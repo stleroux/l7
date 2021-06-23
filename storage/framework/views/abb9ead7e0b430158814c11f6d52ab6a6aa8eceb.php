@@ -10,7 +10,7 @@
             <!-- Left navbar links -->
             <?php echo $__env->make('layouts.admin.navbar.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <!-- SEARCH FORM -->
-            <?php echo $__env->make('layouts.admin.navbar.search', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('admin.search.quickSearch', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                <!-- Messages Dropdown Menu -->

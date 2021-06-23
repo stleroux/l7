@@ -38,7 +38,7 @@
       </div>
    </div>
 
-   {{-- @include('common.audits') --}}
+   @include('common.audits')
 
    @include('admin.carvings.help')
 

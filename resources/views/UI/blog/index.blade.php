@@ -13,10 +13,11 @@
    @include('UI.blog.blocks.search')
    @include('UI.blog.blocks.archives')
    @include('UI.blog.blocks.popular')
+   @include('UI.blog.blocks.faqs')
 @endsection
 
 @section('topbar')
-   @include('UI.blog.topbar')
+   {{-- @include('UI.blog.topbar') --}}
 @endsection
 
 @section('content')
@@ -30,7 +31,7 @@
                {{ $post->title }}
 
                <span class="float-right font-weight-normal">
-                  @if($post->likes()->count() > 0)
+                  {{-- @if($post->likes()->count() > 0)
                      @if($post->likes()->count() == 1)
                         <small class="text-steel">Liked {{ $post->likes()->count() }} time by others</small>
                      @else
@@ -38,7 +39,11 @@
                      @endif
                   @else
                      <small class="text-steel">Not liked by anyone yet</small>
-                  @endif
+                  @endif --}}
+                  <small class="text-steel">
+                     Likes : {{ $post->likes()->count() }} / 
+                     Views : {{ views($post)->count() }}
+                  </small>
                </span>
 
             </div>
@@ -71,7 +76,27 @@
                Created by @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                on @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
 
-               @include('common.likeTopbar', ['model' => $post])
+               {{-- @include('common.likeTopbar', ['model' => $post]) --}}
+               <div class="form-inline float-right p-0 m-0">
+   
+                  @can('like', $post)
+                     <form class="p-0 m-0" action="{{ route('like') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="likeable_type" value="{{ get_class($post) }}"/>
+                        <input type="hidden" name="id" value="{{ $post->id }}"/>
+                        <button class="btn btn-sm btn-success">@lang('Like')</button>
+                     </form>
+                  @else
+                     <form class="" action="{{ route('unlike') }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="likeable_type" value="{{ get_class($post) }}"/>
+                        <input type="hidden" name="id" value="{{ $post->id }}"/>
+                        <button class="btn btn-sm btn-danger">@lang('Unlike')</button>
+                     </form>
+                  @endcan
+
+               </div>
 
             </div>
 

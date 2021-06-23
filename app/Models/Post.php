@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
@@ -12,17 +14,21 @@ use Spatie\Searchable\SearchResult;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Contracts\Likeable;
 use App\Models\Concerns\Likes;
+use Route;
 
-class Post extends Model implements Searchable, Auditable, Likeable
+class Post extends Model implements Searchable, Auditable, Likeable, Viewable
 {
 
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
    use Likes;
+   use InteractsWithViews;
 
    protected $fillable = ['slug'];
 
    protected $dates = ['deleted_at', 'published_at'];
+
+   protected $removeViewsOnDelete = true;
    
    protected static function boot()
    {
@@ -204,8 +210,12 @@ class Post extends Model implements Searchable, Auditable, Likeable
    public function getSearchResult(): SearchResult
    {
       
-      $url = route('blog.show', $this->slug);
-      // dd($url);
+      if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')
+      {
+         $url = route('admin.posts.show', $this->id);
+      } else {
+         $url = route('posts.show', $this->id);
+      }
 
       return new SearchResult(
          $this,

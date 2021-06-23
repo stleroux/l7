@@ -20,50 +20,41 @@
 
    @include('UI.carvings.show.topbar')
 
-   <div class="card card-trans-2 p-2">
-
-      <div class="row">
-      
-         <div class="col-12 col-xl-5">
-            @include('UI.carvings.blocks.imageSlider')
-            @include('UI.carvings.show.description')
-         </div>
-         
-         <div class="col-12 col-xl-4">
-            @include('UI.carvings.show.materials')
-            @include('UI.carvings.show.finishes')
-            @include('UI.carvings.show.tags')
-         </div>
-
-         <div class="col-12 col-xl-3">
-            @include('UI.carvings.show.information')
-         </div>
-      
-      </div>
-
-      <div class="row">
-         <div class="col-xl-9">
-            @include('common.view_more')         
-         </div>
-      </div>
-
-      <div class="row">
-         <div class="col-xl-9">
-            @include('UI.carvings.show.comments', ['model'=>$carving])
-         </div>
-      
-         @auth
-            <div class="col-xl-3">
-               @include('UI.carvings.show.leave_comment')
+   <div class="card card-trans-2 p-1">
+      <div class="card-body p-2">
+         <div class="row">
+            <div class="col-9">
+               <div class="row">
+                  <div class="col-7">
+                     @include('UI.carvings.blocks.imageSlider')
+                     @include('UI.carvings.show.description')                  
+                  </div>
+                  <div class="col-5">
+                     @include('UI.carvings.show.materials')
+                     @include('UI.carvings.show.finishes')
+                     @include('UI.carvings.show.tags')                  
+                  </div>
+               </div>
+               <div class="row-col">
+                  @include('common.view_more')               
+               </div>
+               <div class="row-col">
+                  @include('UI.carvings.show.comments', ['model'=>$carving])
+               </div>
             </div>
-         @endauth
+            <div class="col-3">
+               @include('UI.carvings.show.information')            
+               @auth
+                  @include('UI.carvings.show.leave_comment')
+               @endauth
+            </div>
+         </div>
       </div>
-
    </div>
 
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
    <script>
       $('.modal').on('shown.bs.modal', function (e) {
          $('.carousel').carousel('pause');
@@ -74,4 +65,4 @@
          $('.carousel').carousel('cycle');
       })
    </script>
-@endsection
+@endsection --}}

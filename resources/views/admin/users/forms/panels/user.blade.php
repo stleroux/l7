@@ -14,6 +14,7 @@
    	
    	<div class="form-row">
          <div class="col-12 col-md-6">@include('admin.users.forms.fields.email', ['required'=>'required'])</div>
+         <div class="col-12 col-md-6">@include('admin.users.forms.fields.username')</div>
    		<div class="col-12 col-md-3">@include('admin.users.forms.fields.first_name', ['required'=>'required'])</div>
       	<div class="col-12 col-md-3">@include('admin.users.forms.fields.last_name', ['required'=>'required'])</div>
       	<div class="col-12">@include('admin.users.forms.fields.notes')</div>

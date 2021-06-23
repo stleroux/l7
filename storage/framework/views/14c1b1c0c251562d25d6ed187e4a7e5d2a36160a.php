@@ -3,7 +3,8 @@
 	<div class="card card-trans-6 mb-2">
 		<div class="card-header card_header p-2">Views</div>
 		<div class="card-body card_body p-1 text-center text-dark">
-         <?php echo e($recipe->views + 1); ?>
+         
+         <?php echo e(views($recipe)->count()); ?>
 
       </div>
 	</div>
