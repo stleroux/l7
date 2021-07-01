@@ -1,5 +1,7 @@
 <ul class="navbar-nav ml-auto">
 
+   @include('layouts.UI.common.cart')
+
    @guest
 
       @include('layouts.UI.navbar.right.authLinks')

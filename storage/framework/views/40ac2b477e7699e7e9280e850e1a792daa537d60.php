@@ -49,6 +49,8 @@
    <link rel="stylesheet" href="<?php echo e(asset('css/common/styles.css')); ?>">
    <link rel="stylesheet" href="<?php echo e(asset('css/common/print.css')); ?>">
 
+
+
    <?php echo $__env->yieldContent('stylesheet'); ?>
 
    

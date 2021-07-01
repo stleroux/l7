@@ -93,7 +93,7 @@ class UsersController extends Controller
          $user->password = Hash::make('password');
       }
 
-      $user->account_status = User::IS_DISABLED;
+      $user->account_status = 0;
       $user->public_email = 1;
       $user->telephone = $request->telephone;
       $user->cell = $request->cell;
@@ -122,24 +122,24 @@ class UsersController extends Controller
          );
 
 
-         if($user->invoicer_client){
-            // save the data in the Invoicer client database table
-            $client = new InvoicerClient;
-               $client->company_name = $request->company_name;
-               $client->contact_name = $request->first_name . ' ' . $request->last_name;
-               $client->address = $request->address;
-               $client->city = $request->city;
-               $client->state = $request->state;
-               $client->zip = $request->zip;
-               $client->notes = $request->notes;
-               $client->telephone = $request->telephone;
-               $client->cell = $request->cell;
-               $client->fax = $request->fax;
-               $client->email = $request->email;
-               $client->website = $request->website;
-            $client->save();
+         // if($user->invoicer_client){
+         //    // save the data in the Invoicer client database table
+         //    $client = new InvoicerClient;
+         //       $client->company_name = $request->company_name;
+         //       $client->contact_name = $request->first_name . ' ' . $request->last_name;
+         //       $client->address = $request->address;
+         //       $client->city = $request->city;
+         //       $client->state = $request->state;
+         //       $client->zip = $request->zip;
+         //       $client->notes = $request->notes;
+         //       $client->telephone = $request->telephone;
+         //       $client->cell = $request->cell;
+         //       $client->fax = $request->fax;
+         //       $client->email = $request->email;
+         //       $client->website = $request->website;
+         //    $client->save();
 
-         }
+         // }
 
          if ($request->submit == 'new')
          {

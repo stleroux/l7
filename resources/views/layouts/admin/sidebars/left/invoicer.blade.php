@@ -63,14 +63,14 @@
 				</li>
 			@endcan
 
-			@can('invoicer-client')
+{{-- 			@can('invoicer-client')
 				<li class="nav-item ml-3">
 					<a href="{{ route('admin.invoicer.clients') }}" class="nav-link {{ Request::is('admin/invoicer/clients*') ? 'active' : '' }}">
 						<i class="{{ config('icons.invoicer-clients') }}"></i>
 						<p>Clients</p>
 					</a>
 				</li>
-			@endcan
+			@endcan --}}
 
 			@can('invoicer-product')
 				<li class="nav-item ml-3">

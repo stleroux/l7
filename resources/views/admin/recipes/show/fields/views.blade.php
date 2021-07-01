@@ -3,7 +3,7 @@
 	<div class="card card-secondary mb-2">
 		<div class="card-header p-1">Views</div>
 		<div class="card-body p-1 text-center text-dark">
-         {{ $recipe->views + 1 }}
+         {{ views($recipe)->count() }}
       </div>
 	</div>
 </div>

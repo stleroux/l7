@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
@@ -22,12 +23,13 @@ class InvoicerInvoice extends Model implements Auditable
 		'updated_at',
 		'deleted_at',
 		'invoiced_at',
+      'quoted_at',
 		'paid_at',
       'work_date'
 	];
 
 	protected $fillable = [
-		'client_id',
+		'user_id',
 		'notes',
 		'status',
 		'amount_charged',
@@ -38,7 +40,8 @@ class InvoicerInvoice extends Model implements Auditable
 		'total_deductions',
 		'total',
 		'invoiced_at',
-		'paid_at'
+		'paid_at',
+      'quoted_at'
 	];
 
 	public $sortable = [
@@ -61,14 +64,15 @@ class InvoicerInvoice extends Model implements Auditable
 // RELATIONSHIPS
 //////////////////////////////////////////////////////////////////////////////////////
 	// An invoice belongs to a client
-	public function client()
-	{
-		return $this->belongsTo('App\Models\InvoicerClient');
-	}
-   // public function user()
-   // {
-   //    return $this->belongsTo('App\Models\User');
-   // }
+	// public function client()
+	// {
+	// 	return $this->belongsTo('App\Models\InvoicerClient');
+	// }
+   public function client()
+   {
+      return $this->belongsTo('App\Models\User','client_id','id');
+      // return $this->belongsTo('App/Artist','artist_id','id');
+   }
 
 	// An invoice has many items
 	public function invoiceItems() {

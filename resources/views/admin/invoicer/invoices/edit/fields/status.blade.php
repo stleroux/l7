@@ -7,14 +7,14 @@
 	@if($invoice->status != 'paid')
 	
 		<select name="status" class="col-6 form-control pull-right">
-	
-			<option value="estimate" {{ ($invoice->status == 'estimate' ? 'selected' : '') }}>1- Estimate</option>
-			<option value="logged" {{ ($invoice->status == 'logged' ? 'selected' : '') }}>2- Logged</option>
-
-			@if($invoice->invoiceItems->count() > 0)
-				<option value="invoiced" {{ ($invoice->status == 'invoiced' ? 'selected' : '') }}>3- Invoiced</option>
+			@if($invoice->status == 'logged')
+				<option value="logged" {{ ($invoice->status == 'logged' ? 'selected' : '') }} readonly >Logged</option>
+			@elseif($invoice->status == 'quote')
+				<option value="quote" {{ ($invoice->status == 'quote' ? 'selected' : '') }} readonly >Quote</option>
 			@endif
-
+			{{-- <option value="quote" {{ ($invoice->status == 'quote' ? 'selected' : '') }}>Quote</option> --}}
+			<option value="estimate" {{ ($invoice->status == 'estimate' ? 'selected' : '') }}>Estimate</option>
+			<option value="invoiced" {{ ($invoice->status == 'invoiced' ? 'selected' : '') }}>Invoiced</option>
 		</select>
 	
 	@endif

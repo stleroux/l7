@@ -52,10 +52,15 @@
                   @include('admin.recipes.show.fields.servings')
                   @include('admin.recipes.show.fields.prep_time')
                   @include('admin.recipes.show.fields.cook_time')
+                  @include('admin.recipes.show.fields.source')
+                  @include('admin.recipes.show.fields.publishDate')
+                  @include('admin.recipes.show.fields.author')
+               </div>
+               <div class="row">
                   @include('admin.recipes.show.fields.personal')
                   @include('admin.recipes.show.fields.views')
-                  @include('admin.recipes.show.fields.source')
-                  @include('admin.recipes.show.fields.author')
+                  @include('admin.recipes.show.fields.viewsLastMonth')
+                  @include('admin.recipes.show.fields.likes')
                </div>
 
                <div class="row">

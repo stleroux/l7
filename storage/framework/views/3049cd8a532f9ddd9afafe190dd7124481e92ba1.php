@@ -64,8 +64,9 @@
 							<th><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('invoiced_at','Invoiced'));?></th>
 						<?php endif; ?>
 
-						<th><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('client.contact_name','Contact Name'));?></th>
-						
+						<th><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('client.last_name','Last Name'));?></th>
+						<th><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('client.first_name','First Name'));?></th>
+						<th><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('client.company_name','Company Name'));?></th>
 						<th class="text-right"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('amount_charged','Charged'));?></th>
 						<th class="text-right"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('deposits','Deposits'));?></th>
 						<th class="text-right"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('discounts','Discounts'));?></th>
@@ -114,11 +115,20 @@
 
 						<td>
 							<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-client')): ?>
-								<a href="<?php echo e(route('admin.invoicer.clients.show', $invoice->client->id)); ?>"><?php echo e($invoice->client->contact_name); ?></a>
+								<a href="<?php echo e(route('admin.users.show', $invoice->client->id)); ?>"><?php echo e($invoice->client->last_name); ?></a>
 							<?php else: ?>
-								<?php echo e($invoice->client->contact_name); ?>
+								<?php echo e($invoice->client->last_name); ?>
 
 							<?php endif; ?>
+						</td>
+
+						<td>
+							<?php echo e($invoice->client->first_name); ?>							
+						</td>
+
+						<td>
+							<?php echo e($invoice->client->company_name); ?>
+
 						</td>
 
 						<td class="text-right"><?php echo e(number_format($invoice->sub_total, 2, '.', ', ')); ?>$</td>

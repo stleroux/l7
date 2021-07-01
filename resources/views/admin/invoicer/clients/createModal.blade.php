@@ -18,8 +18,8 @@
 				</button>
 			</div>
 			
-			{{-- <form action="{{ route('admin.invoicer.clients.store') }}" class="needs-validation" novalidate method="POST"> --}}
-			<form action="{{ route('admin.invoicer.clients.store') }}" method="POST">
+			<form action="{{ route('admin.invoicer.clients.store') }}" class="needs-validation" novalidate method="POST">
+			{{-- <form action="{{ route('admin.users.store') }}" method="POST"> --}}
 				@csrf
 			
 				<div class="modal-body">
@@ -27,19 +27,33 @@
 					<input type="hidden" name="popup" value="popup">
 					
 					<div class="form-group">
-						<label for="contact_name" class="required">Contact Name</label>
+						<label for="first_name" class="required">First Name</label>
 						<input
 							type="text"
-							name="contact_name"
-							class="form-control @error('contact_name', 'clientErrors') is-invalid @enderror"
-							value="{{ old('contact_name') }}">
-					   	{{-- <span class="text-danger">{{ $errors->clientErrors->first('contact_name') }}</span> --}}
-						@error('contact_name', 'clientErrors')
+							name="first_name"
+							class="form-control @error('first_name', 'clientErrors') is-invalid @enderror"
+							value="{{ old('first_name') }}">
+					   	{{-- <span class="text-danger">{{ $errors->clientErrors->first('first_name') }}</span> --}}
+						@error('first_name', 'clientErrors')
 							<span class="invalid-feedback" role="alert">
 								<strong>{{ $message }}</strong>
 							</span>
 						@enderror
+					</div>
 
+					<div class="form-group">
+						<label for="last_name" class="required">Last Name</label>
+						<input
+							type="text"
+							name="last_name"
+							class="form-control @error('last_name', 'clientErrors') is-invalid @enderror"
+							value="{{ old('last_name') }}">
+					   	{{-- <span class="text-danger">{{ $errors->clientErrors->first('last_name') }}</span> --}}
+						@error('last_name', 'clientErrors')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+						@enderror
 					</div>
 
 					<div class="form-group">

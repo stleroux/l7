@@ -11,7 +11,7 @@
 			@if($invoice->invoiced_at || $invoice->status == 'paid')
 				<input type="text" name="invoiced_at" value="{{ $invoice->invoiced_at }}" class="form-control" readonly />
 			@else
-				<input type="text" name="invoiced_at" id="datePicker" value="{{ $invoice->invoiced_at }}" class="form-control" />
+				<input type="text" name="invoiced_at" id="datePickerInvoiced" value="{{ $invoice->invoiced_at }}" class="form-control" />
 			@endif
 
 			<div class="input-group-append">

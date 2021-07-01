@@ -1,6 +1,6 @@
 <?php
 
-// namespace Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -21,19 +21,27 @@ class FavoritesTableSeeder extends Seeder
         \DB::table('favorites')->insert(array (
             0 => 
             array (
-                'created_at' => '2019-10-25 21:43:47',
-                'favoriteable_id' => 7,
-                'favoriteable_type' => 'App\\Models\\Articles\\Article',
-                'updated_at' => '2019-10-25 21:43:47',
                 'user_id' => 2,
+                'favoriteable_type' => 'App\\Models\\Articles\\Article',
+                'favoriteable_id' => 7,
+                'created_at' => '2019-10-25 21:43:47',
+                'updated_at' => '2019-10-25 21:43:47',
             ),
             1 => 
             array (
-                'created_at' => '2019-11-15 08:58:42',
-                'favoriteable_id' => 27,
-                'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',
-                'updated_at' => '2019-11-15 08:58:42',
                 'user_id' => 2,
+                'favoriteable_type' => 'App\\Models\\Recipes\\Recipe',
+                'favoriteable_id' => 27,
+                'created_at' => '2019-11-15 08:58:42',
+                'updated_at' => '2019-11-15 08:58:42',
+            ),
+            2 => 
+            array (
+                'user_id' => 2,
+                'favoriteable_type' => 'App\\Models\\Recipe',
+                'favoriteable_id' => 34,
+                'created_at' => '2021-06-11 10:31:36',
+                'updated_at' => '2021-06-11 10:31:36',
             ),
         ));
         

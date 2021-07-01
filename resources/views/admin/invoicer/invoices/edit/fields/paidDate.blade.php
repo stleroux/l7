@@ -13,7 +13,7 @@
 				@if($invoice->paid_at)
 					<input type="text" name="paid_at" value="{{ $invoice->paid_at }}" class="form-control" readonly />
 				@else
-					<input type="text" name="paid_at" id="datePicker" value="{{ $invoice->paid_at }}" class="form-control" />
+					<input type="text" name="paid_at" id="datePickerPaid" value="{{ $invoice->paid_at }}" class="form-control" />
 				@endif
 
 				<div class="input-group-append">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Invoicer;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use App\Models\InvoicerInvoice;
 // use App\Models\User;
 use Config;
 use Gate;
+use Hash;
 use Session;
 
 
@@ -182,64 +184,70 @@ class ClientsController extends Controller
       if($request->popup)
       {
          $validator = \Validator::make($request->all(), [
-               'contact_name' => 'required|unique:invoicer__clients',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'telephone' => 'required',
-            'email' => 'required|email|unique:invoicer__clients'
+            'email' => 'required|email|unique:users'
            ]);
 
            if ($validator->fails()) {
                return redirect()
-                        ->route('admin.invoicer.invoices.create')
-                           ->withErrors($validator, 'clientErrors')
-                           ->withInput();
+                  ->route('admin.invoicer.invoices.create')
+                  ->withErrors($validator, 'clientErrors')
+                  ->withInput();
            }
 
-           // set a flash message to be displayed on screen
+         // return redirect('register')->withErrors($validator, 'login');
+               // save the data in the database
+         $client = new User;
+            $client->first_name = $request->first_name;
+            $client->last_name = $request->last_name;
+            $client->company_name = $request->company_name;
+            $client->email = $request->email;
+            $client->telephone = $request->telephone;
+            $client->password = Hash::make('password');
+            $client->account_status = 1;
+            $client->invoicer_client = 1;
+         $client->save();
+
+         // set a flash message to be displayed on screen
          $notification = [
             'message' => 'The client was successfully added!',
             'alert-type' => 'success'
          ];
-         // return redirect('register')->withErrors($validator, 'login');
-               // save the data in the database
-         $client = new InvoicerClient;
-            $client->company_name = $request->company_name;
-            $client->contact_name = $request->contact_name;
-            $client->address = $request->address;
-            $client->telephone = $request->telephone;
-         $client->save();
 
-            return redirect()->route('admin.invoicer.invoices.create')->with($notification);
+         return redirect()->route('admin.invoicer.invoices.create')->with($notification);
       }
 
       // Regular client create
       // validate the data
-      $this->validate($request, array(
-         'contact_name' => 'required',
-         'telephone' => 'required',
-         'email' => 'required|email|unique:invoicer__clients'
-      ));
+      // $this->validate($request, array(
+      //    'contact_name' => 'required',
+      //    'telephone' => 'required',
+      //    'email' => 'required|email|unique:invoicer__clients'
+      // ));
 
-      // save the data in the database
-      $client = new InvoicerClient;
-         $client->company_name = $request->company_name;
-         $client->contact_name = $request->contact_name;
-         $client->address = $request->address;
-         $client->city = $request->city;
-         $client->state = $request->state;
-         $client->zip = $request->zip;
-         $client->notes = $request->notes;
-         $client->telephone = $request->telephone;
-         $client->cell = $request->cell;
-         $client->fax = $request->fax;
-         $client->email = $request->email;
-         $client->website = $request->website;
-      $client->save();
+      // // save the data in the database
+      // $client = new InvoicerClient;
+      //    $client->company_name = $request->company_name;
+      //    $client->contact_name = $request->contact_name;
+      //    $client->address = $request->address;
+      //    $client->city = $request->city;
+      //    $client->state = $request->state;
+      //    $client->zip = $request->zip;
+      //    $client->notes = $request->notes;
+      //    $client->telephone = $request->telephone;
+      //    $client->cell = $request->cell;
+      //    $client->fax = $request->fax;
+      //    $client->email = $request->email;
+      //    $client->website = $request->website;
+      // $client->save();
 
       // set a flash message to be displayed on screen
-      Session::flash('success','The client was successfully saved!');
+      // Session::flash('success','The client was successfully saved!');
 
       
-      return redirect()->route('admin.invoicer.clients');
+      // return redirect()->route('admin.invoicer.clients');
    }
 
 

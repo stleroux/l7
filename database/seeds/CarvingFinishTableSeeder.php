@@ -1,6 +1,6 @@
 <?php
 
-// namespace Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -21,18 +21,18 @@ class CarvingFinishTableSeeder extends Seeder
         \DB::table('carving_finish')->insert(array (
             0 => 
             array (
-                'carving_id' => 51,
-                'created_at' => NULL,
-                'finish_id' => 1,
                 'id' => 10,
+                'carving_id' => 51,
+                'finish_id' => 1,
+                'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             1 => 
             array (
-                'carving_id' => 53,
-                'created_at' => NULL,
-                'finish_id' => 2,
                 'id' => 11,
+                'carving_id' => 53,
+                'finish_id' => 2,
+                'created_at' => NULL,
                 'updated_at' => NULL,
             ),
         ));

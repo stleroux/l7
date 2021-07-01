@@ -13,6 +13,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Haruncpi\LaravelUserActivity\Traits\Loggable;
 use App\Contracts\Likeable;
 use App\Models\Like;
+// use App\Models\InvoicerInvoice;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Route;
@@ -118,6 +119,19 @@ class User extends Authenticatable implements Searchable, Auditable
    public function mylinks() {
       return $this->hasMany('App\Models\Mylink')->orderBy('name','desc');
    }
+
+   // A client has many invoices
+   public function invoices() {
+      return $this->hasMany('App\Models\InvoicerInvoice','client_id');
+      // return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+      // return $this->hasMany('App\Models\InvoicerInvoice', 'client_id')->orderBy('id', 'desc');
+   }
+
+   // A client has many invoices
+   public function payments() {
+      // return $this->hasMany('App\Models\InvoicerInvoice')->orderBy('id','desc');
+      return $this->hasMany('App\Models\InvoicerActivity', 'client_id')->where('activity','payment')->orderBy('id', 'desc');
+   } 
 
    /////////////////////////////////////////////////////////////////////
    // 

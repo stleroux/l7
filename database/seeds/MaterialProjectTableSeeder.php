@@ -1,6 +1,6 @@
 <?php
 
-// namespace Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -21,34 +21,34 @@ class MaterialProjectTableSeeder extends Seeder
         \DB::table('material_project')->insert(array (
             0 => 
             array (
-                'created_at' => NULL,
                 'id' => 11,
-                'material_id' => 1,
                 'project_id' => 11,
+                'material_id' => 1,
+                'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             1 => 
             array (
-                'created_at' => NULL,
                 'id' => 13,
-                'material_id' => 1,
                 'project_id' => 24,
+                'material_id' => 1,
+                'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             2 => 
             array (
-                'created_at' => NULL,
                 'id' => 14,
-                'material_id' => 3,
                 'project_id' => 24,
+                'material_id' => 3,
+                'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             3 => 
             array (
-                'created_at' => NULL,
                 'id' => 15,
-                'material_id' => 3,
                 'project_id' => 12,
+                'material_id' => 3,
+                'created_at' => NULL,
                 'updated_at' => NULL,
             ),
         ));

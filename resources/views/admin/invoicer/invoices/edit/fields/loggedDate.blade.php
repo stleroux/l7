@@ -11,7 +11,7 @@
 			@if($invoice->logged_at || $invoice->status == 'paid')
 				<input type="text" name="logged_at" value="{{ $invoice->logged_at }}" class="form-control" readonly />
 			@else
-				<input type="text" name="logged_at" id="datePicker" value="{{ $invoice->logged_at }}" class="form-control" />
+				<input type="text" name="logged_at" id="datePickerLogged" value="{{ $invoice->logged_at }}" class="form-control" autocomplete="off" />
 			@endif
 
 			<div class="input-group-append">
@@ -24,7 +24,7 @@
 
 		</div>
 
-		<span><small class="form-text">Ensure you select Logged from the Status dropdown</small></span>
+		{{-- <span><small class="form-text">Ensure you select Logged from the Status dropdown</small></span> --}}
 
 	</div>
 

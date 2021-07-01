@@ -18,31 +18,26 @@
 					</div>
 					<div class="col-sm-7">
 						<div class="row">
-
-						<div class="col text-center">
-							<div><strong>Invoice N<sup>o</sup></strong></div>
-							<div>{{ $invoice->id }}</div>
-						</div>
-						<div class="col text-center">
+							<div class="col text-center">
+								<div><strong>Invoice N<sup>o</sup></strong></div>
+								<div>{{ $invoice->id }}</div>
+							</div>
+							<div class="col text-center">
+								<div><strong>Quoted Date</strong></div>
+								<div>{{ $invoice->quoted_at }}</div>
+							</div>
+							<div class="col text-center">
 								<div><strong>Estimate Date</strong></div>
 								<div>{{ $invoice->created_at }}</div>
-							{{-- @endif --}}
-						</div>
-						<div class="col text-center">
-							{{-- @else --}}
-								<div><strong>Logged Date</strong></div>
-								<div>{{ $invoice->logged_at }}</div>
 							</div>
-						<div class="col text-center">
-							{{-- @if($invoice->invoiced_at) --}}
+							<div class="col text-center">
 								<div><strong>Invoiced Date</strong></div>
 								<div>{{ $invoice->invoiced_at }}</div>
 							</div>
-
-						<div class="col text-center">
-							<div><strong>Paid Date</strong></div>
+							<div class="col text-center">
+								<div><strong>Paid Date</strong></div>
 								<div>{{ $invoice->paid_at }}</div>
-						</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -35,7 +35,7 @@
       <li class="user-body">
          <div class="row">
             <div class="col-4 text-center">
-               <a href="#">Followers</a>
+               <a href="<?php echo e(route('myInvoices')); ?>">My Invoices</a>
             </div>
             <div class="col-4 text-center">
                <a href="#">Sales</a>

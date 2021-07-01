@@ -45,7 +45,7 @@
 							<td class="text-right" nowrap="nowrap">{{ number_format($item->price, 2, '.', ' ') }}$</td>
 							{{-- <td class="text-right" nowrap="nowrap">{{ number_format($item->hst, 2, '.', ' ') }}$</td> --}}
 							<td class="text-right" nowrap="nowrap">{{ number_format($item->total, 2, '.', ' ') }}$</td>
-							@if($invoice->status == 'estimate' || $invoice->status == 'logged')
+							@if($invoice->status == 'estimate' || $invoice->status == 'logged' || $invoice->status == 'quote')
 								<td class="text-right" nowrap="nowrap">
 									<form action="{{ route('admin.invoicer.invoiceItems.destroy',[$item->id]) }}" method="POST" onsubmit="return confirm('Do you really want to delete this billable item?');"
 										class="pull-right">

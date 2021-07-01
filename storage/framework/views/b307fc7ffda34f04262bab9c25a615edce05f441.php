@@ -1,0 +1,2 @@
+<a href="<?php echo e(route('admin.notifications.markAsRead', $notification)); ?>" class="btn btn-xs btn-primary">Mark As Read</a>
+<?php /**PATH C:\sites\l7\resources\views/admin/notifications/actions/markAsRead.blade.php ENDPATH**/ ?>

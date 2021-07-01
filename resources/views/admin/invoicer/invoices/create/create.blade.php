@@ -49,7 +49,7 @@
 
 
 		<div class="card">
-			
+
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-9">
@@ -59,14 +59,14 @@
 							<select name="client_id" class="form-control @error('client_id') is-invalid @enderror">
 								@if(!empty($client))
 									<option value="{{ $client->id }}" >
-										{{ $client->contact_name }} :: {{ $client->email }} :: {{ $client->company_name }}
+										{{ $client->last_name }}, {{ $client->first_name }} :: {{ $client->email }} :: {{ $client->company_name }}
 									</option>
 								@else
 									<option value="">Select One</option>
 								@endif
-								@foreach($clients as $c)
-									<option value="{{ $c->id }}" >
-										{{ $c->contact_name }} :: {{ $c->email }} {{ $c->company_name ? ' :: ' . $c->company_name . '' : '' }}
+								@foreach($clients as $client)
+									<option value="{{ $client->id }}" >
+										{{ $client->last_name }}, {{ $client->first_name }} :: {{ $client->email }} {{ $client->company_name ? ' :: ' . $client->company_name . '' : '' }}
 									</option>
 								@endforeach
 							</select>

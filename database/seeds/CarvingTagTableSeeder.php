@@ -1,6 +1,6 @@
 <?php
 
-// namespace Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -21,99 +21,87 @@ class CarvingTagTableSeeder extends Seeder
         \DB::table('carving_tag')->insert(array (
             0 => 
             array (
-                'carving_id' => 49,
                 'id' => 9,
+                'carving_id' => 49,
                 'tag_id' => 11,
             ),
             1 => 
             array (
-                'carving_id' => 51,
                 'id' => 12,
+                'carving_id' => 51,
                 'tag_id' => 19,
             ),
             2 => 
             array (
-                'carving_id' => 49,
                 'id' => 13,
+                'carving_id' => 49,
                 'tag_id' => 21,
             ),
             3 => 
             array (
-                'carving_id' => 50,
                 'id' => 14,
+                'carving_id' => 50,
                 'tag_id' => 20,
             ),
             4 => 
             array (
-                'carving_id' => 52,
                 'id' => 15,
+                'carving_id' => 52,
                 'tag_id' => 11,
             ),
             5 => 
             array (
-                'carving_id' => 53,
-                'id' => 16,
-                'tag_id' => 17,
+                'id' => 17,
+                'carving_id' => 54,
+                'tag_id' => 11,
             ),
             6 => 
             array (
-                'carving_id' => 54,
-                'id' => 17,
-                'tag_id' => 11,
+                'id' => 18,
+                'carving_id' => 51,
+                'tag_id' => 20,
             ),
             7 => 
             array (
-                'carving_id' => 51,
-                'id' => 18,
-                'tag_id' => 20,
+                'id' => 21,
+                'carving_id' => 57,
+                'tag_id' => 0,
             ),
             8 => 
             array (
-                'carving_id' => 55,
-                'id' => 19,
+                'id' => 22,
+                'carving_id' => 58,
                 'tag_id' => 0,
             ),
             9 => 
             array (
-                'carving_id' => 56,
-                'id' => 20,
-                'tag_id' => 0,
+                'id' => 23,
+                'carving_id' => 59,
+                'tag_id' => 17,
             ),
             10 => 
             array (
-                'carving_id' => 57,
-                'id' => 21,
-                'tag_id' => 0,
+                'id' => 24,
+                'carving_id' => 59,
+                'tag_id' => 21,
             ),
             11 => 
             array (
-                'carving_id' => 58,
-                'id' => 22,
-                'tag_id' => 0,
+                'id' => 25,
+                'carving_id' => 60,
+                'tag_id' => 17,
             ),
             12 => 
             array (
-                'carving_id' => 59,
-                'id' => 23,
-                'tag_id' => 17,
+                'id' => 26,
+                'carving_id' => 60,
+                'tag_id' => 20,
             ),
             13 => 
             array (
-                'carving_id' => 59,
-                'id' => 24,
-                'tag_id' => 21,
-            ),
-            14 => 
-            array (
-                'carving_id' => 60,
-                'id' => 25,
+                'id' => 27,
+                'carving_id' => 56,
                 'tag_id' => 17,
-            ),
-            15 => 
-            array (
-                'carving_id' => 60,
-                'id' => 26,
-                'tag_id' => 20,
             ),
         ));
         

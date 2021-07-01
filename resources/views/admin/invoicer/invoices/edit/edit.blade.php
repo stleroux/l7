@@ -46,8 +46,9 @@
 						@include('admin.invoicer.invoices.edit.fields.notes')
 					
 						<div class="row">
-							@include('admin.invoicer.invoices.edit.fields.estimateDate')
+							{{-- @include('admin.invoicer.invoices.edit.fields.quotedDate') --}}
 							@include('admin.invoicer.invoices.edit.fields.loggedDate')
+							@include('admin.invoicer.invoices.edit.fields.estimatedDate')
 							@include('admin.invoicer.invoices.edit.fields.invoicedDate')
 							@include('admin.invoicer.invoices.edit.fields.paidDate')
 						</div>
@@ -82,4 +83,34 @@
 		@include('admin.invoicer.invoices.edit.activities')
 	@endif
 
+@endsection
+
+@section('scripts')
+<script>
+   $("#datePickerEstimated").datetimepicker({
+      step: 30,
+      showOn: 'button',
+      buttonImage: '',
+      buttonImageOnly: true,
+      format:'Y-m-d H:i'+':00'
+   });
+</script>
+<script>
+   $("#datePickerLogged").datetimepicker({
+      step: 30,
+      showOn: 'button',
+      buttonImage: '',
+      buttonImageOnly: true,
+      format:'Y-m-d H:i'+':00'
+   });
+</script>
+<script>
+   $("#datePickerInvoiced").datetimepicker({
+      step: 30,
+      showOn: 'button',
+      buttonImage: '',
+      buttonImageOnly: true,
+      format:'Y-m-d H:i'+':00'
+   });
+</script>
 @endsection

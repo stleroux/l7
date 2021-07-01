@@ -73,14 +73,7 @@
 				</li>
 			<?php endif; ?>
 
-			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-client')): ?>
-				<li class="nav-item ml-3">
-					<a href="<?php echo e(route('admin.invoicer.clients')); ?>" class="nav-link <?php echo e(Request::is('admin/invoicer/clients*') ? 'active' : ''); ?>">
-						<i class="<?php echo e(config('icons.invoicer-clients')); ?>"></i>
-						<p>Clients</p>
-					</a>
-				</li>
-			<?php endif; ?>
+
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoicer-product')): ?>
 				<li class="nav-item ml-3">

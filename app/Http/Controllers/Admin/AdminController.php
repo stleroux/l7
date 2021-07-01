@@ -173,7 +173,8 @@ class AdminController extends Controller
       $estimatesCount = InvoicerInvoice::where('status','estimate')->count();
       $invoicesCount = InvoicerInvoice::where('status','!=','estimate')->count();
       $billableItemsCount = InvoicerInvoiceItem::count();
-      $clientsCount = InvoicerClient::count();
+      // $clientsCount = InvoicerClient::count();
+      $clientsCount = User::where('invoicer_client',1)->where('account_status',1)->count();
       $productsCount = InvoicerProduct::count();
       
       $products = InvoicerProduct::all()->pluck('details','id');

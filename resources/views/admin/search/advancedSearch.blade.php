@@ -6,7 +6,8 @@
 @endsection
 
 @section('pageHeader')
-  @if($searchResults)
+   <i class="{{ config('icons.search') }}"></i>
+   @if($searchResults)
       Advanced Search Results
    @else
       Advanced Search

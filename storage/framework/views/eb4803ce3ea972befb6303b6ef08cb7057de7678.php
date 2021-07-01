@@ -29,6 +29,7 @@
 
 <?php $__env->startSection('content'); ?>
 
+
    <?php if(count($carvings) > 0): ?>
       
       <div class="card card-trans-2 mb-3">
@@ -39,13 +40,11 @@
 
                <?php $__currentLoopData = $carvings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $carving): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-
-
                   <div  class="col-xl-3 pb-2">
 
-                     <div id="card-hover" class="h-100 w-100" style="border: 2px black solid;">
+                     <div id="card-hover" class="card card-trans-2 h-100 w-100" style="border: 2px black solid;">
 
-                        <div class="position-relative p-0">
+                        <div class="card-body position-relative p-0">
                            
                            <?php if($carving->created_at > \Carbon\Carbon::now()->subMonth()): ?>
                               <div class="ribbon-wrapper">
@@ -108,31 +107,43 @@
 
                                     </div>
                                  </div>
-                                 <div class="row-col pt-2 pb-2">
-                                    
-                                    <?php if(auth()->guard()->check()): ?>
-                                       <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
-                                          <form class="" action="<?php echo e(route('like')); ?>" method="POST">
-                                             <?php echo csrf_field(); ?>
-                                             <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
-                                             <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
-                                             <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
-                                          </form>
-                                       
-
-                                       
-                                       <?php else: ?>
-                                          <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
-                                             <?php echo csrf_field(); ?>
-                                             <?php echo method_field('DELETE'); ?>
-                                             <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
-                                             <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
-                                             <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
-                                          </form>
-                                       <?php endif; ?>
-                                    <?php endif; ?>
-                                 </div>
+                                 
                               </a>
+                           </div>
+
+                        </div>
+
+                        <div class="card-footer p-0 m-0 pb-2">
+                           <div class="row p-0 m-0">
+                              <div class="col-6">
+                              <?php if(auth()->guard()->check()): ?>
+                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
+                                    <form class="" action="<?php echo e(route('like')); ?>" method="POST">
+                                       <?php echo csrf_field(); ?>
+                                       <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                       <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                       <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
+                                    </form>
+                                 <?php else: ?>
+                                    <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+                                       <?php echo csrf_field(); ?>
+                                       <?php echo method_field('DELETE'); ?>
+                                       <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                       <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                       <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
+                                    </form>
+                                 <?php endif; ?>
+                              <?php endif; ?>
+                              </div>
+<div class="col-6">
+   <form action="<?php echo e(route('cart.store', $carving)); ?>" method="POST">
+      <?php echo csrf_field(); ?>
+      <input type="hidden" value="1" name="quantity">
+      <button type="submit" class="btn btn-block btn-xs btn-outline-secondary text-dark"><strong>Add To Cart</strong></button>
+   </form>
+</div>
+
+
                            </div>
 
                         </div>
@@ -145,7 +156,7 @@
             </div>
 
             
-            <?php if(strpos($_SERVER['REQUEST_URI'], "1000") === false): ?>
+            
                <div class="row mb-2">
                   <div class="col ml-2 text-light">
                      Showing <?php echo e($carvings->firstItem()); ?> to <?php echo e($carvings->lastItem()); ?> of <?php echo e($carvings->total()); ?> entries
@@ -155,8 +166,10 @@
 
                   </div>
                </div>
-            <?php endif; ?>
+            
          </div>
+
+
       </div>
    <?php else: ?>
       <div class="col-row p-3 card-trans-4 text-dark">

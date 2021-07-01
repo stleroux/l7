@@ -52,7 +52,9 @@
 								<th>@sortablelink('status','Status')</th>
 							@endif
 							{{-- <th>@sortablelink('client.company_name','Company Name')</th> --}}
-							<th>@sortablelink('client.contact_name','Contact Name')</th>
+							<th>@sortablelink('client.first_name','Last Name')</th>
+							<th>@sortablelink('client.last_name','First Name')</th>
+							<th>@sortablelink('client.company_name','Company Name')</th>
 							<th class="text-right">@sortablelink('amount_charged','Charge')</th>
 							<th class="d-none d-md-table-cell text-right">@sortablelink('hst','HST')</th>
 							<th class="d-none d-md-table-cell text-right">@sortablelink('deposit','Deposits')</th>
@@ -67,7 +69,7 @@
 					</thead>
 					<tfoot>
 						<tr class="bg-info">
-							<td colspan="{{ (Request::is('admin/invoicer/ledger/unpaid') ? '2' : '3') }}" class="text-right"><b>Totals This Page :&nbsp;</b></td>
+							<td colspan="{{ (Request::is('admin/invoicer/ledger/unpaid') ? '4' : '5') }}" class="text-right"><b>Totals This Page :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($invoices->sum('amount_charged'), 2, '.', ', ') }}$</td>
 							<td class="d-none d-md-table-cell text-right">{{ number_format($invoices->sum('hst'), 2, '.', ', ') }}$</td>
 							<td class="d-none d-md-table-cell text-right">{{ number_format($invoices->sum('deposits'), 2, '.', ', ') }}$</td>
@@ -79,7 +81,7 @@
 							<td class="text-right">{{ number_format($invoices->sum('total'), 2, '.', ', ') }}$</td>
 						</tr>
 						<tr class="bg-info">
-							<td colspan="{{ (Request::is('admin/invoicer/ledger/unpaid') ? '2' : '3') }}" class="text-right"><b>Overall Totals :&nbsp;</b></td>
+							<td colspan="{{ (Request::is('admin/invoicer/ledger/unpaid') ? '4' : '5') }}" class="text-right"><b>Overall Totals :&nbsp;</b></td>
 							<td class="text-right">{{ number_format($amountCharged, 2, '.', ', ') }}$</td>
 							<td class="d-none d-md-table-cell text-right">{{ number_format($hst, 2, '.', ', ') }}$</td>
 							<td class="d-none d-lg-table-cell text-right">{{ number_format($deposits, 2, '.', ', ') }}$</td>
@@ -120,13 +122,27 @@
 									@endif
 								</td>
 							@endif
+							
 							<td>
 								@can('invoicer-client')
-									<a href="{{ route('admin.invoicer.clients.show', $invoice->client_id) }}">{{ $invoice->client->contact_name }}</a>
+									<a href="{{ route('admin.users.show', $invoice->client_id) }}">{{ $invoice->client->last_name }}</a>
 								@else
-									{{ $invoice->user->company_name }}
-								@endcan
+									{{ $invoice->client->last_name }}
+								@endif
 							</td>
+							
+							<td>
+								@can('invoicer-client')
+									<a href="{{ route('admin.users.show', $invoice->client_id) }}">{{ $invoice->client->first_name }}</a>
+								@else
+									{{ $invoice->client->first_name }}
+								@endif
+							</td>
+							
+							<td>
+								{{ $invoice->client->company_name }}								
+							</td>
+							
 							<td class="text-right">{{ number_format($invoice->amount_charged, 2, '.' , ', ') }}$</td>
 							
 							<td class="d-none d-md-table-cell text-right">{{ number_format($invoice->hst, 2, '.' , ', ') }}$</td>

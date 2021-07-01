@@ -59,8 +59,9 @@
 							<th>@sortablelink('invoiced_at','Invoiced')</th>
 						@endif
 
-						<th>@sortablelink('client.contact_name','Contact Name')</th>
-						{{-- <th>@sortablelink('client.company_name','Company Name')</th> --}}
+						<th>@sortablelink('client.last_name','Last Name')</th>
+						<th>@sortablelink('client.first_name','First Name')</th>
+						<th>@sortablelink('client.company_name','Company Name')</th>
 						<th class="text-right">@sortablelink('amount_charged','Charged')</th>
 						<th class="text-right">@sortablelink('deposits','Deposits')</th>
 						<th class="text-right">@sortablelink('discounts','Discounts')</th>
@@ -109,10 +110,18 @@
 
 						<td>
 							@can('invoicer-client')
-								<a href="{{ route('admin.invoicer.clients.show', $invoice->client->id) }}">{{ $invoice->client->contact_name }}</a>
+								<a href="{{ route('admin.users.show', $invoice->client->id) }}">{{ $invoice->client->last_name }}</a>
 							@else
-								{{ $invoice->client->contact_name }}
+								{{ $invoice->client->last_name }}
 							@endcan
+						</td>
+
+						<td>
+							{{ $invoice->client->first_name }}							
+						</td>
+
+						<td>
+							{{ $invoice->client->company_name }}
 						</td>
 
 						<td class="text-right">{{ number_format($invoice->sub_total, 2, '.', ', ') }}$</td>

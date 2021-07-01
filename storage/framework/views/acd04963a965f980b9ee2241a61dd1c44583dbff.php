@@ -1,5 +1,7 @@
 <ul class="navbar-nav ml-auto">
 
+   <?php echo $__env->make('layouts.UI.common.cart', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
    <?php if(auth()->guard()->guest()): ?>
 
       <?php echo $__env->make('layouts.UI.navbar.right.authLinks', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

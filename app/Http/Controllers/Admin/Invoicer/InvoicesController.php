@@ -58,10 +58,12 @@ class InvoicesController extends Controller
       abort_unless(Gate::allows('invoicer-invoice'), 403);
 
       $products = InvoicerProduct::all();
-      $clients = InvoicerClient::orderBy('contact_name')->get();
+      // $clients = InvoicerClient::orderBy('contact_name')->get();
+      $clients = User::where('invoicer_client',1)->where('account_status',1)->orderBy('last_name')->get();
 
       if($id){
-         $client = InvoicerClient::findOrFail($id);
+         // $client = InvoicerClient::findOrFail($id);
+         $client = User::findOrFail($id);
          return view('admin.invoicer.invoices.create.create', compact('products','clients','client'));
       }
 
@@ -147,7 +149,8 @@ class InvoicesController extends Controller
       abort_unless(Gate::allows('invoicer-invoice'), 403);
 
       $invoice = InvoicerInvoice::with('InvoiceItems')->find($id);
-      $clients = InvoicerClient::all();
+      // $clients = InvoicerClient::all();
+      $clients = User::all();
 
       return view('admin.invoicer.invoices.edit.edit', compact('invoice','clients'));
    }
@@ -534,6 +537,7 @@ class InvoicesController extends Controller
 ##################################################################################################################
    public function store(Request $request)
    {
+      // dd($request->client_id);
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-invoice'), 403);
 
@@ -554,9 +558,10 @@ class InvoicesController extends Controller
          }
       $invoice->save();
 
-      // Notify admins
-         $users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
-         Notification::send($users, new InvoiceCreatedNotification($invoice));
+      // Admins to notify
+      $users = User::whereIn('id', explode(',', Config::get('invoicer.usersToNotify')))->get();
+
+      Notification::send($users, new InvoiceCreatedNotification($invoice));
 
 
       // redirect to another page
@@ -627,10 +632,13 @@ class InvoicesController extends Controller
             $invoice->invoiced_at = null;
             $invoice->logged_at = null;
 
-         // If status is changed from Invoiced to Logged
-         }elseif($ori_status == 'invoiced' && $request->status == 'logged' ){
-            // Clear the value of the invoiced_at field
+         // If status is changed from Paid to Quote
+         }elseif($ori_status == 'paid' && $request->status == 'quote' ){
+            // Clear the value of the paid_at and invoiced_at fields
+            $invoice->paid_at = null;
             $invoice->invoiced_at = null;
+            $invoice->logged_at = null;
+            // $invoice->quoted_at = null;
 
          // If status is changed from Invoiced to Paid
          }elseif($ori_status == 'invoiced' && $request->status == 'paid' ){
@@ -641,13 +649,27 @@ class InvoicesController extends Controller
                $invoice->paid_at = Carbon::now();
             }
 
+         // If status is changed from Invoiced to Logged
+         }elseif($ori_status == 'invoiced' && $request->status == 'logged' ){
+            // Clear the value of the invoiced_at field
+            $invoice->invoiced_at = null;
+
          // If status is changed from Invoiced to Estimate
          }elseif($ori_status == 'invoiced' && $request->status == 'estimate' ){
             // Set the value of paid_at to the value passed from the form
             $invoice->paid_at = null;
+            $invoice->invoiced_at = null;
             $invoice->logged_at = null;
 
-         // If status is cahnged form Logged to Invoiced
+         // If status is changed from Invoiced to Quote
+         }elseif($ori_status == 'invoiced' && $request->status == 'quote' ){
+            // Set the value of paid_at to the value passed from the form
+            $invoice->paid_at = null;
+            $invoice->invoiced_at = null;
+            $invoice->logged_at = null;
+            // $invoice->quoted_at = null;
+
+         // If status is changed form Logged to Invoiced
          }elseif($ori_status == 'logged' && $request->status == 'invoiced' ){
             // Set the value of invoiced_at to the value passed from the form
             if($request->invoiced_at) {
@@ -656,13 +678,29 @@ class InvoicesController extends Controller
                $invoice->invoiced_at = Carbon::now();
             }
 
-         // If status is cahnged form Logged to Estimate
+         // If status is changed form Logged to Estimate
          }elseif($ori_status == 'logged' && $request->status == 'estimate' ){
             // Set the value of invoiced_at to the value passed from the form
             $invoice->logged_at = null;
+            // $invoice->quoted_at = null;
 
-         // If status is cahnged form Estimate to Logged
+         // If status is changed form Estimate to Logged
+         }elseif($ori_status == 'quoted' && $request->status == 'estimate' ){
+            // Set the value of invoiced_at to the value passed from the form
+            if($request->estimated_at) {
+               $invoice->estimated_at = $request->estimated_at;
+            } else {
+               $invoice->estimated_at = Carbon::now();
+            }
+
+         // If status is changed form Estimate to Logged
          }elseif($ori_status == 'estimate' && $request->status == 'logged' ){
+            // Set the value of invoiced_at to the value passed from the form
+            if($request->estimated_at) {
+               $invoice->estimated_at = $request->estimated_at;
+            } else {
+               $invoice->estimated_at = Carbon::now();
+            }
             // Set the value of invoiced_at to the value passed from the form
             if($request->logged_at) {
                $invoice->logged_at = $request->logged_at;
@@ -670,8 +708,14 @@ class InvoicesController extends Controller
                $invoice->logged_at = Carbon::now();
             }
 
-         // If status is cahnged form Estimate to Invoiced
+         // If status is changed form Estimate to Invoiced
          }elseif($ori_status == 'estimate' && $request->status == 'invoiced' ){
+            // Set the value of invoiced_at to the value passed from the form
+            if($request->estimated_at) {
+               $invoice->estimated_at = $request->estimated_at;
+            } else {
+               $invoice->estimated_at = Carbon::now();
+            }
             // Set the value of invoiced_at to the value passed from the form
             if($request->logged_at) {
                $invoice->logged_at = $request->logged_at;
@@ -685,8 +729,14 @@ class InvoicesController extends Controller
                $invoice->invoiced_at = Carbon::now();
             }
 
-         // If status is cahnged form Estimate to Paid
+         // If status is changed form Estimate to Paid
          }elseif($ori_status == 'estimate' && $request->status == 'paid' ){
+            // Set the value of invoiced_at to the value passed from the form
+            if($request->estimated_at) {
+               $invoice->estimated_at = $request->estimated_at;
+            } else {
+               $invoice->estimated_at = Carbon::now();
+            }
             // Set the value of invoiced_at to the value passed from the form
             if($request->logged_at) {
                $invoice->logged_at = $request->logged_at;

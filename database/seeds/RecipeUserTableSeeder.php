@@ -1,6 +1,6 @@
 <?php
 
-// namespace Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -21,11 +21,11 @@ class RecipeUserTableSeeder extends Seeder
         \DB::table('recipe_user')->insert(array (
             0 => 
             array (
-                'created_at' => NULL,
                 'id' => 1,
-                'recipe_id' => 1,
-                'updated_at' => NULL,
                 'user_id' => 2,
+                'recipe_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
         ));
         

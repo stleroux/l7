@@ -1,6 +1,6 @@
 <?php
 
-// namespace Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -18,14 +18,6 @@ class PostTagTableSeeder extends Seeder
 
         \DB::table('post_tag')->delete();
         
-        \DB::table('post_tag')->insert(array (
-            0 => 
-            array (
-                'id' => 2,
-                'post_id' => 10,
-                'tag_id' => 24,
-            ),
-        ));
         
         
     }

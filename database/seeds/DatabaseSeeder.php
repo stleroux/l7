@@ -84,5 +84,15 @@ class DatabaseSeeder extends Seeder
       // $this->call(FailedJobsTableSeeder::class);
       // $this->call(PasswordResetsTableSeeder::class);
       
+        $this->call(AuditsTableSeeder::class);
+        $this->call(BlocksTableSeeder::class);
+        $this->call(CopyAuditsTableSeeder::class);
+        $this->call(CopyInvoicerInvoicesTableSeeder::class);
+        $this->call(LikesTableSeeder::class);
+        $this->call(LogsTableSeeder::class);
+        $this->call(MylinksTableSeeder::class);
+        $this->call(NotificationsTableSeeder::class);
+        $this->call(ShoppingcartTableSeeder::class);
+        $this->call(ViewsTableSeeder::class);
     }
 }

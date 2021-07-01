@@ -4,8 +4,11 @@ namespace App\Http\Controllers\UI;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
+use App\Models\InvoicerInvoice;
 use App\Models\Post;
+use Auth;
 use Config;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Route;
@@ -127,5 +130,52 @@ class SiteController extends Controller
       return view('UI.privacyPolicy');
    }
 
+
+   public function myInvoices()
+   {
+      $invoices = InvoicerInvoice::where('client_id', Auth()->id())->paginate(10);
+      // dd($invoices);
+
+      return view('UI.invoices.index', compact('invoices'));
+   }
+
+##################################################################################################################
+#  ███████╗██╗  ██╗ ██████╗ ██╗    ██╗
+#  ██╔════╝██║  ██║██╔═══██╗██║    ██║
+#  ███████╗███████║██║   ██║██║ █╗ ██║
+#  ╚════██║██╔══██║██║   ██║██║███╗██║
+#  ███████║██║  ██║╚██████╔╝╚███╔███╔╝
+#  ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ 
+# Display the specified resource
+##################################################################################################################
+   public function viewInvoice(InvoicerInvoice $invoice)
+   {
+      // Check if user has required permission
+      abort_if($invoice->client_id != Auth::user()->id, 403);
+      
+      return view('UI.invoices.show', compact('invoice'));
+   }
+
+   // public function viewInvoice()
+   // {
+
+   // }
+
+   public function downloadPDFInvoice(InvoicerInvoice $invoice)
+   {
+      // Check if user has required permission
+      abort_if($invoice->client_id != Auth::user()->id, 403);
+
+      // $invoice = InvoicerInvoice::find($id);
+      $pdf = PDF::loadView('UI.invoices.invoicedPDF', compact('invoice'));
+      
+      if($invoice->status == "estimate")
+      {
+         return $pdf->download('Estimate '.$invoice->id.'.pdf');
+      } else {
+         return $pdf->download('Invoice '.$invoice->id.'.pdf');
+      }
+
+   }
 
 }

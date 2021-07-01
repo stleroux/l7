@@ -12,13 +12,15 @@ use OwenIt\Auditing\Contracts\Auditable;
 use App\Contracts\Likeable;
 use App\Models\Concerns\Likes;
 use Route;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 
-class Carving extends Model implements Searchable, Auditable, Likeable, Viewable
+class Carving extends Model implements Searchable, Auditable, Likeable, Viewable, Buyable
 {
    use SoftDeletes;
    use \OwenIt\Auditing\Auditable;
    use Likes;
    use InteractsWithViews;
+   use \Gloudemans\Shoppingcart\CanBeBought;
    
    protected $guarded = [];
 
@@ -122,6 +124,30 @@ class Carving extends Model implements Searchable, Auditable, Likeable, Viewable
    //    // return 'N/A';
    // }
 
+   //////////////////////////////////////////////////////////////////////////////////////
+   // SHOPPING CART
+   //////////////////////////////////////////////////////////////////////////////////////
+   public function getBuyableIdentifier($options = null) {
+      return $this->id;
+   }
+
+   public function getBuyableDescription($options = null) {
+      return $this->name;
+   }
+
+   public function getBuyablePrice($options = null) {
+      return $this->price;
+   }
+   
+   public function getBuyableWeight($options = null) {
+      // return $this->weight;
+      return 0;
+   }
+
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // SEARCH
+   //////////////////////////////////////////////////////////////////////////////////////
    public function getSearchResult(): SearchResult
    {
       if(Route::currentRouteName('') == 'admin.quickSearch' || Route::currentRouteName('') == 'admin.advSearch')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Invoicer;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\InvoicerClient;
 use App\Models\InvoicerInvoice;
@@ -47,11 +48,13 @@ class DashboardController extends Controller
       abort_unless(Gate::allows('invoicer-dashboard'), 403);
 
       // Get clients with remaining balances
-      $owingClients = InvoicerClient::whereHas('invoices', function ($query) {
+      // $owingClients = InvoicerClient::whereHas('invoices', function ($query) {
+      $owingClients = User::whereHas('invoices', function ($query) {
          return $query->where('total', '>', 0);
       })->get();
 
-      $bestClients = InvoicerClient::whereHas('invoices', function ($query) {
+      // $bestClients = InvoicerClient::whereHas('invoices', function ($query) {
+      $bestClients = User::whereHas('invoices', function ($query) {
          $query->where('payments', '>', 0);
       })->with('invoices')->get();
 
