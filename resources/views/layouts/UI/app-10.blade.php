@@ -2,38 +2,42 @@
 <html>
    <head>
       @include('layouts.common.head')
-      {{-- @yield('stylesheet') --}}
    </head>
 
    <body>
-      @include('layouts.UI.navbar.topNavbar')
 
-      <div class="container-fluid">
+      <wrapper class="d-flex flex-column min-vh-100">
 
-         <div class="row mt-5 pt-4 card-trans-6 mb-2">
-            <div class="col-6 offset-xl-1">
-               <h1 class="d-flex text-center justify-content-sm-start">
-                  @yield('pageHeader')
-               </h1>
-            </div>
-            <div class="d-none d-sm-block col-4">
-               @include('layouts.UI.common.breadcrumb')
-            </div>
-            <div class="col-1"></div>
-         </div>
+         @include('layouts.UI.navbar.topNavbarDouble')
 
-         <div class="row">
-            <div class="col-xl-10 offset-xl-1">
-               @yield('content')
+         <main class="container-fluid flex-fill">
+
+            <div class="row card-trans-6 pt-2 pb-1 mb-2">
+               <div class="col-12 col-md-4 offset-md-1">
+                  <h3>
+                     @yield('pageHeader')
+                  </h3>
+               </div>
+            
+               <div class="col-12 col-md-6 align-middle text-right pt-2">
+                  @include('layouts.UI.common.breadcrumb')
+               </div>
             </div>
-         </div>
-      
+
+            <div class="row">
+               <div class="col-xl-10 offset-xl-1">
+                  @yield('content')
+               </div>
+            </div>
+
+         </main>
+
          @include('layouts.UI.common.footer')
-      
-      </div><!-- /.container-fluid -->
 
-      <!-- Scripts -->
-      @include('layouts.common.scripts')
+         <!-- Scripts -->
+         @include('layouts.common.scripts')
+
+      </wrapper>
 
    </body>
 </html>

@@ -39,12 +39,65 @@ Route::namespace('Admin\Carvings')->prefix('admin')->name('admin.')->group(funct
 // FRONTEND CARVINGS ROUTES
 //////////////////////////////////////////////////////////////////////////////
 
+// SELECT ITEM
+Route::get('carvings/customOrder/create',   'UI\Carvings\CustomOrderController@create')
+   ->name('carvings.customOrder.create');
+Route::post('carvings/customOrder/store',   'UI\Carvings\CustomOrderController@store')
+   ->name('carvings.customOrder.store');
+Route::get('carvings/customOrder/reset',   'UI\Carvings\CustomOrderController@reset')
+   ->name('carvings.customOrder.reset');
+
+
+// SELECT SIGN TYPE
+Route::get('carvings/customOrder/sign/type/create',   'UI\Carvings\CustomOrder\Sign\TypeController@create')
+   ->name('carvings.customOrder.sign.type.create');
+Route::post('carvings/customOrder/sign/type/store',   'UI\Carvings\CustomOrder\Sign\TypeController@store')
+   ->name('carvings.customOrder.sign.type.store');
+
+
+
+// Route::get('carvings/customOrders/step-two',    'UI\Carvings\CustomOrderController@createStepTwo')->name('carvings.customOrders.step.two');
+// Route::post('carvings/customOrders/step-two',   'UI\Carvings\CustomOrderController@postCreateStepTwo')->name('carvings.customOrders.step.two.post');
+
+
+
+
+
+
+
+
+
+// Route::get('carvings/create-step-two',    'UI\Carvings\CustomOrderController@createStepTwo')->name('carvings.create.step.two');
+// Route::post('carvings/create-step-two',   'UI\Carvings\CustomOrderController@postCreateStepTwo')->name('carvings.create.step.two.post');
+
+// Route::get('carvings/create-step-three',  'UI\Carvings\CustomOrderController@createStepThree')->name('carvings.create.step.three');
+// Route::post('carvings/create-step-three', 'UI\Carvings\CustomOrderController@postCreateStepThree')->name('carvings.create.step.three.post');
+
+// Route::get('carvings/create-step-four',   'UI\Carvings\CustomOrderController@createStepFour')->name('carvings.create.step.four');
+// Route::post('carvings/create-step-four',  'UI\Carvings\CustomOrderController@postCreateStepFour')->name('carvings.create.step.four.post');
+
+// Route::get('carvings/create-step-five',   'UI\Carvings\CustomOrderController@createStepFive')->name('carvings.create.step.five');
+// Route::post('carvings/create-step-five',  'UI\Carvings\CustomOrderController@postCreateStepFive')->name('carvings.create.step.five.post');
+
+
+
+
+
+
+
+
 Route::namespace('UI\Carvings')->prefix('carvings')->name('carvings.')->group(function() {
+   Route::get('typeList',                       'CarvingsController@typeList')               ->name('typeList');
    Route::get('{carving}/show',                 'CarvingsController@show')                   ->name('show');
    Route::get('faq',                            'CarvingsController@faq')                    ->name('faq');
    Route::get('{filter?}/{tag?}',               'CarvingsController@index')                  ->name('index');
    Route::post('{carving}/comment',             'CommentController@store')                   ->name('comment.store');
 });
+
+
+// Route::get('carvings', 'CarvingsController@index')->name('carvings.index');
+  
+
 
 
 Route::middleware('auth')->group(function () {

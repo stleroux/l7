@@ -1,4 +1,7 @@
 <!-- UNPUBLISH MODAL -->
+@php
+// dd($modelName);
+@endphp
 <div class="modal bg-secondary" id="unpublishModal" tabindex="-1" role="dialog">
    <div class="modal-dialog modal-dialog-centered" role="document"> <!-- modal-dialog-centered -->
       <div class="modal-content">

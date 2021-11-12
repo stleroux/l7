@@ -1,14 +1,14 @@
-<div class="card card-trans-4 card-outline card-primary mb-2">
+<div class="card card-trans-4 card-outline card-primary text-dark mb-2">
 
-   <div class="card-header bg-info">
-      <div class="card-title font-weight-bold">
+   <div class="card-header bg-info p-1">
+      <div class="card-title">
          <i class="{{ config('icons.materials') }}"></i>
          Material(s) Used In This Project
       </div>
    </div>
 
    @if($project->materials->count() > 0)
-      <table class="table table-hover table-striped mb-0">
+      <table class="table table-sm table-hover table-striped mb-0">
          <thead>
             <tr class="text-dark">
                <th>Name</th>
@@ -27,7 +27,7 @@
          </tbody>
       </table>
    @else
-      <div class="card-body">N/A</div>
+      <div class="card-body p-1">N/A</div>
    @endif
 
 </div>

@@ -12,7 +12,8 @@
 		data-toggle="tooltip"
 		{{-- data-target="#unpublishModal" --}}
 		data-id="{{ $model->id }}"
-		data-url="{{ url('admin/posts/unpublish', $model) }}"
+		{{-- data-url="{{ url('admin/posts/unpublish', $model) }}" --}}
+		data-url="{{ url($routeName, $model) }}"
 		title="Unpublish {{ ucfirst($modelName) }}"
 		>
 		<i class="{{ config('icons.publish') }} text-warning"></i>

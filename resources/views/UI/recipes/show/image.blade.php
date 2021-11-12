@@ -1,9 +1,13 @@
 <div class="col-sm-4">
-	<div class="card mb-2">
+	<div class="card card-trans-6 mb-2">
 		
-		<div class="card-header card_header p-2">Image</div>
+		<div class="card-header card_header p-1">
+			<div class="card-title">
+				Image				
+			</div>
+		</div>
 		
-		<div class="card-body text text-center p-2">
+		<div class="card-body text text-center p-1">
 			@if($recipe->image)
 				<img src="/_recipes/{{ $recipe->image }}" alt="" height="200px" width="auto" class="card-img">
 			@else

@@ -9,7 +9,8 @@
 		was
 		{{ $notification->data['title'] }}
 		for
-		<a href="{{ route('admin.invoicer.clients.show', $notification->data['client']) }}">
+		{{-- <a href="{{ route('admin.invoicer.clients.show', $notification->data['client']) }}"> --}}
+		<a href="{{ route('admin.users.show', $notification->data['client']) }}">
 			{{ $notification->data['client_name'] }}
 			{{ ($notification->data['company_name'] ? '[' . ucwords($notification->data['company_name']) . ']' : '') }}
 		</a>

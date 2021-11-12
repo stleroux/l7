@@ -71,12 +71,36 @@
             </tr>
             <tr>
                <td>
-                  {{ $invoice->client->company_name }}<br />
-                  {{ $invoice->client->contact_name }}<br />
-                  {{ $invoice->client->address }}<br />
-                  {{ $invoice->client->city }}, {{ $invoice->client->province }}<br />
-                  {{ $invoice->client->postal_code }}<br />
-                  {{ $invoice->client->telephone }}
+                  @if($invoice->client->company_name)
+                     {{ $invoice->client->company_name }} <br />
+                  @endif
+                  @if($invoice->client->contact_name)
+                     {{ $invoice->client->contact_name }} <br />
+                  @endif
+                  @if($invoice->client->address)
+                     {{ $invoice->client->address }} <br />
+                  @endif
+                  
+                  @if($invoice->client->city && $invoice->client->province)
+                     {{ $invoice->client->city }}, {{ $invoice->client->province }} <br />
+                  @elseif($invoice->client->city && !$invoice->client->province)
+                     {{ $invoice->client->city }} <br />
+                  @elseif($invoice->client->province && !$invoice->client->city)
+                     {{ $invoice->client->province }} <br />                  
+                  @endif
+
+                  @if($invoice->client->postal_code)
+                     {{ $invoice->client->postal_code }} <br />
+                  @endif
+                  @if($invoice->client->telephone)
+                     {{ $invoice->client->telephone }}
+                  @endif
+                  {{-- {{ $invoice->client->company_name ? $invoice->client->company_name : '' }} --}}
+                  {{-- {{ $invoice->client->contact_name ? $invoice->client->contact_name : '' }} --}}
+                  {{-- {{ $invoice->client->address ? $invoice->client->address : '' }} --}}
+                  {{-- {{ $invoice->client->city }}, {{ $invoice->client->province }}<br /> --}}
+                  {{-- {{ $invoice->client->postal_code }}<br /> --}}
+                  {{-- {{ $invoice->client->telephone }} --}}
                </td>
             </tr>
          </table>
@@ -201,7 +225,7 @@
    <tr>
       <td colspan="12">
          {{-- {!! Config::get('invoicer.termsAndConditions') !!} --}}
-         @include('admin.invoicer.termsAndConditionsPDF')
+         @include('admin.invoicer.termsAndConditions')
       </td>
    </tr>
 

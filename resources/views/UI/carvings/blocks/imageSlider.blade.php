@@ -1,12 +1,13 @@
-<div class="card card-trans-4 card-outline card-info mb-2">
-	<div class="card-header bg-primary">
-      <div class="card-title font-weight-bold">
+<div class="card card-trans-4 card-outline card-info text-dark mb-2">
+
+	<div class="card-header bg-primary p-1">
+      <div class="card-title">
 		   <i class="{{ config('icons.image') }}"></i>
 		   Carving Image(s)
       </div>
 	</div>
 
-	<div class="card-body p-0 m-0 w-50 mx-auto">
+	<div class="card-body p-1 w-50 mx-auto">
 		@if($carving->images->count() >= 1)
 			<div id="carvingsImageSlider" class="carousel slide mb-0" data-ride="carousel">
 

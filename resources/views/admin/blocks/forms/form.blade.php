@@ -24,7 +24,7 @@
       
       <div class="form-row">
          <div class="col-12">
-            @include('admin.blocks.forms.fields.description', ['required'=>'required'])
+            @include('admin.blocks.forms.fields.body', ['required'=>'required'])
          </div>
       </div>
       

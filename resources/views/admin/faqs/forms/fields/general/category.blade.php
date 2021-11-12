@@ -1,10 +1,12 @@
 <!-- CATEGORY -->
 
-<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-2">
    
    <div class="form-group">
       
-      <label for="category" class="required">Category</label>
+      <label for="category" class="required">
+         Category
+      </label>
 
       @if(Route::currentRouteName('') == 'admin.faqs.show')
 

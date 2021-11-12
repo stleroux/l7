@@ -67,7 +67,7 @@ class ProfileController extends Controller
 # ╚══════╝╚═════╝ ╚═╝   ╚═╝   
 // Show the form for editing the specified resource
 ##################################################################################################################
-   public function edit(Request $request, $id)
+   public function edit(Request $request, User $user)
    {
       $user = Auth::user();
 
@@ -138,7 +138,7 @@ class ProfileController extends Controller
 // UPDATE :: Update the specified resource in storage
 ##################################################################################################################
    // public function update(ProfileRequest $request, User $user)
-   public function update(ProfileRequest $request)
+   public function update(ProfileRequest $request, User $user)
    {
       
       $user = User::findOrFail(Auth::user()->id);

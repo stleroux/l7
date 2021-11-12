@@ -4,7 +4,7 @@
 // BACKEND TAGS ROUTES
 //////////////////////////////////////////////////////////////////////////////
 
-Route::get('UI/tags/{slug}',                 'BlogController@show')                   ->name('tags.show');
+// Route::get('UI/tags/{slug}',                 'BlogController@show')                   ->name('tags.show');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
    Route::get('tags/restore/{role}',        'TagsController@restore')          ->name('tags.restore');

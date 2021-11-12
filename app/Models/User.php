@@ -211,6 +211,18 @@ class User extends Authenticatable implements Searchable, Auditable
       return $this;
    }
 
+   // public function unlike(Likeable $likeable): self
+   // {
+   //    if (! $this->hasLiked($likeable)) {
+   //       return $this;
+   //    }
+
+   //    $likeable->likes()
+   //       ->whereHas('user', fn($q) => $q->whereId($this->id))
+   //       ->delete();
+
+   //    return $this;
+   // }
    public function unlike(Likeable $likeable): self
    {
       if (! $this->hasLiked($likeable)) {
@@ -218,12 +230,23 @@ class User extends Authenticatable implements Searchable, Auditable
       }
 
       $likeable->likes()
-         ->whereHas('user', fn($q) => $q->whereId($this->id))
-         ->delete();
+        ->whereHas('user', function($q){
+         $q->whereId($this->id);
+        })->delete();
 
       return $this;
    }
 
+   // public function hasLiked(Likeable $likeable): bool
+   // {
+   //    if (! $likeable->exists) {
+   //       return false;
+   //    }
+
+   //    return $likeable->likes()
+   //       ->whereHas('user', fn($q) =>  $q->whereId($this->id))
+   //       ->exists();
+   // }
    public function hasLiked(Likeable $likeable): bool
    {
       if (! $likeable->exists) {
@@ -231,8 +254,10 @@ class User extends Authenticatable implements Searchable, Auditable
       }
 
       return $likeable->likes()
-         ->whereHas('user', fn($q) =>  $q->whereId($this->id))
-         ->exists();
+         ->whereHas('user', function($q){
+            $q->whereId($this->id);
+         // ->exists()
+      })->exists();
    }
 
    public function getSearchResult(): SearchResult

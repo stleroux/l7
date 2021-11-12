@@ -16,7 +16,7 @@
 <?php $__env->startSection('rightColumn'); ?>
    <?php echo $__env->make('UI.carvings.blocks.popular', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    <?php echo $__env->make('UI.carvings.blocks.tags', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-   <?php echo $__env->make('UI.carvings.blocks.faqs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+   <?php echo $__env->make('UI.carvings.blocks.general', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('notice'); ?>
@@ -40,7 +40,7 @@
 
                <?php $__currentLoopData = $carvings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $carving): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                  <div  class="col-xl-3 pb-2">
+                  <div  class="col-8 offset-2 offset-sm-0 col-sm-6 col-md-4 col-lg-3 pb-2">
 
                      <div id="card-hover" class="card card-trans-2 h-100 w-100" style="border: 2px black solid;">
 
@@ -62,91 +62,49 @@
                                  <?php endif; ?>
                                  <h4 class="badge-dark p-1 m-1"><?php echo e(ucwords($carving->name)); ?></h4>
                                  
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Category :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       <?php echo e($carving->category); ?>
-
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Views :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                        <?php echo e(views($carving)->count()); ?>
-
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Comments :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       <?php echo e($carving->comments->count()); ?>
-
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Images :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                        <?php echo e(count($carving->images)); ?>
-
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Likes :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       <?php echo e($carving->likes()->count()); ?>
-
-                                    </div>
-                                 </div>
+                                 <?php echo $__env->make('UI.carvings.partials.index.rows', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                 
+                                 
                                  
                               </a>
                            </div>
 
                         </div>
 
-                        <div class="card-footer p-0 m-0 pb-2">
-                           <div class="row p-0 m-0">
-                              <div class="col-6">
-                              <?php if(auth()->guard()->check()): ?>
-                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
-                                    <form class="" action="<?php echo e(route('like')); ?>" method="POST">
-                                       <?php echo csrf_field(); ?>
-                                       <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
-                                       <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
-                                       <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
-                                    </form>
-                                 <?php else: ?>
-                                    <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
-                                       <?php echo csrf_field(); ?>
-                                       <?php echo method_field('DELETE'); ?>
-                                       <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
-                                       <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
-                                       <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
-                                    </form>
-                                 <?php endif; ?>
-                              <?php endif; ?>
-                              </div>
-<div class="col-6">
-   <form action="<?php echo e(route('cart.store', $carving)); ?>" method="POST">
-      <?php echo csrf_field(); ?>
-      <input type="hidden" value="1" name="quantity">
-      <button type="submit" class="btn btn-block btn-xs btn-outline-secondary text-dark"><strong>Add To Cart</strong></button>
-   </form>
-</div>
+                           <div class="card-footer p-0 m-0 pb-2">
+                              <div class="row p-0 m-0">
+                                 <div class="col-6">
+                        <?php if(auth()->guard()->check()): ?>
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $carving)): ?>
+                                       <form class="" action="<?php echo e(route('like')); ?>" method="POST">
+                                          <?php echo csrf_field(); ?>
+                                          <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                          <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                          <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold"><?php echo app('translator')->get('Like'); ?></button>
+                                       </form>
+                                    <?php else: ?>
+                                       <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+                                          <?php echo csrf_field(); ?>
+                                          <?php echo method_field('DELETE'); ?>
+                                          <input type="hidden" name="likeable_type" value="<?php echo e(get_class($carving)); ?>"/>
+                                          <input type="hidden" name="id" value="<?php echo e($carving->id); ?>"/>
+                                          <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong><?php echo app('translator')->get('Unlike'); ?></strong></button>
+                                       </form>
+                                    <?php endif; ?>
+                        <?php endif; ?>
+                                 </div>
 
+                                 <div class="col-6">
+                                    <form action="<?php echo e(route('cart.store', $carving)); ?>" method="POST">
+                                       <?php echo csrf_field(); ?>
+                                       <input type="hidden" value="1" name="quantity">
+                                       <button type="submit" class="btn btn-block btn-xs btn-outline-secondary text-dark"><strong>Request a Quote</strong></button>
+                                    </form>
+                                 </div>
+
+                              </div>
 
                            </div>
-
-                        </div>
 
                      </div>
 
@@ -169,7 +127,6 @@
             
          </div>
 
-
       </div>
    <?php else: ?>
       <div class="col-row p-3 card-trans-4 text-dark">
@@ -177,8 +134,6 @@
 
       </div>
    <?php endif; ?>
-
-
 
 <?php $__env->stopSection(); ?>
 

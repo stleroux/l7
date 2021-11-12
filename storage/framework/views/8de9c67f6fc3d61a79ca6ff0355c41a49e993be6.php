@@ -5,11 +5,13 @@
 			
 			<div class="row mb-0 p-0">
 
+
+
 				<div class="col-6 col-sm-4 col-md-2 col-xl">
 					<div class="card card-primary">
-						<div class="card-header p-1 text-center">Entries</div>
+						<div class="card-header p-1 text-center">Quotes</div>
 						<div class="p-2 text-center">
-							<?php echo e(number_format($totalEntries, 2, '.', ', ')); ?>$
+							<?php echo e(number_format($totalQuotes, 2, '.', ', ')); ?>$
 						</div>
 					</div>
 				</div>
@@ -23,14 +25,7 @@
 					</div>
 				</div>
 
-				<div class="col-6 col-sm-4 col-md-2 col-xl">
-					<div class="card card-primary">
-						<div class="card-header p-1 text-center">Logged</div>
-						<div class="p-2 text-center">
-							<?php echo e(number_format($totalLogged, 2, '.', ', ')); ?>$
-						</div>
-					</div>
-				</div>
+
 
 				<div class="col-6 col-sm-4 col-md-2 col-xl">
 					<div class="card card-primary">
@@ -79,15 +74,25 @@
 
 				<div class="col-6 col-sm-4 col-md-2 col-xl">
 					<div class="card card-primary">
-						<div class="card-header p-1 text-center">Total Owed</div>
+						<div class="card-header p-1 text-center">Total</div>
 						<div class="p-2 text-center">
-							<?php echo e(number_format($totalOwed, 2, '.', ', ')); ?>$
+							<?php echo e(number_format($total, 2, '.', ', ')); ?>$
 						</div>
 					</div>
 				</div>
 			</div>
 
+
 			<div class="row mb-0 p-0">
+				<div class="col-6 col-sm-4 col-md-2 col-xl">
+					<div class="card card-primary">
+						<div class="card-header p-1 text-center">Quotes</div>
+						<div class="p-2 text-center">
+							<?php echo e($quotesCount); ?>
+
+						</div>
+					</div>
+				</div>
 				<div class="col-6 col-sm-4 col-md-2 col-xl">
 					<div class="card card-primary">
 						<div class="card-header p-1 text-center">Estimates</div>

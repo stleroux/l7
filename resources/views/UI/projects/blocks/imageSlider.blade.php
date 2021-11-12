@@ -1,12 +1,12 @@
-<div class="card card-trans-4 card-outline card-primary mb-2">
-	<div class="card-header bg-info">
-      <div class="card-title font-weight-bold">
+<div class="card card-trans-4 card-outline card-primary text-dark mb-2">
+	<div class="card-header bg-info p-1">
+      <div class="card-title">
 		   <i class="{{ config('icons.image') }}"></i>
 		   Project Image(s)
       </div>
 	</div>
 
-	<div class="card-body p-0 m-0 w-50 mx-auto">
+	<div class="card-body p-1 m-0 w-50 mx-auto">
 		@if($project->images->count() >= 1)
 			<div id="projectsImageSlider" class="carousel slide mb-0" data-ride="carousel">
 

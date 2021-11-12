@@ -1,69 +1,46 @@
-{{-- @if(checkPerm('comment_add')) --}}
-{{-- @if(checkACL('user')) --}}
-@auth
-	<div class="card mb-3">
-		
-		<div class="card-header block_header p-2">
+
+<div class="card mb-2 card-trans-4" style="background-color: #800000">
+   
+   <div class="card-header text-light p-1">
+   	<div class="card-title">
 			<i class="fa fa-comment" aria-hidden="true"></i>
-			Leave a comment
-		</div>
-		
-		<div class="card-body p-2">
-			{{-- {{ Form::open(['route' => ['recipes.storeComment', $recipe->id], 'method' => 'POST']) }} --}}
+			Leave a comment   		
+   	</div>
+	</div>
+
+	@auth
+		<div class="card-body card-trans-6 p-2 m-0">
 			<form action="{{ route('recipes.storeComment',  $recipe->id) }}" method="POST">
 				@csrf
-{{-- 			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-						{{ Form::label('name', "Name:") }}
-						@if(Auth::check())
-							{{ Form::text('name', Auth::user()->username, ['class' => 'form-control', 'readonly'=>'readonly']) }}
-						@else
-							{{ Form::text('name', null, ['class' => 'form-control']) }}
-						@endif
-						<span class="text-danger">{{ $errors->first('name') }}</span>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+							<textarea name="comment" id="comment" rows="5" class="form-control"></textarea>
+							<span class="text-danger">{{ $errors->first('comment') }}</span>
+						</div>
 					</div>
 				</div>
-			</div> --}}
-{{-- 			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-						{{ Form::label('email', 'Email:') }}
-						@if(Auth::check())
-							{{ Form::text('email', Auth::user()->email, ['class' => 'form-control', 'readonly'=>'readonly']) }}
-						@else
-							{{ Form::text('email', null, ['class' => 'form-control']) }}
-						@endif
-						<span class="text-danger">{{ $errors->first('email') }}</span>
+
+				<div class="row">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-sm btn-success btn-block">Add Comment</button>
 					</div>
 				</div>
-			</div> --}}
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-						{{-- {{ Form::label('comment', "Comment:") }} --}}
-						{{-- {{ Form::textarea('comment', null, ['class' => 'form-control', 'rows' => '5']) }} --}}
-						<textarea name="comment" id="comment" rows="5" class="form-control"></textarea>
-						<span class="text-danger">{{ $errors->first('comment') }}</span>
-				</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					{{-- {{ Form::submit('Add Comment', ['class' => 'btn btn-success btn-block', 'style' => 'margin-top:15px;']) }} --}}
-					{{-- {{ Form::button('<i class="fa fa-plus-circle"></i> Add Comment', ['type' => 'submit', 'class' => 'btn btn-sm btn-success btn-block'] )  }} --}}
-					<button type="submit" class="btn btn-sm btn-success btn-block">Add Comment</button>
-				</div>
-			</div>
-			{{-- {{ Form::close() }} --}}
+
 			</form>
 		</div>
 
-		<div class="card-footer p-1">
+		<div class="card-footer card-trans-6 p-1">
 			Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.
 		</div>
-		
+
+	@else
+
+		<div class="card-body card-trans-4 p-2 m-0">
+			Please login to leave a comment
+		</div>
+	
 	</div>
-{{-- @endif --}}
-{{-- @endif --}}
+
 @endauth

@@ -14,6 +14,7 @@
             {{-- <th>#</th> --}}
             <th>Question</th>
             <th>Category</th>
+            <th>Published?</th>
             <th class="no-sort text-center" width="140px">Actions</th>
          </tr>
       </thead>
@@ -36,6 +37,7 @@
                {{-- <td>{{ $faq->id }}</td> --}}
                <td><a href="{{ route('admin.faqs.show', $faq->id) }}">{{ ucfirst($faq->question) }}</a></td>
                <td>{{ $faq->category }}</td>
+               <td>{{ ($faq->is_published ? 'Yes' : 'No') }}</td>
                <td class="text-right">
                   @include('admin.faqs.index.actions')
                </td>

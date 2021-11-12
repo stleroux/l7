@@ -22,21 +22,48 @@
 
 		<tbody>
 
-			<tr>
-				<th>Logged</th>
-				<td class="text-right">{{ number_format($invoicesLogged->sum('amount_charged'), 2, '.', ', ') }}$</td>
-				<td class="text-right">{{ number_format($invoicesLogged->sum('hst'), 2, '.', ', ') }}$</td>
-				<td class="text-right">{{ number_format($invoicesLogged->sum('sub_total'), 2, '.', ', ') }}$</td>
-				<td class="text-right">{{ number_format($invoicesLogged->sum('deposits'), 2, '.', ', ') }}$</td>
-				<td class="text-right">{{ number_format($invoicesLogged->sum('discounts'), 2, '.', ', ') }}$</td>
-				<td class="text-right">{{ number_format($invoicesLogged->sum('payments'), 2, '.', ', ') }}$</td>
-				{{-- <td class="text-right">{{ number_format($invoicesLogged->sum('wsib'), 2, '.', ', ') }}$</td> --}}
-				{{-- <td class="text-right">{{ number_format($invoicesLogged->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
-				{{-- <td class="text-right">{{ number_format($invoicesLogged->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
-				<td class="text-right">{{ number_format($invoicesLogged->sum('total'), 2, '.', ', ') }}$</td>
+			<tr class="">
+				<th>Quotes</th>
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesQuotes->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesQuotes->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesQuotes->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesQuotes->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+			<tr class="">
+				<th>Estimates</th>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesEstimates->sum('total'), 2, '.', ', ') }}$</td>
 			</tr>
 
-			<tr>
+			<tr class="table-warning font-weight-bold">
+				<th>Subtotal</th>
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesSubTotal->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesSubTotal->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesSubTotal->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesSubTotal->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+
+			<tr class="">
 				<th>Invoiced</th>
 				<td class="text-right">{{ number_format($invoicesInvoiced->sum('amount_charged'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesInvoiced->sum('hst'), 2, '.', ', ') }}$</td>
@@ -64,7 +91,75 @@
 				<td class="text-right">{{ number_format($invoicesPaid->sum('total'), 2, '.', ', ') }}$</td>
 			</tr>
 
-			<tr class="table-success font-weight-bold">
+			<tr>
+				<th>Work-Orders</th>
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesWorkOrders->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesWorkOrders->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesWorkOrders->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesWorkOrders->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+
+			<tr>
+				<th>Completed</t>
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesCompleted->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesCompleted->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesCompleted->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesCompleted->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+
+			<tr>
+				<th>Shipped</th>
+				<td class="text-right">{{ number_format($invoicesShipped->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesShipped->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesShipped->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesShipped->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesShipped->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesShipped->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesShipped->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesShipped->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesShipped->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesShipped->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+			<tr>
+				<th>Picked Up</th>
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesPickedUp->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesPickedUp->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesPickedUp->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesPickedUp->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+
+			<tr class="table-danger">
+				<th>Canceled</th>
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('amount_charged'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('hst'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('sub_total'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('deposits'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('discounts'), 2, '.', ', ') }}$</td>
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('payments'), 2, '.', ', ') }}$</td>
+				{{-- <td class="text-right">{{ number_format($invoicesCanceled->sum('wsib'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesCanceled->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
+				{{-- <td class="text-right">{{ number_format($invoicesCanceled->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<td class="text-right">{{ number_format($invoicesCanceled->sum('total'), 2, '.', ', ') }}$</td>
+			</tr>
+			{{-- <tr class="table-success font-weight-bold">
 				<th>Total Invoices</th>
 				<td class="text-right">{{ number_format($invoicesTotal->sum('amount_charged'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesTotal->sum('hst'), 2, '.', ', ') }}$</td>
@@ -72,13 +167,13 @@
 				<td class="text-right">{{ number_format($invoicesTotal->sum('deposits'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesTotal->sum('discounts'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesTotal->sum('payments'), 2, '.', ', ') }}$</td>
-				{{-- <td class="text-right">{{ number_format($invoicesTotal->sum('wsib'), 2, '.', ', ') }}$</td> --}}
-				{{-- <td class="text-right">{{ number_format($invoicesTotal->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
-				{{-- <td class="text-right">{{ number_format($invoicesTotal->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<!-- <td class="text-right">{{ number_format($invoicesTotal->sum('wsib'), 2, '.', ', ') }}$</td> -->
+				<!-- <td class="text-right">{{ number_format($invoicesTotal->sum('income_taxes'), 2, '.', ', ') }}$</td> -->
+				<!-- <td class="text-right">{{ number_format($invoicesTotal->sum('total_deductions'), 2, '.', ', ') }}$</td> -->
 				<td class="text-right">{{ number_format($invoicesTotal->sum('total'), 2, '.', ', ') }}$</td>
-			</tr>
+			</tr> --}}
 
-			<tr class="table-warning">
+{{-- 			<tr class="table-warning">
 				<th>Estimates</th>
 				<td class="text-right">{{ number_format($invoicesEstimates->sum('amount_charged'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesEstimates->sum('hst'), 2, '.', ', ') }}$</td>
@@ -86,9 +181,9 @@
 				<td class="text-right">{{ number_format($invoicesEstimates->sum('deposits'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesEstimates->sum('discounts'), 2, '.', ', ') }}$</td>
 				<td class="text-right">{{ number_format($invoicesEstimates->sum('payments'), 2, '.', ', ') }}$</td>
-				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('wsib'), 2, '.', ', ') }}$</td> --}}
-				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('income_taxes'), 2, '.', ', ') }}$</td> --}}
-				{{-- <td class="text-right">{{ number_format($invoicesEstimates->sum('total_deductions'), 2, '.', ', ') }}$</td> --}}
+				<!-- <td class="text-right">{{ number_format($invoicesEstimates->sum('wsib'), 2, '.', ', ') }}$</td> -->
+				<!-- <td class="text-right">{{ number_format($invoicesEstimates->sum('income_taxes'), 2, '.', ', ') }}$</td> -->
+				<!-- <td class="text-right">{{ number_format($invoicesEstimates->sum('total_deductions'), 2, '.', ', ') }}$</td> -->
 				<td class="text-right">
 					@php
 						$ac = $invoicesEstimates->sum('amount_charged');
@@ -102,7 +197,7 @@
 					{{ number_format($total, 2, '.', ', ') }}
 					$
 				</td>
-			</tr>
+			</tr> --}}
 
 			<tr class="table-primary font-weight-bold">
 				<th>Overall Total</th>

@@ -8,7 +8,7 @@
 		</span>
 		<br />
 		<span class="text-primary">
-			These are not part of the retail section of our business.
+			These are usually not a part of the retail section of our business but time permitting, accomodations could be made.
 		</span>
 	</div>
 <?php endif; ?>

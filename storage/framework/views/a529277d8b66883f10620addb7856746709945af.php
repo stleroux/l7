@@ -8,7 +8,6 @@
 						<div><strong>Billed To</strong></div>
 							<div><?php echo e($invoice->client->company_name ? $invoice->client->company_name : ''); ?></div>
 							<div><?php echo e($invoice->client->contact_name); ?></div>
-							<div><?php echo e($invoice->client->telephone ? $invoice->client->telephone : ''); ?></div>
 							<div><?php echo e($invoice->client->address ? $invoice->client->address : ''); ?></div>
 							<div>
 								<?php echo e($invoice->client->city ? $invoice->client->city : ''); ?>
@@ -17,6 +16,7 @@
 
 							</div>
 							<div><?php echo e($invoice->client->postal_code ? $invoice->client->postal_code : ''); ?></div>
+							<div><?php echo e($invoice->client->telephone ? $invoice->client->telephone : ''); ?></div>
 					</div>
 					<div class="col-sm-7">
 						<div class="row">

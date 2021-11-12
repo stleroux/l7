@@ -307,7 +307,18 @@ class ActivitiesController extends Controller
          'alert-type' => 'success'
       ];
 
+      // return redirect()->route('admin.invoicer.invoices.edit', $activity->invoice_id)->with($notification);
+      // if($invoice->status == "quote"){
+      //    return redirect()->route('admin.invoicer.quotes.edit', $activity->invoice_id)->with($notification);
+      // }
+      // elseif($invoice->status == "estimate"){
+      //    return redirect()->route('admin.invoicer.estimates.edit', $activity->invoice_id)->with($notification);
+      // }
+      // elseif($invoice->status == "invoiced"){
+      //    return redirect()->route('admin.invoicer.invoices.edit', $activity->invoice_id)->with($notification);
+      // }
       return redirect()->route('admin.invoicer.invoices.edit', $activity->invoice_id)->with($notification);
+
    }
 
 

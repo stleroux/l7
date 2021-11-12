@@ -1,4 +1,5 @@
-<ul class="navbar-nav ml-auto">
+
+<ul class="navbar-nav">
 
    <?php echo $__env->make('layouts.UI.common.cart', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
@@ -17,7 +18,7 @@
          </li>
       <?php endif; ?>
 
-      <?php echo $__env->make('layouts.common.navbar.mylinks', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('layouts.common.navbar.myLinks', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php echo $__env->make('layouts.common.navbar.languages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php echo $__env->make('layouts.common.navbar.user', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

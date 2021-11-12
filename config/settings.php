@@ -40,13 +40,16 @@ return [
    'perPage' => '15',
 
    // Message to display when fields are required in a form
-   'formFieldsRequired' => 'DUH!! Fields marked with an <span class="required"></span> are required.',
+   'formFieldsRequired' => 'Fields marked with an <span class="required"></span> are required.',
 
    // Generic message to display at top of form when validation error(s) occur
    'formSubmissionError' => 'Errors occurred while submitting the form. Please correct the errors before proceeding.',
 
    // Message to display when user is not logged in and they view a details page
    'viewMore' => 'To view more details, please <a href="\login"  class="text text-info">LOGIN</a> if you are already a member or <a href="\register" class="text text-info">REGISTER</a> an account if you are not.',
+
+   // Collapse the sidebar
+   'sidebarCollapsed' => '',
 
    // Visibity settings for frontend modules
    'carvings' => 'visible',

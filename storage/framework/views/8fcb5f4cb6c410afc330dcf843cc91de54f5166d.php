@@ -47,6 +47,7 @@
 </script>
 
 <!-- DateTime Picker -->
+<!-- https://xdsoft.net/jqplugins/datetimepicker/ -->
 <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
 <script>
    $("#datePicker").datetimepicker({
@@ -90,10 +91,10 @@
 
 <?php echo $__env->yieldContent('scripts'); ?>
 
-<script src="<?php echo e(asset('/js/app.js')); ?>"></script>
 
 
 <?php echo \Livewire\Livewire::scripts(); ?>
+
 
 
 

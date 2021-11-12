@@ -22,7 +22,7 @@
 
 @section('content')
 
-   <div class="card card-trans-2 text-light mb-3">
+   <div class="card card-trans-2 mb-3">
 
       <div class="card-body">
 

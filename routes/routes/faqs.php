@@ -10,6 +10,12 @@ Route::namespace('Admin\Faqs')->prefix('admin')->name('admin.')->group(function(
    Route::post('/faqs/delete/{faq}',            'FaqsController@delete')              ->name('faqs.delete');
    Route::delete('/faqs/mass_delete',           'FaqsController@massDelete')          ->name('faqs.mass_delete');
    Route::delete('/faqs/mass_destroy',          'FaqsController@massDestroy')         ->name('faqs.mass_destroy');
+
+   Route::post('/faqs/unpublish/{faq}',             'FaqsController@unpublish')             ->name('faqs.unpublish');
+   Route::post('/faqs/publish/{faq}',               'FaqsController@publish')               ->name('faqs.publish');
+   Route::post('/faqs/mass_publish',                   'FaqsController@massPublish')           ->name('faqs.mass_publish');
+   Route::post('/faqs/mass_unpublish',                 'FaqsController@massUnpublish')         ->name('faqs.mass_unpublish');
+
    Route::get('/faqs/trashed',                  'FaqsController@trashed')             ->name('faqs.trashed');
    Route::post('/faqs/resetViews/{faq}',        'FaqsController@resetViews')          ->name('faqs.resetViews');
    Route::post('/faqs/mass_resetViews',         'FaqsController@massResetViews')      ->name('faqs.mass_resetViews');
@@ -25,5 +31,5 @@ Route::namespace('UI')->prefix('faqs')->name('faqs.')->group(function() {
    Route::get('{faq}/show',                     'FaqsController@show')                ->name('show');
    Route::get('faq',                            'FaqsController@faq')                 ->name('faq');
    Route::get('{filter?}/{tag?}',               'FaqsController@index')               ->name('index');
-   Route::post('{faq}/comment',                 'CommentController@store')            ->name('comment.store');
+   // Route::post('{faq}/comment',                 'CommentController@store')            ->name('comment.store');
 });

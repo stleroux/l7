@@ -1,11 +1,11 @@
 <div class="card mb-2 card-trans-4">
 
-   <div class="card-header bg-steel p-2">
+   <div class="card-header card_header text-light p-2 font-weight-normal">
       <i class="fas fa-fw fa-blog"></i>
       Popular Blog Posts
    </div>
    
-   <div class="card-body bg-steel-light p-2">
+   <div class="card-body card-trans-2 p-2 m-0">
       <?php if($popular->count() > 0): ?>
          <ul class="list-group px-0 py-0">
             <?php $__currentLoopData = $popular; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

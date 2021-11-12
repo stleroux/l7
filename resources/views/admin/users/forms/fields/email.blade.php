@@ -11,6 +11,7 @@
       <div class="p-1 m-0 bg-gray-light">
          {!! $user->email !!}
       </div>
+      {{-- <input type="hidden" name="email" value="{{ old('email') ?? $user->email }}"> --}}
 
    @else
 

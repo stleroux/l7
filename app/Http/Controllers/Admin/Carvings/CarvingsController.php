@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\Admin\Carvings;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CarvingRequest;
-use App\Models\Carving;
-use App\Models\CarvingImage;
-use App\Models\Comment;
-use App\Models\Category;
-use App\Models\Finish;
-use App\Models\Material;
-use App\Models\Tag;
-use Illuminate\Http\Request;
+use URL;
 use Auth;
-use DB;
-use File;
-use Gate;
-use Image as Img;
 use Route;
 use Session;
-use URL;
+use Image as Img;
+use App\Models\Tag;
+use App\Models\Finish;
+use App\Models\Carving;
+use App\Models\Comment;
+use App\Models\Category;
+use App\Models\Material;
+use App\Models\CarvingImage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\CarvingRequest;
 
 
 class CarvingsController extends Controller

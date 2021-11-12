@@ -453,7 +453,7 @@ class CategoriesController extends Controller
          $category->save();
 
          Session::flash('success','The new parent category has been created.');
-         dd($request->part);
+         // dd($request->part);
          return redirect()->route('admin.categories.index', ['part1', $request->part]);
       } 
 

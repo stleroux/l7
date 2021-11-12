@@ -1,9 +1,11 @@
 
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>TheWoodBarn.ca</title>
+   <title><?php echo e(Config::get('settings.appName')); ?></title>
    <!-- Tell the browser to be responsive to screen width -->
    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
 
    <!-- Font Awesome -->
    <link rel="stylesheet" href="<?php echo e(asset('plugins/fontawesome-free/css/all.css')); ?>">
@@ -53,5 +55,7 @@
 
    <?php echo $__env->yieldContent('stylesheet'); ?>
 
+   <?php echo \Livewire\Livewire::styles(); ?>
+
    
-   <?php echo \Livewire\Livewire::styles(); ?><?php /**PATH C:\sites\l7\resources\views/layouts/common/head.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\sites\l7\resources\views/layouts/common/head.blade.php ENDPATH**/ ?>

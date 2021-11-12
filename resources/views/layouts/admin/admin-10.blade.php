@@ -7,7 +7,7 @@
    </head>
 
    {{-- <body class="hold-transition sidebar-mini sidebar-collapse layout-navbar-fixed layout-footer-fixed"> --}}
-   <body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed">
+   <body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed {{ config('settings.sidebarCollapsed') == 'on' ? 'sidebar-collapse' : '' }}">
 
       <!-- Site wrapper -->
       <div class="wrapper">

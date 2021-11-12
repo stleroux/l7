@@ -1,4 +1,4 @@
-<div class="pb-1 pl-0">
+<div class="pb-1 pl-0 text text-right">
 
       @if(Route::currentRouteName() != 'darts.index')
          <a href="{{ route('darts.index') }}" class="btn btn-primary p-1 {{ Route::is('darts') ? 'active' : '' }}">
@@ -24,7 +24,7 @@
             Route::currentRouteName() == 'darts.zeroOne.players'
          ) --}}
          @if(Route::currentRouteName() == 'darts.games.board' || Route::currentRouteName() == 'darts.index')
-            <div class="float-right">
+            {{-- <div class="float-right"> --}}
             <a href="{{ route('darts.game.create') }}"
                class="btn btn-primary p-1
                {{ Route::is('darts.games.create') ? 'active' : '' }}
@@ -34,7 +34,7 @@
                <i class="fa fa-gamepad"></i>
                New Game
             </a>
-            </div>
+            {{-- </div> --}}
          @endif
          
          @if(

@@ -125,7 +125,7 @@
 							      <input
 							        	id="reasonToRegister"
 							        	type="text"
-							         class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
+							         class="form-control{{ $errors->has('reasonToRegister') ? ' is-invalid' : '' }}"
 							         name="reasonToRegister"
 							         value="{{ old('reasonToRegister') }}"
 							         required

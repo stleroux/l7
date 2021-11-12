@@ -41,15 +41,13 @@ class LedgerController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-      $invoices = InvoicerInvoice::sortable()
-         ->with('client')
+      $invoices = InvoicerInvoice::with('client')
          ->with('activities')
          ->where('status', '!=', 'estimate')
          ->orderBy('id','desc')
          ->paginate(Config::get('settings.rowsPerPage'));
 
-      $estimates = InvoicerInvoice::sortable()
-         ->with('client')
+      $estimates = InvoicerInvoice::with('client')
          ->with('activities')
          ->where('status', 'estimate')
          ->orderBy('id','desc')
@@ -93,8 +91,7 @@ class LedgerController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-ledger'), 403);
      
-      $invoices = InvoicerInvoice::sortable()
-         ->where('status','=','estimate')
+      $invoices = InvoicerInvoice::where('status','=','estimate')
          ->orderBy('id','desc')
          ->paginate(Config::get('settings.rowsPerPage'));
 
@@ -127,7 +124,7 @@ class LedgerController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-      $invoices = InvoicerInvoice::sortable()->where('status','=','invoiced')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+      $invoices = InvoicerInvoice::where('status','=','invoiced')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
       $amountCharged = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('amount_charged');
       $hst = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('hst');
       $subTotal = DB::table('invoicer__invoices')->where('status','=','invoiced')->sum('sub_total');
@@ -157,8 +154,7 @@ class LedgerController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-ledger'), 403);     
      
-      $invoices = InvoicerInvoice::sortable()
-         ->where('status','=','logged')
+      $invoices = InvoicerInvoice::where('status','=','logged')
          ->orderBy('id','desc')
          ->paginate(Config::get('settings.rowsPerPage'));
 
@@ -191,7 +187,7 @@ class LedgerController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-      $invoices = InvoicerInvoice::sortable()->where('status','=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+      $invoices = InvoicerInvoice::where('status','=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
       $amountCharged = DB::table('invoicer__invoices')->where('status','=','paid')->sum('amount_charged');
       $hst = DB::table('invoicer__invoices')->where('status','=','paid')->sum('hst');
       $subTotal = DB::table('invoicer__invoices')->where('status','=','paid')->sum('sub_total');
@@ -221,7 +217,7 @@ class LedgerController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-ledger'), 403);     
 
-      $invoices = InvoicerInvoice::sortable()->where('status','!=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
+      $invoices = InvoicerInvoice::where('status','!=','paid')->orderBy('id','desc')->paginate(Config::get('settings.rowsPerPage'));
       $amountCharged = DB::table('invoicer__invoices')->where('status','=','paid')->sum('amount_charged');
       $hst = DB::table('invoicer__invoices')->where('status','=','paid')->sum('hst');
       $subTotal = DB::table('invoicer__invoices')->where('status','=','paid')->sum('sub_total');

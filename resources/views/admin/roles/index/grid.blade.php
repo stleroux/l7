@@ -38,7 +38,7 @@
                <td nowrap="nowrap">{{ $role->name }}</td>
                <td class="d-none d-lg-table-cell">
                   {{-- {{ implode(', ', $role->permissions()->get()->pluck('name')->toArray()) }} --}}
-                  @foreach($role->permissions as $p)
+                  @foreach($role->permissions->sortBy('name') as $p)
                      <span class="badge badge-dark">
                         {{ $p->name }}
                      </span>

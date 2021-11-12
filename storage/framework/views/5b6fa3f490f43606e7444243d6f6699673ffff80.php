@@ -1,11 +1,16 @@
 
 <div class="row">
 	<div class="col-sm-4">
-		<?php if($invoice->status == "estimate"): ?>
-			<h1 class="text-center">ESTIMATE</h1>
-		<?php else: ?>
-			<h1 class="text-center">INVOICE</h1>
-		<?php endif; ?>
+		<h1 class="text-center">
+			<?php if($invoice->status == 'quote' || $invoice->status == 'estimate'): ?>
+				<?php echo e(Str::upper($invoice->status)); ?>
+
+			<?php else: ?>
+				INVOICE
+			<?php endif; ?>
+		</h1>
+
+		
 	</div>
 	<div class="col-sm-8">
 		<div class="col-sm-12">

@@ -86,7 +86,7 @@ class RecipesController extends Controller
         // Set the session to the current page route
         Session::put('fromPage', url()->full());
 
-        $faqs = FAQ::where('category', 'recipes')->orderBy('question')->get();
+        $faqs = FAQ::where('category', 'recipes')->where('is_published', 1)->orderBy('question')->get();
         // dd($faqs);
 
         return view('UI.recipes.faqs', compact('faqs'));
@@ -876,11 +876,13 @@ public function myRecipesList(Request $request)
       if($byCatName) {
          $previous = Recipe::where('title', '<', $recipe->title)
             ->where('category_id', $byCatName)
+            ->where('personal', '=', Recipe::IS_PERSONAL_NO)
             ->orderBy('title','asc')
             ->max('title');
       // If no sub category has been selected
       } else {
          $previous = Recipe::where('title', '<', $recipe->title)
+            ->where('personal', '=', Recipe::IS_PERSONAL_NO)
             ->orderBy('title','asc')
             ->max('title');
       }
@@ -891,12 +893,15 @@ public function myRecipesList(Request $request)
          if($byCatName) {
             $p = Recipe::where('title',$previous)
                ->where('category_id', $byCatName)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
                ->get();
             // return only the ID of the previous record
             $previous = $p[0]->id;
          // If no sub category has been selected
          } else {
-            $p = Recipe::where('title',$previous)->get();
+            $p = Recipe::where('title',$previous)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
+               ->get();
             // return only the ID of the previous record
             $previous = $p[0]->id;
          }
@@ -907,11 +912,13 @@ public function myRecipesList(Request $request)
       if($byCatName) {
          $next = Recipe::where('title', '>', $recipe->title)
             ->where('category_id', $byCatName)
+            ->where('personal', '=', Recipe::IS_PERSONAL_NO)
             ->orderBy('title','desc')
             ->min('title');
       // If no sub category has been selected
       } else {
          $next = Recipe::where('title', '>', $recipe->title)
+            ->where('personal', '=', Recipe::IS_PERSONAL_NO)
             ->orderBy('title','desc')
             ->min('title');
       }
@@ -922,12 +929,15 @@ public function myRecipesList(Request $request)
          if($byCatName) {
             $n = Recipe::where('title',$next)
                ->where('category_id', $byCatName)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
                ->get();
             // return only the ID of the next record
             $next = $n[0]->id;
          // If no sub category has been selected
          } else {
-            $n = Recipe::where('title',$next)->get();
+            $n = Recipe::where('title',$next)
+               ->where('personal', '=', Recipe::IS_PERSONAL_NO)
+               ->get();
             // return only the ID of the next record
             $next = $n[0]->id;
          }

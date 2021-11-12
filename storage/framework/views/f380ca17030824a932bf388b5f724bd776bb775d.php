@@ -2,38 +2,42 @@
 <html>
    <head>
       <?php echo $__env->make('layouts.common.head', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-      
    </head>
 
    <body>
-      <?php echo $__env->make('layouts.UI.navbar.topNavbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-      <div class="container-fluid">
+      <wrapper class="d-flex flex-column min-vh-100">
 
-         <div class="row mt-5 pt-4 card-trans-6 mb-2">
-            <div class="col-6 offset-xl-1">
-               <h1 class="d-flex text-center justify-content-sm-start">
-                  <?php echo $__env->yieldContent('pageHeader'); ?>
-               </h1>
-            </div>
-            <div class="d-none d-sm-block col-4">
-               <?php echo $__env->make('layouts.UI.common.breadcrumb', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            </div>
-            <div class="col-1"></div>
-         </div>
+         <?php echo $__env->make('layouts.UI.navbar.topNavbarDouble', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-         <div class="row">
-            <div class="col-xl-10 offset-xl-1">
-               <?php echo $__env->yieldContent('content'); ?>
+         <main class="container-fluid flex-fill">
+
+            <div class="row card-trans-6 pt-2 pb-1 mb-2">
+               <div class="col-12 col-md-4 offset-md-1">
+                  <h3>
+                     <?php echo $__env->yieldContent('pageHeader'); ?>
+                  </h3>
+               </div>
+            
+               <div class="col-12 col-md-6 align-middle text-right pt-2">
+                  <?php echo $__env->make('layouts.UI.common.breadcrumb', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+               </div>
             </div>
-         </div>
-      
+
+            <div class="row">
+               <div class="col-xl-10 offset-xl-1">
+                  <?php echo $__env->yieldContent('content'); ?>
+               </div>
+            </div>
+
+         </main>
+
          <?php echo $__env->make('layouts.UI.common.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-      
-      </div><!-- /.container-fluid -->
 
-      <!-- Scripts -->
-      <?php echo $__env->make('layouts.common.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <!-- Scripts -->
+         <?php echo $__env->make('layouts.common.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+      </wrapper>
 
    </body>
 </html>

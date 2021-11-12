@@ -9,7 +9,8 @@
 
 		</a>
 		for
-		<a href="<?php echo e(route('admin.invoicer.clients.show', $notification->data['client'])); ?>">
+		
+		<a href="<?php echo e(route('admin.users.show', $notification->data['client'])); ?>">
 			<?php echo e($notification->data['client_name']); ?>
 
 			<?php echo e(($notification->data['company_name'] ? '[' . ucwords($notification->data['company_name']) . ']' : '')); ?>

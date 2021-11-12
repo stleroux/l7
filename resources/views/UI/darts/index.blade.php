@@ -32,7 +32,7 @@
 
             <div class="card-header p-2 text-light">
                <div class="row">
-                  <div class="col font-weight-bold">
+                  <div class="col font-weight-bold card-title">
                      <i class="{{ config('icons.darts') }}"></i>            
                      Dart Keeper
                   </div>

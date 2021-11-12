@@ -163,6 +163,7 @@ public function storeCrud(Request $request, Permission $permission)
 
    // $bread = ['browse','read','edit','add','delete'];
    $bread = ['create','read','update','delete'];
+   // $bread = ['create','show','edit','delete'];
 
    // save the data in the database
    foreach($bread as $b){

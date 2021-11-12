@@ -1,18 +1,16 @@
-<div class="card card-trans-0 card-outline card-primary mb-3">
+<div class="card card-trans-4 card-outline card-primary text-dark mb-2">
 
-	<div class="card-header bg-info text-light">
-		{{-- <div class="card-title"> --}}
-			<strong>
-				<i class="{{ config('icons.comments') }}"></i>
-				Comments
-			</strong>
+	<div class="card-header bg-info p-1">
+		<div class="card-title">
+			<i class="{{ config('icons.comments') }}"></i>
+			Comments
 			<small>({{ $model->comments()->count() }} total)</small>
-		{{-- </div> --}}
+		</div>
 	</div>
 
-	<div class="card-body card-trans-6 text-dark p-0">
+	<div class="card-body p-0">
 		@if($model->comments->count())
-			<table class="table table-sm table-hover mb-0">
+			<table class="table table-sm table-sm table-hover mb-0">
 				<thead>
 					<tr class="d-flex">
 						<th class="col-3">Name</th>
@@ -39,7 +37,7 @@
 				</tbody>
 			</table>
 		@else
-			<div class="text p-1">No comments found</div>
+			<div class="p-1">No comments found</div>
 		@endif
 	</div>
 

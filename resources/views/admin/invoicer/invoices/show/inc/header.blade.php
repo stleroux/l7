@@ -1,11 +1,21 @@
 
 <div class="row">
 	<div class="col-sm-4">
-		@if($invoice->status == "estimate")
+		<h1 class="text-center">
+			@if($invoice->status == 'quote' || $invoice->status == 'estimate')
+				{{ Str::upper($invoice->status) }}
+			@else
+				INVOICE
+			@endif
+		</h1>
+
+		{{-- @if(request()->has('type') && request()->type == "quote")
+			<h1 class="text-center">QUOTE</h1>
+		@elseif(request()->has('type') && request()->type == "estimate")
 			<h1 class="text-center">ESTIMATE</h1>
 		@else
 			<h1 class="text-center">INVOICE</h1>
-		@endif
+		@endif --}}
 	</div>
 	<div class="col-sm-8">
 		<div class="col-sm-12">

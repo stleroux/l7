@@ -15,6 +15,7 @@
       <div class="form-row">
          @include('admin.faqs.forms.fields.general.question')
          @include('admin.faqs.forms.fields.general.category')
+         @include('admin.faqs.forms.fields.general.is_published')
       </div>
       
       <div class="form-row">

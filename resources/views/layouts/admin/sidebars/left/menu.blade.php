@@ -5,11 +5,20 @@
    </a>
 </li>
 
+{{-- @can('admin-search') --}}
+   <li class="nav-item">
+      <a href="{{ Route('admin.advancedSearch') }}" class="nav-link {{ Request::is('admin/advancedSearch*') ? 'active' : '' }}">
+         <i class="{{ config('icons.search') }}"></i>
+         <p>Advanced Search</p>
+      </a>
+   </li>
+{{-- @endcan --}}
+
 @include('layouts.admin.sidebars.left.invoicer')
+
 @include('layouts.admin.sidebars.left.modules')
+
 @include('layouts.admin.sidebars.left.monitoring')
-@include('layouts.admin.sidebars.left.configuration')
-@include('layouts.admin.sidebars.left.userManagement')
 
 @can('movie-manage')
    <li class="nav-item">
@@ -20,14 +29,19 @@
    </li>
 @endcan
 
-{{-- @can('admin-search') --}}
+@include('layouts.admin.sidebars.left.configuration')
+
+@can('admin-maintenance')
    <li class="nav-item">
-      <a href="{{ Route('admin.advancedSearch') }}" class="nav-link {{ Request::is('admin/advancedSearch*') ? 'active' : '' }}">
-         <i class="{{ config('icons.search') }}"></i>
-         <p>Advanced Search</p>
+      <a href="{{ route('admin.maintenance') }}" class="nav-link {{ Request::is('admin/maintenance*') ? 'active' : '' }}">
+         <i class="{{ config('icons.maintenance') }}"></i>
+         <p>Site Maintenance</p>
       </a>
    </li>
-{{-- @endcan --}}
+@endcan
+
+@include('layouts.admin.sidebars.left.userManagement')
+
 
 {{-- @can('bug-manage')
    <li class="nav-item">

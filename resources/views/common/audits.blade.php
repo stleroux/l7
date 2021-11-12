@@ -45,7 +45,9 @@
                      <tr data-toggle="collapse" data-target="#demo{{ $audit->id }}" class="accordion-toggle">
                         <td>{{ $audit->id }}</td>
                         <td>{{ $audit->event }}</td>
-                        <td>{{ $audit->user->username }}</td>
+                        <td>
+                           {{ ($audit->user->username ?? 'Guest') }}
+                        </td>
                         <td>{{ $audit->created_at->diffForHumans() }}</td>
                         <td>{{ $audit->url }}</td>
                         <td>{{ $audit->ip_address }}</td>                    

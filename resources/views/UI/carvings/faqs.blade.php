@@ -16,6 +16,7 @@
 
 @section('rightColumn')
    @include('UI.carvings.blocks.popular')
+   @include('UI.carvings.blocks.general')
    {{-- @include('UI.carvings.blocks.tags') --}}
 @endsection
 

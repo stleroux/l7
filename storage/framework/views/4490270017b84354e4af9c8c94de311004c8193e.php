@@ -106,21 +106,23 @@
                      <?php endif; ?>
 
                      <div class="row-col text-center pt-2">
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $recipe)): ?>
-                           <form class="" action="<?php echo e(route('like')); ?>" method="POST">
-                              <?php echo csrf_field(); ?>
-                              <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
-                              <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
-                              <button class="btn btn-block btn-xs btn-outline-success text-light"><?php echo app('translator')->get('Like'); ?></button>
-                           </form>
-                        <?php else: ?>
-                           <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
-                              <?php echo csrf_field(); ?>
-                              <?php echo method_field('DELETE'); ?>
-                              <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
-                              <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
-                              <button class="btn btn-block btn-xs btn-outline-danger text-light"><?php echo app('translator')->get('Unlike'); ?></button>
-                           </form>
+                        <?php if(auth()->guard()->check()): ?>
+                           <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $recipe)): ?>
+                              <form class="" action="<?php echo e(route('like')); ?>" method="POST">
+                                 <?php echo csrf_field(); ?>
+                                 <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+                                 <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+                                 <button class="btn btn-block btn-xs btn-outline-success text-light"><?php echo app('translator')->get('Like'); ?></button>
+                              </form>
+                           <?php else: ?>
+                              <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
+                                 <?php echo csrf_field(); ?>
+                                 <?php echo method_field('DELETE'); ?>
+                                 <input type="hidden" name="likeable_type" value="<?php echo e(get_class($recipe)); ?>"/>
+                                 <input type="hidden" name="id" value="<?php echo e($recipe->id); ?>"/>
+                                 <button class="btn btn-block btn-xs btn-outline-danger text-light"><?php echo app('translator')->get('Unlike'); ?></button>
+                              </form>
+                           <?php endif; ?>
                         <?php endif; ?>
                      </div>
 

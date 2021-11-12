@@ -3,7 +3,7 @@
 <div class="form-group">
 
    <label for="name" class="{{ $required ?? '' }}">
-      {{ $label ?? 'name' }}
+      {{ $label ?? 'Name' }}
    </label>
    
    @if(Route::currentRouteName('') == 'admin.blocks.show' || Route::currentRouteName('') == 'admin.blocks.edit')
@@ -11,6 +11,7 @@
       <div class="p-1 m-0 bg-gray-light">
          {{ $block->name ?? 'N/A' }}
       </div>
+      <input type="hidden" name="name" value="{{ old('name') ?? $block->name }}">
 
    @else
 

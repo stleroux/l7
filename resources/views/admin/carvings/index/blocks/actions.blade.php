@@ -10,8 +10,8 @@
       @endif
 
       @if(Route::currentRouteName() == 'admin.carvings.trashed')
-         @include('admin.carvings.actions.mass.restore', ['modelName'=>'carving'])
-         @include('admin.carvings.actions.mass.delete', ['modelName'=>'carving'])
+         @include('admin.actions.mass.restore', ['modelName'=>'carving'])
+         @include('admin.actions.mass.delete', ['modelName'=>'carving'])
       @endif
       
    </div>

@@ -46,7 +46,8 @@
 					<div class="col-sm-8">
 						
 						<label for="product">Product</label>
-						<input type="text" name="product" class="form-control" value="<?php echo e($item->product); ?>">
+						<input type="text" name="product" class="form-control" value="<?php echo e($item->product); ?>" readonly>
+						<small id="productHelpBlock" class="form-text text-muted mb-2"><b>Note:</b> To change the product, please delete this one and add a new one</small>
 					</div>
 					<div class="col-sm-2">
 						<div class="form-group <?php echo e($errors->has('quantity') ? 'has-error' : ''); ?>">

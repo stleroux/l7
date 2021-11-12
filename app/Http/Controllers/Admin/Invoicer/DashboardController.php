@@ -58,16 +58,46 @@ class DashboardController extends Controller
          $query->where('payments', '>', 0);
       })->with('invoices')->get();
 
-      $invoicesTotal = InvoicerInvoice::where('status','!=','estimate')->get();
+      $invoicesQuotes = InvoicerInvoice::where('status','quote')->get();
       $invoicesEstimates = InvoicerInvoice::where('status','estimate')->get();
-      $invoicesLogged = InvoicerInvoice::where('status','logged')->get();
+      $invoicesSubTotal = InvoicerInvoice::where('status','quote')->orWhere('status','estimate')->get();
+
       $invoicesInvoiced = InvoicerInvoice::where('status','invoiced')->get();
       $invoicesPaid = InvoicerInvoice::where('status','paid')->get();
+      $invoicesWorkOrders = InvoicerInvoice::where('status','workOrder')->get();
+      $invoicesCompleted = InvoicerInvoice::where('status','completed')->get();
+      $invoicesShipped = InvoicerInvoice::where('status','shipped')->get();
+      $invoicesPickedUp = InvoicerInvoice::where('status','pickedUp')->get();
+      $invoicesCanceled = InvoicerInvoice::where('status','canceled')->get();
+
+      $invoicesTotal = InvoicerInvoice::where('status','!=','estimate')->get();
+
       $invoiceItems = InvoicerInvoiceItem::all();
       $products = InvoicerProduct::orderByRaw('RAND()')->take(10)->get();;
       $productsCount = InvoicerProduct::count();
+      // $invoicesInvoiced = InvoicerInvoice::where('status','invoiced')->get();
+      // $invoicesLogged = InvoicerInvoice::where('status','logged')->get();
 
-      return view('admin.invoicer.dashboard.index', compact('owingClients', 'bestClients', 'invoicesTotal', 'invoicesEstimates', 'invoicesLogged', 'invoicesInvoiced', 'invoicesPaid', 'invoiceItems', 'products', 'productsCount'));
+      return view('admin.invoicer.dashboard.index',
+         compact(
+            'owingClients',
+            'bestClients',
+            'invoicesQuotes',
+            'invoicesEstimates',
+            'invoicesSubTotal',
+            'invoicesPaid',
+            'invoicesInvoiced',
+            'invoicesWorkOrders',
+            'invoicesCompleted',
+            'invoicesShipped',
+            'invoicesPickedUp',
+            'invoicesCanceled',
+            'invoicesTotal',
+            'invoiceItems',
+            'products',
+            'productsCount'
+         )
+      );
    }
 
 }

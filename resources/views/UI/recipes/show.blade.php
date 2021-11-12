@@ -41,6 +41,7 @@ Recipes :: {{ $recipe->title }}
    <div class="col">
       <div class="text-right">
          <div class="btn-group">
+            @auth
             <div class="form-inline float-right p-0 m-0">
                @can('like', $recipe)
                   <form class="p-0 m-0" action="{{ route('like') }}" method="POST">
@@ -59,6 +60,7 @@ Recipes :: {{ $recipe->title }}
                   </form>
                @endcan
             </div>
+            @endauth
 
             <a href="{{ Session::get('fromPage') }}" class="btn btn-sm btn-maroon">
                <i class="{{ config('icons.back') }}"></i>
@@ -88,7 +90,7 @@ Recipes :: {{ $recipe->title }}
          @include('UI.recipes.show.image')
       </div>
 
-      @include('common.view_more')
+      @include('UI.recipes.blocks.view_more')
 
       @auth
          <div class="row">

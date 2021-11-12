@@ -21,6 +21,7 @@
 						@include('admin.settings.fields.settings.viewsToBePopularCount')
 						@include('admin.settings.fields.settings.formSubmissionError')
 						@include('admin.settings.fields.settings.viewMore')
+						@include('admin.settings.fields.settings.sidebar')
 					</tbody>
     			</table>
  			</div>

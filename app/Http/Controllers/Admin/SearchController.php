@@ -16,6 +16,7 @@ use App\Models\Project;
 use App\Models\Recipe;
 use App\Models\Tag;
 use App\Models\User;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Searchable\ModelSearchAspect;
@@ -34,7 +35,7 @@ class SearchController extends Controller
 ##################################################################################################################
    public function __construct()
    {
-      // $this->middleware('auth');
+      $this->middleware('auth');
    }
 
 
@@ -167,7 +168,7 @@ class SearchController extends Controller
          ->registerModel(Like::class, ['user_id'])
          ->perform($request->input('query'));
 
-      if($request->bugs)
+      if(Auth::user()->search_bugs)
       {
          $bugsSearchResults = (new Search())
             ->registerModel(Bug::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -179,7 +180,7 @@ class SearchController extends Controller
          $bugsSearchResults = [];
       }
 
-      if($request->carvings)
+      if(Auth::user()->search_carvings)
       {
          $carvingsSearchResults = (new Search())
             ->registerModel(Carving::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -192,7 +193,7 @@ class SearchController extends Controller
          $carvingsSearchResults = [];
       }
 
-      if($request->faqs)
+      if(Auth::user()->search_faqs)
       {
          $faqsSearchResults = (new Search())
             ->registerModel(Faq::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -205,7 +206,7 @@ class SearchController extends Controller
          $faqsSearchResults = [];
       }
 
-      if($request->features)
+      if(Auth::user()->search_features)
       {
          $featuresSearchResults = (new Search())
             ->registerModel(Feature::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -218,7 +219,7 @@ class SearchController extends Controller
          $featuresSearchResults = [];
       }
 
-      if($request->finishes)
+      if(Auth::user()->search_finishes)
       {
          $finishesSearchResults = (new Search())
             ->registerModel(Finish::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -235,7 +236,7 @@ class SearchController extends Controller
          $finishesSearchResults = [];
       }
 
-      if($request->materials)
+      if(Auth::user()->search_materials)
       {
          $materialsSearchResults = (new Search())
             ->registerModel(Material::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -250,7 +251,7 @@ class SearchController extends Controller
          $materialsSearchResults = [];
       }
 
-      if($request->movies)
+      if(Auth::user()->search_movies)
       {
          $moviesSearchResults = (new Search())
             ->registerModel(Movie::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -262,7 +263,7 @@ class SearchController extends Controller
          $moviesSearchResults = [];
       }
 
-      if($request->posts)
+      if(Auth::user()->search_posts)
       {
          $postsSearchResults = (new Search())
             ->registerModel(Post::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -277,7 +278,7 @@ class SearchController extends Controller
          $postsSearchResults = [];
       }
 
-      if($request->projects)
+      if(Auth::user()->search_projects)
       {
          $projectsSearchResults = (new Search())
             ->registerModel(Project::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -290,7 +291,7 @@ class SearchController extends Controller
          $projectsSearchResults = [];
       }
 
-      if($request->recipes)
+      if(Auth::user()->search_recipes)
       {
          $recipesSearchResults = (new Search())
             ->registerModel(Recipe::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -305,7 +306,7 @@ class SearchController extends Controller
          $recipesSearchResults = [];
       }
 
-      if($request->tags)
+      if(Auth::user()->search_tags)
       {
          $tagsSearchResults = (new Search())
             ->registerModel(Tag::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -317,7 +318,7 @@ class SearchController extends Controller
          $tagsSearchResults = [];
       }
 
-      if($request->users)
+      if(Auth::user()->search_users)
       {
          $usersSearchResults = (new Search())
             ->registerModel(User::class, function(ModelSearchAspect $modelSearchAspect) {
@@ -360,5 +361,34 @@ class SearchController extends Controller
 
       return view('admin.search.advancedSearch', compact('searchResults'));
    }
+
+
+   public function advSearchSave(Request $request, User $user)
+   {
+      $user = User::findOrFail(Auth::user()->id);
+
+         $user->search_bugs      = $request->input('search_bugs') ? true : false;
+         $user->search_carvings  = $request->input('search_carvings') ? true : false;
+         $user->search_faqs      = $request->input('search_faqs') ? true : false;
+         $user->search_features  = $request->input('search_features') ? true : false;
+         $user->search_finishes  = $request->input('search_finishes') ? true : false;
+         $user->search_materials = $request->input('search_materials') ? true : false;
+         $user->search_movies    = $request->input('search_movies') ? true : false;
+         $user->search_posts     = $request->input('search_posts') ? true : false;
+         $user->search_projects  = $request->input('search_projects') ? true : false;
+         $user->search_recipes   = $request->input('search_recipes') ? true : false;
+         $user->search_tags      = $request->input('search_tags') ? true : false;
+         $user->search_users     = $request->input('search_users') ? true : false;
+
+      $user->save();
+
+      $notification = array(
+         'message' => 'Your profile has been updated.',
+         'alert-type' => 'success'
+      );
+
+      return redirect()->back()->with($notification);
+   }
+
 
 }

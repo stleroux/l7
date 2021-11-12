@@ -72,16 +72,31 @@ class InvoiceItemsController extends Controller
 ##################################################################################################################
    public function destroy(Request $request, $id)
    {
+      // dd($id);
+      // dd($request->invId);
       // Check if user has required permission
       abort_unless(Gate::allows('invoicer-invoice'), 403);
 
+
       $item = InvoicerInvoiceItem::find($id);
       // dd($item);
-      $invoice_id = $item->invoice_id;
+      // $invoice_id = $item->invoice_id;
       $item->delete();
 
+
       // update invoice with totals
-      $this::invUpdate($invoice_id);
+      // $this::invUpdate($invoice_id);
+      // dd($item->invoice_id);
+      calculateInvoiceAmounts($item->invoice_id);
+
+// Check if other items exist for this invoice
+      $billItems = InvoicerInvoiceItem::where('invoice_id', $item->invoice_id)->count();
+      if($billItems == 0)
+      {
+         // dd('nothing left');
+         // dd($item->invoice_id);
+         clearInvoiceAmounts($item->invoice_id);
+      }
 
       // Need to requery the invoice to get the updated total
       $invoice = InvoicerInvoice::with('client')->findOrFail($item->invoice_id);
@@ -163,6 +178,7 @@ class InvoiceItemsController extends Controller
 
       // // update invoice with totals
       // $this::invUpdate($request->invoice_id);
+      // dd($request->invoice_id);
       calculateInvoiceAmounts($request->invoice_id);
 
 
@@ -179,7 +195,19 @@ class InvoiceItemsController extends Controller
       ];
 
       // redirect to another page
-      return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+      // return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+
+      // if($invoice->status == "quote"){
+      //    return redirect()->route('admin.invoicer.quotes.edit', $item->invoice_id)->with($notification);
+      // }
+      // elseif($invoice->status == "estimate"){
+      //    return redirect()->route('admin.invoicer.estimates.edit', $item->invoice_id)->with($notification);
+      // }
+      // elseif($invoice->status == "invoiced"){
+      //    return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+      // }
+         return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+
    }
 
 
@@ -211,7 +239,16 @@ class InvoiceItemsController extends Controller
 
       // update invoice with totals
       // $this::invUpdate($request->invoice_id);
+      // dd($request->invoice_id);
       calculateInvoiceAmounts($request->invoice_id);
+
+// Check if other items exist for this invoice
+      $billItems = InvoicerInvoiceItem::where('invoice_id', $item->invoice_id)->count();
+      if($billItems == 0)
+      {
+         // dd('nothing left');
+         clearInvoiceAmounts($item->invoice_id);
+      }
 
       // Need to requery the invoice to get the updated total
       $invoice = InvoicerInvoice::with('client')->findOrFail($request->invoice_id);
@@ -227,7 +264,18 @@ class InvoiceItemsController extends Controller
       ];
 
       // redirect to another page
-      return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+      // return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+
+      if($invoice->status == "quote"){
+         return redirect()->route('admin.invoicer.quotes.edit', $item->invoice_id)->with($notification);
+      }
+      elseif($invoice->status == "estimate"){
+         return redirect()->route('admin.invoicer.estimates.edit', $item->invoice_id)->with($notification);
+      }
+      elseif($invoice->status == "invoiced"){
+         return redirect()->route('admin.invoicer.invoices.edit', $item->invoice_id)->with($notification);
+      }
+      
    }
 
 

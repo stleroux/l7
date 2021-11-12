@@ -4,7 +4,7 @@
 
 	<label for="notes">Notes</label>
 
-	<textarea name="notes" rows="4" class="form-control" {{ ($invoice->status == 'paid' ? 'readonly disabled' : '') }}>{{ $invoice->notes }}</textarea>
+	<textarea name="notes" rows="4" class="form-control" {{ ($invoice->status == 'paid' ? 'readonly disabled' : '') }}>{{ $invoice->notes = str_replace('<br />', "\n", $invoice->notes) }}</textarea>
 
 	<span class="text-danger">{{ $errors->first('notes') }}</span>
 

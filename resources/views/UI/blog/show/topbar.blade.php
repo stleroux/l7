@@ -9,7 +9,7 @@
 
    <div class="col mb-2 float-right px-1">
       <div class="form-inline float-right p-0 m-0">
-   
+         @auth
          @can('like', $post)
             <form class="p-0 m-0" action="{{ route('like') }}" method="POST">
                @csrf
@@ -26,6 +26,7 @@
                <button class="btn btn-sm btn-danger">@lang('Unlike')</button>
             </form>
          @endcan
+         @endauth
 
       </div>
    </div>

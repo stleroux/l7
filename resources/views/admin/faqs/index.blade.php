@@ -27,8 +27,12 @@
    @include('modals.massRestore',   ['modelName'=>'faq'])
    @include('modals.delete',        ['modelName'=>'faq'])
    @include('modals.massDelete',    ['modelName'=>'faq'])
-   @include('modals.resetViews',    ['modelName'=>'faq'])
-   @include('modals.massResetViews',['modelName'=>'faq'])
+   {{-- @include('modals.resetViews',    ['modelName'=>'faq']) --}}
+   {{-- @include('modals.massResetViews',['modelName'=>'faq']) --}}
+   @include('modals.publish',       ['modelName'=>'faq'])
+   @include('modals.massPublish',   ['modelName'=>'faq'])
+   @include('modals.unpublish',     ['modelName'=>'faq'])
+   @include('modals.massUnpublish', ['modelName'=>'faq'])
 
    @include('admin.faqs.help')
 

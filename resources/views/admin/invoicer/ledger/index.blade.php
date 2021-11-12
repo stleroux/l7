@@ -35,36 +35,36 @@
 				<table class="table table-hover table-stripped table-sm">
 					<thead>
 						<tr>
-							<th>@sortablelink('id','Inv #')</th>
+							<th>#</th>
 							@if(Request::is('admin/invoicer/ledger/estimates'))
-								<th>@sortablelink('created_at','Create Date')</th>
+								<th>Create Date</th>
 							@endif
 							@if(Request::is('admin/invoicer/ledger/logged'))
-								<th>@sortablelink('created_at','Logged Date')</th>
+								<th>Logged Date</th>
 							@endif
 							@if(Request::is('admin/invoicer/ledger/invoiced'))
-								<th>@sortablelink('invoiced_at','Invoiced Date')</th>
+								<th>Invoiced Date</th>
 							@endif
 							@if(Request::is('admin/invoicer/ledger/paid'))
-								<th>@sortablelink('paid_at','Paid Date')</th>
+								<th>Paid Date</th>
 							@endif
 							@if(Request::is('admin/invoicer/ledger'))
-								<th>@sortablelink('status','Status')</th>
+								<th>Status</th>
 							@endif
 							{{-- <th>@sortablelink('client.company_name','Company Name')</th> --}}
-							<th>@sortablelink('client.first_name','Last Name')</th>
-							<th>@sortablelink('client.last_name','First Name')</th>
-							<th>@sortablelink('client.company_name','Company Name')</th>
-							<th class="text-right">@sortablelink('amount_charged','Charge')</th>
-							<th class="d-none d-md-table-cell text-right">@sortablelink('hst','HST')</th>
-							<th class="d-none d-md-table-cell text-right">@sortablelink('deposit','Deposits')</th>
-							<th class="d-none d-md-table-cell text-right">@sortablelink('discount','Discounts')</th>
-							<th class="d-none d-md-table-cell text-right">@sortablelink('payment','Payments')</th>
+							<th>Last Name</th>
+							<th>First Name</th>
+							<th>Company Name</th>
+							<th class="text-right">Charge</th>
+							<th class="d-none d-md-table-cell text-right">HST</th>
+							<th class="d-none d-md-table-cell text-right">Deposits</th>
+							<th class="d-none d-md-table-cell text-right">Discounts</th>
+							<th class="d-none d-md-table-cell text-right">Payments</th>
 							{{-- <th class="d-none d-lg-table-cell text-right" title="SubTotal">@sortablelink('sub_total','SUB')</th> --}}
 							{{-- <th class="d-none d-lg-table-cell text-right">@sortablelink('wsib','WSIB')</th> --}}
 							{{-- <th class="d-none d-lg-table-cell text-right" title="Income Taxes">@sortablelink('income_taxes','IT')</th> --}}
 							{{-- <th class="d-none d-sm-table-cell text-right" title="Total Deductions">@sortablelink('total_deductions','DED')</th> --}}
-							<th class="text-right">@sortablelink('total','Owed')</th>
+							<th class="text-right">Owed</th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -111,13 +111,13 @@
 							@endif
 							@if(Request::is('admin/invoicer/ledger'))
 								<td>
-									@if($invoice->status === 'estimate')
-										<span class="badge badge-secondary" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
-									@elseif($invoice->status === 'logged')
+									@if($invoice->status === 'quote')
+										<span class="badge badge-steel" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
+									@elseif($invoice->status === 'estimate')
 										<span class="badge badge-info" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
 									@elseif($invoice->status === 'invoiced')
 										<span class="badge badge-warning" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
-									@else($invoice->status === 'paid')
+									@elseif($invoice->status === 'paid')
 										<span class="badge badge-success" style="font-size: 13px">{{ ucfirst($invoice->status) }}</span>
 									@endif
 								</td>
@@ -140,7 +140,7 @@
 							</td>
 							
 							<td>
-								{{ $invoice->client->company_name }}								
+								{{ $invoice->client->company_name }}
 							</td>
 							
 							<td class="text-right">{{ number_format($invoice->amount_charged, 2, '.' , ', ') }}$</td>

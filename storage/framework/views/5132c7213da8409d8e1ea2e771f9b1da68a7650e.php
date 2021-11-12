@@ -1,8 +1,8 @@
-<ul class="navbar-nav mr-auto">
+<ul class="navbar-nav mr-auto ml-auto">
 
    <?php if(Config::get('settings.carvings') == 'visible'): ?>
-      <li class="nav-item <?php echo e(Route::is('carvings*') ? 'bg-black border-red-2' : ''); ?>">
-         <a class="nav-link" href="<?php echo e(route('carvings.index')); ?>">
+      <li class="nav-item <?php echo e(Route::is('carvings*') ? 'bg-black border-red-2' : ''); ?> <?php echo e(Route::is('offerings*') ? 'bg-black border-red-2' : ''); ?>">
+         <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('carvings.index')); ?>">
             <i class="<?php echo e(config('icons.carvings')); ?> mr-1"></i>
             <?php echo e(__('Carvings')); ?>               
          </a>
@@ -11,7 +11,7 @@
 
    <?php if(Config::get('settings.projects') == 'visible'): ?>
       <li class="nav-item <?php echo e(Route::is('projects*') ? 'bg-black border-red-2' : ''); ?>">
-         <a class="nav-link" href="<?php echo e(route('projects.index')); ?>">
+         <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('projects.index')); ?>">
             <i class="<?php echo e(config('icons.projects')); ?>"></i>
             <?php echo e(__('Projects')); ?>
 
@@ -21,7 +21,7 @@
 
    <?php if(Config::get('settings.recipes') == 'visible'): ?>
       <li class="nav-item <?php echo e(Route::is('recipes*') ? 'bg-black border-red-2' : ''); ?>">
-         <a class="nav-link" href="<?php echo e(route('recipes.indexGrid', 'all')); ?>">
+         <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('recipes.indexGrid', 'all')); ?>">
             <i class="<?php echo e(config('icons.recipes')); ?>"></i>
             <?php echo e(__('Recipes')); ?>
 
@@ -31,7 +31,7 @@
 
    <?php if(Config::get('settings.blog') == 'visible'): ?>
       <li class="nav-item <?php echo e(Route::is('blog*') ? 'bg-black border-red-2' : ''); ?>">
-         <a class="nav-link" href="<?php echo e(route('blog.index')); ?>">
+         <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('blog.index')); ?>">
             <i class="<?php echo e(config('icons.blog')); ?>"></i>
             <?php echo e(__('Blog')); ?>
 
@@ -42,7 +42,7 @@
    <?php if(Config::get('settings.darts') == 'visible'): ?>
       <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('dart-access')): ?>
          <li class="nav-item <?php echo e(Route::is('darts*') ? 'bg-black border-red-2' : ''); ?>">
-            <a class="nav-link" href="<?php echo e(route('darts.index')); ?>">
+            <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('darts.index')); ?>">
                <i class="<?php echo e(config('icons.darts')); ?>"></i>
                <?php echo e(__('Darts')); ?>
 
@@ -52,7 +52,7 @@
    <?php endif; ?>
 
    <li class="nav-item <?php echo e(Route::is('about*') ? 'bg-black border-red-2' : ''); ?>">
-      <a class="nav-link" href="<?php echo e(route('about')); ?>">
+      <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('about')); ?>">
          <i class="<?php echo e(config('icons.about-us')); ?>"></i>
          <?php echo e(__('About us')); ?>
 
@@ -60,7 +60,7 @@
    </li>
    
    <li class="nav-item <?php echo e(Route::is('contact*') ? 'bg-black border-red-2' : ''); ?>">
-      <a class="nav-link" href="<?php echo e(route('contact')); ?>">
+      <a class="nav-link text-light py-1 m-0" href="<?php echo e(route('contact')); ?>">
          <i class="<?php echo e(config('icons.contact-us')); ?>"></i>
          <?php echo e(__('Contact us')); ?>
 

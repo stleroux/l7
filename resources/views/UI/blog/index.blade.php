@@ -75,29 +75,6 @@
             <div class="card-footer card_footer p-1 card-trans-2">
                Created by @include('common.authorFormat', ['model'=>$post, 'field'=>'user'])
                on @include('common.dateFormat', ['model'=>$post, 'field'=>'created_at'])
-
-               {{-- @include('common.likeTopbar', ['model' => $post]) --}}
-               <div class="form-inline float-right p-0 m-0">
-   
-                  @can('like', $post)
-                     <form class="p-0 m-0" action="{{ route('like') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="likeable_type" value="{{ get_class($post) }}"/>
-                        <input type="hidden" name="id" value="{{ $post->id }}"/>
-                        <button class="btn btn-sm btn-success">@lang('Like')</button>
-                     </form>
-                  @else
-                     <form class="" action="{{ route('unlike') }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="likeable_type" value="{{ get_class($post) }}"/>
-                        <input type="hidden" name="id" value="{{ $post->id }}"/>
-                        <button class="btn btn-sm btn-danger">@lang('Unlike')</button>
-                     </form>
-                  @endcan
-
-               </div>
-
             </div>
 
          </div>

@@ -7,6 +7,8 @@ Route::get('/phpinfo', function () {
    return view('phpinfo');
 });
 
+Route::view('/test','layouts.test')->name('test');
+
 // Route::group(['middleware' => 'verified'], function () {
 
    foreach (File::allFiles(__DIR__ . '/routes') as $route_file) {

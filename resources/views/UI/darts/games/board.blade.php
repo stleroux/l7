@@ -252,14 +252,16 @@
 		</div>
 		
 		{{-- SHOW PAGINATION --}}
-		<div class="row d-flex">
-			<div class="col ml-2">
-				Showing records {{ $games->firstItem() }} to {{ $games->lastItem() }} of {{$games->total()}}
+		@if($games->count() > 0)
+			<div class="row d-flex">
+				<div class="col ml-2">
+					Showing records {{ $games->firstItem() }} to {{ $games->lastItem() }} of {{$games->total()}}
+				</div>
+				<div class="col mr-2">
+					{{ $games->links('UI.darts.pagination.simple') }}
+				</div>
 			</div>
-			<div class="col mr-2">
-				{{ $games->links('UI.darts.pagination.simple') }}
-			</div>
-		</div>
+		@endif
 
 		<div class="card-footer card_footer p-1">
 			Games marked as practice are not accounted for in the Leader Board statistics

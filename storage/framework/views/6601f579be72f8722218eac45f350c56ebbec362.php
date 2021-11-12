@@ -6,8 +6,7 @@
       
    </head>
 
-   
-   <body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed">
+   <body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed <?php echo e(config('settings.sidebarCollapsed') == 'on' ? 'sidebar-collapse' : ''); ?>">
 
       <!-- Site wrapper -->
       <div class="wrapper">

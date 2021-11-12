@@ -1,6 +1,6 @@
 <!-- QUESTION -->
 
-<div class="col-xs-12 col-sm-9">
+<div class="col-xs-12 col-sm-4 col-md-8">
    
    <div class="form-group">
       

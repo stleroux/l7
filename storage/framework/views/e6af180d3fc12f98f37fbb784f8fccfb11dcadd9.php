@@ -5,15 +5,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('pageHeader'); ?>
-   <i class="<?php echo e(config('icons.projects')); ?> col-2 text-green pr-2"></i>
-   <div class="col-8">
-      Welcome to TheWoodBarn.ca
-   </div>
-   <i class="<?php echo e(config('icons.projects')); ?> col-2 text-green pl-2"></i>
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
-   
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('rightColumn'); ?>
@@ -24,6 +19,7 @@
 <?php $__env->startSection('content'); ?>
 
    <?php echo $__env->make('UI.homepage.greeting', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+   <?php echo $__env->make('UI.homepage.nonRegistered', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    <?php echo $__env->make('UI.homepage.warning', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    <?php echo $__env->make('UI.homepage.newUser', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    <?php echo $__env->make('UI.homepage.interests', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

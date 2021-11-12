@@ -1,6 +1,6 @@
 @hasSection('breadcrumb')
    <div class="ml-auto">
-      <ol class="breadcrumb float-sm-right py-1 m-1 mb-2">
+      <ol class="breadcrumb float-sm-right p-0 m-0 px-1">
          <li class="breadcrumb-item">
             @if(Route::currentRouteName() != 'homepage')
                <a href="{{ route('homepage') }}" class="">
@@ -8,7 +8,7 @@
                </a>
             @endif
          </li>
-            @yield('breadcrumb')
+         @yield('breadcrumb')
       </ol>
    </div>
 @endif

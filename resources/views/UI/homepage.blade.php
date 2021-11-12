@@ -5,15 +5,18 @@
 @endsection
 
 @section('pageHeader')
-   <i class="{{ config('icons.projects') }} col-2 text-green pr-2"></i>
-   <div class="col-8">
-      Welcome to TheWoodBarn.ca
-   </div>
-   <i class="{{ config('icons.projects') }} col-2 text-green pl-2"></i>
+{{--    <div class="container-fluid">
+      <div class="row">
+         <i class="{{ config('icons.projects') }} col-md-2 text-green pr-md-2 d-none d-md-block"></i>
+         <div class="col-sm-12 col-md-8">
+            Welcome to TheWoodBarn.ca
+         </div>
+         <i class="{{ config('icons.projects') }} col-md-2 text-green pl-md-2 d-none d-md-block"></i>
+      </div>
+   </div> --}}
 @endsection
 
 @section('breadcrumb')
-   {{-- <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
 @endsection
 
 @section('rightColumn')
@@ -24,6 +27,7 @@
 @section('content')
 
    @include('UI.homepage.greeting')
+   @include('UI.homepage.nonRegistered')
    @include('UI.homepage.warning')
    @include('UI.homepage.newUser')
    @include('UI.homepage.interests')

@@ -86,13 +86,37 @@
             </tr>
             <tr>
                <td>
-                  <?php echo e($invoice->client->company_name); ?><br />
-                  <?php echo e($invoice->client->contact_name); ?><br />
-                  <?php echo e($invoice->client->address); ?><br />
-                  <?php echo e($invoice->client->city); ?>, <?php echo e($invoice->client->province); ?><br />
-                  <?php echo e($invoice->client->postal_code); ?><br />
-                  <?php echo e($invoice->client->telephone); ?>
+                  <?php if($invoice->client->company_name): ?>
+                     <?php echo e($invoice->client->company_name); ?> <br />
+                  <?php endif; ?>
+                  <?php if($invoice->client->contact_name): ?>
+                     <?php echo e($invoice->client->contact_name); ?> <br />
+                  <?php endif; ?>
+                  <?php if($invoice->client->address): ?>
+                     <?php echo e($invoice->client->address); ?> <br />
+                  <?php endif; ?>
+                  
+                  <?php if($invoice->client->city && $invoice->client->province): ?>
+                     <?php echo e($invoice->client->city); ?>, <?php echo e($invoice->client->province); ?> <br />
+                  <?php elseif($invoice->client->city && !$invoice->client->province): ?>
+                     <?php echo e($invoice->client->city); ?> <br />
+                  <?php elseif($invoice->client->province && !$invoice->client->city): ?>
+                     <?php echo e($invoice->client->province); ?> <br />                  
+                  <?php endif; ?>
 
+                  <?php if($invoice->client->postal_code): ?>
+                     <?php echo e($invoice->client->postal_code); ?> <br />
+                  <?php endif; ?>
+                  <?php if($invoice->client->telephone): ?>
+                     <?php echo e($invoice->client->telephone); ?>
+
+                  <?php endif; ?>
+                  
+                  
+                  
+                  
+                  
+                  
                </td>
             </tr>
          </table>
@@ -214,7 +238,7 @@
    <tr>
       <td colspan="12">
          
-         <?php echo $__env->make('admin.invoicer.termsAndConditionsPDF', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+         <?php echo $__env->make('admin.invoicer.termsAndConditions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       </td>
    </tr>
 

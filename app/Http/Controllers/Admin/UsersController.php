@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\InvoicerClient;
+use App\Models\InvoicerInvoice;
 use App\Models\Role;
 use App\Models\User;
 use App\Notifications\User\AccountApprovedNotification;
@@ -178,10 +179,14 @@ class UsersController extends Controller
 
       $roles = Role::all();
 
+      // Get user's invoices
+      $invoices = InvoicerInvoice::where('client_id', $user->id)->get();
+      // dd($invoices);
+
       // Get all associated Audits
       $audits = $user->audits()->with('user')->orderBy('id','desc')->get();
 
-      return view('admin.users.show', compact('user','roles','audits'));
+      return view('admin.users.show', compact('user','roles','audits','invoices'));
 
    }
 
@@ -230,7 +235,7 @@ class UsersController extends Controller
          $user->password = Hash::make($request->password);
       }
       
-      $user->account_status = (isset($request->account_status)) ? User::IS_DISABLED : User::IS_ENABLED ;
+      $user->account_status = (isset($request->account_status)) ? 0 : 1 ;
 
       $user->public_email = (!isset($request->public_email)) ? 0 : 1 ;
       $user->telephone = $request->telephone;
@@ -266,14 +271,14 @@ class UsersController extends Controller
       }
 
       // account goes from disabled to active
-      if($account_status == User::IS_DISABLED && $user->account_status == User::IS_ENABLED)
+      if($account_status == 0 && $user->account_status == 1)
       {
          // notify user via email
          $user->notify(new AccountApprovedNotification($user));
       }
 
       // account goes from active to disabled
-      if($account_status == User::IS_ENABLED && $user->account_status == User::IS_DISABLED)
+      if($account_status == 1 && $user->account_status == 0)
       {
          // notify user via email
          $user->notify(new AccountDisabledNotification($user));

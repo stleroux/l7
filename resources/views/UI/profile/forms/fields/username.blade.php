@@ -7,12 +7,14 @@
    </label>
    
    {{-- @if(Route::currentRouteName('') == 'admin.users.show') --}}
+         
    @if($user->username)
 
       <div class="p-1 m-0 bg-gray-light form-control">
          {!! $user->username !!}
       </div>
-
+      <input type="hidden" name="username" value="{{ old('username') ?? $user->username }}" />
+   
    @else
 
       <input

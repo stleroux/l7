@@ -5,7 +5,7 @@
 
 @section('pageHeader')
    <i class="{{ config('icons.add') }}"></i>
-   Invoicer :: Register an Activity for Invoice #{{ $invoice->id }}
+   Invoicer :: Register an Activity for {{ ucwords($invoice->status) }} #{{ $invoice->id }}
 @endsection
 
 @section('breadcrumb')

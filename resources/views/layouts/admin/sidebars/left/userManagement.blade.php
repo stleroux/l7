@@ -18,7 +18,7 @@
 		<ul class="nav nav-treeview">
 
 			@can('permission-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.permissions.index') }}" class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
 						<i class="{{ config('icons.permissions') }}"></i>
 						<p>Permissions</p>
@@ -27,7 +27,7 @@
 			@endcan
 
 			@can('role-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ route('admin.roles.index') }}" class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
 						<i class="{{ config('icons.roles') }}"></i>
 						<p>Roles</p>
@@ -36,7 +36,7 @@
 			@endcan
 
 			@can('user-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.users.index') }}" class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}">
 						<i class="{{ config('icons.users') }}"></i>
 						<p>Users</p>

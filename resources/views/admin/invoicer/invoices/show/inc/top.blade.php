@@ -8,13 +8,13 @@
 						<div><strong>Billed To</strong></div>
 							<div>{{ $invoice->client->company_name ? $invoice->client->company_name : '' }}</div>
 							<div>{{ $invoice->client->contact_name }}</div>
-							<div>{{ $invoice->client->telephone ? $invoice->client->telephone : '' }}</div>
 							<div>{{ $invoice->client->address ? $invoice->client->address : '' }}</div>
 							<div>
 								{{ $invoice->client->city ? $invoice->client->city : '' }}
 								{{ $invoice->client->province ? ', '.$invoice->client->province : '' }}
 							</div>
 							<div>{{ $invoice->client->postal_code ? $invoice->client->postal_code : '' }}</div>
+							<div>{{ $invoice->client->telephone ? $invoice->client->telephone : '' }}</div>
 					</div>
 					<div class="col-sm-7">
 						<div class="row">

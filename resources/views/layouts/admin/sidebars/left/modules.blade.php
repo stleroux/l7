@@ -31,7 +31,7 @@
 		<ul class="nav nav-treeview">
 
 			@can('bug-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.bugs.index') }}" class="nav-link {{ Request::is('admin/bugs*') ? 'active' : '' }}">
 						<i class="{{ config('icons.bugs') }}"></i>
 						<p>Bug Reports</p>
@@ -40,7 +40,7 @@
 			@endcan
 
 			@can('carving-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.carvings.index') }}" class="nav-link {{ Request::is('admin/carvings*') ? 'active' : '' }}">
 						<i class="{{ config('icons.carvings') }}"></i>
 						<p>
@@ -55,7 +55,7 @@
 			@endcan
 
 			@can('faq-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ route('admin.faqs.index') }}" class="nav-link {{ Request::is('admin/faqs*') ? 'active' : '' }}">
 						<i class="{{ config('icons.faq') }}"></i>
 						<p>FAQs</p>
@@ -64,7 +64,7 @@
 			@endcan
 
 			@can('feature-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.features.index') }}" class="nav-link {{ Request::is('admin/features*') ? 'active' : '' }}">
 						<i class="{{ config('icons.features') }}"></i>
 						<p>Feature Requests</p>
@@ -73,7 +73,7 @@
 			@endcan
 
 			@can('post-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.posts.index') }}" class="nav-link {{ Request::is('admin/posts*') ? 'active' : '' }}">
 						<i class="{{ config('icons.posts') }}"></i>
 						<p>
@@ -88,7 +88,7 @@
 			@endcan
 
 			@can('project-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.projects.index') }}" class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}">
 						<i class="{{ config('icons.projects') }}"></i>
 						<p>
@@ -103,7 +103,7 @@
 			@endcan
 
 			@can('recipe-manage')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.recipes.index') }}" class="nav-link {{ Request::is('admin/recipes*') ? 'active' : '' }}">
 						<i class="{{ config('icons.recipes') }}"></i>
 						<p>

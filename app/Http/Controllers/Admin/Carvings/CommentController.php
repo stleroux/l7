@@ -66,7 +66,7 @@ class CommentController extends Controller
       // Check if user has required permission
       abort_unless(Gate::allows('comment-create'), 403);
 
-      $project = project::find($id);
+      $project = Project::find($id);
 
       $comment = new Comment();
          $comment->user_id = Auth::user()->id;

@@ -103,7 +103,7 @@ class ProjectsController extends Controller
         // Set the session to the current page route
         Session::put('fromPage', url()->full());
 
-        $faqs = FAQ::where('category', 'projects')->orderBy('question')->get();
+        $faqs = FAQ::where('category', 'projects')->where('is_published', 1)->orderBy('question')->get();
         // dd($faqs);
 
         return view('UI.projects.faqs', compact('faqs'));

@@ -45,7 +45,10 @@
                      <tr data-toggle="collapse" data-target="#demo<?php echo e($audit->id); ?>" class="accordion-toggle">
                         <td><?php echo e($audit->id); ?></td>
                         <td><?php echo e($audit->event); ?></td>
-                        <td><?php echo e($audit->user->username); ?></td>
+                        <td>
+                           <?php echo e(($audit->user->username ?? 'Guest')); ?>
+
+                        </td>
                         <td><?php echo e($audit->created_at->diffForHumans()); ?></td>
                         <td><?php echo e($audit->url); ?></td>
                         <td><?php echo e($audit->ip_address); ?></td>                    

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\UI;
 
-use App\Http\Controllers\Controller;
+use Gate;
 // use App\Http\Requests\BugRequest;
 use App\Models\Bug;
 use Illuminate\Http\Request;
-use Auth;
-use Gate;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BugsController extends Controller
 {

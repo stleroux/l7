@@ -158,20 +158,35 @@ class AdminController extends Controller
       ];
       $billablesByItemChart = new LaravelChart($billablesByItemChart_options);
 
-      $totalEntries = InvoicerInvoice::sum('sub_total');
+      // $totalEntries = InvoicerInvoice::sum('sub_total');
+      $totalQuotes = InvoicerInvoice::where('status' , 'quote')->sum('sub_total');
       $totalEstimates = InvoicerInvoice::where('status' , 'estimate')->sum('sub_total');
-      $totalLogged = InvoicerInvoice::where('status' , 'logged')->sum('sub_total');
+      // $totalLogged = InvoicerInvoice::where('status' , 'logged')->sum('sub_total');
       $totalInvoiced = InvoicerInvoice::where('status', 'invoiced')->sum('sub_total');
       $totalPaid = InvoicerInvoice::where('status', 'paid')->sum('sub_total');
+      $totalWorkOrders = InvoicerInvoice::where('status', 'workOrder')->sum('sub_total');
+      $totalCompleted = InvoicerInvoice::where('status', 'completed')->sum('sub_total');
+      $totalShipped = InvoicerInvoice::where('status', 'shipped')->sum('sub_total');
+      $totalPickedUp = InvoicerInvoice::where('status', 'pickedUp')->sum('sub_total');
+      $totalCanceled = InvoicerInvoice::where('status', 'canceled')->sum('sub_total');
 
       $totalDeposits = InvoicerInvoice::sum('deposits');
       $totalDiscounts = InvoicerInvoice::sum('discounts');
       $totalPayments = DB::table('invoicer__invoices')->sum(DB::raw('payments'));
       
-      $totalOwed = InvoicerInvoice::where('status', '!=', 'estimate')->sum('total');
+      $total = InvoicerInvoice::sum('total');
       
-      $estimatesCount = InvoicerInvoice::where('status','estimate')->count();
-      $invoicesCount = InvoicerInvoice::where('status','!=','estimate')->count();
+      // $quotesCount = InvoicerInvoice::where('status','quote')->count();
+      // $estimatesCount = InvoicerInvoice::where('status','estimate')->count();
+      // $invoicedCount = InvoicerInvoice::where('status','invoiced')->count();
+      // $paidCount = InvoicerInvoice::where('status','paid')->count();
+      // $workOrdersCount = InvoicerInvoice::where('status','workOrders')->count();
+      // $completedCount = InvoicerInvoice::where('status','completed')->count();
+      // $shippedCount = InvoicerInvoice::where('status','shipped')->count();
+      // $pickedUpCount = InvoicerInvoice::where('status','pickedUp')->count();
+      // $canceledCount = InvoicerInvoice::where('status','canceled')->count();
+      // $invoicesCount = InvoicerInvoice::where('status','!=','estimate')->count();
+
       $billableItemsCount = InvoicerInvoiceItem::count();
       // $clientsCount = InvoicerClient::count();
       $clientsCount = User::where('invoicer_client',1)->where('account_status',1)->count();
@@ -217,18 +232,36 @@ class AdminController extends Controller
             'projectsByCategoryChart',
             'billablesByItemChart',
             // 'usersByRoleChart',
+
             // Invoicer
-            'totalEntries',
+            // 'totalEntries',
+            'totalQuotes',
             'totalEstimates',
-            'totalLogged',
+            // 'totalLogged',
             'totalInvoiced',
             'totalPaid',
+            'totalWorkOrders',
+            'totalCompleted',
+            'totalShipped',
+            'totalPickedUp',
+            'totalCanceled',
+
             'totalPayments',
             'totalDiscounts',
             'totalDeposits',
-            'totalOwed',
-            'estimatesCount',
-            'invoicesCount',
+            'total',
+
+            // 'quotesCount',
+            // 'estimatesCount',
+            // 'invoicedCount',
+            // 'paidCount',
+            // 'workOrdersCount',
+            // 'completedCount',
+            // 'shippedCount',
+            // 'pickedUpCount',
+            // 'canceledCount',
+            // 'invoicesCount',
+
             'billableItemsCount',
             'clientsCount',
             'productsCount',

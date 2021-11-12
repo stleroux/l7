@@ -187,6 +187,11 @@ class SettingsController extends Controller
 				"'darts' => '".$request->darts."'",
 				$file);
 
+			$file = str_replace(
+				"'sidebarCollapsed' => '".Config::get('settings.sidebarCollapsed')."'",
+				"'sidebarCollapsed' => '".$request->sidebarCollapsed."'",
+				$file);
+
 			file_put_contents(base_path('config/settings.php'), $file);
 		}
 

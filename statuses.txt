@@ -1,0 +1,31 @@
+STATUSES
+=======================================
+Quote to Estimate
+Estimate to Invoiced
+-> Approval from client
+Invoiced to Paid
+Paid to WorkOrder
+
+WorkOrder to Completed
+Completed to Shipped
+Completed to Picked Up
+
+
+REVERSE ORDERS
+=======================================
+Estimate to Quote
+Invoiced to Estimate
+Paid to Invoiced
+WorkOrder to Paid
+
+Completed to WorkOrder
+Shipped to Completed
+Picked Up to Completed
+
+
+Canceled
+
+
+
+Shipped or Picked Up
+

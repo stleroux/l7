@@ -168,6 +168,8 @@ class FaqsController extends Controller
       $faq->question    = $request->question;
       $faq->answer      = $request->answer;
       $faq->category    = $request->category;
+      // $faq->is_published = $request->is_published;
+      $faq->is_published  = (!isset($request->is_published)) ? 0 : 1 ;
 
       // Save the data
       if($faq->save())
@@ -248,6 +250,8 @@ class FaqsController extends Controller
       $faq->question      = $request->question;
       $faq->answer        = $request->answer;
       $faq->category      = $request->category;
+      // $faq->is_published  = $request->is_published;
+      $faq->is_published  = (!isset($request->is_published)) ? 0 : 1 ;
 
       // Save the data
       if($faq->save())
@@ -539,4 +543,148 @@ class FaqsController extends Controller
       
       return view('admin.faqs.index', compact('faqs'));
    }
+
+
+##################################################################################################################
+# ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
+# ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
+# ██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
+# ██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║
+# ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║
+# ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function publish($id)
+   {
+      $faq = Faq::find($id);
+      
+      // Check if user has required permission
+      abort_unless(Gate::allows('faq-manage'), 403);
+
+         $faq->is_published = 1;
+         if($faq->deleted_at != Null) {
+            $faq->deleted_at = Null;
+         }
+      $faq->save();
+
+      Session::flash ('success','The Faq was successfully published.');
+      return redirect()->back();
+   }
+
+
+##################################################################################################################
+#  ███╗   ███╗ █████╗ ███████╗███████╗    ██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
+#  ████╗ ████║██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
+#  ██╔████╔██║███████║███████╗███████╗    ██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
+#  ██║╚██╔╝██║██╔══██║╚════██║╚════██║    ██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║
+#  ██║ ╚═╝ ██║██║  ██║███████║███████║    ██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║
+#  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function massPublish(Request $request)
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('faq-manage'), 403);
+
+      $faqs = explode(',', $request->input('mass_publish_pass_checkedvalue'));
+
+      if(!$request->input('mass_publish_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be published.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($faqs as $faq) {
+            $faq = Faq::withTrashed()->find($faq);
+               $faq->is_published = 1;
+               $faq->deleted_at = Null;
+            $faq->save();
+         }
+
+         $notification = [
+            'message' => 'The selected faqs have been published successfully!', 
+            'alert-type' => 'success'
+         ];
+
+      }
+      
+      return redirect()->back()->with($notification);
+
+   }
+
+
+##################################################################################################################
+# ██╗   ██╗███╗   ██╗██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
+# ██║   ██║████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
+# ██║   ██║██╔██╗ ██║██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
+# ██║   ██║██║╚██╗██║██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║
+# ╚██████╔╝██║ ╚████║██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║
+#  ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function unpublish($id)
+   {
+      $faq = Faq::find($id);
+
+      // Check if user has required permission
+      abort_unless(Gate::allows('faq-manage'), 403);
+
+      // Set the variable so we can use a button in other pages to come back to this page
+      // Session::put('pageName', 'unpublish');
+
+      $faq->is_published = 0;
+      $faq->save();
+
+      $notification = [
+         'message' => 'The faq was successfully unpublished.', 
+         'alert-type' => 'success'
+      ];
+
+      return redirect()->back()->with($notification);
+   }
+
+
+##################################################################################################################
+#  ███╗   ███╗ █████╗ ███████╗███████╗    ██╗   ██╗███╗   ██╗██████╗ ██╗   ██╗██████╗ ██╗     ██╗███████╗██╗  ██╗
+#  ████╗ ████║██╔══██╗██╔════╝██╔════╝    ██║   ██║████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██║██╔════╝██║  ██║
+#  ██╔████╔██║███████║███████╗███████╗    ██║   ██║██╔██╗ ██║██████╔╝██║   ██║██████╔╝██║     ██║███████╗███████║
+#  ██║╚██╔╝██║██╔══██║╚════██║╚════██║    ██║   ██║██║╚██╗██║██╔═══╝ ██║   ██║██╔══██╗██║     ██║╚════██║██╔══██║
+#  ██║ ╚═╝ ██║██║  ██║███████║███████║    ╚██████╔╝██║ ╚████║██║     ╚██████╔╝██████╔╝███████╗██║███████║██║  ██║
+#  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝     ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝
+##################################################################################################################
+   public function massUnpublish(Request $request)
+   {
+      // Check if user has required permission
+      abort_unless(Gate::allows('faq-manage'), 403);
+
+      $faqs = explode(',', $request->input('mass_unpublish_pass_checkedvalue'));
+
+      if(!$request->input('mass_unpublish_pass_checkedvalue'))
+      {
+
+         $notification = [
+            'message' => 'Please select entries to be unpublished.', 
+            'alert-type' => 'error'
+         ];
+
+      } else {
+         
+         foreach ($faqs as $faq) {
+            $faq = Faq::findOrFail($faq);
+            $faq->is_published = 0;
+            $faq->save();
+            // DB::table('favorites')->where('favoriteable_id', '=', $post->id)->delete();
+         }
+
+         $notification = [
+            'message' => 'The selected faqs have been unpublished successfully!', 
+            'alert-type' => 'success'
+         ];
+
+      }
+      
+      return redirect()->back()->with($notification);
+   }
+
 }

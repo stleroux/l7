@@ -43,7 +43,13 @@ class DartsController extends Controller
 		// Check if user has required permission
 		abort_unless(Gate::allows('dart-access'), 403);
 
-		$players = User::where('id','!=',1)->whereNotNull('first_name')->whereNotNull('last_name')->orderby('last_name', 'asc')->get();
+		$players = User::whereNotIn('id',[1,2])
+			->whereNotNull('first_name')
+			->whereNotNull('last_name')
+			// ->whereNotNull('dart_doubleOut')
+			->where('dart_doubleOut','>=',2)
+			->orderby('last_name', 'asc')
+			->get();
 		// dd($players);
 
 		return view('UI.darts.index', compact('players'));

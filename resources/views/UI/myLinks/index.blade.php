@@ -18,7 +18,7 @@
 
 @section('content')
 
-   @include('UI.mylinks.index.topbar')
+   @include('UI.myLinks.index.topbar')
 
    <div class="row">
 

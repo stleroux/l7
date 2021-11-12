@@ -5,14 +5,14 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Kyslik\ColumnSortable\Sortable;
+// use Kyslik\ColumnSortable\Sortable;
 use Carbon\Carbon;
 use Config;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class InvoicerInvoice extends Model implements Auditable
 {
-	use Sortable;
+	// use Sortable;
    use \OwenIt\Auditing\Auditable;
    use SoftDeletes;
 
@@ -44,20 +44,20 @@ class InvoicerInvoice extends Model implements Auditable
       'quoted_at'
 	];
 
-	public $sortable = [
-		'id',
-		'status',
-		'created_at',
-		'amount_charged',
-		'hst',
-		'sub_total',
-		'wsib',
-		'income_taxes',
-		'total_deductions',
-		'total',
-		'invoiced_at',
-		'paid_at'
-	];
+	// public $sortable = [
+	// 	'id',
+	// 	'status',
+	// 	'created_at',
+	// 	'amount_charged',
+	// 	'hst',
+	// 	'sub_total',
+	// 	'wsib',
+	// 	'income_taxes',
+	// 	'total_deductions',
+	// 	'total',
+	// 	'invoiced_at',
+	// 	'paid_at'
+	// ];
 
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -89,6 +89,11 @@ class InvoicerInvoice extends Model implements Auditable
    }
 
 //////////////////////////////////////////////////////////////////////////////////////
+// SCOPES
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////
 // ACCESSORS
 //////////////////////////////////////////////////////////////////////////////////////
    public function getCreatedAtAttribute($date)
@@ -98,10 +103,7 @@ class InvoicerInvoice extends Model implements Auditable
          $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
-      
-      // return 'N/A';
    }
-
 
    public function getUpdatedAtAttribute($date)
    {
@@ -110,26 +112,24 @@ class InvoicerInvoice extends Model implements Auditable
          $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
-      
-      // return 'N/A';
    }
 
-   // public function formInvoicedAtAttribute($date)
-   // {
-   //     // return Carbon::parse($date)->format(setting('dateFormat'));
-   //     // return Carbon::parse($date)->format('m/d/y');
-   //     return Carbon::parse($date)->format(Config::get('settings.dateFormat'));
-   // }
-
-   public function getLoggedAtAttribute($date)
+   public function getQuotedAtAttribute($date)
    {
       if($date){
          $date = new \Carbon\Carbon($date);
          $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
-      
-      // return 'N/A';
+   }
+
+   public function getEstimatedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
    }
 
    public function getInvoicedAtAttribute($date)
@@ -139,8 +139,6 @@ class InvoicerInvoice extends Model implements Auditable
          $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
-      
-      // return 'N/A';
    }
 
    public function getPaidAtAttribute($date)
@@ -150,12 +148,52 @@ class InvoicerInvoice extends Model implements Auditable
          $date = $date->format(Config::get('settings.dateFormat'));
          return $date;
       }
-      
-      // return 'N/A';
    }
 
+   public function getWorkOrderAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
+   }
 
+   public function getCompletedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
+   }
 
+   public function getShippedAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
+   }
+
+   public function getPickedUpAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
+   }
+
+   public function getCanceledAtAttribute($date)
+   {
+      if($date){
+         $date = new \Carbon\Carbon($date);
+         $date = $date->format(Config::get('settings.dateFormat'));
+         return $date;
+      }
+   }
 
 }
 

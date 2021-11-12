@@ -64,9 +64,11 @@
 
          </div>
          
-         <div class="card-footer bg-secondary px-1 py-1">
-            <div>Fields with <i class="fa fa-star" style="color:#ff0000" aria-hidden="true"></i> are required</div>
-         </div>
+         @if(Route::currentRouteName('') != 'admin.permissions.show')
+            <div class="card-footer p-1">
+               {!! Config::get('settings.formFieldsRequired') !!}
+            </div>
+         @endif
          
       </div>
    </form>

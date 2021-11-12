@@ -2,17 +2,17 @@
 // use CyrildeWit\EloquentViewable\Support\Period;
 @endphp
 
-<div class="card card-outline card-info">
+<div class="card card-outline card-info text-dark mb-2">
 
-   <div class="card-header bg-primary">
-      <div class="card-title font-weight-bold">
+   <div class="card-header bg-primary p-1">
+      <div class="card-title">
          <i class="{{ config('icons.info') }}"></i>
          Information
       </div>
    </div>
 
    <div class="card-body p-0">
-      <table class="table table-hover table-striped text-dark">
+      <table class="table table-sm table-hover table-striped">
          <tbody class="">
             <tr>
                <th>Category</th>

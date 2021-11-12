@@ -4,24 +4,96 @@
 
 	<label for="status" class="col-6 control-label required">Status</label>
 
-	<?php if($invoice->status != 'paid'): ?>
-	
-		<select name="status" class="col-6 form-control pull-right">
-			<?php if($invoice->status == 'logged'): ?>
-				<option value="logged" <?php echo e(($invoice->status == 'logged' ? 'selected' : '')); ?> readonly >Logged</option>
-			<?php elseif($invoice->status == 'quote'): ?>
-				<option value="quote" <?php echo e(($invoice->status == 'quote' ? 'selected' : '')); ?> readonly >Quote</option>
-			<?php endif; ?>
-			
-			<option value="estimate" <?php echo e(($invoice->status == 'estimate' ? 'selected' : '')); ?>>Estimate</option>
-			<option value="invoiced" <?php echo e(($invoice->status == 'invoiced' ? 'selected' : '')); ?>>Invoiced</option>
-		</select>
-	
-	<?php endif; ?>
+<?php if($invoice->status == 'quote'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="quote" <?php echo e(($invoice->status == 'quote' ? 'selected' : '')); ?>>Quote</option>
+		<option value="invoiced">Invoiced</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
 
-	<?php if($invoice->status == 'paid'): ?>
-		<input type="text" name="paid" class="col-6 form-control text-right" value="Paid" readonly disabled>
-	<?php endif; ?>
+<?php if($invoice->status == 'estimate'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="quote">Quote</option>
+		<option value="estimate" <?php echo e(($invoice->status == 'estimate' ? 'selected' : '')); ?>>Estimate</option>
+		<option value="invoiced">Invoiced</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'invoiced'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="estimate">Estimate</option>
+		<option value="invoiced" selected>Invoiced</option>
+		<option value="paid">Paid</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'paid'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="invoiced">Invoiced</option>
+		<option value="paid" selected>Paid</option>
+		<option value="workOrder">Work Order</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'workOrder'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="paid">Paid</option>
+		<option value="workOrder" selected>Work Order</option>
+		<option value="completed">Completed</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'completed'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="workOrder">Work Order</option>
+		<option value="completed" selected>Completed</option>
+		<option value="shipped">Shipped</option>
+		<option value="pickedUp">Picked Up</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'shipped'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="completed">Completed</option>
+		<option value="shipped" selected>Shipped</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'pickedUp'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="completed">Completed</option>
+		<option value="pickedUp" selected>Picked Up</option>
+		<option value="canceled">Canceled</option>
+	</select>
+<?php endif; ?>
+
+<?php if($invoice->status == 'canceled'): ?>
+	<select name="status" class="col-6 form-control pull-right">
+		<option value="quote">Quote</option>
+		<option value="estimate">Estimate</option>
+		<option value="invoiced">Invoiced</option>
+		<option value="paid">Paid</option>
+		<option value="workOrder">Work Order</option>
+		<option value="completed">Completed</option>
+		<option value="shipped">Shipped</option>
+		<option value="pickedUp">Picked Up</option>
+		<option value="canceled" selected disabled>Canceled</option>
+	</select>
+<?php endif; ?>
+
+
+
+
+
+	
+
+
 	
 	<span class="text-danger"><?php echo e($errors->first('status')); ?></span>
 

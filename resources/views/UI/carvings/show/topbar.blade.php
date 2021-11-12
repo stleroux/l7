@@ -46,8 +46,16 @@
    @endauth
 
    <div class="d-flex mb-2">
+      <form action="{{ route('cart.store', $carving) }}" method="POST" class="form-inline pr-1">
+         @csrf
+         <input type="hidden" value="1" name="quantity">
+         <button type="submit" class="btn btn-block btn-sm btn-secondary text-light">Request a Quote</button>
+      </form>
+
       <div class="float-right">
-         
+
+
+
 
 {{--       <a href="#"
          class="btn btn-sm btn-dark">

@@ -20,7 +20,7 @@
 		@foreach($bestClients as $client)
 			<tr>
 				<td>
-					<a href="{{ route('admin.invoicer.clients.show', $client->id) }}">
+					<a href="{{ route('admin.users.show', $client->id) }}">
 						{{ $client->contact_name }}
 						{{ ($client->company_name) ? ' [' . $client->company_name . ']' : '' }}
 					</a>

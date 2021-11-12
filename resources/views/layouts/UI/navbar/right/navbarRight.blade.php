@@ -1,4 +1,5 @@
-<ul class="navbar-nav ml-auto">
+{{-- <ul class="navbar-nav ml-auto"> --}}
+<ul class="navbar-nav">
 
    @include('layouts.UI.common.cart')
 
@@ -17,7 +18,7 @@
          </li>
       @endcan
 
-      @include('layouts.common.navbar.mylinks')
+      @include('layouts.common.navbar.myLinks')
       @include('layouts.common.navbar.languages')
       @include('layouts.common.navbar.user')
 

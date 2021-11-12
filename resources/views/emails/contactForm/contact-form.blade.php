@@ -11,8 +11,24 @@
 @endcomponent --}}
 
 <h1>{{ $data['subject'] }}</h1>
-<p><b>From : </b>{{ $data['email'] }}</p>
-<p>{{ $data['message'] }}</p>
+<p>
+   <b>From : </b>
+   {{ $data['email'] }}
+</p>
+<p>
+   <b>Message :</b>
+   <br />
+   {{ $data['message'] }}
+</p>
+@if(request()->has('type') && (request()->type == "quoteRequest"))
+<p>
+   <b>Cart Items :</b>
+   <br />
+   @foreach(Cart::content() as $row)
+      {{ $row->qty }} x {{ $row->name }} <br />      
+   @endforeach
+</p>
+@endif
 <br />
 
 {{-- <table border="1" cellspacing="1" cellpadding="1" width="100%">

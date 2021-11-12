@@ -7,6 +7,8 @@
       @include('admin.actions.common.create', ['modelName'=>'faq'])
 
       @if(Route::currentRouteName() == 'admin.faqs.index')
+         @include('admin.actions.mass.publish', ['modelName'=>'faq'])
+         @include('admin.actions.mass.unpublish', ['modelName'=>'faq'])
          @include('admin.actions.mass.destroy', ['modelName'=>'faq'])
       @endif
 
@@ -16,4 +18,5 @@
       @endif
       
    </div>
+
 </div>

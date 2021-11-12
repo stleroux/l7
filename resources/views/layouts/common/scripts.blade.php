@@ -47,6 +47,7 @@
 </script>
 
 <!-- DateTime Picker -->
+<!-- https://xdsoft.net/jqplugins/datetimepicker/ -->
 <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
 <script>
    $("#datePicker").datetimepicker({
@@ -90,9 +91,9 @@
 
 @yield('scripts')
 
-<script src="{{ asset('/js/app.js') }}"></script>
+{{-- <script src="{{ asset('/js/app.js') }}"></script> --}}
 
-{{-- @livewireScripts --}}
-<livewire:scripts>
+@livewireScripts
+{{-- <livewire:scripts> --}}
 
 {{-- <script src="http://unpkg.com/turbolinks"></script> --}}

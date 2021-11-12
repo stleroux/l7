@@ -4,17 +4,57 @@ use App\Models\InvoicerActivity;
 use App\Models\InvoicerInvoice;
 use Illuminate\Support\Facades\Config;
 
+function clearInvoiceAmounts($invID)
+{
+	// Check if user has required permission
+	abort_unless(Gate::allows('invoicer-invoice'), 403);
+
+	// dd($invID);
+	// update invoice with totals
+	$invoice = InvoicerInvoice::find($invID);
+	// dd("clearInvoiceAmounts".$invoice);
+
+	// InvoicerInvoice::where('id',$invID)->update(
+	// 	[
+	// 		'amount_charged' => '0.00',
+	// 		'hst' => '0.00',
+	// 		'sub_total' => '0.00',
+	// 		'wsib' => '0.00',
+	// 		'income_taxes' => '0.00',
+	// 		'total_deductions' => '0.00',
+	// 		'deposits' => '0.00',
+	// 		'discounts' => '0.00',
+	// 		'payments' => '0.00',
+	// 		'total' => '0.00',
+	// 	]
+	// );
+
+		$invoice->amount_charged = '0.00';
+		$invoice->hst = '0.00';
+		$invoice->sub_total = '0.00';
+		$invoice->wsib = '0.00';
+		$invoice->income_taxes = '0.00';
+		$invoice->total_deductions = '0.00';
+		$invoice->deposits = '0.00';
+		$invoice->discounts = '0.00';
+		$invoice->payments = '0.00';
+		$invoice->total = '0.00';
+	$invoice->save();
+}
+
 function calculateInvoiceAmounts($invID, $activity = null)
 {
+	// dd("calculateInvoiceAmounts".$invID);
 	// Check if user has required permission
 	abort_unless(Gate::allows('invoicer-invoice'), 403);
 
 	// update invoice with totals
 	$invoice = InvoicerInvoice::find($invID);
+	// dd("invoice".$invoice->id);
 
 		 // Perform required calculations
-		$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invoice->id)->sum('total');
-
+		$inv_amount_charged = DB::table('invoicer__invoice_items')->where('invoice_id', '=', $invID)->where('deleted_at',null)->sum('total');
+// dd($inv_amount_charged);
 		$inv_hst = $inv_amount_charged * Config::get('invoicer.hstRate');
 		// $inv_hst_total = $inv_amount_charged * Config::get('invoicer.hstRate');
 		// $tax_rebates = InvoicerActivity::where('invoice_id',$invID)->where('activity','taxRebate')->sum('amount');

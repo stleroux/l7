@@ -1,9 +1,11 @@
 
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>TheWoodBarn.ca</title>
+   <title>{{ Config::get('settings.appName') }}</title>
    <!-- Tell the browser to be responsive to screen width -->
    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   {{-- <link rel="icon" href="{{ URL::asset('/images/14-1.jpg') }}" type="image/x-icon"/> --}}
 
    <!-- Font Awesome -->
    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.css') }}">
@@ -53,5 +55,5 @@
 
    @yield('stylesheet')
 
-   {{-- @livewireStyles --}}
-   <livewire:styles>
+   @livewireStyles
+   {{-- <livewire:styles> --}}

@@ -3,9 +3,9 @@
 	<div class="card-header">
 		<span class="h3">Billable Items</span>
 		
-			<?php if($invoice->status == 'logged' || $invoice->status == 'estimate'): ?>
+			<?php if($invoice->status == 'quote' || $invoice->status == 'estimate'): ?>
 				<span class="float-right">
-					<a href="<?php echo e(route('admin.invoicer.invoiceItems.create', $invoice->id)); ?>" class="btn btn-sm btn-primary">
+					<a href="<?php echo e(route('admin.invoicer.invoiceItems.create', [$invoice->id, 'type'=>$invoice->status])); ?>" class="btn btn-sm btn-secondary">
 						<i class="<?php echo e(config('icons.invoicer-newBillable')); ?>"></i>
 						Add Billable
 					</a>

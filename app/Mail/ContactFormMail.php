@@ -35,12 +35,17 @@ class ContactFormMail extends Mailable
     {
         
         if(Auth::user()) {
-            
-            $image = (public_path("/_profiles") . DIRECTORY_SEPARATOR . Auth::user()->image);
-            
-            return $this->view('emails.contactForm.contact-form')
+
+            if(Auth::user()->image) {
+                $image = (public_path("/_profiles") . DIRECTORY_SEPARATOR . Auth::user()->image);
+
+                return $this->view('emails.contactForm.contact-form')
                 ->replyTo($this->data['email'])
                 ->attach($image);
+            }
+            
+            return $this->view('emails.contactForm.contact-form')
+                ->replyTo($this->data['email']);
 
         } else {
             

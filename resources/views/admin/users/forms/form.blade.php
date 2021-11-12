@@ -2,6 +2,7 @@
 
 <div class="row">
    <div class="col-xl-6">
+      @include('admin.users.forms.panels.reasonToRegister')
       @include('admin.users.forms.panels.user')
       @include('admin.users.forms.panels.contact')
       @include('admin.users.forms.panels.address')

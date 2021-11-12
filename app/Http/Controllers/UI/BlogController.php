@@ -5,8 +5,9 @@ namespace App\Http\Controllers\UI;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment;
-use App\Models\Post;
 use App\Models\Faq;
+use App\Models\Post;
+use App\Models\Project;
 use Carbon\Carbon;
 use Auth;
 use DB;
@@ -74,7 +75,7 @@ class BlogController extends Controller
       // Set the session to the current page route
       // Session::put('fromPage', url()->full());
 
-      $faqs = FAQ::where('category', 'blog')->orderBy('question')->get();
+      $faqs = FAQ::where('category', 'blog')->where('is_published', 1)->orderBy('question')->get();
       // dd($faqs);
 
       return view('UI.blog.faqs', compact('faqs'));

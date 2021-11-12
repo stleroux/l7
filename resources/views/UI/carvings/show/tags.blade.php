@@ -1,11 +1,14 @@
 <!-- TAGS -->
-<div class="card card-trans-4 card-outline card-info mb-2">
+<div class="card card-trans-4 card-outline card-info text-dark mb-2">
 
-   <div class="card-header bg-primary">
-      <div class="card-title font-weight-bold">Related Tags</div>
+   <div class="card-header bg-primary p-1">
+      <div class="card-title">
+         Related Tags
+      </div>
    </div>
+
    @if($carving->tags->count() > 0)
-      <div class="card-body">
+      <div class="card-body p-1">
          @foreach($carving->tags as $tag)
             <span class="lead">
                <span class="badge badge-light font-weight-normal">
@@ -17,7 +20,7 @@
          @endforeach               
       </div>            
    @else
-      <div class="card-body">N/A</div>
+      <div class="card-body p-1">N/A</div>
    @endif
 
 </div>

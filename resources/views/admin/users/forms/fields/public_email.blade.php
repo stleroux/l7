@@ -3,7 +3,7 @@
 <div class="form-group">
 
 	<label for="public_email" class="{{ $required ?? '' }}">
-		{{ $label ?? 'Is Email Prublic?' }}
+		{{ $label ?? 'Is Email Public?' }}
 	</label>
 
 	<br />

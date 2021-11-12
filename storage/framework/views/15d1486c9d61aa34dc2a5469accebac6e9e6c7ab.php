@@ -6,6 +6,7 @@
 			(Request::is('admin/finishes*')) ||
 			(Request::is('admin/general*')) ||
 			(Request::is('admin/materials*')) ||
+			(Request::is('admin/offerings*')) ||
 			(Request::is('admin/settings*')) ||
 			(Request::is('admin/tags*'))
 		) ? 'menu-open' : ''); ?>
@@ -18,6 +19,7 @@
 				(Request::is('admin/finishes*')) ||
 				(Request::is('admin/general*')) ||
 				(Request::is('admin/materials*')) ||
+				(Request::is('admin/offerings*')) ||
 				(Request::is('admin/settings*')) ||
 				(Request::is('admin/tags*'))
 			) ? 'active' : ''); ?>
@@ -32,8 +34,17 @@
 
 		<ul class="nav nav-treeview">
 
+			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('block-manage')): ?>
+				<li class="nav-item ml-1">
+					<a href="<?php echo e(route('admin.blocks.index')); ?>" class="nav-link <?php echo e(Request::is('admin/blocks*') ? 'active' : ''); ?>">
+						<i class="<?php echo e(config('icons.homepage')); ?>"></i>
+						<p>Blocks</p>
+					</a>
+				</li>
+			<?php endif; ?>
+
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('category-manage')): ?>
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="<?php echo e(Route('admin.categories.index')); ?>" class="nav-link <?php echo e(Request::is('admin/categories*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.categories')); ?>"></i>
 						<p>Categories</p>
@@ -42,7 +53,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('finish-manage')): ?>
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="<?php echo e(route('admin.finishes.index')); ?>" class="nav-link <?php echo e(Request::is('admin/finishes*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.finishes')); ?>"></i>
 						<p>Finishes</p>
@@ -50,17 +61,8 @@
 				</li>
 			<?php endif; ?>
 
-			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('block-manage')): ?>
-				<li class="nav-item ml-3">
-					<a href="<?php echo e(route('admin.blocks.index')); ?>" class="nav-link <?php echo e(Request::is('admin/blocks') ? 'active' : ''); ?>">
-						<i class="<?php echo e(config('icons.homepage')); ?>"></i>
-						<p>Blocks</p>
-					</a>
-				</li>
-			<?php endif; ?>
-
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('material-manage')): ?>
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="<?php echo e(Route('admin.materials.index')); ?>" class="nav-link <?php echo e(Request::is('admin/materials*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.materials')); ?>"></i>
 						<p>Materials</p>
@@ -68,8 +70,17 @@
 				</li>
 			<?php endif; ?>
 
+			
+				<li class="nav-item ml-1">
+					<a href="<?php echo e(Route('admin.offerings.index')); ?>" class="nav-link <?php echo e(Request::is('admin/offerings*') ? 'active' : ''); ?>">
+						<i class="<?php echo e(config('icons.carvings')); ?>"></i>
+						<p>Offerings <small>(Carvings)</small></p>
+					</a>
+				</li>
+			
+
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin-settings')): ?>
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="<?php echo e(route('admin.settings.index')); ?>" class="nav-link <?php echo e(Request::is('admin/settings*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.dashboard')); ?>"></i>
 						<p>Settings</p>
@@ -78,7 +89,7 @@
 			<?php endif; ?>
 
 			<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('tag-manage')): ?>
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="<?php echo e(route('admin.tags.index')); ?>" class="nav-link <?php echo e(Request::is('admin/tags*') ? 'active' : ''); ?>">
 						<i class="<?php echo e(config('icons.tags')); ?>"></i>
 						<p>Tags</p>

@@ -25,7 +25,7 @@ return [
 	'version' => '2.0',
 
 	// Notifications
-	'usersToNotify' => '1,2,3',
+	'usersToNotify' => '10,11',
 	
 	// For Terms and Conditions, please see termsAndConditions.blade.php in views\invoicer
 ];

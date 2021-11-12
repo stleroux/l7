@@ -69,29 +69,6 @@
             <div class="card-footer card_footer p-1 card-trans-2">
                Created by <?php echo $__env->make('common.authorFormat', ['model'=>$post, 'field'=>'user'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                on <?php echo $__env->make('common.dateFormat', ['model'=>$post, 'field'=>'created_at'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-               
-               <div class="form-inline float-right p-0 m-0">
-   
-                  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('like', $post)): ?>
-                     <form class="p-0 m-0" action="<?php echo e(route('like')); ?>" method="POST">
-                        <?php echo csrf_field(); ?>
-                        <input type="hidden" name="likeable_type" value="<?php echo e(get_class($post)); ?>"/>
-                        <input type="hidden" name="id" value="<?php echo e($post->id); ?>"/>
-                        <button class="btn btn-sm btn-success"><?php echo app('translator')->get('Like'); ?></button>
-                     </form>
-                  <?php else: ?>
-                     <form class="" action="<?php echo e(route('unlike')); ?>" method="POST">
-                        <?php echo csrf_field(); ?>
-                        <?php echo method_field('DELETE'); ?>
-                        <input type="hidden" name="likeable_type" value="<?php echo e(get_class($post)); ?>"/>
-                        <input type="hidden" name="id" value="<?php echo e($post->id); ?>"/>
-                        <button class="btn btn-sm btn-danger"><?php echo app('translator')->get('Unlike'); ?></button>
-                     </form>
-                  <?php endif; ?>
-
-               </div>
-
             </div>
 
          </div>

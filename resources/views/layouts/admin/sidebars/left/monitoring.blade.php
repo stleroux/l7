@@ -23,7 +23,7 @@
 		<ul class="nav nav-treeview">
 
 			@can('admin-logreader')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="/admin/log-reader" class="nav-link {{ Request::is('admin/log-reader*') ? 'active' : '' }}" target="_blank">
 						<i class="{{ config('icons.logs') }}"></i>
 						<p>Log Reader</p>
@@ -32,7 +32,7 @@
 			@endcan
 
 			@can('admin-notifications')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="{{ Route('admin.notifications.all') }}" class="nav-link {{ Request::is('admin/notifications*') ? 'active' : '' }}">
 						<i class="{{ config('icons.bell') }}"></i>
 						<p>Notifications</p>
@@ -41,7 +41,7 @@
 			@endcan
 
 			@can('admin-audits')
-				<li class="nav-item ml-3">
+				<li class="nav-item ml-1">
 					<a href="/admin/user-activity" class="nav-link {{ Request::is('admin/user-activity*') ? 'active' : '' }}" target="_blank">
 						<i class="{{ config('icons.users') }}"></i>
 						<p>User Activity</p>

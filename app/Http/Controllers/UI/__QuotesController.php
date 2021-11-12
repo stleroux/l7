@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\UI;
 
 use App\Http\Controllers\Controller;
-use App\Models\InvoicerInvoice;
 use Auth;
 use Gate;
 use Illuminate\Http\Request;

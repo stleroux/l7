@@ -12,6 +12,8 @@
 
    @include('admin.users.forms.form')
 
+   @include('admin.users.show.sections.invoices')
+   
    @include('common.audits')
 
    @include('admin.users.help')

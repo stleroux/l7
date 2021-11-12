@@ -104,22 +104,24 @@
                      @endauth
 
                      <div class="row-col text-center pt-2">
-                        @can('like', $recipe)
-                           <form class="" action="{{ route('like') }}" method="POST">
-                              @csrf
-                              <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
-                              <input type="hidden" name="id" value="{{ $recipe->id }}"/>
-                              <button class="btn btn-block btn-xs btn-outline-success text-light">@lang('Like')</button>
-                           </form>
-                        @else
-                           <form class="" action="{{ route('unlike') }}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
-                              <input type="hidden" name="id" value="{{ $recipe->id }}"/>
-                              <button class="btn btn-block btn-xs btn-outline-danger text-light">@lang('Unlike')</button>
-                           </form>
-                        @endcan
+                        @auth
+                           @can('like', $recipe)
+                              <form class="" action="{{ route('like') }}" method="POST">
+                                 @csrf
+                                 <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+                                 <input type="hidden" name="id" value="{{ $recipe->id }}"/>
+                                 <button class="btn btn-block btn-xs btn-outline-success text-light">@lang('Like')</button>
+                              </form>
+                           @else
+                              <form class="" action="{{ route('unlike') }}" method="POST">
+                                 @csrf
+                                 @method('DELETE')
+                                 <input type="hidden" name="likeable_type" value="{{ get_class($recipe) }}"/>
+                                 <input type="hidden" name="id" value="{{ $recipe->id }}"/>
+                                 <button class="btn btn-block btn-xs btn-outline-danger text-light">@lang('Unlike')</button>
+                              </form>
+                           @endcan
+                        @endauth
                      </div>
 
                      <div class="card-footer px-1 py-0 mb-0">

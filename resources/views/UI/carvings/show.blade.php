@@ -10,6 +10,8 @@
 @endsection
 
 @section('breadcrumb')
+   <li class="breadcrumb-item"><a href="{{ route('carvings.index') }}">Carvings</a></li>
+   <li class="breadcrumb-item">Show</li>
 @endsection
 
 @section('rightColumn')
@@ -36,7 +38,7 @@
                   </div>
                </div>
                <div class="row-col">
-                  @include('common.view_more')               
+                  @include('UI.carvings.blocks.view_more')               
                </div>
                <div class="row-col">
                   @include('UI.carvings.show.comments', ['model'=>$carving])
@@ -44,9 +46,7 @@
             </div>
             <div class="col-3">
                @include('UI.carvings.show.information')            
-               @auth
-                  @include('UI.carvings.show.leave_comment')
-               @endauth
+               @include('UI.carvings.show.leave_comment')
             </div>
          </div>
       </div>

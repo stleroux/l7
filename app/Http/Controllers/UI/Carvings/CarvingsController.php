@@ -98,7 +98,7 @@ class CarvingsController extends Controller
         // Set the session to the current page route
         Session::put('fromPage', url()->full());
 
-        $faqs = FAQ::where('category', 'carvings')->orderBy('question')->get();
+        $faqs = FAQ::where('category', 'carvings')->where('is_published', 1)->orderBy('question')->get();
         // dd($faqs);
 
         // Increase the view count since this is viewed from the frontend
@@ -148,4 +148,24 @@ class CarvingsController extends Controller
         return view('UI.carvings.show', compact('carving','previous','next'));
     }
 
+
+    // public function index($filter = null, $tag = null)
+    public function typeList()
+    {
+        // Check if user has required permission
+        
+
+        // Set the session to the current page route
+        // Session::put('fromPage', url()->full());
+
+        $list = FAQ::findOrFail(126);
+        // dd($list);
+
+        // Increase the view count since this is viewed from the frontend
+        // $expiresAt = now()->addHours(3);
+        // views($faq)->cooldown($expiresAt)->record();
+
+        return view('UI.carvings.typeList', compact('list'));
+
+    }
 }

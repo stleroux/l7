@@ -1,39 +1,45 @@
-{{-- @if(checkPerm('comment_add')) --}}
+<div class="card card-trans-4 card-outline card-primary text-dark mb-2">
 
-   <form action="{{ route('projects.comment.store', $project->id) }}" method="POST">
-      @csrf
+   <div class="card-header bg-info p-1">
+      <div class="card-title">
+         <i class="fa fa-comment" aria-hidden="true"></i>
+         Leave a comment
+      </div>
+   </div>
 
-      <div class="card card-trans-2 card-outline card-primary mb-2">
+   @auth
+      <div class="card-body p-1">
+         <form action="{{ route('projects.comment.store', $project->id) }}" method="POST">
+            @csrf
 
-         <div class="card-header bg-info font-weight-bold">
-            <i class="{{ config('icons.comment') }}"></i>
-            Leave a comment
-         </div>
-         
-         <div class="card-body p-2">
-            
-            <div class="form-group">
-               
-               <textarea name="comment" id="" rows="3" class="form-control form-control-sm @error('comment') is-invalid @enderror">{{ old('comment') ?? $project->comment }}</textarea>
-               
-               @error('comment')
-                  <span class="invalid-feedback" role="alert">
-                     <strong>{{ $message }}</strong>
-                  </span>
-               @enderror
-
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
+                     <textarea name="comment" id="comment" rows="5" class="form-control"></textarea>
+                     <span class="text-danger">{{ $errors->first('comment') }}</span>
+                  </div>
+               </div>
             </div>
 
-            <button type="submit" class="btn btn-block btn-sm btn-success">
-               <i class="{{ config('icons.add') }}"></i>
-               Add Comment
-            </button>
+            <div class="row">
+               <div class="col-md-12">
+                  <button type="submit" class="btn btn-sm btn-success btn-block">Add Comment</button>
+               </div>
+            </div>
 
-         </div>
-
-         <div class="card-footer text-dark p-1">
-            <small>Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.</small>
-         </div>
+         </form>
       </div>
 
-   </form>
+      <div class="card-footer p-1">
+         Be a sport and keep your comments clean, otherwise they will be removed and you risk being banned from the site.
+      </div>
+
+   @else
+
+      <div class="card-body p-1">
+         Please login to leave a comment
+      </div>
+   
+   @endauth
+
+</div>

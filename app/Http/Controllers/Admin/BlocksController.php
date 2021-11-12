@@ -9,6 +9,7 @@ use Auth;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\BlockRequest;
 // use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class BlocksController extends Controller
@@ -40,7 +41,7 @@ class BlocksController extends Controller
    public function index(Request $request)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('admin-frontend'), 403);
+      abort_unless(Gate::allows('block-manage'), 403);
 
       $blocks = Block::all();
 
@@ -76,18 +77,18 @@ class BlocksController extends Controller
 #  ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 # Store a newly created resource in storage
 ##################################################################################################################
-   public function store(Request $request, Block $block)
+   public function store(BlockRequest $request, Block $block)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('block-create'), 403);
 
       // validate the data
-      $this->validate($request, [
-      'page' => 'required',
-      "name" => 'required|unique:blocks,name',
-      'title' => 'required|min:5',
-      'body' => 'required',
-      ]);
+      // $this->validate($request, [
+      // 'page' => 'required',
+      // "name" => 'required|unique:blocks,name',
+      // 'title' => 'required|min:5',
+      // 'body' => 'required',
+      // ]);
 
          // assign values from form fields
          $block->title = $request->title;
@@ -149,7 +150,7 @@ class BlocksController extends Controller
    public function edit(Block $block)
    {
       // Check if user has required permission
-      abort_unless(Gate::allows('block-manage'), 403);
+      abort_unless(Gate::allows('block-edit'), 403);
 
       return view('admin.blocks.edit', compact('block'));
    }
@@ -164,18 +165,18 @@ class BlocksController extends Controller
 #   ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 # Update the specified resource in storage
 ##################################################################################################################
-    public function update(Request $request, Block $block)
+    public function update(BlockRequest $request, Block $block)
    {
       // Check if user has required permission
       abort_unless(Gate::allows('block-edit'), 403);
 
       // validate the data
-      $this->validate($request, [
-         'page' => 'required',
-         'name' => 'required|unique:blocks,name,'.$block->id,
-         'title' => 'required|min:5',
-         'body' => 'required',
-      ]);
+      // $this->validate($request, [
+      //    'page' => 'required',
+      //    'name' => 'required|unique:blocks,name,'.$block->id,
+      //    'title' => 'required|min:5',
+      //    'body' => 'required',
+      // ]);
 
       // assign values from form fields
       $block->title = $request->title;

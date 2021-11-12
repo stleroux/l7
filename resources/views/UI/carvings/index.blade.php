@@ -16,7 +16,7 @@
 @section('rightColumn')
    @include('UI.carvings.blocks.popular')
    @include('UI.carvings.blocks.tags')
-   @include('UI.carvings.blocks.faqs')
+   @include('UI.carvings.blocks.general')
 @endsection
 
 @section('notice')
@@ -40,7 +40,7 @@
 
                @foreach($carvings as $carving)
 
-                  <div  class="col-xl-3 pb-2">
+                  <div  class="col-8 offset-2 offset-sm-0 col-sm-6 col-md-4 col-lg-3 pb-2">
 
                      <div id="card-hover" class="card card-trans-2 h-100 w-100" style="border: 2px black solid;">
 
@@ -62,86 +62,49 @@
                                  @endif
                                  <h4 class="badge-dark p-1 m-1">{{ ucwords($carving->name) }}</h4>
                                  
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Category :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       {{ $carving->category }}
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Views :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       {{-- {{ $carving->views }} --}} {{ views($carving)->count() }}
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Comments :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       {{ $carving->comments->count() }}
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Images :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                        {{ count($carving->images) }}
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col text-right pr-0">
-                                       <strong>Likes :</strong>
-                                    </div>
-                                    <div class="col text-left pl-1">
-                                       {{ $carving->likes()->count() }}
-                                    </div>
-                                 </div>
+                                 @include('UI.carvings.partials.index.rows')
+                                 {{-- @include('UI.carvings.partials.index.rows2') --}}
+                                 {{-- @include('UI.carvings.partials.index.table') --}}
                                  
                               </a>
                            </div>
 
                         </div>
 
-                        <div class="card-footer p-0 m-0 pb-2">
-                           <div class="row p-0 m-0">
-                              <div class="col-6">
-                              @auth
-                                 @can('like', $carving)
-                                    <form class="" action="{{ route('like') }}" method="POST">
-                                       @csrf
-                                       <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
-                                       <input type="hidden" name="id" value="{{ $carving->id }}"/>
-                                       <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold">@lang('Like')</button>
-                                    </form>
-                                 @else
-                                    <form class="" action="{{ route('unlike') }}" method="POST">
-                                       @csrf
-                                       @method('DELETE')
-                                       <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
-                                       <input type="hidden" name="id" value="{{ $carving->id }}"/>
-                                       <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong>@lang('Unlike')</strong></button>
-                                    </form>
-                                 @endcan
-                              @endauth
-                              </div>
-<div class="col-6">
-   <form action="{{ route('cart.store', $carving) }}" method="POST">
-      @csrf
-      <input type="hidden" value="1" name="quantity">
-      <button type="submit" class="btn btn-block btn-xs btn-outline-secondary text-dark"><strong>Add To Cart</strong></button>
-   </form>
-</div>
+                           <div class="card-footer p-0 m-0 pb-2">
+                              <div class="row p-0 m-0">
+                                 <div class="col-6">
+                        @auth
+                                    @can('like', $carving)
+                                       <form class="" action="{{ route('like') }}" method="POST">
+                                          @csrf
+                                          <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                                          <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                                          <button class="btn btn-block btn-xs btn-outline-success text-dark font-weight-bold">@lang('Like')</button>
+                                       </form>
+                                    @else
+                                       <form class="" action="{{ route('unlike') }}" method="POST">
+                                          @csrf
+                                          @method('DELETE')
+                                          <input type="hidden" name="likeable_type" value="{{ get_class($carving) }}"/>
+                                          <input type="hidden" name="id" value="{{ $carving->id }}"/>
+                                          <button class="btn btn-block btn-xs btn-outline-danger text-dark"><strong>@lang('Unlike')</strong></button>
+                                       </form>
+                                    @endcan
+                        @endauth
+                                 </div>
 
+                                 <div class="col-6">
+                                    <form action="{{ route('cart.store', $carving) }}" method="POST">
+                                       @csrf
+                                       <input type="hidden" value="1" name="quantity">
+                                       <button type="submit" class="btn btn-block btn-xs btn-outline-secondary text-dark"><strong>Request a Quote</strong></button>
+                                    </form>
+                                 </div>
+
+                              </div>
 
                            </div>
-
-                        </div>
 
                      </div>
 
@@ -163,14 +126,11 @@
             {{-- @endif --}}
          </div>
 
-
       </div>
    @else
       <div class="col-row p-3 card-trans-4 text-dark">
          {{ config('settings.noRecordsFound') }}
       </div>
    @endif
-
-
 
 @endsection

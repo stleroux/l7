@@ -1,3 +1,8 @@
 // Check current route
 @if(Route::currentRouteName('') == 'admin.bugs.show')
 
+// Check if user belongs to any roles
+@if(Auth::user()->hasAnyRoles(['admin','customOrdering']))
+
+// Check if user belongs to this role
+@if(Auth::user()->hasRole(['name'=>'admin']))

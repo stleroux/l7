@@ -1,11 +1,11 @@
 <div class="card mb-2 card-trans-4">
 
-	<div class="card-header block_header p-2">
+	<div class="card-header card_header text-light p-2 font-weight-normal">
       <i class="fa fa-fw fa-search"></i>
       Search Blog Entries
 	</div>
 	
-   <div class="card-body p-2">
+   <div class="card-body card-trans-2 p-2 m-0">
       <form action="{{ route('blog.search') }}" method="POST">
          @csrf
          <div class="row px-2">

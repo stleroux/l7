@@ -79,8 +79,9 @@ class SiteController extends Controller
       $projects   = DB::table('blocks')->where('name', '=', 'projects')->first();
       $recipes    = DB::table('blocks')->where('name', '=', 'recipes')->first();
       $blog       = DB::table('blocks')->where('name', '=', 'blog')->first();
+      $nonRegistered = DB::table('blocks')->where('name', '=', 'nonRegistered')->first();
 
-      return view('UI.homepage', compact('posts','greeting','newUser','carvings','projects','recipes','blog'));
+      return view('UI.homepage', compact('posts','greeting','newUser','carvings','projects','recipes','blog','nonRegistered'));
    }
 
 

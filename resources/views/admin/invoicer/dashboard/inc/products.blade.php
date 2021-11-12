@@ -9,7 +9,7 @@
 		<table class="table table-hover table-sm">
 			@foreach($products as $product)
 				<tr>
-					<td>{{ $product->code }}</td>
+					<td>{{ $product->details }}</td>
 				</tr>
 			@endforeach
 		</table>

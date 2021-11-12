@@ -5,6 +5,24 @@
 
    <div class="col">
 
+
+{{-- @if(request()->has('type') && (request()->type == "quote")) --}}
+@if($invoice->status == "quote")
+<a href="{{ route('admin.invoicer.invoices', 'quotes') }}" class="btn btn-sm btn-warning">
+<i class="{{ config('icons.cancel') }}"></i>
+Cancel
+</a>
+@endif
+
+{{-- @if(request()->has('type') && (request()->type == "estimate")) --}}
+@if($invoice->status == "estimate")
+<a href="{{ route('admin.invoicer.invoices', 'estimates') }}" class="btn btn-sm btn-warning">
+<i class="{{ config('icons.cancel') }}"></i>
+Cancel
+</a>
+@endif
+
+
       <div class="float-right">
 	     @if($invoice->status != 'paid')
             <a href="{{ route('admin.invoicer.invoices.edit', $invoice->id) }}" class="btn btn-sm btn-outline-secondary d-print-none">
@@ -27,7 +45,7 @@
             Print this page
          </a>
 
-         @if($invoice->status == "estimate")
+{{--          @if($invoice->status == "estimate")
             <a href="{{ route('admin.invoicer.invoices.estimates') }}" class="btn btn-sm btn-primary d-print-none">
                <i class="fa fa-list"></i>
                Estimates List
@@ -37,7 +55,7 @@
                <i class="fa fa-list"></i>
                Invoices List
             </a>
-         @endif
+         @endif --}}
       </div>
 
    </div>

@@ -1,13 +1,13 @@
 <div class="card pt-2">
 
 	<div class="card-header">
-		<span class="h3">Activity</span>
+		<span class="h3">Activities</span>
 		
 			
 			
 			<?php if($invoice->status != 'paid' && $invoice->invoiceItems->count() > 0): ?>
 				<span class="float-right">
-					<a href="<?php echo e(route('admin.invoicer.activities.create', $invoice)); ?>" class="btn btn-sm btn-primary">
+					<a href="<?php echo e(route('admin.invoicer.activities.create', $invoice)); ?>" class="btn btn-sm btn-secondary">
 						<i class="<?php echo e(config('icons.invoicer-newActivity')); ?>"></i>
 						Add Activity
 					</a>
@@ -18,7 +18,7 @@
 
 	
 		<?php if($invoice->activities->count() > 0): ?>
-			<table class="table table-sm table-hover">
+			<table class="table table-sm table-striped">
 				<thead>
 					<tr class="d-flex">
 						<th class="col-1">ID</th>

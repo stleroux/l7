@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Onecentlin\Adminer\ServiceProvider::class,
 
         /* * Customer Service Providers */
         App\Providers\MovieServiceProvider::class,

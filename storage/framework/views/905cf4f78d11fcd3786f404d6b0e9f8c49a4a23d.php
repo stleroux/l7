@@ -1,6 +1,6 @@
 <?php if (! empty(trim($__env->yieldContent('breadcrumb')))): ?>
    <div class="ml-auto">
-      <ol class="breadcrumb float-sm-right py-1 m-1 mb-2">
+      <ol class="breadcrumb float-sm-right p-0 m-0 px-1">
          <li class="breadcrumb-item">
             <?php if(Route::currentRouteName() != 'homepage'): ?>
                <a href="<?php echo e(route('homepage')); ?>" class="">
@@ -8,7 +8,7 @@
                </a>
             <?php endif; ?>
          </li>
-            <?php echo $__env->yieldContent('breadcrumb'); ?>
+         <?php echo $__env->yieldContent('breadcrumb'); ?>
       </ol>
    </div>
 <?php endif; ?>

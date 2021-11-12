@@ -4,7 +4,7 @@
 
 	<label for="notes">Notes</label>
 
-	<textarea name="notes" rows="4" class="form-control" <?php echo e(($invoice->status == 'paid' ? 'readonly disabled' : '')); ?>><?php echo e($invoice->notes); ?></textarea>
+	<textarea name="notes" rows="4" class="form-control" <?php echo e(($invoice->status == 'paid' ? 'readonly disabled' : '')); ?>><?php echo e($invoice->notes = str_replace('<br />', "\n", $invoice->notes)); ?></textarea>
 
 	<span class="text-danger"><?php echo e($errors->first('notes')); ?></span>
 
