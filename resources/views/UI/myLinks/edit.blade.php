@@ -22,7 +22,7 @@
       @csrf
       @method('PUT')
 
-      @include('UI.mylinks.edit.topbar')
+      @include('UI.myLinks.edit.topbar')
 
       <div class="row">
 
@@ -39,10 +39,10 @@
                <div class="card-body p-2">
                   <div class="row">
                      <div class="col">
-                        @include('UI.mylinks.edit.name', ['required'=>'required'])
+                        @include('UI.myLinks.edit.name', ['required'=>'required'])
                      </div>
                      <div class="col">
-                        @include('UI.mylinks.edit.page_url', ['required'=>'required'])
+                        @include('UI.myLinks.edit.page_url', ['required'=>'required'])
                      </div>
                   </div>
                </div> <!-- Card body -->
@@ -53,7 +53,7 @@
 
    </form>
 
-   @include('help.index', ['title'=>'Edit Link', 'icon'=>'', 'path'=>'UI.mylinks.edit'])
+   @include('help.index', ['title'=>'Edit Link', 'icon'=>'', 'path'=>'UI.myLinks.edit'])
 
 @endsection
 

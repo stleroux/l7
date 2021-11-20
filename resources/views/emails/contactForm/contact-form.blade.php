@@ -16,11 +16,16 @@
    {{ $data['email'] }}
 </p>
 <p>
+   <b>Name: </b>
+   {{ $data['name'] }}
+</p>
+<p>
    <b>Message :</b>
    <br />
    {{ $data['message'] }}
 </p>
-@if(request()->has('type') && (request()->type == "quoteRequest"))
+{{-- @if(request()->has('type') && (request()->type == "quoteRequest")) --}}
+@if($data['subject'] == "Contact from Quote Request")
 <p>
    <b>Cart Items :</b>
    <br />

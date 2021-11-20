@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Bugs;
+// namespace App\Http\Livewire\Admin\Bugs;
 
-use Livewire\Component;
+// use Livewire\Component;
 
-class Bugs extends AdminComponent
-{
-    public function render()
-    {
-        return view('livewire.admin.bugs.bugs');
-    }
-}
+// class Bugs extends AdminComponent
+// {
+//     public function render()
+//     {
+//         return view('livewire.admin.bugs.bugs');
+//     }
+// }

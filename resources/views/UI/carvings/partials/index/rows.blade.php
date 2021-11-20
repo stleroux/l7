@@ -19,10 +19,12 @@
    </div>
 </div>
 
+{{-- @dd($carving) --}}
+
 <div class="col text-center">
    <div class="row border-bottom border-dark">
+      <div class="w-50">{{ $carving->comments()->count() }}</div>
       <div class="w-50 border-right border-dark">{{ count($carving->images) }}</div>
-      <div class="w-50">{{ $carving->comments->count() }}</div>
    </div>
 </div>
 

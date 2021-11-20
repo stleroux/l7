@@ -7,12 +7,18 @@
 
 </p>
 <p>
+   <b>Name: </b>
+   <?php echo e($data['name']); ?>
+
+</p>
+<p>
    <b>Message :</b>
    <br />
    <?php echo e($data['message']); ?>
 
 </p>
-<?php if(request()->has('type') && (request()->type == "quoteRequest")): ?>
+
+<?php if($data['subject'] == "Contact from Quote Request"): ?>
 <p>
    <b>Cart Items :</b>
    <br />

@@ -32,11 +32,13 @@
 {{-- @if((app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'cart') && (Cart::content())) --}}
  @if(request()->has('type') && (request()->type == "quoteRequest"))
    @include('UI.contactForm.fields.cart.subject')
+   @include('UI.contactForm.fields.cart.name')
    @include('UI.contactForm.fields.cart.email')
    @include('UI.contactForm.fields.cart.items')
    @include('UI.contactForm.fields.cart.message')
 @else
    @include('UI.contactForm.fields.main.subject')
+   @include('UI.contactForm.fields.main.name')
    @include('UI.contactForm.fields.main.email')
    @include('UI.contactForm.fields.main.message')
 @endif

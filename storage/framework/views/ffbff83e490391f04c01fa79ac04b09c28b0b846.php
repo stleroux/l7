@@ -18,6 +18,7 @@
             <th>Views</th>
             <th>Likes</th>
             <th>Images</th>
+            <th>Comments</th>
             <th>Finish(es)</th>
             <th>Material(s)</th>
             
@@ -54,6 +55,7 @@
                <td><?php echo e($carving->views); ?></td>
                <td><?php echo e($carving->likes()->count()); ?></td>
                <td><?php echo e($carving->images()->count()); ?></td>
+               <td><?php echo e($carving->comments()->count()); ?></td>
                <td><?php echo e($carving->finishes()->count()); ?></td>
                <td><?php echo e($carving->materials()->count()); ?></td>
                

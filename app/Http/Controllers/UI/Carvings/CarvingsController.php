@@ -64,15 +64,15 @@ class CarvingsController extends Controller
 
         // Filter and Tag
         } elseif($filter && $tag) {
-            $carvings = Carving::with('images')->where('category', '=', $filter)->whereHas('tags', function ($query) {
+            $carvings = Carving::with('comments')->with('images')->where('category', '=', $filter)->whereHas('tags', function ($query) {
                 $query->where('name', request('tag'));
             })->paginate(8);
 
         // Filter and NO Tag
         } elseif($filter && !$tag) {
-            $carvings = Carving::with('images')->where('category', '=', $filter)->orderBy('name')->paginate(8);
+            $carvings = Carving::with('comments')->with('images')->where('category', '=', $filter)->orderBy('name')->paginate(8);
         }else{
-            $carvings = Carving::with('images')->orderBy('name')->paginate(8);
+            $carvings = Carving::with('comments')->with('images')->orderBy('name')->paginate(8);
         }
 
         return view('UI.carvings.index', compact('carving','tags','carvings'));

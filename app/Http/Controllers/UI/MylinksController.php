@@ -64,7 +64,7 @@ class MylinksController extends Controller
       // $mylinks = Mylink::where('user_id', '=', Auth::user()->id)->orderBy('id','desc')->get();
 
       // return view('UI.mylinks.create', compact('mylink','mylinks'));
-      return view('UI.mylinks.create', compact('mylink'));
+      return view('UI.myLinks.create', compact('mylink'));
    }
 
 
@@ -124,7 +124,7 @@ class MylinksController extends Controller
 		// Check if user has required permission
       // abort_unless(Gate::allows('bug-show'), 403);
 
-		return view('UI.mylinks.show', compact('mylink'));
+		return view('UI.myLinks.show', compact('mylink'));
 	}
 
 
@@ -142,7 +142,7 @@ class MylinksController extends Controller
 		// Check if user has required permission
       // abort_unless((Gate::allows('bug-edit') || ($bug->user_id == Auth::id())), 403);
 
-      return view('UI.mylinks.edit', compact('mylink'));
+      return view('UI.myLinks.edit', compact('mylink'));
 	}
 
 

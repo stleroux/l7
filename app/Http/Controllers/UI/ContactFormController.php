@@ -41,6 +41,7 @@ class ContactFormController extends Controller
    {
 
       $data = request()->validate([
+         'name' => 'required',
          'email' => 'required|email',
          'subject' => 'required',
          'message' => 'required',
@@ -52,14 +53,24 @@ class ContactFormController extends Controller
          'alert-type' => 'success'
       ];
 
-      // Send email
-      Mail::to('stephaneandstacie@gmail.com')->send(new ContactFormMail($data));
+      // dd($request->subject);
+      // // Send email
+      // Mail::to('stephaneandstacie@gmail.com')->send(new ContactFormMail($data));
 
-      if(request()->has('type') && (request()->type == "quoteRequest"))
+
+      if($request->subject == "Contact from Quote Request")
       {
-         // clear the cart
+         Mail::to('stephaneandstacie@gmail.com')->send(new ContactFormMail($data));
          Cart::destroy();
+      } else {
+         Mail::to('stephaneandstacie@gmail.com')->send(new ContactFormMail($data));         
       }
+      
+      // if(request()->has('type') && (request()->type == "quoteRequest"))
+      // {
+      //    // clear the cart
+      //    Cart::destroy();
+      // }
 
       return view('UI.contactForm.thankyou')->with($notification);
    }

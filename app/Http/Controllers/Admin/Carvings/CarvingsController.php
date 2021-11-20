@@ -226,7 +226,7 @@ class CarvingsController extends Controller
          // dd(request('tag'));
          $carvings = Tag::where('name', request('tag'))->firstOrFail()->carvings->sortBy('name');
       } else {
-         $carvings = Carving::with('images')->orderBy('name','asc')->get();
+         $carvings = Carving::with('comments')->with('images')->orderBy('name','asc')->get();
       }
 
       $tags = Tag::where('category', Tag::IS_CARVING)->orderBy('name')->get();

@@ -19,10 +19,12 @@
    </div>
 </div>
 
+
+
 <div class="col text-center">
    <div class="row border-bottom border-dark">
+      <div class="w-50"><?php echo e($carving->comments()->count()); ?></div>
       <div class="w-50 border-right border-dark"><?php echo e(count($carving->images)); ?></div>
-      <div class="w-50"><?php echo e($carving->comments->count()); ?></div>
    </div>
 </div>
 

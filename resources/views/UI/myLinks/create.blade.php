@@ -21,7 +21,7 @@
 	<form action="{{ route('mylinks.store') }}" method="POST" id="" class="m-0 p-0">
 		@csrf
 
-		@include('UI.mylinks.create.topbar')
+		@include('UI.myLinks.create.topbar')
 		
 		<div class="row">
 
@@ -38,10 +38,10 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col">
-								@include('UI.mylinks.create.name', ['required'=>'required'])
+								@include('UI.myLinks.create.name', ['required'=>'required'])
 							</div>
 							<div class="col">
-								@include('UI.mylinks.create.page_url')
+								@include('UI.myLinks.create.page_url')
 							</div>
 						</div>
 
@@ -51,7 +51,7 @@
 
 		</div><!-- Row -->
 
-	@include('help.index', ['title'=>'My Links', 'icon'=>'', 'path'=>'UI.mylinks.create'])
+	@include('help.index', ['title'=>'My Links', 'icon'=>'', 'path'=>'UI.myLinks.create'])
 
 	</form>
 

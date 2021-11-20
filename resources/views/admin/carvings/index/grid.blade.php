@@ -18,6 +18,7 @@
             <th>Views</th>
             <th>Likes</th>
             <th>Images</th>
+            <th>Comments</th>
             <th>Finish(es)</th>
             <th>Material(s)</th>
             {{-- <th>Created On</th> --}}
@@ -54,6 +55,7 @@
                <td>{{ $carving->views }}</td>
                <td>{{ $carving->likes()->count() }}</td>
                <td>{{ $carving->images()->count() }}</td>
+               <td>{{ $carving->comments()->count() }}</td>
                <td>{{ $carving->finishes()->count() }}</td>
                <td>{{ $carving->materials()->count() }}</td>
                {{-- <td nowrap="nowrap" title="@if($carving->created_at){{ $carving->created_at }}@endif">{{ $carving->created_at->toDateString() }}</td> --}}
